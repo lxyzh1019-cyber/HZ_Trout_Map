@@ -132,7 +132,7 @@
     height: 0; overflow: hidden; transition: height 0.25s ease-out;
     display: flex; flex-direction: column;
   }
-  #chart-panel.open { height: 340px; }
+  #chart-panel.open { height: 368px; }
   .chart-header {
     display: flex; align-items: center; justify-content: space-between;
     padding: 10px 16px; border-bottom: 1px solid var(--panel-edge);
@@ -156,6 +156,19 @@
     background: var(--accent); color: #1f211e;
     border-color: var(--accent); font-weight: 600;
   }
+  .chart-scope-row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; padding: 6px 16px; font-size: 11px; color: var(--ink-dim);
+    border-bottom: 1px solid var(--panel-edge); flex-shrink: 0;
+  }
+  .chart-scope-row strong { color: var(--ink); font-weight: 600; }
+  .chart-scope-clear {
+    flex-shrink: 0; padding: 3px 8px; font-size: 11px; cursor: pointer;
+    background: var(--bg); border: 1px solid var(--panel-edge); color: var(--accent);
+    border-radius: 3px;
+  }
+  .chart-scope-clear:hover { border-color: var(--accent); color: var(--ink); }
+
   .chart-body { flex: 1; padding: 10px 16px 14px; min-height: 0; position: relative; }
   .chart-body canvas { max-height: 100%; }
 
@@ -280,6 +293,10 @@
           <button class="chart-type-btn" data-chart="line-trend">Trend</button>
         </div>
       </div>
+      <div id="chart-scope-row" class="chart-scope-row" hidden>
+        <span>Chart: <strong id="chart-scope-name"></strong></span>
+        <button type="button" class="chart-scope-clear" id="chart-scope-clear">All lakes</button>
+      </div>
       <div class="chart-body">
         <canvas id="chart-canvas"></canvas>
       </div>
@@ -329,6 +346,8 @@ const state = {
   years: new Set(),
   chartType: "stacked-species",
   chartOpen: false,
+  /** When set, chart aggregates only this lake (ATS id). Cleared on map background click or filters. */
+  focusedLakeAts: null,
 };
 
 let LAKES = [];         // populated after fetch
@@ -520,6 +539,14 @@ function initMap() {
     .addTo(map);
 
   pinLayer = L.layerGroup().addTo(map);
+
+  map.on("click", () => {
+    if (state.focusedLakeAts != null) {
+      state.focusedLakeAts = null;
+      updateChartScopeUI();
+      renderChart();
+    }
+  });
 }
 
 function renderPins() {
@@ -547,7 +574,11 @@ function renderPins() {
       radius: r, fillColor: primaryColor, fillOpacity: 0.82,
       color: "#1f211e", weight: 1.2,
     });
-    marker.on("click", function() {
+    marker.on("click", function(ev) {
+      if (ev.originalEvent) L.DomEvent.stopPropagation(ev.originalEvent);
+      state.focusedLakeAts = lake.ats;
+      updateChartScopeUI();
+      renderChart();
       marker.bindPopup(popupHtml(lake), { maxWidth: 380 }).openPopup();
     });
     marker.addTo(pinLayer);
@@ -660,9 +691,27 @@ function buildBasemapToggle() {
 // ============================================================
 let chart = null;
 
+function updateChartScopeUI() {
+  const row = document.getElementById("chart-scope-row");
+  const nameEl = document.getElementById("chart-scope-name");
+  if (!state.focusedLakeAts) {
+    row.hidden = true;
+    return;
+  }
+  const lk = LAKES.find(l => l.ats === state.focusedLakeAts);
+  row.hidden = false;
+  nameEl.textContent = lk ? `${lk.name} (${lk.ats})` : state.focusedLakeAts;
+}
+
 function buildChartToggle() {
   const btn = document.getElementById("chart-toggle");
   const panel = document.getElementById("chart-panel");
+  document.getElementById("chart-scope-clear").addEventListener("click", e => {
+    e.stopPropagation();
+    state.focusedLakeAts = null;
+    updateChartScopeUI();
+    renderChart();
+  });
   btn.addEventListener("click", () => {
     state.chartOpen = !state.chartOpen;
     panel.classList.toggle("open", state.chartOpen);
@@ -692,7 +741,11 @@ function computeChartData() {
   let totalFish = 0;
   const shownLakes = new Set();
 
-  for (const lake of LAKES) {
+  const lakesForChart = state.focusedLakeAts
+    ? LAKES.filter(l => l.ats === state.focusedLakeAts)
+    : LAKES;
+
+  for (const lake of lakesForChart) {
     if (lake.distanceKm > state.maxDistanceKm) continue;
     let lakeContributed = false;
     for (const s of lake.stockings) {
@@ -840,7 +893,17 @@ function chartOptions({ stacked, yTitle }) {
 // ============================================================
 // FILTER CHANGE HANDLER
 // ============================================================
+function clearChartFocusIfInvalid() {
+  if (!state.focusedLakeAts) return;
+  const lk = LAKES.find(l => l.ats === state.focusedLakeAts);
+  if (!lk || !lakePassesFilters(lk)) {
+    state.focusedLakeAts = null;
+    updateChartScopeUI();
+  }
+}
+
 function onFilterChange() {
+  clearChartFocusIfInvalid();
   renderPins();
   renderChart();
 }
