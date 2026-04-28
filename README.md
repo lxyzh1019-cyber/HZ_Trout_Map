@@ -110,6 +110,8 @@ Run after every data update:
 python scripts/check_consistency.py
 # Or export to CSV for spreadsheet review:
 python scripts/check_consistency.py --csv report.csv
+# Or generate machine-readable planning summary:
+python3 scripts/check_consistency.py --json-out data/consistency_summary.json
 ```
 
 ## Running locally

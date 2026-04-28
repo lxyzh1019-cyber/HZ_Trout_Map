@@ -204,6 +204,37 @@ def write_csv_report(findings, path):
     print(f"CSV written to {path}")
 
 
+def findings_to_summary(findings):
+    likely_typos = []
+    for norm_name, entries, max_dist in findings["ats_mismatch"]:
+        raw_names = {e[4] for e in entries}
+        all_have_parens = all("(" in n for n in raw_names)
+        if all_have_parens and len(raw_names) == len(entries):
+            hint = "probably_intentional_parenthetical"
+        elif max_dist < 20:
+            hint = "likely_typo"
+        else:
+            hint = "likely_different_lakes"
+        if hint == "likely_typo":
+            likely_typos.append({
+                "normalized_name": norm_name,
+                "max_distance_km": round(max_dist, 2),
+                "entries": [
+                    {"ats": ats, "year": year, "lat": lat, "lon": lon, "name": raw_name}
+                    for ats, year, lat, lon, raw_name in entries
+                ],
+            })
+
+    return {
+        "unmatched_count": len(findings["unmatched"]),
+        "name_mismatch_count": len(findings["name_mismatch"]),
+        "ats_mismatch_count": len(findings["ats_mismatch"]),
+        "ats_variant_count": len(findings["ats_variants"]),
+        "likely_typo_count": len(likely_typos),
+        "likely_typos": likely_typos,
+    }
+
+
 if __name__ == "__main__":
     by_year = load_all_years()
     if not by_year:
@@ -221,3 +252,11 @@ if __name__ == "__main__":
         idx = sys.argv.index("--csv")
         out = sys.argv[idx + 1] if idx + 1 < len(sys.argv) else "consistency_report.csv"
         write_csv_report(findings, out)
+    summary = findings_to_summary(findings)
+    if "--json" in sys.argv:
+        print(json.dumps(summary, indent=2))
+    if "--json-out" in sys.argv:
+        idx = sys.argv.index("--json-out")
+        out = sys.argv[idx + 1] if idx + 1 < len(sys.argv) else "consistency_summary.json"
+        Path(out).write_text(json.dumps(summary, indent=2), encoding="utf-8")
+        print(f"JSON written to {out}")

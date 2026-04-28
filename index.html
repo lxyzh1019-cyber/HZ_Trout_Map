@@ -51,6 +51,11 @@
     padding: 8px 10px; border: 1px dashed var(--panel-edge); border-radius: 3px;
   }
   #sidebar .empty-state.show { display: block; }
+  #sidebar .data-quality {
+    font-size: 11px; color: var(--ink-dim); margin-top: -10px; margin-bottom: 14px;
+    padding: 7px 9px; border: 1px solid var(--panel-edge); border-radius: 3px;
+  }
+  #sidebar .data-quality strong { color: var(--ink); }
   #sidebar .group { margin-bottom: 22px; }
   #sidebar .group-label {
     font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
@@ -170,6 +175,12 @@
     padding: 6px 16px; font-size: 11px; color: var(--ink-dim);
     border-bottom: 1px solid var(--panel-edge); gap: 8px;
   }
+  .planning-summary {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    padding: 6px 16px; font-size: 11px; color: var(--ink-dim);
+    border-bottom: 1px solid var(--panel-edge);
+  }
+  .planning-summary strong { color: var(--ink); }
   .chart-scope-row {
     display: flex; align-items: center; justify-content: space-between;
     gap: 10px; padding: 6px 16px; font-size: 11px; color: var(--ink-dim);
@@ -252,6 +263,7 @@
     <div class="count" id="result-count">Showing … lakes</div>
     <div class="filter-summary" id="filter-summary">Filters: all species · all years · ≤ 1000 km</div>
     <div class="empty-state" id="empty-state">No lakes match the current filters. Try All years, All species, or increase distance.</div>
+    <div class="data-quality" id="data-quality">Data quality: checking…</div>
 
     <div class="group">
       <div class="group-label">Species</div>
@@ -310,6 +322,12 @@
         </div>
       </div>
       <div class="chart-helper" id="chart-helper">Stacked by species compares annual stocking mix across selected years.</div>
+      <div class="planning-summary" id="planning-summary">
+        <span><strong>YoY:</strong> —</span>
+        <span><strong>Trend:</strong> —</span>
+        <span><strong>Top risers:</strong> —</span>
+        <span><strong>Top decliners:</strong> —</span>
+      </div>
       <div id="chart-scope-row" class="chart-scope-row" hidden>
         <span>Chart: <strong id="chart-scope-name"></strong></span>
         <button type="button" class="chart-scope-clear" id="chart-scope-clear">All lakes</button>
@@ -371,6 +389,7 @@ const state = {
 
 let LAKES = [];         // populated after fetch
 let ALL_YEARS = [];     // sorted ascending
+let QUALITY_SUMMARY = null;
 const DATA_ISSUES = {
   invalidStockings: 0,
   examples: [],
@@ -438,6 +457,16 @@ async function loadAllData() {
     lk.species_set = [...new Set(lk.stockings.map(s => s.species).filter(Boolean))].sort();
   }
   return { lakes, years };
+}
+
+async function loadQualitySummary() {
+  try {
+    const resp = await fetch("data/consistency_summary.json");
+    if (!resp.ok) return null;
+    return await resp.json();
+  } catch {
+    return null;
+  }
 }
 
 function prepareLakes() {
@@ -752,6 +781,21 @@ function updateFilterSummary() {
     `Filters: ${speciesLabel} · ${yearsLabel} · ${distLabel}`;
 }
 
+function updateDataQualitySummary() {
+  const el = document.getElementById("data-quality");
+  const malformed = DATA_ISSUES.invalidStockings;
+  if (!QUALITY_SUMMARY) {
+    el.innerHTML = `Data quality: <strong>${malformed}</strong> malformed row(s) skipped in browser checks. Run <code>python3 scripts/check_consistency.py --json data/consistency_summary.json</code> for full badges.`;
+    return;
+  }
+  const u = QUALITY_SUMMARY.unmatched_count || 0;
+  const n = QUALITY_SUMMARY.name_mismatch_count || 0;
+  const a = QUALITY_SUMMARY.ats_mismatch_count || 0;
+  const v = QUALITY_SUMMARY.ats_variant_count || 0;
+  el.innerHTML =
+    `Data quality: unmatched ATS <strong>${u}</strong> · ATS/name mismatches <strong>${n}</strong> · same-name ATS splits <strong>${a}</strong> · ATS variants <strong>${v}</strong> · malformed rows skipped <strong>${malformed}</strong>`;
+}
+
 function buildBasemapToggle() {
   document.querySelectorAll(".basemap-btn").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -824,6 +868,50 @@ function updateChartHelperText() {
   document.getElementById("chart-helper").textContent = map[state.chartType];
 }
 
+function updatePlanningSummary(data) {
+  const el = document.getElementById("planning-summary");
+  const years = [...data.byYearSpecies.keys()].sort((a, b) => a - b);
+  if (years.length < 2) {
+    el.innerHTML = `<span><strong>YoY:</strong> need 2+ years</span><span><strong>Trend:</strong> —</span><span><strong>Top risers:</strong> —</span><span><strong>Top decliners:</strong> —</span>`;
+    return;
+  }
+  const latest = years[years.length - 1];
+  const prev = years[years.length - 2];
+  const totalForYear = y => {
+    const bucket = data.byYearSpecies.get(y);
+    return SPECIES_ORDER.reduce((sum, sp) => sum + (bucket?.[sp] || 0), 0);
+  };
+  const latestTotal = totalForYear(latest);
+  const prevTotal = totalForYear(prev);
+  const delta = latestTotal - prevTotal;
+  const pct = prevTotal > 0 ? (delta / prevTotal) * 100 : null;
+  const slope = (latestTotal - totalForYear(years[0])) / (years.length - 1);
+  const trend = slope > 0 ? "up" : slope < 0 ? "down" : "flat";
+  const perLakeDelta = [];
+  const lakesForChart = state.focusedLakeAts ? LAKES.filter(l => l.ats === state.focusedLakeAts) : LAKES;
+  for (const lake of lakesForChart) {
+    if (lake.distanceKm > state.maxDistanceKm) continue;
+    let latestLake = 0;
+    let prevLake = 0;
+    for (const s of lake.stockings) {
+      if (!stockingPasses(s)) continue;
+      if (s.year === latest) latestLake += s.number;
+      if (s.year === prev) prevLake += s.number;
+    }
+    const d = latestLake - prevLake;
+    if (d !== 0) perLakeDelta.push({ lake: lake.name, delta: d });
+  }
+  perLakeDelta.sort((a, b) => b.delta - a.delta);
+  const risers = perLakeDelta.slice(0, 3).map(x => `${x.lake} (+${fmtNum(x.delta)})`).join(", ") || "none";
+  const decliners = perLakeDelta.slice(-3).reverse().map(x => `${x.lake} (${fmtNum(x.delta)})`).join(", ") || "none";
+  const deltaText = `${delta >= 0 ? "+" : ""}${fmtNum(delta)}${pct == null ? "" : ` (${pct >= 0 ? "+" : ""}${pct.toFixed(1)}%)`}`;
+  el.innerHTML =
+    `<span><strong>YoY:</strong> ${prev}→${latest} ${deltaText}</span>` +
+    `<span><strong>Trend:</strong> ${trend}</span>` +
+    `<span><strong>Top risers:</strong> ${risers}</span>` +
+    `<span><strong>Top decliners:</strong> ${decliners}</span>`;
+}
+
 // Returns { totalFish, totalLakes, yearsCount, byYearSpecies, byYearSeason }
 function computeChartData() {
   const byYearSpecies = new Map();  // year -> {RNTR, BKTR, ...}
@@ -868,6 +956,7 @@ function computeChartData() {
 
 function renderChart() {
   const data = computeChartData();
+  updatePlanningSummary(data);
 
   // Summary stats
   document.getElementById("stat-fish").textContent = fmtNum(data.totalFish) + " ";
@@ -1005,6 +1094,7 @@ function onFilterChange() {
 async function init() {
   try {
     const { lakes, years } = await loadAllData();
+    QUALITY_SUMMARY = await loadQualitySummary();
     LAKES = lakes;
     ALL_YEARS = years;
     state.years = new Set(years);
@@ -1015,6 +1105,7 @@ async function init() {
       : `Stocking data · ${years[0]}–${years[years.length - 1]}`;
 
     prepareLakes();
+    updateDataQualitySummary();
     initMap();
     buildSpeciesFilters();
     buildYearChips();
