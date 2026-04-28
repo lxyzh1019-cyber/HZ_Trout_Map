@@ -325,6 +325,7 @@ const SPECIES_ORDER = ["RNTR", "BKTR", "BNTR", "TGTR", "CTTR"];
 const PIN_MIN = 5;
 const PIN_MAX = 28;
 let SQRT_MAX = 1;
+const STOCKING_ISSUE_SAMPLE_LIMIT = 6;
 
 // Spring: Jan-Jun (months 1-6). Fall: Jul-Dec (months 7-12).
 // "xx-Mon-YY" dates — parse month name to number.
@@ -333,7 +334,8 @@ const MONTH_NUM = { Jan:1, Feb:2, Mar:3, Apr:4, May:5, Jun:6,
 function seasonOf(dateStr) {
   // "14-Apr-25" → "spring", "22-Sep-25" → "fall"
   const parts = dateStr.split("-");
-  const m = MONTH_NUM[parts[1]] || 0;
+  const m = MONTH_NUM[parts[1]];
+  if (!m) return null;
   return m <= 6 ? "spring" : "fall";
 }
 
@@ -352,6 +354,10 @@ const state = {
 
 let LAKES = [];         // populated after fetch
 let ALL_YEARS = [];     // sorted ascending
+const DATA_ISSUES = {
+  invalidStockings: 0,
+  examples: [],
+};
 
 // ============================================================
 // UTILITIES
@@ -399,30 +405,63 @@ async function loadAllData() {
       } else {
         const existing = byAts.get(lk.ats);
         existing.stockings.push(...lk.stockings);
-        // Prefer the newer year's profile data (zone/area/amenities) if non-null
+        // Prefer the newer year's non-null lake/profile values.
+        if (lk.name) existing.name = lk.name;
+        if (lk.lat != null) existing.lat = lk.lat;
+        if (lk.lon != null) existing.lon = lk.lon;
         if (lk.zone) existing.zone = lk.zone;
         if (lk.surface_area_ha != null) existing.surface_area_ha = lk.surface_area_ha;
         if (lk.amenities) existing.amenities = lk.amenities;
       }
     }
   }
-  return { lakes: [...byAts.values()], years };
+  const lakes = [...byAts.values()];
+  for (const lk of lakes) {
+    lk.total_fish = lk.stockings.reduce((acc, s) => acc + (Number(s.number) || 0), 0);
+    lk.species_set = [...new Set(lk.stockings.map(s => s.species).filter(Boolean))].sort();
+  }
+  return { lakes, years };
 }
 
 function prepareLakes() {
   let maxFish = 0;
+  DATA_ISSUES.invalidStockings = 0;
+  DATA_ISSUES.examples = [];
   for (const lake of LAKES) {
     lake.distanceKm = haversineKm(HOME.lat, HOME.lon, lake.lat, lake.lon);
-    lake.yearsInLake = new Set(lake.stockings.map(s => s.year));
     if (lake.total_fish > maxFish) maxFish = lake.total_fish;
+    for (const s of lake.stockings) {
+      if (!s || typeof s !== "object") {
+        DATA_ISSUES.invalidStockings++;
+        continue;
+      }
+      const bad =
+        !s.species ||
+        s.year == null ||
+        !s.date ||
+        !Number.isFinite(Number(s.number));
+      if (!bad) continue;
+      DATA_ISSUES.invalidStockings++;
+      if (DATA_ISSUES.examples.length < STOCKING_ISSUE_SAMPLE_LIMIT) {
+        DATA_ISSUES.examples.push(`${lake.ats}: ${JSON.stringify(s)}`);
+      }
+    }
   }
-  SQRT_MAX = Math.sqrt(maxFish);
+  SQRT_MAX = Math.sqrt(Math.max(1, maxFish));
+  if (DATA_ISSUES.invalidStockings > 0) {
+    console.warn(
+      `Skipped ${DATA_ISSUES.invalidStockings} malformed stocking row(s).`,
+      DATA_ISSUES.examples
+    );
+  }
 }
 
 // ============================================================
 // FILTERING
 // ============================================================
 function stockingPasses(s) {
+  if (!s || typeof s !== "object") return false;
+  if (!s.species || s.year == null || !Number.isFinite(Number(s.number))) return false;
   return state.species.has(s.species) && state.years.has(s.year);
 }
 function lakePassesFilters(lake) {
@@ -761,7 +800,8 @@ function computeChartData() {
       byYearSpecies.get(s.year)[s.species] += s.number;
 
       if (!byYearSeason.has(s.year)) byYearSeason.set(s.year, { spring: 0, fall: 0 });
-      byYearSeason.get(s.year)[seasonOf(s.date)] += s.number;
+      const season = seasonOf(s.date);
+      if (season) byYearSeason.get(s.year)[season] += s.number;
     }
     if (lakeContributed) shownLakes.add(lake.ats);
   }
