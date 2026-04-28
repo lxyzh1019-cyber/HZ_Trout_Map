@@ -42,6 +42,15 @@
     padding: 8px 10px; background: rgba(201,138,62,0.08);
     border-left: 3px solid var(--accent);
   }
+  #sidebar .filter-summary {
+    font-size: 11px; color: var(--ink-dim); margin-top: -10px; margin-bottom: 16px;
+    line-height: 1.45;
+  }
+  #sidebar .empty-state {
+    display: none; font-size: 11px; color: var(--ink-dim); margin-bottom: 14px;
+    padding: 8px 10px; border: 1px dashed var(--panel-edge); border-radius: 3px;
+  }
+  #sidebar .empty-state.show { display: block; }
   #sidebar .group { margin-bottom: 22px; }
   #sidebar .group-label {
     font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
@@ -156,6 +165,11 @@
     background: var(--accent); color: #1f211e;
     border-color: var(--accent); font-weight: 600;
   }
+  .chart-helper {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 6px 16px; font-size: 11px; color: var(--ink-dim);
+    border-bottom: 1px solid var(--panel-edge); gap: 8px;
+  }
   .chart-scope-row {
     display: flex; align-items: center; justify-content: space-between;
     gap: 10px; padding: 6px 16px; font-size: 11px; color: var(--ink-dim);
@@ -236,6 +250,8 @@
     <h1>Alberta Trout Map</h1>
     <div class="subtitle" id="subtitle">Stocking data</div>
     <div class="count" id="result-count">Showing … lakes</div>
+    <div class="filter-summary" id="filter-summary">Filters: all species · all years · ≤ 1000 km</div>
+    <div class="empty-state" id="empty-state">No lakes match the current filters. Try All years, All species, or increase distance.</div>
 
     <div class="group">
       <div class="group-label">Species</div>
@@ -293,6 +309,7 @@
           <button class="chart-type-btn" data-chart="line-trend">Trend</button>
         </div>
       </div>
+      <div class="chart-helper" id="chart-helper">Stacked by species compares annual stocking mix across selected years.</div>
       <div id="chart-scope-row" class="chart-scope-row" hidden>
         <span>Chart: <strong id="chart-scope-name"></strong></span>
         <button type="button" class="chart-scope-clear" id="chart-scope-clear">All lakes</button>
@@ -509,6 +526,12 @@ function profileBlock(lake) {
 function popupHtml(lake) {
   const filteredTotal = filteredFishTotal(lake);
   const gmapsUrl = `https://www.google.com/maps/search/?api=1&query=${lake.lat},${lake.lon}`;
+  const activeYears = [...new Set(lake.stockings.filter(stockingPasses).map(s => s.year))].sort((a, b) => a - b);
+  const activeSpecies = filteredDominantOrder(lake);
+  const yearRangeText = activeYears.length
+    ? (activeYears.length === 1 ? String(activeYears[0]) : `${activeYears[0]}–${activeYears[activeYears.length - 1]}`)
+    : "none";
+  const speciesText = activeSpecies.length ? activeSpecies.join(", ") : "none";
   const rows = [...lake.stockings]
     .filter(stockingPasses)
     .sort((a, b) => {
@@ -535,6 +558,9 @@ function popupHtml(lake) {
     <div class="meta">
       <strong>${Math.round(lake.distanceKm)} km</strong> from Red Deer &nbsp;·&nbsp;
       <strong>${fmtNum(filteredTotal)}</strong> fish (shown)
+    </div>
+    <div class="meta">
+      <strong>Years shown:</strong> ${yearRangeText} &nbsp;·&nbsp; <strong>Species:</strong> ${speciesText}
     </div>
     ${profileBlock(lake)}
     <table>
@@ -625,6 +651,9 @@ function renderPins() {
 
   document.getElementById("result-count").textContent =
     `Showing ${shown} of ${LAKES.length} lakes`;
+  const emptyState = document.getElementById("empty-state");
+  emptyState.classList.toggle("show", shown === 0);
+  updateFilterSummary();
 }
 
 // ============================================================
@@ -711,6 +740,18 @@ function buildDistanceSlider() {
   });
 }
 
+function updateFilterSummary() {
+  const speciesLabel = state.species.size === SPECIES_ORDER.length
+    ? "all species"
+    : `${state.species.size}/${SPECIES_ORDER.length} species`;
+  const yearsLabel = state.years.size === ALL_YEARS.length
+    ? "all years"
+    : `${state.years.size}/${ALL_YEARS.length} years`;
+  const distLabel = state.maxDistanceKm >= 1000 ? "≤ 1000 km" : `≤ ${state.maxDistanceKm} km`;
+  document.getElementById("filter-summary").textContent =
+    `Filters: ${speciesLabel} · ${yearsLabel} · ${distLabel}`;
+}
+
 function buildBasemapToggle() {
   document.querySelectorAll(".basemap-btn").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -768,9 +809,19 @@ function buildChartToggle() {
       state.chartType = b.dataset.chart;
       document.querySelectorAll(".chart-type-btn").forEach(x =>
         x.classList.toggle("active", x === b));
+      updateChartHelperText();
       renderChart();
     });
   });
+}
+
+function updateChartHelperText() {
+  const map = {
+    "stacked-species": "Stacked by species compares annual stocking mix across selected years.",
+    "grouped-season": "Spring vs Fall shows seasonal stocking split for each selected year.",
+    "line-trend": "Trend highlights year-over-year species direction and magnitude.",
+  };
+  document.getElementById("chart-helper").textContent = map[state.chartType];
 }
 
 // Returns { totalFish, totalLakes, yearsCount, byYearSpecies, byYearSeason }
