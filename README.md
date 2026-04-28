@@ -112,6 +112,8 @@ python scripts/check_consistency.py
 python scripts/check_consistency.py --csv report.csv
 # Or generate machine-readable planning summary:
 python3 scripts/check_consistency.py --json-out data/consistency_summary.json
+# Optional lightweight regression checks for script logic:
+python3 scripts/test_regression_checks.py
 ```
 
 ## Running locally
