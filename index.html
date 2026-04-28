@@ -42,6 +42,20 @@
     padding: 8px 10px; background: rgba(201,138,62,0.08);
     border-left: 3px solid var(--accent);
   }
+  #sidebar .filter-summary {
+    font-size: 11px; color: var(--ink-dim); margin-top: -10px; margin-bottom: 16px;
+    line-height: 1.45;
+  }
+  #sidebar .empty-state {
+    display: none; font-size: 11px; color: var(--ink-dim); margin-bottom: 14px;
+    padding: 8px 10px; border: 1px dashed var(--panel-edge); border-radius: 3px;
+  }
+  #sidebar .empty-state.show { display: block; }
+  #sidebar .data-quality {
+    font-size: 11px; color: var(--ink-dim); margin-top: -10px; margin-bottom: 14px;
+    padding: 7px 9px; border: 1px solid var(--panel-edge); border-radius: 3px;
+  }
+  #sidebar .data-quality strong { color: var(--ink); }
   #sidebar .group { margin-bottom: 22px; }
   #sidebar .group-label {
     font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
@@ -156,6 +170,17 @@
     background: var(--accent); color: #1f211e;
     border-color: var(--accent); font-weight: 600;
   }
+  .chart-helper {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 6px 16px; font-size: 11px; color: var(--ink-dim);
+    border-bottom: 1px solid var(--panel-edge); gap: 8px;
+  }
+  .planning-summary {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    padding: 6px 16px; font-size: 11px; color: var(--ink-dim);
+    border-bottom: 1px solid var(--panel-edge);
+  }
+  .planning-summary strong { color: var(--ink); }
   .chart-scope-row {
     display: flex; align-items: center; justify-content: space-between;
     gap: 10px; padding: 6px 16px; font-size: 11px; color: var(--ink-dim);
@@ -236,6 +261,9 @@
     <h1>Alberta Trout Map</h1>
     <div class="subtitle" id="subtitle">Stocking data</div>
     <div class="count" id="result-count">Showing … lakes</div>
+    <div class="filter-summary" id="filter-summary">Filters: all species · all years · ≤ 1000 km</div>
+    <div class="empty-state" id="empty-state">No lakes match the current filters. Try All years, All species, or increase distance.</div>
+    <div class="data-quality" id="data-quality">Data quality: checking…</div>
 
     <div class="group">
       <div class="group-label">Species</div>
@@ -293,6 +321,13 @@
           <button class="chart-type-btn" data-chart="line-trend">Trend</button>
         </div>
       </div>
+      <div class="chart-helper" id="chart-helper">Stacked by species compares annual stocking mix across selected years.</div>
+      <div class="planning-summary" id="planning-summary">
+        <span><strong>YoY:</strong> —</span>
+        <span><strong>Trend:</strong> —</span>
+        <span><strong>Top risers:</strong> —</span>
+        <span><strong>Top decliners:</strong> —</span>
+      </div>
       <div id="chart-scope-row" class="chart-scope-row" hidden>
         <span>Chart: <strong id="chart-scope-name"></strong></span>
         <button type="button" class="chart-scope-clear" id="chart-scope-clear">All lakes</button>
@@ -325,6 +360,7 @@ const SPECIES_ORDER = ["RNTR", "BKTR", "BNTR", "TGTR", "CTTR"];
 const PIN_MIN = 5;
 const PIN_MAX = 28;
 let SQRT_MAX = 1;
+const STOCKING_ISSUE_SAMPLE_LIMIT = 6;
 
 // Spring: Jan-Jun (months 1-6). Fall: Jul-Dec (months 7-12).
 // "xx-Mon-YY" dates — parse month name to number.
@@ -333,7 +369,8 @@ const MONTH_NUM = { Jan:1, Feb:2, Mar:3, Apr:4, May:5, Jun:6,
 function seasonOf(dateStr) {
   // "14-Apr-25" → "spring", "22-Sep-25" → "fall"
   const parts = dateStr.split("-");
-  const m = MONTH_NUM[parts[1]] || 0;
+  const m = MONTH_NUM[parts[1]];
+  if (!m) return null;
   return m <= 6 ? "spring" : "fall";
 }
 
@@ -352,6 +389,11 @@ const state = {
 
 let LAKES = [];         // populated after fetch
 let ALL_YEARS = [];     // sorted ascending
+let QUALITY_SUMMARY = null;
+const DATA_ISSUES = {
+  invalidStockings: 0,
+  examples: [],
+};
 
 // ============================================================
 // UTILITIES
@@ -399,30 +441,73 @@ async function loadAllData() {
       } else {
         const existing = byAts.get(lk.ats);
         existing.stockings.push(...lk.stockings);
-        // Prefer the newer year's profile data (zone/area/amenities) if non-null
+        // Prefer the newer year's non-null lake/profile values.
+        if (lk.name) existing.name = lk.name;
+        if (lk.lat != null) existing.lat = lk.lat;
+        if (lk.lon != null) existing.lon = lk.lon;
         if (lk.zone) existing.zone = lk.zone;
         if (lk.surface_area_ha != null) existing.surface_area_ha = lk.surface_area_ha;
         if (lk.amenities) existing.amenities = lk.amenities;
       }
     }
   }
-  return { lakes: [...byAts.values()], years };
+  const lakes = [...byAts.values()];
+  for (const lk of lakes) {
+    lk.total_fish = lk.stockings.reduce((acc, s) => acc + (Number(s.number) || 0), 0);
+    lk.species_set = [...new Set(lk.stockings.map(s => s.species).filter(Boolean))].sort();
+  }
+  return { lakes, years };
+}
+
+async function loadQualitySummary() {
+  try {
+    const resp = await fetch("data/consistency_summary.json");
+    if (!resp.ok) return null;
+    return await resp.json();
+  } catch {
+    return null;
+  }
 }
 
 function prepareLakes() {
   let maxFish = 0;
+  DATA_ISSUES.invalidStockings = 0;
+  DATA_ISSUES.examples = [];
   for (const lake of LAKES) {
     lake.distanceKm = haversineKm(HOME.lat, HOME.lon, lake.lat, lake.lon);
-    lake.yearsInLake = new Set(lake.stockings.map(s => s.year));
     if (lake.total_fish > maxFish) maxFish = lake.total_fish;
+    for (const s of lake.stockings) {
+      if (!s || typeof s !== "object") {
+        DATA_ISSUES.invalidStockings++;
+        continue;
+      }
+      const bad =
+        !s.species ||
+        s.year == null ||
+        !s.date ||
+        !Number.isFinite(Number(s.number));
+      if (!bad) continue;
+      DATA_ISSUES.invalidStockings++;
+      if (DATA_ISSUES.examples.length < STOCKING_ISSUE_SAMPLE_LIMIT) {
+        DATA_ISSUES.examples.push(`${lake.ats}: ${JSON.stringify(s)}`);
+      }
+    }
   }
-  SQRT_MAX = Math.sqrt(maxFish);
+  SQRT_MAX = Math.sqrt(Math.max(1, maxFish));
+  if (DATA_ISSUES.invalidStockings > 0) {
+    console.warn(
+      `Skipped ${DATA_ISSUES.invalidStockings} malformed stocking row(s).`,
+      DATA_ISSUES.examples
+    );
+  }
 }
 
 // ============================================================
 // FILTERING
 // ============================================================
 function stockingPasses(s) {
+  if (!s || typeof s !== "object") return false;
+  if (!s.species || s.year == null || !Number.isFinite(Number(s.number))) return false;
   return state.species.has(s.species) && state.years.has(s.year);
 }
 function lakePassesFilters(lake) {
@@ -470,6 +555,12 @@ function profileBlock(lake) {
 function popupHtml(lake) {
   const filteredTotal = filteredFishTotal(lake);
   const gmapsUrl = `https://www.google.com/maps/search/?api=1&query=${lake.lat},${lake.lon}`;
+  const activeYears = [...new Set(lake.stockings.filter(stockingPasses).map(s => s.year))].sort((a, b) => a - b);
+  const activeSpecies = filteredDominantOrder(lake);
+  const yearRangeText = activeYears.length
+    ? (activeYears.length === 1 ? String(activeYears[0]) : `${activeYears[0]}–${activeYears[activeYears.length - 1]}`)
+    : "none";
+  const speciesText = activeSpecies.length ? activeSpecies.join(", ") : "none";
   const rows = [...lake.stockings]
     .filter(stockingPasses)
     .sort((a, b) => {
@@ -496,6 +587,9 @@ function popupHtml(lake) {
     <div class="meta">
       <strong>${Math.round(lake.distanceKm)} km</strong> from Red Deer &nbsp;·&nbsp;
       <strong>${fmtNum(filteredTotal)}</strong> fish (shown)
+    </div>
+    <div class="meta">
+      <strong>Years shown:</strong> ${yearRangeText} &nbsp;·&nbsp; <strong>Species:</strong> ${speciesText}
     </div>
     ${profileBlock(lake)}
     <table>
@@ -586,6 +680,9 @@ function renderPins() {
 
   document.getElementById("result-count").textContent =
     `Showing ${shown} of ${LAKES.length} lakes`;
+  const emptyState = document.getElementById("empty-state");
+  emptyState.classList.toggle("show", shown === 0);
+  updateFilterSummary();
 }
 
 // ============================================================
@@ -672,6 +769,33 @@ function buildDistanceSlider() {
   });
 }
 
+function updateFilterSummary() {
+  const speciesLabel = state.species.size === SPECIES_ORDER.length
+    ? "all species"
+    : `${state.species.size}/${SPECIES_ORDER.length} species`;
+  const yearsLabel = state.years.size === ALL_YEARS.length
+    ? "all years"
+    : `${state.years.size}/${ALL_YEARS.length} years`;
+  const distLabel = state.maxDistanceKm >= 1000 ? "≤ 1000 km" : `≤ ${state.maxDistanceKm} km`;
+  document.getElementById("filter-summary").textContent =
+    `Filters: ${speciesLabel} · ${yearsLabel} · ${distLabel}`;
+}
+
+function updateDataQualitySummary() {
+  const el = document.getElementById("data-quality");
+  const malformed = DATA_ISSUES.invalidStockings;
+  if (!QUALITY_SUMMARY) {
+    el.innerHTML = `Data quality: <strong>${malformed}</strong> malformed row(s) skipped in browser checks. Run <code>python3 scripts/check_consistency.py --json data/consistency_summary.json</code> for full badges.`;
+    return;
+  }
+  const u = QUALITY_SUMMARY.unmatched_count || 0;
+  const n = QUALITY_SUMMARY.name_mismatch_count || 0;
+  const a = QUALITY_SUMMARY.ats_mismatch_count || 0;
+  const v = QUALITY_SUMMARY.ats_variant_count || 0;
+  el.innerHTML =
+    `Data quality: unmatched ATS <strong>${u}</strong> · ATS/name mismatches <strong>${n}</strong> · same-name ATS splits <strong>${a}</strong> · ATS variants <strong>${v}</strong> · malformed rows skipped <strong>${malformed}</strong>`;
+}
+
 function buildBasemapToggle() {
   document.querySelectorAll(".basemap-btn").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -729,9 +853,63 @@ function buildChartToggle() {
       state.chartType = b.dataset.chart;
       document.querySelectorAll(".chart-type-btn").forEach(x =>
         x.classList.toggle("active", x === b));
+      updateChartHelperText();
       renderChart();
     });
   });
+}
+
+function updateChartHelperText() {
+  const map = {
+    "stacked-species": "Stacked by species compares annual stocking mix across selected years.",
+    "grouped-season": "Spring vs Fall shows seasonal stocking split for each selected year.",
+    "line-trend": "Trend highlights year-over-year species direction and magnitude.",
+  };
+  document.getElementById("chart-helper").textContent = map[state.chartType];
+}
+
+function updatePlanningSummary(data) {
+  const el = document.getElementById("planning-summary");
+  const years = [...data.byYearSpecies.keys()].sort((a, b) => a - b);
+  if (years.length < 2) {
+    el.innerHTML = `<span><strong>YoY:</strong> need 2+ years</span><span><strong>Trend:</strong> —</span><span><strong>Top risers:</strong> —</span><span><strong>Top decliners:</strong> —</span>`;
+    return;
+  }
+  const latest = years[years.length - 1];
+  const prev = years[years.length - 2];
+  const totalForYear = y => {
+    const bucket = data.byYearSpecies.get(y);
+    return SPECIES_ORDER.reduce((sum, sp) => sum + (bucket?.[sp] || 0), 0);
+  };
+  const latestTotal = totalForYear(latest);
+  const prevTotal = totalForYear(prev);
+  const delta = latestTotal - prevTotal;
+  const pct = prevTotal > 0 ? (delta / prevTotal) * 100 : null;
+  const slope = (latestTotal - totalForYear(years[0])) / (years.length - 1);
+  const trend = slope > 0 ? "up" : slope < 0 ? "down" : "flat";
+  const perLakeDelta = [];
+  const lakesForChart = state.focusedLakeAts ? LAKES.filter(l => l.ats === state.focusedLakeAts) : LAKES;
+  for (const lake of lakesForChart) {
+    if (lake.distanceKm > state.maxDistanceKm) continue;
+    let latestLake = 0;
+    let prevLake = 0;
+    for (const s of lake.stockings) {
+      if (!stockingPasses(s)) continue;
+      if (s.year === latest) latestLake += s.number;
+      if (s.year === prev) prevLake += s.number;
+    }
+    const d = latestLake - prevLake;
+    if (d !== 0) perLakeDelta.push({ lake: lake.name, delta: d });
+  }
+  perLakeDelta.sort((a, b) => b.delta - a.delta);
+  const risers = perLakeDelta.slice(0, 3).map(x => `${x.lake} (+${fmtNum(x.delta)})`).join(", ") || "none";
+  const decliners = perLakeDelta.slice(-3).reverse().map(x => `${x.lake} (${fmtNum(x.delta)})`).join(", ") || "none";
+  const deltaText = `${delta >= 0 ? "+" : ""}${fmtNum(delta)}${pct == null ? "" : ` (${pct >= 0 ? "+" : ""}${pct.toFixed(1)}%)`}`;
+  el.innerHTML =
+    `<span><strong>YoY:</strong> ${prev}→${latest} ${deltaText}</span>` +
+    `<span><strong>Trend:</strong> ${trend}</span>` +
+    `<span><strong>Top risers:</strong> ${risers}</span>` +
+    `<span><strong>Top decliners:</strong> ${decliners}</span>`;
 }
 
 // Returns { totalFish, totalLakes, yearsCount, byYearSpecies, byYearSeason }
@@ -761,7 +939,8 @@ function computeChartData() {
       byYearSpecies.get(s.year)[s.species] += s.number;
 
       if (!byYearSeason.has(s.year)) byYearSeason.set(s.year, { spring: 0, fall: 0 });
-      byYearSeason.get(s.year)[seasonOf(s.date)] += s.number;
+      const season = seasonOf(s.date);
+      if (season) byYearSeason.get(s.year)[season] += s.number;
     }
     if (lakeContributed) shownLakes.add(lake.ats);
   }
@@ -777,6 +956,7 @@ function computeChartData() {
 
 function renderChart() {
   const data = computeChartData();
+  updatePlanningSummary(data);
 
   // Summary stats
   document.getElementById("stat-fish").textContent = fmtNum(data.totalFish) + " ";
@@ -914,6 +1094,7 @@ function onFilterChange() {
 async function init() {
   try {
     const { lakes, years } = await loadAllData();
+    QUALITY_SUMMARY = await loadQualitySummary();
     LAKES = lakes;
     ALL_YEARS = years;
     state.years = new Set(years);
@@ -924,6 +1105,7 @@ async function init() {
       : `Stocking data · ${years[0]}–${years[years.length - 1]}`;
 
     prepareLakes();
+    updateDataQualitySummary();
     initMap();
     buildSpeciesFilters();
     buildYearChips();

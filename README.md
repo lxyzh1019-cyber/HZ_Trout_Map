@@ -110,6 +110,10 @@ Run after every data update:
 python scripts/check_consistency.py
 # Or export to CSV for spreadsheet review:
 python scripts/check_consistency.py --csv report.csv
+# Or generate machine-readable planning summary:
+python3 scripts/check_consistency.py --json-out data/consistency_summary.json
+# Optional lightweight regression checks for script logic:
+python3 scripts/test_regression_checks.py
 ```
 
 ## Running locally
@@ -140,3 +144,34 @@ On GitHub Pages the fetches work natively — no server setup needed.
 - **Basemap toggle** — topographic (default) or street.
 - **Popups** — per-lake stocking history, zone link, amenities, Google
   Maps link. Reflects current filters.
+- **Planning summary** — year-over-year total fish and trend direction
+  in the chart panel.
+- **Data quality indicator** — quick count of malformed stocking rows
+  skipped from calculations.
+
+## Operator workflow (planning use)
+
+Use this repeatable flow to turn the map into a planning aid.
+
+1. **Select planning window**
+   - Use year chips (`All`, `Latest`, `Last 5`) to set your decision horizon.
+2. **Inspect species mix shifts**
+   - Open charts and compare:
+     - **Stacked by species** for composition
+     - **Trend** for direction over time
+     - **Spring vs Fall** for season balance
+3. **Find understocked periods**
+   - Watch the planning summary values:
+     - YoY change and percent change
+     - trend direction over the selected range
+4. **Zoom to candidate lakes**
+   - Use distance + species filters, then click a lake pin.
+   - Chart focus switches to that single lake until reset.
+5. **Check data confidence before decisions**
+   - Run:
+     ```bash
+     python3 scripts/check_consistency.py
+     ```
+   - In UI, verify the malformed-row indicator is zero.
+   - Resolve unmatched/mismatch findings in profiles CSV, rerun
+     `merge_profiles.py`, then re-run consistency checks.
