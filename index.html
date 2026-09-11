@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Alberta Trout Stocking Map</title>
 <!--
-  FEATURE MANIFEST v2 — anything listed here must survive every future edit.
+  FEATURE MANIFEST v3 — anything listed here must survive every future edit.
 
   Data
     M01 reads data/manifest.json for the year list and provisional seasons
@@ -61,7 +61,22 @@
     M41 filters and home shared through the URL
     M42 data quality panel, collapsed
     M43 works at phone width with a slide-over sidebar
+
+  Added in v3
+    M44 deep link to one lake (?lake=), restoring its popup and chart scope
+    M45 copy-link button inside the popup, for that lake alone
+    M46 Google Maps driving directions from home, per lake and in the list
+    M47 pin colour mode: dominant species, or year-over-year change
+    M48 change mode needs two selected years and says so when it has one
+    M49 zone view: a graduated bubble per fish management zone, ranked table
+    M50 works offline: service worker precaches app, libraries, data and tiles
+    M51 offline badge, and a reload prompt when a newer version is cached
+    M52 installable as an app through a web manifest
 -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#2b2e2a">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
 <link rel="stylesheet" href="vendor/leaflet.css"/>
 <link rel="stylesheet" href="vendor/MarkerCluster.css"/>
 <style>
@@ -177,6 +192,14 @@
   .data-quality { font-size: 11px; color: var(--ink-dim); margin-top: 8px; line-height: 1.55; }
   .data-quality strong { color: var(--ink); }
   .legend { font-size: 11px; color: var(--ink-dim); line-height: 1.5; margin-top: 10px; }
+  .legend strong { color: var(--ink); }
+  .legend-keys { display: flex; flex-direction: column; gap: 3px; margin-top: 8px; }
+  .legend-key { display: flex; align-items: center; gap: 6px; }
+  .legend-swatch {
+    flex: 0 0 auto; width: 15px; height: 15px; border-radius: 50%; display: grid;
+    place-items: center; font-size: 9px; font-weight: 700; color: #26251f;
+    border: 1px solid rgba(0,0,0,0.35);
+  }
 
   #fav-list { list-style: none; margin: 0; padding: 0; font-size: 12px; }
   #fav-list li { display: flex; align-items: center; gap: 6px; padding: 2px 0; }
@@ -340,6 +363,76 @@
     border-bottom: 1px solid var(--accent); font-size: 11px;
   }
   .lake-popup a.gmaps:hover { color: var(--ink); border-color: var(--ink); }
+  /* Above the stocking table, not below it: some lakes carry forty rows, and
+     burying "directions" under all of them hides the most-used action. */
+  .lake-popup .popup-actions {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+    margin: 10px 0 4px; padding-bottom: 8px; border-bottom: 1px solid var(--panel-edge);
+  }
+  .lake-popup .popup-actions a.gmaps, .lake-popup .popup-actions .gmaps { margin-top: 0; }
+  .lake-popup .gmaps.as-btn {
+    background: none; padding: 0; cursor: pointer; font-family: inherit;
+    border: 0; border-bottom: 1px solid var(--accent); color: var(--accent); font-size: 11px;
+  }
+  .lake-popup .gmaps.as-btn:hover { color: var(--ink); border-color: var(--ink); }
+  .change-tag {
+    display: inline-block; min-width: 15px; text-align: center; padding: 0 4px;
+    border-radius: 2px; font-size: 10px; font-weight: 700; color: #12140f;
+  }
+
+  /* Zone view */
+  .zone-bubble {
+    border-radius: 50%; display: grid; place-items: center; line-height: 1.15;
+    border: 2px solid rgba(26,25,20,0.75); color: #26251f; font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4); cursor: pointer; opacity: 0.92;
+    padding: 2px; box-sizing: border-box; text-align: center;
+  }
+  .zone-bubble:hover { opacity: 1; }
+  .zone-bubble-code { font-size: 12px; letter-spacing: 0.5px; }
+  .zone-bubble-fish { font-size: 10px; font-weight: 600; opacity: 0.85; }
+  #zone-panel {
+    display: none; position: absolute; top: 10px; left: 56px; z-index: 500;
+    width: 318px; max-height: 62%; overflow: auto; padding: 10px 12px 12px;
+    background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.45);
+  }
+  #map-wrap.zone-mode #zone-panel { display: block; }
+  .zone-panel-title {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
+    color: var(--ink-dim); margin-bottom: 8px;
+  }
+  .zone-table { border-collapse: collapse; width: 100%; font-size: 12px; }
+  /* A wrapped region name pushes the swatch onto its own line and the row stops
+     reading as a row, so every cell stays on one line. */
+  .zone-table th, .zone-table td {
+    padding: 3px 4px; border-bottom: 1px solid var(--panel-edge); text-align: left;
+    white-space: nowrap; vertical-align: middle;
+  }
+  .zone-table th { color: var(--ink-dim); font-weight: 500; font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px; }
+  .zone-table td.num, .zone-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .zone-table .zone-region { color: var(--ink-dim); font-size: 11px; }
+  .zone-swatch {
+    display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 5px;
+    border: 1px solid rgba(0,0,0,0.4);
+  }
+
+  /* Offline and update notices */
+  #offline-badge {
+    position: absolute; bottom: 10px; right: 10px; z-index: 600;
+    padding: 5px 10px; font-size: 11px; border-radius: 3px;
+    background: #4a3d22; color: #f0d9a8; border: 1px solid #6b5729;
+  }
+  #update-toast {
+    position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); z-index: 700;
+    display: flex; align-items: center; gap: 10px; padding: 7px 12px; font-size: 12px;
+    background: var(--panel); color: var(--ink); border: 1px solid var(--accent);
+    border-radius: 3px; box-shadow: 0 2px 10px rgba(0,0,0,0.45);
+  }
+  #update-toast[hidden], #offline-badge[hidden] { display: none; }
+  #update-reload {
+    background: var(--accent); color: #1f211e; border: 0; border-radius: 2px;
+    padding: 3px 9px; font-size: 11px; font-weight: 600; cursor: pointer;
+  }
 
   .leaflet-control-attribution { background: rgba(43,46,42,0.85) !important; color: var(--ink-dim) !important; font-size: 10px !important; }
   .leaflet-control-attribution a { color: var(--accent) !important; }
@@ -374,6 +467,18 @@
     .chart-summary { gap: 12px; font-size: 11px; }
     .leaflet-popup-content { min-width: 200px; max-height: 46vh; }
     #sidebar-close { display: block; }
+    /* The zone table cannot float beside a phone-width map, so it sits under
+       the map buttons across the full width, with its own scroll. */
+    #zone-panel {
+      left: 8px; right: 8px; width: auto; top: auto; bottom: calc(50px + var(--panel-h));
+      max-height: 38vh;
+    }
+    /* Clear of the chart toggle at bottom-left and the offline badge at right. */
+    #update-toast { bottom: calc(10px + var(--panel-h)); left: auto; right: 8px; transform: none; }
+    #offline-badge { bottom: calc(10px + var(--panel-h)); right: 8px; }
+    /* Both live bottom-right on a phone, so stack them rather than overlap.
+       The badge comes first in the DOM, so it pushes the toast up. */
+    #offline-badge:not([hidden]) ~ #update-toast { bottom: calc(48px + var(--panel-h)); }
   }
   #sidebar-close {
     display: none; background: none; border: 0; color: var(--ink-dim);
@@ -457,7 +562,17 @@
       <div class="btn-row">
         <button class="btn active" data-view="map">Map</button>
         <button class="btn" data-view="list">List</button>
+        <button class="btn" data-view="zones">Zones</button>
       </div>
+    </div>
+
+    <div class="group">
+      <div class="group-label"><span>Pin colour</span></div>
+      <div class="btn-row">
+        <button class="btn active" data-color="species">Species</button>
+        <button class="btn" data-color="change">Change</button>
+      </div>
+      <div class="hint" id="color-hint"></div>
     </div>
 
     <div class="group">
@@ -482,6 +597,12 @@
       <button class="map-btn" id="zoom-results" type="button">Zoom to results</button>
       <button class="map-btn" id="share-btn" type="button">Copy link</button>
     </div>
+    <div id="offline-badge" hidden>Offline · showing cached data</div>
+    <div id="update-toast" hidden>
+      <span>A newer version is ready.</span>
+      <button type="button" id="update-reload">Reload</button>
+    </div>
+    <div id="zone-panel"></div>
 
     <div id="list-view">
       <div class="list-bar">
@@ -567,8 +688,43 @@ const RECENCY_OPTIONS = [
   { id: "season", label: "This season", days: null, season: true },
 ];
 
+/** Pins can carry either of two stories. Species answers "what is in there";
+ *  change answers "is this lake getting more or less than it used to". */
+const COLOR_MODES = [
+  { id: "species", label: "Species" },
+  { id: "change", label: "Change" },
+];
+
+/** Diverging scale for year-over-year change. ColorBrewer PuOr, which stays
+ *  readable under protanopia and deuteranopia because it varies on the
+ *  blue–yellow axis that both forms of colour blindness keep. Orange is down,
+ *  purple is up, and the pale middle is "about the same". */
+const CHANGE_CLASSES = [
+  { id: "down-big", label: "Down by a quarter or more", color: "#b35806", glyph: "▼", test: r => r <= -0.25 },
+  { id: "down",     label: "Down a little",            color: "#f1a340", glyph: "▽", test: r => r <= -0.05 },
+  { id: "flat",     label: "About the same",           color: "#d8d3c6", glyph: "=", test: r => r < 0.05 },
+  { id: "up",       label: "Up a little",              color: "#b2abd2", glyph: "△", test: r => r < 0.25 },
+  { id: "up-big",   label: "Up by a quarter or more",  color: "#5e3c99", glyph: "▲", test: () => true },
+];
+const CHANGE_NEW     = { id: "new",     label: "Newly stocked, none the year before", color: "#199e70", glyph: "+" };
+const CHANGE_STOPPED = { id: "stopped", label: "Stocked the year before, none this year", color: "#6f6a60", glyph: "✕" };
+/** A lake selected for its history in other years but stocked in neither of the
+ *  two being compared. Calling that "stopped" would read as a loss that did not
+ *  happen in this window. */
+const CHANGE_NEITHER = { id: "neither", label: "Not stocked in either year", color: "#3f4239", glyph: "–" };
+
+/** Alberta's fish management zones, as they appear in the profiles CSV. The
+ *  prefix is the region; the digit is the zone within it. */
+const ZONE_REGIONS = { ES: "Eastern Slopes", PP: "Parkland & Prairie", NB: "Northern Boreal" };
+
+/** Sequential single-hue ramp for the zone bubbles. A single hue is safe for
+ *  every form of colour vision, because only lightness carries the value. */
+const ZONE_RAMP = ["#f3d9a4", "#e8b96b", "#d9953c", "#bd7222", "#94520f"];
+
 const PIN_MIN = 7;
 const PIN_MAX = 30;
+const ZONE_BUBBLE_MIN = 17;
+const ZONE_BUBBLE_MAX = 44;
 let SQRT_MAX = 1;
 const STOCKING_ISSUE_SAMPLE_LIMIT = 6;
 const CLUSTER_OFF_ZOOM = 11;
@@ -619,6 +775,8 @@ const state = {
   chartType: "stacked-species",
   chartOpen: false,
   view: "map",
+  /** "species" or "change" — what pin colour means. */
+  colorMode: "species",
   home: { ...DEFAULT_HOME },
   /** Stable lake id the charts are scoped to, or null for every lake. */
   focusedLakeAts: null,
@@ -825,6 +983,104 @@ function visibleLakes() { return LAKES.filter(lakePassesFilters); }
 function mappableLakes() { return visibleLakes().filter(l => l.lat != null && l.lon != null); }
 
 // ============================================================
+// YEAR-OVER-YEAR CHANGE
+// ============================================================
+/** Change is only meaningful between two years the user has actually selected.
+ *  Comparing against a year that is filtered out would report a drop the
+ *  filters invented. Returns the two most recent selected years, newest first,
+ *  or null when fewer than two are selected. */
+function changeYearPair() {
+  const years = [...state.years].sort((a, b) => b - a);
+  return years.length >= 2 ? { current: years[0], previous: years[1] } : null;
+}
+
+/** Fish in one year for one lake, with the species and size filters applied,
+ *  so the colour agrees with the number the popup shows. */
+function fishInYear(lake, year) {
+  let total = 0;
+  for (const s of lake.stockings) {
+    if (s.year !== year) continue;
+    if (!state.species.has(s.species)) continue;
+    if (!state.sizes.has(sizeClassOf(s.length_cm))) continue;
+    total += Number(s.number) || 0;
+  }
+  return total;
+}
+
+/** Ink for the glyph sitting on a change colour. The pale middle of the
+ *  diverging scale and the two greys need opposite treatment. */
+function glyphInk(classId) {
+  return ["flat", "down", "up"].includes(classId) ? "#26251f" : "#f4f1e6";
+}
+
+/** Which change class a lake falls in, or null when the pair is unavailable. */
+function changeClassOf(lake, pair) {
+  if (!pair) return null;
+  const now = fishInYear(lake, pair.current);
+  const before = fishInYear(lake, pair.previous);
+  if (before === 0 && now === 0) return { ...CHANGE_NEITHER, now, before, ratio: null };
+  if (before === 0) return { ...CHANGE_NEW, now, before, ratio: null };
+  if (now === 0) return { ...CHANGE_STOPPED, now, before, ratio: -1 };
+  const ratio = (now - before) / before;
+  const cls = CHANGE_CLASSES.find(c => c.test(ratio));
+  return { ...cls, now, before, ratio };
+}
+
+/** One line of plain English for the popup and the tooltip. */
+function changeText(lake, pair) {
+  const cls = changeClassOf(lake, pair);
+  if (!cls) return null;
+  const { now, before, ratio } = cls;
+  if (cls.id === "neither") return `not stocked in ${pair.previous} or ${pair.current}`;
+  if (cls.id === "new") return `${fmtNum(now)} in ${pair.current}, none in ${pair.previous}`;
+  if (now === 0) return `none in ${pair.current}, ${fmtNum(before)} in ${pair.previous}`;
+  const pct = Math.round(ratio * 100);
+  const dir = pct > 0 ? `up ${pct}%` : pct < 0 ? `down ${Math.abs(pct)}%` : "unchanged";
+  return `${fmtNum(now)} in ${pair.current} vs ${fmtNum(before)} in ${pair.previous} — ${dir}`;
+}
+
+// ============================================================
+// ZONES
+// ============================================================
+/** Zone totals under the current filters. Lakes with no zone in the profiles
+ *  CSV are counted separately rather than dropped, so the totals still add up
+ *  to what the map shows. */
+function zoneSummaries() {
+  const byZone = new Map();
+  let unzonedLakes = 0, unzonedFish = 0;
+  for (const lake of visibleLakes()) {
+    const fish = filteredFishTotal(lake);
+    if (!lake.zone) { unzonedLakes++; unzonedFish += fish; continue; }
+    let z = byZone.get(lake.zone);
+    if (!z) {
+      z = { zone: lake.zone, region: ZONE_REGIONS[lake.zone.slice(0, 2)] || "",
+            lakes: [], fish: 0, latSum: 0, lonSum: 0, placed: 0, last: null };
+      byZone.set(lake.zone, z);
+    }
+    z.lakes.push({ name: lake.name, fish, key: lakeKey(lake) });
+    z.fish += fish;
+    if (lake.lat != null && lake.lon != null) { z.latSum += lake.lat; z.lonSum += lake.lon; z.placed++; }
+    const last = lastStockedDate(lake);
+    if (last && (!z.last || last > z.last)) z.last = last;
+  }
+  const zones = [...byZone.values()].map(z => ({
+    ...z,
+    lat: z.placed ? z.latSum / z.placed : null,
+    lon: z.placed ? z.lonSum / z.placed : null,
+    lakes: z.lakes.sort((a, b) => b.fish - a.fish),
+  })).sort((a, b) => b.fish - a.fish);
+  return { zones, unzonedLakes, unzonedFish };
+}
+
+/** Rank-based shade, so the ramp always uses its whole range however lopsided
+ *  the totals are. PP2 alone holds a fifth of the lakes. */
+function zoneShade(index, count) {
+  if (count <= 1) return ZONE_RAMP[ZONE_RAMP.length - 1];
+  const step = (count - 1 - index) / (count - 1);
+  return ZONE_RAMP[Math.min(ZONE_RAMP.length - 1, Math.round(step * (ZONE_RAMP.length - 1)))];
+}
+
+// ============================================================
 // POPUP
 // ============================================================
 function profileBlock(lake) {
@@ -848,6 +1104,7 @@ function popupHtml(lake) {
   const key = lakeKey(lake);
   const filteredTotal = filteredFishTotal(lake);
   const gmapsUrl = `https://www.google.com/maps/search/?api=1&query=${lake.lat},${lake.lon}`;
+  const driveUrl = directionsUrl(lake);
   const rows = [...lake.stockings].filter(stockingPasses)
     .sort((a, b) => stockingSortKey(b).localeCompare(stockingSortKey(a)));
   const activeYears = [...new Set(rows.map(s => s.year))].sort((a, b) => a - b);
@@ -880,40 +1137,75 @@ function popupHtml(lake) {
   const fav = state.favourites.has(key);
   const distText = Number.isFinite(lake.distanceKm) ? `${Math.round(lake.distanceKm)} km` : "—";
 
+  const pair = changeYearPair();
+  const change = changeText(lake, pair);
+  const changeCls = changeClassOf(lake, pair);
+  const changeRow = change
+    ? `<div class="meta"><strong>Versus ${pair.previous}:</strong>
+         <span class="change-tag" style="background:${changeCls.color};color:${glyphInk(changeCls.id)}">${changeCls.glyph}</span>
+         ${esc(change)}</div>`
+    : "";
+
   return `<div class="lake-popup">
     <h3><button class="star ${fav ? "on" : ""}" data-fav="${esc(key)}" title="${fav ? "Remove from favourites" : "Add to favourites"}" aria-label="${fav ? "Remove from favourites" : "Add to favourites"}">${fav ? "★" : "☆"}</button>${esc(lake.name)}</h3>
     <div class="ats">${esc(lake.ats || key)}</div>
     <div class="meta"><strong>${distText}</strong> from ${esc(state.home.name)} &nbsp;·&nbsp; <strong>${fmtNum(filteredTotal)}</strong> fish shown</div>
     <div class="meta"><strong>Last stocked:</strong> ${esc(lastText)}</div>
     <div class="meta"><strong>Years:</strong> ${esc(yearRangeText)} &nbsp;·&nbsp; <strong>Species:</strong> ${esc(speciesText)}</div>
+    ${changeRow}
     ${approx}
     ${profileBlock(lake)}
+    <div class="popup-actions">
+      <a class="gmaps" href="${driveUrl}" target="_blank" rel="noopener">Directions from ${esc(state.home.name)} ↗</a>
+      <a class="gmaps" href="${gmapsUrl}" target="_blank" rel="noopener">Show on Google Maps ↗</a>
+      <button type="button" class="gmaps as-btn" data-lakelink="${esc(key)}">Copy link to this lake</button>
+    </div>
     <table>
       <thead><tr><th>Date</th><th>Sp.</th><th>Strain</th><th>cm</th><th>Number</th></tr></thead>
       <tbody>${tableRows}</tbody>
     </table>
-    <a class="gmaps" href="${gmapsUrl}" target="_blank" rel="noopener">Open in Google Maps ↗</a>
   </div>`;
+}
+
+/** Google Maps driving directions, home to the lake. A plain URL, so there is
+ *  no API key to keep and nothing to break when a quota runs out. Google shows
+ *  the road distance and time, which is what actually matters — the straight
+ *  line this app measures understates most of these drives badly. */
+function directionsUrl(lake) {
+  const origin = `${state.home.lat},${state.home.lon}`;
+  return `https://www.google.com/maps/dir/?api=1&origin=${origin}` +
+         `&destination=${lake.lat},${lake.lon}&travelmode=driving`;
+}
+
+/** A link that reopens the map on one lake, with nothing else carried over. */
+function lakeLinkUrl(key) {
+  return `${location.origin}${location.pathname}?lake=${encodeURIComponent(key)}`;
 }
 
 // ============================================================
 // MAP
 // ============================================================
-let map, pinLayer, homeMarker, currentBasemap = "topo";
+let map, pinLayer, zoneLayer, homeMarker, currentBasemap = "topo";
 let rerenderingPins = false;
 const basemaps = {};
 
-function pinIcon(lake, radius, order) {
-  const primary = SPECIES_META[order[0]]?.color || "#888";
+function pinIcon(lake, radius, order, changePair) {
+  const changeMode = state.colorMode === "change" && changePair;
+  const cls = changeMode ? changeClassOf(lake, changePair) : null;
+  const primary = changeMode ? cls.color : (SPECIES_META[order[0]]?.color || "#888");
+  /* In change mode the ring still names a second species, so switching colour
+     mode never costs you the information the other mode was carrying. */
   const secondary = order.length > 1 ? SPECIES_META[order[1]]?.color : null;
   const size = Math.round(radius * 2);
   const ring = secondary ? `box-shadow:0 0 0 2.5px ${secondary};` : "";
-  const initial = size >= 20 ? (SPECIES_META[order[0]]?.initial || "") : "";
+  const glyph = changeMode ? cls.glyph : (SPECIES_META[order[0]]?.initial || "");
+  const initial = size >= 20 ? glyph : "";
+  const inkStyle = changeMode ? `color:${glyphInk(cls.id)};` : "";
   const fontSize = Math.max(8, Math.round(size * 0.42));
   const fav = state.favourites.has(lakeKey(lake)) ? " fav" : "";
   return L.divIcon({
     className: "pin-wrap",
-    html: `<div class="pin${fav}" style="width:${size}px;height:${size}px;background:${primary};${ring}font-size:${fontSize}px">${initial}</div>`,
+    html: `<div class="pin${fav}" style="width:${size}px;height:${size}px;background:${primary};${ring}${inkStyle}font-size:${fontSize}px">${initial}</div>`,
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
   });
@@ -924,7 +1216,10 @@ function tooltipHtml(lake) {
     .sort((a, b) => stockingSortKey(b).localeCompare(stockingSortKey(a)))[0];
   const when = last ? fmtDate(last.date, last.date_precision) : "—";
   const dist = Number.isFinite(lake.distanceKm) ? `${Math.round(lake.distanceKm)} km · ` : "";
-  return `<b>${esc(lake.name)}</b><br><span class="tip-sub">${dist}${fmtNum(filteredFishTotal(lake))} fish · last ${esc(when)}</span>`;
+  const pair = state.colorMode === "change" ? changeYearPair() : null;
+  const change = pair ? changeText(lake, pair) : null;
+  return `<b>${esc(lake.name)}</b><br><span class="tip-sub">${dist}${fmtNum(filteredFishTotal(lake))} fish · last ${esc(when)}</span>` +
+         (change ? `<br><span class="tip-sub">${esc(change)}</span>` : "");
 }
 
 function initMap() {
@@ -952,6 +1247,10 @@ function initMap() {
     },
   }).addTo(map);
 
+  /* Zone bubbles are a separate layer, added only in zone view, so switching
+     back to pins cannot leave a stale bubble behind. */
+  zoneLayer = L.layerGroup();
+
   placeHomeMarker();
 
   map.on("click", ev => {
@@ -966,8 +1265,22 @@ function initMap() {
   });
   map.on("popupclose", () => { if (!rerenderingPins) state.openPopupAts = null; });
   map.on("popupopen", e => {
-    const btn = e.popup.getElement()?.querySelector("[data-fav]");
+    const el = e.popup.getElement();
+    const btn = el?.querySelector("[data-fav]");
     if (btn) btn.addEventListener("click", () => toggleFavourite(btn.dataset.fav));
+    const link = el?.querySelector("[data-lakelink]");
+    if (link) link.addEventListener("click", async () => {
+      const url = lakeLinkUrl(link.dataset.lakelink);
+      try {
+        await navigator.clipboard.writeText(url);
+        link.textContent = "Link copied";
+      } catch {
+        // Clipboard access is refused over plain http and in some browsers.
+        // Showing the link is still useful; it can be copied by hand.
+        link.textContent = url;
+      }
+      setTimeout(() => { link.textContent = "Copy link to this lake"; }, 2500);
+    });
   });
 }
 
@@ -992,6 +1305,7 @@ function renderPins() {
   pinLayer.clearLayers();
   const markers = [];
   let shown = 0, unplaced = 0;
+  const changePair = state.colorMode === "change" ? changeYearPair() : null;
 
   for (const lake of LAKES) {
     if (!lakePassesFilters(lake)) continue;
@@ -999,7 +1313,7 @@ function renderPins() {
     shown++;
     const order = filteredDominantOrder(lake);
     const marker = L.marker([lake.lat, lake.lon], {
-      icon: pinIcon(lake, pinRadius(filteredFishTotal(lake)), order),
+      icon: pinIcon(lake, pinRadius(filteredFishTotal(lake)), order, changePair),
       riseOnHover: true,
     });
     marker.bindTooltip(() => tooltipHtml(lake), { className: "lake-tip", direction: "top", offset: [0, -6] });
@@ -1027,6 +1341,7 @@ function renderPins() {
     `Showing ${shown} of ${LAKES.length} lakes`;
   document.getElementById("empty-state").classList.toggle("show", shown === 0 && unplaced === 0);
   updateFilterSummary();
+  updateLegend();
   return shown;
 }
 
@@ -1034,6 +1349,94 @@ function zoomToResults() {
   const lakes = mappableLakes();
   if (!lakes.length) return;
   map.fitBounds(L.latLngBounds(lakes.map(l => [l.lat, l.lon])).pad(0.12));
+}
+
+// ============================================================
+// ZONE VIEW
+// ============================================================
+/** Alberta does not publish zone boundaries in this repository, and drawing an
+ *  invented outline would be a lie about where a zone ends. So a zone is drawn
+ *  as one bubble at the centre of its own stocked lakes: the area says how many
+ *  fish went into the zone, the shade says where it ranks, and the label names
+ *  it. The ranked table beside it carries the exact numbers. */
+function renderZones() {
+  zoneLayer.clearLayers();
+  const { zones, unzonedLakes, unzonedFish } = zoneSummaries();
+  const maxFish = Math.max(1, ...zones.map(z => z.fish));
+
+  zones.forEach((z, i) => {
+    if (z.lat == null) return;
+    const scale = Math.sqrt(z.fish) / Math.sqrt(maxFish);
+    const radius = ZONE_BUBBLE_MIN + scale * (ZONE_BUBBLE_MAX - ZONE_BUBBLE_MIN);
+    const fill = zoneShade(i, zones.length);
+    const marker = L.marker([z.lat, z.lon], {
+      icon: L.divIcon({
+        className: "pin-wrap",
+        html: `<div class="zone-bubble" style="width:${radius * 2}px;height:${radius * 2}px;background:${fill}">
+                 <span class="zone-bubble-code">${esc(z.zone)}</span>
+                 <span class="zone-bubble-fish">${shortNum(z.fish)}</span>
+               </div>`,
+        iconSize: [radius * 2, radius * 2],
+        iconAnchor: [radius, radius],
+      }),
+      /* Southern Alberta's zone centres sit close together, so the bubbles
+         overlap however they are sized. Stacking the smallest on top keeps every
+         label readable; left to Leaflet's default order, PP2 swallows NB2. */
+      zIndexOffset: (i + 1) * 10,
+      riseOnHover: true,
+    });
+    marker.bindTooltip(`<b>${esc(z.zone)}</b> ${esc(z.region)}<br><span class="tip-sub">${z.lakes.length} lakes · ${fmtNum(z.fish)} fish</span>`,
+      { className: "lake-tip", direction: "top", offset: [0, -6] });
+    marker.bindPopup(() => zonePopupHtml(z), { maxWidth: 320 });
+    zoneLayer.addLayer(marker);
+  });
+
+  renderZonePanel(zones, unzonedLakes, unzonedFish);
+  updateLegend();
+}
+
+function zonePopupHtml(z) {
+  const url = `https://albertaregulations.ca/fishingregs/${encodeURIComponent(z.zone.toLowerCase())}.html`;
+  const top = z.lakes.slice(0, 6).map(l =>
+    `<tr><td>${esc(l.name)}</td><td class="num">${fmtNum(l.fish)}</td></tr>`).join("");
+  return `<div class="lake-popup">
+    <h3>${esc(z.zone)} — ${esc(z.region)}</h3>
+    <div class="meta"><strong>${fmtNum(z.fish)}</strong> fish across <strong>${z.lakes.length}</strong> lakes</div>
+    <div class="meta"><strong>Last stocked:</strong> ${esc(z.last ? fmtDate(z.last) : "—")}</div>
+    <table><thead><tr><th>Biggest lakes here</th><th class="num">Fish</th></tr></thead>
+      <tbody>${top}</tbody></table>
+    <div class="popup-actions">
+      <a class="gmaps" href="${url}" target="_blank" rel="noopener">Regulations for ${esc(z.zone)} ↗</a>
+    </div>
+  </div>`;
+}
+
+function renderZonePanel(zones, unzonedLakes, unzonedFish) {
+  const rows = zones.map((z, i) => `
+    <tr data-zone="${esc(z.zone)}">
+      <td><span class="zone-swatch" style="background:${zoneShade(i, zones.length)}"></span>${esc(z.zone)}</td>
+      <td class="zone-region">${esc(z.region)}</td>
+      <td class="num">${z.lakes.length}</td>
+      <td class="num">${fmtNum(z.fish)}</td>
+    </tr>`).join("");
+  const tail = unzonedLakes
+    ? `<div class="hint">${unzonedLakes} lake${unzonedLakes === 1 ? "" : "s"} (${fmtNum(unzonedFish)} fish)
+         have no zone recorded in the profiles, so they are not in any bubble.</div>`
+    : "";
+  document.getElementById("zone-panel").innerHTML = zones.length
+    ? `<div class="zone-panel-title">Zones by fish stocked</div>
+       <table class="zone-table">
+         <thead><tr><th>Zone</th><th>Region</th><th class="num">Lakes</th><th class="num">Fish</th></tr></thead>
+         <tbody>${rows}</tbody>
+       </table>${tail}`
+    : `<div class="zone-panel-title">Zones by fish stocked</div>
+       <div class="hint">No zoned lakes match these filters.</div>`;
+}
+
+function shortNum(n) {
+  if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+  if (n >= 1000) return Math.round(n / 1000) + "k";
+  return String(n);
 }
 
 // ============================================================
@@ -1287,10 +1690,70 @@ function updateDataQualitySummary() {
   }
   el.innerHTML = parts.join(" · ");
 
+  updateLegend();
+}
+
+/** The legend has to describe whatever the map is currently drawing, or it
+ *  teaches the wrong thing the moment a mode is switched. */
+function updateLegend() {
   const partial = ALL_YEARS.filter(y => PROVISIONAL_YEARS.has(y));
-  document.getElementById("legend").innerHTML =
-    (partial.length ? `<strong>${partial.join(", ")}*</strong> is still in progress — Alberta updates that report later in the season.<br><br>` : "") +
-    `Pin size follows the number of fish shown. The letter is the main species; a ring means a second species is stocked there too. Pins group together when zoomed out.`;
+  const provisional = partial.length
+    ? `<strong>${partial.join(", ")}*</strong> is still in progress — Alberta updates that report later in the season.<br><br>`
+    : "";
+
+  let body;
+  if (state.view === "zones") {
+    body = `Each bubble sits at the centre of its zone's stocked lakes, sized by fish and
+            shaded by rank. Alberta does not publish zone outlines here, so a bubble marks
+            where the zone's lakes are, not how far the zone reaches.`;
+  } else if (state.colorMode === "change") {
+    const pair = changeYearPair();
+    if (!pair) {
+      body = `Change needs two selected years to compare. Select another year, or switch
+              colour back to Species.`;
+    } else {
+      /* Two of these swatches are dark, so the glyph inside has to flip to a
+         light ink or it disappears into its own background. */
+      const keys = [...CHANGE_CLASSES, CHANGE_NEW, CHANGE_STOPPED, CHANGE_NEITHER].map(c =>
+        `<span class="legend-key"><span class="legend-swatch" style="background:${c.color};color:${glyphInk(c.id)}">${c.glyph}</span>${c.label}</span>`).join("");
+      body = `Colour compares <strong>${pair.current}</strong> against <strong>${pair.previous}</strong>.
+              Pin size still follows the number of fish shown, and a ring still means a second
+              species.<div class="legend-keys">${keys}</div>`;
+    }
+  } else {
+    body = `Pin size follows the number of fish shown. The letter is the main species; a ring
+            means a second species is stocked there too. Pins group together when zoomed out.`;
+  }
+  document.getElementById("legend").innerHTML = provisional + body;
+}
+
+function buildColorModeToggle() {
+  document.querySelectorAll("[data-color]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      state.colorMode = btn.dataset.color;
+      document.querySelectorAll("[data-color]").forEach(b =>
+        b.classList.toggle("active", b.dataset.color === state.colorMode));
+      updateColorModeHint();
+      renderPins();
+      writeUrl();
+    });
+  });
+  updateColorModeHint();
+}
+
+/** Change mode silently colours everything "about the same" when only one year
+ *  is selected, which looks like a finding rather than a missing input. */
+function updateColorModeHint() {
+  const hint = document.getElementById("color-hint");
+  const pair = changeYearPair();
+  if (state.colorMode !== "change") {
+    hint.textContent = "Pin colour is the main species stocked there.";
+  } else if (!pair) {
+    hint.textContent = "Select at least two years to compare.";
+  } else {
+    hint.textContent = `Comparing ${pair.current} against ${pair.previous}.`;
+  }
+  hint.classList.toggle("armed", state.colorMode === "change" && !pair);
 }
 
 function buildBasemapToggle() {
@@ -1399,6 +1862,7 @@ function gotoLake(key) {
   map.setView([lake.lat, lake.lon], Math.max(map.getZoom(), CLUSTER_OFF_ZOOM + 1));
   renderPins();
   renderChart();
+  writeUrl();
 }
 function buildRecencyChipsState() {
   document.querySelectorAll("[data-recency]").forEach(c =>
@@ -1442,7 +1906,10 @@ function renderList() {
       <td class="num">${fmtNum(r.fish)}</td>
       <td>${r.species.map(c => `<span class="sp-tag" style="background:${SPECIES_META[c]?.color || "#888"}">${c}</span>`).join(" ")}</td>
       <td>${esc(r.zone || "—")}</td>
-      <td>${r.lat != null ? `<a class="linkish" data-listgoto="${esc(r.key)}">map</a>` : "—"}</td>
+      <td>${r.lat != null
+        ? `<a class="linkish" data-listgoto="${esc(r.key)}">map</a> ·
+           <a class="linkish" href="${directionsUrl(r)}" target="_blank" rel="noopener">drive</a>`
+        : "—"}</td>
     </tr>`;
   }).join("");
   document.getElementById("list-count").textContent = `${rows.length} lakes`;
@@ -1487,10 +1954,23 @@ function exportCsv() {
 
 function setView(view) {
   state.view = view;
-  document.getElementById("map-wrap").classList.toggle("list-mode", view === "list");
+  const wrap = document.getElementById("map-wrap");
+  wrap.classList.toggle("list-mode", view === "list");
+  wrap.classList.toggle("zone-mode", view === "zones");
   document.querySelectorAll("[data-view]").forEach(b => b.classList.toggle("active", b.dataset.view === view));
+
+  if (view === "zones") {
+    if (map.hasLayer(pinLayer)) map.removeLayer(pinLayer);
+    if (!map.hasLayer(zoneLayer)) zoneLayer.addTo(map);
+    renderZones();
+  } else {
+    if (map.hasLayer(zoneLayer)) map.removeLayer(zoneLayer);
+    if (!map.hasLayer(pinLayer)) pinLayer.addTo(map);
+  }
+
   if (view === "list") renderList();
   else setTimeout(() => map.invalidateSize(), 60);
+  updateLegend();
   writeUrl();
 }
 
@@ -1745,6 +2225,8 @@ function writeUrl() {
   if (state.maxDistanceKm !== 1000) p.set("d", state.maxDistanceKm);
   if (state.recency !== "any") p.set("rc", state.recency);
   if (state.view !== "map") p.set("v", state.view);
+  if (state.colorMode !== "species") p.set("cm", state.colorMode);
+  if (state.focusedLakeAts) p.set("lake", state.focusedLakeAts);
   if (state.chartType !== "stacked-species") p.set("c", state.chartType);
   if (state.home.lat !== DEFAULT_HOME.lat || state.home.lon !== DEFAULT_HOME.lon) {
     p.set("home", `${state.home.lat.toFixed(5)},${state.home.lon.toFixed(5)},${state.home.name}`);
@@ -1759,7 +2241,8 @@ function readUrl() {
   if (p.has("sz")) state.sizes = new Set(p.get("sz").split(",").filter(c => SIZE_IDS.includes(c)));
   if (p.has("d")) state.maxDistanceKm = Math.max(0, Math.min(1000, Number(p.get("d")) || 1000));
   if (p.has("rc") && RECENCY_OPTIONS.some(o => o.id === p.get("rc"))) state.recency = p.get("rc");
-  if (p.has("v") && ["map", "list"].includes(p.get("v"))) state.view = p.get("v");
+  if (p.has("v") && ["map", "list", "zones"].includes(p.get("v"))) state.view = p.get("v");
+  if (p.has("cm") && COLOR_MODES.some(m => m.id === p.get("cm"))) state.colorMode = p.get("cm");
   if (p.has("c")) state.chartType = p.get("c");
   if (p.has("home")) {
     const [lat, lon, ...rest] = p.get("home").split(",");
@@ -1768,6 +2251,56 @@ function readUrl() {
     }
   }
   return p;
+}
+
+// ============================================================
+// OFFLINE
+// ============================================================
+/** Most of these lakes have no usable signal at the water, which is exactly
+ *  where the map is worth having. The service worker precaches the app, the
+ *  libraries and every year of data on first visit, and caches basemap tiles as
+ *  they are viewed, so a route planned at home still draws at the lake. */
+function registerServiceWorker() {
+  if (!("serviceWorker" in navigator)) return;
+  // A worker cannot be registered from a file:// page, and there is nothing to
+  // cache when the page was not served in the first place.
+  if (location.protocol === "file:") return;
+
+  navigator.serviceWorker.register("sw.js").then(reg => {
+    reg.addEventListener("updatefound", () => {
+      const incoming = reg.installing;
+      if (!incoming) return;
+      incoming.addEventListener("statechange", () => {
+        // A worker that reaches "installed" while one is already in control is
+        // a new version waiting. Never swap it in mid-session — that would
+        // reload the page out from under someone reading a popup.
+        if (incoming.state === "installed" && navigator.serviceWorker.controller) {
+          showUpdateToast(incoming);
+        }
+      });
+    });
+  }).catch(err => console.warn("Offline support unavailable:", err));
+}
+
+function showUpdateToast(worker) {
+  const toast = document.getElementById("update-toast");
+  toast.hidden = false;
+  document.getElementById("update-reload").addEventListener("click", () => {
+    worker.postMessage({ type: "skip-waiting" });
+    // The new worker takes control, then the page reloads onto it once.
+    let reloaded = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (!reloaded) { reloaded = true; location.reload(); }
+    });
+  }, { once: true });
+}
+
+function watchConnection() {
+  const badge = document.getElementById("offline-badge");
+  const paint = () => { badge.hidden = navigator.onLine; };
+  addEventListener("online", paint);
+  addEventListener("offline", paint);
+  paint();
 }
 
 // ============================================================
@@ -1803,7 +2336,9 @@ function onFilterChange() {
   renderChart();
   renderFavourites();
   updateRecencyCounts();
+  updateColorModeHint();
   if (state.view === "list") renderList();
+  if (state.view === "zones") renderZones();
   writeUrl();
 }
 
@@ -1846,6 +2381,7 @@ async function init() {
     buildDistanceSlider();
     buildHomeControls();
     buildYearChips();
+    buildColorModeToggle();
     buildBasemapToggle();
     buildSelectAll();
     buildChartToggle();
@@ -1874,6 +2410,8 @@ async function init() {
     });
     document.querySelectorAll("[data-view]").forEach(b =>
       b.addEventListener("click", () => setView(b.dataset.view)));
+    document.querySelectorAll("[data-color]").forEach(b =>
+      b.classList.toggle("active", b.dataset.color === state.colorMode));
 
     document.querySelectorAll(".chart-type-btn").forEach(b =>
       b.classList.toggle("active", b.dataset.chart === state.chartType));
@@ -1881,7 +2419,14 @@ async function init() {
 
     renderPins();
     renderChart();
-    if (state.view === "list") setView("list");
+    if (state.view !== "map") setView(state.view);
+
+    /* A ?lake= link is the whole point of the visit, so it is applied after the
+       first render — gotoLake relaxes any filter that would hide the lake. */
+    if (params.has("lake")) gotoLake(params.get("lake"));
+
+    watchConnection();
+    registerServiceWorker();
 
     document.getElementById("loading").classList.add("hidden");
   } catch (err) {

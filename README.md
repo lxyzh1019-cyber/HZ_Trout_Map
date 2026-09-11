@@ -12,6 +12,9 @@ Hosted via GitHub Pages: push to `main` and the map is live at
 ```
 alberta-trout-map/
 ├── index.html                      ← the map (open in browser)
+├── sw.js                           ← service worker: makes the map work offline
+├── manifest.webmanifest            ← lets the map install as an app
+├── icon.svg                        ← the app icon
 ├── vendor/                         ← Leaflet, MarkerCluster and Chart.js, checked in
 ├── data/
 │   ├── raw/                        ← the reports as published (PDF, CSV, XLSX)
@@ -193,6 +196,7 @@ committed. Generated data can therefore never drift from its sources.
 ## Running locally
 
 The map fetches JSON over HTTP, so opening `index.html` from disk will not work.
+Offline support is skipped on a `file://` page for the same reason.
 
 ```bash
 python3 -m http.server 8000    # from the project root
@@ -238,12 +242,30 @@ there lately.
   as a collapse in stocking.
 - Click a pin to scope every chart to that lake.
 
+**Seeing the shape of it**
+- **Pin colour** is either the main species, or year-over-year change: how the
+  latest selected year compares with the one before it, on a diverging scale
+  where orange is down and purple is up. Change needs two selected years, and
+  says so rather than colouring everything "about the same".
+- **Zone view** ranks Alberta's ten fish management zones by fish stocked, with
+  a bubble at the centre of each zone's stocked lakes. Alberta does not publish
+  zone outlines here, so a bubble marks where a zone's lakes are, not how far
+  the zone reaches — the map says so rather than drawing an invented boundary.
+
 **Taking it with you**
 - List view, sortable on any column, with a CSV download.
+- Google Maps driving directions from your home to any lake, in the popup and
+  in the list. Google gives the road distance and time, which is what matters:
+  the straight line this app measures understates most of these drives.
 - Favourites, saved in your browser, and a one-click multi-stop driving route
   from home through all of them.
 - Every filter and your home location live in the URL, so a link reproduces
-  exactly what you are looking at.
+  exactly what you are looking at. `?lake=wb6051` opens one lake directly, and
+  each popup has a button that copies its own link.
+- **Works with no signal.** On first visit the map caches itself, the
+  libraries, all sixteen years of data and the basemap tiles you have looked
+  at, so it still opens at the lake. It says when it is offline, and offers a
+  reload when a newer version has been fetched. It can be installed as an app.
 - Works at phone width, with the filters in a slide-over panel.
 
 **Honesty about the data**
