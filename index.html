@@ -707,6 +707,7 @@
 <script src="vendor/chart.umd.js"></script>
 <script src="js/astro.js"></script>
 <script src="js/conditions.js"></script>
+<script src="js/weather.js"></script>
 <script>
 // ============================================================
 // CONFIG
@@ -2578,6 +2579,7 @@ async function init() {
       typeof Chart === "undefined" ? "vendor/chart.umd.js" : null,
       typeof Astro === "undefined" ? "js/astro.js" : null,
       typeof Conditions === "undefined" ? "js/conditions.js" : null,
+      typeof Weather === "undefined" ? "js/weather.js" : null,
     ].filter(Boolean);
     if (missing.length) throw new Error(`${missing.join(" and ")} did not load. Check the vendor/ and js/ folders are present.`);
 

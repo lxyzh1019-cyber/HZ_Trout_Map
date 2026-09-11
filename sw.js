@@ -21,7 +21,12 @@
 const SHELL_CACHE = "troutmap-shell-v1";
 const DATA_CACHE = "troutmap-data-v1";
 const TILE_CACHE = "troutmap-tiles-v1";
-const KNOWN_CACHES = [SHELL_CACHE, DATA_CACHE, TILE_CACHE];
+const WX_CACHE = "troutmap-wx-v1";
+/* Every troutmap-* cache missing from this list is deleted on activate, so a
+ * cache added above and forgotten here is wiped on the next worker update —
+ * silently, and only noticed by someone offline at a lake. */
+const KNOWN_CACHES = [SHELL_CACHE, DATA_CACHE, TILE_CACHE, WX_CACHE];
+const WX_LIMIT = 25;
 
 /* Tiles are unbounded — Alberta at zoom 17 is millions of them — so the tile
  * cache is capped and trimmed oldest-first. 600 tiles is roughly a province at
@@ -40,6 +45,7 @@ const SHELL_FILES = [
   "vendor/chart.umd.js",
   "js/astro.js",
   "js/conditions.js",
+  "js/weather.js",
   "evidence.html",
   "vendor/images/marker-icon.png",
   "vendor/images/marker-icon-2x.png",
@@ -95,6 +101,10 @@ self.addEventListener("message", event => {
   if (event.data && event.data.type === "skip-waiting") self.skipWaiting();
 });
 
+function isWeather(url) {
+  return url.hostname === "api.open-meteo.com";
+}
+
 function isTile(url) {
   return /tile\.opentopomap\.org|tile\.openstreetmap\.org/.test(url.hostname);
 }
@@ -134,6 +144,42 @@ async function cacheFirst(request, cacheName, { limit } = {}) {
   return res;
 }
 
+/** Weather is the one thing here that is wrong when it is old, and the one thing
+ *  you cannot get where it matters most. So: take the network when there is one
+ *  and it answers quickly, and otherwise fall back to whatever is cached,
+ *  however stale, because an old forecast beats an empty panel.
+ *
+ *  The timeout is the point. Neither existing strategy fits — cacheFirst never
+ *  refreshes, so the forecast freezes; cacheFirstRevalidate always shows you
+ *  last session's weather. And the common field failure is not being offline,
+ *  which fetch rejects on promptly. It is one bar of signal, where fetch simply
+ *  hangs and navigator.onLine cheerfully reports true, so the offline badge
+ *  never appears and the panel spins forever. */
+async function networkFirstTimed(request, cacheName, timeoutMs, limit) {
+  const cache = await caches.open(cacheName);
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(request, { signal: controller.signal });
+    clearTimeout(timer);
+    if (res.ok) {
+      const body = await res.clone().arrayBuffer();
+      const headers = new Headers(res.headers);
+      headers.set("x-troutmap-fetched", String(Date.now()));
+      await cache.put(request, new Response(body, { status: 200, headers }));
+      if (limit) trimCache(cacheName, limit);
+    }
+    return res;
+  } catch (err) {
+    clearTimeout(timer);
+    const hit = await cache.match(request);
+    if (hit) return hit;
+    // A shape the page can read, rather than a network error it cannot.
+    return new Response('{"error":"offline"}',
+      { status: 503, headers: { "content-type": "application/json" } });
+  }
+}
+
 /** The page itself: take the network when there is one, so an update lands
  *  without any version here to remember to bump. */
 async function networkFirst(request, cacheName) {
@@ -157,6 +203,13 @@ self.addEventListener("fetch", event => {
 
   if (isTile(url)) {
     event.respondWith(cacheFirst(request, TILE_CACHE, { limit: TILE_LIMIT }));
+    return;
+  }
+
+  // Before the same-origin bail below, because the forecast is someone else's
+  // to serve but very much ours to keep.
+  if (isWeather(url)) {
+    event.respondWith(networkFirstTimed(request, WX_CACHE, 6000, WX_LIMIT));
     return;
   }
 
