@@ -1,7 +1,7 @@
 """
 merge_profiles.py — enrich a lakes_YYYY.json file with profile data from the
-MyWildAlberta profiles CSV (zone, surface area, amenities, and name/coord
-overrides).
+MyWildAlberta profiles CSV (coordinates, zone, surface area, amenities, and the
+display name).
 
 USAGE:
     python merge_profiles.py ../data/lakes_2025.json
@@ -9,15 +9,32 @@ USAGE:
 The file is updated in place. Unmatched ATS codes are reported; you can add
 them to profiles/mywildalberta_profiles.csv and re-run.
 
-CSV columns used (from mywildalberta_profiles.csv):
-    ats              ATS code — primary key for the join
-    html_lat         Authoritative latitude (overrides extractor's lat)
-    html_lon         Authoritative longitude (overrides extractor's lon)
-    Trout Map Name   Display name (falls back to `name`)
-    name             Profile name (falls back if Trout Map Name blank)
-    zone             Regulatory zone (e.g. ES1, PP2)
-    surface_area     Surface area, usually "123.4 ha"
-    site_amenities   Free-text amenities list
+Where coordinates come from
+---------------------------
+Each lake gets a ``coord_source`` field recording which of these was used, in
+descending order of preference:
+
+  ``override``  ``override_lat`` / ``override_lon`` — a coordinate you placed
+                by hand to correct a specific lake. Always wins.
+  ``profile``   ``lat`` / ``lon`` — the hand-verified MyWildAlberta coordinates.
+                Median 0.53 km from the ATS quarter-section the stocking report
+                names for the same lake, so the two independent sources agree.
+  ``ats``       Derived from the ATS code by ats.py. Used only when the lake has
+                no profile row or no profile coordinate. Expect ~0.5 km error.
+
+The ``html_lat`` / ``html_lon`` columns are deliberately NOT used. They are not
+an independent observation: for 249 of 265 rows they reproduce the old (buggy)
+ATS estimate to within 50 m, which put every pin a median 6 km off the water.
+
+CSV columns used:
+    ats                          ATS code — primary key for the join
+    lat, lon                     Hand-verified coordinates (preferred)
+    override_lat, override_lon   Manual per-lake correction (optional column)
+    Trout Map Name               Display name (falls back to `name`)
+    name                         Profile name (falls back if Trout Map Name blank)
+    zone                         Regulatory zone (e.g. ES1, PP2)
+    surface_area                 Surface area, e.g. "(ha): 123.4 hectares"
+    site_amenities               Free-text amenities list
 """
 
 import csv
@@ -26,8 +43,15 @@ import re
 import sys
 from pathlib import Path
 
+from ats import ats_to_latlng, haversine_km
+
 
 PROFILES_CSV = Path(__file__).parent.parent / "profiles" / "mywildalberta_profiles.csv"
+
+# Flag any lake whose profile coordinate sits further than this from the ATS
+# quarter-section the stocking report names for it. Beyond a couple of km the
+# two sources are describing different places and one of them is wrong.
+COORD_DISAGREEMENT_KM = 2.0
 
 
 def parse_float(s):
@@ -43,15 +67,20 @@ def parse_float(s):
 
 
 def parse_area_ha(s):
-    """Surface area in the CSV is like '123.4 ha' or '1,234 ha' or blank."""
+    """Pull a hectare figure out of the CSV's surface-area text.
+
+    The column is free text and comes in several shapes:
+        "(ha): 123.4 hectares"   "1,234 ha"   "13.2"   "n/a"   ""
+    Returns None when there is no number to find.
+    """
     if not s:
         return None
-    s = s.strip().replace(",", "")
-    m = re.match(r"^([\d.]+)", s)
-    if not m:
+    text = s.replace(",", "")
+    match = re.search(r"(\d+(?:\.\d+)?)", text)
+    if not match:
         return None
     try:
-        return float(m.group(1))
+        return float(match.group(1))
     except ValueError:
         return None
 
@@ -68,13 +97,29 @@ def load_profiles():
             display_name = (row.get("Trout Map Name") or "").strip() or (row.get("name") or "").strip()
             profiles[ats] = {
                 "display_name": display_name or None,
-                "lat": parse_float(row.get("html_lat")),
-                "lon": parse_float(row.get("html_lon")),
+                "lat": parse_float(row.get("lat")),
+                "lon": parse_float(row.get("lon")),
+                "override_lat": parse_float(row.get("override_lat")),
+                "override_lon": parse_float(row.get("override_lon")),
                 "zone": (row.get("zone") or "").strip() or None,
                 "surface_area_ha": parse_area_ha(row.get("surface_area")),
                 "amenities": (row.get("site_amenities") or "").strip() or None,
             }
     return profiles
+
+
+def resolve_coordinates(ats, prof):
+    """Pick the best coordinate for a lake.
+
+    Returns (lat, lon, source). Source is "override", "profile" or "ats".
+    """
+    if prof:
+        if prof["override_lat"] is not None and prof["override_lon"] is not None:
+            return prof["override_lat"], prof["override_lon"], "override"
+        if prof["lat"] is not None and prof["lon"] is not None:
+            return prof["lat"], prof["lon"], "profile"
+    lat, lon = ats_to_latlng(ats)
+    return lat, lon, "ats"
 
 
 def merge(lakes_path):
@@ -83,41 +128,62 @@ def merge(lakes_path):
     profiles = load_profiles()
 
     name_changes = 0
-    coord_changes = 0
+    by_source = {"override": 0, "profile": 0, "ats": 0}
     unmatched = []
+    disagreements = []
 
     for lk in lakes:
+        # A stable identifier for the physical lake. Today it equals the ATS
+        # code; once years are linked it becomes the registry id and stops
+        # changing when a report mistypes an ATS code.
+        lk["lake_id"] = lk["ats"]
+
         prof = profiles.get(lk["ats"])
         if not prof:
-            lk["zone"] = None
-            lk["surface_area_ha"] = None
-            lk["amenities"] = None
             unmatched.append(lk)
-            continue
 
-        if prof["display_name"] and prof["display_name"] != lk["name"]:
+        if prof and prof["display_name"] and prof["display_name"] != lk["name"]:
             lk["name"] = prof["display_name"]
             name_changes += 1
 
-        if prof["lat"] is not None and prof["lon"] is not None:
-            if (lk["lat"], lk["lon"]) != (prof["lat"], prof["lon"]):
-                lk["lat"] = prof["lat"]
-                lk["lon"] = prof["lon"]
-                coord_changes += 1
+        lat, lon, source = resolve_coordinates(lk["ats"], prof)
+        if lat is not None and lon is not None:
+            lk["lat"], lk["lon"] = lat, lon
+        lk["coord_source"] = source
+        by_source[source] += 1
 
-        lk["zone"] = prof["zone"]
-        lk["surface_area_ha"] = prof["surface_area_ha"]
-        lk["amenities"] = prof["amenities"]
+        # Cross-check the chosen coordinate against the ATS code in the report.
+        ats_lat, ats_lon = ats_to_latlng(lk["ats"])
+        if source != "ats" and ats_lat is not None:
+            gap = haversine_km(lat, lon, ats_lat, ats_lon)
+            lk["ats_gap_km"] = round(gap, 2)
+            if gap > COORD_DISAGREEMENT_KM:
+                disagreements.append((lk["name"], lk["ats"], gap))
+        else:
+            lk["ats_gap_km"] = None
+
+        lk["zone"] = prof["zone"] if prof else None
+        lk["surface_area_ha"] = prof["surface_area_ha"] if prof else None
+        lk["amenities"] = prof["amenities"] if prof else None
 
     lakes_path.write_text(json.dumps(lakes, indent=2), encoding="utf-8")
 
     print(f"Merged {lakes_path.name}:")
     print(f"  Total lakes:     {len(lakes)}")
     print(f"  Names updated:   {name_changes}")
-    print(f"  Coords updated:  {coord_changes}")
+    print(f"  Coordinates:     {by_source['override']} override, "
+          f"{by_source['profile']} profile, {by_source['ats']} ATS estimate")
     print(f"  Unmatched:       {len(unmatched)}")
     for lk in unmatched:
         print(f"    UNMATCHED: {lk['name']}  ({lk['ats']})")
+    print(f"  Coordinate disagreements (>{COORD_DISAGREEMENT_KM} km from ATS code): "
+          f"{len(disagreements)}")
+    for name, ats, gap in sorted(disagreements, key=lambda x: -x[2]):
+        print(f"    {gap:5.1f} km  {ats:<18} {name}")
+    if disagreements:
+        print("    Check these on satellite imagery. If the profile coordinate is")
+        print("    right the report's ATS code is a typo; if not, set override_lat/")
+        print("    override_lon in the profiles CSV and re-run.")
 
 
 if __name__ == "__main__":

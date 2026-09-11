@@ -14,9 +14,8 @@ OUTPUT:
 
 Changes from v1:
     1. ATS longitude math fixed. v1 treated each range increment as 1 mile;
-       it's actually 6 miles. Longitude errors of 20–60 km (for lakes far
-       from the W5 meridian) are eliminated; residual error is the inherent
-       quarter-section tolerance (~2–8 km).
+       it's actually 6 miles. (The remaining grid errors were fixed later
+       again — the conversion now lives in ats.py.)
     2. Name parsing uses word x-coordinates to separate Official Name and
        Common Name columns, instead of concatenating everything before the
        ATS code. No more "Payne Lake Mami Lake" garbage.
@@ -30,9 +29,10 @@ Changes from v1:
 import pdfplumber
 import json
 import re
-import math
 import sys
 from pathlib import Path
+
+from ats import ats_to_latlng
 
 TROUT_SPECIES = {"RNTR", "BKTR", "BNTR", "TGTR", "CTTR"}
 
@@ -137,51 +137,12 @@ def resolve_lake_name(official, common):
 
 
 # ═══════════════════════════════════════════════════════
-# ATS → Lat/Lng conversion (fixed in v2)
+# ATS → Lat/Lng conversion
 # ═══════════════════════════════════════════════════════
-# Alberta Township System:
-#   Quarter-Section-Township-Range-Meridian (e.g., SW4-36-8-W5)
-#   - Meridians: W4 = 110°W, W5 = 114°W, W6 = 118°W
-#   - Townships: 6 miles N/S, numbered from 49°N (US border) going north
-#   - Ranges: 6 miles E/W, numbered from each meridian going west
-#   - Sections: 6×6 grid (36 per township) in boustrophedon (snake) order
-#   - Quarters: NE/NW/SE/SW of each 1-mile section
-# Accuracy: ~2–8 km (returns approx centroid of quarter-section)
-
-MERIDIAN_LON = {"W4": -110.0, "W5": -114.0, "W6": -118.0}
-MILES_PER_DEG_LAT = 69.0
-
-QUARTER_OFFSETS = {
-    "NE": (0.75, 0.75), "NW": (0.25, 0.75),
-    "SE": (0.75, 0.25), "SW": (0.25, 0.25),
-}
-
-
-def section_offset(section):
-    """(col, row) 0-5 for section within 6x6 township grid (snake ordering)."""
-    s = section - 1
-    row = s // 6
-    pos_in_row = s % 6
-    col = 5 - pos_in_row if row % 2 == 0 else pos_in_row
-    return col, row
-
-
-def ats_to_latlng(ats):
-    m = re.match(r"^(NE|NW|SE|SW)(\d+)-(\d+)-(\d+)-(W[456])$", ats)
-    if not m:
-        return None, None
-    quarter, section, township, rng, meridian = m.groups()
-    section, township, rng = int(section), int(township), int(rng)
-    # Township south edge: 6 mi × (township - 1) north of 49°N
-    township_south_lat = 49.0 + (township - 1) * (6.0 / MILES_PER_DEG_LAT)
-    col, row = section_offset(section)       # miles 0–5 within township
-    qcol, qrow = QUARTER_OFFSETS[quarter]    # 0.25 or 0.75 mile
-    lat = township_south_lat + (row + qrow) * (1.0 / MILES_PER_DEG_LAT)
-    miles_per_deg_lon = MILES_PER_DEG_LAT * math.cos(math.radians(lat))
-    # FIX: each range is 6 miles wide; col/qcol are miles within the range
-    miles_west_of_meridian = (rng - 1) * 6.0 + col + qcol
-    lon = MERIDIAN_LON[meridian] - miles_west_of_meridian / miles_per_deg_lon
-    return round(lat, 5), round(lon, 5)
+# Lives in ats.py so merge_profiles.py and the tests share one implementation.
+# See that module for the survey geometry and for the accuracy measurement.
+# These coordinates are a fallback: merge_profiles.py prefers the hand-verified
+# coordinates in the profiles CSV wherever a lake has one.
 
 
 # ═══════════════════════════════════════════════════════

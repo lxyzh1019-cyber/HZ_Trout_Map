@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Alberta Trout Stocking Map</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-      crossorigin=""/>
+<!-- Leaflet and Chart.js are vendored in vendor/ so the map works offline
+     and cannot break when a CDN is unreachable. See README for versions. -->
+<link rel="stylesheet" href="vendor/leaflet.css"/>
 <style>
   :root {
     --bg: #2b2e2a;
@@ -129,9 +130,13 @@
   }
   #map { flex: 1; background: #1a1c1a; }
 
-  /* Chart toggle button */
+  /* Chart toggle button — sits above the chart panel when it is open, so it
+     never covers the chart's axis. --panel-h mirrors #chart-panel.open. */
+  #map-wrap { --panel-open-h: 368px; --panel-h: 0px; }
+  #map-wrap.charts-open { --panel-h: var(--panel-open-h); }
   #chart-toggle {
-    position: absolute; bottom: 16px; left: 16px; z-index: 500;
+    position: absolute; bottom: calc(16px + var(--panel-h)); left: 16px; z-index: 500;
+    transition: bottom 0.25s ease-out;
     padding: 8px 14px; font-size: 13px; font-weight: 500;
     background: var(--panel); color: var(--ink);
     border: 1px solid var(--panel-edge); border-radius: 3px;
@@ -146,7 +151,7 @@
     height: 0; overflow: hidden; transition: height 0.25s ease-out;
     display: flex; flex-direction: column;
   }
-  #chart-panel.open { height: 368px; }
+  #chart-panel.open { height: var(--panel-open-h); }
   .chart-header {
     display: flex; align-items: center; justify-content: space-between;
     padding: 10px 16px; border-bottom: 1px solid var(--panel-edge);
@@ -186,6 +191,9 @@
     gap: 10px; padding: 6px 16px; font-size: 11px; color: var(--ink-dim);
     border-bottom: 1px solid var(--panel-edge); flex-shrink: 0;
   }
+  /* A class-level `display: flex` outranks the UA rule for [hidden], so
+     setting el.hidden alone would leave this row on screen. */
+  .chart-scope-row[hidden] { display: none; }
   .chart-scope-row strong { color: var(--ink); font-weight: 600; }
   .chart-scope-clear {
     flex-shrink: 0; padding: 3px 8px; font-size: 11px; cursor: pointer;
@@ -339,10 +347,8 @@
   </div>
 </div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-        crossorigin=""></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="vendor/leaflet.js"></script>
+<script src="vendor/chart.umd.js"></script>
 <script>
 // ============================================================
 // CONFIG
@@ -385,7 +391,16 @@ const state = {
   chartOpen: false,
   /** When set, chart aggregates only this lake (ATS id). Cleared on map background click or filters. */
   focusedLakeAts: null,
+  /** Lake whose popup is open, so it survives a re-render of the pin layer. */
+  openPopupAts: null,
 };
+
+/** A click on a pin can also reach the map, which would immediately undo the
+ *  focus the pin just set. Whether it does depends on Leaflet internals, so
+ *  the map handler ignores clicks that land right after a pin click rather
+ *  than relying on a flag someone has to remember to clear. */
+let lastPinClickAt = 0;
+const PIN_CLICK_GRACE_MS = 250;
 
 let LAKES = [];         // populated after fetch
 let ALL_YEARS = [];     // sorted ascending
@@ -408,7 +423,24 @@ function haversineKm(lat1, lon1, lat2, lon2) {
   return 2 * R * Math.asin(Math.sqrt(a));
 }
 
-function fmtNum(n) { return n.toLocaleString(); }
+function fmtNum(n) { return Number(n || 0).toLocaleString(); }
+
+/** Lake names, strains and amenities come from a PDF and a hand-edited CSV.
+ *  Escape them before they go anywhere near innerHTML. */
+function esc(s) {
+  return String(s == null ? "" : s).replace(/[&<>"']/g, c =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+/** Sort key for a stocking row. Dates are "14-Apr-25"; Safari rejects that
+ *  format in new Date(), so build the key from the month table instead. */
+function stockingSortKey(s) {
+  const parts = String(s.date || "").split("-");
+  const day = Number(parts[0]) || 0;
+  const month = MONTH_NUM[parts[1]] || 0;
+  const year = Number(s.year) || 0;
+  return year * 10000 + month * 100 + day;
+}
 
 // ============================================================
 // DATA LOADING
@@ -448,6 +480,8 @@ async function loadAllData() {
         if (lk.zone) existing.zone = lk.zone;
         if (lk.surface_area_ha != null) existing.surface_area_ha = lk.surface_area_ha;
         if (lk.amenities) existing.amenities = lk.amenities;
+        if (lk.coord_source) existing.coord_source = lk.coord_source;
+        if (lk.lake_id) existing.lake_id = lk.lake_id;
       }
     }
   }
@@ -516,13 +550,13 @@ function lakePassesFilters(lake) {
 }
 function filteredFishTotal(lake) {
   let total = 0;
-  for (const s of lake.stockings) if (stockingPasses(s)) total += s.number;
+  for (const s of lake.stockings) if (stockingPasses(s)) total += Number(s.number);
   return total;
 }
 function filteredDominantOrder(lake) {
   const counts = {};
   for (const s of lake.stockings) {
-    if (stockingPasses(s)) counts[s.species] = (counts[s.species] || 0) + s.number;
+    if (stockingPasses(s)) counts[s.species] = (counts[s.species] || 0) + Number(s.number);
   }
   return Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
 }
@@ -538,16 +572,17 @@ function pinRadius(totalFish) {
 function profileBlock(lake) {
   const parts = [];
   if (lake.zone) {
-    const url = `https://albertaregulations.ca/fishingregs/${lake.zone.toLowerCase()}.html`;
-    parts.push(`<span class="profile-item"><span class="profile-label">Zone</span> <a class="zone-link" href="${url}" target="_blank" rel="noopener">${lake.zone}</a></span>`);
+    const zone = esc(lake.zone);
+    const url = `https://albertaregulations.ca/fishingregs/${encodeURIComponent(lake.zone.toLowerCase())}.html`;
+    parts.push(`<span class="profile-item"><span class="profile-label">Zone</span> <a class="zone-link" href="${url}" target="_blank" rel="noopener">${zone}</a></span>`);
   }
   if (lake.surface_area_ha != null) {
-    parts.push(`<span class="profile-item"><span class="profile-label">Area</span> ${lake.surface_area_ha} ha</span>`);
+    parts.push(`<span class="profile-item"><span class="profile-label">Area</span> ${esc(lake.surface_area_ha)} ha</span>`);
   }
   if (!parts.length && !lake.amenities) return "";
   let html = parts.length ? `<div class="profile-row">${parts.join(" &nbsp;·&nbsp; ")}</div>` : "";
   if (lake.amenities) {
-    html += `<div class="profile-amenities"><span class="profile-label">Facilities</span> ${lake.amenities}</div>`;
+    html += `<div class="profile-amenities"><span class="profile-label">Facilities</span> ${esc(lake.amenities)}</div>`;
   }
   return html;
 }
@@ -563,34 +598,34 @@ function popupHtml(lake) {
   const speciesText = activeSpecies.length ? activeSpecies.join(", ") : "none";
   const rows = [...lake.stockings]
     .filter(stockingPasses)
-    .sort((a, b) => {
-      // Parse "14-Apr-25" for sort; year from s.year is more reliable than 2-digit suffix.
-      const dA = new Date(`${a.date.split("-")[0]}-${a.date.split("-")[1]}-${a.year}`);
-      const dB = new Date(`${b.date.split("-")[0]}-${b.date.split("-")[1]}-${b.year}`);
-      return dB - dA;
-    });
+    .sort((a, b) => stockingSortKey(b) - stockingSortKey(a));
 
   const tableRows = rows.map(s => {
     const color = SPECIES_META[s.species]?.color || "#888";
     return `<tr>
-      <td>${s.date}</td>
-      <td><span class="sp-tag" style="background:${color}">${s.species}</span></td>
-      <td>${s.strain || "—"}</td>
-      <td>${s.length_cm ? s.length_cm.toFixed(1) : "—"}</td>
+      <td>${esc(s.date)}</td>
+      <td><span class="sp-tag" style="background:${color}">${esc(s.species)}</span></td>
+      <td>${esc(s.strain) || "—"}</td>
+      <td>${s.length_cm ? Number(s.length_cm).toFixed(1) : "—"}</td>
       <td>${fmtNum(s.number)}</td>
     </tr>`;
   }).join("");
 
+  const approxCoord = lake.coord_source === "ats"
+    ? `<div class="profile-row">Position estimated from the report's land description; expect a few hundred metres of error.</div>`
+    : "";
+
   return `<div class="lake-popup">
-    <h3>${lake.name}</h3>
-    <div class="ats">${lake.ats}</div>
+    <h3>${esc(lake.name)}</h3>
+    <div class="ats">${esc(lake.ats)}</div>
     <div class="meta">
       <strong>${Math.round(lake.distanceKm)} km</strong> from Red Deer &nbsp;·&nbsp;
       <strong>${fmtNum(filteredTotal)}</strong> fish (shown)
     </div>
     <div class="meta">
-      <strong>Years shown:</strong> ${yearRangeText} &nbsp;·&nbsp; <strong>Species:</strong> ${speciesText}
+      <strong>Years shown:</strong> ${esc(yearRangeText)} &nbsp;·&nbsp; <strong>Species:</strong> ${esc(speciesText)}
     </div>
+    ${approxCoord}
     ${profileBlock(lake)}
     <table>
       <thead><tr><th>Date</th><th>Sp.</th><th>Strain</th><th>cm</th><th>Number</th></tr></thead>
@@ -606,6 +641,7 @@ function popupHtml(lake) {
 let map;
 let pinLayer;
 let currentBasemap;
+let rerenderingPins = false;
 const basemaps = {};
 
 function initMap() {
@@ -635,15 +671,21 @@ function initMap() {
   pinLayer = L.layerGroup().addTo(map);
 
   map.on("click", () => {
+    if (Date.now() - lastPinClickAt < PIN_CLICK_GRACE_MS) return;
+    state.openPopupAts = null;
     if (state.focusedLakeAts != null) {
       state.focusedLakeAts = null;
       updateChartScopeUI();
       renderChart();
     }
   });
+  // Clearing the pin layer closes any open popup; that is bookkeeping, not the
+  // user dismissing it, so don't forget which lake to re-open.
+  map.on("popupclose", () => { if (!rerenderingPins) state.openPopupAts = null; });
 }
 
 function renderPins() {
+  rerenderingPins = true;
   pinLayer.clearLayers();
   let shown = 0;
 
@@ -668,15 +710,22 @@ function renderPins() {
       radius: r, fillColor: primaryColor, fillOpacity: 0.82,
       color: "#1f211e", weight: 1.2,
     });
-    marker.on("click", function(ev) {
-      if (ev.originalEvent) L.DomEvent.stopPropagation(ev.originalEvent);
+    // Popup content is generated on open so it always reflects current filters.
+    marker.bindPopup(() => popupHtml(lake), { maxWidth: 380 });
+    marker.on("click", function() {
+      lastPinClickAt = Date.now();
+      state.openPopupAts = lake.ats;
       state.focusedLakeAts = lake.ats;
       updateChartScopeUI();
       renderChart();
-      marker.bindPopup(popupHtml(lake), { maxWidth: 380 }).openPopup();
     });
     marker.addTo(pinLayer);
+    // Re-opened after a filter change rebuilt the layer.
+    if (state.openPopupAts === lake.ats) marker.openPopup();
   }
+
+  rerenderingPins = false;
+  if (shown === 0) state.openPopupAts = null;
 
   document.getElementById("result-count").textContent =
     `Showing ${shown} of ${LAKES.length} lakes`;
@@ -690,9 +739,14 @@ function renderPins() {
 // ============================================================
 function buildSpeciesFilters() {
   const host = document.getElementById("species-filters");
+  // Count lakes, not stocking rows — the sidebar's headline number is lakes,
+  // and a lake stocked twelve times is still one place to fish.
   const counts = {};
-  for (const l of LAKES) for (const s of l.stockings)
-    counts[s.species] = (counts[s.species] || 0) + 1;
+  for (const l of LAKES) {
+    for (const code of new Set(l.stockings.map(s => s.species).filter(Boolean))) {
+      counts[code] = (counts[code] || 0) + 1;
+    }
+  }
 
   host.innerHTML = SPECIES_ORDER.map(code => {
     const meta = SPECIES_META[code];
@@ -701,7 +755,7 @@ function buildSpeciesFilters() {
       <input type="checkbox" data-species="${code}" checked>
       <span class="species-swatch" style="background:${meta.color}"></span>
       <span class="species-label">${meta.label}</span>
-      <span class="species-count">${n}</span>
+      <span class="species-count" title="${n} lake${n === 1 ? "" : "s"}">${n}</span>
     </label>`;
   }).join("");
 
@@ -784,16 +838,18 @@ function updateFilterSummary() {
 function updateDataQualitySummary() {
   const el = document.getElementById("data-quality");
   const malformed = DATA_ISSUES.invalidStockings;
-  if (!QUALITY_SUMMARY) {
-    el.innerHTML = `Data quality: <strong>${malformed}</strong> malformed row(s) skipped in browser checks. Run <code>python3 scripts/check_consistency.py --json data/consistency_summary.json</code> for full badges.`;
-    return;
+  const estimated = LAKES.filter(l => l.coord_source === "ats").length;
+  const parts = [];
+  parts.push(`<strong>${LAKES.length - estimated}</strong> of <strong>${LAKES.length}</strong> lakes at verified coordinates`);
+  if (estimated) parts.push(`<strong>${estimated}</strong> estimated from the land description`);
+  if (malformed) parts.push(`<strong>${malformed}</strong> malformed row(s) skipped`);
+  if (QUALITY_SUMMARY) {
+    const u = QUALITY_SUMMARY.unmatched_count || 0;
+    const v = QUALITY_SUMMARY.ats_variant_count || 0;
+    if (u) parts.push(`<strong>${u}</strong> lake(s) missing a profile entry`);
+    if (v) parts.push(`<strong>${v}</strong> land-description variant(s) to review`);
   }
-  const u = QUALITY_SUMMARY.unmatched_count || 0;
-  const n = QUALITY_SUMMARY.name_mismatch_count || 0;
-  const a = QUALITY_SUMMARY.ats_mismatch_count || 0;
-  const v = QUALITY_SUMMARY.ats_variant_count || 0;
-  el.innerHTML =
-    `Data quality: unmatched ATS <strong>${u}</strong> · ATS/name mismatches <strong>${n}</strong> · same-name ATS splits <strong>${a}</strong> · ATS variants <strong>${v}</strong> · malformed rows skipped <strong>${malformed}</strong>`;
+  el.innerHTML = `Data quality: ${parts.join(" · ")}`;
 }
 
 function buildBasemapToggle() {
@@ -840,6 +896,7 @@ function buildChartToggle() {
     state.chartOpen = !state.chartOpen;
     panel.classList.toggle("open", state.chartOpen);
     btn.classList.toggle("open", state.chartOpen);
+    document.getElementById("map-wrap").classList.toggle("charts-open", state.chartOpen);
     btn.textContent = state.chartOpen ? "📊 Hide Charts" : "📊 Show Charts";
     // Give the CSS transition a moment to settle, then invalidate map + draw chart
     setTimeout(() => {
@@ -1074,6 +1131,10 @@ function chartOptions({ stacked, yTitle }) {
 // FILTER CHANGE HANDLER
 // ============================================================
 function clearChartFocusIfInvalid() {
+  if (state.openPopupAts) {
+    const open = LAKES.find(l => l.ats === state.openPopupAts);
+    if (!open || !lakePassesFilters(open)) state.openPopupAts = null;
+  }
   if (!state.focusedLakeAts) return;
   const lk = LAKES.find(l => l.ats === state.focusedLakeAts);
   if (!lk || !lakePassesFilters(lk)) {
@@ -1093,6 +1154,12 @@ function onFilterChange() {
 // ============================================================
 async function init() {
   try {
+    if (typeof L === "undefined" || typeof Chart === "undefined") {
+      const missing = [typeof L === "undefined" ? "vendor/leaflet.js" : null,
+                       typeof Chart === "undefined" ? "vendor/chart.umd.js" : null]
+                      .filter(Boolean).join(" and ");
+      throw new Error(`${missing} did not load. Check the vendor/ folder is present.`);
+    }
     const { lakes, years } = await loadAllData();
     QUALITY_SUMMARY = await loadQualitySummary();
     LAKES = lakes;
@@ -1118,8 +1185,12 @@ async function init() {
     document.getElementById("loading").classList.add("hidden");
   } catch (err) {
     document.getElementById("loading").innerHTML =
-      `<div style="color:#c85a2e">Failed to load data: ${err.message}<br>
-      <span style="color:#a8a396;font-size:12px">Check that data/manifest.json and data/lakes_*.json exist.</span></div>`;
+      `<div style="color:#c85a2e;max-width:520px;text-align:center;line-height:1.5">
+        Could not start the map: ${esc(err.message)}<br>
+        <span style="color:#a8a396;font-size:12px">Opening this file directly from disk will not work —
+        the browser blocks the data files. Serve the folder instead:
+        <code>python3 -m http.server 8000</code>, then open http://localhost:8000</span>
+      </div>`;
     console.error(err);
   }
 }

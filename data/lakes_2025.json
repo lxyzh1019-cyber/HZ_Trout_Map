@@ -3,7 +3,7 @@
     "ats": "NE10-2-28-W4",
     "name": "Payne (Mami) Lake",
     "lat": 49.1117,
-    "lon": -113.6558,
+    "lon": -113.655837,
     "stockings": [
       {
         "species": "RNTR",
@@ -155,14 +155,17 @@
       "RNTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Day use, camping on site, boat launch, fire pits, firewood available, hand launch, pier, pit toilets, water pump."
+    "surface_area_ha": 219.2,
+    "amenities": "Day use, camping on site, boat launch, fire pits, firewood available, hand launch, pier, pit toilets, water pump.",
+    "lake_id": "NE10-2-28-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.94
   },
   {
     "ats": "SE25-61-12-W5",
     "name": "McLeod (Carson) Lake",
-    "lat": 54.2986,
-    "lon": -115.6528,
+    "lat": 54.298603,
+    "lon": -115.652786,
     "stockings": [
       {
         "species": "RNTR",
@@ -306,13 +309,16 @@
     ],
     "zone": "ES3",
     "surface_area_ha": null,
-    "amenities": "Boat launch, boat rentals, fish cleaning stations, tackle shop, pier, small boat/hand launch, life jacket loaner station, horse shoe pits, laundry, payphones, playground, potable water."
+    "amenities": "Boat launch, boat rentals, fish cleaning stations, tackle shop, pier, small boat/hand launch, life jacket loaner station, horse shoe pits, laundry, payphones, playground, potable water.",
+    "lake_id": "SE25-61-12-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.86
   },
   {
     "ats": "NE4-15-2-W5",
     "name": "Chain Lakes Reservoir",
-    "lat": 50.2369,
-    "lon": -114.208,
+    "lat": 50.236864,
+    "lon": -114.20802,
     "stockings": [
       {
         "species": "RNTR",
@@ -411,14 +417,17 @@
       "RNTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Water, restrooms, power camping sites, firewood available, community kitchens, playground, boat launch, beach, concession store, sani dump."
+    "surface_area_ha": 643.4,
+    "amenities": "Water, restrooms, power camping sites, firewood available, community kitchens, playground, boat launch, beach, concession store, sani dump.",
+    "lake_id": "NE4-15-2-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.44
   },
   {
     "ats": "NW32-65-11-W5",
     "name": "Marigold Lake",
-    "lat": 54.6644,
-    "lon": -115.5422,
+    "lat": 54.671776,
+    "lon": -115.628279,
     "stockings": [
       {
         "species": "BKTR",
@@ -435,14 +444,17 @@
       "BKTR"
     ],
     "zone": "NB2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 32.1,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NW32-65-11-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.76
   },
   {
     "ats": "SW28-26-9-W4",
     "name": "Blood Indian Creek Reservoir",
-    "lat": 51.2381,
-    "lon": -111.1644,
+    "lat": 51.24853,
+    "lon": -111.210333,
     "stockings": [
       {
         "species": "BNTR",
@@ -542,14 +554,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, fish cleaning station, outhouses, dock and boat launch, day use picnic area, rave sewer drainage, coin-operated showers, laundromat, Wi-Fi."
+    "surface_area_ha": 90.1,
+    "amenities": "Camping on site, fish cleaning station, outhouses, dock and boat launch, day use picnic area, rave sewer drainage, coin-operated showers, laundromat, Wi-Fi.",
+    "lake_id": "SW28-26-9-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.31
   },
   {
     "ats": "NE12-38-8-W5",
     "name": "Cow Lake",
-    "lat": 52.245,
-    "lon": -115.1322,
+    "lat": 52.260185,
+    "lon": -115.005926,
     "stockings": [
       {
         "species": "RNTR",
@@ -612,14 +627,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Serviced and un-serviced sites, group camping, shelter kitchen, beach, playgrounds, boat launch, boating and fishing, coin showers and laundromat, water fill station."
+    "surface_area_ha": 844.7,
+    "amenities": "Serviced and un-serviced sites, group camping, shelter kitchen, beach, playgrounds, boat launch, boating and fishing, coin showers and laundromat, water fill station.",
+    "lake_id": "NE12-38-8-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.28
   },
   {
     "ats": "SW8-7-2-W5",
     "name": "Lees Lake",
-    "lat": 49.5419,
-    "lon": -114.2486,
+    "lat": 49.541912,
+    "lon": -114.248586,
     "stockings": [
       {
         "species": "RNTR",
@@ -673,14 +691,17 @@
       "RNTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, parking area, garbage cans, sanitary receptacles."
+    "surface_area_ha": 37.9,
+    "amenities": "Day use only, no open fires, parking area, garbage cans, sanitary receptacles.",
+    "lake_id": "SW8-7-2-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.37
   },
   {
     "ats": "NW17-83-6-W4",
     "name": "Engstrom Lake",
-    "lat": 56.1703,
-    "lon": -110.8135,
+    "lat": 56.188889,
+    "lon": -110.906389,
     "stockings": [
       {
         "species": "RNTR",
@@ -724,14 +745,17 @@
       "RNTR"
     ],
     "zone": "NB4",
-    "surface_area_ha": null,
-    "amenities": "Canoeing/kayaking, hiking (front country), ice fishing, power boating, pit toilets."
+    "surface_area_ha": 79.3,
+    "amenities": "Canoeing/kayaking, hiking (front country), ice fishing, power boating, pit toilets.",
+    "lake_id": "NW17-83-6-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 1.95
   },
   {
     "ats": "NE1-57-8-W6",
     "name": "Grande Cache Lake",
-    "lat": 53.8822,
-    "lon": -119.1761,
+    "lat": 53.9,
+    "lon": -119.05,
     "stockings": [
       {
         "species": "RNTR",
@@ -766,14 +790,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Day use picnic area, fire pits, picnic tables, boat launch, natural beach, playground, beach, dock for small motors."
+    "surface_area_ha": 163.6,
+    "amenities": "Day use picnic area, fire pits, picnic tables, boat launch, natural beach, playground, beach, dock for small motors.",
+    "lake_id": "NE1-57-8-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.46
   },
   {
     "ats": "NW13-35-3-W5",
     "name": "Dickson Trout Pond",
-    "lat": 52.0125,
-    "lon": -114.3083,
+    "lat": 52.011001,
+    "lon": -114.309334,
     "stockings": [
       {
         "species": "RNTR",
@@ -863,14 +890,17 @@
       "TGTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Hiking, boat dock, day use area, outhouses."
+    "surface_area_ha": 64.8,
+    "amenities": "Hiking, boat dock, day use area, outhouses.",
+    "lake_id": "NW13-35-3-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.33
   },
   {
     "ats": "SW18-70-25-W5",
     "name": "Swan Lake",
-    "lat": 55.1222,
-    "lon": -117.4811,
+    "lat": 55.059122,
+    "lon": -117.813668,
     "stockings": [
       {
         "species": "RNTR",
@@ -905,14 +935,17 @@
       "RNTR"
     ],
     "zone": "ES4",
-    "surface_area_ha": null,
-    "amenities": "Pit toilets, picnic area, fire pits."
+    "surface_area_ha": 162.7,
+    "amenities": "Pit toilets, picnic area, fire pits.",
+    "lake_id": "SW18-70-25-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.51
   },
   {
     "ats": "SW26-8-2-W4",
     "name": "Spruce Coulee Reservoir",
-    "lat": 49.6703,
-    "lon": -110.2295,
+    "lat": 49.673739,
+    "lon": -110.181613,
     "stockings": [
       {
         "species": "BKTR",
@@ -948,14 +981,17 @@
       "BNTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Year round camping, fishing dock, pit toilets, picnic tables, cook shelters, hand launch, water pump."
+    "surface_area_ha": 19.7,
+    "amenities": "Year round camping, fishing dock, pit toilets, picnic tables, cook shelters, hand launch, water pump.",
+    "lake_id": "SW26-8-2-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.43
   },
   {
     "ats": "NW20-8-1-W4",
     "name": "Reesor Lake",
-    "lat": 49.663,
-    "lon": -110.028,
+    "lat": 49.66537,
+    "lon": -110.106922,
     "stockings": [
       {
         "species": "RNTR",
@@ -1008,14 +1044,17 @@
       "RNTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Fishing pier, dock, boat launch, camping on site, pit toilets"
+    "surface_area_ha": 52.4,
+    "amenities": "Fishing pier, dock, boat launch, camping on site, pit toilets",
+    "lake_id": "NW20-8-1-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.11
   },
   {
     "ats": "SW24-55-25-W4",
     "name": "Cardiff Park Pond",
-    "lat": 53.7428,
-    "lon": -113.6574,
+    "lat": 53.763266,
+    "lon": -113.584073,
     "stockings": [
       {
         "species": "RNTR",
@@ -1079,14 +1118,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, picnic shelters, BBQ and fire pits, playground, horseshoe pits, volleyball courts, walking, biking and cross country skiing trails."
+    "surface_area_ha": 11.3,
+    "amenities": "Day use, picnic shelters, BBQ and fire pits, playground, horseshoe pits, volleyball courts, walking, biking and cross country skiing trails.",
+    "lake_id": "SW24-55-25-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 1.04
   },
   {
     "ats": "NE36-41-1-W4",
     "name": "Dillberry Lake",
-    "lat": 52.5616,
-    "lon": -110.1371,
+    "lat": 52.576348,
+    "lon": -110.004391,
     "stockings": [
       {
         "species": "RNTR",
@@ -1131,14 +1173,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Boat launch, cook shelters, firewood available for purchase, fish cleaning stations, life jacket loaner station, pier, pit/vault toilets, playground, sewage disposal, showers, water, beach."
+    "surface_area_ha": 70.1,
+    "amenities": "Boat launch, cook shelters, firewood available for purchase, fish cleaning stations, life jacket loaner station, pier, pit/vault toilets, playground, sewage disposal, showers, water, beach.",
+    "lake_id": "NE36-41-1-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.3
   },
   {
     "ats": "NE15-58-3-W5",
     "name": "Peanut Lake",
-    "lat": 53.9964,
-    "lon": -114.3883,
+    "lat": 54.017399,
+    "lon": -114.352591,
     "stockings": [
       {
         "species": "BKTR",
@@ -1174,14 +1219,17 @@
       "RNTR"
     ],
     "zone": "NB2",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, boat launch, boat launch (for smaller boats), canoeing, pit toilets, walking, trails, bird watching, day use areas, fish cleaning station."
+    "surface_area_ha": 13.2,
+    "amenities": "Camping on site, boat launch, boat launch (for smaller boats), canoeing, pit toilets, walking, trails, bird watching, day use areas, fish cleaning station.",
+    "lake_id": "NE15-58-3-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.37
   },
   {
     "ats": "SW19-40-15-W5",
     "name": "Shunda Lake (Fish Lake)",
-    "lat": 52.4384,
-    "lon": -116.0029,
+    "lat": 52.451617,
+    "lon": -116.149976,
     "stockings": [
       {
         "species": "RNTR",
@@ -1207,14 +1255,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Fish cleaning stations, fire pits, pit toilets, cook shelters, boat launch (hand launching), hiking, swimming, canoeing/kayaking"
+    "surface_area_ha": 51.4,
+    "amenities": "Fish cleaning stations, fire pits, pit toilets, cook shelters, boat launch (hand launching), hiking, swimming, canoeing/kayaking",
+    "lake_id": "SW19-40-15-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.79
   },
   {
     "ats": "NW7-69-23-W4",
     "name": "Chain Lakes (Lower Chain Lake)",
-    "lat": 54.9384,
-    "lon": -113.3365,
+    "lat": 54.964036,
+    "lon": -113.511311,
     "stockings": [
       {
         "species": "RNTR",
@@ -1287,14 +1338,17 @@
       "TGTR"
     ],
     "zone": "NB2",
-    "surface_area_ha": null,
-    "amenities": "Camping, boat launch, pit toilets, firepits, fish cleaning station, water pump."
+    "surface_area_ha": 84.8,
+    "amenities": "Camping, boat launch, pit toilets, firepits, fish cleaning station, water pump.",
+    "lake_id": "NW7-69-23-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.39
   },
   {
     "ats": "SW11-53-22-W5",
     "name": "Obed Lake",
-    "lat": 53.5399,
-    "lon": -117.1765,
+    "lat": 53.566667,
+    "lon": -117.133333,
     "stockings": [
       {
         "species": "BNTR",
@@ -1330,13 +1384,16 @@
     ],
     "zone": "ES3",
     "surface_area_ha": null,
-    "amenities": "Camping on site, fire pits, firewood available, fish cleaning stations, hand launch, pit toilets, water pump, power boating, canoeing/kayaking."
+    "amenities": "Camping on site, fire pits, firewood available, fish cleaning stations, hand launch, pit toilets, water pump, power boating, canoeing/kayaking.",
+    "lake_id": "SW11-53-22-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 1.25
   },
   {
     "ats": "NW19-64-2-W4",
     "name": "Little Bear Lake (Hasse Lake)",
-    "lat": 54.5326,
-    "lon": -110.1561,
+    "lat": 54.551596,
+    "lon": -110.300937,
     "stockings": [
       {
         "species": "BKTR",
@@ -1410,14 +1467,17 @@
       "TGTR"
     ],
     "zone": "NB1",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 47.1,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NW19-64-2-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.9
   },
   {
     "ats": "SW13-52-2-W5",
     "name": "Hasse Lake",
-    "lat": 53.4674,
-    "lon": -114.2739,
+    "lat": 53.487212,
+    "lon": -114.173756,
     "stockings": [
       {
         "species": "RNTR",
@@ -1471,14 +1531,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Walking trails, boat launch, fishing, picnic areas, pit toilets, fire pits."
+    "surface_area_ha": 90.0,
+    "amenities": "Walking trails, boat launch, fishing, picnic areas, pit toilets, fire pits.",
+    "lake_id": "SW13-52-2-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.52
   },
   {
     "ats": "NW11-49-18-W4",
     "name": "Black Nugget Mine Pit",
-    "lat": 53.1993,
-    "lon": -112.5706,
+    "lat": 53.217685,
+    "lon": -112.532662,
     "stockings": [
       {
         "species": "TGTR",
@@ -1514,14 +1577,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, firewood available, tap water available, sewage dumping station, playground, picnic shelter, day use area, group camping, boat launch."
+    "surface_area_ha": 2.1,
+    "amenities": "Camping on site, firewood available, tap water available, sewage dumping station, playground, picnic shelter, day use area, group camping, boat launch.",
+    "lake_id": "NW11-49-18-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.39
   },
   {
     "ats": "SW31-49-26-W5",
     "name": "Lower Wildhorse Lakes",
-    "lat": 53.25,
-    "lon": -117.6394,
+    "lat": 53.269491,
+    "lon": -117.792759,
     "stockings": [
       {
         "species": "RNTR",
@@ -1557,14 +1623,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Boat launch, fire pit, firewood available for purchase, fish cleaning stations, hand launch, pier, pit/vault toilets, water pump."
+    "surface_area_ha": 25.4,
+    "amenities": "Boat launch, fire pit, firewood available for purchase, fish cleaning stations, hand launch, pier, pit/vault toilets, water pump.",
+    "lake_id": "SW31-49-26-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 1.12
   },
   {
     "ats": "SW30-52-1-W5",
     "name": "Spring (Cottage) Lake",
-    "lat": 53.4964,
-    "lon": -114.0061,
+    "lat": 53.517861,
+    "lon": -114.138808,
     "stockings": [
       {
         "species": "BNTR",
@@ -1610,14 +1679,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Private campground, cottages for rent, potable water, boat launch, swimming area, day use area."
+    "surface_area_ha": 69.2,
+    "amenities": "Private campground, cottages for rent, potable water, boat launch, swimming area, day use area.",
+    "lake_id": "SW30-52-1-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.2
   },
   {
     "ats": "NE11-5-3-W5",
     "name": "Beaver Mines Lake",
-    "lat": 49.3732,
-    "lon": -114.3728,
+    "lat": 49.372895,
+    "lon": -114.296284,
     "stockings": [
       {
         "species": "CTTR",
@@ -1643,14 +1715,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Boat launch, water pump, ice fishing, canoeing/kayaking, swimming, hiking."
+    "surface_area_ha": 67.9,
+    "amenities": "Boat launch, water pump, ice fishing, canoeing/kayaking, swimming, hiking.",
+    "lake_id": "NE11-5-3-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.27
   },
   {
     "ats": "SW29-5-1-W5",
     "name": "Beauvais Lake",
-    "lat": 49.4094,
-    "lon": -114.0278,
+    "lat": 49.411416,
+    "lon": -114.105019,
     "stockings": [
       {
         "species": "CTTR",
@@ -1667,14 +1742,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, fire pits, firewood, picnic tables, playground, boat launch, fish cleaning station, day use areas, horseshoe pit, sewage dumping station, hiking trails."
+    "surface_area_ha": 82.8,
+    "amenities": "Camping on site, fire pits, firewood, picnic tables, playground, boat launch, fish cleaning station, day use areas, horseshoe pit, sewage dumping station, hiking trails.",
+    "lake_id": "SW29-5-1-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.13
   },
   {
     "ats": "SW7-57-4-W6",
     "name": "Pierre Greys Lakes (Upper) #3",
-    "lat": 53.8877,
-    "lon": -118.4488,
+    "lat": 53.908548,
+    "lon": -118.585692,
     "stockings": [
       {
         "species": "BKTR",
@@ -1709,14 +1787,17 @@
       "BKTR"
     ],
     "zone": "ES4",
-    "surface_area_ha": null,
-    "amenities": "Pierre grey?\u20ac?s waterbody provincial park, boat launch, cook shelters, fire pits, firewood sales, fish cleaning stations, hand launch, pit toilets, warm-up shelter, water pump."
+    "surface_area_ha": 53.4,
+    "amenities": "Pierre grey?\u20ac?s waterbody provincial park, boat launch, cook shelters, fire pits, firewood sales, fish cleaning stations, hand launch, pit toilets, warm-up shelter, water pump.",
+    "lake_id": "SW7-57-4-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.45
   },
   {
     "ats": "NW6-57-4-W6",
     "name": "Pierre Greys Lakes (Middle) #2",
-    "lat": 53.8804,
-    "lon": -118.4487,
+    "lat": 53.90135,
+    "lon": -118.588692,
     "stockings": [
       {
         "species": "RNTR",
@@ -1733,14 +1814,17 @@
       "RNTR"
     ],
     "zone": "ES4",
-    "surface_area_ha": null,
-    "amenities": "Pierre grey?\u20ac?s waterbody provincial park, boat launch, cook shelters, fire pits, firewood sales, fish cleaning stations, hand launch, pit toilets, warm-up shelter, water pump."
+    "surface_area_ha": 29.6,
+    "amenities": "Pierre grey?\u20ac?s waterbody provincial park, boat launch, cook shelters, fire pits, firewood sales, fish cleaning stations, hand launch, pit toilets, warm-up shelter, water pump.",
+    "lake_id": "NW6-57-4-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.33
   },
   {
     "ats": "SW35-56-8-W6",
     "name": "Victor Lake",
-    "lat": 53.8587,
-    "lon": -119.1365,
+    "lat": 53.882014,
+    "lon": -119.090207,
     "stockings": [
       {
         "species": "RNTR",
@@ -1757,14 +1841,17 @@
       "RNTR"
     ],
     "zone": "NB1",
-    "surface_area_ha": null,
-    "amenities": "Kayaking, canoeing, fishing."
+    "surface_area_ha": 72.4,
+    "amenities": "Kayaking, canoeing, fishing.",
+    "lake_id": "SW35-56-8-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.15
   },
   {
     "ats": "SW8-53-19-W5",
     "name": "Millers Lake",
-    "lat": 53.5399,
-    "lon": -116.6644,
+    "lat": 53.560075,
+    "lon": -116.768896,
     "stockings": [
       {
         "species": "RNTR",
@@ -1809,14 +1896,17 @@
       "TGTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Day use, boat launch."
+    "surface_area_ha": 37.1,
+    "amenities": "Day use, boat launch.",
+    "lake_id": "SW8-53-19-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.79
   },
   {
     "ats": "SW26-54-2-W5",
     "name": "Salter's Lake",
-    "lat": 53.6703,
-    "lon": -114.2508,
+    "lat": 53.690156,
+    "lon": -114.191032,
     "stockings": [
       {
         "species": "RNTR",
@@ -1861,14 +1951,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Outhouses, picnic table, floating dock."
+    "surface_area_ha": 13.6,
+    "amenities": "Outhouses, picnic table, floating dock.",
+    "lake_id": "SW26-54-2-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.31
   },
   {
     "ats": "SW5-25-2-W4",
     "name": "Acadia Valley Reservoir",
-    "lat": 51.0906,
-    "lon": -110.1673,
+    "lat": 51.099316,
+    "lon": -110.25524,
     "stockings": [
       {
         "species": "RNTR",
@@ -1913,14 +2006,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, picnic tables, playground, boat launch, outhouses."
+    "surface_area_ha": 13.2,
+    "amenities": "Camping on site, picnic tables, playground, boat launch, outhouses.",
+    "lake_id": "SW5-25-2-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.34
   },
   {
     "ats": "SE15-59-15-W4",
     "name": "Bellis Beach Lake",
-    "lat": 54.0761,
-    "lon": -112.1676,
+    "lat": 54.100613,
+    "lon": -112.15247,
     "stockings": [
       {
         "species": "RNTR",
@@ -1937,14 +2033,17 @@
       "RNTR"
     ],
     "zone": "NB1",
-    "surface_area_ha": null,
-    "amenities": "Picnic sites, firewood available, pump water available, pit toilets."
+    "surface_area_ha": 19.6,
+    "amenities": "Picnic sites, firewood available, pump water available, pit toilets.",
+    "lake_id": "SE15-59-15-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.68
   },
   {
     "ats": "NW26-19-9-W5",
     "name": "Lower Kananaskis Lake",
-    "lat": 50.6341,
-    "lon": -115.1939,
+    "lat": 50.64198,
+    "lon": -115.15215,
     "stockings": [
       {
         "species": "CTTR",
@@ -1971,13 +2070,16 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "lake_id": "NW26-19-9-W5",
+    "coord_source": "ats",
+    "ats_gap_km": null
   },
   {
     "ats": "SW30-37-7-W5",
     "name": "Strubel Lake",
-    "lat": 52.192,
-    "lon": -114.857,
+    "lat": 52.203976,
+    "lon": -115.001395,
     "stockings": [
       {
         "species": "RNTR",
@@ -1994,14 +2096,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 297.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SW30-37-7-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.49
   },
   {
     "ats": "SE31-79-8-W6",
     "name": "Moonshine (Mirage) Lake",
-    "lat": 55.8587,
-    "lon": -119.1039,
+    "lat": 55.886111,
+    "lon": -119.227778,
     "stockings": [
       {
         "species": "BNTR",
@@ -2038,14 +2143,17 @@
       "TGTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, group camping areas, sewage disposal facilities, tap water, concession stand, hand boat launch, boat launch for trailers, day use areas, change house, baseball diamond, playground."
+    "surface_area_ha": 30.5,
+    "amenities": "Camping on site, group camping areas, sewage disposal facilities, tap water, concession stand, hand boat launch, boat launch for trailers, day use areas, change house, baseball diamond, playground.",
+    "lake_id": "SE31-79-8-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.9
   },
   {
     "ats": "NE14-40-16-W5",
     "name": "Goldeye Lake",
-    "lat": 52.4312,
-    "lon": -116.2522,
+    "lat": 52.449584,
+    "lon": -116.192114,
     "stockings": [
       {
         "species": "RNTR",
@@ -2071,14 +2179,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Fish cleaning stations, boat launch, hand launch, pit toilets, pier, day use area, camping on site, firewood available, water pumps, canoeing/kayaking, boating, swimming."
+    "surface_area_ha": 18.8,
+    "amenities": "Fish cleaning stations, boat launch, hand launch, pit toilets, pier, day use area, camping on site, firewood available, water pumps, canoeing/kayaking, boating, swimming.",
+    "lake_id": "NE14-40-16-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.34
   },
   {
     "ats": "SW30-11-3-W4",
     "name": "Cavan Lake",
-    "lat": 49.9312,
-    "lon": -110.2758,
+    "lat": 49.935915,
+    "lon": -110.407082,
     "stockings": [
       {
         "species": "RNTR",
@@ -2104,14 +2215,17 @@
       "RNTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Camping (including group camping), fire pits, free firewood, playground, horseshoe pits, pit toilets (no sani dump), non-potable water, day use area, picnic shelter."
+    "surface_area_ha": 31.6,
+    "amenities": "Camping (including group camping), fire pits, free firewood, playground, horseshoe pits, pit toilets (no sani dump), non-potable water, day use area, picnic shelter.",
+    "lake_id": "SW30-11-3-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.15
   },
   {
     "ats": "NE31-86-3-W6",
     "name": "Montagneuse (Stony) Lake",
-    "lat": 56.4746,
-    "lon": -118.3346,
+    "lat": 56.504886,
+    "lon": -118.461339,
     "stockings": [
       {
         "species": "RNTR",
@@ -2138,14 +2252,17 @@
       "TGTR"
     ],
     "zone": "ES4",
-    "surface_area_ha": null,
-    "amenities": "Camping, firepits, picnic table, pit vault toilets"
+    "surface_area_ha": 39.5,
+    "amenities": "Camping, firepits, picnic table, pit vault toilets",
+    "lake_id": "NE31-86-3-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.74
   },
   {
     "ats": "SE23-53-4-W5",
     "name": "East Pit Lake",
-    "lat": 53.5688,
-    "lon": -114.5552,
+    "lat": 53.584969,
+    "lon": -114.473822,
     "stockings": [
       {
         "species": "RNTR",
@@ -2162,14 +2279,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Hiking trails."
+    "surface_area_ha": 18.8,
+    "amenities": "Hiking trails.",
+    "lake_id": "SE23-53-4-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.67
   },
   {
     "ats": "NE35-69-14-W4",
     "name": "Mile 07 Lake",
-    "lat": 54.9964,
-    "lon": -112.0907,
+    "lat": 55.021444,
+    "lon": -112.015324,
     "stockings": [
       {
         "species": "RNTR",
@@ -2186,14 +2306,17 @@
       "RNTR"
     ],
     "zone": "NB1",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 26.2,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NE35-69-14-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.6
   },
   {
     "ats": "NW4-6-20-W4",
     "name": "Corner Lake",
-    "lat": 49.4457,
-    "lon": -112.5913,
+    "lat": 49.446821,
+    "lon": -112.648546,
     "stockings": [
       {
         "species": "RNTR",
@@ -2237,14 +2360,17 @@
       "RNTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Camping, pit toilets"
+    "surface_area_ha": 6.7,
+    "amenities": "Camping, pit toilets",
+    "lake_id": "NW4-6-20-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.11
   },
   {
     "ats": "NE19-52-2-W5",
     "name": "Star Lake",
-    "lat": 53.4891,
-    "lon": -114.1644,
+    "lat": 53.510057,
+    "lon": -114.273086,
     "stockings": [
       {
         "species": "RNTR",
@@ -2281,14 +2407,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Boat launch, picnic space."
+    "surface_area_ha": 27.0,
+    "amenities": "Boat launch, picnic space.",
+    "lake_id": "NE19-52-2-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.3
   },
   {
     "ats": "NE4-61-6-W4",
     "name": "Chatwin Lake",
-    "lat": 54.2283,
-    "lon": -110.812,
+    "lat": 54.24779,
+    "lon": -110.841712,
     "stockings": [
       {
         "species": "RNTR",
@@ -2314,14 +2443,17 @@
       "RNTR"
     ],
     "zone": "NB1",
-    "surface_area_ha": null,
-    "amenities": "Gravel parking area with a crude boat launch"
+    "surface_area_ha": 78.9,
+    "amenities": "Gravel parking area with a crude boat launch",
+    "lake_id": "NE4-61-6-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.83
   },
   {
     "ats": "NW17-46-18-W5",
     "name": "Fairfax Lake",
-    "lat": 52.9529,
-    "lon": -116.4837,
+    "lat": 52.971131,
+    "lon": -116.576532,
     "stockings": [
       {
         "species": "RNTR",
@@ -2338,14 +2470,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Boat launch, fire pits, firewood available, fish cleaning stations, pier, pit/vault toilets, water available, canoeing/kayaking."
+    "surface_area_ha": 32.3,
+    "amenities": "Boat launch, fire pits, firewood available, fish cleaning stations, pier, pit/vault toilets, water available, canoeing/kayaking.",
+    "lake_id": "NW17-46-18-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.9
   },
   {
     "ats": "SE6-50-26-W5",
     "name": "Kinky Lake",
-    "lat": 53.2645,
-    "lon": -117.6527,
+    "lat": 53.280836,
+    "lon": -117.783145,
     "stockings": [
       {
         "species": "BKTR",
@@ -2371,14 +2506,17 @@
       "BKTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Boat launch, canoe/hand launch, fish cleaning station, firewood available, pit toilets, non-potable water, beach."
+    "surface_area_ha": 15.5,
+    "amenities": "Boat launch, canoe/hand launch, fish cleaning station, firewood available, pit toilets, non-potable water, beach.",
+    "lake_id": "SE6-50-26-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 1.05
   },
   {
     "ats": "SE17-36-7-W5",
     "name": "Phyllis Lake",
-    "lat": 52.0761,
-    "lon": -114.8902,
+    "lat": 52.1,
+    "lon": -114.966667,
     "stockings": [
       {
         "species": "RNTR",
@@ -2395,14 +2533,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Picnic tables, fire pits, hand water pump, dry toilets, boat launch, dock, refuse containers, fish cleaning stations, firewood available."
+    "surface_area_ha": 16.0,
+    "amenities": "Picnic tables, fire pits, hand water pump, dry toilets, boat launch, dock, refuse containers, fish cleaning stations, firewood available.",
+    "lake_id": "SE17-36-7-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 1.07
   },
   {
     "ats": "SE35-61-8-W5",
     "name": "Schuman Lake",
-    "lat": 54.2935,
-    "lon": -115.1609,
+    "lat": 54.318086,
+    "lon": -115.077728,
     "stockings": [
       {
         "species": "TGTR",
@@ -2429,14 +2570,17 @@
       "TGTR"
     ],
     "zone": "NB2",
-    "surface_area_ha": null,
-    "amenities": "6 campsites, fire pits, picnic sites, barbeque sites, pit toilets, day use area."
+    "surface_area_ha": 9.3,
+    "amenities": "6 campsites, fire pits, picnic sites, barbeque sites, pit toilets, day use area.",
+    "lake_id": "SE35-61-8-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.46
   },
   {
     "ats": "NE15-18-14-W4",
     "name": "Brooks Aquaduct Pond",
-    "lat": 50.5181,
-    "lon": -111.8634,
+    "lat": 50.524756,
+    "lon": -111.843722,
     "stockings": [
       {
         "species": "RNTR",
@@ -2453,14 +2597,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 13.9,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NE15-18-14-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.11
   },
   {
     "ats": "SW18-31-14-W4",
     "name": "Helmer Reservoir",
-    "lat": 51.6413,
-    "lon": -111.8274,
+    "lat": 51.649233,
+    "lon": -111.983108,
     "stockings": [
       {
         "species": "RNTR",
@@ -2486,14 +2633,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Helmer reservoir is located right beside fox waterbody, fox waterbody park offers:, beach access, firewood, potable water, power sites, sewer disposal."
+    "surface_area_ha": 2.0,
+    "amenities": "Helmer reservoir is located right beside fox waterbody, fox waterbody park offers:, beach access, firewood, potable water, power sites, sewer disposal.",
+    "lake_id": "SW18-31-14-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.55
   },
   {
     "ats": "NE15-14-28-W4",
     "name": "Pine Coulee Reservoir",
-    "lat": 50.1703,
-    "lon": -113.7504,
+    "lat": 50.1757,
+    "lon": -113.737738,
     "stockings": [
       {
         "species": "RNTR",
@@ -2519,14 +2669,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Camping area, day use area."
+    "surface_area_ha": 503.2,
+    "amenities": "Camping area, day use area.",
+    "lake_id": "NE15-14-28-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.74
   },
   {
     "ats": "SW7-52-14-W4",
     "name": "Vegreville Trout Pond",
-    "lat": 53.4529,
-    "lon": -111.9044,
+    "lat": 53.474312,
+    "lon": -112.05988,
     "stockings": [
       {
         "species": "RNTR",
@@ -2543,14 +2696,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only, pit toilets."
+    "surface_area_ha": 1.3,
+    "amenities": "Day use only, no open fires, foot access only, pit toilets.",
+    "lake_id": "SW7-52-14-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.36
   },
   {
     "ats": "NW33-55-25-W4",
     "name": "Heritage Pond",
-    "lat": 53.779,
-    "lon": -113.587,
+    "lat": 53.799728,
+    "lon": -113.66643,
     "stockings": [
       {
         "species": "BKTR",
@@ -2614,14 +2770,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 1.3,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "NW33-55-25-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.56
   },
   {
     "ats": "NE8-8-5-W5",
     "name": "Crowsnest Lake",
-    "lat": 49.6341,
-    "lon": -114.5762,
+    "lat": 49.634111,
+    "lon": -114.637963,
     "stockings": [
       {
         "species": "CTTR",
@@ -2647,14 +2806,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Large parking area"
+    "surface_area_ha": 126.6,
+    "amenities": "Large parking area",
+    "lake_id": "NE8-8-5-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.37
   },
   {
     "ats": "NE29-97-22-W5",
     "name": "East Twin Lake",
-    "lat": 57.4167,
-    "lon": -117.438,
+    "lat": 57.45,
+    "lon": -117.533333,
     "stockings": [
       {
         "species": "RNTR",
@@ -2690,14 +2852,17 @@
       "TGTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "Campground, water pump, pit toilets, firewood available for purchase, playground, boat launch, fish cleaning station, canoeing/kayaking, wildlife viewing docks."
+    "surface_area_ha": 23.2,
+    "amenities": "Campground, water pump, pit toilets, firewood available for purchase, playground, boat launch, fish cleaning station, canoeing/kayaking, wildlife viewing docks.",
+    "lake_id": "NE29-97-22-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.96
   },
   {
     "ats": "SE18-35-6-W5",
     "name": "Birch Lake",
-    "lat": 51.9891,
-    "lon": -114.7237,
+    "lat": 52.011667,
+    "lon": -114.854167,
     "stockings": [
       {
         "species": "BNTR",
@@ -2734,14 +2899,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Small parking area with outhouses, hand launch."
+    "surface_area_ha": 28.8,
+    "amenities": "Small parking area with outhouses, hand launch.",
+    "lake_id": "SE18-35-6-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 1.24
   },
   {
     "ats": "NE5-7-3-W4",
     "name": "Michel Reservoir",
-    "lat": 49.5326,
-    "lon": -110.307,
+    "lat": 49.531283,
+    "lon": -110.372274,
     "stockings": [
       {
         "species": "RNTR",
@@ -2768,14 +2936,17 @@
       "RNTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Day use area at the Mitchel reservoir provincial recreation area with pit toilets."
+    "surface_area_ha": 23.1,
+    "amenities": "Day use area at the Mitchel reservoir provincial recreation area with pit toilets.",
+    "lake_id": "NE5-7-3-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.53
   },
   {
     "ats": "NE20-84-25-W5",
     "name": "Figure Eight Lake",
-    "lat": 56.2717,
-    "lon": -117.8042,
+    "lat": 56.30153,
+    "lon": -117.906378,
     "stockings": [
       {
         "species": "RNTR",
@@ -2792,14 +2963,17 @@
       "RNTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "Fish cleaning stations, fire pits, pit toilets, cook shelters, boat launch (hand launching), hiking, swimming, canoeing/kayaking."
+    "surface_area_ha": 37.0,
+    "amenities": "Fish cleaning stations, fire pits, pit toilets, cook shelters, boat launch (hand launching), hiking, swimming, canoeing/kayaking.",
+    "lake_id": "NE20-84-25-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 1.0
   },
   {
     "ats": "SE26-8-22-W4",
     "name": "Nicholas Sheran Park Pond",
-    "lat": 49.6703,
-    "lon": -112.928,
+    "lat": 49.671905,
+    "lon": -112.879725,
     "stockings": [
       {
         "species": "BKTR",
@@ -2872,14 +3046,17 @@
       "RNTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Playground area, picnic facility, baseball diamonds, soccer field, basketball hoops."
+    "surface_area_ha": 6.1,
+    "amenities": "Playground area, picnic facility, baseball diamonds, soccer field, basketball hoops.",
+    "lake_id": "SE26-8-22-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.29
   },
   {
     "ats": "NW2-29-5-W5",
     "name": "Winchell Lake",
-    "lat": 51.4457,
-    "lon": -114.6569,
+    "lat": 51.454862,
+    "lon": -114.609375,
     "stockings": [
       {
         "species": "RNTR",
@@ -2914,14 +3091,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only."
+    "surface_area_ha": 4.7,
+    "amenities": "Day use only, no open fires, foot access only.",
+    "lake_id": "NW2-29-5-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.4
   },
   {
     "ats": "SE1-60-8-W5",
     "name": "Dolberg Lake",
-    "lat": 54.1341,
-    "lon": -115.1812,
+    "lat": 54.15737,
+    "lon": -115.05405,
     "stockings": [
       {
         "species": "RNTR",
@@ -2938,14 +3118,17 @@
       "RNTR"
     ],
     "zone": "NB2",
-    "surface_area_ha": null,
-    "amenities": "Water well, fish cleaning station, boat launch, dock, walking trails to natural springs, canoeing."
+    "surface_area_ha": 34.7,
+    "amenities": "Water well, fish cleaning station, boat launch, dock, walking trails to natural springs, canoeing.",
+    "lake_id": "SE1-60-8-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.39
   },
   {
     "ats": "NW17-48-3-W5",
     "name": "Ashland Reservoir",
-    "lat": 53.1268,
-    "lon": -114.32,
+    "lat": 53.147371,
+    "lon": -114.409999,
     "stockings": [
       {
         "species": "RNTR",
@@ -2962,14 +3145,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, fire pits, firewood available, picnic tables, playground."
+    "surface_area_ha": 11.2,
+    "amenities": "Camping on site, fire pits, firewood available, picnic tables, playground.",
+    "lake_id": "NW17-48-3-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.07
   },
   {
     "ats": "NE10-66-12-W5",
     "name": "Tamarack Lake",
-    "lat": 54.6775,
-    "lon": -115.7484,
+    "lat": 54.702083,
+    "lon": -115.71791,
     "stockings": [
       {
         "species": "RNTR",
@@ -2986,14 +3172,17 @@
       "RNTR"
     ],
     "zone": "NB2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 19.6,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NE10-66-12-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.62
   },
   {
     "ats": "SE13-32-29-W4",
     "name": "Hiller's (Dam) Reservoir",
-    "lat": 51.7283,
-    "lon": -114.0655,
+    "lat": 51.739122,
+    "lon": -113.978521,
     "stockings": [
       {
         "species": "RNTR",
@@ -3010,14 +3199,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use area, picnic area, walking trails."
+    "surface_area_ha": 8.9,
+    "amenities": "Day use area, picnic area, walking trails.",
+    "lake_id": "SE13-32-29-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.6
   },
   {
     "ats": "SW24-36-11-W4",
     "name": "Coronation Reservoir",
-    "lat": 52.0906,
-    "lon": -111.5391,
+    "lat": 52.105809,
+    "lon": -111.44958,
     "stockings": [
       {
         "species": "RNTR",
@@ -3054,14 +3246,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Newly built washroom, shower facilities, dumping station, group camping, camp kitchen, playground, boat launch."
+    "surface_area_ha": 10.4,
+    "amenities": "Newly built washroom, shower facilities, dumping station, group camping, camp kitchen, playground, boat launch.",
+    "lake_id": "SW24-36-11-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.08
   },
   {
     "ats": "NW23-19-9-W5",
     "name": "Upper Kananaskis Lake",
-    "lat": 50.6196,
-    "lon": -115.1935,
+    "lat": 50.617022,
+    "lon": -115.161232,
     "stockings": [
       {
         "species": "CTTR",
@@ -3087,14 +3282,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Boat launch, hand launch, well groomed hiking/mountain bike trail surrounding waterbody, pit toilets."
+    "surface_area_ha": 846.4,
+    "amenities": "Boat launch, hand launch, well groomed hiking/mountain bike trail surrounding waterbody, pit toilets.",
+    "lake_id": "NW23-19-9-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 1.32
   },
   {
     "ats": "SW36-37-13-W4",
     "name": "Huber Reservoir",
-    "lat": 52.2065,
-    "lon": -111.8269,
+    "lat": 52.221611,
+    "lon": -111.732917,
     "stockings": [
       {
         "species": "RNTR",
@@ -3121,14 +3319,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Picnic tables, free firewood available, pit toilets, playground, picnic shelter, day use area, horseshoe pits, group camping areas available, boat launch, power sites available"
+    "surface_area_ha": 14.9,
+    "amenities": "Picnic tables, free firewood available, pit toilets, playground, picnic shelter, day use area, horseshoe pits, group camping areas available, boat launch, power sites available",
+    "lake_id": "SW36-37-13-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.3
   },
   {
     "ats": "NE20-62-12-W6",
     "name": "North Two Lake",
-    "lat": 54.3587,
-    "lon": -119.685,
+    "lat": 54.380594,
+    "lon": -119.755438,
     "stockings": [
       {
         "species": "RNTR",
@@ -3145,14 +3346,17 @@
       "RNTR"
     ],
     "zone": "ES4",
-    "surface_area_ha": null,
-    "amenities": "Boat launch, fire pits, firewood for purchase, fish cleaning stations, hand launch, vault toilets, water pump, camping, canoeing, kayaking, front country hiking, ice fishing, mountain biking, cycling, power boating, wildlife viewing."
+    "surface_area_ha": 3.6,
+    "amenities": "Boat launch, fire pits, firewood for purchase, fish cleaning stations, hand launch, vault toilets, water pump, camping, canoeing, kayaking, front country hiking, ice fishing, mountain biking, cycling, power boating, wildlife viewing.",
+    "lake_id": "NE20-62-12-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.6
   },
   {
     "ats": "NW30-38-5-W4",
     "name": "Captain Eyre (Ayre) Lake",
-    "lat": 52.2862,
-    "lon": -110.5745,
+    "lat": 52.29945,
+    "lon": -110.714832,
     "stockings": [
       {
         "species": "RNTR",
@@ -3179,14 +3383,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Laundry facilities, playground, picnic shelter, day use area, horseshoe pits, group camping , boat launch, golf course nearby, baseball diamond."
+    "surface_area_ha": 20.2,
+    "amenities": "Laundry facilities, playground, picnic shelter, day use area, horseshoe pits, group camping , boat launch, golf course nearby, baseball diamond.",
+    "lake_id": "NW30-38-5-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.43
   },
   {
     "ats": "SE25-70-5-W5",
     "name": "Parker Lake",
-    "lat": 55.0616,
-    "lon": -114.7529,
+    "lat": 55.084708,
+    "lon": -114.621162,
     "stockings": [
       {
         "species": "RNTR",
@@ -3203,14 +3410,17 @@
       "RNTR"
     ],
     "zone": "NB2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 27.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SE25-70-5-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.71
   },
   {
     "ats": "SE12-57-5-W6",
     "name": "Pierre Greys Lakes (Lower) #1",
-    "lat": 53.8877,
-    "lon": -118.7316,
+    "lat": 53.910427,
+    "lon": -118.60656,
     "stockings": [
       {
         "species": "RNTR",
@@ -3227,14 +3437,17 @@
       "RNTR"
     ],
     "zone": "ES4",
-    "surface_area_ha": null,
-    "amenities": "Pierre grey?\u20ac?s waterbody provincial park, boat launch, cook shelters, fire pits, firewood sales, fish cleaning stations, hand launch, pit toilets, warm-up shelter, water pump."
+    "surface_area_ha": 15.8,
+    "amenities": "Pierre grey?\u20ac?s waterbody provincial park, boat launch, cook shelters, fire pits, firewood sales, fish cleaning stations, hand launch, pit toilets, warm-up shelter, water pump.",
+    "lake_id": "SE12-57-5-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.26
   },
   {
     "ats": "SW6-40-7-W5",
     "name": "Twin Lakes",
-    "lat": 52.3949,
-    "lon": -114.861,
+    "lat": 52.41472,
+    "lon": -115.00078,
     "stockings": [
       {
         "species": "RNTR",
@@ -3251,14 +3464,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Hand water pump, dry toilets, firewood, playground, boat launch, fish cleaning station, wildlife viewing areas, handicap accessible."
+    "surface_area_ha": 27.5,
+    "amenities": "Hand water pump, dry toilets, firewood, playground, boat launch, fish cleaning station, wildlife viewing areas, handicap accessible.",
+    "lake_id": "SW6-40-7-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.46
   },
   {
     "ats": "NW30-35-12-W5",
     "name": "Peppers Lake",
-    "lat": 52.0254,
-    "lon": -115.5604,
+    "lat": 52.038779,
+    "lon": -115.705653,
     "stockings": [
       {
         "species": "BKTR",
@@ -3285,14 +3501,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, fire pits, fish cleaning station, hand launch, pit toilets, water pump, firewood available at staging area."
+    "surface_area_ha": 11.6,
+    "amenities": "Camping on site, fire pits, fish cleaning station, hand launch, pit toilets, water pump, firewood available at staging area.",
+    "lake_id": "NW30-35-12-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.54
   },
   {
     "ats": "NW1-41-16-W4",
     "name": "Diplomat Mine Pond",
-    "lat": 52.4891,
-    "lon": -112.2671,
+    "lat": 52.50583,
+    "lon": -112.180118,
     "stockings": [
       {
         "species": "RNTR",
@@ -3328,14 +3547,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Fish cleaning station, pit toilets, picnic sites."
+    "surface_area_ha": 5.0,
+    "amenities": "Fish cleaning station, pit toilets, picnic sites.",
+    "lake_id": "NW1-41-16-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.28
   },
   {
     "ats": "NE23-75-11-W6",
     "name": "Spring Lake (Spirit River)",
-    "lat": 55.4891,
-    "lon": -119.6563,
+    "lat": 55.513162,
+    "lon": -119.583801,
     "stockings": [
       {
         "species": "RNTR",
@@ -3361,14 +3583,17 @@
       "RNTR"
     ],
     "zone": "ES4",
-    "surface_area_ha": null,
-    "amenities": "Campground, ski hill, hiking, dock, boat launch, day use area, picnic tables, pit toilets, swimming area."
+    "surface_area_ha": 40.1,
+    "amenities": "Campground, ski hill, hiking, dock, boat launch, day use area, picnic tables, pit toilets, swimming area.",
+    "lake_id": "NE23-75-11-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.92
   },
   {
     "ats": "NW20-53-9-W4",
     "name": "Jack Fish Lake",
-    "lat": 53.5761,
-    "lon": -111.2021,
+    "lat": 53.594311,
+    "lon": -111.296351,
     "stockings": [
       {
         "species": "RNTR",
@@ -3395,14 +3620,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Picnicking, water skiing, boating, picnic tables, fire pits."
+    "surface_area_ha": 69.0,
+    "amenities": "Picnicking, water skiing, boating, picnic tables, fire pits.",
+    "lake_id": "NW20-53-9-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.53
   },
   {
     "ats": "NE28-53-1-W5",
     "name": "Sauer Lake",
-    "lat": 53.5906,
-    "lon": -114.0672,
+    "lat": 53.612875,
+    "lon": -114.078152,
     "stockings": [
       {
         "species": "RNTR",
@@ -3419,14 +3647,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 42.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NE28-53-1-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.13
   },
   {
     "ats": "SW16-67-7-W5",
     "name": "Tea Lake",
-    "lat": 54.7717,
-    "lon": -114.961,
+    "lat": 54.795498,
+    "lon": -115.015327,
     "stockings": [
       {
         "species": "RNTR",
@@ -3443,14 +3674,17 @@
       "RNTR"
     ],
     "zone": "NB2",
-    "surface_area_ha": null,
-    "amenities": "Tea Lakes is one of our helicopter-stocked lakes and was freshly stocked in 2025, ensuring excellent fishing opportunities for visitors."
+    "surface_area_ha": 114.4,
+    "amenities": "Tea Lakes is one of our helicopter-stocked lakes and was freshly stocked in 2025, ensuring excellent fishing opportunities for visitors.",
+    "lake_id": "SW16-67-7-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.47
   },
   {
     "ats": "NE25-42-6-W5",
     "name": "Open Creek Reservoir",
-    "lat": 52.6341,
-    "lon": -114.8537,
+    "lat": 52.648629,
+    "lon": -114.729184,
     "stockings": [
       {
         "species": "RNTR",
@@ -3467,14 +3701,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, group camping, picnic shelter, water-pump, spring water, wheelchair access, outdoor boat launch, day use area, horseshoe pits, playgrounds, basic camping/no hookups, fire pits, firewood available for purchase, picnic tables, Sani dump."
+    "surface_area_ha": 19.8,
+    "amenities": "Camping on site, group camping, picnic shelter, water-pump, spring water, wheelchair access, outdoor boat launch, day use area, horseshoe pits, playgrounds, basic camping/no hookups, fire pits, firewood available for purchase, picnic tables, Sani dump.",
+    "lake_id": "NE25-42-6-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.35
   },
   {
     "ats": "SW25-60-17-W4",
     "name": "Shemeluk Lake",
-    "lat": 54.192,
-    "lon": -112.5081,
+    "lat": 54.212986,
+    "lon": -112.423089,
     "stockings": [
       {
         "species": "RNTR",
@@ -3491,14 +3728,17 @@
       "RNTR"
     ],
     "zone": "NB1",
-    "surface_area_ha": null,
-    "amenities": "Day use area, pit toilets, picnic tables, boat launch."
+    "surface_area_ha": 11.0,
+    "amenities": "Day use area, pit toilets, picnic tables, boat launch.",
+    "lake_id": "SW25-60-17-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.51
   },
   {
     "ats": "NE26-43-5-W4",
     "name": "Shuster Lake",
-    "lat": 52.721,
-    "lon": -110.6879,
+    "lat": 52.740747,
+    "lon": -110.609119,
     "stockings": [
       {
         "species": "BKTR",
@@ -3515,14 +3755,17 @@
       "BKTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 10.6,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NE26-43-5-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.3
   },
   {
     "ats": "SW19-30-18-W4",
     "name": "Michichi Reservoir",
-    "lat": 51.5688,
-    "lon": -112.3841,
+    "lat": 51.582647,
+    "lon": -112.52946,
     "stockings": [
       {
         "species": "RNTR",
@@ -3548,14 +3791,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, group camping areas, potable water, camp kitchen, firewood, showers, sewage disposal, playground, picnic areas."
+    "surface_area_ha": 15.6,
+    "amenities": "Camping on site, group camping areas, potable water, camp kitchen, firewood, showers, sewage disposal, playground, picnic areas.",
+    "lake_id": "SW19-30-18-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.31
   },
   {
     "ats": "SW23-33-18-W4",
     "name": "McLaren's Reservoir",
-    "lat": 51.8297,
-    "lon": -112.4917,
+    "lat": 51.840076,
+    "lon": -112.45129,
     "stockings": [
       {
         "species": "RNTR",
@@ -3581,14 +3827,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "McLaren Dam Recreation Area features 27 sites (15 with power), outhouse toilets, fire pits, free firewood, potable water, camp kitchen."
+    "surface_area_ha": 22.2,
+    "amenities": "McLaren Dam Recreation Area features 27 sites (15 with power), outhouse toilets, fire pits, free firewood, potable water, camp kitchen.",
+    "lake_id": "SW23-33-18-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.6
   },
   {
     "ats": "NW12-26-22-W4",
     "name": "Severn Creek Reservoir",
-    "lat": 51.1993,
-    "lon": -113.0356,
+    "lat": 51.208304,
+    "lon": -112.955705,
     "stockings": [
       {
         "species": "RNTR",
@@ -3614,14 +3863,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Free camp sites, picnic tables, trash cans, fire ring, pit toilet, limited fire pits."
+    "surface_area_ha": 22.1,
+    "amenities": "Free camp sites, picnic tables, trash cans, fire ring, pit toilet, limited fire pits.",
+    "lake_id": "NW12-26-22-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.22
   },
   {
     "ats": "NW32-48-21-W4",
     "name": "Telegraph Park Pond",
-    "lat": 53.1703,
-    "lon": -112.9315,
+    "lat": 53.1886,
+    "lon": -113.0443,
     "stockings": [
       {
         "species": "RNTR",
@@ -3685,14 +3937,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, group camping, picnic shelter, day use area, hiking trail, horseshoe pit(s), interpretive trails, playgrounds."
+    "surface_area_ha": 2.4,
+    "amenities": "Camping on site, group camping, picnic shelter, day use area, hiking trail, horseshoe pit(s), interpretive trails, playgrounds.",
+    "lake_id": "NW32-48-21-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.51
   },
   {
     "ats": "NW1-10-17-W4",
     "name": "Taber Trout Pond",
-    "lat": 49.7935,
-    "lon": -112.2731,
+    "lat": 49.794747,
+    "lon": -112.188165,
     "stockings": [
       {
         "species": "RNTR",
@@ -3727,14 +3982,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Camping, day use, picnic sites, pit toilets."
+    "surface_area_ha": 53.0,
+    "amenities": "Camping, day use, picnic sites, pit toilets.",
+    "lake_id": "NW1-10-17-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.39
   },
   {
     "ats": "NE6-1-26-W4",
     "name": "Outpost Lake (Police Lake)",
-    "lat": 49.0109,
-    "lon": -113.3309,
+    "lat": 49.011823,
+    "lon": -113.456699,
     "stockings": [
       {
         "species": "RNTR",
@@ -3760,14 +4018,17 @@
       "RNTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, boat launch, fire pits, firewood available, fish cleaning stations, hand launch, viewpoints, payphones, picnic shelter, pier, pit toilets, playground, sewage disposal, water pump, water taps"
+    "surface_area_ha": 97.8,
+    "amenities": "Camping on site, boat launch, fire pits, firewood available, fish cleaning stations, hand launch, viewpoints, payphones, picnic shelter, pier, pit toilets, playground, sewage disposal, water pump, water taps",
+    "lake_id": "NE6-1-26-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.8
   },
   {
     "ats": "SW5-36-8-W5",
     "name": "Tay Lake",
-    "lat": 52.0471,
-    "lon": -115.0192,
+    "lat": 52.06155,
+    "lon": -115.11949,
     "stockings": [
       {
         "species": "RNTR",
@@ -3784,14 +4045,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 4.9,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SW5-36-8-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.22
   },
   {
     "ats": "SW22-46-24-W4",
     "name": "By the Lake Park",
-    "lat": 52.9601,
-    "lon": -113.3984,
+    "lat": 52.976846,
+    "lon": -113.408198,
     "stockings": [
       {
         "species": "RNTR",
@@ -3808,14 +4072,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Picnic area, day use area, winter activities, cross country skiing, ice skating and ice fishing."
+    "surface_area_ha": 11.2,
+    "amenities": "Picnic area, day use area, winter activities, cross country skiing, ice skating and ice fishing.",
+    "lake_id": "SW22-46-24-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.52
   },
   {
     "ats": "SW25-45-6-W5",
     "name": "Kramer Pond",
-    "lat": 52.8877,
-    "lon": -114.8467,
+    "lat": 52.906846,
+    "lon": -114.745933,
     "stockings": [
       {
         "species": "RNTR",
@@ -3841,14 +4108,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "This site has no amenities."
+    "surface_area_ha": 6.7,
+    "amenities": "This site has no amenities.",
+    "lake_id": "SW25-45-6-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.04
   },
   {
     "ats": "NE27-49-25-W4",
     "name": "Leduc Reservoir",
-    "lat": 53.2428,
-    "lon": -113.5782,
+    "lat": 53.259984,
+    "lon": -113.567083,
     "stockings": [
       {
         "species": "RNTR",
@@ -3874,14 +4144,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Outhouses, walking paths, playground, garbage receptacles."
+    "surface_area_ha": 103.0,
+    "amenities": "Outhouses, walking paths, playground, garbage receptacles.",
+    "lake_id": "NE27-49-25-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.76
   },
   {
     "ats": "NE18-53-23-W4",
     "name": "Hermitage Lake",
-    "lat": 53.5616,
-    "lon": -113.2391,
+    "lat": 53.581702,
+    "lon": -113.371337,
     "stockings": [
       {
         "species": "BNTR",
@@ -3926,14 +4199,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 5.2,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "NE18-53-23-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.91
   },
   {
     "ats": "NW20-22-5-W5",
     "name": "McLean Pond",
-    "lat": 50.8804,
-    "lon": -114.58,
+    "lat": 50.888074,
+    "lon": -114.669068,
     "stockings": [
       {
         "species": "CTTR",
@@ -3968,14 +4244,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Picnic sites, fire pits, pit toilets, playground, sewage disposal, water pump, day use area."
+    "surface_area_ha": 1.9,
+    "amenities": "Picnic sites, fire pits, pit toilets, playground, sewage disposal, water pump, day use area.",
+    "lake_id": "NW20-22-5-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.28
   },
   {
     "ats": "NE25-37-8-W5",
     "name": "Mitchell Lake",
-    "lat": 52.1993,
-    "lon": -115.1291,
+    "lat": 52.216312,
+    "lon": -115.007692,
     "stockings": [
       {
         "species": "RNTR",
@@ -4021,14 +4300,17 @@
       "TGTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Fire pits, hand launch, pier, pit toilets."
+    "surface_area_ha": 15.0,
+    "amenities": "Fire pits, hand launch, pier, pit toilets.",
+    "lake_id": "NE25-37-8-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.19
   },
   {
     "ats": "SW19-23-8-W5",
     "name": "Mount Lorette Ponds",
-    "lat": 50.9601,
-    "lon": -114.9722,
+    "lat": 50.969566,
+    "lon": -115.107943,
     "stockings": [
       {
         "species": "CTTR",
@@ -4118,14 +4400,17 @@
       "RNTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Day use area, picnic sites, walking trails, park benches, handicap accessible."
+    "surface_area_ha": 1.6,
+    "amenities": "Day use area, picnic sites, walking trails, park benches, handicap accessible.",
+    "lake_id": "SW19-23-8-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.44
   },
   {
     "ats": "NW5-45-20-W5",
     "name": "Muskiki Lake",
-    "lat": 52.837,
-    "lon": -116.765,
+    "lat": 52.851672,
+    "lon": -116.874653,
     "stockings": [
       {
         "species": "CTTR",
@@ -4151,14 +4436,17 @@
       "CTTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 34.8,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NW5-45-20-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.61
   },
   {
     "ats": "NW7-89-2-W6",
     "name": "Sulphur Lake",
-    "lat": 56.6775,
-    "lon": -118.1649,
+    "lat": 56.706382,
+    "lon": -118.318549,
     "stockings": [
       {
         "species": "BKTR",
@@ -4175,14 +4463,17 @@
       "BKTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "Boat launch, fire pits, fish cleaning stations, pier, pit toilets, water pump."
+    "surface_area_ha": 53.0,
+    "amenities": "Boat launch, fire pits, fish cleaning stations, pier, pit toilets, water pump.",
+    "lake_id": "NW7-89-2-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.98
   },
   {
     "ats": "NE7-62-12-W6",
     "name": "South Two Lake",
-    "lat": 54.3297,
-    "lon": -119.659,
+    "lat": 54.380594,
+    "lon": -119.755438,
     "stockings": [
       {
         "species": "CTTR",
@@ -4208,14 +4499,17 @@
       "CTTR"
     ],
     "zone": "ES4",
-    "surface_area_ha": null,
-    "amenities": "Boat launch, fire pits, firewood for purchase, fish cleaning stations, hand launch, vault toilets, water pump, camping, canoeing, kayaking, front country hiking, ice fishing, mountain biking, cycling, power boating, wildlife viewing."
+    "surface_area_ha": 3.6,
+    "amenities": "Boat launch, fire pits, firewood for purchase, fish cleaning stations, hand launch, vault toilets, water pump, camping, canoeing, kayaking, front country hiking, ice fishing, mountain biking, cycling, power boating, wildlife viewing.",
+    "lake_id": "NE7-62-12-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 3.44
   },
   {
     "ats": "SW24-8-22-W4",
     "name": "Riverstone Pond",
-    "lat": 49.6558,
-    "lon": -112.9383,
+    "lat": 49.659849,
+    "lon": -112.863787,
     "stockings": [
       {
         "species": "RNTR",
@@ -4250,14 +4544,17 @@
       "RNTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Picnic area, day use."
+    "surface_area_ha": 7.0,
+    "amenities": "Picnic area, day use.",
+    "lake_id": "SW24-8-22-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.57
   },
   {
     "ats": "NE16-35-6-W5",
     "name": "Beaver Lake",
-    "lat": 51.9964,
-    "lon": -114.7709,
+    "lat": 52.006721,
+    "lon": -114.788387,
     "stockings": [
       {
         "species": "RNTR",
@@ -4293,14 +4590,17 @@
       "TGTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Lots of parking, day use area with tables for picnicking and outhouses, no overnight camping permitted."
+    "surface_area_ha": 31.1,
+    "amenities": "Lots of parking, day use area with tables for picnicking and outhouses, no overnight camping permitted.",
+    "lake_id": "NE16-35-6-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.6
   },
   {
     "ats": "NW7-75-5-W5",
     "name": "Lilly Lake",
-    "lat": 55.4601,
-    "lon": -114.6199,
+    "lat": 55.483333,
+    "lon": -114.766667,
     "stockings": [
       {
         "species": "TGTR",
@@ -4337,13 +4637,16 @@
     ],
     "zone": "NB2",
     "surface_area_ha": null,
-    "amenities": "Day use area."
+    "amenities": "Day use area.",
+    "lake_id": "NW7-75-5-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.97
   },
   {
     "ats": "NE7-36-18-W5",
     "name": "Landslide Lake",
-    "lat": 52.0688,
-    "lon": -116.4225,
+    "lat": 52.08109,
+    "lon": -116.553435,
     "stockings": [
       {
         "species": "CTTR",
@@ -4360,14 +4663,17 @@
       "CTTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "There are no defined campsites, swimming and fishing is great at the waterbody"
+    "surface_area_ha": 50.9,
+    "amenities": "There are no defined campsites, swimming and fishing is great at the waterbody",
+    "lake_id": "NE7-36-18-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.59
   },
   {
     "ats": "NW4-48-24-W5",
     "name": "Mary Gregg Lake",
-    "lat": 53.0978,
-    "lon": -117.3851,
+    "lat": 53.112602,
+    "lon": -117.454064,
     "stockings": [
       {
         "species": "RNTR",
@@ -4384,14 +4690,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 11.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NW4-48-24-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 1.03
   },
   {
     "ats": "SW20-24-7-W5",
     "name": "Sibbald Meadows Pond",
-    "lat": 51.0471,
-    "lon": -114.8587,
+    "lat": 51.05457,
+    "lon": -114.944741,
     "stockings": [
       {
         "species": "RNTR",
@@ -4426,14 +4735,17 @@
       "RNTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Pit toilets, day use area."
+    "surface_area_ha": 3.6,
+    "amenities": "Pit toilets, day use area.",
+    "lake_id": "SW20-24-7-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.51
   },
   {
     "ats": "NW27-107-16-W5",
     "name": "Machesis Lake",
-    "lat": 58.2862,
-    "lon": -116.5709,
+    "lat": 58.324911,
+    "lon": -116.585882,
     "stockings": [
       {
         "species": "RNTR",
@@ -4450,14 +4762,17 @@
       "RNTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, pier, firewood available, fish cleaning station, pit toilets, boat launch."
+    "surface_area_ha": 24.1,
+    "amenities": "Camping on site, pier, firewood available, fish cleaning station, pit toilets, boat launch.",
+    "lake_id": "NW27-107-16-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.94
   },
   {
     "ats": "SE9-58-9-W4",
     "name": "St. Paul Fish Pond",
-    "lat": 53.9746,
-    "lon": -111.2506,
+    "lat": 53.995566,
+    "lon": -111.268531,
     "stockings": [
       {
         "species": "BNTR",
@@ -4512,14 +4827,17 @@
       "TGTR"
     ],
     "zone": "NB1",
-    "surface_area_ha": null,
-    "amenities": "Campground has power, also amenities can be located within the town, such as food and fuel."
+    "surface_area_ha": 0.3,
+    "amenities": "Campground has power, also amenities can be located within the town, such as food and fuel.",
+    "lake_id": "SE9-58-9-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.52
   },
   {
     "ats": "SW33-34-6-W5",
     "name": "Yellowhead Lake",
-    "lat": 51.9457,
-    "lon": -114.7583,
+    "lat": 51.957774,
+    "lon": -114.802334,
     "stockings": [
       {
         "species": "BKTR",
@@ -4536,14 +4854,17 @@
       "BKTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 24.5,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SW33-34-6-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.3
   },
   {
     "ats": "SW5-19-28-W4",
     "name": "Emerson Lakes",
-    "lat": 50.5688,
-    "lon": -113.725,
+    "lat": 50.57721,
+    "lon": -113.85142,
     "stockings": [
       {
         "species": "RNTR",
@@ -4579,14 +4900,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Camping, hiking trails, interpretive trails, picnic tables, fire pits, day use area."
+    "surface_area_ha": 17.0,
+    "amenities": "Camping, hiking trails, interpretive trails, picnic tables, fire pits, day use area.",
+    "lake_id": "SW5-19-28-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.73
   },
   {
     "ats": "SW20-46-19-W4",
     "name": "Pleasure Island (Twomey) Reservoir",
-    "lat": 52.9601,
-    "lon": -112.6285,
+    "lat": 52.979766,
+    "lon": -112.729392,
     "stockings": [
       {
         "species": "RNTR",
@@ -4651,14 +4975,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 10.0,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "SW20-46-19-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.41
   },
   {
     "ats": "NW8-73-21-W5",
     "name": "East Dollar Lake",
-    "lat": 55.2862,
-    "lon": -117.0857,
+    "lat": 55.314926,
+    "lon": -117.204628,
     "stockings": [
       {
         "species": "BNTR",
@@ -4695,14 +5022,17 @@
       "TGTR"
     ],
     "zone": "ES4",
-    "surface_area_ha": null,
-    "amenities": "Day use area."
+    "surface_area_ha": 5.9,
+    "amenities": "Day use area.",
+    "lake_id": "NW8-73-21-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.41
   },
   {
     "ats": "SW27-8-5-W5",
     "name": "Allison Lake (Chinook Lake)",
-    "lat": 49.6703,
-    "lon": -114.6102,
+    "lat": 49.672284,
+    "lon": -114.604063,
     "stockings": [
       {
         "species": "CTTR",
@@ -4737,14 +5067,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, beached area, boat launch (non-propeller), water pump available, firewood available on or near campground, picnic shelter, day use area"
+    "surface_area_ha": 2.7,
+    "amenities": "Camping on site, beached area, boat launch (non-propeller), water pump available, firewood available on or near campground, picnic shelter, day use area",
+    "lake_id": "SW27-8-5-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.2
   },
   {
     "ats": "SE31-26-1-W5",
     "name": "Dewitt's Pond",
-    "lat": 51.25,
-    "lon": -114.0174,
+    "lat": 51.262527,
+    "lon": -114.121485,
     "stockings": [
       {
         "species": "RNTR",
@@ -4771,14 +5104,17 @@
       "RNTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Foot access only, no open fires, day use only"
+    "surface_area_ha": 3.0,
+    "amenities": "Foot access only, no open fires, day use only",
+    "lake_id": "SE31-26-1-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.19
   },
   {
     "ats": "NW12-8-6-W5",
     "name": "Island Lake",
-    "lat": 49.6341,
-    "lon": -114.7888,
+    "lat": 49.627778,
+    "lon": -114.684444,
     "stockings": [
       {
         "species": "CTTR",
@@ -4795,14 +5131,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Camping available, no potable water, bathrooms, firewood available."
+    "surface_area_ha": 49.5,
+    "amenities": "Camping available, no potable water, bathrooms, firewood available.",
+    "lake_id": "NW12-8-6-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 1.36
   },
   {
     "ats": "SW23-68-7-W5",
     "name": "Jessie Lake",
-    "lat": 54.89124,
-    "lon": -114.973,
+    "lat": 54.90164,
+    "lon": -114.96302,
     "stockings": [
       {
         "species": "RNTR",
@@ -4820,13 +5159,16 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "lake_id": "SW23-68-7-W5",
+    "coord_source": "ats",
+    "ats_gap_km": null
   },
   {
     "ats": "NW32-53-27-W4",
     "name": "Muir Lake",
-    "lat": 53.6051,
-    "lon": -113.8409,
+    "lat": 53.624675,
+    "lon": -113.956437,
     "stockings": [
       {
         "species": "BNTR",
@@ -4862,14 +5204,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Basic amenities."
+    "surface_area_ha": 29.9,
+    "amenities": "Basic amenities.",
+    "lake_id": "NW32-53-27-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.59
   },
   {
     "ats": "SW10-42-22-W4",
     "name": "Windsor Lake",
-    "lat": 52.5833,
-    "lon": -113.0829,
+    "lat": 52.595848,
+    "lon": -113.093667,
     "stockings": [
       {
         "species": "RNTR",
@@ -4895,14 +5240,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only."
+    "surface_area_ha": 1.6,
+    "amenities": "Day use only, no open fires, foot access only.",
+    "lake_id": "SW10-42-22-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.64
   },
   {
     "ats": "NW29-40-26-W4",
     "name": "Len Thompson Pond",
-    "lat": 52.4705,
-    "lon": -113.601,
+    "lat": 52.476805,
+    "lon": -113.712706,
     "stockings": [
       {
         "species": "RNTR",
@@ -4957,14 +5305,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Public parking."
+    "surface_area_ha": 2.0,
+    "amenities": "Public parking.",
+    "lake_id": "NW29-40-26-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.8
   },
   {
     "ats": "SE26-19-10-W5",
     "name": "Three Isle Lake",
-    "lat": 50.6268,
-    "lon": -115.3422,
+    "lat": 50.630121,
+    "lon": -115.277514,
     "stockings": [
       {
         "species": "CTTR",
@@ -4981,14 +5332,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Pit toilets, bear proof containers, camping."
+    "surface_area_ha": 33.2,
+    "amenities": "Pit toilets, bear proof containers, camping.",
+    "lake_id": "SE26-19-10-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.53
   },
   {
     "ats": "SW13-8-19-W4",
     "name": "McQuillan Reservoir",
-    "lat": 49.6413,
-    "lon": -112.5346,
+    "lat": 49.64707,
+    "lon": -112.45932,
     "stockings": [
       {
         "species": "RNTR",
@@ -5014,14 +5368,17 @@
       "RNTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 1.9,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "SW13-8-19-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.43
   },
   {
     "ats": "SW33-12-21-W4",
     "name": "McVinnie Reservoir",
-    "lat": 50.0326,
-    "lon": -112.7582,
+    "lat": 50.03504,
+    "lon": -112.81712,
     "stockings": [
       {
         "species": "TGTR",
@@ -5057,14 +5414,17 @@
       "TGTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 4.0,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "SW33-12-21-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.56
   },
   {
     "ats": "NW15-28-9-W5",
     "name": "Margaret Lake",
-    "lat": 51.3877,
-    "lon": -115.1902,
+    "lat": 51.401845,
+    "lon": -115.185439,
     "stockings": [
       {
         "species": "RNTR",
@@ -5081,14 +5441,17 @@
       "RNTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 6.1,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NW15-28-9-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.61
   },
   {
     "ats": "NW11-45-28-W4",
     "name": "Mound Red Reservoir",
-    "lat": 52.8515,
-    "lon": -113.9899,
+    "lat": 52.867842,
+    "lon": -113.961579,
     "stockings": [
       {
         "species": "RNTR",
@@ -5114,14 +5477,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 7.2,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "NW11-45-28-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.8
   },
   {
     "ats": "SW4-36-8-W5",
     "name": "Alford Lake",
-    "lat": 52.0471,
-    "lon": -115.0428,
+    "lat": 52.063523,
+    "lon": -115.092202,
     "stockings": [
       {
         "species": "RNTR",
@@ -5138,14 +5504,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "There is a small picnic area but this waterbody has no amenities."
+    "surface_area_ha": 4.9,
+    "amenities": "There is a small picnic area but this waterbody has no amenities.",
+    "lake_id": "SW4-36-8-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.19
   },
   {
     "ats": "NW15-4-1-W5",
     "name": "Butcher's Lake",
-    "lat": 49.3007,
-    "lon": -114.0722,
+    "lat": 49.303994,
+    "lon": -114.061148,
     "stockings": [
       {
         "species": "BKTR",
@@ -5171,14 +5540,17 @@
       "BKTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "The lake features a designated day-use area with basic amenities, making it accessible for families while maintaining its wild character. Pit vault toilets are available at the day-use location."
+    "surface_area_ha": 3.4,
+    "amenities": "The lake features a designated day-use area with basic amenities, making it accessible for families while maintaining its wild character. Pit vault toilets are available at the day-use location.",
+    "lake_id": "NW15-4-1-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.21
   },
   {
     "ats": "NW7-54-25-W5",
     "name": "Dunn Lake",
-    "lat": 53.6341,
-    "lon": -117.5258,
+    "lat": 53.654925,
+    "lon": -117.685762,
     "stockings": [
       {
         "species": "BKTR",
@@ -5195,14 +5567,17 @@
       "BKTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 13.8,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NW7-54-25-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.5
   },
   {
     "ats": "NW30-84-12-W6",
     "name": "Ole Lake",
-    "lat": 56.2862,
-    "lon": -119.7299,
+    "lat": 56.316771,
+    "lon": -119.894419,
     "stockings": [
       {
         "species": "RNTR",
@@ -5219,14 +5594,17 @@
       "RNTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, fire pits, firewood available, fish cleaning station, hand launch, pit toilets, playground, water pump, swimming."
+    "surface_area_ha": 18.6,
+    "amenities": "Camping on site, fire pits, firewood available, fish cleaning station, hand launch, pit toilets, playground, water pump, swimming.",
+    "lake_id": "NW30-84-12-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.55
   },
   {
     "ats": "SW34-88-7-W6",
     "name": "Running Lake",
-    "lat": 56.6413,
-    "lon": -119.0345,
+    "lat": 56.669178,
+    "lon": -119.0339,
     "stockings": [
       {
         "species": "BKTR",
@@ -5243,14 +5621,17 @@
       "BKTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "Fish cleaning station, pit toilets, fire pits, picnic tables, picnic shelter, boat launch, fishing pier."
+    "surface_area_ha": 29.7,
+    "amenities": "Fish cleaning station, pit toilets, fire pits, picnic tables, picnic shelter, boat launch, fishing pier.",
+    "lake_id": "SW34-88-7-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 1.02
   },
   {
     "ats": "NE22-36-6-W4",
     "name": "Gooseberry Park Pond",
-    "lat": 52.0978,
-    "lon": -110.7962,
+    "lat": 52.110661,
+    "lon": -110.771236,
     "stockings": [
       {
         "species": "RNTR",
@@ -5267,14 +5648,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 8.8,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "NE22-36-6-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.25
   },
   {
     "ats": "NW15-88-8-W4",
     "name": "Texaco East Pond",
-    "lat": 56.6051,
-    "lon": -111.1915,
+    "lat": 56.637029,
+    "lon": -111.191296,
     "stockings": [
       {
         "species": "RNTR",
@@ -5291,14 +5675,17 @@
       "RNTR"
     ],
     "zone": "NB4",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only."
+    "surface_area_ha": 3.4,
+    "amenities": "Day use only, no open fires, foot access only.",
+    "lake_id": "NW15-88-8-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.57
   },
   {
     "ats": "NE10-36-19-W5",
     "name": "Lake Of Falls",
-    "lat": 52.08598,
-    "lon": -116.6284,
+    "lat": 52.08371,
+    "lon": -116.63264,
     "stockings": [
       {
         "species": "CTTR",
@@ -5316,13 +5703,16 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "lake_id": "NE10-36-19-W5",
+    "coord_source": "ats",
+    "ats_gap_km": null
   },
   {
     "ats": "NW4-56-25-W4",
     "name": "Morinville Fish and Game Pond",
-    "lat": 53.7935,
-    "lon": -113.5882,
+    "lat": 53.811699,
+    "lon": -113.658398,
     "stockings": [
       {
         "species": "RNTR",
@@ -5358,14 +5748,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Hiking trail, park benches."
+    "surface_area_ha": 1.8,
+    "amenities": "Hiking trail, park benches.",
+    "lake_id": "NW4-56-25-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 1.16
   },
   {
     "ats": "NW8-67-8-W5",
     "name": "Chrystina (Windy) Lake",
-    "lat": 54.7645,
-    "lon": -115.0864,
+    "lat": 54.786102,
+    "lon": -115.194645,
     "stockings": [
       {
         "species": "BKTR",
@@ -5382,14 +5775,17 @@
       "BKTR"
     ],
     "zone": "NB2",
-    "surface_area_ha": null,
-    "amenities": "Firewood, picnic tables, dry toilets, small watercraft boat launch, canoeing/kayaking."
+    "surface_area_ha": 41.7,
+    "amenities": "Firewood, picnic tables, dry toilets, small watercraft boat launch, canoeing/kayaking.",
+    "lake_id": "NW8-67-8-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.71
   },
   {
     "ats": "SW5-62-11-W5",
     "name": "Emerald Lake",
-    "lat": 54.308,
-    "lon": -115.5215,
+    "lat": 54.333426,
+    "lon": -115.61828,
     "stockings": [
       {
         "species": "BKTR",
@@ -5406,14 +5802,17 @@
       "BKTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 3.5,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SW5-62-11-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.35
   },
   {
     "ats": "NE23-54-23-W4",
     "name": "West Rivers Edge Pond (Fort Lions Park Pond)",
-    "lat": 53.663,
-    "lon": -113.3448,
+    "lat": 53.683219,
+    "lon": -113.274136,
     "stockings": [
       {
         "species": "RNTR",
@@ -5477,14 +5876,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Handicap accessible, washrooms, day use."
+    "surface_area_ha": 4.8,
+    "amenities": "Handicap accessible, washrooms, day use.",
+    "lake_id": "NE23-54-23-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.83
   },
   {
     "ats": "SW5-49-4-W5",
     "name": "Sardine Lake",
-    "lat": 53.1775,
-    "lon": -114.4655,
+    "lat": 53.193482,
+    "lon": -114.551159,
     "stockings": [
       {
         "species": "RNTR",
@@ -5501,14 +5903,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 2.3,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SW5-49-4-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.59
   },
   {
     "ats": "NE12-5-24-W4",
     "name": "Spring Coulee Park Pond",
-    "lat": 49.3732,
-    "lon": -113.1996,
+    "lat": 49.372404,
+    "lon": -113.108558,
     "stockings": [
       {
         "species": "RNTR",
@@ -5525,14 +5930,17 @@
       "RNTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Pit toilets, garbage receptacles, camping on site."
+    "surface_area_ha": 49.0,
+    "amenities": "Pit toilets, garbage receptacles, camping on site.",
+    "lake_id": "NE12-5-24-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.3
   },
   {
     "ats": "SE21-21-10-W5",
     "name": "Hogarth Lakes (Lower)",
-    "lat": 50.7862,
-    "lon": -115.3009,
+    "lat": 50.797209,
+    "lon": -115.322777,
     "stockings": [
       {
         "species": "CTTR",
@@ -5558,14 +5966,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 0.8,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SE21-21-10-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.34
   },
   {
     "ats": "NE18-39-27-W4",
     "name": "Boulder Lake",
-    "lat": 52.3442,
-    "lon": -113.7186,
+    "lat": 52.355924,
+    "lon": -113.871506,
     "stockings": [
       {
         "species": "RNTR",
@@ -5601,14 +6012,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 2.2,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NE18-39-27-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.82
   },
   {
     "ats": "SW14-20-10-W5",
     "name": "Maude Lake",
-    "lat": 50.6848,
-    "lon": -115.3324,
+    "lat": 50.689323,
+    "lon": -115.293158,
     "stockings": [
       {
         "species": "CTTR",
@@ -5625,14 +6039,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 125.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SW14-20-10-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.43
   },
   {
     "ats": "NE19-36-20-W4",
     "name": "Kerbe's Pond",
-    "lat": 52.0978,
-    "lon": -112.7072,
+    "lat": 52.112277,
+    "lon": -112.844594,
     "stockings": [
       {
         "species": "RNTR",
@@ -5669,14 +6086,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only."
+    "surface_area_ha": 3.7,
+    "amenities": "Day use only, no open fires, foot access only.",
+    "lake_id": "NE19-36-20-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.21
   },
   {
     "ats": "NE16-64-19-W4",
     "name": "Boyle Pond",
-    "lat": 54.5181,
-    "lon": -112.7652,
+    "lat": 54.537414,
+    "lon": -112.80524,
     "stockings": [
       {
         "species": "RNTR",
@@ -5693,14 +6113,17 @@
       "RNTR"
     ],
     "zone": "NB2",
-    "surface_area_ha": null,
-    "amenities": "Day use, fires in designated pits only."
+    "surface_area_ha": 2.8,
+    "amenities": "Day use, fires in designated pits only.",
+    "lake_id": "NE16-64-19-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.99
   },
   {
     "ats": "NW8-14-18-W4",
     "name": "Enchant Park Pond",
-    "lat": 50.1558,
-    "lon": -112.3355,
+    "lat": 50.161135,
+    "lon": -112.432267,
     "stockings": [
       {
         "species": "TGTR",
@@ -5727,14 +6150,17 @@
       "TGTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Baseball diamonds, swimming, beach, day use area, camping."
+    "surface_area_ha": 2.8,
+    "amenities": "Baseball diamonds, swimming, beach, day use area, camping.",
+    "lake_id": "NW8-14-18-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.27
   },
   {
     "ats": "NW18-38-27-W4",
     "name": "Mitchell Pond (Waskasoo Park Pond)",
-    "lat": 52.2573,
-    "lon": -113.6994,
+    "lat": 52.269458,
+    "lon": -113.853351,
     "stockings": [
       {
         "species": "RNTR",
@@ -5760,14 +6186,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use area, foot access only, hiking trails."
+    "surface_area_ha": 2.2,
+    "amenities": "Day use area, foot access only, hiking trails.",
+    "lake_id": "NW18-38-27-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.73
   },
   {
     "ats": "NE13-67-10-W5",
     "name": "Edith Lake",
-    "lat": 54.779,
-    "lon": -115.5015,
+    "lat": 54.801854,
+    "lon": -115.382263,
     "stockings": [
       {
         "species": "BKTR",
@@ -5784,14 +6213,17 @@
       "BKTR"
     ],
     "zone": "NB2",
-    "surface_area_ha": null,
-    "amenities": "Dock, day use only, sheltered picnic site."
+    "surface_area_ha": 22.8,
+    "amenities": "Dock, day use only, sheltered picnic site.",
+    "lake_id": "NE13-67-10-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.58
   },
   {
     "ats": "SW1-60-10-W5",
     "name": "Whiteridge Recreational Area Pond (Blueridge Pit)",
-    "lat": 54.1341,
-    "lon": -115.4656,
+    "lat": 54.15613,
+    "lon": -115.364319,
     "stockings": [
       {
         "species": "RNTR",
@@ -5808,14 +6240,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Trail surrounding the waterbody, picnic tables, fire pits, bench, floating dock, pit toilets."
+    "surface_area_ha": 5.8,
+    "amenities": "Trail surrounding the waterbody, picnic tables, fire pits, bench, floating dock, pit toilets.",
+    "lake_id": "SW1-60-10-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.64
   },
   {
     "ats": "NW8-53-17-W5",
     "name": "Lambert Pond",
-    "lat": 53.5471,
-    "lon": -116.3721,
+    "lat": 53.566383,
+    "lon": -116.481493,
     "stockings": [
       {
         "species": "RNTR",
@@ -5832,14 +6267,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 3.3,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NW8-53-17-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.37
   },
   {
     "ats": "NW12-54-26-W5",
     "name": "Petite Lake",
-    "lat": 53.6341,
-    "lon": -117.7947,
+    "lat": 53.655681,
+    "lon": -117.702585,
     "stockings": [
       {
         "species": "RNTR",
@@ -5856,14 +6294,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Located in the glacial cascades natural area - camping adjacent to waterbody."
+    "surface_area_ha": 11.2,
+    "amenities": "Located in the glacial cascades natural area - camping adjacent to waterbody.",
+    "lake_id": "NW12-54-26-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.99
   },
   {
     "ats": "NE15-17-17-W4",
     "name": "Bow City East Ponds",
-    "lat": 50.4312,
-    "lon": -112.2695,
+    "lat": 50.434749,
+    "lon": -112.259866,
     "stockings": [
       {
         "species": "RNTR",
@@ -5880,14 +6321,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 4.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NE15-17-17-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.38
   },
   {
     "ats": "NW14-72-6-W6",
     "name": "County Sportsplex Pond",
-    "lat": 55.2138,
-    "lon": -118.8701,
+    "lat": 55.237091,
+    "lon": -118.812752,
     "stockings": [
       {
         "species": "RNTR",
@@ -5904,14 +6348,17 @@
       "RNTR"
     ],
     "zone": "ES4",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 2.7,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "NW14-72-6-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.8
   },
   {
     "ats": "NE6-54-20-W4",
     "name": "Fort Saskatchewan Fish & Game Pond",
-    "lat": 53.6196,
-    "lon": -112.8038,
+    "lat": 53.64195,
+    "lon": -112.94075,
     "stockings": [
       {
         "species": "RNTR",
@@ -5929,13 +6376,16 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "lake_id": "NE6-54-20-W4",
+    "coord_source": "ats",
+    "ats_gap_km": null
   },
   {
     "ats": "NW5-57-23-W5",
     "name": "Mayan Lake",
-    "lat": 53.8804,
-    "lon": -117.2761,
+    "lat": 53.902144,
+    "lon": -117.38983,
     "stockings": [
       {
         "species": "RNTR",
@@ -5952,14 +6402,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 6.7,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NW5-57-23-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.73
   },
   {
     "ats": "SW27-83-23-W5",
     "name": "MD Peace Pond #1",
-    "lat": 56.192,
-    "lon": -117.5228,
+    "lat": 56.222511,
+    "lon": -117.556197,
     "stockings": [
       {
         "species": "RNTR",
@@ -5985,14 +6438,17 @@
       "RNTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 1.1,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SW27-83-23-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.62
   },
   {
     "ats": "NW11-68-8-W5",
     "name": "Jane Lake",
-    "lat": 54.8515,
-    "lon": -115.1643,
+    "lat": 54.872509,
+    "lon": -115.11153,
     "stockings": [
       {
         "species": "RNTR",
@@ -6010,13 +6466,16 @@
     ],
     "zone": "NB2",
     "surface_area_ha": null,
-    "amenities": "Site Description:, Return to map, Return to list, Updated: Jul 22, 2025, Fish Stocking, Stocking Maps, Recovery Trout Stocking, Recreational Trout Stocking, Walleye Stocking, Report-A-Poacher, RAP Incident Form, 1-800-642-3800, Footer, Quick Links, Alberta Fire Bans, Campground Closures, Parks Advisories & Public Safety, Parks Reservations, Follow My Wild Alberta, MWA Facebook, F&W Enforcement Facebook, Alberta Wildfire App, About This Site, Accessibility, Contact Us, Disclaimer, GoA, Privacy"
+    "amenities": "Site Description:, Return to map, Return to list, Updated: Jul 22, 2025, Fish Stocking, Stocking Maps, Recovery Trout Stocking, Recreational Trout Stocking, Walleye Stocking, Report-A-Poacher, RAP Incident Form, 1-800-642-3800, Footer, Quick Links, Alberta Fire Bans, Campground Closures, Parks Advisories & Public Safety, Parks Reservations, Follow My Wild Alberta, MWA Facebook, F&W Enforcement Facebook, Alberta Wildfire App, About This Site, Accessibility, Contact Us, Disclaimer, GoA, Privacy",
+    "lake_id": "NW11-68-8-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.86
   },
   {
     "ats": "NE29-67-9-W5",
     "name": "Atlantic Richfield Reservoir",
-    "lat": 54.808,
-    "lon": -115.2511,
+    "lat": 54.832388,
+    "lon": -115.326749,
     "stockings": [
       {
         "species": "RNTR",
@@ -6033,14 +6492,17 @@
       "RNTR"
     ],
     "zone": "NB2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities.."
+    "surface_area_ha": 5.3,
+    "amenities": "This waterbody has no amenities..",
+    "lake_id": "NE29-67-9-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.57
   },
   {
     "ats": "SE16-30-27-W4",
     "name": "Midway Reservoir",
-    "lat": 51.5544,
-    "lon": -113.7003,
+    "lat": 51.565685,
+    "lon": -113.735238,
     "stockings": [
       {
         "species": "RNTR",
@@ -6057,14 +6519,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Picnic area, pit toilets, day use area."
+    "surface_area_ha": 23.1,
+    "amenities": "Picnic area, pit toilets, day use area.",
+    "lake_id": "SE16-30-27-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.63
   },
   {
     "ats": "NW21-24-9-W5",
     "name": "Grotto Mountain Pond",
-    "lat": 51.0544,
-    "lon": -115.1586,
+    "lat": 51.065761,
+    "lon": -115.202402,
     "stockings": [
       {
         "species": "CTTR",
@@ -6099,14 +6564,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Day use area, picnic tables, pit toilets."
+    "surface_area_ha": 2.5,
+    "amenities": "Day use area, picnic tables, pit toilets.",
+    "lake_id": "NW21-24-9-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.39
   },
   {
     "ats": "SW24-8-5-W5",
     "name": "Coleman Fish and Game Pond (McGillivray)",
-    "lat": 49.6558,
-    "lon": -114.6548,
+    "lat": 49.655563,
+    "lon": -114.559795,
     "stockings": [
       {
         "species": "CTTR",
@@ -6123,14 +6591,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 3.2,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SW24-8-5-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.38
   },
   {
     "ats": "NW36-56-7-W4",
     "name": "Elk Point Pond",
-    "lat": 53.8659,
-    "lon": -111.0138,
+    "lat": 53.888476,
+    "lon": -110.910587,
     "stockings": [
       {
         "species": "BKTR",
@@ -6168,13 +6639,16 @@
     ],
     "zone": "NB1",
     "surface_area_ha": null,
-    "amenities": "This site has no amenities."
+    "amenities": "This site has no amenities.",
+    "lake_id": "NW36-56-7-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.24
   },
   {
     "ats": "SW34-76-4-W6",
     "name": "Kakut Lake",
-    "lat": 55.5978,
-    "lon": -118.5451,
+    "lat": 55.625,
+    "lon": -118.533333,
     "stockings": [
       {
         "species": "RNTR",
@@ -6191,14 +6665,17 @@
       "RNTR"
     ],
     "zone": "ES4",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, camp kitchen, canoeing, playground, baseball diamond, community hall."
+    "surface_area_ha": 2.9,
+    "amenities": "Camping on site, camp kitchen, canoeing, playground, baseball diamond, community hall.",
+    "lake_id": "SW34-76-4-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.63
   },
   {
     "ats": "SE11-65-2-W4",
     "name": "Medley River",
-    "lat": 54.5833,
-    "lon": -110.2688,
+    "lat": 54.604201,
+    "lon": -110.186494,
     "stockings": [
       {
         "species": "RNTR",
@@ -6216,13 +6693,16 @@
     ],
     "zone": "NB1",
     "surface_area_ha": null,
-    "amenities": "Basic amenities at the beach area including:, parking lot, waste receptacles, pit toilets."
+    "amenities": "Basic amenities at the beach area including:, parking lot, waste receptacles, pit toilets.",
+    "lake_id": "SE11-65-2-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.72
   },
   {
     "ats": "NE26-49-1-W4",
     "name": "Bud Miller Park Pond",
-    "lat": 53.2428,
-    "lon": -110.115,
+    "lat": 53.259224,
+    "lon": -110.040698,
     "stockings": [
       {
         "species": "RNTR",
@@ -6239,14 +6719,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Picnic sites, baseball diamonds, spray park, tennis courts, disc golf, mini golf, lawn bowling, playground"
+    "surface_area_ha": 3.7,
+    "amenities": "Picnic sites, baseball diamonds, spray park, tennis courts, disc golf, mini golf, lawn bowling, playground",
+    "lake_id": "NE26-49-1-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.81
   },
   {
     "ats": "SW15-106-12-W5",
     "name": "La Crete Pond",
-    "lat": 58.163,
-    "lon": -115.9026,
+    "lat": 58.197347,
+    "lon": -115.906655,
     "stockings": [
       {
         "species": "RNTR",
@@ -6263,14 +6746,17 @@
       "RNTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "This site has no amenities."
+    "surface_area_ha": 9.0,
+    "amenities": "This site has no amenities.",
+    "lake_id": "SW15-106-12-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 1.12
   },
   {
     "ats": "SE32-53-12-W5",
     "name": "Niton Lake",
-    "lat": 53.5978,
-    "lon": -115.6545,
+    "lat": 53.616078,
+    "lon": -115.725966,
     "stockings": [
       {
         "species": "RNTR",
@@ -6287,14 +6773,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 2.5,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SE32-53-12-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.62
   },
   {
     "ats": "SW20-88-8-W4",
     "name": "Texaco Pond",
-    "lat": 56.6123,
-    "lon": -111.139,
+    "lat": 56.639271,
+    "lon": -111.248523,
     "stockings": [
       {
         "species": "RNTR",
@@ -6311,14 +6800,17 @@
       "RNTR"
     ],
     "zone": "NB4",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only."
+    "surface_area_ha": 2.7,
+    "amenities": "Day use only, no open fires, foot access only.",
+    "lake_id": "SW20-88-8-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 1.11
   },
   {
     "ats": "NE35-59-12-W5",
     "name": "Whitecourt Town Pond",
-    "lat": 54.1268,
-    "lon": -115.7498,
+    "lat": 54.149158,
+    "lon": -115.685342,
     "stockings": [
       {
         "species": "RNTR",
@@ -6335,14 +6827,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Trails, sports fields, playgrounds, picnic areas, off-leash dog park, river slide attraction, splash park."
+    "surface_area_ha": 5.0,
+    "amenities": "Trails, sports fields, playgrounds, picnic areas, off-leash dog park, river slide attraction, splash park.",
+    "lake_id": "NE35-59-12-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.29
   },
   {
     "ats": "SW30-53-9-W5",
     "name": "Wildwood Pond (Stones Pond)",
-    "lat": 53.5833,
-    "lon": -115.1779,
+    "lat": 53.601291,
+    "lon": -115.318904,
     "stockings": [
       {
         "species": "RNTR",
@@ -6359,14 +6854,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only."
+    "surface_area_ha": 1.5,
+    "amenities": "Day use only, no open fires, foot access only.",
+    "lake_id": "SW30-53-9-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.64
   },
   {
     "ats": "NE35-47-13-W4",
     "name": "Castaway Trout Pond",
-    "lat": 53.0833,
-    "lon": -111.8519,
+    "lat": 53.097592,
+    "lon": -111.79091,
     "stockings": [
       {
         "species": "RNTR",
@@ -6392,14 +6890,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Picnic area, day use area, pit toilets."
+    "surface_area_ha": 1.4,
+    "amenities": "Picnic area, day use area, pit toilets.",
+    "lake_id": "NE35-47-13-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.62
   },
   {
     "ats": "NW27-50-24-W4",
     "name": "Beaumont Pond",
-    "lat": 53.3297,
-    "lon": -113.4278,
+    "lat": 53.346482,
+    "lon": -113.430512,
     "stockings": [
       {
         "species": "RNTR",
@@ -6436,14 +6937,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 5.8,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NW27-50-24-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.93
   },
   {
     "ats": "SE27-28-1-W5",
     "name": "Crossfield Trout Pond",
-    "lat": 51.4094,
-    "lon": -114.0871,
+    "lat": 51.422275,
+    "lon": -114.049779,
     "stockings": [
       {
         "species": "RNTR",
@@ -6460,14 +6964,17 @@
       "RNTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 1.3,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SE27-28-1-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.25
   },
   {
     "ats": "NE5-39-13-W5",
     "name": "Gap Lake",
-    "lat": 52.3152,
-    "lon": -115.7484,
+    "lat": 52.330286,
+    "lon": -115.830899,
     "stockings": [
       {
         "species": "CTTR",
@@ -6484,14 +6991,17 @@
       "CTTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Day use area, boat launch, pit toilets"
+    "surface_area_ha": 12.2,
+    "amenities": "Day use area, boat launch, pit toilets",
+    "lake_id": "NE5-39-13-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.31
   },
   {
     "ats": "SE5-19-9-W5",
     "name": "Aster Lake",
-    "lat": 50.5688,
-    "lon": -115.1352,
+    "lat": 50.577603,
+    "lon": -115.210545,
     "stockings": [
       {
         "species": "CTTR",
@@ -6508,14 +7018,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Vault toilets, bear boxes for security."
+    "surface_area_ha": 1.8,
+    "amenities": "Vault toilets, bear boxes for security.",
+    "lake_id": "SE5-19-9-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.13
   },
   {
     "ats": "NE16-21-10-W5",
     "name": "Burstall Lake (Lower)",
-    "lat": 50.779,
-    "lon": -115.3007,
+    "lat": 50.785287,
+    "lon": -115.326112,
     "stockings": [
       {
         "species": "CTTR",
@@ -6532,14 +7045,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "The upper and lower lakes helicopter stocked. These lakes have recently been stocked in the fall of 2025."
+    "surface_area_ha": 8.3,
+    "amenities": "The upper and lower lakes helicopter stocked. These lakes have recently been stocked in the fall of 2025.",
+    "lake_id": "NE16-21-10-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.26
   },
   {
     "ats": "NE9-47-19-W5",
     "name": "Silkstone Lake",
-    "lat": 53.0254,
-    "lon": -116.6686,
+    "lat": 53.0436,
+    "lon": -116.717434,
     "stockings": [
       {
         "species": "RNTR",
@@ -6556,14 +7072,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 5.1,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NE9-47-19-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.28
   },
   {
     "ats": "NE36-50-7-W4",
     "name": "Claude N Bernnan Memorial Pond (Vermillion Park Pond)",
-    "lat": 53.3442,
-    "lon": -111.0135,
+    "lat": 53.364531,
+    "lon": -110.884936,
     "stockings": [
       {
         "species": "RNTR",
@@ -6580,14 +7099,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 1.9,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NE36-50-7-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.14
   },
   {
     "ats": "SE18-73-21-W5",
     "name": "West Dollar Lake",
-    "lat": 55.2935,
-    "lon": -117.0736,
+    "lat": 55.317308,
+    "lon": -117.209194,
     "stockings": [
       {
         "species": "BNTR",
@@ -6614,14 +7136,17 @@
       "RNTR"
     ],
     "zone": "ES4",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only."
+    "surface_area_ha": 7.3,
+    "amenities": "Day use only, no open fires, foot access only.",
+    "lake_id": "SE18-73-21-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 1.16
   },
   {
     "ats": "SW16-21-10-W5",
     "name": "Burstall Lake (Upper)",
-    "lat": 50.7717,
-    "lon": -115.2891,
+    "lat": 50.781856,
+    "lon": -115.335866,
     "stockings": [
       {
         "species": "CTTR",
@@ -6638,14 +7163,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "The upper and lower lakes helicopter stocked. These lakes have recently been stocked in the fall of 2025."
+    "surface_area_ha": 9.3,
+    "amenities": "The upper and lower lakes helicopter stocked. These lakes have recently been stocked in the fall of 2025.",
+    "lake_id": "SW16-21-10-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.2
   },
   {
     "ats": "NW5-67-13-W4",
     "name": "Lac La Biche Trout Pond",
-    "lat": 54.75,
-    "lon": -111.8394,
+    "lat": 54.775532,
+    "lon": -111.953265,
     "stockings": [
       {
         "species": "RNTR",
@@ -6671,14 +7199,17 @@
       "RNTR"
     ],
     "zone": "NB1",
-    "surface_area_ha": null,
-    "amenities": "This waterbody is located in Lac La Biche, amenities such as food and fuel are closely available"
+    "surface_area_ha": 1.9,
+    "amenities": "This waterbody is located in Lac La Biche, amenities such as food and fuel are closely available",
+    "lake_id": "NW5-67-13-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.4
   },
   {
     "ats": "NE31-59-25-W4",
     "name": "Rainbow Park Pond (Westlock Recreation Pond)",
-    "lat": 54.1268,
-    "lon": -113.58,
+    "lat": 54.145706,
+    "lon": -113.727525,
     "stockings": [
       {
         "species": "RNTR",
@@ -6695,14 +7226,17 @@
       "RNTR"
     ],
     "zone": "NB2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 1.1,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "NE31-59-25-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 1.19
   },
   {
     "ats": "SW11-38-9-W5",
     "name": "Rat Lake",
-    "lat": 52.2355,
-    "lon": -115.2365,
+    "lat": 52.247523,
+    "lon": -115.183801,
     "stockings": [
       {
         "species": "TGTR",
@@ -6728,14 +7262,17 @@
       "TGTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Boat dock, day use area."
+    "surface_area_ha": 2.5,
+    "amenities": "Boat dock, day use area.",
+    "lake_id": "SW11-38-9-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.5
   },
   {
     "ats": "NW24-57-25-W4",
     "name": "Legal Reservoir",
-    "lat": 53.9239,
-    "lon": -113.6733,
+    "lat": 53.947431,
+    "lon": -113.586428,
     "stockings": [
       {
         "species": "RNTR",
@@ -6752,14 +7289,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only."
+    "surface_area_ha": 1.5,
+    "amenities": "Day use only, no open fires, foot access only.",
+    "lake_id": "NW24-57-25-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.85
   },
   {
     "ats": "SE29-40-26-W4",
     "name": "East Stormwater Pond",
-    "lat": 52.4529,
-    "lon": -113.6088,
+    "lat": 52.469538,
+    "lon": -113.709921,
     "stockings": [
       {
         "species": "RNTR",
@@ -6786,14 +7326,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 1.3,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "SE29-40-26-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.18
   },
   {
     "ats": "NW5-54-25-W4",
     "name": "Lacombe Park Pond",
-    "lat": 53.6196,
-    "lon": -113.549,
+    "lat": 53.637547,
+    "lon": -113.653734,
     "stockings": [
       {
         "species": "RNTR",
@@ -6820,14 +7363,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Trail system, fenced dog park, picnic area, swimming area for dogs, skating, change building, restrooms."
+    "surface_area_ha": 1.4,
+    "amenities": "Trail system, fenced dog park, picnic area, swimming area for dogs, skating, change building, restrooms.",
+    "lake_id": "NW5-54-25-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 1.07
   },
   {
     "ats": "SW35-46-19-W5",
     "name": "Pit 44 Lake",
-    "lat": 52.9891,
-    "lon": -116.7025,
+    "lat": 53.004695,
+    "lon": -116.653503,
     "stockings": [
       {
         "species": "RNTR",
@@ -6844,14 +7390,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 7.1,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "SW35-46-19-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.74
   },
   {
     "ats": "SE26-46-19-W5",
     "name": "Pit 45 Lake",
-    "lat": 52.9746,
-    "lon": -116.7136,
+    "lat": 52.992815,
+    "lon": -116.645687,
     "stockings": [
       {
         "species": "RNTR",
@@ -6868,14 +7417,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 7.5,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "SE26-46-19-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.35
   },
   {
     "ats": "NE5-43-25-W4",
     "name": "Ponoka Centennial Park Pond",
-    "lat": 52.663,
-    "lon": -113.4828,
+    "lat": 52.6804,
+    "lon": -113.58502,
     "stockings": [
       {
         "species": "RNTR",
@@ -6902,14 +7454,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 6.5,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "NE5-43-25-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.79
   },
   {
     "ats": "NE6-40-20-W5",
     "name": "Obstruction Lakes",
-    "lat": 52.41794,
-    "lon": -116.86292,
+    "lat": 52.41866,
+    "lon": -116.87013,
     "stockings": [
       {
         "species": "CTTR",
@@ -6927,13 +7482,16 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "lake_id": "NE6-40-20-W5",
+    "coord_source": "ats",
+    "ats_gap_km": null
   },
   {
     "ats": "SW33-39-7-W5",
     "name": "Rocky Children's Pond",
-    "lat": 52.3804,
-    "lon": -114.9082,
+    "lat": 52.398682,
+    "lon": -114.949741,
     "stockings": [
       {
         "species": "RNTR",
@@ -6959,14 +7517,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Walking trails, pier, benches, pit toilet, group, fire pit."
+    "surface_area_ha": 1.4,
+    "amenities": "Walking trails, pier, benches, pit toilet, group, fire pit.",
+    "lake_id": "SW33-39-7-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.52
   },
   {
     "ats": "SE31-58-20-W4",
     "name": "Radway Fish Pond",
-    "lat": 54.0326,
-    "lon": -112.8316,
+    "lat": 54.056876,
+    "lon": -112.9560769,
     "stockings": [
       {
         "species": "RNTR",
@@ -6984,13 +7545,16 @@
     ],
     "zone": "NB1",
     "surface_area_ha": null,
-    "amenities": "Wheelchair accessible, day use."
+    "amenities": "Wheelchair accessible, day use.",
+    "lake_id": "SE31-58-20-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.6
   },
   {
     "ats": "SE11-4-1-W5",
     "name": "Bathing Lake",
-    "lat": 49.279,
-    "lon": -114.1055,
+    "lat": 49.278825,
+    "lon": -114.024744,
     "stockings": [
       {
         "species": "CTTR",
@@ -7007,14 +7571,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Parking lot, pit toilets."
+    "surface_area_ha": 5.6,
+    "amenities": "Parking lot, pit toilets.",
+    "lake_id": "SE11-4-1-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.3
   },
   {
     "ats": "SE14-7-3-W5",
     "name": "Burmis Lake",
-    "lat": 49.5544,
-    "lon": -114.3742,
+    "lat": 49.553784,
+    "lon": -114.299609,
     "stockings": [
       {
         "species": "CTTR",
@@ -7031,14 +7598,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Pit toilets, garbage receptacles."
+    "surface_area_ha": 7.0,
+    "amenities": "Pit toilets, garbage receptacles.",
+    "lake_id": "SE14-7-3-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.36
   },
   {
     "ats": "NE23-6-30-W4",
     "name": "Burn's Reservoir",
-    "lat": 49.4891,
-    "lon": -113.988,
+    "lat": 49.492841,
+    "lon": -113.93045,
     "stockings": [
       {
         "species": "CTTR",
@@ -7055,14 +7625,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Picnic tables, benches, pit toilets, camp kitchen."
+    "surface_area_ha": 3.9,
+    "amenities": "Picnic tables, benches, pit toilets, camp kitchen.",
+    "lake_id": "NE23-6-30-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.85
   },
   {
     "ats": "SW23-83-21-W5",
     "name": "Cecil Thompson Pond",
-    "lat": 56.1775,
-    "lon": -117.2351,
+    "lat": 56.209063,
+    "lon": -117.20295,
     "stockings": [
       {
         "species": "RNTR",
@@ -7079,14 +7652,17 @@
       "RNTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "Picnic tables in campsites, free firewood, pump water available, pit toilets, playground, day use area."
+    "surface_area_ha": 1.1,
+    "amenities": "Picnic tables in campsites, free firewood, pump water available, pit toilets, playground, day use area.",
+    "lake_id": "SW23-83-21-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 1.04
   },
   {
     "ats": "NE9-53-19-W5",
     "name": "Dandurand Lake",
-    "lat": 53.5471,
-    "lon": -116.7014,
+    "lat": 53.565803,
+    "lon": -116.736533,
     "stockings": [
       {
         "species": "RNTR",
@@ -7103,14 +7679,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only."
+    "surface_area_ha": 2.1,
+    "amenities": "Day use only, no open fires, foot access only.",
+    "lake_id": "NE9-53-19-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.59
   },
   {
     "ats": "SW12-69-6-W6",
     "name": "Highway 40 Pond",
-    "lat": 54.9312,
-    "lon": -118.8892,
+    "lat": 54.958674,
+    "lon": -118.782831,
     "stockings": [
       {
         "species": "RNTR",
@@ -7127,14 +7706,17 @@
       "RNTR"
     ],
     "zone": "ES4",
-    "surface_area_ha": null,
-    "amenities": "Pit toilets, fire pits, dock, handicap accessible, fish cleaning station, day use."
+    "surface_area_ha": 1.4,
+    "amenities": "Pit toilets, fire pits, dock, handicap accessible, fish cleaning station, day use.",
+    "lake_id": "SW12-69-6-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.17
   },
   {
     "ats": "NE35-87-9-W4",
     "name": "Highway 63 Pond",
-    "lat": 56.5616,
-    "lon": -111.3874,
+    "lat": 56.588109,
+    "lon": -111.320447,
     "stockings": [
       {
         "species": "RNTR",
@@ -7151,14 +7733,17 @@
       "RNTR"
     ],
     "zone": "NB4",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 1.8,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NE35-87-9-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 1.19
   },
   {
     "ats": "SE13-51-12-W4",
     "name": "Innisfree Trout Pond",
-    "lat": 53.3804,
-    "lon": -111.7433,
+    "lat": 53.39796,
+    "lon": -111.629354,
     "stockings": [
       {
         "species": "RNTR",
@@ -7185,14 +7770,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access ."
+    "surface_area_ha": 1.2,
+    "amenities": "Day use, no open fires, foot access .",
+    "lake_id": "SE13-51-12-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.5
   },
   {
     "ats": "SE34-1-28-W4",
     "name": "Little Beaverdam Lake",
-    "lat": 49.08587,
-    "lon": -113.60806,
+    "lat": 49.07646,
+    "lon": -113.66861,
     "stockings": [
       {
         "species": "TGTR",
@@ -7210,13 +7798,16 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "lake_id": "SE34-1-28-W4",
+    "coord_source": "ats",
+    "ats_gap_km": null
   },
   {
     "ats": "NW10-47-19-W5",
     "name": "Lovett Lake",
-    "lat": 53.0254,
-    "lon": -116.6807,
+    "lat": 53.041523,
+    "lon": -116.706,
     "stockings": [
       {
         "species": "RNTR",
@@ -7233,14 +7824,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 2.6,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NW10-47-19-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.42
   },
   {
     "ats": "NE14-24-7-W5",
     "name": "Sibbald Lake",
-    "lat": 51.0399,
-    "lon": -114.9393,
+    "lat": 51.05457,
+    "lon": -114.944741,
     "stockings": [
       {
         "species": "RNTR",
@@ -7266,14 +7860,17 @@
       "RNTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Cook shelters, fire pits, hand launch, pit/vault toilets, playground."
+    "surface_area_ha": 2.2,
+    "amenities": "Cook shelters, fire pits, hand launch, pit/vault toilets, playground.",
+    "lake_id": "NE14-24-7-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 5.31
   },
   {
     "ats": "SW29-6-19-W4",
     "name": "Stirling Children's Pond",
-    "lat": 49.4964,
-    "lon": -112.4378,
+    "lat": 49.500793,
+    "lon": -112.5376,
     "stockings": [
       {
         "species": "RNTR",
@@ -7290,14 +7887,17 @@
       "RNTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only."
+    "surface_area_ha": 1.9,
+    "amenities": "Day use only, no open fires, foot access only.",
+    "lake_id": "SW29-6-19-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.25
   },
   {
     "ats": "NW7-85-21-W5",
     "name": "Weberville Pond",
-    "lat": 56.3297,
-    "lon": -117.1434,
+    "lat": 56.360995,
+    "lon": -117.311159,
     "stockings": [
       {
         "species": "RNTR",
@@ -7314,14 +7914,17 @@
       "RNTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "Day use only, picnic sites, garbage receptacles, pit toilets."
+    "surface_area_ha": 1.3,
+    "amenities": "Day use only, picnic sites, garbage receptacles, pit toilets.",
+    "lake_id": "NW7-85-21-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.95
   },
   {
     "ats": "SW7-38-7-W5",
     "name": "Ironside Pond",
-    "lat": 52.2355,
-    "lon": -114.8579,
+    "lat": 52.246795,
+    "lon": -114.996541,
     "stockings": [
       {
         "species": "RNTR",
@@ -7348,14 +7951,17 @@
       "TGTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Day use only, hand launch boats only."
+    "surface_area_ha": 33.0,
+    "amenities": "Day use only, hand launch boats only.",
+    "lake_id": "SW7-38-7-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.49
   },
   {
     "ats": "NW6-20-8-W5",
     "name": "Sparrows Egg Lake",
-    "lat": 50.663,
-    "lon": -114.966,
+    "lat": 50.673406,
+    "lon": -115.105897,
     "stockings": [
       {
         "species": "CTTR",
@@ -7372,14 +7978,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 6.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NW6-20-8-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.26
   },
   {
     "ats": "SW25-28-21-W4",
     "name": "Anderson Dam",
-    "lat": 51.4094,
-    "lon": -112.9102,
+    "lat": 51.419906,
+    "lon": -112.838356,
     "stockings": [
       {
         "species": "RNTR",
@@ -7396,14 +8005,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only"
+    "surface_area_ha": 2.0,
+    "amenities": "Day use, no open fires, foot access only",
+    "lake_id": "SW25-28-21-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.14
   },
   {
     "ats": "SW26-5-22-W4",
     "name": "Magrath Children's Pond",
-    "lat": 49.4094,
-    "lon": -112.9012,
+    "lat": 49.4103,
+    "lon": -112.8647,
     "stockings": [
       {
         "species": "RNTR",
@@ -7438,14 +8050,17 @@
       "RNTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 3.7,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "SW26-5-22-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.65
   },
   {
     "ats": "NW36-14-4-W5",
     "name": "Bear Pond",
-    "lat": 50.2138,
-    "lon": -114.5266,
+    "lat": 50.218457,
+    "lon": -114.430019,
     "stockings": [
       {
         "species": "TGTR",
@@ -7462,14 +8077,17 @@
       "TGTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 3.3,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NW36-14-4-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.2
   },
   {
     "ats": "SW11-32-11-W5",
     "name": "Eagle Lake",
-    "lat": 51.7138,
-    "lon": -115.5029,
+    "lat": 51.726322,
+    "lon": -115.462742,
     "stockings": [
       {
         "species": "CTTR",
@@ -7486,14 +8104,17 @@
       "CTTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 15.2,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SW11-32-11-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.07
   },
   {
     "ats": "SE1-39-3-W5",
     "name": "Niemela Reservoir (Ray's Pond)",
-    "lat": 52.308,
-    "lon": -114.4207,
+    "lat": 52.322935,
+    "lon": -114.292729,
     "stockings": [
       {
         "species": "TGTR",
@@ -7520,14 +8141,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only"
+    "surface_area_ha": 1.5,
+    "amenities": "Day use, no open fires, foot access only",
+    "lake_id": "SE1-39-3-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.19
   },
   {
     "ats": "NW1-15-4-W5",
     "name": "Big Iron Lake",
-    "lat": 50.2283,
-    "lon": -114.5267,
+    "lat": 50.233539,
+    "lon": -114.430313,
     "stockings": [
       {
         "species": "TGTR",
@@ -7544,14 +8168,17 @@
       "TGTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Day use only no open fires foot access only."
+    "surface_area_ha": 1.8,
+    "amenities": "Day use only no open fires foot access only.",
+    "lake_id": "NW1-15-4-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.09
   },
   {
     "ats": "NE4-47-19-W5",
     "name": "Pit 24 Lake",
-    "lat": 53.0109,
-    "lon": -116.6677,
+    "lat": 53.030531,
+    "lon": -116.714447,
     "stockings": [
       {
         "species": "RNTR",
@@ -7568,14 +8195,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 4.9,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "NE4-47-19-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.44
   },
   {
     "ats": "SW13-53-16-W5",
     "name": "Wolf Creek Pond",
-    "lat": 53.5544,
-    "lon": -116.3237,
+    "lat": 53.574507,
+    "lon": -116.2285,
     "stockings": [
       {
         "species": "RNTR",
@@ -7592,14 +8222,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only."
+    "surface_area_ha": 0.9,
+    "amenities": "Day use only, no open fires, foot access only.",
+    "lake_id": "SW13-53-16-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.66
   },
   {
     "ats": "SE4-42-21-W4",
     "name": "Bashaw Pond",
-    "lat": 52.5688,
-    "lon": -112.9269,
+    "lat": 52.581079,
+    "lon": -112.966507,
     "stockings": [
       {
         "species": "RNTR",
@@ -7626,14 +8259,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use only no open fires foot access only."
+    "surface_area_ha": 12.0,
+    "amenities": "Day use only no open fires foot access only.",
+    "lake_id": "SE4-42-21-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.56
   },
   {
     "ats": "NE19-52-26-W5",
     "name": "Jarvis Creek Pond",
-    "lat": 53.4891,
-    "lon": -117.6721,
+    "lat": 53.508917,
+    "lon": -117.810057,
     "stockings": [
       {
         "species": "RNTR",
@@ -7650,14 +8286,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Campground amenities include:, dry toilets, water available at cache campground, firewood, picnic tables, hiking, nearby canoeing & kayaking, mountain biking, wildlife watching, guided tours, fish cleaning station."
+    "surface_area_ha": 1.5,
+    "amenities": "Campground amenities include:, dry toilets, water available at cache campground, firewood, picnic tables, hiking, nearby canoeing & kayaking, mountain biking, wildlife watching, guided tours, fish cleaning station.",
+    "lake_id": "NE19-52-26-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 1.24
   },
   {
     "ats": "SW19-36-18-W5",
     "name": "Entry Lake",
-    "lat": 52.0906,
-    "lon": -116.4119,
+    "lat": 52.106097,
+    "lon": -116.564829,
     "stockings": [
       {
         "species": "CTTR",
@@ -7674,14 +8313,17 @@
       "CTTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "This site has no amenities."
+    "surface_area_ha": 4.1,
+    "amenities": "This site has no amenities.",
+    "lake_id": "SW19-36-18-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.56
   },
   {
     "ats": "NW30-38-17-W5",
     "name": "Allstones Lake",
-    "lat": 52.2862,
-    "lon": -116.2804,
+    "lat": 52.303119,
+    "lon": -116.418572,
     "stockings": [
       {
         "species": "BKTR",
@@ -7698,14 +8340,17 @@
       "BKTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Pit toilet, backcountry camping."
+    "surface_area_ha": 3.5,
+    "amenities": "Pit toilet, backcountry camping.",
+    "lake_id": "NW30-38-17-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.76
   },
   {
     "ats": "SW10-79-8-W6",
     "name": "Shell True North Pond",
-    "lat": 55.8007,
-    "lon": -119.1668,
+    "lat": 55.829544,
+    "lon": -119.167595,
     "stockings": [
       {
         "species": "BKTR",
@@ -7732,14 +8377,17 @@
       "TGTR"
     ],
     "zone": "ES4",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 8.0,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "SW10-79-8-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.55
   },
   {
     "ats": "NW26-21-5-W5",
     "name": "Champion Lakes (Lower)",
-    "lat": 50.808,
-    "lon": -114.6479,
+    "lat": 50.815306,
+    "lon": -114.599941,
     "stockings": [
       {
         "species": "CTTR",
@@ -7765,14 +8413,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 8.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NW26-21-5-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.3
   },
   {
     "ats": "NW1-62-4-W4",
     "name": "Ardmore Community Pond",
-    "lat": 54.3152,
-    "lon": -110.5777,
+    "lat": 54.339952,
+    "lon": -110.479159,
     "stockings": [
       {
         "species": "RNTR",
@@ -7798,14 +8449,17 @@
       "RNTR"
     ],
     "zone": "NB1",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 4.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NW1-62-4-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.59
   },
   {
     "ats": "NW31-10-26-W4",
     "name": "Granum Pond",
-    "lat": 49.8659,
-    "lon": -113.3782,
+    "lat": 49.870282,
+    "lon": -113.516665,
     "stockings": [
       {
         "species": "RNTR",
@@ -7822,14 +8476,17 @@
       "RNTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 1.4,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "NW31-10-26-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.85
   },
   {
     "ats": "NE33-43-11-W4",
     "name": "Lougheed Trout Pond",
-    "lat": 52.7355,
-    "lon": -111.5019,
+    "lat": 52.750929,
+    "lon": -111.539761,
     "stockings": [
       {
         "species": "RNTR",
@@ -7846,14 +8503,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Camping, picnic area, outhouses."
+    "surface_area_ha": 8.0,
+    "amenities": "Camping, picnic area, outhouses.",
+    "lake_id": "NE33-43-11-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.46
   },
   {
     "ats": "SE14-44-3-W5",
     "name": "Nuggent Pond",
-    "lat": 52.7717,
-    "lon": -114.4013,
+    "lat": 52.791495,
+    "lon": -114.317013,
     "stockings": [
       {
         "species": "RNTR",
@@ -7870,14 +8530,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 4.0,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "SE14-44-3-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.34
   },
   {
     "ats": "NW14-24-8-W5",
     "name": "Tim Horton Children's Pond",
-    "lat": 51.0399,
-    "lon": -115.066,
+    "lat": 51.04974,
+    "lon": -115.02083,
     "stockings": [
       {
         "species": "CTTR",
@@ -7905,13 +8568,16 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "lake_id": "NW14-24-8-W5",
+    "coord_source": "ats",
+    "ats_gap_km": null
   },
   {
     "ats": "NW17-52-14-W4",
     "name": "Vegreville Children's Pond",
-    "lat": 53.4746,
-    "lon": -111.9298,
+    "lat": 53.492329,
+    "lon": -112.035539,
     "stockings": [
       {
         "species": "RNTR",
@@ -7928,14 +8594,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only."
+    "surface_area_ha": 1.3,
+    "amenities": "Day use only, no open fires, foot access only.",
+    "lake_id": "NW17-52-14-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.56
   },
   {
     "ats": "NE12-35-6-W5",
     "name": "Fiesta Lake",
-    "lat": 51.9819,
-    "lon": -114.8412,
+    "lat": 51.995874,
+    "lon": -114.726449,
     "stockings": [
       {
         "species": "RNTR",
@@ -7952,14 +8621,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Pit toilets, maintained parking area, floating dock, boat launch."
+    "surface_area_ha": 7.1,
+    "amenities": "Pit toilets, maintained parking area, floating dock, boat launch.",
+    "lake_id": "NE12-35-6-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.29
   },
   {
     "ats": "SE34-37-14-W4",
     "name": "Castor Eastside Trout Pond",
-    "lat": 52.2065,
-    "lon": -111.9333,
+    "lat": 52.218207,
+    "lon": -111.91105,
     "stockings": [
       {
         "species": "RNTR",
@@ -7985,14 +8657,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use park, picnic area"
+    "surface_area_ha": 1.0,
+    "amenities": "Day use park, picnic area",
+    "lake_id": "SE34-37-14-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.56
   },
   {
     "ats": "SE6-110-19-W5",
     "name": "High Level Community Park Pond (High Level Town Pond)",
-    "lat": 58.4819,
-    "lon": -117.0149,
+    "lat": 58.517177,
+    "lon": -117.163713,
     "stockings": [
       {
         "species": "RNTR",
@@ -8009,14 +8684,17 @@
       "RNTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "Baseball diamonds, off leash dog park, disc golf course."
+    "surface_area_ha": 3.0,
+    "amenities": "Baseball diamonds, off leash dog park, disc golf course.",
+    "lake_id": "SE6-110-19-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 1.25
   },
   {
     "ats": "NW1-22-11-W5",
     "name": "Shark Lake",
-    "lat": 50.837,
-    "lon": -115.4974,
+    "lat": 50.840833,
+    "lon": -115.397778,
     "stockings": [
       {
         "species": "CTTR",
@@ -8033,14 +8711,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "There are no amenities at this waterbody."
+    "surface_area_ha": 2.9,
+    "amenities": "There are no amenities at this waterbody.",
+    "lake_id": "NW1-22-11-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.85
   },
   {
     "ats": "NW33-35-12-W5",
     "name": "Elk Creek Pond",
-    "lat": 52.0399,
-    "lon": -115.6081,
+    "lat": 52.056822,
+    "lon": -115.657217,
     "stockings": [
       {
         "species": "RNTR",
@@ -8057,14 +8738,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Fire pits, pit toilets."
+    "surface_area_ha": 5.0,
+    "amenities": "Fire pits, pit toilets.",
+    "lake_id": "NW33-35-12-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.62
   },
   {
     "ats": "SW34-81-3-W6",
     "name": "Fairview College Pond",
-    "lat": 56.0326,
-    "lon": -118.3956,
+    "lat": 56.0588,
+    "lon": -118.387234,
     "stockings": [
       {
         "species": "RNTR",
@@ -8081,14 +8765,17 @@
       "RNTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "The waterbody is at Fairview college, and amenities such as fuel, lodging, and food establishments are near the waterbody."
+    "surface_area_ha": 3.8,
+    "amenities": "The waterbody is at Fairview college, and amenities such as fuel, lodging, and food establishments are near the waterbody.",
+    "lake_id": "SW34-81-3-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.88
   },
   {
     "ats": "SE5-111-19-W5",
     "name": "Footner Pond",
-    "lat": 58.5688,
-    "lon": -117.0502,
+    "lat": 58.608147,
+    "lon": -117.156875,
     "stockings": [
       {
         "species": "RNTR",
@@ -8105,14 +8792,17 @@
       "RNTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 6.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SE5-111-19-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 1.26
   },
   {
     "ats": "NW17-6-11-W4",
     "name": "Foremost Reservoir",
-    "lat": 49.4746,
-    "lon": -111.3661,
+    "lat": 49.477485,
+    "lon": -111.456691,
     "stockings": [
       {
         "species": "RNTR",
@@ -8129,14 +8819,17 @@
       "RNTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Day use only, foot access, no open fires."
+    "surface_area_ha": 5.6,
+    "amenities": "Day use only, foot access, no open fires.",
+    "lake_id": "NW17-6-11-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.06
   },
   {
     "ats": "NW13-63-20-W5",
     "name": "Fox Creek Trout Pond",
-    "lat": 54.4312,
-    "lon": -116.9712,
+    "lat": 54.45359,
+    "lon": -116.888798,
     "stockings": [
       {
         "species": "RNTR",
@@ -8153,14 +8846,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Fishing dock"
+    "surface_area_ha": 2.5,
+    "amenities": "Fishing dock",
+    "lake_id": "NW13-63-20-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.96
   },
   {
     "ats": "NW1-51-3-W5",
     "name": "Genesee Trout Pond",
-    "lat": 53.3587,
-    "lon": -114.4189,
+    "lat": 53.376492,
+    "lon": -114.309875,
     "stockings": [
       {
         "species": "RNTR",
@@ -8177,14 +8873,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Pit toilets, day use, picnic tables."
+    "surface_area_ha": 1.6,
+    "amenities": "Pit toilets, day use, picnic tables.",
+    "lake_id": "NW1-51-3-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.48
   },
   {
     "ats": "NE29-38-3-W5",
     "name": "Hansen's Reservoir",
-    "lat": 52.2862,
-    "lon": -114.3258,
+    "lat": 52.297145,
+    "lon": -114.394522,
     "stockings": [
       {
         "species": "RNTR",
@@ -8201,14 +8900,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only."
+    "surface_area_ha": 2.9,
+    "amenities": "Day use only, no open fires, foot access only.",
+    "lake_id": "NE29-38-3-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.71
   },
   {
     "ats": "NE17-85-19-W5",
     "name": "Highway 686 Pond",
-    "lat": 56.3442,
-    "lon": -116.87,
+    "lat": 56.372419,
+    "lon": -116.954587,
     "stockings": [
       {
         "species": "RNTR",
@@ -8225,14 +8927,17 @@
       "RNTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 5.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NE17-85-19-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 1.15
   },
   {
     "ats": "SW34-45-9-W4",
     "name": "Irma Fish and Game Pond",
-    "lat": 52.9022,
-    "lon": -111.2314,
+    "lat": 52.918593,
+    "lon": -111.236446,
     "stockings": [
       {
         "species": "RNTR",
@@ -8259,14 +8964,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 4.0,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "SW34-45-9-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.44
   },
   {
     "ats": "SE6-50-1-W4",
     "name": "Lloydminster Trout Pond",
-    "lat": 53.2645,
-    "lon": -110.0182,
+    "lat": 53.25943,
+    "lon": -110.04075,
     "stockings": [
       {
         "species": "RNTR",
@@ -8283,14 +8991,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 6.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SE6-50-1-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 6.49
   },
   {
     "ats": "SW32-77-19-W5",
     "name": "McClennan Reservoir",
-    "lat": 55.6848,
-    "lon": -116.8086,
+    "lat": 55.709784,
+    "lon": -116.919773,
     "stockings": [
       {
         "species": "RNTR",
@@ -8307,14 +9018,17 @@
       "RNTR"
     ],
     "zone": "NB2",
-    "surface_area_ha": null,
-    "amenities": "Power sites, washrooms, showers, sewage disposal station, playground, free firewood on site, shelter with cook stove, day use picnic, potable water."
+    "surface_area_ha": 1.2,
+    "amenities": "Power sites, washrooms, showers, sewage disposal station, playground, free firewood on site, shelter with cook stove, day use picnic, potable water.",
+    "lake_id": "SW32-77-19-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.95
   },
   {
     "ats": "SE26-71-6-W6",
     "name": "Muskoseepi Pond",
-    "lat": 55.1486,
-    "lon": -118.8813,
+    "lat": 55.172657,
+    "lon": -118.806587,
     "stockings": [
       {
         "species": "RNTR",
@@ -8331,14 +9045,17 @@
       "RNTR"
     ],
     "zone": "ES4",
-    "surface_area_ha": null,
-    "amenities": "Interactive programs, information, food services, restrooms, amphitheatre."
+    "surface_area_ha": 14.3,
+    "amenities": "Interactive programs, information, food services, restrooms, amphitheatre.",
+    "lake_id": "SE26-71-6-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.65
   },
   {
     "ats": "NE17-78-5-W6",
     "name": "Nardam Lake",
-    "lat": 55.7355,
-    "lon": -118.6628,
+    "lat": 55.762438,
+    "lon": -118.725502,
     "stockings": [
       {
         "species": "RNTR",
@@ -8355,14 +9072,17 @@
       "RNTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "Camping on site, firewood, full hookup, sewage dump site, boat dock, recreation hall, picnic tables, horseshoe pits, hiking and biking trails, playground, fire pits."
+    "surface_area_ha": 1.1,
+    "amenities": "Camping on site, firewood, full hookup, sewage dump site, boat dock, recreation hall, picnic tables, horseshoe pits, hiking and biking trails, playground, fire pits.",
+    "lake_id": "NE17-78-5-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.81
   },
   {
     "ats": "NE25-109-9-W6",
     "name": "Rainbow Lake Pond",
-    "lat": 58.4601,
-    "lon": -119.4892,
+    "lat": 58.495385,
+    "lon": -119.349303,
     "stockings": [
       {
         "species": "RNTR",
@@ -8379,14 +9099,17 @@
       "RNTR"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 1.5,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "NE25-109-9-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 1.18
   },
   {
     "ats": "NE21-70-22-W5",
     "name": "Valleyview Children's Pond",
-    "lat": 55.0544,
-    "lon": -117.2576,
+    "lat": 55.08368,
+    "lon": -117.29722,
     "stockings": [
       {
         "species": "RNTR",
@@ -8404,13 +9127,16 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "lake_id": "NE21-70-22-W5",
+    "coord_source": "ats",
+    "ats_gap_km": null
   },
   {
     "ats": "NE31-44-6-W4",
     "name": "Wallace Park Pond",
-    "lat": 52.8225,
-    "lon": -110.7375,
+    "lat": 52.8425,
+    "lon": -110.85653,
     "stockings": [
       {
         "species": "RNTR",
@@ -8427,14 +9153,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only."
+    "surface_area_ha": 5.0,
+    "amenities": "Day use only, no open fires, foot access only.",
+    "lake_id": "NE31-44-6-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.19
   },
   {
     "ats": "SW18-117-4-W6",
     "name": "Zamma Community Pond",
-    "lat": 59.1196,
-    "lon": -118.5153,
+    "lat": 59.161004,
+    "lon": -118.681101,
     "stockings": [
       {
         "species": "RNTR",
@@ -8452,13 +9181,16 @@
     ],
     "zone": "NB3",
     "surface_area_ha": null,
-    "amenities": "Swimming pond, camping, day use area."
+    "amenities": "Swimming pond, camping, day use area.",
+    "lake_id": "SW18-117-4-W6",
+    "coord_source": "profile",
+    "ats_gap_km": 0.86
   },
   {
     "ats": "SE28-33-26-W4",
     "name": "Kraft Winborne Pond",
-    "lat": 51.8442,
-    "lon": -113.5833,
+    "lat": 51.859122,
+    "lon": -113.620127,
     "stockings": [
       {
         "species": "BKTR",
@@ -8495,14 +9227,17 @@
       "TGTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 6.0,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "SE28-33-26-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.76
   },
   {
     "ats": "SW5-20-9-W5",
     "name": "Invincible Lake",
-    "lat": 50.66227,
-    "lon": -115.21628,
+    "lat": 50.66382,
+    "lon": -115.22162,
     "stockings": [
       {
         "species": "CTTR",
@@ -8520,13 +9255,16 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "lake_id": "SW5-20-9-W5",
+    "coord_source": "ats",
+    "ats_gap_km": null
   },
   {
     "ats": "SE4-26-4-W5",
     "name": "Mitford Pond",
-    "lat": 51.1775,
-    "lon": -114.4797,
+    "lat": 51.19005,
+    "lon": -114.49262,
     "stockings": [
       {
         "species": "RNTR",
@@ -8553,14 +9291,17 @@
       "RNTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 4.0,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "SE4-26-4-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.31
   },
   {
     "ats": "SE29-21-10-W5",
     "name": "Commonwealth Lake (Birdwood Lake)",
-    "lat": 50.8007,
-    "lon": -115.2784,
+    "lat": 50.806944,
+    "lon": -115.345556,
     "stockings": [
       {
         "species": "CTTR",
@@ -8577,14 +9318,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "There are no amenities at this waterbody"
+    "surface_area_ha": 1.8,
+    "amenities": "There are no amenities at this waterbody",
+    "lake_id": "SE29-21-10-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.37
   },
   {
     "ats": "NE25-40-24-W4",
     "name": "Parlby Reservoir (Tees Fish Pond)",
-    "lat": 52.4601,
-    "lon": -113.4192,
+    "lat": 52.471946,
+    "lon": -113.316718,
     "stockings": [
       {
         "species": "RNTR",
@@ -8601,14 +9345,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 7.0,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "NE25-40-24-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.91
   },
   {
     "ats": "SE35-25-10-W5",
     "name": "Stenton Lake",
-    "lat": 51.163,
-    "lon": -115.3577,
+    "lat": 51.17613,
+    "lon": -115.283424,
     "stockings": [
       {
         "species": "RNTR",
@@ -8625,14 +9372,17 @@
       "RNTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 2.9,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SE35-25-10-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.49
   },
   {
     "ats": "NE9-45-16-W4",
     "name": "Daysland Pond",
-    "lat": 52.8515,
-    "lon": -112.2259,
+    "lat": 52.86884,
+    "lon": -112.263607,
     "stockings": [
       {
         "species": "RNTR",
@@ -8649,14 +9399,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fire, foot access only."
+    "surface_area_ha": 1.6,
+    "amenities": "Day use, no open fire, foot access only.",
+    "lake_id": "NE9-45-16-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.16
   },
   {
     "ats": "SE5-41-14-W5",
     "name": "Harleck Pond",
-    "lat": 52.4819,
-    "lon": -115.8978,
+    "lat": 52.494632,
+    "lon": -115.972609,
     "stockings": [
       {
         "species": "RNTR",
@@ -8673,14 +9426,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "Pit toilets, day use area beside waterbody."
+    "surface_area_ha": 0.8,
+    "amenities": "Pit toilets, day use area beside waterbody.",
+    "lake_id": "SE5-41-14-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.66
   },
   {
     "ats": "SE24-21-11-W5",
     "name": "Lower Smuts Lake",
-    "lat": 50.7862,
-    "lon": -115.5072,
+    "lat": 50.796667,
+    "lon": -115.388417,
     "stockings": [
       {
         "species": "CTTR",
@@ -8706,14 +9462,17 @@
       "CTTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 2.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SE24-21-11-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.52
   },
   {
     "ats": "SW32-40-15-W5",
     "name": "Nordegg Borrow Pit (West)",
-    "lat": 52.4674,
-    "lon": -116.028,
+    "lat": 52.484878,
+    "lon": -116.128512,
     "stockings": [
       {
         "species": "RNTR",
@@ -8730,14 +9489,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 7.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SW32-40-15-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.52
   },
   {
     "ats": "NE1-27-1-W5",
     "name": "Nose Creek Pond",
-    "lat": 51.2717,
-    "lon": -114.1332,
+    "lat": 51.280125,
+    "lon": -114.010762,
     "stockings": [
       {
         "species": "RNTR",
@@ -8763,14 +9525,17 @@
       "RNTR"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 5.4,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "NE1-27-1-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.45
   },
   {
     "ats": "NE24-46-24-W4",
     "name": "Wetaskiwin Pond",
-    "lat": 52.9674,
-    "lon": -113.4591,
+    "lat": 52.987222,
+    "lon": -113.353311,
     "stockings": [
       {
         "species": "RNTR",
@@ -8797,14 +9562,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use only, picnic sites, garbage receptacles, pit toilets."
+    "surface_area_ha": 3.0,
+    "amenities": "Day use only, picnic sites, garbage receptacles, pit toilets.",
+    "lake_id": "NE24-46-24-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.09
   },
   {
     "ats": "SW26-46-19-W5",
     "name": "Pit 35 Lake",
-    "lat": 52.9746,
-    "lon": -116.7016,
+    "lat": 52.992044,
+    "lon": -116.649313,
     "stockings": [
       {
         "species": "RNTR",
@@ -8821,14 +9589,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 2.6,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "SW26-46-19-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.92
   },
   {
     "ats": "NE10-56-23-W4",
     "name": "Gibbons Park Pond",
-    "lat": 53.808,
-    "lon": -113.3318,
+    "lat": 53.830514,
+    "lon": -113.332084,
     "stockings": [
       {
         "species": "RNTR",
@@ -8854,14 +9625,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only."
+    "surface_area_ha": 1.2,
+    "amenities": "Day use only, no open fires, foot access only.",
+    "lake_id": "NE10-56-23-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.42
   },
   {
     "ats": "SW28-50-25-W5",
     "name": "Hinton Fish and Game Pond (Cold Creek Trout Pond)",
-    "lat": 53.3225,
-    "lon": -117.5485,
+    "lat": 53.341065,
+    "lon": -117.605197,
     "stockings": [
       {
         "species": "RNTR",
@@ -8878,14 +9652,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "Parking area, day use area."
+    "surface_area_ha": 5.0,
+    "amenities": "Parking area, day use area.",
+    "lake_id": "SW28-50-25-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.63
   },
   {
     "ats": "SE32-40-15-W5",
     "name": "Nordegg Borrow Pit (East)",
-    "lat": 52.4674,
-    "lon": -116.0399,
+    "lat": 52.480398,
+    "lon": -116.122018,
     "stockings": [
       {
         "species": "RNTR",
@@ -8902,14 +9679,17 @@
       "RNTR"
     ],
     "zone": "ES2",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 2.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "SE32-40-15-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.44
   },
   {
     "ats": "NW34-27-4-W4",
     "name": "Oyen (Concrete Plant) Pond",
-    "lat": 51.3442,
-    "lon": -110.493,
+    "lat": 51.351315,
+    "lon": -110.488247,
     "stockings": [
       {
         "species": "RNTR",
@@ -8926,14 +9706,17 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Day use, no open fires, foot access only."
+    "surface_area_ha": 5.0,
+    "amenities": "Day use, no open fires, foot access only.",
+    "lake_id": "NW34-27-4-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.47
   },
   {
     "ats": "NE25-61-5-W4",
     "name": "Lara Fish Pond",
-    "lat": 54.2862,
-    "lon": -110.7386,
+    "lat": 54.3089,
+    "lon": -110.61054,
     "stockings": [
       {
         "species": "RNTR",
@@ -8950,14 +9733,17 @@
       "RNTR"
     ],
     "zone": "NB1",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 1.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NE25-61-5-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.36
   },
   {
     "ats": "NE1-48-10-W5",
     "name": "Lodgepole Pond",
-    "lat": 53.0978,
-    "lon": -115.4422,
+    "lat": 53.119469,
+    "lon": -115.320171,
     "stockings": [
       {
         "species": "RNTR",
@@ -8974,14 +9760,17 @@
       "RNTR"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
-    "amenities": "This waterbody has no amenities."
+    "surface_area_ha": 5.0,
+    "amenities": "This waterbody has no amenities.",
+    "lake_id": "NE1-48-10-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.49
   },
   {
     "ats": "SW14-24-25-W4",
     "name": "Strathmore Children's Pond",
-    "lat": 51.0326,
-    "lon": -113.4165,
+    "lat": 51.041855,
+    "lon": -113.390752,
     "stockings": [
       {
         "species": "TGTR",
@@ -8998,14 +9787,17 @@
       "TGTR"
     ],
     "zone": "PP1",
-    "surface_area_ha": null,
-    "amenities": "Day use only, no open fires, foot access only."
+    "surface_area_ha": 1.9,
+    "amenities": "Day use only, no open fires, foot access only.",
+    "lake_id": "SW14-24-25-W4",
+    "coord_source": "profile",
+    "ats_gap_km": 0.71
   },
   {
     "ats": "SW13-24-1-W5",
     "name": "Kids Can Catch Pond",
-    "lat": 51.0326,
-    "lon": -114.121,
+    "lat": 51.041403,
+    "lon": -114.017656,
     "stockings": [
       {
         "species": "RNTR",
@@ -9031,7 +9823,10 @@
       "RNTR"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
-    "amenities": "Bow habitat station has amenities."
+    "surface_area_ha": 1.0,
+    "amenities": "Bow habitat station has amenities.",
+    "lake_id": "SW13-24-1-W5",
+    "coord_source": "profile",
+    "ats_gap_km": 0.12
   }
 ]

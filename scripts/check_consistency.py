@@ -23,27 +23,18 @@ Run this after adding a new year's data, before committing.
 
 import csv
 import json
-import math
 import re
 import sys
 from collections import defaultdict
 from pathlib import Path
+
+from ats import haversine_km
 
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 PROFILES_CSV = Path(__file__).parent.parent / "profiles" / "mywildalberta_profiles.csv"
 
 ATS_RE = re.compile(r"^(?P<sec>NE|NW|SE|SW)(?P<rest>\d+-\d+-\d+-W[456])$")
-
-
-def haversine_km(lat1, lon1, lat2, lon2):
-    R = 6371.0
-    to_rad = math.radians
-    dlat = to_rad(lat2 - lat1)
-    dlon = to_rad(lon2 - lon1)
-    a = (math.sin(dlat / 2) ** 2
-         + math.cos(to_rad(lat1)) * math.cos(to_rad(lat2)) * math.sin(dlon / 2) ** 2)
-    return 2 * R * math.asin(math.sqrt(a))
 
 
 def load_all_years():

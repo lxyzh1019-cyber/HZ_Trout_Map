@@ -1,0 +1,43 @@
+name: Checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Data and script checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run the regression suite
+        working-directory: scripts
+        run: python -m unittest discover -p "test_*.py" -v
+
+      - name: Report data consistency
+        run: python3 scripts/check_consistency.py
+
+      - name: Fail if the consistency summary is stale
+        run: |
+          python3 scripts/check_consistency.py --json-out /tmp/summary.json >/dev/null
+          if ! diff -u data/consistency_summary.json /tmp/summary.json; then
+            echo "::error::data/consistency_summary.json is out of date."
+            echo "Run: python3 scripts/check_consistency.py --json-out data/consistency_summary.json"
+            exit 1
+          fi
+
+      - name: Fail if merged data is stale
+        run: |
+          cp data/lakes_2025.json /tmp/before.json
+          (cd scripts && python3 merge_profiles.py ../data/lakes_2025.json >/dev/null)
+          if ! diff -q /tmp/before.json data/lakes_2025.json; then
+            echo "::error::data/lakes_2025.json does not match the profiles CSV."
+            echo "Run: cd scripts && python3 merge_profiles.py ../data/lakes_2025.json"
+            exit 1
+          fi

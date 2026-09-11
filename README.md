@@ -12,18 +12,24 @@ Hosted via GitHub Pages: just push to `main` and the map is live at
 ```
 alberta-trout-map/
 ├── index.html                      ← the map (open in browser)
+├── vendor/                         ← Leaflet 1.9.4 + Chart.js 4.4.0, checked in
 ├── data/
 │   ├── manifest.json               ← which years are available
 │   ├── lakes_2025.json             ← one file per year
 │   └── lakes_YYYY.json
 ├── profiles/
-│   └── mywildalberta_profiles.csv  ← zone/amenities/coord overrides
+│   └── mywildalberta_profiles.csv  ← coordinates, zone, amenities
 ├── scripts/
+│   ├── ats.py                      ← land description → lat/lon
 │   ├── extract_alberta_trout_v2.py ← PDF → lakes_YYYY.json
 │   ├── merge_profiles.py           ← enrich a year's JSON with profile data
-│   └── check_consistency.py        ← report mismatches across years
+│   ├── check_consistency.py        ← report mismatches across years
+│   └── test_regression_checks.py   ← the test suite
 └── README.md
 ```
+
+The map libraries are committed under `vendor/` rather than loaded from a CDN,
+so the map keeps working offline and cannot break when a CDN is unreachable.
 
 ## Adding a new year
 
@@ -88,6 +94,38 @@ Convert your CSV to match the JSON schema, save it as
 Species codes: `RNTR` Rainbow, `BKTR` Brook, `BNTR` Brown, `TGTR` Tiger,
 `CTTR` Cutthroat. Date format `D-Mon-YY` (e.g. `14-Apr-26`).
 
+## Where lake coordinates come from
+
+The stocking report never prints a latitude or longitude. It prints a land
+description such as `SW4-36-8-W5`, which names a quarter-section: an 800 m
+square on the survey grid. So every pin is positioned from one of three
+sources, and `merge_profiles.py` records which in each lake's `coord_source`:
+
+| `coord_source` | Where it comes from | Typical accuracy |
+| --- | --- | --- |
+| `override` | `override_lat` / `override_lon` in the profiles CSV | exact, you placed it |
+| `profile` | `lat` / `lon` in the profiles CSV, verified by hand | on the lake |
+| `ats` | Computed from the land description by `ats.py` | ~0.5 km |
+
+To correct a single lake, add `override_lat` and `override_lon` columns to
+`profiles/mywildalberta_profiles.csv`, fill them in for that row, and re-run
+`merge_profiles.py`. An override always wins, so your correction survives every
+later data refresh.
+
+The `html_lat` / `html_lon` columns are deliberately ignored. They are not an
+independent observation: for 249 of 265 rows they reproduce an old, buggy grid
+calculation to within 50 m, which used to place every pin a median 6 km from
+the water.
+
+**How we know the coordinates are right.** The hand-verified `lat` / `lon`
+column and the report's land descriptions are two independently produced
+sources. Converted correctly, they agree to a median of 0.53 km, with 252 of
+256 lakes inside 1.5 km — about the width of a quarter-section. Three lakes
+still disagree by more than 2 km and `merge_profiles.py` prints them on every
+run; check those on satellite imagery and set an override if needed.
+`test_regression_checks.py` fails the build if that median ever rises above
+1 km.
+
 ## Consistency checks
 
 `check_consistency.py` scans all year files and reports:
@@ -112,9 +150,23 @@ python scripts/check_consistency.py
 python scripts/check_consistency.py --csv report.csv
 # Or generate machine-readable planning summary:
 python3 scripts/check_consistency.py --json-out data/consistency_summary.json
-# Optional lightweight regression checks for script logic:
-python3 scripts/test_regression_checks.py
 ```
+
+## Tests
+
+```bash
+cd scripts && python3 -m unittest discover -p "test_*.py"
+```
+
+The suite covers the survey-grid conversion and its accuracy against the
+verified coordinates, the coordinate precedence rules, area parsing, and the
+committed data itself (every lake has coordinates inside Alberta, totals match
+their stocking rows, dates parse).
+
+GitHub Actions runs the same suite on every push, and additionally fails the
+build when `data/lakes_2025.json` or `data/consistency_summary.json` no longer
+match what the scripts would produce — so committed data can never drift away
+from the profiles CSV.
 
 ## Running locally
 
@@ -142,12 +194,13 @@ On GitHub Pages the fetches work natively — no server setup needed.
   - Spring vs Fall (seasonal split per year)
   - Trend (line chart per species over time)
 - **Basemap toggle** — topographic (default) or street.
-- **Popups** — per-lake stocking history, zone link, amenities, Google
-  Maps link. Reflects current filters.
+- **Popups** — per-lake stocking history, zone link, surface area, amenities,
+  Google Maps link. Reflects current filters and stays open while you change
+  them. Lakes positioned from the land description say so.
 - **Planning summary** — year-over-year total fish and trend direction
   in the chart panel.
-- **Data quality indicator** — quick count of malformed stocking rows
-  skipped from calculations.
+- **Data quality indicator** — how many lakes sit at verified coordinates,
+  how many are estimated, and anything left to review.
 
 ## Operator workflow (planning use)
 
@@ -172,6 +225,8 @@ Use this repeatable flow to turn the map into a planning aid.
      ```bash
      python3 scripts/check_consistency.py
      ```
-   - In UI, verify the malformed-row indicator is zero.
-   - Resolve unmatched/mismatch findings in profiles CSV, rerun
-     `merge_profiles.py`, then re-run consistency checks.
+   - In the sidebar, check how many lakes are at verified coordinates. A lake
+     shown as estimated is within about half a kilometre, which is fine for
+     finding a lake but not for a specific pond in a city park.
+   - Resolve unmatched/mismatch findings in the profiles CSV, re-run
+     `merge_profiles.py`, then re-run the consistency checks.
