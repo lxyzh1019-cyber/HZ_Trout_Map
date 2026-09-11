@@ -39,6 +39,7 @@ const SHELL_FILES = [
   "vendor/leaflet.markercluster.js",
   "vendor/chart.umd.js",
   "js/astro.js",
+  "js/conditions.js",
   "evidence.html",
   "vendor/images/marker-icon.png",
   "vendor/images/marker-icon-2x.png",

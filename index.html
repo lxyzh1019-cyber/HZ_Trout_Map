@@ -79,6 +79,12 @@
         allowed to move or suppress the dawn and dusk peaks
     M55 evidence page stating what each factor is worth and why, with its own
         self-check at evidence.html?selfcheck=1
+    M56 conditions score weighted by strength of evidence: light 0.40, water
+        temperature 0.35, pressure 0.15 as a front proxy, wind and rain 0.10
+    M57 the moon is a multiplier capped at five percent, applied after the sum,
+        so it can never reorder a day — asserted, not merely intended
+    M58 a missing input is dropped and the rest renormalised, never defaulted;
+        the score says how much of it was actually known
 -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2b2e2a">
@@ -660,6 +666,7 @@
 <script src="vendor/leaflet.markercluster.js"></script>
 <script src="vendor/chart.umd.js"></script>
 <script src="js/astro.js"></script>
+<script src="js/conditions.js"></script>
 <script>
 // ============================================================
 // CONFIG
@@ -2360,6 +2367,7 @@ async function init() {
       typeof L !== "undefined" && !L.markerClusterGroup ? "vendor/leaflet.markercluster.js" : null,
       typeof Chart === "undefined" ? "vendor/chart.umd.js" : null,
       typeof Astro === "undefined" ? "js/astro.js" : null,
+      typeof Conditions === "undefined" ? "js/conditions.js" : null,
     ].filter(Boolean);
     if (missing.length) throw new Error(`${missing.join(" and ")} did not load. Check the vendor/ and js/ folders are present.`);
 

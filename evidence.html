@@ -190,6 +190,10 @@ intended.</p>
       photopic, mesopic and scotopic feeding in brown trout and Arctic charr.</li>
   <li>Rainbow trout thermal performance literature; Raleigh et al. habitat suitability
       index series; Bear et al. (2007) for cutthroat thermal limits.</li>
+  <li>Mohseni, Stefan &amp; Erickson (1998), for the S-shaped relation between air
+      and water temperature &mdash; it saturates at both ends, which a straight line
+      does not. A linear fit puts an Alberta lake at 26 &deg;C in a hot week, which
+      no lake here reaches.</li>
   <li>Stefan &amp; Preud'homme (1993) and the air2water family, for lake surface
       temperature from lagged and smoothed air temperature.</li>
   <li>Pressure to depth equivalence: 1 hPa = 100 Pa; fresh water &rho;g = 9807 Pa/m;
@@ -207,6 +211,7 @@ intended.</p>
 </main>
 
 <script src="js/astro.js"></script>
+<script src="js/conditions.js"></script>
 <script>
 /* The self-check ships with the app instead of living in a test runner. This
  * repo has no bundler and no npm, and the one place these numbers matter is a
@@ -346,6 +351,127 @@ intended.</p>
         var hit = Astro.periodAt(x.centre, p);
         return hit && hit.kind === "major";
       }));
+  })();
+
+  // --- Scoring: degradation, and the promise about the moon ---------------
+  (function () {
+    if (typeof Conditions === "undefined") { check("js/conditions.js loaded", false); return; }
+    var RD2 = { lat: 52.2681, lon: -113.8112 };
+    var dayStart = new Date("2026-07-15T06:00:00Z");         // local midnight, MDT
+    var real = Astro.dayFor(RD2.lat, RD2.lon, dayStart);
+    var wx = { cloudCoverPct: 35, dP3h: -1.0, dP12h: -2, windKph: 10, precipMm: 0 };
+    var water = { tempC: 15, source: "modeled", sigmaC: 2 };
+    var slots = [], i;
+    for (i = 0; i < 48; i++) slots.push(new Date(dayStart.getTime() + i * 1800000));
+    var localHM = function (d) {
+      return new Date(d.getTime() - 6 * 3600000).toISOString().slice(11, 16);
+    };
+
+    [["full weather and water", wx, water, "Full"],
+     ["offline, nothing but the sky", null, null, "Astronomy only"],
+     ["offline but a measured temperature", null, { tempC: 15, source: "measured" }, "Partial"],
+     ["weather but no water", wx, null, "Partial"]
+    ].forEach(function (c) {
+      var r = Conditions.scoreSlot({ when: slots[40], lat: RD2.lat, lon: RD2.lon,
+        species: ["RNTR"], weather: c[1], water: c[2], astro: real });
+      check("confidence — " + c[0], r.confidence === c[3],
+        r.confidence + ", score " + r.score.toFixed(2) + " " + r.band);
+    });
+
+    function dayWith(phase, kind, from, to) {
+      var periods = kind ? [{ kind: kind, label: "test",
+        start: new Date(dayStart.getTime() + from * 3600000),
+        end: new Date(dayStart.getTime() + to * 3600000) }] : [];
+      var astro = { dayStart: real.dayStart, lat: real.lat, lon: real.lon, sun: real.sun,
+                    moonTimes: real.moonTimes, moon: { phase: phase }, periods: periods };
+      return slots.map(function (w) {
+        return Conditions.scoreSlot({ when: w, lat: RD2.lat, lon: RD2.lon,
+          species: ["RNTR"], weather: wx, water: water, astro: astro });
+      });
+    }
+
+    var noMoon = slots.map(function (w) {
+      return Conditions.scoreSlot({ when: w, lat: RD2.lat, lon: RD2.lon, species: ["RNTR"],
+        weather: wx, water: water,
+        astro: { lat: real.lat, lon: real.lon, sun: real.sun, moon: null, periods: [] } });
+    });
+    var baseBest = localHM(Conditions.bestOf(noMoon).when);
+
+    var lightMoved = false, movedAt = null, maxDev = 0;
+    ["major", "minor", null].forEach(function (kind) {
+      for (var p = 0; p <= 1.0001; p += 0.05) {
+        [[0, 24], [14, 16], [2, 7]].forEach(function (win) {
+          var day = dayWith(p, kind, win[0], win[1]);
+          day.forEach(function (r, k) {
+            if (r.factors.light.s !== noMoon[k].factors.light.s) lightMoved = true;
+            var dev = Math.abs(r.moonMult - 1);
+            if (dev > maxDev) maxDev = dev;
+          });
+          var b = localHM(Conditions.bestOf(day).when);
+          if (b !== baseBest && movedAt === null) movedAt = b + " with a " + kind + " period";
+        });
+      }
+    });
+    check("the light score never sees a lunar quantity", !lightMoved);
+    check("the moon never moves the best window of the day", movedAt === null,
+      movedAt || "stays at " + baseBest + " local");
+    check("the moon never shifts a score by more than 5%",
+      maxDev <= Conditions.MOON_CAP + 1e-9, (maxDev * 100).toFixed(2) + "% maximum");
+
+    // The case this page is really about: a major in the middle of the afternoon.
+    var aft = dayWith(0.02, "major", 14, 16);
+    var pick = function (lo, hi) {
+      return Math.max.apply(null, aft.filter(function (r) {
+        var t = localHM(r.when); return t >= lo && t < hi;
+      }).map(function (r) { return r.score; }));
+    };
+    check("a major at 14:00–16:00 still loses to dawn and to dusk",
+      pick("04:30", "06:30") > pick("14:00", "16:00") &&
+      pick("21:00", "23:00") > pick("14:00", "16:00"),
+      "afternoon " + pick("14:00", "16:00").toFixed(2) +
+      ", dawn " + pick("04:30", "06:30").toFixed(2) +
+      ", dusk " + pick("21:00", "23:00").toFixed(2));
+
+    // Total and finite on anything.
+    var bad = 0;
+    var pickOne = function (a) { return a[Math.floor(Math.random() * a.length)]; };
+    for (i = 0; i < 3000; i++) {
+      var rw = Math.random() < 0.3 ? null : {
+        cloudCoverPct: pickOne([null, NaN, Math.random() * 100]),
+        dP3h: pickOne([null, NaN, Math.random() * 12 - 6]),
+        dP12h: pickOne([null, NaN, Math.random() * 24 - 12]),
+        windKph: pickOne([null, NaN, Math.random() * 90]),
+        precipMm: pickOne([null, NaN, Math.random() * 20]) };
+      var rt = Math.random() < 0.3 ? null : {
+        tempC: pickOne([null, NaN, undefined, Math.random() * 80 - 40]),
+        source: pickOne(["modeled", "measured", null]),
+        sigmaC: pickOne([null, NaN, Math.random() * 4]) };
+      try {
+        var r2 = Conditions.scoreSlot({
+          when: new Date(dayStart.getTime() + Math.random() * 6 * 86400000),
+          lat: RD2.lat, lon: RD2.lon,
+          species: pickOne([["RNTR"], ["BKTR", "BNTR"], [], null, ["ZZZZ"]]),
+          weather: rw, water: rt, astro: real,
+          leadDays: pickOne([null, NaN, Math.random() * 9]),
+          maxDepthM: pickOne([null, NaN, Math.random() * 40]),
+          areaHa: pickOne([null, Math.random() * 2000]) });
+        if (!isFinite(r2.score) || r2.score < 0 || r2.score > 1) bad++;
+        if (!(r2.moonMult >= 0.95 - 1e-9 && r2.moonMult <= 1.05 + 1e-9)) bad++;
+      } catch (e) { bad++; }
+    }
+    check("3,000 malformed inputs: never throws, never returns NaN", bad === 0,
+      bad ? bad + " bad" : "clean");
+
+    // Depth is unknown for most lakes, so the advisory has to fail closed.
+    var noDepth = Conditions.stratification({ surfaceC: 23, month: 8,
+      band: Conditions.BANDS.RNTR, maxDepthM: null });
+    check("with no depth survey, no depth is ever advised",
+      noDepth.stratified === false && !noDepth.depthKnown &&
+      !/\d\s*–\s*\d|\bm\b/.test(noDepth.advisory.replace("them", "")),
+      "says: " + noDepth.advisory.slice(0, 60) + "…");
+    var shallow = Conditions.stratification({ surfaceC: 23, month: 8,
+      band: Conditions.BANDS.RNTR, maxDepthM: 3 });
+    check("a 3 m pothole is never told to fish deep", shallow.stratified === false);
   })();
 
   // --- Render --------------------------------------------------------------
