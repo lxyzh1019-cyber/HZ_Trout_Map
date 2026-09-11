@@ -2414,7 +2414,7 @@
     "lon": -117.80152,
     "coord_source": "alberta",
     "zone": "ES3",
-    "surface_area_ha": 25.4,
+    "surface_area_ha": null,
     "amenities": "Boat launch, fire pit, firewood available for purchase, fish cleaning stations, hand launch, pier, pit/vault toilets, water pump.",
     "stockings": [
       {
@@ -4498,43 +4498,6 @@
     ]
   },
   {
-    "lake_id": "wb22995",
-    "ats": "SW27-83-23-W5",
-    "name": "Md Peace Pond #2",
-    "lat": 56.224205,
-    "lon": -117.553092,
-    "coord_source": "alberta",
-    "zone": "NB3",
-    "surface_area_ha": 1.1,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "Diploid",
-        "length_cm": 20.7,
-        "number": 1000,
-        "date": "2014-05-19",
-        "year": 2014,
-        "date_precision": "day"
-      },
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "Diploid",
-        "length_cm": 20.7,
-        "number": 1000,
-        "date": "2014-05-19",
-        "year": 2014,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 2000,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
     "lake_id": "wb5565",
     "ats": "12-54-26-W5",
     "name": "Petite Lake",
@@ -5631,6 +5594,60 @@
     ]
   },
   {
+    "lake_id": "wb6721",
+    "ats": "27-83-23-W5",
+    "name": "MD Peace Pond #1",
+    "lat": 56.222511,
+    "lon": -117.556197,
+    "coord_source": "profile",
+    "zone": "NB3",
+    "surface_area_ha": 1.1,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "Diploid",
+        "length_cm": 20.7,
+        "number": 1000,
+        "date": "2014-05-19",
+        "year": 2014,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb22995",
+    "ats": "SW27-83-23-W5",
+    "name": "Md Peace Pond #2",
+    "lat": 56.224205,
+    "lon": -117.553092,
+    "coord_source": "alberta",
+    "zone": "NB3",
+    "surface_area_ha": null,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "Diploid",
+        "length_cm": 20.7,
+        "number": 1000,
+        "date": "2014-05-19",
+        "year": 2014,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb3485",
     "ats": "33-39-7-W5",
     "name": "Rocky Children's Pond",
@@ -5983,43 +6000,6 @@
       }
     ],
     "total_fish": 620,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
-    "lake_id": "wb6607",
-    "ats": "NW26-21-5-W5",
-    "name": "Champion Lakes (Upper Champion Lake)",
-    "lat": 50.815306,
-    "lon": -114.599941,
-    "coord_source": "alberta",
-    "zone": "ES1",
-    "surface_area_ha": 8.0,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "Triploid",
-        "length_cm": 19.4,
-        "number": 304,
-        "date": "2014-06-23",
-        "year": 2014,
-        "date_precision": "day"
-      },
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "Triploid",
-        "length_cm": 19.4,
-        "number": 305,
-        "date": "2014-06-23",
-        "year": 2014,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 609,
     "species_set": [
       "RNTR"
     ]
@@ -6747,6 +6727,60 @@
     ]
   },
   {
+    "lake_id": "wb6607",
+    "ats": "NW26-21-5-W5",
+    "name": "Champion Lakes (Upper Champion Lake)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "alberta",
+    "zone": "ES1",
+    "surface_area_ha": null,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "Triploid",
+        "length_cm": 19.4,
+        "number": 305,
+        "date": "2014-06-23",
+        "year": 2014,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 305,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6608",
+    "ats": "26-21-5-W5",
+    "name": "Champion Lakes (Lower)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "profile",
+    "zone": "ES1",
+    "surface_area_ha": 8.0,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "Triploid",
+        "length_cm": 19.4,
+        "number": 304,
+        "date": "2014-06-23",
+        "year": 2014,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 304,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb4159",
     "ats": "SW17-19-7-W5",
     "name": "Burns Lake",
@@ -6889,7 +6923,7 @@
     "lon": -115.318769,
     "coord_source": "alberta",
     "zone": "ES1",
-    "surface_area_ha": 0.8,
+    "surface_area_ha": null,
     "amenities": "This waterbody has no amenities.",
     "stockings": [
       {

@@ -5058,7 +5058,7 @@
     "lon": -117.80152,
     "coord_source": "alberta",
     "zone": "ES3",
-    "surface_area_ha": 25.4,
+    "surface_area_ha": null,
     "amenities": "Boat launch, fire pit, firewood available for purchase, fish cleaning stations, hand launch, pier, pit/vault toilets, water pump.",
     "stockings": [
       {
@@ -5348,43 +5348,6 @@
         "length_cm": 19.29,
         "number": 2000,
         "date": "2017-06-12",
-        "year": 2017,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 2000,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
-    "lake_id": "wb22995",
-    "ats": "SW27-83-23-W5",
-    "name": "Md Peace Pond #2",
-    "lat": 56.224205,
-    "lon": -117.553092,
-    "coord_source": "alberta",
-    "zone": "NB3",
-    "surface_area_ha": 1.1,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": "TROUT LODGE/SILVER'S",
-        "genotype": "AF3N",
-        "length_cm": 21.56,
-        "number": 1000,
-        "date": "2017-05-24",
-        "year": 2017,
-        "date_precision": "day"
-      },
-      {
-        "species": "RNTR",
-        "strain": "TROUT LODGE/SILVER'S",
-        "genotype": "AF3N",
-        "length_cm": 21.56,
-        "number": 1000,
-        "date": "2017-05-24",
         "year": 2017,
         "date_precision": "day"
       }
@@ -6454,6 +6417,60 @@
     ]
   },
   {
+    "lake_id": "wb6721",
+    "ats": "27-83-23-W5",
+    "name": "MD Peace Pond #1",
+    "lat": 56.222511,
+    "lon": -117.556197,
+    "coord_source": "profile",
+    "zone": "NB3",
+    "surface_area_ha": 1.1,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "TROUT LODGE/SILVER'S",
+        "genotype": "AF3N",
+        "length_cm": 21.56,
+        "number": 1000,
+        "date": "2017-05-24",
+        "year": 2017,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb22995",
+    "ats": "SW27-83-23-W5",
+    "name": "Md Peace Pond #2",
+    "lat": 56.224205,
+    "lon": -117.553092,
+    "coord_source": "alberta",
+    "zone": "NB3",
+    "surface_area_ha": null,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "TROUT LODGE/SILVER'S",
+        "genotype": "AF3N",
+        "length_cm": 21.56,
+        "number": 1000,
+        "date": "2017-05-24",
+        "year": 2017,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb6724",
     "ats": "14-44-3-W5",
     "name": "Nuggent Pond",
@@ -6718,64 +6735,6 @@
     "total_fish": 805,
     "species_set": [
       "BNTR",
-      "RNTR"
-    ]
-  },
-  {
-    "lake_id": "wb6607",
-    "ats": "NW26-21-5-W5",
-    "name": "Champion Lakes (Upper Champion Lake)",
-    "lat": 50.815306,
-    "lon": -114.599941,
-    "coord_source": "alberta",
-    "zone": "ES1",
-    "surface_area_ha": 8.0,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": "TROUT LODGE/SILVER'S",
-        "genotype": "AF3N",
-        "length_cm": 23.12,
-        "number": 300,
-        "date": "2017-06-22",
-        "year": 2017,
-        "date_precision": "day"
-      },
-      {
-        "species": "RNTR",
-        "strain": "TROUT LODGE/SILVER'S",
-        "genotype": "AF3N",
-        "length_cm": 23.12,
-        "number": 300,
-        "date": "2017-06-22",
-        "year": 2017,
-        "date_precision": "day"
-      },
-      {
-        "species": "CTTR",
-        "strain": "ATHABASCA",
-        "genotype": "2N",
-        "length_cm": 16.4,
-        "number": 100,
-        "date": "2017-09-11",
-        "year": 2017,
-        "date_precision": "day"
-      },
-      {
-        "species": "CTTR",
-        "strain": "ATHABASCA",
-        "genotype": "2N",
-        "length_cm": 16.4,
-        "number": 100,
-        "date": "2017-09-11",
-        "year": 2017,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 800,
-    "species_set": [
-      "CTTR",
       "RNTR"
     ]
   },
@@ -7749,6 +7708,82 @@
     "total_fish": 421,
     "species_set": [
       "BKTR",
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6608",
+    "ats": "26-21-5-W5",
+    "name": "Champion Lakes (Lower)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "profile",
+    "zone": "ES1",
+    "surface_area_ha": 8.0,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "TROUT LODGE/SILVER'S",
+        "genotype": "AF3N",
+        "length_cm": 23.12,
+        "number": 300,
+        "date": "2017-06-22",
+        "year": 2017,
+        "date_precision": "day"
+      },
+      {
+        "species": "CTTR",
+        "strain": "ATHABASCA",
+        "genotype": "2N",
+        "length_cm": 16.4,
+        "number": 100,
+        "date": "2017-09-11",
+        "year": 2017,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 400,
+    "species_set": [
+      "CTTR",
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6607",
+    "ats": "NW26-21-5-W5",
+    "name": "Champion Lakes (Upper Champion Lake)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "alberta",
+    "zone": "ES1",
+    "surface_area_ha": null,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "TROUT LODGE/SILVER'S",
+        "genotype": "AF3N",
+        "length_cm": 23.12,
+        "number": 300,
+        "date": "2017-06-22",
+        "year": 2017,
+        "date_precision": "day"
+      },
+      {
+        "species": "CTTR",
+        "strain": "ATHABASCA",
+        "genotype": "2N",
+        "length_cm": 16.4,
+        "number": 100,
+        "date": "2017-09-11",
+        "year": 2017,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 400,
+    "species_set": [
+      "CTTR",
       "RNTR"
     ]
   },

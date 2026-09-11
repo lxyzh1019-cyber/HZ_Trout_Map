@@ -1395,7 +1395,7 @@
       "Hogarth Lakes Upper Hogarth Lake"
     ],
     "zone": "ES1",
-    "surface_area_ha": 0.8,
+    "surface_area_ha": null,
     "amenities": "This waterbody has no amenities.",
     "base_name": "Hogarth Lakes (Upper Hogarth Lake)"
   },
@@ -3013,7 +3013,7 @@
       "Wildhorse Lakes Upper Wildhorse Lake"
     ],
     "zone": "ES3",
-    "surface_area_ha": 25.4,
+    "surface_area_ha": null,
     "amenities": "Boat launch, fire pit, firewood available for purchase, fish cleaning stations, hand launch, pier, pit/vault toilets, water pump.",
     "base_name": "Wildhorse Lakes (Upper Wildhorse Lake)"
   },
@@ -3374,7 +3374,7 @@
       "Upper Smuts Lake"
     ],
     "zone": "ES1",
-    "surface_area_ha": 2.0,
+    "surface_area_ha": null,
     "amenities": "This waterbody has no amenities.",
     "base_name": "Upper Smuts Lake"
   },
@@ -3389,21 +3389,17 @@
       "NW26-21-5-W5"
     ],
     "aliases": [
-      "champion lakes lower champion lake",
       "champion lakes upper champion lake",
       "upper champion lake"
     ],
     "name_variants": [
-      "CHAMPION LAKES (LOWER CHAMPION LAKE)",
       "CHAMPION LAKES (UPPER CHAMPION LAKE)",
-      "Champion Lakes (Lower Champion Lake)",
       "Champion Lakes (Upper Champion Lake)",
-      "Champion Lakes Lower Champion Lake",
       "Champion Lakes Upper Champion Lake",
       "UPPER CHAMPION LAKE"
     ],
     "zone": "ES1",
-    "surface_area_ha": 8.0,
+    "surface_area_ha": null,
     "amenities": "This waterbody has no amenities.",
     "base_name": "Champion Lakes (Upper Champion Lake)"
   },
@@ -3429,6 +3425,7 @@
       "CHAMPION LAKES (UPPER CHAMPION LAKE)",
       "Champion Lakes (Lower Champion Lake)",
       "Champion Lakes (Lower)",
+      "Champion Lakes Lower Champion Lake",
       "LOWER CHAMPION LAKE"
     ],
     "zone": "ES1",
@@ -4658,14 +4655,16 @@
     "aliases": [
       "md peace pond 1",
       "peace pond 1",
-      "peace pond 2"
+      "peace pond 2",
+      "unnamed md peace pond 1"
     ],
     "name_variants": [
       "MD PEACE POND #1",
       "MD Peace Pond #1",
       "Md Peace Pond #1",
       "PEACE POND #1",
-      "PEACE POND #2"
+      "PEACE POND #2",
+      "Unnamed Md Peace Pond #1"
     ],
     "zone": "NB3",
     "surface_area_ha": 1.1,
@@ -7493,7 +7492,7 @@
       "Unnamed East Stormwater Pond"
     ],
     "zone": "PP2",
-    "surface_area_ha": 2.0,
+    "surface_area_ha": null,
     "amenities": "Public parking.",
     "base_name": "East Stormwater Pond"
   },
@@ -7508,26 +7507,20 @@
       "SW27-83-23-W5"
     ],
     "aliases": [
-      "md peace pond 1",
       "md peace pond 2",
       "peace pond 2",
-      "unnamed md peace pond 1",
       "unnamed md peace pond 2"
     ],
     "name_variants": [
-      "MD PEACE POND #1",
       "MD PEACE POND #2",
-      "MD Peace Pond #1",
       "MD Peace Pond #2",
-      "Md Peace Pond #1",
       "Md Peace Pond #2",
       "PEACE POND #2",
       "Peace Pond #2",
-      "Unnamed Md Peace Pond #1",
       "Unnamed Md Peace Pond #2"
     ],
     "zone": "NB3",
-    "surface_area_ha": 1.1,
+    "surface_area_ha": null,
     "amenities": "This waterbody has no amenities.",
     "base_name": "Md Peace Pond #2"
   },

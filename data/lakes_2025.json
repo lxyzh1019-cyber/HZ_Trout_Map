@@ -6177,7 +6177,7 @@
     "lon": -117.80152,
     "coord_source": "alberta",
     "zone": "ES3",
-    "surface_area_ha": 25.4,
+    "surface_area_ha": null,
     "amenities": "Boat launch, fire pit, firewood available for purchase, fish cleaning stations, hand launch, pier, pit/vault toilets, water pump.",
     "stockings": [
       {
@@ -6602,43 +6602,6 @@
         "length_cm": 18.2,
         "number": 2000,
         "date": "2025-06-09",
-        "year": 2025,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 2000,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
-    "lake_id": "wb22995",
-    "ats": "SW27-83-23-W5",
-    "name": "Md Peace Pond #2",
-    "lat": 56.224205,
-    "lon": -117.553092,
-    "coord_source": "alberta",
-    "zone": "NB3",
-    "surface_area_ha": 1.1,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": "Riverence",
-        "genotype": "AF2N",
-        "length_cm": 23.6,
-        "number": 1000,
-        "date": "2025-05-13",
-        "year": 2025,
-        "date_precision": "day"
-      },
-      {
-        "species": "RNTR",
-        "strain": "Riverence",
-        "genotype": "AF2N",
-        "length_cm": 23.6,
-        "number": 1000,
-        "date": "2025-05-13",
         "year": 2025,
         "date_precision": "day"
       }
@@ -7443,7 +7406,7 @@
     "lon": -115.318769,
     "coord_source": "alberta",
     "zone": "ES1",
-    "surface_area_ha": 0.8,
+    "surface_area_ha": null,
     "amenities": "This waterbody has no amenities.",
     "stockings": [
       {
@@ -7598,7 +7561,7 @@
     "lon": -113.709921,
     "coord_source": "alberta",
     "zone": "PP2",
-    "surface_area_ha": 2.0,
+    "surface_area_ha": null,
     "amenities": "Public parking.",
     "stockings": [
       {
@@ -8121,6 +8084,60 @@
         "length_cm": 21.2,
         "number": 1000,
         "date": "2025-05-27",
+        "year": 2025,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6721",
+    "ats": "27-83-23-W5",
+    "name": "MD Peace Pond #1",
+    "lat": 56.222511,
+    "lon": -117.556197,
+    "coord_source": "profile",
+    "zone": "NB3",
+    "surface_area_ha": 1.1,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "Riverence",
+        "genotype": "AF2N",
+        "length_cm": 23.6,
+        "number": 1000,
+        "date": "2025-05-13",
+        "year": 2025,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb22995",
+    "ats": "SW27-83-23-W5",
+    "name": "Md Peace Pond #2",
+    "lat": 56.224205,
+    "lon": -117.553092,
+    "coord_source": "alberta",
+    "zone": "NB3",
+    "surface_area_ha": null,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "Riverence",
+        "genotype": "AF2N",
+        "length_cm": 23.6,
+        "number": 1000,
+        "date": "2025-05-13",
         "year": 2025,
         "date_precision": "day"
       }
@@ -8688,43 +8705,6 @@
     "species_set": [
       "BKTR",
       "TGTR"
-    ]
-  },
-  {
-    "lake_id": "wb6607",
-    "ats": "NW26-21-5-W5",
-    "name": "Champion Lakes (Upper Champion Lake)",
-    "lat": 50.815306,
-    "lon": -114.599941,
-    "coord_source": "alberta",
-    "zone": "ES1",
-    "surface_area_ha": 8.0,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "CTTR",
-        "strain": "Allison Creek",
-        "genotype": "2N",
-        "length_cm": 14.1,
-        "number": 300,
-        "date": "2025-06-03",
-        "year": 2025,
-        "date_precision": "day"
-      },
-      {
-        "species": "CTTR",
-        "strain": "Allison Creek",
-        "genotype": "2N",
-        "length_cm": 14.1,
-        "number": 300,
-        "date": "2025-06-03",
-        "year": 2025,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 600,
-    "species_set": [
-      "CTTR"
     ]
   },
   {
@@ -9914,6 +9894,60 @@
     ]
   },
   {
+    "lake_id": "wb6608",
+    "ats": "26-21-5-W5",
+    "name": "Champion Lakes (Lower)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "profile",
+    "zone": "ES1",
+    "surface_area_ha": 8.0,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "CTTR",
+        "strain": "Allison Creek",
+        "genotype": "2N",
+        "length_cm": 14.1,
+        "number": 300,
+        "date": "2025-06-03",
+        "year": 2025,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 300,
+    "species_set": [
+      "CTTR"
+    ]
+  },
+  {
+    "lake_id": "wb6607",
+    "ats": "NW26-21-5-W5",
+    "name": "Champion Lakes (Upper Champion Lake)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "alberta",
+    "zone": "ES1",
+    "surface_area_ha": null,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "CTTR",
+        "strain": "Allison Creek",
+        "genotype": "2N",
+        "length_cm": 14.1,
+        "number": 300,
+        "date": "2025-06-03",
+        "year": 2025,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 300,
+    "species_set": [
+      "CTTR"
+    ]
+  },
+  {
     "lake_id": "wb6917",
     "ats": "28-50-25-W5",
     "name": "Hinton Fish and Game Pond (Cold Creek Trout Pond)",
@@ -10083,7 +10117,7 @@
     "lon": -115.39287,
     "coord_source": "alberta",
     "zone": "ES1",
-    "surface_area_ha": 2.0,
+    "surface_area_ha": null,
     "amenities": "This waterbody has no amenities.",
     "stockings": [
       {

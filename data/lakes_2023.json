@@ -6522,7 +6522,7 @@
     "lon": -113.709921,
     "coord_source": "alberta",
     "zone": "PP2",
-    "surface_area_ha": 2.0,
+    "surface_area_ha": null,
     "amenities": "Public parking.",
     "stockings": [
       {
@@ -7269,43 +7269,6 @@
       "BKTR",
       "RNTR",
       "TGTR"
-    ]
-  },
-  {
-    "lake_id": "wb22995",
-    "ats": "SW27-83-23-W5",
-    "name": "Md Peace Pond #2",
-    "lat": 56.224205,
-    "lon": -117.553092,
-    "coord_source": "alberta",
-    "zone": "NB3",
-    "surface_area_ha": 1.1,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": "Trout Lodge/Jumpers",
-        "genotype": "AF3N",
-        "length_cm": 21.2,
-        "number": 502,
-        "date": "2023-05-24",
-        "year": 2023,
-        "date_precision": "day"
-      },
-      {
-        "species": "RNTR",
-        "strain": "Trout Lodge/Jumpers",
-        "genotype": "AF3N",
-        "length_cm": 21.2,
-        "number": 502,
-        "date": "2023-05-24",
-        "year": 2023,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 1004,
-    "species_set": [
-      "RNTR"
     ]
   },
   {
@@ -8457,43 +8420,6 @@
     ]
   },
   {
-    "lake_id": "wb6607",
-    "ats": "NW26-21-5-W5",
-    "name": "Champion Lakes (Upper Champion Lake)",
-    "lat": 50.815306,
-    "lon": -114.599941,
-    "coord_source": "alberta",
-    "zone": "ES1",
-    "surface_area_ha": 8.0,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "CTTR",
-        "strain": "Job Lake",
-        "genotype": "3N",
-        "length_cm": 14.5,
-        "number": 300,
-        "date": "2023-06-13",
-        "year": 2023,
-        "date_precision": "day"
-      },
-      {
-        "species": "CTTR",
-        "strain": "Job Lake",
-        "genotype": "3N",
-        "length_cm": 14.5,
-        "number": 300,
-        "date": "2023-06-13",
-        "year": 2023,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 600,
-    "species_set": [
-      "CTTR"
-    ]
-  },
-  {
     "lake_id": "wb6810",
     "ats": "31-10-26-W4",
     "name": "Granum Pond",
@@ -8812,6 +8738,60 @@
         "length_cm": 20.3,
         "number": 502,
         "date": "2023-10-03",
+        "year": 2023,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 502,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6721",
+    "ats": "27-83-23-W5",
+    "name": "MD Peace Pond #1",
+    "lat": 56.222511,
+    "lon": -117.556197,
+    "coord_source": "profile",
+    "zone": "NB3",
+    "surface_area_ha": 1.1,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Jumpers",
+        "genotype": "AF3N",
+        "length_cm": 21.2,
+        "number": 502,
+        "date": "2023-05-24",
+        "year": 2023,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 502,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb22995",
+    "ats": "SW27-83-23-W5",
+    "name": "Md Peace Pond #2",
+    "lat": 56.224205,
+    "lon": -117.553092,
+    "coord_source": "alberta",
+    "zone": "NB3",
+    "surface_area_ha": null,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Jumpers",
+        "genotype": "AF3N",
+        "length_cm": 21.2,
+        "number": 502,
+        "date": "2023-05-24",
         "year": 2023,
         "date_precision": "day"
       }
@@ -9218,6 +9198,60 @@
     "total_fish": 325,
     "species_set": [
       "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6608",
+    "ats": "26-21-5-W5",
+    "name": "Champion Lakes (Lower)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "profile",
+    "zone": "ES1",
+    "surface_area_ha": 8.0,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "CTTR",
+        "strain": "Job Lake",
+        "genotype": "3N",
+        "length_cm": 14.5,
+        "number": 300,
+        "date": "2023-06-13",
+        "year": 2023,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 300,
+    "species_set": [
+      "CTTR"
+    ]
+  },
+  {
+    "lake_id": "wb6607",
+    "ats": "NW26-21-5-W5",
+    "name": "Champion Lakes (Upper Champion Lake)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "alberta",
+    "zone": "ES1",
+    "surface_area_ha": null,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "CTTR",
+        "strain": "Job Lake",
+        "genotype": "3N",
+        "length_cm": 14.5,
+        "number": 300,
+        "date": "2023-06-13",
+        "year": 2023,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 300,
+    "species_set": [
+      "CTTR"
     ]
   },
   {

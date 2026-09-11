@@ -34,7 +34,9 @@ from collections import defaultdict
 import sources
 from ats import ats_to_latlng, haversine_km
 from registry import (ALIASES_PATH, DATA_DIR, REVIEW_PATH, Registry, display_name,
-                      load_aliases, load_profiles, name_similarity, normalize_name,
+                      best_matching_name, discriminating_conflict,
+                      load_aliases, load_profiles, name_similarity, normalise_code,
+                      normalize_name, shared_land_descriptions,
                       save_registry, _title)
 
 TROUT = sources.TROUT_SPECIES
@@ -90,9 +92,23 @@ def attach_profiles(reg):
         best = max(lakes, key=lambda l: name_similarity(prof["name"] or "", l["name"]))
         for lake in lakes:
             matched += 1
+            # A fish management zone covers both halves of a pair, and the
+            # amenities describe the site they share, so those are safe to
+            # copy. Surface area is not: it measures one body of water.
+            #
+            # The profile row's area belongs to the lake the row is NAMED
+            # after — Alberta's stocking map confirms it for seven of the
+            # eight shared rows, matching Hogarth Lower at 0.8 ha, Lower
+            # Smuts at 2.0, MD Peace Pond #1 at 1.1 and Lower Wildhorse at
+            # 25.4 while their neighbours measure something else entirely.
+            # Copying it to both put the same hectares on two lakes and made
+            # Upper Wildhorse ten times its real size.
+            #
+            # The neighbour gets nothing instead, and says so.
             lake["zone"] = prof["zone"]
-            lake["surface_area_ha"] = prof["surface_area_ha"]
             lake["amenities"] = prof["amenities"]
+            if lake is best:
+                lake["surface_area_ha"] = prof["surface_area_ha"]
             if prof["lat"] is not None and prof["lon"] is not None and lake is best:
                 lake["lat"], lake["lon"] = prof["lat"], prof["lon"]
                 lake["coord_source"] = "profile"
@@ -224,6 +240,7 @@ def link_all(reg, rows_by_year, aliases, verbose=True):
     linked = defaultdict(list)
     review = []
     stats = defaultdict(int)
+    shared_codes = shared_land_descriptions(reg)
 
     for year in sorted(rows_by_year):
         for row in rows_by_year[year]:
@@ -231,7 +248,8 @@ def link_all(reg, rows_by_year, aliases, verbose=True):
                 stats["not_trout"] += 1
                 continue
 
-            key = normalize_name(display_name(row["official_name"], row["common_name"]))
+            row_name = display_name(row["official_name"], row["common_name"])
+            key = normalize_name(row_name)
             if key in aliases["skip"]:
                 stats["skipped_by_you"] += 1
                 continue
@@ -242,9 +260,30 @@ def link_all(reg, rows_by_year, aliases, verbose=True):
                 continue
 
             # A decision you already made in a past review always wins.
+            #
+            # A land description is consulted before a name because it is
+            # usually the stronger key, and for 633 of the registry's 640
+            # quarter sections it is. For the other seven it is the WEAKEST
+            # evidence there is, because it is the one field that is identical
+            # for both lakes on it, and the name is all that can separate them.
+            #
+            # apply_review.py records a confirmed answer as a land-description
+            # rule as well as a name, which is right for the 633 and turns an
+            # answer about one row into a rule about its neighbour for the
+            # seven. So on a shared quarter section the rule is only honoured
+            # when the row's own name does not contradict it; otherwise the row
+            # falls through to resolve(), where the name is weighed properly.
+            #
+            # Without this, MD Peace Pond #1's fish were credited to #2 and
+            # Lower Champion Lake's to Upper, for six years each.
             forced = None
             if row.get("ats") and row["ats"].upper() in aliases["ats"]:
-                forced = aliases["ats"][row["ats"].upper()]
+                candidate = aliases["ats"][row["ats"].upper()]
+                target = reg.by_id.get(candidate)
+                contested = normalise_code(row["ats"]) in shared_codes
+                if not contested or target is None or not discriminating_conflict(
+                        row_name, best_matching_name(target, row_name)):
+                    forced = candidate
             if not forced and key in aliases["name"]:
                 forced = aliases["name"][key]
             if forced and forced in reg.by_id:

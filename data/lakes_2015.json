@@ -3768,7 +3768,7 @@
     "lon": -117.80152,
     "coord_source": "alberta",
     "zone": "ES3",
-    "surface_area_ha": 25.4,
+    "surface_area_ha": null,
     "amenities": "Boat launch, fire pit, firewood available for purchase, fish cleaning stations, hand launch, pier, pit/vault toilets, water pump.",
     "stockings": [
       {
@@ -5069,7 +5069,7 @@
     "lon": -117.553092,
     "coord_source": "alberta",
     "zone": "NB3",
-    "surface_area_ha": 1.1,
+    "surface_area_ha": null,
     "amenities": "This waterbody has no amenities.",
     "stockings": [
       {
@@ -6219,7 +6219,7 @@
     "lon": -114.599941,
     "coord_source": "alberta",
     "zone": "ES1",
-    "surface_area_ha": 8.0,
+    "surface_area_ha": null,
     "amenities": "This waterbody has no amenities.",
     "stockings": [
       {

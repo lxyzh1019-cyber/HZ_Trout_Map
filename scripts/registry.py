@@ -139,6 +139,27 @@ def discriminating_conflict(a, b):
     return not (ta <= tb or tb <= ta)
 
 
+def normalise_code(ats):
+    """One spelling per quarter section, so two files can be compared."""
+    return re.sub(r"[^A-Z0-9-]", "", str(ats or "").upper())
+
+
+def shared_land_descriptions(registry):
+    """Quarter sections that more than one lake sits on.
+
+    Seven of the registry's 640 land descriptions are shared, and every one of
+    them is a pair the survey grid cannot separate: Upper and Lower Champion,
+    Upper and Lower Smuts, Pit 35 and Pit 45, MD Peace Pond #1 and #2. For
+    those, the land description is the weakest evidence rather than the
+    strongest, because it is the one field that is identical for both.
+    """
+    holders = defaultdict(set)
+    for lake in registry.lakes:
+        for code in lake.get("ats_codes") or []:
+            holders[normalise_code(code)].add(lake["lake_id"])
+    return {code for code, who in holders.items() if len(who) > 1}
+
+
 def strip_quarter(ats):
     """NE10-2-28-W4 -> 10-2-28-W4. Partial codes pass through unchanged."""
     if not ats:
@@ -276,7 +297,11 @@ class Registry:
     # ── scoring helpers ──────────────────────────────────────────────────
     @staticmethod
     def _name_of(lake, against):
-        """The lake's own name spelling that best matches `against`."""
+        """The lake's own name spelling that best matches `against`.
+
+        Public as best_matching_name() at module level, for callers outside
+        the class that need to compare a report name against a lake fairly.
+        """
         best, score = lake["name"], name_similarity(against, lake["name"])
         for variant in lake["name_variants"]:
             s = name_similarity(against, variant)
@@ -492,3 +517,12 @@ def load_profiles():
                 amenities=(row.get("site_amenities") or "").strip() or None,
             )
     return profiles
+
+
+def best_matching_name(lake, against):
+    """The spelling of `lake`'s name that best matches `against`.
+
+    A lake carries every spelling its reports have used, so comparing a report
+    name against only the canonical one understates the match.
+    """
+    return Registry._name_of(lake, against)

@@ -1,3 +1,4 @@
+import collections
 import csv
 import json
 import re
@@ -1074,3 +1075,214 @@ class AerationIsKnownPerLakeTests(unittest.TestCase):
             self.assertTrue(entry["winterkill"]["inputs"]["aeration"])
             self.assertTrue(any("aerated by the province" in r
                                 for r in entry["winterkill"]["reasons"]))
+
+
+class SharedLandDescriptionTests(unittest.TestCase):
+    """Two lakes on one quarter section must keep their own fish.
+
+    Seven of the registry's land descriptions are shared, and every one is a
+    pair the survey grid cannot separate: Upper and Lower Champion, Upper and
+    Lower Smuts, Pit 35 and Pit 45, MD Peace Pond #1 and #2. For those the land
+    description is the WEAKEST evidence, not the strongest, because it is the
+    one field that is identical for both — and the name is all that is left.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.registry = json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))
+        cls.by_id = {e["lake_id"]: e for e in cls.registry}
+
+    def totals(self, lake_id):
+        """Every year's fish for one lake, out of the published year files."""
+        out = {}
+        for year in json.loads((DATA_DIR / "manifest.json").read_text(encoding="utf-8"))["years"]:
+            for lake in json.loads((DATA_DIR / f"lakes_{year}.json").read_text(encoding="utf-8")):
+                if lake["lake_id"] == lake_id:
+                    out[year] = sum(s["number"] for s in lake["stockings"])
+        return out
+
+    def test_both_halves_of_a_pair_are_published(self):
+        """Alberta stocks both ponds every year and names them apart every year.
+
+        A land-description rule written from an answer about one of them used
+        to send the other's rows to it too, so one lake carried double and the
+        other vanished from the map entirely.
+        """
+        for first, second in (("wb6721", "wb22995"), ("wb6607", "wb6608")):
+            for lake_id in (first, second):
+                self.assertIn(lake_id, self.by_id)
+                totals = self.totals(lake_id)
+                self.assertTrue(totals, f"{self.by_id[lake_id]['name']} has no stocking at all")
+                recent = {y: n for y, n in totals.items() if y >= 2021}
+                self.assertTrue(recent, f"{self.by_id[lake_id]['name']} disappears after 2020")
+
+    def test_neither_half_carries_the_others_fish(self):
+        """The pairs are stocked in equal measure, so a doubled total is visible."""
+        for first, second in (("wb6721", "wb22995"), ("wb6607", "wb6608")):
+            a, b = self.totals(first), self.totals(second)
+            for year in sorted(set(a) & set(b)):
+                if year < 2021:
+                    continue
+                self.assertEqual(
+                    a[year], b[year],
+                    f"{year}: {self.by_id[first]['name']} has {a[year]} and "
+                    f"{self.by_id[second]['name']} has {b[year]}; Alberta stocks them equally")
+
+    def test_a_shared_profile_row_gives_its_area_to_one_lake_only(self):
+        """Surface area measures one body of water, so it cannot be copied.
+
+        Eight profile rows are claimed by two lakes each. The area on such a
+        row belongs to the lake the row is named after — Alberta's stocking map
+        confirms it for seven of the eight — so the neighbour gets nothing and
+        says so, rather than reporting hectares that are not its own.
+        """
+        from registry import load_profiles, name_similarity
+        profiles = load_profiles()
+        claimants = collections.defaultdict(list)
+        for lake in self.registry:
+            for code in lake["ats_codes"]:
+                if code in profiles:
+                    claimants[code].append(lake)
+                    break
+        shared = {c: ls for c, ls in claimants.items() if len(ls) > 1}
+        self.assertTrue(shared, "expected some profile rows claimed by two lakes")
+        for code, lakes in shared.items():
+            prof = profiles[code]
+            if prof["surface_area_ha"] is None:
+                continue
+            carrying = [l for l in lakes if l["surface_area_ha"] == prof["surface_area_ha"]]
+            self.assertLessEqual(
+                len(carrying), 1,
+                f"{code}: {[l['name'] for l in carrying]} all report "
+                f"{prof['surface_area_ha']} ha from one profile row")
+            if carrying:
+                best = max(lakes, key=lambda l: name_similarity(prof["name"] or "", l["name"]))
+                self.assertIs(carrying[0], best,
+                              f"{code}: the area went to a lake the row does not name")
+
+    def test_no_two_lakes_report_the_same_area_on_the_same_quarter_section(self):
+        by_code = collections.defaultdict(list)
+        for lake in self.registry:
+            for code in lake["ats_codes"]:
+                by_code[code].append(lake)
+        for code, lakes in by_code.items():
+            areas = [l["surface_area_ha"] for l in lakes if l["surface_area_ha"] is not None]
+            self.assertEqual(len(areas), len(set(areas)),
+                             f"{code}: {[(l['name'], l['surface_area_ha']) for l in lakes]}")
+
+    def test_every_shared_land_description_rule_is_guarded(self):
+        """These rules are kept, because for the 2011-2013 reports they are the
+        answer: those years print a quarter section and no waterbody id, and
+        without the recorded rule 58 rows go back to the review queue.
+
+        What makes them safe is that link_all re-checks the row's own name
+        before honouring one. This asserts the guard covers every shared code
+        that actually appears as a rule, so a new one cannot arrive unprotected.
+        """
+        import registry as registry_module
+        shared = registry_module.shared_land_descriptions(registry_module.load_registry())
+        self.assertTrue(shared, "no shared land descriptions found to guard against")
+        with (DATA_DIR / "lake_aliases.csv").open(newline="", encoding="utf-8") as handle:
+            contested = [r for r in csv.DictReader(handle) if r["kind"] == "ats"
+                         and registry_module.normalise_code(r["value"]) in shared]
+        self.assertTrue(contested, "expected some rules on shared quarter sections")
+        for row in contested:
+            target = self.by_id.get(row["lake_id"])
+            self.assertIsNotNone(target, f"{row['lake_id']} is not a lake")
+            # The neighbour's name must be refused by the guard, or the rule
+            # would take its rows too.
+            neighbours = [e for e in self.registry
+                          if e["lake_id"] != row["lake_id"]
+                          and any(registry_module.normalise_code(c)
+                                  == registry_module.normalise_code(row["value"])
+                                  for c in e.get("ats_codes") or [])]
+            for other in neighbours:
+                self.assertTrue(
+                    registry_module.discriminating_conflict(
+                        other["name"],
+                        registry_module.best_matching_name(target, other["name"])),
+                    f"{row['value']} -> {target['name']} would also swallow "
+                    f"{other['name']}")
+
+    def test_a_land_description_rule_never_outranks_a_name_that_disagrees(self):
+        """The second guard, in case such a rule is ever written by hand."""
+        import registry as registry_module
+        pond = {"lake_id": "wb22995", "name": "Md Peace Pond #2",
+                "name_variants": ["Md Peace Pond #2", "Peace Pond #2"]}
+        self.assertTrue(registry_module.discriminating_conflict(
+            "Md Peace Pond #1", registry_module.best_matching_name(pond, "Md Peace Pond #1")))
+        self.assertFalse(registry_module.discriminating_conflict(
+            "Md Peace Pond #2", registry_module.best_matching_name(pond, "Md Peace Pond #2")))
+
+
+class StockingMapAgreementTests(unittest.TestCase):
+    """The published totals, against Alberta's other publication of the same years.
+
+    The stocking map and the annual reports are two separate publications by the
+    same agency, and this repo reads the reports. Comparing the two is how the
+    doubled ponds were found, so it stays as a standing check rather than a
+    one-off audit.
+
+    Dates are deliberately not compared: 64% of the map's events sit one day
+    earlier than the report's, which is a rendering difference and not a
+    disagreement about what happened.
+    """
+
+    SPECIES = {"RAINBOW TROUT": "RNTR", "BROOK TROUT": "BKTR", "BROWN TROUT": "BNTR",
+               "TIGER TROUT": "TGTR", "CUTTHROAT TROUT": "CTTR",
+               "WESTSLOPE CUTTHROAT TROUT": "WSCT"}
+
+    # Where the two publications genuinely disagree about individual events.
+    # Neither is this repo getting it wrong, so they are named rather than
+    # silently tolerated, and the count is asserted so a new one cannot hide.
+    KNOWN_DISAGREEMENTS = {
+        ("6818", 2023, "RNTR"),      # Goldspring Park Pond: the reports carry a
+                                     # 19 May pair (2,528 fish) the map does not
+        ("3524", 2021, "RNTR"),      # Michichi Reservoir: the map carries three
+                                     # 55 cm September events the reports do not,
+                                     # and the reports a 70-fish one the map lacks
+    }
+
+    @classmethod
+    def setUpClass(cls):
+        import import_stocking_map
+        if not import_stocking_map.WORKBOOK.exists():
+            raise unittest.SkipTest("the stocking-map workbook is not present")
+        import openpyxl
+        book = openpyxl.load_workbook(import_stocking_map.WORKBOOK, data_only=True)
+        rows = list(book["Stocking details"].iter_rows(min_row=5, values_only=True))
+        header = [str(h) for h in rows[0]]
+        col = {name: header.index(name) for name in header}
+        cls.export = collections.Counter()
+        for row in rows[1:]:
+            if not row or row[0] is None:
+                continue
+            species = cls.SPECIES.get(row[col["Species"]])
+            if species:
+                cls.export[(str(row[col["Lake ID"]]).strip(),
+                            row[col["Year"]], species)] += row[col["Fish stocked"]]
+        registry = json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))
+        cls.waterbody = {e["lake_id"]: str(e.get("waterbody_id") or "") for e in registry}
+        cls.published = collections.Counter()
+        for year in range(2021, 2027):
+            for lake in json.loads((DATA_DIR / f"lakes_{year}.json").read_text(encoding="utf-8")):
+                wid = cls.waterbody.get(lake["lake_id"], "")
+                for row in lake["stockings"]:
+                    cls.published[(wid, row["year"], row["species"])] += row["number"]
+
+    def test_the_two_publications_agree_on_almost_every_lake_year(self):
+        both = [k for k in set(self.export) | set(self.published)
+                if self.export[k] and self.published[k]]
+        differ = [k for k in both if self.export[k] != self.published[k]]
+        unexplained = [k for k in differ if k not in self.KNOWN_DISAGREEMENTS]
+        self.assertEqual(
+            unexplained, [],
+            "\n".join(f"{k}: map {self.export[k]}, reports {self.published[k]}"
+                      for k in unexplained))
+        self.assertGreater(len(both), 2000, "the comparison covered too little to mean anything")
+
+    def test_no_lake_carries_exactly_twice_what_the_map_says(self):
+        """The signature of one lake absorbing its neighbour's rows."""
+        doubled = [k for k in self.export
+                   if self.export[k] and self.published[k] == self.export[k] * 2]
+        self.assertEqual(doubled, [], f"{len(doubled)} lake-year(s) at exactly double")

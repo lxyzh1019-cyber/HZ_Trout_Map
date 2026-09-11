@@ -2524,7 +2524,7 @@
     "lon": -117.80152,
     "coord_source": "alberta",
     "zone": "ES3",
-    "surface_area_ha": 25.4,
+    "surface_area_ha": null,
     "amenities": "Boat launch, fire pit, firewood available for purchase, fish cleaning stations, hand launch, pier, pit/vault toilets, water pump.",
     "stockings": [
       {
@@ -4708,7 +4708,7 @@
     "lon": -113.709921,
     "coord_source": "alberta",
     "zone": "PP2",
-    "surface_area_ha": 2.0,
+    "surface_area_ha": null,
     "amenities": "Public parking.",
     "stockings": [
       {
@@ -5866,43 +5866,6 @@
         "genotype": "Triploid",
         "length_cm": 21.0,
         "number": 2000,
-        "date": "2013-05-23",
-        "year": 2013,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 2000,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
-    "lake_id": "wb22995",
-    "ats": "SW27-83-23-W5",
-    "name": "Md Peace Pond #2",
-    "lat": 56.224205,
-    "lon": -117.553092,
-    "coord_source": "alberta",
-    "zone": "NB3",
-    "surface_area_ha": 1.1,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "Diploid",
-        "length_cm": 20.0,
-        "number": 1000,
-        "date": "2013-05-23",
-        "year": 2013,
-        "date_precision": "day"
-      },
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "Diploid",
-        "length_cm": 20.0,
-        "number": 1000,
         "date": "2013-05-23",
         "year": 2013,
         "date_precision": "day"
@@ -7214,6 +7177,60 @@
         "genotype": "Diploid",
         "length_cm": 20.0,
         "number": 948,
+        "date": "2013-05-23",
+        "year": 2013,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6721",
+    "ats": "27-83-23-W5",
+    "name": "MD Peace Pond #1",
+    "lat": 56.222511,
+    "lon": -117.556197,
+    "coord_source": "profile",
+    "zone": "NB3",
+    "surface_area_ha": 1.1,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "Diploid",
+        "length_cm": 20.0,
+        "number": 1000,
+        "date": "2013-05-23",
+        "year": 2013,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb22995",
+    "ats": "SW27-83-23-W5",
+    "name": "Md Peace Pond #2",
+    "lat": 56.224205,
+    "lon": -117.553092,
+    "coord_source": "alberta",
+    "zone": "NB3",
+    "surface_area_ha": null,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "Diploid",
+        "length_cm": 20.0,
+        "number": 1000,
         "date": "2013-05-23",
         "year": 2013,
         "date_precision": "day"

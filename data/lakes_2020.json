@@ -5521,7 +5521,7 @@
     "lon": -117.80152,
     "coord_source": "alberta",
     "zone": "ES3",
-    "surface_area_ha": 25.4,
+    "surface_area_ha": null,
     "amenities": "Boat launch, fire pit, firewood available for purchase, fish cleaning stations, hand launch, pier, pit/vault toilets, water pump.",
     "stockings": [
       {
@@ -6034,43 +6034,6 @@
         "length_cm": 16.9,
         "number": 2000,
         "date": "2020-06-12",
-        "year": 2020,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 2000,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
-    "lake_id": "wb22995",
-    "ats": "SW27-83-23-W5",
-    "name": "Md Peace Pond #2",
-    "lat": 56.224205,
-    "lon": -117.553092,
-    "coord_source": "alberta",
-    "zone": "NB3",
-    "surface_area_ha": 1.1,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": "Trout Lodge/Jumpers",
-        "genotype": "AF2N",
-        "length_cm": 19.8,
-        "number": 1000,
-        "date": "2020-05-20",
-        "year": 2020,
-        "date_precision": "day"
-      },
-      {
-        "species": "RNTR",
-        "strain": "Trout Lodge/Jumpers",
-        "genotype": "AF2N",
-        "length_cm": 19.8,
-        "number": 1000,
-        "date": "2020-05-20",
         "year": 2020,
         "date_precision": "day"
       }
@@ -6816,7 +6779,7 @@
     "lon": -113.709921,
     "coord_source": "alberta",
     "zone": "PP2",
-    "surface_area_ha": 2.0,
+    "surface_area_ha": null,
     "amenities": "Public parking.",
     "stockings": [
       {
@@ -7456,6 +7419,60 @@
     ]
   },
   {
+    "lake_id": "wb6721",
+    "ats": "27-83-23-W5",
+    "name": "MD Peace Pond #1",
+    "lat": 56.222511,
+    "lon": -117.556197,
+    "coord_source": "profile",
+    "zone": "NB3",
+    "surface_area_ha": 1.1,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Jumpers",
+        "genotype": "AF2N",
+        "length_cm": 19.8,
+        "number": 1000,
+        "date": "2020-05-20",
+        "year": 2020,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb22995",
+    "ats": "SW27-83-23-W5",
+    "name": "Md Peace Pond #2",
+    "lat": 56.224205,
+    "lon": -117.553092,
+    "coord_source": "alberta",
+    "zone": "NB3",
+    "surface_area_ha": null,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Jumpers",
+        "genotype": "AF2N",
+        "length_cm": 19.8,
+        "number": 1000,
+        "date": "2020-05-20",
+        "year": 2020,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb23789",
     "ats": "4-47-19-W5",
     "name": "Pit 24 Lake",
@@ -7928,43 +7945,6 @@
     "total_fish": 640,
     "species_set": [
       "BKTR"
-    ]
-  },
-  {
-    "lake_id": "wb6607",
-    "ats": "NW26-21-5-W5",
-    "name": "Champion Lakes (Upper Champion Lake)",
-    "lat": 50.815306,
-    "lon": -114.599941,
-    "coord_source": "alberta",
-    "zone": "ES1",
-    "surface_area_ha": 8.0,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": "Trout Lodge/Jumpers",
-        "genotype": "AF3N",
-        "length_cm": 19.8,
-        "number": 300,
-        "date": "2020-06-22",
-        "year": 2020,
-        "date_precision": "day"
-      },
-      {
-        "species": "RNTR",
-        "strain": "Trout Lodge/Jumpers",
-        "genotype": "AF3N",
-        "length_cm": 19.8,
-        "number": 300,
-        "date": "2020-06-22",
-        "year": 2020,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 600,
-    "species_set": [
-      "RNTR"
     ]
   },
   {
@@ -8917,6 +8897,60 @@
       }
     ],
     "total_fish": 315,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6608",
+    "ats": "26-21-5-W5",
+    "name": "Champion Lakes (Lower)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "profile",
+    "zone": "ES1",
+    "surface_area_ha": 8.0,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Jumpers",
+        "genotype": "AF3N",
+        "length_cm": 19.8,
+        "number": 300,
+        "date": "2020-06-22",
+        "year": 2020,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 300,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6607",
+    "ats": "NW26-21-5-W5",
+    "name": "Champion Lakes (Upper Champion Lake)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "alberta",
+    "zone": "ES1",
+    "surface_area_ha": null,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Jumpers",
+        "genotype": "AF3N",
+        "length_cm": 19.8,
+        "number": 300,
+        "date": "2020-06-22",
+        "year": 2020,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 300,
     "species_set": [
       "RNTR"
     ]
