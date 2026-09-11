@@ -630,6 +630,7 @@
    "winterkill": null
   },
   "wb26047": {
+   "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": null,
    "mean_depth": null,
@@ -1199,6 +1200,7 @@
    }
   },
   "wb4061": {
+   "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": 10.3,
    "mean_depth": {
@@ -1225,14 +1227,15 @@
    "surface_area_ha": 28.8,
    "winterkill": {
     "inputs": {
-     "aeration": false,
+     "aeration": true,
      "depth": true,
      "eutrophy": false,
      "ice_duration": false
     },
     "level": "low",
     "reasons": [
-     "10.3 m deep"
+     "10.3 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
     ]
    }
   },
@@ -1777,6 +1780,7 @@
    }
   },
   "wb4794": {
+   "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": 14.0,
    "mean_depth": {
@@ -1796,14 +1800,15 @@
    "surface_area_ha": 90.0,
    "winterkill": {
     "inputs": {
-     "aeration": false,
+     "aeration": true,
      "depth": true,
      "eutrophy": false,
      "ice_duration": false
     },
     "level": "low",
     "reasons": [
-     "14 m deep"
+     "14 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
     ]
    }
   },
@@ -2025,6 +2030,7 @@
    "winterkill": null
   },
   "wb5093": {
+   "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": 10.0,
    "mean_depth": {
@@ -2044,14 +2050,15 @@
    "surface_area_ha": 47.1,
    "winterkill": {
     "inputs": {
-     "aeration": false,
+     "aeration": true,
      "depth": true,
      "eutrophy": false,
      "ice_duration": false
     },
     "level": "low",
     "reasons": [
-     "10 m deep"
+     "10 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
     ]
    }
   },
@@ -2167,6 +2174,7 @@
    "winterkill": null
   },
   "wb5348": {
+   "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": 7.3,
    "mean_depth": {
@@ -2186,14 +2194,15 @@
    "surface_area_ha": 15.0,
    "winterkill": {
     "inputs": {
-     "aeration": false,
+     "aeration": true,
      "depth": true,
      "eutrophy": false,
      "ice_duration": false
     },
     "level": "low",
     "reasons": [
-     "7.3 m deep"
+     "7.3 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
     ]
    }
   },
@@ -2225,6 +2234,7 @@
    }
   },
   "wb5387": {
+   "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": 6.0,
    "mean_depth": {
@@ -2244,14 +2254,15 @@
    "surface_area_ha": 29.9,
    "winterkill": {
     "inputs": {
-     "aeration": false,
+     "aeration": true,
      "depth": true,
      "eutrophy": false,
      "ice_duration": false
     },
     "level": "low",
     "reasons": [
-     "6 m deep"
+     "6 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
     ]
    }
   },
@@ -2359,6 +2370,7 @@
    "winterkill": null
   },
   "wb5538": {
+   "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": 10.5,
    "mean_depth": {
@@ -2378,14 +2390,15 @@
    "surface_area_ha": 13.2,
    "winterkill": {
     "inputs": {
-     "aeration": false,
+     "aeration": true,
      "depth": true,
      "eutrophy": false,
      "ice_duration": false
     },
     "level": "low",
     "reasons": [
-     "10.5 m deep"
+     "10.5 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
     ]
    }
   },
@@ -2716,6 +2729,7 @@
    "winterkill": null
   },
   "wb5929": {
+   "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": null,
    "mean_depth": null,
@@ -2725,6 +2739,7 @@
    "winterkill": null
   },
   "wb5944": {
+   "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": null,
    "mean_depth": null,
@@ -3709,6 +3724,7 @@
    "winterkill": null
   },
   "wb6693": {
+   "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": null,
    "mean_depth": null,
@@ -4360,6 +4376,7 @@
    "winterkill": null
   },
   "wb6778": {
+   "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": null,
    "mean_depth": null,
@@ -4767,6 +4784,7 @@
    }
   },
   "wb6827": {
+   "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": 6.3,
    "mean_depth": {
@@ -4786,14 +4804,15 @@
    "surface_area_ha": 37.0,
    "winterkill": {
     "inputs": {
-     "aeration": false,
+     "aeration": true,
      "depth": true,
      "eutrophy": false,
      "ice_duration": false
     },
     "level": "low",
     "reasons": [
-     "6.3 m deep"
+     "6.3 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
     ]
    }
   },

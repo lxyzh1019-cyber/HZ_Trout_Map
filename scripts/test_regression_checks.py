@@ -1847,3 +1847,76 @@ class OutOfScopeTests(unittest.TestCase):
         for forbidden in ("reg.mint", ".mint(", "add_lake"):
             self.assertNotIn(forbidden, source,
                              f"the importer calls {forbidden}")
+
+
+class AcaRosterTests(unittest.TestCase):
+    """ACA's published Lake Aeration Program roster, transcribed by hand.
+
+    Alberta's lake pages name twelve aerated lakes. ACA's roster names
+    twenty-two, and the two only partly overlap — Camp 9 Trout Pond and
+    Salter's Lake are stated by Alberta and absent from ACA's, which is what a
+    fish-and-game club windmill outside the province's programme looks like.
+    Both are kept; neither list is treated as the whole truth.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.roster_path = DATA_DIR / "aca_aeration_roster.csv"
+        if not cls.roster_path.exists():
+            raise unittest.SkipTest("the roster has not been transcribed")
+        with cls.roster_path.open(newline="", encoding="utf-8") as handle:
+            cls.roster = list(csv.DictReader(handle))
+        cls.registry = {e["lake_id"]: e for e in
+                        json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))}
+
+    def test_every_roster_row_names_a_lake_on_the_map(self):
+        for row in self.roster:
+            self.assertIn(row["lake_id"], self.registry,
+                          f"{row['name']} is not a lake this map holds")
+
+    def test_the_roster_is_keyed_on_an_id_and_not_a_name(self):
+        """Swan, Spring and Birch Lake are each one of several in Alberta.
+
+        Matching ACA's roster on name alone would aerate the wrong water. Swan
+        Lake is the case that proves it: the roster says only "Swan Lake", and
+        ACA's own page places it 42 km west of Valleyview, which is wb5944 and
+        not the Red Earth one.
+        """
+        header = self.roster_path.read_text(encoding="utf-8").splitlines()[0]
+        self.assertTrue(header.startswith("lake_id,"), header)
+        swan = [r for r in self.roster if r["lake_id"] == "wb5944"]
+        self.assertEqual(len(swan), 1)
+        self.assertIn("Valleyview", swan[0]["note"])
+
+    def test_the_roster_reaches_the_aerated_list(self):
+        import depth
+        applied, _ = depth.load_aerated()
+        self.assertTrue(applied)
+        for row in self.roster:
+            lake = self.registry[row["lake_id"]]
+            wid = str(lake.get("waterbody_id") or lake.get("published_waterbody_id") or "")
+            self.assertIn(wid, applied, f"{row['name']} is on the roster but not applied")
+
+    def test_both_sources_survive_each_other(self):
+        """Alberta states two lakes ACA does not list. They stay aerated."""
+        path = ROOT / "data" / "raw" / "aca_aerated_lakes.csv"
+        with path.open(newline="", encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+        tiers = collections.Counter(r["confidence"] for r in rows)
+        self.assertGreaterEqual(tiers["stated"], 12)
+        self.assertGreaterEqual(tiers["published_list"], 10)
+        stated_names = {r["name"] for r in rows if r["confidence"] == "stated"}
+        self.assertIn("Camp 9 Trout Pond", stated_names)
+        self.assertIn("Salter's Lake", stated_names)
+
+    def test_aeration_still_only_lowers_a_band_on_a_measured_depth(self):
+        path = DATA_DIR / "lake_depth.json"
+        if not path.exists():
+            self.skipTest("depth has not been built")
+        lakes = json.loads(path.read_text(encoding="utf-8"))["lakes"]
+        for key, entry in lakes.items():
+            if entry.get("aerated"):
+                if entry["max_depth_m"] is None:
+                    self.assertIsNone(entry["winterkill"], key)
+                else:
+                    self.assertTrue(entry["winterkill"]["inputs"]["aeration"], key)

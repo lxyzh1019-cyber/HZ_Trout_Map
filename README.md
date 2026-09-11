@@ -32,6 +32,7 @@ alberta-trout-map/
 │   ├── lake_regulations.json       ← seasons and catch limits per lake, generated
 │   ├── lake_aliases.csv            ← your answers to past linking questions
 │   ├── lake_facts.csv              ← your answers to past attribute questions
+│   ├── aca_aeration_roster.csv     ← ACA's aerated-lakes roster, transcribed
 │   ├── lake_facts_review.csv       ← attribute questions still open, generated
 │   ├── link_review.csv             ← linking questions still open, generated
 │   ├── regs_review.csv             ← lakes the guide could not be matched to
@@ -57,7 +58,7 @@ alberta-trout-map/
 ```
 
 Everything under `data/` except `raw/`, `lake_aliases.csv`, `lake_facts.csv`,
-`regs_aliases.csv` and the profiles CSV is generated. Never edit those by hand;
+`aca_aeration_roster.csv`, `regs_aliases.csv` and the profiles CSV is generated. Never edit those by hand;
 change the inputs and rebuild.
 
 **`lake_registry.json` is a build artefact, not a store.** `build_history.py`
@@ -329,7 +330,7 @@ metres down in three metres of water is a real harm.
 | an average depth is published | 54 |
 | an average depth is estimated from the maximum | 59 |
 | deep enough to form a summer layer | 83 |
-| the province aerates it | 12 |
+| the province aerates it | 24 |
 | nothing is published, so nothing is shown | the rest |
 
 **The summer layer.** Below about 5 m an Alberta lake stays mixed all summer and
@@ -344,6 +345,19 @@ aeration are real inputs. Eutrophy is not available at all. Ice duration is
 deliberately not modelled: across these lakes it varies far less than depth
 does, so it would add arithmetic without adding discrimination. The app names
 what was not counted.
+
+**Two sources, and neither is the whole truth.** Alberta's own lake pages name
+twelve aerated lakes. ACA's published Lake Aeration Program roster names
+twenty-two, and the lists only partly overlap: Camp 9 Trout Pond and Salter's
+Lake are stated by Alberta and absent from ACA's, which is what a fish-and-game
+club windmill outside the province's programme looks like. Both are kept.
+
+The roster is transcribed by hand into `data/aca_aeration_roster.csv`, which is
+an input like `data/lake_aliases.csv` and never generated. It is keyed on
+`lake_id` and not on name, because Swan, Spring and Birch Lake are each one of
+several in Alberta and a name alone would aerate the wrong water. Swan Lake is
+the case that proves it — the roster says only "Swan Lake", and ACA places it
+42 km west of Valleyview, which settles which one.
 
 **Aeration is known one lake at a time.** Alberta names the lakes it aerates and
 says nothing whatsoever about the rest, so absence from that list is not a

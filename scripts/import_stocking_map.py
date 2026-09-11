@@ -65,6 +65,7 @@ PHOTOS_CSV = ROOT / "data" / "raw" / "mywildalberta_photos.csv"
 ISSUES_CSV = ROOT / "data" / "raw" / "mywildalberta_issues.csv"
 DESCRIPTIONS_CSV = ROOT / "data" / "raw" / "mywildalberta_descriptions.csv"
 OUT_OF_SCOPE_CSV = ROOT / "data" / "out_of_scope.csv"
+ACA_ROSTER = ROOT / "data" / "aca_aeration_roster.csv"
 
 # The header sits on row 5 of every data sheet; rows 1-4 are the title block.
 HEADER_ROW = 5
@@ -276,7 +277,32 @@ def waterbody_rows(waterbodies, details, by_id, refused_positions):
     return rows
 
 
-def aerated_rows(waterbodies, captioned):
+def load_aca_roster(by_id):
+    """The lakes ACA publishes as being on its Lake Aeration Program.
+
+    Hand-owned, like data/lake_aliases.csv, because it comes from a person
+    reading ACA's own roster rather than from anything in the workbook. Alberta
+    lake pages name twelve aerated lakes; ACA's roster names twenty-two, and the
+    two lists only partly overlap — Camp 9 Trout Pond and Salter's Lake are
+    stated by Alberta and absent from ACA's, which is what you would expect of a
+    fish-and-game club windmill that is not part of the province's programme.
+
+    Keyed on lake_id and not on name: Swan Lake, Spring Lake and Birch Lake are
+    each one of several in Alberta, and a name alone would pick the wrong water.
+    """
+    if not ACA_ROSTER.exists():
+        return {}
+    out = {}
+    with ACA_ROSTER.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            lake_id = (row.get("lake_id") or "").strip()
+            if lake_id:
+                out[lake_id] = row
+    by_lake_id = {v.get("lake_id"): k for k, v in by_id.items() if v.get("lake_id")}
+    return {by_lake_id[lid]: row for lid, row in out.items() if lid in by_lake_id}
+
+
+def aerated_rows(waterbodies, captioned, roster):
     """Aeration, with how strongly it is known kept beside it.
 
     Alberta's lake descriptions name twelve. Two more appear only in a
@@ -293,9 +319,16 @@ def aerated_rows(waterbodies, captioned):
         wid = cell_text(row.get("Lake ID"))
         name = cell_text(row.get("Waterbody name"))
         evidence = published(row.get("Aeration evidence / notes"))
+        listed = roster.get(wid)
         if cell_text(row.get("Aerated")) == "Yes":
             rows.append({"waterbody_id": wid, "name": name, "confidence": "stated",
                          "evidence": evidence or "the lake description says so"})
+        elif listed:
+            rows.append({"waterbody_id": wid, "name": name,
+                         "confidence": "published_list",
+                         "evidence": f"ACA's Lake Aeration Program roster, as "
+                                     f"{listed['on_the_roster_as']}"
+                                     + (f" — {listed['note']}" if listed.get("note") else "")})
         elif wid in captioned:
             rows.append({"waterbody_id": wid, "name": name,
                          "confidence": CAPTION_ONLY_EVIDENCE,
@@ -423,7 +456,8 @@ def build():
         LAKES_CSV: render(fields, waterbody_rows(waterbodies, details, by_id, refused),
                           by_waterbody),
         AERATED_CSV: render(["waterbody_id", "name", "confidence", "evidence"],
-                            aerated_rows(waterbodies, captioned), by_waterbody),
+                            aerated_rows(waterbodies, captioned, load_aca_roster(by_id)),
+                            by_waterbody),
         PHOTOS_CSV: render(["waterbody_id", "lake_id", "caption", "url"],
                            photo_rows(photos, by_id),
                            lambda r: (by_waterbody(r), r["caption"])),
