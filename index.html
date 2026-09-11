@@ -108,6 +108,15 @@
     M71 a water temperature you measured overrides the model, is remembered per
         lake, and works with no signal — the one input that helps most exactly
         where the app can do least
+    M72 aeration known one lake at a time: Alberta names the lakes it aerates
+        and says nothing about the rest, so absence from that list is never
+        reported as "not aerated"
+    M73 a mean depth Alberta publishes, shown beside the maximum it publishes
+    M74 a mean depth nobody published, shown as a band on its own line, marked
+        estimated next to the number, and never allowed to change the summer
+        layer or the winterkill band
+    M75 a published mean deeper than the published maximum is shown as nothing:
+        one of the two is wrong and there is no way to tell which
 -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2b2e2a">
@@ -392,6 +401,10 @@
   #advisory-list a { color: var(--ink-dim); text-decoration: none; }
   #advisory-list a:hover { color: var(--ink); }
   .lake-popup .depth-row { font-size: 11px; color: var(--ink-dim); margin-bottom: 5px; }
+  /* A derived figure never shares a line with a measured one. Its own row,
+     italic, and the word "estimated" adjacent to the number itself. */
+  .lake-popup .est-row { font-size: 11px; color: var(--ink-dim); margin-bottom: 5px;
+    font-style: italic; opacity: .85; }
   .lake-popup .dim { color: var(--ink-dim); }
   .lake-popup .wk-row { font-size: 11px; margin-bottom: 7px; display: flex;
     align-items: baseline; gap: 6px; flex-wrap: wrap; }
@@ -1376,13 +1389,31 @@ function depthFor(lake) {
 function depthBlock(lake) {
   const d = depthFor(lake);
   if (!d) return "";
+  const mean = d.mean_depth;
+  const measuredMean = mean && mean.m != null;
+
   if (d.max_depth_m == null) {
+    /* Five lakes publish an average depth and no maximum. That is a fact and
+     * it is shown, but it unlocks nothing: the summer layer and the winterkill
+     * band are both set by how deep the lake gets, not how deep it is on
+     * average, so neither appears here and neither should. */
+    if (measuredMean) {
+      return `<div class="depth-row"><span><span class="profile-label">Mean depth</span>
+        ${esc(mean.m)} m</span> &nbsp;·&nbsp; <span class="dim">Alberta publishes no
+        maximum depth for this lake</span></div>`;
+    }
     return d.depth_stated_unavailable
       ? `<div class="depth-row"><span class="profile-label">Depth</span>
            <span class="dim">Alberta lists no depth for this lake</span></div>`
       : "";
   }
   const parts = [`<span><span class="profile-label">Max depth</span> ${esc(d.max_depth_m)} m</span>`];
+  /* A measured mean sits beside the measured maximum. An estimated one never
+   * does — it gets its own row below, so the two can never be read as equally
+   * firm by glancing along a line. */
+  if (measuredMean) {
+    parts.push(`<span><span class="profile-label">Mean depth</span> ${esc(mean.m)} m</span>`);
+  }
   const strat = d.stratification;
   if (strat && strat.stratifies) {
     parts.push(`<span><span class="profile-label">Summer layer</span> about ${strat.band_m[0]}–${strat.band_m[1]} m</span>`);
@@ -1390,6 +1421,21 @@ function depthBlock(lake) {
     parts.push(`<span class="dim">${esc(strat.why)}</span>`);
   }
   let html = `<div class="depth-row">${parts.join(" &nbsp;·&nbsp; ")}</div>`;
+
+  /* Estimated, and said so next to the number rather than in a footnote. The
+   * band is wide because the relationship it rests on is weak, and the width
+   * is the honest part of it. A mean deeper than the maximum is shown as
+   * nothing at all: one of the two published numbers is wrong and there is no
+   * way to tell which, so neither is repeated here. */
+  if (mean && mean.range_m) {
+    /* Short on purpose: this line repeats on 59 lakes, and the two words that
+     * matter are "estimated" and "not measured". How the band was drawn and how
+     * often it holds are in lake_depth.json and the README, for anyone who
+     * wants to check rather than be told every time. */
+    html += `<div class="est-row"><span class="profile-label">Mean depth</span>
+      probably ${esc(mean.range_m[0])}–${esc(mean.range_m[1])} m — estimated from the
+      maximum, not measured</div>`;
+  }
 
   const wk = d.winterkill;
   if (wk) {

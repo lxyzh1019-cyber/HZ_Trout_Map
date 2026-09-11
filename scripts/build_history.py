@@ -535,6 +535,10 @@ def write_depths(reg):
               f"for the rest")
     else:
         print("  no aerated-lake list present; winterkill uses depth alone")
+    print(f"  mean depth: {stats['mean_published']} published, "
+          f"{stats['mean_estimated']} estimated as a range"
+          + (f", {stats['mean_contradicted']} refused for contradicting the maximum"
+             if stats["mean_contradicted"] else ""))
     if stats["aeration_photo_only"]:
         print(f"  {stats['aeration_photo_only']} with aeration seen only in a photo, "
               f"shown but not counted")

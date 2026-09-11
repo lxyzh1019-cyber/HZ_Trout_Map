@@ -4,6 +4,7 @@ import json
 import re
 import statistics
 import unittest
+import unittest.mock
 from pathlib import Path
 
 import ats
@@ -1500,3 +1501,167 @@ class PublishedWaterbodyIdTests(unittest.TestCase):
         self.assertEqual(str(lake.get("published_waterbody_id")), "6120")
         self.assertLess(abs(lake["lon"] - (-115.43)), 0.1,
                         "Watridge moved to the map's published longitude")
+
+
+class MeanDepthTests(unittest.TestCase):
+    """A mean depth Alberta published, and one nobody did.
+
+    The second kind is the first derived quantity this repo publishes, so the
+    rules around it are the point of these tests: it is never stored where a
+    measurement is stored, and it can never change a word of the advice.
+    """
+
+    def test_a_published_mean_is_carried_through_unchanged(self):
+        import depth
+        self.assertEqual(depth.mean_depth(7.0, 4.0),
+                         {"m": 4.0, "source": "mywildalberta"})
+
+    def test_a_mean_deeper_than_the_max_is_refused_not_repaired(self):
+        """Castor Eastside Trout Pond: 22 m mean against a 7 m max, on 1 ha.
+
+        One of the two numbers is wrong and there is no way to tell which, so
+        the implausible one is dropped and the other kept. Swapping them would
+        not be a repair, only a different guess, and a one-hectare pond is
+        neither 22 m deep nor 7 m deep on average.
+        """
+        import depth
+        found = depth.mean_depth(7.0, 22.0)
+        self.assertEqual(found["source"], "contradicted")
+        self.assertNotIn("m", found)
+        self.assertNotIn("range_m", found)
+        # and no estimate is substituted for it either
+        self.assertIsNone(found.get("range_m"))
+
+    def test_an_estimate_is_never_stored_as_a_measurement(self):
+        """Reading one field must be enough to know which kind it is."""
+        import depth
+        found = depth.mean_depth(7.0, None)
+        self.assertIn("range_m", found)
+        self.assertNotIn("m", found)
+        self.assertEqual(found["source"], "estimated")
+        self.assertIn("from_max_depth_m", found)
+        self.assertIn("method", found)
+
+    def test_the_published_file_keeps_the_two_kinds_apart(self):
+        path = DATA_DIR / "lake_depth.json"
+        if not path.exists():
+            self.skipTest("depth has not been built")
+        lakes = json.loads(path.read_text(encoding="utf-8"))["lakes"]
+        estimated = 0
+        for key, entry in lakes.items():
+            mean = entry.get("mean_depth")
+            if not mean:
+                continue
+            if mean.get("source") == "estimated":
+                estimated += 1
+                self.assertNotIn("m", mean, f"{key} stores an estimate as a measurement")
+                self.assertIn("from_max_depth_m", mean, key)
+            elif mean.get("source") == "mywildalberta":
+                self.assertIn("m", mean, key)
+                self.assertNotIn("range_m", mean, key)
+        self.assertGreater(estimated, 40, "almost nothing was estimated")
+
+    def test_an_estimate_never_changes_the_advice(self):
+        """The decisive rule.
+
+        Every lake an estimate could serve already has a measured maximum, so
+        an estimate can only ever alter advice that already exists — it can
+        never extend it to a lake that had none. Zero upside, in the one place
+        where being wrong puts someone in eight metres of water.
+        """
+        import depth, inspect
+
+        # Neither advice function can even see a mean depth.
+        for fn in (depth.stratification, depth.winterkill):
+            names = list(inspect.signature(fn).parameters)
+            self.assertNotIn("mean_depth_m", names, f"{fn.__name__} takes a mean depth")
+
+        # And end to end: the same lake built with a published mean, with none
+        # (so it is estimated), and with a contradictory one, must produce
+        # byte-identical stratification and winterkill all three times.
+        lakes = [{"lake_id": "wbtest", "waterbody_id": "999001"}]
+        rows = {"999001": {"max_depth_m": 7.0, "surface_area_ha": 40.0,
+                           "stated_unavailable": False}}
+        advice = []
+        for mean in (4.0, None, 22.0):
+            rows["999001"]["mean_depth_m"] = mean
+            with unittest.mock.patch.object(depth, "load_depths", lambda: rows), \
+                 unittest.mock.patch.object(depth, "load_aerated", lambda: (set(), set())):
+                built, _ = depth.build(lakes)
+            entry = built["wbtest"]
+            advice.append((entry["stratification"], entry["winterkill"]))
+            # the mean itself does differ, which is the point of storing it apart
+            self.assertIsNotNone(entry["mean_depth"])
+        self.assertEqual(advice[0], advice[1], "an estimate changed the advice")
+        self.assertEqual(advice[0], advice[2], "a contradiction changed the advice")
+
+    def test_a_band_never_reaches_the_bottom(self):
+        """A lake whose average depth equals its maximum has vertical sides."""
+        import depth
+        for max_depth in (2.0, 5.0, 7.0, 12.0, 65.0):
+            found = depth.mean_depth(max_depth, None)
+            if not found:
+                continue
+            low, high = found["range_m"]
+            self.assertLess(low, high, max_depth)
+            self.assertLess(high, max_depth, f"{max_depth} m band reaches the bottom")
+            self.assertGreater(low, 0, max_depth)
+
+    def test_a_pond_too_shallow_to_say_anything_about_gets_no_band(self):
+        import depth
+        self.assertIsNone(depth.mean_depth(1.0, None))
+
+    def test_the_estimator_is_still_as_good_as_it_claims(self):
+        """Leave one lake out, predict it from the rest, and measure the miss.
+
+        Re-derived from the committed CSV rather than trusted from a comment,
+        the same way the coordinate test re-measures the survey-grid error. The
+        README quotes 25%; this fails if it drifts past 30%.
+        """
+        import statistics
+        csv_path = ROOT / "data" / "raw" / "mywildalberta_lakes.csv"
+        if not csv_path.exists():
+            self.skipTest("the collected CSV is not present")
+        pairs = []
+        with csv_path.open(newline="", encoding="utf-8") as handle:
+            for row in csv.DictReader(handle):
+                try:
+                    mx, mn = float(row["max_depth_m"]), float(row["mean_depth_m"])
+                except ValueError:
+                    continue
+                if mn <= mx:
+                    pairs.append((mx, mn))
+        self.assertGreater(len(pairs), 40, "too few pairs to measure anything")
+        errors = []
+        for i, (mx, mn) in enumerate(pairs):
+            others = [b / a for j, (a, b) in enumerate(pairs) if j != i]
+            errors.append(abs(mx * statistics.median(others) - mn) / mn)
+        self.assertLess(statistics.median(errors), 0.30,
+                        f"median relative error is now {statistics.median(errors):.0%}")
+
+    def test_the_published_band_matches_the_ratios_it_claims_to_come_from(self):
+        """The constants are hard-coded; this checks they still describe the data."""
+        import depth, statistics
+        csv_path = ROOT / "data" / "raw" / "mywildalberta_lakes.csv"
+        if not csv_path.exists():
+            self.skipTest("the collected CSV is not present")
+        ratios = []
+        with csv_path.open(newline="", encoding="utf-8") as handle:
+            for row in csv.DictReader(handle):
+                try:
+                    mx, mn = float(row["max_depth_m"]), float(row["mean_depth_m"])
+                except ValueError:
+                    continue
+                if mn <= mx:
+                    ratios.append(mn / mx)
+        ratios.sort()
+        def percentile(p):
+            i = p * (len(ratios) - 1)
+            lo = int(i)
+            hi = min(lo + 1, len(ratios) - 1)
+            return ratios[lo] + (i - lo) * (ratios[hi] - ratios[lo])
+        self.assertAlmostEqual(depth.MEAN_MAX_RATIO_LOW, percentile(0.10), places=1)
+        self.assertAlmostEqual(depth.MEAN_MAX_RATIO_HIGH, percentile(0.90), places=1)
+        inside = sum(1 for r in ratios
+                     if depth.MEAN_MAX_RATIO_LOW <= r <= depth.MEAN_MAX_RATIO_HIGH)
+        self.assertAlmostEqual(inside / len(ratios), depth.MEAN_ESTIMATE_COVERS, places=1)

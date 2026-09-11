@@ -322,6 +322,8 @@ metres down in three metres of water is a real harm.
 | | lakes |
 | --- | --- |
 | a maximum depth is published | 109 |
+| an average depth is published | 54 |
+| an average depth is estimated from the maximum | 59 |
 | deep enough to form a summer layer | 83 |
 | the province aerates it | 12 |
 | nothing is published, so nothing is shown | the rest |
@@ -360,7 +362,55 @@ being careful in.
 **A contradiction is refused, not repaired.** Castor Eastside Trout Pond
 publishes a mean depth of 22 m against a maximum of 7 m on a one-hectare pond.
 The maximum is kept and the mean is dropped. Swapping them would not be a
-repair, only a different guess.
+repair, only a different guess, and a pond that size is neither.
+
+**Five lakes publish an average depth and no maximum.** The average is shown,
+because it is a fact. It unlocks nothing: both the summer layer and the
+winterkill band are set by how deep a lake *gets*, not how deep it is on
+average, so neither appears for those five. The ratio is not inverted to guess
+a maximum either — the inverse is worse in the tail, and the maximum is the
+number that decides whether to fish eight metres down, where over-estimating is
+the harmful direction.
+
+### The one estimated number in the repo
+
+Where Alberta publishes a maximum depth and no average, the average is shown as
+a **band**, never as a figure, and the band is a restatement of Alberta's own
+published pairs rather than a model of anything.
+
+Fifty-five lakes publish both depths. Across them the average runs between
+**0.39 and 0.97 of the maximum** (median 0.64), and a band drawn at those outer
+percentiles contains **78%** of them. Held out one lake at a time, the median
+ratio misses the true average by **25%**, and by 70% for the worst tenth.
+
+So the band is wide — a 7 m lake reads "probably 2.7–6.8 m" — and the width is
+the honest part. It is on its own line in the popup, in italics, with the word
+*estimated* beside the number rather than in a footnote, so it can never be
+read as equally firm by glancing along a line.
+
+Three rules hold it in place, each with a test:
+
+- **It is never stored where a measurement is stored.** A published average is
+  `{"m": 4.0}`; an estimated one is `{"range_m": [2.7, 6.8]}`. Reading one field
+  is enough to know which kind it is.
+- **It never changes the advice.** `stratification()` and `winterkill()` take
+  the measured maximum and nothing else — they cannot see an average at all.
+  Every lake an estimate could serve already has a measured maximum, so an
+  estimate could only ever *alter* advice that already exists, never extend it
+  to a lake that had none. Zero upside, in the one place where being wrong puts
+  someone in eight metres of water.
+- **The band cannot reach the bottom.** A lake whose average depth equals its
+  maximum has vertical sides.
+
+Splitting the ratio at 6 m does measurably better — 20% median error against
+25%, and 82% coverage against 78% — but the 6 m threshold was chosen by eye
+from these same 55 lakes and one side of it holds only 20 of them. That is
+fitting the split to the sample, so it is recorded here and not used.
+
+**A maximum depth is never estimated.** The only thing available to predict it
+from is surface area, and across the 114 lakes publishing both, the log-log
+correlation is 0.23. That is noise. The 225 lakes with no depth at all keep
+showing nothing.
 
 
 ## Tests

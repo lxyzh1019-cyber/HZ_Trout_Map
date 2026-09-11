@@ -4,6 +4,7 @@
   "lk0006": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.2,
@@ -12,6 +13,7 @@
   "lk0007": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 6.7,
@@ -20,6 +22,7 @@
   "lk0008": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -28,6 +31,7 @@
   "lk0009": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -36,6 +40,7 @@
   "lk0010": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -44,6 +49,7 @@
   "lk0011": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -52,6 +58,7 @@
   "lk0012": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -60,6 +67,7 @@
   "lk0013": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -68,6 +76,7 @@
   "wb17894": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.0,
@@ -76,6 +85,7 @@
   "wb18007": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 503.2,
@@ -84,6 +94,7 @@
   "wb18019": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 3.0,
@@ -92,6 +103,7 @@
   "wb18020": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.0,
@@ -100,6 +112,10 @@
   "wb18022": {
    "depth_stated_unavailable": false,
    "max_depth_m": 7.0,
+   "mean_depth": {
+    "source": "contradicted",
+    "why": "the published mean of 22 m is deeper than the published maximum of 7 m"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -127,6 +143,7 @@
   "wb18997": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 7.0,
@@ -135,6 +152,17 @@
   "wb19525": {
    "depth_stated_unavailable": false,
    "max_depth_m": 65.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 65.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     25.4,
+     63.0
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -162,6 +190,7 @@
   "wb19760": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.9,
@@ -171,6 +200,7 @@
    "aeration_photo_only": true,
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.4,
@@ -179,6 +209,17 @@
   "wb20267": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.1,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.1,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.4,
+     5.9
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -206,6 +247,17 @@
   "wb21137": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -233,6 +285,7 @@
   "wb2129": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -242,6 +295,7 @@
    "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 7.0,
@@ -250,6 +304,7 @@
   "wb21353": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 4.0,
@@ -258,6 +313,7 @@
   "wb22504": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 7.0,
@@ -266,6 +322,7 @@
   "wb22993": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.3,
@@ -274,6 +331,17 @@
   "wb22995": {
    "depth_stated_unavailable": false,
    "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 4.0,
@@ -297,6 +365,7 @@
   "wb22996": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -305,6 +374,17 @@
   "wb23292": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.5,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.5,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.1,
+     5.3
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -332,6 +412,7 @@
   "wb23293": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.3,
@@ -340,6 +421,17 @@
   "wb23789": {
    "depth_stated_unavailable": false,
    "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 4.0,
@@ -363,6 +455,17 @@
   "wb23790": {
    "depth_stated_unavailable": false,
    "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 4.0,
@@ -386,6 +489,7 @@
   "wb23791": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 7.5,
@@ -395,6 +499,10 @@
    "aeration_photo_only": true,
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.0,
@@ -403,6 +511,17 @@
   "wb24312": {
    "depth_stated_unavailable": false,
    "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 4.0,
@@ -427,6 +546,17 @@
    "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": 7.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 7.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.7,
+     6.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -455,6 +585,17 @@
   "wb24702": {
    "depth_stated_unavailable": false,
    "max_depth_m": 8.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 8.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     3.1,
+     7.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -482,6 +623,7 @@
   "wb26033": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.8,
@@ -490,6 +632,7 @@
   "wb26047": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -498,6 +641,7 @@
   "wb26322": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.0,
@@ -506,6 +650,10 @@
   "wb26431": {
    "depth_stated_unavailable": false,
    "max_depth_m": 4.4,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 4.4,
@@ -529,6 +677,10 @@
   "wb26447": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -556,6 +708,17 @@
   "wb26729": {
    "depth_stated_unavailable": false,
    "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 4.0,
@@ -579,6 +742,7 @@
   "wb26854": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 4.8,
@@ -587,6 +751,7 @@
   "wb318138": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 53.0,
@@ -595,6 +760,7 @@
   "wb328085": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 8.0,
@@ -603,6 +769,7 @@
   "wb3476": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.5,
@@ -611,6 +778,7 @@
   "wb3479": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 3.3,
@@ -619,6 +787,7 @@
   "wb3482": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.6,
@@ -627,6 +796,17 @@
   "wb3485": {
    "depth_stated_unavailable": false,
    "max_depth_m": 2.7,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 2.7,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.1,
+     2.6
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 2.7,
@@ -650,6 +830,7 @@
   "wb3486": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 3.6,
@@ -658,6 +839,10 @@
   "wb3494": {
    "depth_stated_unavailable": false,
    "max_depth_m": 13.3,
+   "mean_depth": {
+    "m": 6.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -685,6 +870,10 @@
   "wb3499": {
    "depth_stated_unavailable": false,
    "max_depth_m": 9.1,
+   "mean_depth": {
+    "m": 9.1,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -712,6 +901,7 @@
   "wb3522": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.9,
@@ -720,6 +910,17 @@
   "wb3523": {
    "depth_stated_unavailable": false,
    "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 4.0,
@@ -743,6 +944,10 @@
   "wb3524": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -770,6 +975,10 @@
   "wb3534": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 2.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -797,6 +1006,7 @@
   "wb3899": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 4.9,
@@ -805,6 +1015,7 @@
   "wb3909": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 3.5,
@@ -813,6 +1024,7 @@
   "wb3948": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.8,
@@ -821,6 +1033,7 @@
   "wb395186": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.0,
@@ -829,6 +1042,7 @@
   "wb395196": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 4.0,
@@ -837,6 +1051,17 @@
   "wb4005": {
    "depth_stated_unavailable": false,
    "max_depth_m": 10.3,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 10.3,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     4.0,
+     10.0
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -864,6 +1089,17 @@
   "wb4011": {
    "depth_stated_unavailable": false,
    "max_depth_m": 10.7,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 10.7,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     4.2,
+     10.4
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -892,6 +1128,17 @@
    "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": 9.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 9.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     3.5,
+     8.7
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -920,6 +1167,17 @@
   "wb4018": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.5,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.5,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.1,
+     5.3
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 5.5,
@@ -943,6 +1201,17 @@
   "wb4061": {
    "depth_stated_unavailable": false,
    "max_depth_m": 10.3,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 10.3,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     4.0,
+     10.0
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -970,6 +1239,7 @@
   "wb4159": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.7,
@@ -978,6 +1248,7 @@
   "wb4167": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 9.3,
@@ -986,6 +1257,7 @@
   "wb4171": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 3.4,
@@ -994,6 +1266,7 @@
   "wb417476": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -1002,6 +1275,7 @@
   "wb417477": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.7,
@@ -1010,6 +1284,10 @@
   "wb4208": {
    "depth_stated_unavailable": false,
    "max_depth_m": 7.2,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1037,6 +1315,7 @@
   "wb4221": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -1045,6 +1324,7 @@
   "wb4231": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 31.6,
@@ -1053,6 +1333,10 @@
   "wb4252": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 5.0,
@@ -1076,6 +1360,10 @@
   "wb4261": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1103,6 +1391,7 @@
   "wb4318": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.8,
@@ -1111,6 +1400,10 @@
   "wb4340": {
    "depth_stated_unavailable": false,
    "max_depth_m": 3.0,
+   "mean_depth": {
+    "m": 2.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 3.0,
@@ -1134,6 +1427,7 @@
   "wb4374": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 126.6,
@@ -1142,6 +1436,17 @@
   "wb4426": {
    "depth_stated_unavailable": false,
    "max_depth_m": 7.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 7.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.7,
+     6.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1169,6 +1474,17 @@
   "wb4446": {
    "depth_stated_unavailable": false,
    "max_depth_m": 10.7,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 10.7,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     4.2,
+     10.4
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1196,6 +1512,10 @@
   "wb4458": {
    "depth_stated_unavailable": false,
    "max_depth_m": 9.0,
+   "mean_depth": {
+    "m": 9.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1224,6 +1544,7 @@
    "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.9,
@@ -1232,6 +1553,7 @@
   "wb4488": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 13.8,
@@ -1240,6 +1562,7 @@
   "wb4495": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 15.2,
@@ -1248,6 +1571,17 @@
   "wb4505": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.6,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.6,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.2,
+     5.4
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1275,6 +1609,7 @@
   "wb4532": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 3.5,
@@ -1283,6 +1618,7 @@
   "wb4535": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 17.0,
@@ -1291,6 +1627,17 @@
   "wb4539": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.8,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.8,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.7,
+     6.6
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1318,6 +1665,17 @@
   "wb4562": {
    "depth_stated_unavailable": false,
    "max_depth_m": 7.6,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 7.6,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     3.0,
+     7.4
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1345,6 +1703,7 @@
   "wb4564": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -1353,6 +1712,7 @@
   "wb4614": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 3.1,
@@ -1361,6 +1721,7 @@
   "wb4642": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.7,
@@ -1369,6 +1730,7 @@
   "wb4647": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 12.2,
@@ -1377,6 +1739,7 @@
   "wb4697": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 18.8,
@@ -1385,6 +1748,10 @@
   "wb4725": {
    "depth_stated_unavailable": false,
    "max_depth_m": 10.8,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1412,6 +1779,10 @@
   "wb4794": {
    "depth_stated_unavailable": false,
    "max_depth_m": 14.0,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1439,6 +1810,7 @@
   "wb4806": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -1447,6 +1819,7 @@
   "wb4837": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.9,
@@ -1455,6 +1828,7 @@
   "wb4854": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 6.2,
@@ -1463,6 +1837,7 @@
   "wb4888": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.1,
@@ -1471,6 +1846,7 @@
   "wb4897": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -1479,6 +1855,7 @@
   "wb4909": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 49.5,
@@ -1487,6 +1864,10 @@
   "wb4920": {
    "depth_stated_unavailable": false,
    "max_depth_m": 4.5,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 4.5,
@@ -1510,6 +1891,17 @@
   "wb4935": {
    "depth_stated_unavailable": false,
    "max_depth_m": 21.3,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 21.3,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     8.3,
+     20.7
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1537,6 +1929,7 @@
   "wb4944": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 71.8,
@@ -1545,6 +1938,10 @@
   "wb5002": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.0,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1572,6 +1969,7 @@
   "wb5029": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 50.9,
@@ -1580,6 +1978,10 @@
   "wb5050": {
    "depth_stated_unavailable": false,
    "max_depth_m": 7.0,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1607,6 +2009,7 @@
   "wb5074": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 3.5,
@@ -1615,6 +2018,7 @@
   "wb5078": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -1623,6 +2027,10 @@
   "wb5093": {
    "depth_stated_unavailable": false,
    "max_depth_m": 10.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1650,6 +2058,7 @@
   "wb5149": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 3.3,
@@ -1658,6 +2067,7 @@
   "wb5158": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.2,
@@ -1666,6 +2076,7 @@
   "wb5179": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -1674,6 +2085,7 @@
   "wb5223": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 6.1,
@@ -1682,6 +2094,7 @@
   "wb5232": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 32.1,
@@ -1690,6 +2103,17 @@
   "wb5245": {
    "depth_stated_unavailable": false,
    "max_depth_m": 13.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 13.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     5.1,
+     12.6
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1717,6 +2141,7 @@
   "wb5253": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 125.0,
@@ -1725,6 +2150,7 @@
   "wb5286": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -1734,6 +2160,7 @@
    "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 37.1,
@@ -1742,6 +2169,10 @@
   "wb5348": {
    "depth_stated_unavailable": false,
    "max_depth_m": 7.3,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1769,6 +2200,10 @@
   "wb5360": {
    "depth_stated_unavailable": false,
    "max_depth_m": 3.0,
+   "mean_depth": {
+    "m": 2.8,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 3.0,
@@ -1792,6 +2227,10 @@
   "wb5387": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.0,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1819,6 +2258,7 @@
   "wb5407": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 34.8,
@@ -1827,6 +2267,10 @@
   "wb5466": {
    "depth_stated_unavailable": false,
    "max_depth_m": 7.0,
+   "mean_depth": {
+    "m": 3.6,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1854,6 +2298,7 @@
   "wb5467": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -1862,6 +2307,7 @@
   "wb5476": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 18.6,
@@ -1870,6 +2316,10 @@
   "wb5504": {
    "depth_stated_unavailable": false,
    "max_depth_m": 4.0,
+   "mean_depth": {
+    "m": 3.5,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 4.0,
@@ -1893,6 +2343,7 @@
   "wb5513": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 219.2,
@@ -1901,6 +2352,7 @@
   "wb5521": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 27.0,
@@ -1909,6 +2361,10 @@
   "wb5538": {
    "depth_stated_unavailable": false,
    "max_depth_m": 10.5,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1936,6 +2392,7 @@
   "wb5555": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 11.6,
@@ -1944,6 +2401,10 @@
   "wb5565": {
    "depth_stated_unavailable": false,
    "max_depth_m": 4.0,
+   "mean_depth": {
+    "m": 3.3,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 4.0,
@@ -1967,6 +2428,17 @@
   "wb5568": {
    "depth_stated_unavailable": false,
    "max_depth_m": 13.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 13.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     5.1,
+     12.6
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -1994,6 +2466,10 @@
   "wb5569": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.9,
+   "mean_depth": {
+    "m": 4.8,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2021,6 +2497,7 @@
   "wb5572": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 53.4,
@@ -2029,6 +2506,10 @@
   "wb5661": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 5.0,
@@ -2052,6 +2533,7 @@
   "wb5667": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 7.0,
@@ -2060,6 +2542,7 @@
   "wb5714": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 29.7,
@@ -2069,6 +2552,10 @@
    "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2097,6 +2584,7 @@
   "wb5753": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 42.0,
@@ -2105,6 +2593,7 @@
   "wb5766": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 9.3,
@@ -2113,6 +2602,7 @@
   "wb5788": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.9,
@@ -2121,6 +2611,7 @@
   "wb5804": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 51.4,
@@ -2129,6 +2620,7 @@
   "wb5805": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.2,
@@ -2137,6 +2629,7 @@
   "wb5858": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 6.0,
@@ -2145,6 +2638,10 @@
   "wb5874": {
    "depth_stated_unavailable": false,
    "max_depth_m": 9.1,
+   "mean_depth": {
+    "m": 1.9,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2172,6 +2669,10 @@
   "wb5895": {
    "depth_stated_unavailable": false,
    "max_depth_m": 7.6,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2199,6 +2700,7 @@
   "wb5901": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.9,
@@ -2207,6 +2709,7 @@
   "wb5919": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 297.0,
@@ -2215,6 +2718,7 @@
   "wb5929": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 53.0,
@@ -2223,6 +2727,7 @@
   "wb5944": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 162.7,
@@ -2231,6 +2736,7 @@
   "wb5968": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 4.9,
@@ -2239,6 +2745,7 @@
   "wb5971": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 114.4,
@@ -2247,6 +2754,7 @@
   "wb5990": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 33.2,
@@ -2255,6 +2763,7 @@
   "wb6039": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 27.5,
@@ -2263,6 +2772,17 @@
   "wb6044": {
    "depth_stated_unavailable": false,
    "max_depth_m": 9.9,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 9.9,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     3.9,
+     9.6
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2290,6 +2810,7 @@
   "wb6051": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -2298,6 +2819,7 @@
   "wb6061": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 846.4,
@@ -2306,6 +2828,7 @@
   "wb6082": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.9,
@@ -2314,6 +2837,7 @@
   "wb6086": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 72.4,
@@ -2322,6 +2846,10 @@
   "wb6160": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 3.2,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2349,6 +2877,7 @@
   "wb6173": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.6,
@@ -2358,6 +2887,7 @@
    "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 7.3,
@@ -2366,6 +2896,7 @@
   "wb6525": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 8.3,
@@ -2374,6 +2905,10 @@
   "wb6528": {
    "depth_stated_unavailable": false,
    "max_depth_m": 8.0,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2401,6 +2936,7 @@
   "wb6530": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -2409,6 +2945,17 @@
   "wb6533": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2436,6 +2983,7 @@
   "wb6534": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 15.8,
@@ -2444,6 +2992,17 @@
   "wb6535": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.3,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.3,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.1,
+     5.1
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2471,6 +3030,7 @@
   "wb6537": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 25.4,
@@ -2479,6 +3039,7 @@
   "wb6541": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 0.8,
@@ -2487,6 +3048,7 @@
   "wb6598": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -2495,6 +3057,7 @@
   "wb6601": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 24.5,
@@ -2503,6 +3066,7 @@
   "wb6605": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.0,
@@ -2511,6 +3075,7 @@
   "wb6606": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.2,
@@ -2519,6 +3084,7 @@
   "wb6607": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 0.4,
@@ -2527,6 +3093,7 @@
   "wb6608": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 4.0,
@@ -2535,6 +3102,17 @@
   "wb6609": {
    "depth_stated_unavailable": false,
    "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 4.0,
@@ -2558,6 +3136,7 @@
   "wb6610": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -2566,6 +3145,17 @@
   "wb6613": {
    "depth_stated_unavailable": false,
    "max_depth_m": 4.9,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.9,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.9,
+     4.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 4.9,
@@ -2589,6 +3179,7 @@
   "wb6614": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 11.2,
@@ -2598,6 +3189,7 @@
    "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 4.7,
@@ -2606,6 +3198,7 @@
   "wb6618": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -2614,6 +3207,7 @@
   "wb6619": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.3,
@@ -2622,6 +3216,17 @@
   "wb6620": {
    "depth_stated_unavailable": false,
    "max_depth_m": 3.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 3.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.2,
+     2.9
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 3.0,
@@ -2645,6 +3250,7 @@
   "wb6622": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.0,
@@ -2653,6 +3259,7 @@
   "wb6623": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.2,
@@ -2661,6 +3268,17 @@
   "wb6625": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2688,6 +3306,7 @@
   "wb6626": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 0.9,
@@ -2696,6 +3315,7 @@
   "wb6635": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 19.6,
@@ -2704,6 +3324,10 @@
   "wb6636": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.0,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2731,6 +3355,7 @@
   "wb6637": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.7,
@@ -2739,6 +3364,17 @@
   "wb6638": {
    "depth_stated_unavailable": false,
    "max_depth_m": 12.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 12.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     4.7,
+     11.6
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2766,6 +3402,17 @@
   "wb6642": {
    "depth_stated_unavailable": false,
    "max_depth_m": 10.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 10.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     3.9,
+     9.7
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2793,6 +3440,7 @@
   "wb6647": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.5,
@@ -2801,6 +3449,7 @@
   "wb6651": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.1,
@@ -2809,6 +3458,7 @@
   "wb6652": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 149.0,
@@ -2817,6 +3467,7 @@
   "wb6655": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -2825,6 +3476,7 @@
   "wb6658": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.6,
@@ -2833,6 +3485,7 @@
   "wb6659": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.1,
@@ -2841,6 +3494,10 @@
   "wb6662": {
    "depth_stated_unavailable": false,
    "max_depth_m": 7.3,
+   "mean_depth": {
+    "m": 2.1,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2868,6 +3525,7 @@
   "wb6668": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.8,
@@ -2876,6 +3534,17 @@
   "wb6669": {
    "depth_stated_unavailable": false,
    "max_depth_m": 8.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 8.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     3.1,
+     7.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2903,6 +3572,7 @@
   "wb6670": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.4,
@@ -2911,6 +3581,17 @@
   "wb6671": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.4,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.4,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.1,
+     5.2
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2938,6 +3619,7 @@
   "wb6674": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.4,
@@ -2946,6 +3628,7 @@
   "wb6677": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -2954,6 +3637,7 @@
   "wb6682": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.9,
@@ -2962,6 +3646,17 @@
   "wb6684": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.3,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.3,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.5,
+     6.1
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -2989,6 +3684,7 @@
   "wb6686": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.9,
@@ -2997,6 +3693,7 @@
   "wb6688": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 10.6,
@@ -3005,6 +3702,7 @@
   "wb6692": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 49.0,
@@ -3013,6 +3711,7 @@
   "wb6693": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 40.1,
@@ -3021,6 +3720,17 @@
   "wb6695": {
    "depth_stated_unavailable": false,
    "max_depth_m": 7.6,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 7.6,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     3.0,
+     7.4
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3048,6 +3758,17 @@
   "wb6697": {
    "depth_stated_unavailable": false,
    "max_depth_m": 7.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 7.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.7,
+     6.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3075,6 +3796,10 @@
   "wb6699": {
    "depth_stated_unavailable": false,
    "max_depth_m": 7.6,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3102,6 +3827,7 @@
   "wb6702": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.5,
@@ -3110,6 +3836,17 @@
   "wb6705": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3137,6 +3874,10 @@
   "wb6706": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 10.0,
@@ -3145,6 +3886,7 @@
   "wb6714": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 13.2,
@@ -3153,6 +3895,7 @@
   "wb6718": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 7.0,
@@ -3161,6 +3904,17 @@
   "wb6721": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.0,
+     4.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3188,6 +3942,7 @@
   "wb6724": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 4.0,
@@ -3196,6 +3951,10 @@
   "wb6726": {
    "depth_stated_unavailable": false,
    "max_depth_m": 11.0,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3223,6 +3982,7 @@
   "wb6730": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 14.3,
@@ -3231,6 +3991,7 @@
   "wb6732": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.1,
@@ -3239,6 +4000,7 @@
   "wb6734": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 6.1,
@@ -3247,6 +4009,17 @@
   "wb6735": {
    "depth_stated_unavailable": false,
    "max_depth_m": 13.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 13.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     5.1,
+     12.6
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3274,6 +4047,7 @@
   "wb6736": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.8,
@@ -3282,6 +4056,17 @@
   "wb6737": {
    "depth_stated_unavailable": false,
    "max_depth_m": 15.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 15.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     5.9,
+     14.5
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3309,6 +4094,7 @@
   "wb6741": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 23.1,
@@ -3317,6 +4103,7 @@
   "wb6746": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 4.1,
@@ -3325,6 +4112,7 @@
   "wb6750": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 24.1,
@@ -3333,6 +4121,17 @@
   "wb6753": {
    "depth_stated_unavailable": false,
    "max_depth_m": 7.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 7.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.7,
+     6.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3360,6 +4159,10 @@
   "wb6755": {
    "depth_stated_unavailable": false,
    "max_depth_m": 7.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3387,6 +4190,7 @@
   "wb6757": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.9,
@@ -3395,6 +4199,7 @@
   "wb6758": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 4.0,
@@ -3403,6 +4208,7 @@
   "wb6760": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 6.0,
@@ -3411,6 +4217,10 @@
   "wb6761": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": {
+    "m": 3.6,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 8.0,
@@ -3419,6 +4229,10 @@
   "wb6764": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.2,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 5.2,
@@ -3442,6 +4256,7 @@
   "wb6765": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.5,
@@ -3450,6 +4265,7 @@
   "wb6767": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -3459,6 +4275,17 @@
    "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": 3.9,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 3.9,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.5,
+     3.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 3.9,
@@ -3483,6 +4310,7 @@
   "wb6773": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 6.0,
@@ -3491,6 +4319,10 @@
   "wb6774": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3518,6 +4350,10 @@
   "wb6776": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": {
+    "m": 2.5,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.4,
@@ -3526,6 +4362,7 @@
   "wb6778": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.1,
@@ -3534,6 +4371,10 @@
   "wb6780": {
    "depth_stated_unavailable": false,
    "max_depth_m": 9.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3561,6 +4402,7 @@
   "wb6784": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.2,
@@ -3569,6 +4411,10 @@
   "wb6785": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": {
+    "m": 2.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 4.0,
@@ -3578,6 +4424,17 @@
    "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": 13.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 13.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     5.1,
+     12.6
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3606,6 +4463,7 @@
   "wb6788": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.5,
@@ -3614,6 +4472,17 @@
   "wb6790": {
    "depth_stated_unavailable": false,
    "max_depth_m": 12.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 12.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     4.7,
+     11.6
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3641,6 +4510,7 @@
   "wb6791": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.2,
@@ -3649,6 +4519,17 @@
   "wb6794": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3676,6 +4557,7 @@
   "wb6795": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.0,
@@ -3684,6 +4566,17 @@
   "wb6796": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.8,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.8,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.6
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3711,6 +4604,10 @@
   "wb6803": {
    "depth_stated_unavailable": false,
    "max_depth_m": 4.5,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 4.5,
@@ -3735,6 +4632,7 @@
    "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.9,
@@ -3743,6 +4641,7 @@
   "wb6808": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 0.8,
@@ -3751,6 +4650,7 @@
   "wb6809": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 8.8,
@@ -3759,6 +4659,7 @@
   "wb6810": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.4,
@@ -3767,6 +4668,7 @@
   "wb6815": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.5,
@@ -3775,6 +4677,7 @@
   "wb6816": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.2,
@@ -3783,6 +4686,7 @@
   "wb6818": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.8,
@@ -3791,6 +4695,7 @@
   "wb6820": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.0,
@@ -3799,6 +4704,7 @@
   "wb6821": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -3807,6 +4713,7 @@
   "wb6822": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -3815,6 +4722,7 @@
   "wb6823": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.8,
@@ -3823,6 +4731,17 @@
   "wb6825": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3850,6 +4769,10 @@
   "wb6827": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.3,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3877,6 +4800,7 @@
   "wb6830": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 6.0,
@@ -3885,6 +4809,7 @@
   "wb6831": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.6,
@@ -3893,6 +4818,10 @@
   "wb6833": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.3,
+   "mean_depth": {
+    "m": 5.5,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3920,6 +4849,7 @@
   "wb6836": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 6.5,
@@ -3928,6 +4858,10 @@
   "wb6840": {
    "depth_stated_unavailable": false,
    "max_depth_m": 8.3,
+   "mean_depth": {
+    "m": 7.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3955,6 +4889,7 @@
   "wb6842": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.5,
@@ -3963,6 +4898,10 @@
   "wb6844": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -3990,6 +4929,17 @@
   "wb6845": {
    "depth_stated_unavailable": false,
    "max_depth_m": 4.5,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.5,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.8,
+     4.4
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 4.5,
@@ -4013,6 +4963,7 @@
   "wb6846": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 8.0,
@@ -4021,6 +4972,7 @@
   "wb6850": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.0,
@@ -4029,6 +4981,7 @@
   "wb6852": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.6,
@@ -4037,6 +4990,7 @@
   "wb6853": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 3.0,
@@ -4046,6 +5000,17 @@
    "aerated": true,
    "depth_stated_unavailable": false,
    "max_depth_m": 5.2,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.2,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.0,
+     5.0
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -4074,6 +5039,7 @@
   "wb6860": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 41.7,
@@ -4082,6 +5048,7 @@
   "wb6861": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 6.0,
@@ -4090,6 +5057,17 @@
   "wb6868": {
    "depth_stated_unavailable": false,
    "max_depth_m": 11.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 11.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     4.3,
+     10.7
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -4117,6 +5095,7 @@
   "wb6871": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 6.5,
@@ -4125,6 +5104,7 @@
   "wb6873": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 13.9,
@@ -4133,6 +5113,10 @@
   "wb6876": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -4160,6 +5144,7 @@
   "wb6878": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": null,
@@ -4168,6 +5153,7 @@
   "wb6879": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 7.0,
@@ -4176,6 +5162,7 @@
   "wb6880": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 3.9,
@@ -4184,6 +5171,7 @@
   "wb6882": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 4.0,
@@ -4192,6 +5180,17 @@
   "wb6884": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.2,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.2,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.0,
+     5.0
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -4219,6 +5218,17 @@
   "wb6890": {
    "depth_stated_unavailable": false,
    "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 4.0,
@@ -4242,6 +5252,10 @@
   "wb6892": {
    "depth_stated_unavailable": false,
    "max_depth_m": 21.0,
+   "mean_depth": {
+    "m": 6.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -4269,6 +5283,7 @@
   "wb6893": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.8,
@@ -4277,6 +5292,17 @@
   "wb6894": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -4304,6 +5330,7 @@
   "wb6897": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 1.8,
@@ -4312,6 +5339,7 @@
   "wb6900": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 13.2,
@@ -4320,6 +5348,17 @@
   "wb6902": {
    "depth_stated_unavailable": false,
    "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 4.0,
@@ -4343,6 +5382,17 @@
   "wb6903": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.8
+    ],
+    "source": "estimated"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -4370,6 +5420,7 @@
   "wb6904": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.3,
@@ -4378,6 +5429,7 @@
   "wb6905": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 12.0,
@@ -4386,6 +5438,7 @@
   "wb6910": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 3.0,
@@ -4394,6 +5447,7 @@
   "wb6914": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 2.0,
@@ -4402,6 +5456,7 @@
   "wb6915": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 7.0,
@@ -4410,6 +5465,7 @@
   "wb6917": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,
+   "mean_depth": null,
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": null,
    "surface_area_ha": 5.0,
@@ -4418,6 +5474,10 @@
   "wb6921": {
    "depth_stated_unavailable": false,
    "max_depth_m": 5.7,
+   "mean_depth": {
+    "m": 5.7,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [
@@ -4445,6 +5505,10 @@
   "wb6922": {
    "depth_stated_unavailable": false,
    "max_depth_m": 2.5,
+   "mean_depth": {
+    "m": 2.5,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "max_depth_m": 2.5,
@@ -4468,6 +5532,10 @@
   "wb6923": {
    "depth_stated_unavailable": false,
    "max_depth_m": 6.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
    "source": "mywildalberta stocking map export 2026-09-11",
    "stratification": {
     "band_m": [

@@ -41,6 +41,28 @@ MIN_STRATIFYING_DEPTH_M = 5.0
 SHALLOW_M = 3.0
 MODERATE_M = 5.0
 
+# Where a mean depth can be guessed at from a maximum, and how loosely.
+#
+# Measured over the 55 lakes in the 2026-09-11 stocking map that publish both
+# depths. The ratio of mean to maximum runs p10 0.39, median 0.64, p90 0.97,
+# and a band drawn at those outer percentiles contains 78% of them. Held out
+# one lake at a time, the median ratio misses by 25% of the true mean, and by
+# 70% for the worst tenth.
+#
+# So this is published as a band and never as a number, and the band is simply
+# a restatement of that spread rather than a model of anything. It is wide
+# because the underlying relationship is weak, and the width is the honest part.
+#
+# Splitting the ratio at 6 m does measurably better — 20% median, 56% at p90,
+# 82% coverage — but the 6 m threshold was chosen by eye from these same 55
+# lakes, and one side of it holds only 20 of them. That is fitting the split to
+# the sample, so it is recorded here and not used.
+MEAN_MAX_RATIO_LOW = 0.39
+MEAN_MAX_RATIO_HIGH = 0.97
+MEAN_ESTIMATE_BASIS = ("55 lakes publishing both depths, MyWildAlberta "
+                       "stocking map 2026-09-11")
+MEAN_ESTIMATE_COVERS = 0.78
+
 
 def load_depths():
     if not DEPTHS_CSV.exists():
@@ -59,6 +81,7 @@ def load_depths():
                     return None
             out[wid] = {
                 "max_depth_m": number("max_depth_m"),
+                "mean_depth_m": number("mean_depth_m"),
                 "surface_area_ha": number("surface_area_ha"),
                 "stated_unavailable": (row.get("depth_stated_unavailable") or "").strip() == "yes",
             }
@@ -140,6 +163,50 @@ def stratification(max_depth_m, surface_area_ha):
             "why": "deep enough to layer in midsummer"}
 
 
+def mean_depth(max_depth_m, mean_depth_m):
+    """What can be said about the average depth, and how firmly.
+
+    Four answers, and they are deliberately different shapes so that a measured
+    depth and a guessed one can never be confused by reading one field:
+
+      published    Alberta prints a mean depth.           {"m": 4.0}
+      contradicted it prints one deeper than the maximum. {"why": ...}
+      estimated    only a maximum is published.           {"range_m": [lo, hi]}
+      None         neither is published, so nothing.
+
+    An estimate is never returned under the key a measurement uses. Nothing
+    here reaches stratification() or winterkill(): both take the measured
+    maximum only, and this cannot change a word of the advice they give.
+    """
+    if mean_depth_m is not None:
+        if max_depth_m is not None and mean_depth_m > max_depth_m:
+            # Castor Eastside Trout Pond publishes 22 m against a maximum of
+            # 7 m on a one-hectare pond. The maximum is the plausible half, so
+            # it is kept and this is dropped. Swapping them is not a repair,
+            # only a different guess, and a pond that size is neither.
+            return {"source": "contradicted",
+                    "why": f"the published mean of {mean_depth_m:g} m is deeper "
+                           f"than the published maximum of {max_depth_m:g} m"}
+        return {"m": mean_depth_m, "source": "mywildalberta"}
+
+    if max_depth_m is None:
+        return None
+
+    low = round(max_depth_m * MEAN_MAX_RATIO_LOW, 1)
+    high = round(max_depth_m * MEAN_MAX_RATIO_HIGH, 1)
+    if high >= max_depth_m:
+        # The band cannot reach the bottom: a lake whose average depth equals
+        # its maximum is a lake with vertical sides.
+        high = round(max_depth_m - 0.1, 1)
+    if low < 0.5 or high <= low:
+        return None
+    return {"range_m": [low, high], "source": "estimated",
+            "from_max_depth_m": max_depth_m,
+            "method": "the maximum depth times the range of mean-to-maximum "
+                      "ratios Alberta's own published pairs show",
+            "basis": MEAN_ESTIMATE_BASIS, "covers": MEAN_ESTIMATE_COVERS}
+
+
 def winterkill(max_depth_m, aerated, aeration_known):
     """A risk band with its reasons, or None when depth is unknown.
 
@@ -191,6 +258,7 @@ def build(lakes):
     aerated, aeration_noted = load_aerated()
 
     out, with_depth, unavailable = {}, 0, 0
+    mean_published, mean_estimated, mean_contradicted = 0, 0, 0
     for lake in lakes:
         wid = join_id(lake)
         key = lake.get("lake_id") or lake.get("ats")
@@ -213,14 +281,24 @@ def build(lakes):
         # export's own notes are explicit: not stated does not mean no.
         is_aerated = wid in aerated
         aeration_known = is_aerated
+        average = mean_depth(depth, found["mean_depth_m"])
         entry = {
             "max_depth_m": depth,
+            "mean_depth": average,
             "surface_area_ha": found["surface_area_ha"],
             "source": "mywildalberta stocking map export 2026-09-11",
             "depth_stated_unavailable": found["stated_unavailable"],
             "stratification": stratification(depth, found["surface_area_ha"]),
             "winterkill": winterkill(depth, is_aerated, aeration_known),
         }
+        if average:
+            source = average.get("source")
+            if source == "mywildalberta":
+                mean_published += 1
+            elif source == "estimated":
+                mean_estimated += 1
+            elif source == "contradicted":
+                mean_contradicted += 1
         if is_aerated:
             entry["aerated"] = True
         elif wid in aeration_noted:
@@ -230,7 +308,8 @@ def build(lakes):
         out[key] = entry
     return out, {"with_depth": with_depth, "stated_unavailable": unavailable,
                  "aerated": len(aerated), "aeration_photo_only": len(aeration_noted),
-                 "rows": len(depths)}
+                 "mean_published": mean_published, "mean_estimated": mean_estimated,
+                 "mean_contradicted": mean_contradicted, "rows": len(depths)}
 
 
 def write(lakes, data_dir):
