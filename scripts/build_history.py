@@ -415,6 +415,32 @@ def write_quality_summary(reg, review_count, linked_rows, trout_rows):
     return summary
 
 
+REGULATIONS_PDF = "alberta-sportfishing-regulations-2026-tables.pdf"
+
+
+def write_regulations():
+    """Catch limits and seasons, read out of the sportfishing guide.
+
+    Skipped quietly when the guide is not present, so the rest of the pipeline
+    still builds: a missing guide should cost the map its limits, not its data.
+    """
+    source = sources.RAW_DIR / REGULATIONS_PDF
+    if not source.exists():
+        print(f"\n{REGULATIONS_PDF} not present; skipping catch limits.")
+        return None
+    import regulations
+    print("\nReading catch limits from the sportfishing regulations...")
+    regs = regulations.load(source)
+    year = regs["guide_year"]
+    rows = sum(len(z["lakes"]) + len(z["rivers"]) for z in regs["zones"].values())
+    (DATA_DIR / f"regulations_{year}.json").write_text(
+        json.dumps(regs, indent=1, ensure_ascii=False, sort_keys=True) + "\n",
+        encoding="utf-8")
+    print(f"  {rows} site-specific rows, {len(regs['defaults'])} watershed defaults, "
+          f"{len(regs['stocked'])} put-and-take waters")
+    return year, rows, len(regs["stocked"])
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--years", nargs="*", type=int)
@@ -484,7 +510,11 @@ def main():
     n_review = write_review(still, reg)
     years_written = write_year_files(reg, linked, sources.PROVISIONAL_YEARS)
     write_quality_summary(reg, len(still), linked_rows, trout_rows)
+    n_regs = write_regulations()
     print(f"\nWrote data/lake_registry.json ({len(reg.lakes)} lakes)")
+    if n_regs:
+        print(f"Wrote data/regulations_{n_regs[0]}.json "
+              f"({n_regs[1]} site-specific rows, {n_regs[2]} put-and-take waters)")
     print(f"Wrote {len(years_written)} year file(s): {years_written[0]}-{years_written[-1]}")
     print(f"Wrote data/link_review.csv ({n_review} question(s) for you)")
     if n_review:

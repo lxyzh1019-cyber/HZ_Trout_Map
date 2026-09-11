@@ -459,3 +459,150 @@ class OfflineAssetTests(unittest.TestCase):
         for src in re.findall(r'<script src="([^"]+)"', text):
             self.assertIn(src, named,
                           f"{src} is loaded but not named in the missing-library check")
+
+
+class RegulationTests(unittest.TestCase):
+    """The catch limits are the only thing here with a legal consequence.
+
+    Every value asserted below was read off the published guide by eye first.
+    The point is not that the parser is self-consistent — it is that it agrees
+    with the document a warden would hold.
+    """
+
+    _cache = None
+
+    @classmethod
+    def regs(cls):
+        if cls._cache is None:
+            import regulations
+            pdf = ROOT / "data" / "raw" / "alberta-sportfishing-regulations-2026-tables.pdf"
+            if not pdf.exists():
+                raise unittest.SkipTest(f"{pdf.name} is not present")
+            cls._cache = regulations.load(pdf)
+        return cls._cache
+
+    # -- the three rules that are easy to get backwards --------------------
+
+    def test_unlisted_waterbody_takes_the_zone_default(self):
+        """"If a ES1 lake ... is not listed, follow the default regulations."
+
+        Not "unknown". A lake absent from every table still has a limit.
+        """
+        import regulations
+        found = regulations.resolve("No Such Lake At All", "ES1", self.regs())
+        self.assertEqual(found["basis"], "watershed-default")
+        self.assertEqual(found["limits"]["Trout"], "5")
+        self.assertEqual(found["season"]["text"], "OPEN all year")
+
+        northern = regulations.resolve("No Such Lake At All", "NB1", self.regs())
+        self.assertEqual(northern["limits"]["Trout"], "3")
+        self.assertEqual(northern["season"]["text"], "OPEN May 15 to Mar. 31")
+
+    def test_blank_season_on_a_listed_waterbody_means_closed(self):
+        """"If a listed waterbody does not have a season listed, it is CLOSED."
+
+        Reading this as "unknown" would put someone on water that is shut.
+        """
+        import regulations
+        self.assertEqual(regulations.parse_season(""),
+                         {"text": "", "closed": True, "implied": True})
+        self.assertTrue(regulations.parse_season("CLOSED ALL YEAR")["closed"])
+        self.assertFalse(regulations.parse_season("CLOSED ALL YEAR")["implied"])
+        self.assertFalse(regulations.parse_season("OPEN ALL YEAR")["closed"])
+
+    def test_blank_species_cell_means_absent_not_unlimited(self):
+        """An empty cell indicates the species is not likely present."""
+        import regulations
+        self.assertIsNone(regulations.parse_limit(""))
+        self.assertIsNone(regulations.parse_limit(None))
+
+    # -- the legend, parsed and preserved ----------------------------------
+
+    def test_limit_is_parsed_without_losing_the_original_wording(self):
+        """"'3 over 63 cm' indicates ... '3 fish each over 63 cm'."
+
+        The structured form is for filtering. The words are what gets shown,
+        because a paraphrase of a legal limit is a liability.
+        """
+        import regulations
+        limit = regulations.parse_limit("3 over 63 cm")
+        self.assertEqual(limit["count"], 3)
+        self.assertEqual(limit["size_op"], "over")
+        self.assertEqual(limit["size_cm"], 63)
+        self.assertEqual(limit["text"], "3 over 63 cm")
+        self.assertEqual(regulations.parse_limit("10 fish")["count"], 10)
+        self.assertTrue(regulations.parse_limit("0 trout")["zero"])
+
+    # -- a row read off the page by hand -----------------------------------
+
+    def test_barnaby_lake_matches_the_printed_page(self):
+        row = self.regs()["zones"]["ES1"]["lakes"]["Barnaby Lake"]
+        self.assertEqual(row["season"]["text"], "OPEN JULY 16 TO OCT. 31")
+        self.assertEqual(row["trout_total"]["text"], "1 trout over 40 cm")
+        self.assertEqual(row["trout_total"]["count"], 1)
+        self.assertEqual(row["trout_total"]["size_cm"], 40)
+        self.assertEqual(row["bait"], "Bait ban")
+        # Its tributaries carry their own, stricter season.
+        self.assertTrue(any(sub["season"]["text"] == "CLOSED ALL YEAR"
+                            for sub in row.get("also", [])))
+
+    def test_a_cross_reference_is_not_reported_as_a_closure(self):
+        """PP1's Bassano Reservoir has no season and points at the Bow River.
+
+        Applied blindly, the blank-season rule calls that CLOSED ALL YEAR,
+        which is false. Errs safe rather than dangerous, but still wrong.
+        """
+        import regulations
+        found = regulations.resolve("Bassano Reservoir", "PP1", self.regs())
+        self.assertEqual(found["basis"], "cross-reference")
+        self.assertIn("Bow River", found["see"])
+
+    # -- precedence ---------------------------------------------------------
+
+    def test_resolution_follows_the_guide_precedence(self):
+        """Site-specific, then the put-and-take list, then the zone default."""
+        import regulations
+        regs = self.regs()
+        site = regulations.resolve("Barnaby Lake", "ES1", regs)
+        self.assertEqual(site["basis"], "site-specific")
+        stocked = regulations.resolve("Beauvais Lake", "ES1", regs)
+        self.assertEqual(stocked["basis"], "put-and-take")
+        self.assertEqual(stocked["limits"]["Trout"], "5 trout of any size")
+        default = regulations.resolve("Nowhere Lake", "ES3", regs)
+        self.assertEqual(default["basis"], "watershed-default")
+
+    # -- coverage and hygiene ----------------------------------------------
+
+    def test_every_zone_in_the_published_data_has_a_default(self):
+        """A zone whose defaults failed to parse would silently leave its
+        unlisted lakes with no limit at all."""
+        regs = self.regs()
+        latest = max(int(p.stem.split("_")[1]) for p in DATA_DIR.glob("lakes_*.json"))
+        lakes = json.loads((DATA_DIR / f"lakes_{latest}.json").read_text())
+        lakes = lakes["lakes"] if isinstance(lakes, dict) and "lakes" in lakes else lakes
+        for zone in {lk.get("zone") for lk in lakes if lk.get("zone")}:
+            self.assertIn(zone, regs["defaults"], f"no default parsed for {zone}")
+            self.assertTrue(regs["defaults"][zone]["lakes"]["limits"],
+                            f"{zone} default parsed with no limits")
+
+    def test_all_ten_watershed_units_have_tables(self):
+        regs = self.regs()
+        for zone in ("ES1", "ES2", "ES3", "ES4", "PP1", "PP2",
+                     "NB1", "NB2", "NB3", "NB4"):
+            self.assertGreater(len(regs["zones"].get(zone, {}).get("lakes", {})), 5,
+                               f"{zone} has almost no site-specific rows")
+
+    def test_stocked_names_are_not_corrupted_by_the_column_layout(self):
+        """The stocked list is set in columns, and reading it flat merges
+        neighbours — "Tim Horton Children's Pond Fairfax Lake" was one entry,
+        and a land description was glued onto another. Either would attach a
+        real limit to the wrong water."""
+        stocked = self.regs()["stocked"]
+        for name in stocked:
+            self.assertFalse(re.match(r"^(NE|NW|SE|SW|\d)", name),
+                             f"{name!r} starts with a land description fragment")
+            self.assertLess(len(name), 46, f"{name!r} looks like two merged entries")
+        for expected in ("Beauvais Lake", "Chain Lakes Reservoir", "Fairfax Lake",
+                         "Shunda (Fish) Lake", "Mcleod Lake (Carson Lake)",
+                         "Tim Horton Children’s Pond"):
+            self.assertIn(expected, stocked, f"{expected!r} missing from the stocked list")
