@@ -1,6 +1,70 @@
 {
  "joined_on": "Alberta waterbody id",
  "lakes": {
+  "lk0006": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.2,
+   "winterkill": null
+  },
+  "lk0007": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 6.7,
+   "winterkill": null
+  },
+  "lk0008": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "lk0009": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "lk0010": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "lk0011": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "lk0012": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "lk0013": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
   "wb17894": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,

@@ -173,6 +173,18 @@ def winterkill(max_depth_m, aerated, aeration_known):
                        "eutrophy": False, "ice_duration": False}}
 
 
+def join_id(lake):
+    """Alberta's id for this lake, however the repo came by it.
+
+    A lake minted from a land description has no waterbody id of its own, so
+    the exact join every other part of this pipeline relies on cannot see it —
+    which is why eight lakes had no depth despite Alberta publishing one. The
+    id recorded from a confirmed land-description match stands in, and is kept
+    in its own field so it can never be mistaken for the report's own.
+    """
+    return str(lake.get("waterbody_id") or lake.get("published_waterbody_id") or "")
+
+
 def build(lakes):
     """Per-lake depth, stratification and winterkill, keyed as the app keys them."""
     depths = load_depths()
@@ -180,7 +192,7 @@ def build(lakes):
 
     out, with_depth, unavailable = {}, 0, 0
     for lake in lakes:
-        wid = str(lake.get("waterbody_id") or "")
+        wid = join_id(lake)
         key = lake.get("lake_id") or lake.get("ats")
         if not key:
             continue

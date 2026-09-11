@@ -33,7 +33,7 @@ from collections import defaultdict
 
 import sources
 from ats import ats_to_latlng, haversine_km
-from registry import (ALIASES_PATH, DATA_DIR, REVIEW_PATH, Registry, display_name,
+from registry import (ALIASES_PATH, DATA_DIR, FACTS_PATH, REVIEW_PATH, Registry, display_name,
                       best_matching_name, discriminating_conflict,
                       load_aliases, load_profiles, name_similarity, normalise_code,
                       normalize_name, shared_land_descriptions,
@@ -70,6 +70,62 @@ def build_spine(rows_by_year):
         lake["name_variants"] = sorted({_title(n) for n in names})
     reg.reindex()
     return reg
+
+
+def apply_facts(reg):
+    """Your answers to past attribute questions, from data/lake_facts.csv.
+
+    reconcile.py compares the repo against what Alberta publishes and writes
+    the answers here, because the registry is regenerated from the reports on
+    every build and anything written into it directly is gone by the next run.
+    This is the same arrangement as data/lake_aliases.csv, which holds the
+    answers to past linking questions.
+
+    Blanks only, in both directions: reconcile.py records a row only where the
+    repo had nothing, and this fills only where the repo still has nothing. A
+    value the pipeline derived for itself is never replaced from here.
+    """
+    if not FACTS_PATH.exists():
+        return 0
+    by_id = {lake["lake_id"]: lake for lake in reg.lakes}
+    applied = 0
+    with FACTS_PATH.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            lake = by_id.get(row["lake_id"])
+            field, value = row["field"], row["value"]
+            if not lake or not value:
+                continue
+            if field == "position":
+                if lake.get("lat") is None:
+                    lat, lon = value.split(",")
+                    lake["lat"], lake["lon"] = float(lat), float(lon)
+                    lake["coord_source"] = "mywildalberta"
+                    applied += 1
+            elif field == "legal_land_description":
+                if not lake["ats_codes"]:
+                    lake["ats_codes"] = [normalise_code(value)]
+                    applied += 1
+            elif field == "surface_area_ha":
+                if lake.get(field) is None:
+                    lake[field] = float(value)
+                    applied += 1
+            elif field == "zone":
+                if lake.get(field) is None:
+                    lake[field] = value
+                    applied += 1
+            elif field == "published_waterbody_id":
+                # Deliberately NOT waterbody_id, and not a rename. lake_id is
+                # minted as "wb" + the waterbody id where one exists, so
+                # setting the field would either contradict the id or force
+                # lk0006 to become wb417506 — which breaks the ?lake= links
+                # people have bookmarked and every answer already recorded
+                # against the old id. This is a join key and nothing more.
+                if not lake.get("waterbody_id") and not lake.get("published_waterbody_id"):
+                    lake["published_waterbody_id"] = value
+                    applied += 1
+    if applied:
+        reg.reindex()
+    return applied
 
 
 def attach_profiles(reg):
@@ -548,6 +604,7 @@ def main():
     print(f"  {drift} of them carry more than one land description across years")
 
     matched = attach_profiles(reg)
+    confirmed = apply_facts(reg)
     print(f"  {matched} matched to a profile entry (zone, amenities, verified position)")
     demoted = resolve_duplicate_coordinates(reg)
     for name, gap in demoted:
@@ -576,6 +633,13 @@ def main():
             for item in items:
                 reg.absorb(lake, item["row"])
                 linked[item["row"]["year"]].append((lake["lake_id"], item["row"]))
+
+    # Again, now that the lakes minted from a land description exist: those are
+    # precisely the ones with no waterbody id, so they are the ones a published
+    # id is recorded for, and they are not in the registry during the first pass.
+    confirmed += apply_facts(reg)
+    if confirmed:
+        print(f"\n  {confirmed} field(s) from data/lake_facts.csv, your past answers")
 
     dropped = drop_empty_lakes(reg, linked)
     if dropped:

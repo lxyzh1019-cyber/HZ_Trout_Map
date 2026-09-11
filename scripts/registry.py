@@ -50,6 +50,7 @@ from ats import ats_to_latlng, haversine_km
 DATA_DIR = Path(__file__).parent.parent / "data"
 PROFILES_CSV = Path(__file__).parent.parent / "profiles" / "mywildalberta_profiles.csv"
 REGISTRY_PATH = DATA_DIR / "lake_registry.json"
+FACTS_PATH = DATA_DIR / "lake_facts.csv"
 ALIASES_PATH = DATA_DIR / "lake_aliases.csv"
 REVIEW_PATH = DATA_DIR / "link_review.csv"
 

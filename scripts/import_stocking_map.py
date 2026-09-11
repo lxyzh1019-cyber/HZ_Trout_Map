@@ -248,6 +248,9 @@ def waterbody_rows(waterbodies, details, by_id, refused_positions):
             "waterbody_id": wid,
             "lake_id": (lake or {}).get("lake_id", ""),
             "registry_name": (lake or {}).get("name", ""),
+            # The name the map itself uses. For the 41 waterbodies this repo
+            # does not hold by id, it is the only name there is.
+            "page_name": cell_text(row.get("Waterbody name")),
             "max_depth_m": published(row.get("Max depth (m)")),
             "mean_depth_m": published(row.get("Mean depth (m)")),
             "surface_area_ha": published(row.get("Surface area (ha)")),
@@ -341,7 +344,7 @@ def build():
     # The schema is fetch_lake_pages.py's, taken from the module rather than
     # copied, so the two cannot drift apart without a test noticing.
     import fetch_lake_pages
-    fields = (["waterbody_id", "lake_id", "registry_name"]
+    fields = (["waterbody_id", "lake_id", "registry_name", "page_name"]
               + list(fetch_lake_pages.INTERESTING) + ["depth_stated_unavailable"])
 
     return {

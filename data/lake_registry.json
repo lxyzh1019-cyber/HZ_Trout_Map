@@ -691,8 +691,8 @@
       "BURNS LAKE",
       "Burns Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 1.7,
     "amenities": null,
     "base_name": "Burns Lake"
   },
@@ -862,8 +862,8 @@
       "CHICKAKOO LAKE (CHICKAKO LAKE)",
       "Chickakoo Lake (Chickako Lake)"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 18.4,
     "amenities": null,
     "base_name": "Chickakoo Lake (Chickako Lake)"
   },
@@ -956,8 +956,8 @@
       "Lac DELORME",
       "Lac Delorme (George'S Lake)"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "NB1",
+    "surface_area_ha": 15.0,
     "amenities": null,
     "base_name": "Lac Delorme (George'S Lake)"
   },
@@ -1120,8 +1120,8 @@
       "EMERALD LAKE (HART LAKE)",
       "Emerald Lake (Hart Lake)"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES3",
+    "surface_area_ha": 3.5,
     "amenities": null,
     "base_name": "Emerald Lake (Hart Lake)"
   },
@@ -1143,8 +1143,8 @@
       "EMERSON LAKES",
       "Emerson Lakes"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES3",
+    "surface_area_ha": 17.0,
     "amenities": null,
     "base_name": "Emerson Lakes"
   },
@@ -1234,8 +1234,8 @@
       "FORTRESS LAKE",
       "Fortress Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 3.1,
     "amenities": null,
     "base_name": "Fortress Lake"
   },
@@ -1256,8 +1256,8 @@
       "GALATEA LAKES (LOWER GALATEA LAKE)",
       "Galatea Lakes (Lower Galatea Lake)"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 5.7,
     "amenities": null,
     "base_name": "Galatea Lakes (Lower Galatea Lake)"
   },
@@ -1395,7 +1395,7 @@
       "Hogarth Lakes Upper Hogarth Lake"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
+    "surface_area_ha": 2.9,
     "amenities": "This waterbody has no amenities.",
     "base_name": "Hogarth Lakes (Upper Hogarth Lake)"
   },
@@ -1417,8 +1417,8 @@
       "LAKE OF THE HORNS",
       "Lake Of The Horns"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 6.2,
     "amenities": null,
     "base_name": "Lake Of The Horns"
   },
@@ -1440,8 +1440,8 @@
       "ICE LAKE",
       "Ice Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES2",
+    "surface_area_ha": 5.1,
     "amenities": null,
     "base_name": "Ice Lake"
   },
@@ -1532,7 +1532,7 @@
       "Jane Lake"
     ],
     "zone": "NB2",
-    "surface_area_ha": null,
+    "surface_area_ha": 7.4,
     "amenities": "Site Description:, Return to map, Return to list, Updated: Jul 22, 2025, Fish Stocking, Stocking Maps, Recovery Trout Stocking, Recreational Trout Stocking, Walleye Stocking, Report-A-Poacher, RAP Incident Form, 1-800-642-3800, Footer, Quick Links, Alberta Fire Bans, Campground Closures, Parks Advisories & Public Safety, Parks Reservations, Follow My Wild Alberta, MWA Facebook, F&W Enforcement Facebook, Alberta Wildfire App, About This Site, Accessibility, Contact Us, Disclaimer, GoA, Privacy",
     "base_name": "Jane Lake"
   },
@@ -1553,8 +1553,8 @@
       "JESSIE LAKE",
       "Jessie Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "NB2",
+    "surface_area_ha": 71.8,
     "amenities": null,
     "base_name": "Jessie Lake"
   },
@@ -1688,8 +1688,8 @@
       "LILLIAN LAKE",
       "Lillian Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 3.5,
     "amenities": null,
     "base_name": "Lillian Lake"
   },
@@ -1759,8 +1759,8 @@
       "LOOMIS LAKE",
       "Loomis Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 3.3,
     "amenities": null,
     "base_name": "Loomis Lake"
   },
@@ -1781,8 +1781,8 @@
       "LOST GUIDE LAKE",
       "Lost Guide Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES2",
+    "surface_area_ha": 5.2,
     "amenities": null,
     "base_name": "Lost Guide Lake"
   },
@@ -2285,8 +2285,8 @@
       "PHILLIPPS LAKE (SUMMIT)",
       "Phillipps Lake (Summit)"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 2.5,
     "amenities": null,
     "base_name": "Phillipps Lake (Summit)"
   },
@@ -2384,8 +2384,8 @@
       "RIBBON LAKE",
       "Ribbon Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 7.0,
     "amenities": null,
     "base_name": "Ribbon Lake"
   },
@@ -3013,7 +3013,7 @@
       "Wildhorse Lakes Upper Wildhorse Lake"
     ],
     "zone": "ES3",
-    "surface_area_ha": null,
+    "surface_area_ha": 2.6,
     "amenities": "Boat launch, fire pit, firewood available for purchase, fish cleaning stations, hand launch, pier, pit/vault toilets, water pump.",
     "base_name": "Wildhorse Lakes (Upper Wildhorse Lake)"
   },
@@ -3374,7 +3374,7 @@
       "Upper Smuts Lake"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
+    "surface_area_ha": 2.2,
     "amenities": "This waterbody has no amenities.",
     "base_name": "Upper Smuts Lake"
   },
@@ -3399,7 +3399,7 @@
       "UPPER CHAMPION LAKE"
     ],
     "zone": "ES1",
-    "surface_area_ha": null,
+    "surface_area_ha": 0.4,
     "amenities": "This waterbody has no amenities.",
     "base_name": "Champion Lakes (Upper Champion Lake)"
   },
@@ -3840,8 +3840,8 @@
       "TRAPPER LAKE",
       "Trapper Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES3",
+    "surface_area_ha": 2.4,
     "amenities": null,
     "base_name": "Trapper Lake"
   },
@@ -3940,8 +3940,8 @@
       "SOUTH SUNDANCE LAKE",
       "South Sundance Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES3",
+    "surface_area_ha": 149.0,
     "amenities": null,
     "base_name": "South Sundance Lake"
   },
@@ -4086,8 +4086,8 @@
       "HORSESHOE LAKE",
       "Horseshoe Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "NB2",
+    "surface_area_ha": 13.2,
     "amenities": null,
     "base_name": "Horseshoe Lake"
   },
@@ -4109,8 +4109,8 @@
       "TWO HILLS POND",
       "Two Hills Pond"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 1.4,
     "amenities": null,
     "base_name": "Two Hills Pond"
   },
@@ -4586,8 +4586,8 @@
       "OYEN RESERVOIR",
       "Oyen Reservoir"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 13.2,
     "amenities": null,
     "base_name": "Oyen Reservoir"
   },
@@ -4921,8 +4921,8 @@
       "MIRROR RESERVOIR",
       "Mirror Reservoir"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 4.1,
     "amenities": null,
     "base_name": "Mirror Reservoir"
   },
@@ -5834,8 +5834,8 @@
       "GOLDSPRING PARK POND",
       "Goldspring Park Pond"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP1",
+    "surface_area_ha": 5.8,
     "amenities": null,
     "base_name": "Goldspring Park Pond"
   },
@@ -6082,8 +6082,8 @@
       "DORMER LAKE",
       "Dormer Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 6.5,
     "amenities": null,
     "base_name": "Dormer Lake"
   },
@@ -6132,8 +6132,8 @@
       "Echo Dale\nRegional Park Pond",
       "Echo Dale Regional Park Pond"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP1",
+    "surface_area_ha": 2.5,
     "amenities": null,
     "base_name": "Echo Dale Regional Park Pond"
   },
@@ -6206,8 +6206,8 @@
       "COTTONWOOD LAKE",
       "Cottonwood Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 8.0,
     "amenities": null,
     "base_name": "Cottonwood Lake"
   },
@@ -6228,8 +6228,8 @@
       "CUMMINGS LAKE",
       "Cummings Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "NB3",
+    "surface_area_ha": 2.0,
     "amenities": null,
     "base_name": "Cummings Lake"
   },
@@ -6356,8 +6356,8 @@
       "Cipperley'S Reservoir",
       "Cipperley's Reservoir"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 6.0,
     "amenities": null,
     "base_name": "Cipperley'S Reservoir"
   },
@@ -6655,8 +6655,8 @@
       "BONNYVILLE TOWN POND (SLAWUTA LAKE)",
       "Bonnyville Town Pond (Slawuta Lake)"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "NB1",
+    "surface_area_ha": 6.0,
     "amenities": null,
     "base_name": "Bonnyville Town Pond (Slawuta Lake)"
   },
@@ -6930,8 +6930,8 @@
       "PINE POINT BURROW PIT",
       "Pine Point Borrow Pit"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES4",
+    "surface_area_ha": 3.0,
     "amenities": null,
     "base_name": "Pine Point Borrow Pit"
   },
@@ -7038,8 +7038,8 @@
       "BRAZEAU BURROW PIT",
       "Brazeau Borrow Pit #1"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES2",
+    "surface_area_ha": 3.1,
     "amenities": null,
     "base_name": "Brazeau Borrow Pit #1"
   },
@@ -7060,7 +7060,7 @@
       "BRAZEAU BORROW PIT #2",
       "Brazeau Borrow Pit #2"
     ],
-    "zone": null,
+    "zone": "ES2",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Brazeau Borrow Pit #2"
@@ -7258,8 +7258,8 @@
       "ODLUM LAKE",
       "Odlum Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 7.0,
     "amenities": null,
     "base_name": "Odlum Lake"
   },
@@ -7413,8 +7413,8 @@
       "CAMP 9 TROUT POND",
       "Camp 9 Trout Pond"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES2",
+    "surface_area_ha": 7.0,
     "amenities": null,
     "base_name": "Camp 9 Trout Pond"
   },
@@ -7492,7 +7492,7 @@
       "Unnamed East Stormwater Pond"
     ],
     "zone": "PP2",
-    "surface_area_ha": null,
+    "surface_area_ha": 1.3,
     "amenities": "Public parking.",
     "base_name": "East Stormwater Pond"
   },
@@ -7520,7 +7520,7 @@
       "Unnamed Md Peace Pond #2"
     ],
     "zone": "NB3",
-    "surface_area_ha": null,
+    "surface_area_ha": 9.0,
     "amenities": "This waterbody has no amenities.",
     "base_name": "Md Peace Pond #2"
   },
@@ -8014,8 +8014,8 @@
       "KAKUT POND",
       "Kakut Pond"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES4",
+    "surface_area_ha": 2.9,
     "amenities": null,
     "base_name": "Kakut Pond"
   },
@@ -8315,7 +8315,8 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "published_waterbody_id": "417506"
   },
   {
     "lake_id": "lk0007",
@@ -8337,7 +8338,8 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "published_waterbody_id": "6859"
   },
   {
     "lake_id": "lk0008",
@@ -8359,7 +8361,8 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "published_waterbody_id": "417505"
   },
   {
     "lake_id": "lk0009",
@@ -8379,7 +8382,8 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "published_waterbody_id": "5649"
   },
   {
     "lake_id": "lk0010",
@@ -8399,7 +8403,8 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "published_waterbody_id": "317177"
   },
   {
     "lake_id": "lk0011",
@@ -8419,7 +8424,8 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "published_waterbody_id": "6654"
   },
   {
     "lake_id": "lk0012",
@@ -8439,7 +8445,8 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "published_waterbody_id": "6120"
   },
   {
     "lake_id": "lk0013",
@@ -8459,6 +8466,7 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null
+    "amenities": null,
+    "published_waterbody_id": "23094"
   }
 ]

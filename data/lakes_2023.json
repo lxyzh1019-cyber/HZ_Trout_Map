@@ -2869,8 +2869,8 @@
     "lat": 49.095497,
     "lon": -111.995479,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP1",
+    "surface_area_ha": 5.8,
     "amenities": null,
     "stockings": [
       {
@@ -4176,8 +4176,8 @@
     "lat": 53.618628,
     "lon": -114.074339,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 18.4,
     "amenities": null,
     "stockings": [
       {
@@ -6522,7 +6522,7 @@
     "lon": -113.709921,
     "coord_source": "alberta",
     "zone": "PP2",
-    "surface_area_ha": null,
+    "surface_area_ha": 1.3,
     "amenities": "Public parking.",
     "stockings": [
       {
@@ -6991,8 +6991,8 @@
     "lat": 51.7253,
     "lon": -114.111399,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 6.0,
     "amenities": null,
     "stockings": [
       {
@@ -7148,8 +7148,8 @@
     "lat": 53.726034,
     "lon": -117.117962,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES3",
+    "surface_area_ha": 17.0,
     "amenities": null,
     "stockings": [
       {
@@ -7763,8 +7763,8 @@
     "lat": 52.916194,
     "lon": -115.414317,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES2",
+    "surface_area_ha": 3.1,
     "amenities": null,
     "stockings": [
       {
@@ -8129,8 +8129,8 @@
     "lat": 53.703308,
     "lon": -111.744946,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 1.4,
     "amenities": null,
     "stockings": [
       {
@@ -8782,7 +8782,7 @@
     "lon": -117.553092,
     "coord_source": "alberta",
     "zone": "NB3",
-    "surface_area_ha": null,
+    "surface_area_ha": 9.0,
     "amenities": "This waterbody has no amenities.",
     "stockings": [
       {
@@ -8835,8 +8835,8 @@
     "lat": 54.265723,
     "lon": -110.745372,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "NB1",
+    "surface_area_ha": 6.0,
     "amenities": null,
     "stockings": [
       {
@@ -9235,7 +9235,7 @@
     "lon": -114.599941,
     "coord_source": "alberta",
     "zone": "ES1",
-    "surface_area_ha": null,
+    "surface_area_ha": 0.4,
     "amenities": "This waterbody has no amenities.",
     "stockings": [
       {
@@ -9288,8 +9288,8 @@
     "lat": 51.6135,
     "lon": -110.497677,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 13.2,
     "amenities": null,
     "stockings": [
       {
@@ -9369,7 +9369,7 @@
     "lat": 52.934075,
     "lon": -115.492258,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES2",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -9396,8 +9396,8 @@
     "lat": 52.84209,
     "lon": -115.125149,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES2",
+    "surface_area_ha": 7.0,
     "amenities": null,
     "stockings": [
       {
@@ -9747,8 +9747,8 @@
     "lat": 52.464155,
     "lon": -113.138878,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 4.1,
     "amenities": null,
     "stockings": [
       {

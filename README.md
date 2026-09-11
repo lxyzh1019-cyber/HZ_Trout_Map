@@ -28,6 +28,8 @@ alberta-trout-map/
 │   ├── lake_depth.json             ← depth, summer layer and winterkill, generated
 │   ├── lake_regulations.json       ← seasons and catch limits per lake, generated
 │   ├── lake_aliases.csv            ← your answers to past linking questions
+│   ├── lake_facts.csv              ← your answers to past attribute questions
+│   ├── lake_facts_review.csv       ← attribute questions still open, generated
 │   ├── link_review.csv             ← linking questions still open, generated
 │   ├── regs_review.csv             ← lakes the guide could not be matched to
 │   └── quality_summary.json        ← headline data-quality figures, generated
@@ -50,9 +52,13 @@ alberta-trout-map/
 └── README.md
 ```
 
-Everything under `data/` except `raw/`, `lake_aliases.csv`, `regs_aliases.csv`
-and the profiles CSV is generated. Never edit those by hand; change the inputs
-and rebuild.
+Everything under `data/` except `raw/`, `lake_aliases.csv`, `lake_facts.csv`,
+`regs_aliases.csv` and the profiles CSV is generated. Never edit those by hand;
+change the inputs and rebuild.
+
+**`lake_registry.json` is a build artefact, not a store.** `build_history.py`
+rebuilds it from the reports every run, so anything written into it directly is
+gone by the next rebuild. Answers live in the input files above.
 
 ### What `data/raw/` holds
 
@@ -187,6 +193,86 @@ Each answer is written to `data/lake_aliases.csv` and applied on every future
 build, including future years. A name Alberta keeps misspelling is settled once
 and stays settled, so the list shrinks every year instead of repeating.
 
+## When two lakes sit on one quarter section
+
+Seven of this repo's 640 land descriptions are held by two lakes, and every one
+is a pair the survey grid cannot separate: Upper and Lower Champion, Upper and
+Lower Smuts, Pit 35 and Pit 45, MD Peace Pond #1 and #2.
+
+For those seven, the land description is the **weakest** evidence there is. It
+is the one field that is identical for both, and the name is all that can tell
+them apart. Two rules follow:
+
+**A recorded answer about one row is not a rule about its neighbour.**
+`apply_review.py` records a confirmed answer as a land-description rule as well
+as a name, because a land description is usually the stronger key — and for 633
+of them it is. On a shared quarter section `link_all` now honours that rule only
+when the row's own name does not contradict it. Without this, MD Peace Pond #1's
+fish were credited to #2 for six years while #1 vanished from the map, and Lower
+Champion Lake's went to Upper the same way.
+
+**A surface area is never copied to a neighbour.** `attach_profiles` claims a
+shared profile row for the lake whose name fits it best, and the area on that
+row belongs to that lake — Alberta's stocking map confirms it for seven of the
+eight shared rows. The neighbour reports nothing until its own area is filled
+in, which is true, rather than borrowing hectares that are not its own.
+
+Alberta's stocking map publishes 2021–2026 separately from the annual reports
+this repo reads. The two agree on **2,028 of 2,030** lake-year-species totals.
+The two that remain are the two publications disagreeing with each other about
+individual stocking events, not this repo getting them wrong, and both are named
+in the test suite rather than silently tolerated. Dates are deliberately not
+compared: 64% of the map's events sit one day earlier than the reports', which
+is a rendering difference and not a disagreement about what happened.
+
+
+## Answering the attribute questions
+
+`reconcile.py` compares what this repo holds against what Alberta publishes on
+its stocking map, field by field, joined on Alberta's own waterbody id.
+
+```bash
+python3 scripts/reconcile.py          # writes data/lake_facts_review.csv
+python3 scripts/reconcile.py --apply  # records the blanks in data/lake_facts.csv
+python3 scripts/build_history.py      # and the rebuild keeps them
+```
+
+Three verdicts. **CONFIRM** where both agree — 1,096 of them, which is the main
+result: two independently produced sources describing the same lakes.
+**FILL** where the repo has nothing and Alberta publishes a value. **DISAGREE**
+where both have a value and they differ, which is never resolved automatically.
+
+`--apply` only ever records a blank, and the rebuild only ever fills a blank, so
+a value the pipeline derived for itself is never replaced from a file. It
+filled 34 fishing zones, 34 surface areas, and Alberta's own id for eight lakes
+this repo had minted from a land description.
+
+Four disagreements are left for a person, in `data/lake_facts_review.csv`. Three
+are positions and one is a surface area; each names both values and how far
+apart they are.
+
+### Alberta's id for a lake the reports never numbered
+
+Thirteen lakes come from reports that print a land description and no waterbody
+id, so the exact id join the rest of the pipeline relies on cannot see them —
+which is why they had no depth even where Alberta publishes one. Eight are
+recoverable from the stocking map, and the recovery needs two independent
+fields to agree:
+
+1. the land description must identify **exactly one lake on each side** — seven
+   of this repo's codes are shared by two lakes and five of the map's are, so a
+   code that is not unique both ways proves nothing; and
+2. the name must match. Watridge Lake is why that is not optional: the map
+   publishes a position for it 140 km from this very land description.
+
+All eight score 0.95 or better on the name. The result is stored as
+`published_waterbody_id`, deliberately **not** as `waterbody_id`: `lake_id` is
+minted as `wb` + the waterbody id wherever the reports give one, so writing it
+into that field would either contradict the `lake_id` or force `lk0006` to
+become `wb417506`, breaking every `?lake=` link and every answer already
+recorded against the old id. It is a join key and nothing more.
+
+
 ## Where lake coordinates come from
 
 The report never prints a latitude or longitude. It prints a land description
@@ -290,6 +376,10 @@ held-out accuracy, the committed data itself, and the stocking-map import —
 that the CSVs still match the workbook, that "Unknown" never becomes zero, that
 a position contradicting its own land description is not published, and that a
 lake Alberta says nothing about is never reported as unaerated.
+
+It also checks that two lakes on one quarter section keep their own fish and
+their own surface area, that the published totals still agree with Alberta's
+stocking map, and that an answer you record survives the next rebuild.
 
 GitHub Actions runs the same suite on every push and additionally rebuilds
 `data/` from the raw reports, failing if the result differs from what is

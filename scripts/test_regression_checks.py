@@ -957,7 +957,7 @@ class ImportedSourceTests(unittest.TestCase):
         letting the two quietly diverge and the readers find nothing.
         """
         import fetch_lake_pages
-        expected = (["waterbody_id", "lake_id", "registry_name"]
+        expected = (["waterbody_id", "lake_id", "registry_name", "page_name"]
                     + list(fetch_lake_pages.INTERESTING) + ["depth_stated_unavailable"])
         header = self.built[self.mod.LAKES_CSV].splitlines()[0].split(",")
         self.assertEqual(header, expected)
@@ -1286,3 +1286,217 @@ class StockingMapAgreementTests(unittest.TestCase):
         doubled = [k for k in self.export
                    if self.export[k] and self.published[k] == self.export[k] * 2]
         self.assertEqual(doubled, [], f"{len(doubled)} lake-year(s) at exactly double")
+
+
+class ConfirmedFactsSurviveTests(unittest.TestCase):
+    """An answer you give must outlive the next rebuild.
+
+    reconcile.py --apply used to write straight into data/lake_registry.json,
+    and build_history.py — the command --apply prints on its very next line —
+    rebuilds that file from the reports and overwrites every field in it. So
+    every answer was erased by the step you were told to run next, and CI, which
+    runs exactly that sequence and then diffs, would have failed on the first
+    such commit. Nothing caught it because reconcile.py had no input at all
+    until the stocking map was imported.
+    """
+
+    def test_apply_never_writes_to_the_registry(self):
+        """The registry is a build artefact. Answers belong in an input."""
+        source = (Path(__file__).parent / "reconcile.py").read_text(encoding="utf-8")
+        self.assertNotIn("REGISTRY.write_text", source,
+                         "reconcile.py writes the registry, which the next build overwrites")
+
+    def test_a_confirmed_fact_survives_a_rebuild(self):
+        """Every row in lake_facts.csv is present in the built registry."""
+        facts = DATA_DIR / "lake_facts.csv"
+        if not facts.exists():
+            self.skipTest("no confirmed facts recorded yet")
+        registry = {e["lake_id"]: e
+                    for e in json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))}
+        checked = 0
+        with facts.open(newline="", encoding="utf-8") as handle:
+            for row in csv.DictReader(handle):
+                lake = registry.get(row["lake_id"])
+                self.assertIsNotNone(lake, f"{row['lake_id']} is not in the registry")
+                if row["field"] == "zone":
+                    self.assertEqual(lake["zone"], row["value"], row["note"])
+                    checked += 1
+                elif row["field"] == "surface_area_ha":
+                    self.assertEqual(lake["surface_area_ha"], float(row["value"]), row["note"])
+                    checked += 1
+        self.assertGreater(checked, 0, "nothing checkable was recorded")
+
+    def test_a_confirmed_fact_never_overwrites_what_the_pipeline_found(self):
+        """Blanks only, in both directions.
+
+        reconcile.py records a row only where the repo had nothing, and
+        apply_facts fills only where the repo still has nothing. A value the
+        pipeline derived for itself is a disagreement for a person to settle,
+        never something replaced from a file.
+        """
+        import build_history, registry as registry_module
+
+        class Fake:
+            lakes = [{"lake_id": "wb1", "zone": "ES1", "surface_area_ha": 3.0,
+                      "ats_codes": ["SW1-2-3-W4"], "lat": 50.0, "lon": -114.0,
+                      "coord_source": "profile"}]
+            def reindex(self):
+                pass
+
+        lake = Fake.lakes[0]
+        original = dict(lake)
+        facts = registry_module.FACTS_PATH
+        backup = facts.read_text(encoding="utf-8") if facts.exists() else None
+        try:
+            facts.write_text(
+                "lake_id,field,value,note\n"
+                "wb1,zone,PP2,trying to overwrite\n"
+                "wb1,surface_area_ha,999,trying to overwrite\n"
+                "wb1,position,1.0,2.0,trying to overwrite\n",
+                encoding="utf-8")
+            build_history.apply_facts(Fake())
+        finally:
+            if backup is not None:
+                facts.write_text(backup, encoding="utf-8")
+            else:
+                facts.unlink()
+        self.assertEqual(lake["zone"], original["zone"])
+        self.assertEqual(lake["surface_area_ha"], original["surface_area_ha"])
+        self.assertEqual(lake["lat"], original["lat"])
+
+    def test_reconcile_reaches_a_fixed_point(self):
+        """Running --apply twice records nothing the second time."""
+        facts = DATA_DIR / "lake_facts.csv"
+        if not facts.exists():
+            self.skipTest("no confirmed facts recorded yet")
+        import reconcile
+        lakes = json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))
+        site = reconcile.load_site()
+        if site is None:
+            self.skipTest("the collected CSV is not present")
+        fills, _, _ = reconcile.compare(lakes, site)
+        applicable = [f for f in fills if f["field"] in reconcile.APPLICABLE]
+        self.assertEqual(
+            applicable, [],
+            f"{len(applicable)} answer(s) still unrecorded after a build; "
+            f"run reconcile.py --apply and rebuild")
+
+
+class PublishedWaterbodyIdTests(unittest.TestCase):
+    """Alberta's id for lakes this repo minted from a land description.
+
+    Thirteen lakes come from reports that print no waterbody id, so the exact
+    id join the rest of the pipeline relies on cannot see them — which is why
+    they got no depth even where Alberta publishes one. Eight are recoverable
+    from the stocking map.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.registry = json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))
+
+    def test_a_published_id_is_never_mistaken_for_the_reports_own(self):
+        """They are different claims and live in different fields.
+
+        lake_id is minted as "wb" + the waterbody id wherever the reports give
+        one. Writing a recovered id into waterbody_id would either contradict
+        the lake_id or force a rename that breaks every ?lake= link and every
+        answer already recorded against the old id.
+        """
+        for lake in self.registry:
+            if lake.get("published_waterbody_id"):
+                self.assertIsNone(lake.get("waterbody_id"),
+                                  f"{lake['name']} carries both kinds of id")
+                self.assertFalse(lake["lake_id"].startswith("wb"),
+                                 f"{lake['name']} has a minted id and a wb lake_id")
+
+    def test_no_published_id_collides_with_a_real_one(self):
+        reported = {str(l["waterbody_id"]) for l in self.registry if l.get("waterbody_id")}
+        for lake in self.registry:
+            recovered = lake.get("published_waterbody_id")
+            if recovered:
+                self.assertNotIn(str(recovered), reported,
+                                 f"{lake['name']} claims an id another lake already holds")
+
+    def test_every_published_id_rests_on_two_agreeing_fields(self):
+        """A land description unique on BOTH sides, and a name that matches.
+
+        Seven registry codes are shared by two lakes and five of the map's are,
+        so a code that is not unique both ways proves nothing. Watridge Lake is
+        why the name check is not optional: its published position is 140 km
+        from this very land description.
+        """
+        import reconcile
+        site = reconcile.load_site()
+        if site is None:
+            self.skipTest("the collected CSV is not present")
+        proposals = {p["lake_id"]: p for p in
+                     reconcile.propose_published_ids(self.registry, site)}
+        recovered = [l for l in self.registry if l.get("published_waterbody_id")]
+        self.assertTrue(recovered, "no published ids were recovered")
+        for lake in recovered:
+            # Already applied, so it no longer proposes; re-derive it against a
+            # copy with the field cleared.
+            blank = dict(lake)
+            blank.pop("published_waterbody_id")
+            others = [l for l in self.registry if l["lake_id"] != lake["lake_id"]]
+            again = reconcile.propose_published_ids(others + [blank], site)
+            match = [p for p in again if p["lake_id"] == lake["lake_id"]]
+            self.assertEqual(len(match), 1,
+                             f"{lake['name']}'s id no longer follows from the evidence")
+            self.assertEqual(match[0]["alberta_value"],
+                             str(lake["published_waterbody_id"]))
+
+    def test_a_name_that_disagrees_blocks_the_join(self):
+        """The land description alone happens to be enough for today's eight.
+
+        It is not enough in general — seven registry codes are shared and five
+        of the map's are — so the name has to agree too. This tests the guard
+        rather than the current data, which would pass without it.
+        """
+        import reconcile
+        lake = {"lake_id": "lk9999", "name": "Somewhere Entirely Else",
+                "ats_codes": ["NW1-2-3-W4"], "waterbody_id": None}
+        site = {"999999": {"waterbody_id": "999999",
+                           "legal_land_description": "NW1-2-3-W4",
+                           "page_name": "Not The Same Lake At All"}}
+        self.assertEqual(reconcile.propose_published_ids([lake], site), [],
+                         "a land description matched two lakes with unrelated names")
+
+        agreeing = dict(lake, name="Not The Same Lake At All")
+        self.assertEqual(len(reconcile.propose_published_ids([agreeing], site)), 1,
+                         "an agreeing name was refused")
+
+    def test_a_shared_land_description_blocks_the_join(self):
+        """A code held by two lakes on either side proves nothing."""
+        import reconcile
+        shared = [{"lake_id": "lk9998", "name": "Twin Lake", "waterbody_id": None,
+                   "ats_codes": ["NW1-2-3-W4"]},
+                  {"lake_id": "lk9997", "name": "Twin Lake", "waterbody_id": None,
+                   "ats_codes": ["NW1-2-3-W4"]}]
+        site = {"999999": {"waterbody_id": "999999",
+                           "legal_land_description": "NW1-2-3-W4",
+                           "page_name": "Twin Lake"}}
+        self.assertEqual(reconcile.propose_published_ids(shared, site), [],
+                         "a land description two lakes share was used as evidence")
+
+    def test_the_recovered_lakes_reach_the_depth_file(self):
+        """The whole point: they were invisible to the join before."""
+        path = DATA_DIR / "lake_depth.json"
+        if not path.exists():
+            self.skipTest("depth has not been built")
+        depths = json.loads(path.read_text(encoding="utf-8"))["lakes"]
+        recovered = [l for l in self.registry if l.get("published_waterbody_id")]
+        self.assertTrue(recovered)
+        for lake in recovered:
+            self.assertIn(lake["lake_id"], depths,
+                          f"{lake['name']} still has no entry despite a published id")
+
+    def test_a_watridge_style_position_is_still_refused(self):
+        """The id is recovered; the bad coordinate is not adopted with it."""
+        watridge = [l for l in self.registry if l["name"] == "Watridge Lake"]
+        self.assertEqual(len(watridge), 1)
+        lake = watridge[0]
+        self.assertEqual(str(lake.get("published_waterbody_id")), "6120")
+        self.assertLess(abs(lake["lon"] - (-115.43)), 0.1,
+                        "Watridge moved to the map's published longitude")

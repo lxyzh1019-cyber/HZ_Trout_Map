@@ -288,7 +288,8 @@ def main():
         if found.get("max_depth_m") is None and not found["depth_stated_unavailable"]:
             unreadable.append((wid, lake["name"]))
         row = {"waterbody_id": wid, "lake_id": lake.get("lake_id", ""),
-               "registry_name": lake.get("name", "")}
+               "registry_name": lake.get("name", ""),
+               "page_name": found.get("page_name", "")}
         for column in INTERESTING:
             value = found.get(column)
             row[column] = "" if value is None else value
@@ -302,8 +303,11 @@ def main():
             time.sleep(args.pause)
 
     OUT_CSV.parent.mkdir(parents=True, exist_ok=True)
-    fields = (["waterbody_id", "lake_id", "registry_name"] + list(INTERESTING)
-              + ["depth_stated_unavailable"])
+    # page_name is the name the source itself uses, which is the only name
+    # available for a waterbody this repo does not yet hold. interpret() has
+    # always produced it; it was simply never written out.
+    fields = (["waterbody_id", "lake_id", "registry_name", "page_name"]
+              + list(INTERESTING) + ["depth_stated_unavailable"])
     with OUT_CSV.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
