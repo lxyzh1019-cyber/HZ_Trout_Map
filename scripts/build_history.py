@@ -429,8 +429,8 @@ def write_depths(reg):
     import depth
     stats = depth.write(reg.lakes, DATA_DIR)
     if not stats:
-        print("\nNo data/raw/mywildalberta_depths.csv; skipping depth and winterkill.")
-        print("  Collect it once with: cd scripts && python3 fetch_depths.py")
+        print("\nNo data/raw/mywildalberta_lakes.csv; skipping depth and winterkill.")
+        print("  Collect it once with: cd scripts && python3 fetch_lake_pages.py")
         return None
     print("\nReading lake depth...")
     print(f"  {stats['with_depth']} lake(s) with a depth, "

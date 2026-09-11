@@ -100,6 +100,11 @@
     M66 forecast confidence fades with lead time in the number, not only in the
         styling: pressure's weight decays and light takes up the slack
     M67 a lake whose season is shut is not scored at all
+    M68 lake depth from Alberta's own pages, joined on its waterbody id, with
+        the summer layer and winterkill risk that depth makes possible
+    M69 no depth means no depth advice: neither is ever guessed
+    M70 Alberta's advisories and closures, checked daily, shown as published
+        and never interpreted into a per-lake flag
 -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2b2e2a">
@@ -378,6 +383,11 @@
   .leaflet-popup-content { margin: 12px 14px; font-size: 12px; min-width: 260px;
     max-height: 60vh; overflow-y: auto; scrollbar-gutter: stable; padding-right: 4px; }
   .lake-popup h3 { margin: 0 0 2px; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+  #advisory-list { list-style: none; padding: 0; margin: 4px 0 0; }
+  #advisory-list li { font-size: 11px; line-height: 1.45; margin-bottom: 5px;
+    padding-left: 9px; border-left: 2px solid var(--TGTR); }
+  #advisory-list a { color: var(--ink-dim); text-decoration: none; }
+  #advisory-list a:hover { color: var(--ink); }
   .lake-popup .depth-row { font-size: 11px; color: var(--ink-dim); margin-bottom: 5px; }
   .lake-popup .dim { color: var(--ink-dim); }
   .lake-popup .wk-row { font-size: 11px; margin-bottom: 7px; display: flex;
@@ -679,6 +689,13 @@
     <div class="count" id="result-count">Showing … lakes</div>
     <div class="filter-summary" id="filter-summary"></div>
     <div class="empty-state" id="empty-state">No lakes match these filters. Try more years, more species, or a longer distance.</div>
+
+    <div class="group" id="advisory-group" hidden>
+      <div class="group-label"><span>Alberta advisories</span></div>
+      <div class="hint" id="advisory-note"></div>
+      <ul id="advisory-list"></ul>
+      <button class="linkish" id="advisory-more" type="button" hidden>Show all</button>
+    </div>
 
     <div class="group" id="season-group" hidden>
       <div class="group-label"><span>Season</span></div>
@@ -989,6 +1006,7 @@ let ALL_YEARS = [];
 let QUALITY_SUMMARY = null;
 let REGULATIONS = null;
 let DEPTHS = null;
+let ADVISORIES = null;
 let PROVISIONAL_YEARS = new Set();
 const DATA_ISSUES = { invalidStockings: 0, examples: [] };
 
@@ -1091,6 +1109,18 @@ async function loadRegulations() {
 async function loadDepths() {
   try {
     const resp = await fetch("data/lake_depth.json");
+    return resp.ok ? await resp.json() : null;
+  } catch { return null; }
+}
+
+/* Alberta's closures and consumption advisories, refreshed daily by a scheduled
+ * job. Deliberately NOT matched to individual lakes: turning a sentence written
+ * for a human into a per-lake closure flag means guessing at its scope, and
+ * guessing generously puts someone on shut water. They are shown as published,
+ * with the date, and the reader follows the link. */
+async function loadAdvisories() {
+  try {
+    const resp = await fetch("live/advisories.json");
     return resp.ok ? await resp.json() : null;
   } catch { return null; }
 }
@@ -1967,6 +1997,33 @@ function buildSizeFilters() {
   });
 }
 
+function buildAdvisories() {
+  if (!ADVISORIES) return;
+  const lines = Object.values(ADVISORIES.sources || {})
+    .flatMap(src => (src.entries || []).map(text => ({ text, url: src.url })));
+  if (!lines.length) return;
+  document.getElementById("advisory-group").hidden = false;
+  const note = document.getElementById("advisory-note");
+  const list = document.getElementById("advisory-list");
+  const more = document.getElementById("advisory-more");
+
+  const checked = ADVISORIES.checked ? new Date(ADVISORIES.checked) : null;
+  note.textContent = `${lines.length} notice${lines.length === 1 ? "" : "s"}`
+    + (checked ? ` · checked ${daysAgo(ADVISORIES.checked.slice(0, 10)) === 0
+        ? "today" : fmtDate(ADVISORIES.checked.slice(0, 10), "day")}` : "");
+
+  let expanded = false;
+  const draw = () => {
+    const shown = expanded ? lines : lines.slice(0, 3);
+    list.innerHTML = shown.map(l =>
+      `<li><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.text)}</a></li>`).join("");
+    more.hidden = lines.length <= 3;
+    more.textContent = expanded ? "Show fewer" : `Show all ${lines.length}`;
+  };
+  more.addEventListener("click", () => { expanded = !expanded; draw(); });
+  draw();
+}
+
 function buildConditionsPanel() {
   const btn = document.getElementById("conditions-btn");
   btn.addEventListener("click", () => {
@@ -2806,6 +2863,7 @@ async function init() {
     QUALITY_SUMMARY = await loadQualitySummary();
     REGULATIONS = await loadRegulations();
     DEPTHS = await loadDepths();
+    ADVISORIES = await loadAdvisories();
     LAKES = lakes;
     ALL_YEARS = years;
     state.years = params.has("yr")
@@ -2820,6 +2878,7 @@ async function init() {
     updateDataQualitySummary();
     initMap();
     buildSearch();
+    buildAdvisories();
     buildConditionsPanel();
     buildSeasonFilter();
     buildRecencyChips();

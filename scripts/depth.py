@@ -1,6 +1,6 @@
 """How deep each lake is, and what that implies in summer and in winter.
 
-Depth arrives from fetch_depths.py, joined on Alberta's own waterbody id, so
+Depth arrives from fetch_lake_pages.py, joined on Alberta's own waterbody id, so
 this is an exact join rather than a name match.
 
 Two things depend on it, and both of them have to say nothing at all when the
@@ -31,7 +31,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
-DEPTHS_CSV = ROOT / "data" / "raw" / "mywildalberta_depths.csv"
+DEPTHS_CSV = ROOT / "data" / "raw" / "mywildalberta_lakes.csv"
 AERATED_CSV = ROOT / "data" / "raw" / "aca_aerated_lakes.csv"
 
 # Below this, wind keeps an Alberta lake mixed through the summer and there is

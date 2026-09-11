@@ -61,7 +61,8 @@ const SHELL_FILES = [
 async function precacheData() {
   const cache = await caches.open(DATA_CACHE);
   const fixed = ["data/manifest.json", "data/quality_summary.json",
-                 "data/lake_regulations.json", "data/lake_depth.json"];
+                 "data/lake_regulations.json", "data/lake_depth.json",
+                 "live/advisories.json"];
   await Promise.all(fixed.map(u => cache.add(u).catch(() => {})));
 
   let years = [];
@@ -220,6 +221,12 @@ self.addEventListener("fetch", event => {
 
   if (request.mode === "navigate") {
     event.respondWith(networkFirst(request, SHELL_CACHE));
+    return;
+  }
+  // Advisories change daily and matter most where there is no signal, so they
+  // are cached like data rather than fetched fresh.
+  if (url.pathname.includes("/live/")) {
+    event.respondWith(cacheFirstRevalidate(request, DATA_CACHE));
     return;
   }
   if (url.pathname.includes("/data/")) {

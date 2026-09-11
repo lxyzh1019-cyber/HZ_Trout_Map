@@ -162,6 +162,77 @@ rescale cannot swap them: the best window of the day is lunar-invariant by
 construction, and that is asserted in the self-check below rather than merely
 intended.</p>
 
+<h2>Where each number comes from</h2>
+<p>Nothing on the map is invented. Every figure traces to a published source or
+to arithmetic you can check, and the ones that are estimates say so in the place
+they are shown, not only here.</p>
+<div class="scroller">
+<table>
+  <thead><tr><th>What you see</th><th>Where it comes from</th><th>Trust</th></tr></thead>
+  <tbody>
+    <tr><td>Stocking history</td><td>Alberta's annual fish stocking reports, parsed from the published PDFs</td><td><span class="tier strong">Recorded</span></td></tr>
+    <tr><td>Catch limits and seasons</td><td>The <em>Alberta Guide to Sportfishing Regulations</em>, in the guide's own words</td><td><span class="tier strong">Published</span></td></tr>
+    <tr><td>Sunrise, dusk, moon</td><td>Computed from the date and the coordinate; no network, no service</td><td><span class="tier strong">Computed</span></td></tr>
+    <tr><td>Lake depth</td><td>Alberta's own stocked-lake pages, joined on its waterbody id</td><td><span class="tier strong">Published</span></td></tr>
+    <tr><td>Weather and pressure</td><td>Open-Meteo forecast for the surrounding grid cell</td><td><span class="tier moderate">Forecast</span></td></tr>
+    <tr><td>Water temperature</td><td>Modelled from a smoothed week of air temperature &mdash; unless you measured it</td><td><span class="tier moderate">Estimate &plusmn;2&nbsp;&deg;C</span></td></tr>
+    <tr><td>Summer layer depth</td><td>Inferred from lake area and depth; a band, never a number</td><td><span class="tier weak">Rule of thumb</span></td></tr>
+    <tr><td>Winterkill risk</td><td>Depth, plus aeration where that list is known</td><td><span class="tier weak">Partial inputs</span></td></tr>
+    <tr><td>Advisories</td><td>Alberta's advisories page, checked daily, quoted not interpreted</td><td><span class="tier strong">Published</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Catch limits, and why they are quoted rather than summarised</h2>
+<p>The limits are the one thing here with a legal consequence, so three things
+are never left off: which year's guide they came from, which rule produced them,
+and a link to the official tables.</p>
+<p>The guide's precedence is not the obvious one, and it is stated in the guide
+itself. A lake resolves in three steps: a site-specific row in its Watershed
+Unit table wins; otherwise the provincial put-and-take stocked regulations apply
+if it is on that list &mdash; <em>"unless the waterbody is stocked, in which case
+provincial put and take stocked lake regulations apply"</em>; otherwise the
+watershed default. That middle step carries most of this map, because this is a
+map of stocked lakes.</p>
+<p>Three rules from the guide are easy to read backwards, and each one is
+asserted in the self-check rather than merely intended:</p>
+<ul>
+  <li>A waterbody that is <strong>not listed</strong> is not unknown &mdash; it takes the
+      zone default, and still has a limit.</li>
+  <li>A listed waterbody with a <strong>blank season is CLOSED</strong>, not unknown.</li>
+  <li>A <strong>blank species cell</strong> means that species is not likely present,
+      not that it is unlimited.</li>
+</ul>
+<p>Where a lake cannot be matched to the regulations with confidence, no limits
+are shown at all. The tempting fallback &mdash; use the watershed default whenever a
+name fails to match &mdash; is the dangerous one, because the default is usually
+<em>more</em> permissive than the site-specific row it would stand in for. ES1
+defaults to five trout with bait allowed, while Barnaby Lake inside ES1 is one
+trout over 40&nbsp;cm under a bait ban. Missing that row and showing the default
+would invite someone to keep four fish too many.</p>
+
+<h2>Depth, and the advice that depends on it</h2>
+<p>Depth decides two things, and both stay silent without it.</p>
+<p><strong>The summer layer.</strong> A lake shallower than about five metres stays
+mixed all summer, so there is no cooler water to drop to and no thermocline to
+fish. A deeper lake does separate, and then a hot surface reading describes water
+the trout are avoiding rather than water they are in. Where the layer sits is set
+mostly by <em>fetch</em> &mdash; how far the wind can blow across the lake &mdash; not by a
+fraction of the maximum depth, and the band is held a metre clear of the bottom.
+It is a band, never a single number, because nobody has measured a temperature
+profile for these lakes.</p>
+<p><strong>Winterkill.</strong> Alberta names the mechanism as shallow, eutrophic and
+long under ice. Depth is measurable here; how productive a lake is, is not
+available at all; and ice duration varies far less between Alberta's stocked
+lakes than depth does, so modelling it would add arithmetic without adding
+discrimination. What is shown is therefore a risk band with its inputs named,
+and the popup says what was not counted. Aeration cuts both ways when that list
+is known: a lake is aerated <em>because</em> the province expects it to winterkill,
+and is less likely to <em>because</em> it is.</p>
+<p>With no depth, no depth advice appears. Sending someone to eight metres in
+three metres of water is a real harm, and "probably deep enough" is not a
+defence.</p>
+
 <h2>What this cannot know</h2>
 <ul>
   <li><strong>The actual water temperature.</strong> Free weather services report air.
@@ -174,6 +245,10 @@ intended.</p>
       then describes water the trout are deliberately avoiding.</li>
   <li><strong>Whether the fish are there at all.</strong> Stocking records say what was
       put in and when. They cannot say what survived the winter.</li>
+  <li><strong>Which lake an advisory is about.</strong> Alberta's closures are written
+      for people, not for parsers. Turning one into a per-lake flag means guessing
+      at the scope of a sentence, and guessing generously would put someone on shut
+      water &mdash; so they are shown as published and you follow the link.</li>
   <li><strong>Anything about your particular lake on your particular day.</strong> The
       honest ceiling on all of this is modest. Environmental variables of this kind
       typically explain a minority of the variation in catch. Treat the score as a
@@ -198,6 +273,15 @@ intended.</p>
       temperature from lagged and smoothed air temperature.</li>
   <li>Pressure to depth equivalence: 1 hPa = 100 Pa; fresh water &rho;g = 9807 Pa/m;
       therefore 1 hPa = 1.02 cm.</li>
+  <li><em>Alberta Guide to Sportfishing Regulations</em> &mdash; watershed unit tables,
+      defaults, and the provincial put-and-take stocked lake regulations.</li>
+  <li>MyWildAlberta stocked-lake pages, for depth and surface area, joined on
+      Alberta's own waterbody identifier.</li>
+  <li>Alberta Conservation Association aerated-lake programme, and Alberta's
+      <em>Best Practices for Recreational Stocking of Trout</em>, for the winterkill
+      mechanism.</li>
+  <li>Mixing-depth work relating thermocline depth to fetch rather than to
+      maximum depth.</li>
 </ul>
 
 <section id="selfcheck"></section>

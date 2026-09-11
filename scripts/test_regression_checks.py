@@ -733,18 +733,71 @@ class DepthTests(unittest.TestCase):
             self.assertTrue(str(lake["waterbody_id"]).isdigit())
             self.assertEqual(lake["lake_id"], "wb" + str(lake["waterbody_id"]))
 
-    def test_the_parser_reads_the_shapes_the_page_uses(self):
-        import fetch_depths
-        found = fetch_depths.parse(
-            "<h1>Somewhere Lake</h1><tr><th>Maximum Depth</th><td>7.6 m</td></tr>"
-            "<tr><th>Surface Area</th><td>25.4 ha</td></tr>")
-        self.assertEqual(found["max_depth_m"], 7.6)
-        self.assertEqual(found["surface_area_ha"], 25.4)
-        # "no depth available" is an answer, not a failure to read the page
-        stated = fetch_depths.parse("<p>Depth information is not available.</p>")
-        self.assertIsNone(stated["max_depth_m"])
-        self.assertTrue(stated["states_unavailable"])
-        # and a page with neither is neither
-        blank = fetch_depths.parse("<h1>Quiet Lake</h1><p>Stocked with trout.</p>")
-        self.assertIsNone(blank["max_depth_m"])
-        self.assertFalse(blank["states_unavailable"])
+    def test_the_collector_discovers_the_page_schema(self):
+        """The collector was written without being able to open the site, so it
+        must not depend on having guessed the labels. It harvests every
+        label/value pair the markup offers, in whatever form, and maps those
+        onto the columns the build wants."""
+        import fetch_lake_pages as collector
+
+        definition_list = ("<h1>Beauvais Lake - Fish Stocking</h1>"
+                           "<dl><dt>Watershed Unit</dt><dd>ES1</dd>"
+                           "<dt>Surface Area</dt><dd>219.2 ha</dd>"
+                           "<dt>Maximum Depth</dt><dd>12.0 m</dd></dl>")
+        found = collector.interpret(collector.harvest(definition_list), definition_list)
+        self.assertEqual(found["page_name"], "Beauvais Lake")
+        self.assertEqual(found["zone"], "ES1")
+        self.assertEqual(found["max_depth_m"], 12.0)
+        self.assertEqual(found["surface_area_ha"], 219.2)
+
+        table = ("<title>Chain Lakes Reservoir | My Wild Alberta</title>"
+                 "<table><tr><th>Zone</th><td>ES1</td></tr>"
+                 "<tr><th>Max. Depth</th><td>9.1 m</td></tr></table>")
+        found = collector.interpret(collector.harvest(table), table)
+        self.assertEqual(found["max_depth_m"], 9.1,
+                         "a differently worded label was missed")
+        self.assertEqual(found["page_name"], "Chain Lakes Reservoir")
+
+        # A zone mentioned only in prose still counts: it is the field that
+        # decides whether a lake gets catch limits at all.
+        prose = "<h1>Jarvis Creek</h1><p>Lies within watershed unit ES3.</p>"
+        self.assertEqual(
+            collector.interpret(collector.harvest(prose), prose)["zone"], "ES3")
+
+    def test_no_depth_available_is_an_answer_not_a_failure(self):
+        import fetch_lake_pages as collector
+        stated = "<h1>Some Pond</h1><p>Depth information is not available.</p>"
+        found = collector.interpret(collector.harvest(stated), stated)
+        self.assertIsNone(found.get("max_depth_m"))
+        self.assertTrue(found["depth_stated_unavailable"])
+
+        silent = "<h1>Quiet Lake</h1><p>Stocked with trout.</p>"
+        found = collector.interpret(collector.harvest(silent), silent)
+        self.assertIsNone(found.get("max_depth_m"))
+        self.assertFalse(found["depth_stated_unavailable"],
+                         "a page that simply says nothing must not be read as "
+                         "Alberta stating no depth exists")
+
+    def test_reconciliation_separates_filling_from_overwriting(self):
+        """Alberta is the authority on its own lakes, but this repo's values came
+        from its own sources for reasons. A blank may be filled; a disagreement
+        goes to a person."""
+        import reconcile
+        lakes = [
+            {"lake_id": "wb1", "waterbody_id": "1", "name": "Blank Zone", "zone": None},
+            {"lake_id": "wb2", "waterbody_id": "2", "name": "Agrees", "zone": "ES1"},
+            {"lake_id": "wb3", "waterbody_id": "3", "name": "Differs", "zone": "PP2"},
+            {"lake_id": "wb4", "waterbody_id": "4", "name": "Close Area",
+             "surface_area_ha": 100.0},
+        ]
+        site = {
+            "1": {"waterbody_id": "1", "zone": "ES2"},
+            "2": {"waterbody_id": "2", "zone": "ES1"},
+            "3": {"waterbody_id": "3", "zone": "NB1"},
+            "4": {"waterbody_id": "4", "surface_area_ha": "104"},
+        }
+        fills, confirms, disagreements = reconcile.compare(lakes, site)
+        self.assertEqual([r["lake"] for r in fills], ["Blank Zone"])
+        self.assertEqual({r["lake"] for r in confirms}, {"Agrees", "Close Area"},
+                         "a 4% area difference should count as agreement")
+        self.assertEqual([r["lake"] for r in disagreements], ["Differs"])
