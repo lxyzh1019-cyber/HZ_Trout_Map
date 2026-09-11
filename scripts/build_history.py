@@ -99,8 +99,66 @@ def attach_profiles(reg):
                 lake["name_variants"] = sorted(set(lake["name_variants"]) | {prof["name"]})
                 lake["aliases"] = sorted(set(lake["aliases"]) | {normalize_name(prof["name"])})
                 lake["name"] = prof["name"]
+    for lake in reg.lakes:
+        lake["base_name"] = lake["name"]
     reg.reindex()
     return matched
+
+
+def resolve_duplicate_coordinates(reg):
+    """A coordinate given to two different lakes is not a verified coordinate.
+
+    The profiles CSV repeats one position across five pairs — North and South
+    Two Lake share a point (and an area) though their land descriptions put
+    them 3.4 km apart, and Sibbald Lake carries Sibbald Meadows Pond's. In each
+    pair the position fits one lake and not the other, so keep it for whichever
+    lake's own land description agrees, and fall the rest back to the grid.
+    """
+    groups = defaultdict(list)
+    for lake in reg.lakes:
+        if lake["coord_source"] == "profile" and lake["lat"] is not None:
+            groups[(round(lake["lat"], 6), round(lake["lon"], 6))].append(lake)
+
+    demoted = []
+    for (lat, lon), lakes in groups.items():
+        if len(lakes) < 2:
+            continue
+
+        def gap(lake):
+            for code in lake["ats_codes"]:
+                est = ats_to_latlng(code)
+                if est[0] is not None:
+                    return haversine_km(lat, lon, est[0], est[1])
+            return float("inf")
+
+        keeper = min(lakes, key=gap)
+        for lake in lakes:
+            if lake is keeper:
+                continue
+            for code in lake["ats_codes"]:
+                est = ats_to_latlng(code)
+                if est[0] is not None:
+                    lake["lat"], lake["lon"] = est
+                    lake["coord_source"] = "ats"
+                    demoted.append((lake["name"], round(gap(lake), 1)))
+                    break
+    reg.reindex()
+    return demoted
+
+
+def drop_empty_lakes(reg, linked):
+    """Remove registry entries that no report row resolved to.
+
+    Alberta has issued two waterbody ids for the same water more than once —
+    Magrath Children's Pond and East Stormwater Pond each have a twin that
+    ends up holding nothing. Left in, they clutter the review candidates and
+    force a disambiguating suffix onto a name that has no real twin.
+    """
+    used = {lake_id for rows in linked.values() for lake_id, _ in rows}
+    dropped = [l for l in reg.lakes if l["lake_id"] not in used]
+    reg.lakes = [l for l in reg.lakes if l["lake_id"] in used]
+    reg.reindex()
+    return dropped
 
 
 def settle_coordinates(reg):
@@ -140,6 +198,8 @@ def disambiguate_names(reg):
     but two identical pins on the map help nobody — so the land description
     goes into the name of each.
     """
+    for lake in reg.lakes:
+        lake["name"] = lake.get("base_name", lake["name"])
     groups = defaultdict(list)
     for lake in reg.lakes:
         if lake["lat"] is None:
@@ -375,6 +435,9 @@ def main():
 
     matched = attach_profiles(reg)
     print(f"  {matched} matched to a profile entry (zone, amenities, verified position)")
+    demoted = resolve_duplicate_coordinates(reg)
+    for name, gap in demoted:
+        print(f"  shared coordinate: {name} moved to its own land description ({gap} km away)")
     counts = settle_coordinates(reg)
     print(f"  positions: {counts['profile']} verified, {counts['alberta']} from Alberta, "
           f"{counts['ats']} from the land description, {counts['none']} unknown")
@@ -399,6 +462,12 @@ def main():
             for item in items:
                 reg.absorb(lake, item["row"])
                 linked[item["row"]["year"]].append((lake["lake_id"], item["row"]))
+
+    dropped = drop_empty_lakes(reg, linked)
+    if dropped:
+        print(f"\n  {len(dropped)} registry entr(ies) held no rows and were dropped: "
+              f"{', '.join(l['name'] for l in dropped[:6])}")
+    disambiguate_names(reg)
 
     linked_rows = sum(len(v) for v in linked.values())
     trout_rows = sum(1 for y in rows_by_year.values() for r in y if r["species"] in TROUT)

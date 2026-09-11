@@ -5737,9 +5737,9 @@
     "lake_id": "wb5805",
     "ats": "14-24-7-W5",
     "name": "Sibbald Lake",
-    "lat": 51.05457,
-    "lon": -114.944741,
-    "coord_source": "profile",
+    "lat": 51.04974,
+    "lon": -114.86917,
+    "coord_source": "alberta",
     "zone": "ES1",
     "surface_area_ha": 2.2,
     "amenities": "Cook shelters, fire pits, hand launch, pit/vault toilets, playground.",
@@ -6034,6 +6034,43 @@
         "length_cm": 16.9,
         "number": 2000,
         "date": "2020-06-12",
+        "year": 2020,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 2000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb22995",
+    "ats": "SW27-83-23-W5",
+    "name": "Md Peace Pond #2",
+    "lat": 56.224205,
+    "lon": -117.553092,
+    "coord_source": "alberta",
+    "zone": "NB3",
+    "surface_area_ha": 1.1,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Jumpers",
+        "genotype": "AF2N",
+        "length_cm": 19.8,
+        "number": 1000,
+        "date": "2020-05-20",
+        "year": 2020,
+        "date_precision": "day"
+      },
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Jumpers",
+        "genotype": "AF2N",
+        "length_cm": 19.8,
+        "number": 1000,
+        "date": "2020-05-20",
         "year": 2020,
         "date_precision": "day"
       }
@@ -6774,7 +6811,7 @@
   {
     "lake_id": "wb22993",
     "ats": "NW29-40-26-W4",
-    "name": "East Stormwater Pond [NW29-40-26-W4]",
+    "name": "East Stormwater Pond",
     "lat": 52.469538,
     "lon": -113.709921,
     "coord_source": "alberta",
@@ -7419,60 +7456,6 @@
     ]
   },
   {
-    "lake_id": "wb6721",
-    "ats": "27-83-23-W5",
-    "name": "MD Peace Pond #1",
-    "lat": 56.222511,
-    "lon": -117.556197,
-    "coord_source": "profile",
-    "zone": "NB3",
-    "surface_area_ha": 1.1,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": "Trout Lodge/Jumpers",
-        "genotype": "AF2N",
-        "length_cm": 19.8,
-        "number": 1000,
-        "date": "2020-05-20",
-        "year": 2020,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 1000,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
-    "lake_id": "wb22995",
-    "ats": "SW27-83-23-W5",
-    "name": "Md Peace Pond #2",
-    "lat": 56.224205,
-    "lon": -117.553092,
-    "coord_source": "alberta",
-    "zone": "NB3",
-    "surface_area_ha": 1.1,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": "Trout Lodge/Jumpers",
-        "genotype": "AF2N",
-        "length_cm": 19.8,
-        "number": 1000,
-        "date": "2020-05-20",
-        "year": 2020,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 1000,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
     "lake_id": "wb23789",
     "ats": "4-47-19-W5",
     "name": "Pit 24 Lake",
@@ -7945,6 +7928,43 @@
     "total_fish": 640,
     "species_set": [
       "BKTR"
+    ]
+  },
+  {
+    "lake_id": "wb6607",
+    "ats": "NW26-21-5-W5",
+    "name": "Champion Lakes (Upper Champion Lake)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "alberta",
+    "zone": "ES1",
+    "surface_area_ha": 8.0,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Jumpers",
+        "genotype": "AF3N",
+        "length_cm": 19.8,
+        "number": 300,
+        "date": "2020-06-22",
+        "year": 2020,
+        "date_precision": "day"
+      },
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Jumpers",
+        "genotype": "AF3N",
+        "length_cm": 19.8,
+        "number": 300,
+        "date": "2020-06-22",
+        "year": 2020,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 600,
+    "species_set": [
+      "RNTR"
     ]
   },
   {
@@ -8541,7 +8561,7 @@
   },
   {
     "lake_id": "wb6751",
-    "ats": "SW26-5-22-W4",
+    "ats": "26-5-22-W4",
     "name": "Magrath Children's Pond",
     "lat": 49.4103,
     "lon": -112.8647,
@@ -8897,33 +8917,6 @@
       }
     ],
     "total_fish": 315,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
-    "lake_id": "wb6608",
-    "ats": "26-21-5-W5",
-    "name": "Champion Lakes (Lower)",
-    "lat": 50.815306,
-    "lon": -114.599941,
-    "coord_source": "profile",
-    "zone": "ES1",
-    "surface_area_ha": 8.0,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": "Trout Lodge/Jumpers",
-        "genotype": "AF3N",
-        "length_cm": 19.8,
-        "number": 300,
-        "date": "2020-06-22",
-        "year": 2020,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 300,
     "species_set": [
       "RNTR"
     ]

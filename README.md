@@ -113,6 +113,23 @@ review**, and none of the 32 rows for lakes absent from the registry were
 absorbed into another. `test_regression_checks.py` fails the build if a single
 wrong link ever appears.
 
+With the reviewed answers applied, **all 7,255 trout rows across sixteen years
+are linked** and the review queue is empty.
+
+Two housekeeping rules keep the registry honest:
+
+- **A position given to two lakes is not verified.** The profiles CSV repeats
+  one coordinate across five pairs. North and South Two Lake, both in Two Lakes
+  Provincial Park near Grande Prairie, shared a single point although their
+  land descriptions put them 3.4 km apart; Sibbald Lake carried Sibbald Meadows
+  Pond's, 5.3 km from its own. Where a coordinate is shared, it stays with
+  whichever lake's land description agrees and the others fall back to the grid.
+- **A registry entry that no row resolves to is dropped.** Alberta has issued
+  two waterbody ids for one water more than once — Magrath Children's Pond and
+  East Stormwater Pond each had a twin holding nothing, which cluttered the
+  review candidates and forced a disambiguating suffix onto a name with no real
+  twin.
+
 ## Answering the linking questions
 
 Anything the rules will not guess at goes to `data/link_review.csv` rather than

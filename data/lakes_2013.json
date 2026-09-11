@@ -4703,7 +4703,7 @@
   {
     "lake_id": "wb22993",
     "ats": "NW29-40-26-W4",
-    "name": "East Stormwater Pond [NW29-40-26-W4]",
+    "name": "East Stormwater Pond",
     "lat": 52.469538,
     "lon": -113.709921,
     "coord_source": "alberta",
@@ -5877,6 +5877,43 @@
     ]
   },
   {
+    "lake_id": "wb22995",
+    "ats": "SW27-83-23-W5",
+    "name": "Md Peace Pond #2",
+    "lat": 56.224205,
+    "lon": -117.553092,
+    "coord_source": "alberta",
+    "zone": "NB3",
+    "surface_area_ha": 1.1,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "Diploid",
+        "length_cm": 20.0,
+        "number": 1000,
+        "date": "2013-05-23",
+        "year": 2013,
+        "date_precision": "day"
+      },
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "Diploid",
+        "length_cm": 20.0,
+        "number": 1000,
+        "date": "2013-05-23",
+        "year": 2013,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 2000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb6082",
     "ats": "1-51-7-W4",
     "name": "Claude N Bernnan Memorial Pond (Vermillion Park Pond)",
@@ -6369,9 +6406,9 @@
     "lake_id": "wb5805",
     "ats": "14-24-7-W5",
     "name": "Sibbald Lake",
-    "lat": 51.05457,
-    "lon": -114.944741,
-    "coord_source": "profile",
+    "lat": 51.04974,
+    "lon": -114.86917,
+    "coord_source": "alberta",
     "zone": "ES1",
     "surface_area_ha": 2.2,
     "amenities": "Cook shelters, fire pits, hand launch, pit/vault toilets, playground.",
@@ -6734,7 +6771,7 @@
   },
   {
     "lake_id": "wb6751",
-    "ats": "SW26-5-22-W4",
+    "ats": "26-5-22-W4",
     "name": "Magrath Children's Pond",
     "lat": 49.4103,
     "lon": -112.8647,
@@ -7177,60 +7214,6 @@
         "genotype": "Diploid",
         "length_cm": 20.0,
         "number": 948,
-        "date": "2013-05-23",
-        "year": 2013,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 1000,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
-    "lake_id": "wb6721",
-    "ats": "27-83-23-W5",
-    "name": "MD Peace Pond #1",
-    "lat": 56.222511,
-    "lon": -117.556197,
-    "coord_source": "profile",
-    "zone": "NB3",
-    "surface_area_ha": 1.1,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "Diploid",
-        "length_cm": 20.0,
-        "number": 1000,
-        "date": "2013-05-23",
-        "year": 2013,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 1000,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
-    "lake_id": "wb22995",
-    "ats": "SW27-83-23-W5",
-    "name": "Md Peace Pond #2",
-    "lat": 56.224205,
-    "lon": -117.553092,
-    "coord_source": "alberta",
-    "zone": "NB3",
-    "surface_area_ha": 1.1,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "Diploid",
-        "length_cm": 20.0,
-        "number": 1000,
         "date": "2013-05-23",
         "year": 2013,
         "date_precision": "day"

@@ -4819,9 +4819,9 @@
     "lake_id": "wb5805",
     "ats": "14-24-7-W5",
     "name": "Sibbald Lake",
-    "lat": 51.05457,
-    "lon": -114.944741,
-    "coord_source": "profile",
+    "lat": 51.04974,
+    "lon": -114.86917,
+    "coord_source": "alberta",
     "zone": "ES1",
     "surface_area_ha": 2.2,
     "amenities": "Cook shelters, fire pits, hand launch, pit/vault toilets, playground.",
@@ -6650,6 +6650,43 @@
         "length_cm": 18.0,
         "number": 1000,
         "date": "2011-05-01",
+        "year": 2011,
+        "date_precision": "month"
+      }
+    ],
+    "total_fish": 1000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6751",
+    "ats": "26-5-22-W4",
+    "name": "Magrath Children's Pond",
+    "lat": 49.4103,
+    "lon": -112.8647,
+    "coord_source": "profile",
+    "zone": "PP1",
+    "surface_area_ha": 3.7,
+    "amenities": "Day use, no open fires, foot access only.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "2N",
+        "length_cm": 21.0,
+        "number": 500,
+        "date": "2011-04-01",
+        "year": 2011,
+        "date_precision": "month"
+      },
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "2N",
+        "length_cm": 20.0,
+        "number": 500,
+        "date": "2011-06-01",
         "year": 2011,
         "date_precision": "month"
       }

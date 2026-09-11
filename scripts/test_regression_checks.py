@@ -217,6 +217,69 @@ class LinkingAccuracyTests(unittest.TestCase):
         self.assertGreater(self.correct / total, 0.95)
 
 
+class CoordinateHygieneTests(unittest.TestCase):
+    """Two lakes must never sit on the same point, and no lake may be a ghost."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.registry = json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))
+
+    def test_no_two_lakes_share_a_verified_coordinate(self):
+        # The profiles CSV repeats one position across five pairs, including
+        # North and South Two Lake, whose land descriptions put them 3.4 km
+        # apart. A position given to two lakes is not verified.
+        seen = {}
+        for lake in self.registry:
+            if lake["coord_source"] != "profile" or lake["lat"] is None:
+                continue
+            key = (round(lake["lat"], 6), round(lake["lon"], 6))
+            self.assertNotIn(key, seen, f"{lake['name']} shares a point with {seen.get(key)}")
+            seen[key] = lake["name"]
+
+    def test_two_lakes_provincial_park_holds_two_distinct_lakes(self):
+        by_name = {l["name"]: l for l in self.registry}
+        north, south = by_name.get("North Two Lake"), by_name.get("South Two Lake")
+        self.assertIsNotNone(north)
+        self.assertIsNotNone(south)
+        apart = ats.haversine_km(north["lat"], north["lon"], south["lat"], south["lon"])
+        self.assertGreater(apart, 1.0, "the two lakes are stacked on one point")
+        self.assertLess(apart, 12.0, "they should both be in the same park")
+
+    def test_no_lake_in_the_registry_is_empty(self):
+        """Alberta has issued two ids for one water more than once; the twin
+        holds nothing and only clutters the review candidates."""
+        used = set()
+        for year in json.loads((DATA_DIR / "manifest.json").read_text(encoding="utf-8"))["years"]:
+            for lake in json.loads((DATA_DIR / f"lakes_{year}.json").read_text(encoding="utf-8")):
+                used.add(lake["lake_id"])
+        empty = [l["lake_id"] for l in self.registry if l["lake_id"] not in used]
+        self.assertEqual(empty, [], f"registry entries with no rows: {empty}")
+
+    def test_no_name_needs_a_disambiguating_suffix_any_more(self):
+        suffixed = [l["name"] for l in self.registry if "[" in l["name"]]
+        self.assertEqual(suffixed, [])
+
+
+class LinkingCompletenessTests(unittest.TestCase):
+    def test_every_report_row_found_a_lake(self):
+        """Reviewed answers are applied, so nothing should be left unlinked."""
+        review = DATA_DIR / "link_review.csv"
+        if not review.exists():
+            return
+        with open(review, newline="", encoding="utf-8") as f:
+            rows = list(csv.DictReader(f))
+        self.assertEqual(rows, [], f"{len(rows)} linking question(s) still open")
+
+    def test_the_published_years_carry_every_trout_row_we_can_read(self):
+        read = sum(1 for y in sources.YEAR_SOURCES
+                   for r in sources.read_year(y) if r["species"] in sources.TROUT_SPECIES)
+        published = 0
+        for year in json.loads((DATA_DIR / "manifest.json").read_text(encoding="utf-8"))["years"]:
+            for lake in json.loads((DATA_DIR / f"lakes_{year}.json").read_text(encoding="utf-8")):
+                published += len(lake["stockings"])
+        self.assertEqual(published, read)
+
+
 class PublishedDataTests(unittest.TestCase):
     """The committed data is what GitHub Pages serves, so check it directly."""
 
