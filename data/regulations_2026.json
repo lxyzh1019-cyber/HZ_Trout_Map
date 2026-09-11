@@ -1062,7 +1062,7 @@
   "ES1": {
    "lakes": {
     "Aster Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "5-19-9-W5",
      "page": 7,
      "season": {
@@ -1151,7 +1151,7 @@
      }
     },
     "Bearspaw Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 7,
      "season": {
@@ -1220,7 +1220,7 @@
      "trout_total": null
     },
     "Burns Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "17-19-7-W5",
      "page": 7,
      "season": {
@@ -1248,7 +1248,7 @@
      }
     },
     "Burstall Lakes": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "All lakes; 16-21-10-W5",
      "page": 7,
      "season": {
@@ -1288,7 +1288,7 @@
      "trout_total": null
     },
     "Carnarvon Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "30-16-6-W5",
      "page": 7,
      "season": {
@@ -1339,7 +1339,7 @@
      "trout_total": null
     },
     "Commonwealth Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Birdwood Lake; 29-21-10-W5",
      "page": 7,
      "season": {
@@ -1416,7 +1416,7 @@
        }
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 7,
      "season": {
@@ -1454,7 +1454,7 @@
      }
     },
     "East Scarpe Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "13-3-3-W5",
      "page": 7,
      "season": {
@@ -1469,7 +1469,7 @@
      }
     },
     "Emerald (Hart) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "SE-8-8-5-W5",
      "page": 7,
      "season": {
@@ -1495,7 +1495,7 @@
      }
     },
     "Fortress Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "6-22-9-W5",
      "page": 7,
      "season": {
@@ -1523,7 +1523,7 @@
      }
     },
     "Galatea Lakes": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Upper and lower; 13-22-10-W5",
      "page": 7,
      "season": {
@@ -1598,7 +1598,7 @@
      }
     },
     "Glenmore Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 7,
      "season": {
@@ -1628,7 +1628,7 @@
      }
     },
     "Headwall Lakes": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Upper and lower; 19,30-21-9-W5",
      "page": 7,
      "season": {
@@ -1686,7 +1686,7 @@
      }
     },
     "Invincible Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "5-20-9-W5",
      "page": 7,
      "season": {
@@ -1743,7 +1743,7 @@
      }
     },
     "Lake Of The Horns": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "11-17-7-W5",
      "page": 7,
      "season": {
@@ -1771,7 +1771,7 @@
      }
     },
     "Lillian Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "13-22-10-W5",
      "page": 7,
      "season": {
@@ -1799,7 +1799,7 @@
      }
     },
     "Loomis Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "21-17-7-W5",
      "page": 8,
      "season": {
@@ -1879,7 +1879,7 @@
      "trout_total": null
     },
     "Lys Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "26-3-3-W5",
      "page": 8,
      "season": {
@@ -1894,7 +1894,7 @@
      }
     },
     "Maude Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "14-20-10-W5",
      "page": 8,
      "season": {
@@ -1922,7 +1922,7 @@
      }
     },
     "Memorial Lakes": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "South, East and West; 6-23-9-W5",
      "page": 8,
      "season": {
@@ -1950,7 +1950,7 @@
      }
     },
     "Mitford Ponds": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "SE 4-26-4-W5",
      "page": 8,
      "season": {
@@ -1978,7 +1978,7 @@
      }
     },
     "Mount Lorette Ponds": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "19-23-8-W5",
      "page": 8,
      "season": {
@@ -2006,7 +2006,7 @@
      }
     },
     "Mud Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "22-21-10-W5",
      "page": 8,
      "season": {
@@ -2021,7 +2021,7 @@
      }
     },
     "Odlum Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "33-17-7-W5",
      "page": 8,
      "season": {
@@ -2058,7 +2058,7 @@
      }
     },
     "Phillips Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "18-8-5-W5",
      "page": 8,
      "season": {
@@ -2196,7 +2196,7 @@
      }
     },
     "Ribbon Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "19-22-9-W5",
      "page": 8,
      "season": {
@@ -2258,7 +2258,7 @@
      }
     },
     "Shark Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "NW-1-22-11-W5",
      "page": 8,
      "season": {
@@ -2433,7 +2433,7 @@
        }
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 9,
      "season": {
@@ -2519,7 +2519,7 @@
      }
     },
     "Talus Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "25-20-8-W5",
      "page": 9,
      "season": {
@@ -2547,7 +2547,7 @@
      }
     },
     "Three Isle Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "23-19-10-W5",
      "page": 9,
      "season": {
@@ -2575,7 +2575,7 @@
      }
     },
     "Tombstone Lakes": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Upper and lower; 13-20-8-W5",
      "page": 9,
      "season": {
@@ -2714,7 +2714,7 @@
      }
     },
     "Window Mountain Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "29-9-5-W5",
      "page": 9,
      "season": {
@@ -3960,7 +3960,7 @@
      }
     },
     "Allstones Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "30-38-17-W5",
      "page": 13,
      "season": {
@@ -4017,7 +4017,7 @@
      }
     },
     "Birch Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "18-35-6-W5",
      "page": 13,
      "season": {
@@ -4072,7 +4072,7 @@
      "trout_total": null
     },
     "Brazeau Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "12-46-12-W5",
      "page": 13,
      "season": {
@@ -4188,7 +4188,7 @@
      }
     },
     "Dormer Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "21-30-11-W5",
      "page": 13,
      "season": {
@@ -4216,7 +4216,7 @@
      }
     },
     "Eagle Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "11-32-11-W5",
      "page": 13,
      "season": {
@@ -4244,7 +4244,7 @@
      }
     },
     "Entry Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "18-36-18-W5",
      "page": 13,
      "season": {
@@ -4301,7 +4301,7 @@
      }
     },
     "Gap Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "5-39-13-W5",
      "page": 13,
      "season": {
@@ -4363,7 +4363,7 @@
      }
     },
     "Ice Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "14-31-12-W5",
      "page": 13,
      "season": {
@@ -4545,7 +4545,7 @@
      }
     },
     "Landslide Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "7-36-18-W5",
      "page": 14,
      "season": {
@@ -4573,7 +4573,7 @@
      }
     },
     "Lost Guide Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "9-34-14-W5",
      "page": 14,
      "season": {
@@ -4666,7 +4666,7 @@
      }
     },
     "Obstruction Lakes": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "6-40-20-W5",
      "page": 14,
      "season": {
@@ -6873,7 +6873,7 @@
      }
     },
     "County Sportplex Pond": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 20,
      "season": {
@@ -6902,7 +6902,7 @@
      }
     },
     "Crooked Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 20,
      "season": {
@@ -6923,7 +6923,7 @@
      "trout_total": null
     },
     "Goose Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "69-24-W5",
      "page": 20,
      "season": {
@@ -6973,7 +6973,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 20,
      "season": {
@@ -7008,7 +7008,7 @@
      "trout_total": null
     },
     "Long Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "68-24-W5",
      "page": 20,
      "season": {
@@ -7029,7 +7029,7 @@
      "trout_total": null
     },
     "Meekwap Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 20,
      "season": {
@@ -7082,7 +7082,7 @@
      }
     },
     "Raspberry Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 20,
      "season": {
@@ -7134,7 +7134,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 20,
      "season": {
@@ -7206,7 +7206,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 20,
      "season": {
@@ -7243,7 +7243,7 @@
     "Sturgeon Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "",
        "page": 20,
        "season": {
@@ -7278,7 +7278,7 @@
        "trout_total": null
       },
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Goose Creek tributary",
        "page": 20,
        "season": {
@@ -7313,7 +7313,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 20,
      "season": {
@@ -7358,7 +7358,7 @@
     "Amisk Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet for 1 km",
        "page": 30,
        "season": {
@@ -7393,7 +7393,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 30,
      "season": {
@@ -7428,7 +7428,7 @@
      "trout_total": null
     },
     "Angling Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 30,
      "season": {
@@ -7449,7 +7449,7 @@
      "trout_total": null
     },
     "Bangs Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes tributaries and outlet for 1 km",
      "page": 30,
      "season": {
@@ -7474,7 +7474,7 @@
      "trout_total": null
     },
     "Beartrap Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 30,
      "season": {
@@ -7496,7 +7496,7 @@
      "trout_total": null
     },
     "Beaver Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 30,
      "season": {
@@ -7530,7 +7530,7 @@
      "trout_total": null
     },
     "Behan Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "11-1-73-11-W4",
      "page": 30,
      "season": {
@@ -7559,7 +7559,7 @@
      "trout_total": null
     },
     "Bentley Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "58-8-W4",
      "page": 30,
      "season": {
@@ -7582,7 +7582,7 @@
      "trout_total": null
     },
     "Big Chief Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "16-72-11-W4",
      "page": 30,
      "season": {
@@ -7603,7 +7603,7 @@
      "trout_total": null
     },
     "Big Johnson (Chump) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 30,
      "season": {
@@ -7629,7 +7629,7 @@
      "trout_total": null
     },
     "Bluet Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "58-4-W4",
      "page": 30,
      "season": {
@@ -7652,7 +7652,7 @@
      "trout_total": null
     },
     "Bourque Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 30,
      "season": {
@@ -7686,7 +7686,7 @@
      "trout_total": null
     },
     "Brodrick (Unnamed) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "60-17-W4",
      "page": 30,
      "season": {
@@ -7723,7 +7723,7 @@
     "Calling Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Includes tributaries and outlet for 1 km",
        "page": 30,
        "season": {
@@ -7757,7 +7757,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 30,
      "season": {
@@ -7791,7 +7791,7 @@
      "trout_total": null
     },
     "Claude Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 30,
      "season": {
@@ -7812,7 +7812,7 @@
      "trout_total": null
     },
     "Clyde Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 30,
      "season": {
@@ -7833,7 +7833,7 @@
      "trout_total": null
     },
     "Cold Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 30,
      "season": {
@@ -7874,7 +7874,7 @@
      "trout_total": null
     },
     "Cow Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "8-72-11-W4",
      "page": 30,
      "season": {
@@ -7899,7 +7899,7 @@
      "trout_total": null
     },
     "Crane (Moore) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes outlet stream",
      "page": 30,
      "season": {
@@ -7929,7 +7929,7 @@
      "trout_total": null
     },
     "Crickett Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "64-18-W4",
      "page": 30,
      "season": {
@@ -7946,7 +7946,7 @@
      "trout_total": null
     },
     "Drown Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 30,
      "season": {
@@ -7967,7 +7967,7 @@
      "trout_total": null
     },
     "Elinor Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 30,
      "season": {
@@ -8000,7 +8000,7 @@
      "trout_total": null
     },
     "Ethel (Bear) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes tributaries and outlet for 1 km",
      "page": 30,
      "season": {
@@ -8036,7 +8036,7 @@
      "trout_total": null
     },
     "Fishing Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 31,
      "season": {
@@ -8061,7 +8061,7 @@
     "Floatingstone Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet for 1 km",
        "page": 31,
        "season": {
@@ -8096,7 +8096,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 31,
      "season": {
@@ -8131,7 +8131,7 @@
      "trout_total": null
     },
     "Fork Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 31,
      "season": {
@@ -8160,7 +8160,7 @@
      "trout_total": null
     },
     "Francis Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "69-11-W4",
      "page": 31,
      "season": {
@@ -8186,7 +8186,7 @@
      "trout_total": null
     },
     "Frog Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "57-3-W4",
      "page": 31,
      "season": {
@@ -8223,7 +8223,7 @@
      "trout_total": null
     },
     "Garner Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "60-12-W4",
      "page": 31,
      "season": {
@@ -8253,7 +8253,7 @@
      "trout_total": null
     },
     "Garnier Lakes": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "58-4-W4",
      "page": 31,
      "season": {
@@ -8288,7 +8288,7 @@
      "trout_total": null
     },
     "Goodwin Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 31,
      "season": {
@@ -8310,7 +8310,7 @@
      "trout_total": null
     },
     "Halfmoon Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 31,
      "season": {
@@ -8331,7 +8331,7 @@
      "trout_total": null
     },
     "Hanmore Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "61-17-W4",
      "page": 31,
      "season": {
@@ -8356,7 +8356,7 @@
      "trout_total": null
     },
     "Heart Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 31,
      "season": {
@@ -8390,7 +8390,7 @@
      "trout_total": null
     },
     "Hilda Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 31,
      "season": {
@@ -8426,7 +8426,7 @@
      "trout_total": null
     },
     "Hope Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 31,
      "season": {
@@ -8457,7 +8457,7 @@
      "trout_total": null
     },
     "Ironwood Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "65-11-W4",
      "page": 31,
      "season": {
@@ -8491,7 +8491,7 @@
      "trout_total": null
     },
     "Island (Unnamed) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "57-1-W4",
      "page": 31,
      "season": {
@@ -8510,7 +8510,7 @@
      "trout_total": null
     },
     "Island Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "62-17-W4",
      "page": 31,
      "season": {
@@ -8533,7 +8533,7 @@
      "trout_total": null
     },
     "Kaduk Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "60-15-W4",
      "page": 31,
      "season": {
@@ -8556,7 +8556,7 @@
      "trout_total": null
     },
     "Kehiwin Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 31,
      "season": {
@@ -8591,7 +8591,7 @@
      "trout_total": null
     },
     "Lac Bellevue": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "56-9-W4",
      "page": 31,
      "season": {
@@ -8631,7 +8631,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 31,
      "season": {
@@ -8665,7 +8665,7 @@
      "trout_total": null
     },
     "Lac La Biche Trout Pond": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Alexander Hamilton Pond",
      "page": 31,
      "season": {
@@ -8693,7 +8693,7 @@
      }
     },
     "Lac Saint Cyr": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "57-9-W4",
      "page": 32,
      "season": {
@@ -8718,7 +8718,7 @@
     "Lac Sante": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Includes outlet",
        "page": 32,
        "season": {
@@ -8754,7 +8754,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 32,
      "season": {
@@ -8790,7 +8790,7 @@
      "trout_total": null
     },
     "Lakeland Provincial Park": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "All lakes including Blackett, Dabbs, Helena, Jackson, Kinnaird, McGuffin, Shaw and Snake; Species limits are combined for all water",
      "page": 32,
      "season": {
@@ -8823,7 +8823,7 @@
      "trout_total": null
     },
     "Laurier Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "56-4-W4",
      "page": 32,
      "season": {
@@ -8846,7 +8846,7 @@
      "trout_total": null
     },
     "Legal Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "24-57-25-W4",
      "page": 32,
      "season": {
@@ -8874,7 +8874,7 @@
      }
     },
     "Little Bear Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "34-70-10-W4",
      "page": 32,
      "season": {
@@ -8895,7 +8895,7 @@
      "trout_total": null
     },
     "Lodge Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "66-17-W4",
      "page": 32,
      "season": {
@@ -8926,7 +8926,7 @@
      "trout_total": null
     },
     "Logan Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 32,
      "season": {
@@ -8952,7 +8952,7 @@
      "trout_total": null
     },
     "Lone Pine Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "63-14-W4",
      "page": 32,
      "season": {
@@ -8981,7 +8981,7 @@
     "Long Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Boyle area; tributaries",
        "page": 32,
        "season": {
@@ -9015,7 +9015,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Boyle area; 63-19-W4",
      "page": 32,
      "season": {
@@ -9049,7 +9049,7 @@
      "trout_total": null
     },
     "Manatokan Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 32,
      "season": {
@@ -9070,7 +9070,7 @@
      "trout_total": null
     },
     "Marie Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 32,
      "season": {
@@ -9104,7 +9104,7 @@
      "trout_total": null
     },
     "May Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 32,
      "season": {
@@ -9138,7 +9138,7 @@
      "trout_total": null
     },
     "Minnie Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 32,
      "season": {
@@ -9160,7 +9160,7 @@
      "trout_total": null
     },
     "Mons Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "60-16-W4",
      "page": 32,
      "season": {
@@ -9183,7 +9183,7 @@
      "trout_total": null
     },
     "Moonshine Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "58-1-W4",
      "page": 32,
      "season": {
@@ -9204,7 +9204,7 @@
     "Moose Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Remainder of the lake and tributaries for 1 km upstream and outlets for 1 km downstream",
        "page": 32,
        "season": {
@@ -9239,7 +9239,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Portion south of a line from the easternmost point of land in NW2-61-7-W4 (Pelican Point) to the southernmost point of land in E2-61-7-W4 (Deadman's Point) and southeast to the northernmost point of land in SW31-60-6-W4 (Ferbey Subdivision)",
      "page": 32,
      "season": {
@@ -9274,7 +9274,7 @@
      "trout_total": null
     },
     "Moosehills Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "57-6-W4",
      "page": 32,
      "season": {
@@ -9295,7 +9295,7 @@
     "North Buck Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Includes outlet for 1 km",
        "page": 33,
        "season": {
@@ -9326,7 +9326,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 33,
      "season": {
@@ -9357,7 +9357,7 @@
      "trout_total": null
     },
     "Piche Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 33,
      "season": {
@@ -9394,7 +9394,7 @@
     "Pinehurst Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Remainder of the lake",
        "page": 33,
        "season": {
@@ -9453,7 +9453,7 @@
      "trout_total": null
     },
     "Reed Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "61-12-W4",
      "page": 33,
      "season": {
@@ -9478,7 +9478,7 @@
     "Rock Island Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet for 1 km",
        "page": 33,
        "season": {
@@ -9512,7 +9512,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 33,
      "season": {
@@ -9546,7 +9546,7 @@
      "trout_total": null
     },
     "Ross Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "56-4-W4",
      "page": 33,
      "season": {
@@ -9604,7 +9604,7 @@
      "trout_total": null
     },
     "Sinclair Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "23-65-5-W4",
      "page": 33,
      "season": {
@@ -9627,7 +9627,7 @@
      "trout_total": null
     },
     "Skeleton Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "65-18-W4",
      "page": 33,
      "season": {
@@ -9660,7 +9660,7 @@
      "trout_total": null
     },
     "Soars Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "59-1-W4",
      "page": 33,
      "season": {
@@ -9687,7 +9687,7 @@
      "trout_total": null
     },
     "Sowka (Unnamed) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "10-18-W4",
      "page": 34,
      "season": {
@@ -9706,7 +9706,7 @@
     "Spencer Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "",
        "page": 33,
        "season": {
@@ -9741,7 +9741,7 @@
        "trout_total": null
       },
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "",
        "page": 33,
        "season": {
@@ -9776,7 +9776,7 @@
        "trout_total": null
       },
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "",
        "page": 33,
        "season": {
@@ -9811,7 +9811,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "NOTE: Spencer Lake is located in the Cold Lake Air Weapons Range and live ammunition is used in the area. Use of the lake by anglers is dependent on the approval of the Canadian Forces at the Base. If necessary for Base operations, access to Spencer Lake may be closed during some of the open periods listed above. Due to safety concerns, the Canadian Forces does not permit overland access to Spencer Lake on any trails that are inside the Bombing Range boundary, including the trail between Seibert and Spencer lakes. Spencer Lake may only be accessed from the west tip of Spencer Lake and it is unlawful to go ashore inside the bombing range boundary.",
      "page": 33,
      "season": {
@@ -9846,7 +9846,7 @@
      "trout_total": null
     },
     "Stoney (Siler) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "56-8-W4",
      "page": 33,
      "season": {
@@ -9874,7 +9874,7 @@
      "trout_total": null
     },
     "Sunday Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "74-9-W4",
      "page": 34,
      "season": {
@@ -9900,7 +9900,7 @@
      "trout_total": null
     },
     "Touchwood Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 34,
      "season": {
@@ -9935,7 +9935,7 @@
      "trout_total": null
     },
     "Tucker Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 34,
      "season": {
@@ -9960,7 +9960,7 @@
      "trout_total": null
     },
     "Victor Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "63-14-W4",
      "page": 34,
      "season": {
@@ -9979,7 +9979,7 @@
      "trout_total": null
     },
     "Wayetenaw Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "61-13-W4",
      "page": 34,
      "season": {
@@ -10002,7 +10002,7 @@
      "trout_total": null
     },
     "Whitefish Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 34,
      "season": {
@@ -10037,7 +10037,7 @@
      "trout_total": null
     },
     "Whitemud (Unnamed) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "62-19-W4",
      "page": 34,
      "season": {
@@ -10054,7 +10054,7 @@
      "trout_total": null
     },
     "Whitney Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "56-4-W4",
      "page": 34,
      "season": {
@@ -10077,7 +10077,7 @@
      "trout_total": null
     },
     "Wiau Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "34-73-9-W4",
      "page": 34,
      "season": {
@@ -10104,7 +10104,7 @@
     "Wolf Lake Complex": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries",
        "page": 34,
        "season": {
@@ -10139,7 +10139,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes all lakes within TWP 66, RNG 6 and 7, W4M; Includes Wolf, Sapphire, Magician, Corner, Lane lks; Species limits are combined for all water",
      "page": 34,
      "season": {
@@ -10184,7 +10184,7 @@
    ],
    "rivers": {
     "Athabasca River": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Mainstem from Sec. Rd. 813 (near Athabasca) and the north boundary of Township 78 (near Pelican River)",
      "page": 35,
      "season": {
@@ -10223,7 +10223,7 @@
      "trout_total": null
     },
     "Beaver River": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Mainstem including tributaries",
      "page": 35,
      "season": {
@@ -10264,7 +10264,7 @@
      "trout_total": null
     },
     "Lakeland Provincial Park": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "All water within the Provincial Park; Species limits are combined for all water",
      "page": 35,
      "season": {
@@ -10297,7 +10297,7 @@
      "trout_total": null
     },
     "Martineau River": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 35,
      "season": {
@@ -10327,7 +10327,7 @@
      "trout_total": null
     },
     "Medley River": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "11-62-2-W4",
      "page": 35,
      "season": {
@@ -10363,7 +10363,7 @@
     "Owl River": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "From confluence with Piche River upstream to headwater",
        "page": 35,
        "season": {
@@ -10399,7 +10399,7 @@
      "trout_total": null
     },
     "Piche River": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes tributaries",
      "page": 35,
      "season": {
@@ -10449,7 +10449,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 35,
      "season": {
@@ -10472,7 +10472,7 @@
   "NB2": {
    "lakes": {
     "Baptiste Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "66-24-W4",
      "page": 37,
      "season": {
@@ -10503,7 +10503,7 @@
      "trout_total": null
     },
     "Blue Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "13-69-17-W5",
      "page": 37,
      "season": {
@@ -10523,7 +10523,7 @@
      }
     },
     "Bolloque Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 37,
      "season": {
@@ -10544,7 +10544,7 @@
      "trout_total": null
     },
     "Chain (Lower) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "69-23-W4",
      "page": 37,
      "season": {
@@ -10572,7 +10572,7 @@
      }
     },
     "Crooked Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 37,
      "season": {
@@ -10625,7 +10625,7 @@
     "Fawcett Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Portion north and east of a line drawn from the MD boat launch in SE12-73-26-W4 to the point of land in SE11-73-26-W4 including the Mink River, Fawcett (Howard) River, and the areas locally known as the narrows and east basin",
        "page": 37,
        "season": {
@@ -10660,7 +10660,7 @@
        "trout_total": null
       },
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Includes tributaries and outlet for 1 km",
        "page": 37,
        "season": {
@@ -10695,7 +10695,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Remainder of the lake",
      "page": 37,
      "season": {
@@ -10730,7 +10730,7 @@
      "trout_total": null
     },
     "Francis Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "18-66-25-W4",
      "page": 37,
      "season": {
@@ -10753,7 +10753,7 @@
     "Freeman Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries",
        "page": 37,
        "season": {
@@ -10770,7 +10770,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 37,
      "season": {
@@ -10787,7 +10787,7 @@
      "trout_total": null
     },
     "Ghost Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "16-68-24-W4",
      "page": 37,
      "season": {
@@ -10808,7 +10808,7 @@
      "trout_total": null
     },
     "Gilroy Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 37,
      "season": {
@@ -10827,7 +10827,7 @@
     "Goose Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet",
        "page": 37,
        "season": {
@@ -10850,7 +10850,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 37,
      "season": {
@@ -10875,7 +10875,7 @@
     "Island Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Includes tributaries and outlet",
        "page": 37,
        "season": {
@@ -10908,7 +10908,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "67-24-W4",
      "page": 37,
      "season": {
@@ -10943,7 +10943,7 @@
     "Jenkins Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Includes outlet downstream for 1 km",
        "page": 37,
        "season": {
@@ -10977,7 +10977,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "68-24-W4",
      "page": 37,
      "season": {
@@ -11011,7 +11011,7 @@
      "trout_total": null
     },
     "Lac La Nonne": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 37,
      "season": {
@@ -11047,7 +11047,7 @@
      "trout_total": null
     },
     "Lawrence Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 37,
      "season": {
@@ -11074,7 +11074,7 @@
     "Lesser Slave Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Remainder of the lake to the outlet (Lesser Slave River)",
        "page": 37,
        "season": {
@@ -11108,7 +11108,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Portion west of a line drawn from Shaw Point to the point of land in 26-74-14-W5 known as Little Grassy Point, including Buffalo Bay and the Grouard Channel, and their tributaries (except East Prairie River, South Heart River and Traverse Creek)",
      "page": 37,
      "season": {
@@ -11142,7 +11142,7 @@
      "trout_total": null
     },
     "Lily Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "7-75-5-W5",
      "page": 37,
      "season": {
@@ -11170,7 +11170,7 @@
      }
     },
     "Long Island Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "24-63-26-W4",
      "page": 38,
      "season": {
@@ -11193,7 +11193,7 @@
      "trout_total": null
     },
     "Long Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "36-64-25-W4",
      "page": 38,
      "season": {
@@ -11215,7 +11215,7 @@
      "trout_total": null
     },
     "Meyer Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 38,
      "season": {
@@ -11236,7 +11236,7 @@
      "trout_total": null
     },
     "Mitsue Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 38,
      "season": {
@@ -11253,7 +11253,7 @@
      "trout_total": null
     },
     "Nakamun Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 38,
      "season": {
@@ -11270,7 +11270,7 @@
      "trout_total": null
     },
     "Narrow Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 38,
      "season": {
@@ -11299,7 +11299,7 @@
     "Orloff Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet",
        "page": 38,
        "season": {
@@ -11323,7 +11323,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 38,
      "season": {
@@ -11359,7 +11359,7 @@
      "trout_total": null
     },
     "Paul Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 38,
      "season": {
@@ -11383,7 +11383,7 @@
      "trout_total": null
     },
     "Schuman Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "35-61-8-W5",
      "page": 38,
      "season": {
@@ -11411,7 +11411,7 @@
      }
     },
     "South Heart Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 38,
      "season": {
@@ -11446,7 +11446,7 @@
      "trout_total": null
     },
     "Steele (Cross) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 38,
      "season": {
@@ -11467,7 +11467,7 @@
      "trout_total": null
     },
     "Thunder Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 38,
      "season": {
@@ -11521,7 +11521,7 @@
     "Winagami Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries, inlet canal, outlet stream, and outlet canal",
        "page": 38,
        "season": {
@@ -11553,7 +11553,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes Boone's Slough",
      "page": 38,
      "season": {
@@ -11598,7 +11598,7 @@
   "NB3": {
    "lakes": {
     "Albright Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 40,
      "season": {
@@ -11615,7 +11615,7 @@
      "trout_total": null
     },
     "Artisinn (unnamed) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 40,
      "season": {
@@ -11638,7 +11638,7 @@
     "Beatty Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet",
        "page": 40,
        "season": {
@@ -11663,7 +11663,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 40,
      "season": {
@@ -11688,7 +11688,7 @@
      "trout_total": null
     },
     "Berry Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 40,
      "season": {
@@ -11711,7 +11711,7 @@
     "Bistcho Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Remainder of the lake",
        "page": 40,
        "season": {
@@ -11744,7 +11744,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "The bay north of Kirkness Island; the portion of lake northerly of a line drawn from the southernmost tip of the point of land in SE31-124-5-W6 southeasterly to the westernmost tip of the point of land in SW28-124-5-W6 on Kirkness Island, and northerly of a line drawn from the easternmost tip of the point of land in SW27-124-5-W6 on Kirkness Island northeasterly to the southernmost tip of the point of land in SW35-124- 5-W6",
      "page": 40,
      "season": {
@@ -11777,7 +11777,7 @@
      "trout_total": null
     },
     "Brintnell Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 40,
      "season": {
@@ -11803,7 +11803,7 @@
      "trout_total": null
     },
     "Cadotte Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 40,
      "season": {
@@ -11820,7 +11820,7 @@
      "trout_total": null
     },
     "Calder Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 40,
      "season": {
@@ -11841,7 +11841,7 @@
      "trout_total": null
     },
     "Caribou Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 40,
      "season": {
@@ -11880,7 +11880,7 @@
     "Equisetum Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "",
        "page": 40,
        "season": {
@@ -11915,7 +11915,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Tributaries and outlet",
      "page": 40,
      "season": {
@@ -11950,7 +11950,7 @@
      "trout_total": null
     },
     "Fish (Jackfish) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "76-11-W6",
      "page": 40,
      "season": {
@@ -11973,7 +11973,7 @@
     "Gods Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet",
        "page": 40,
        "season": {
@@ -12009,7 +12009,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "90-02-W5",
      "page": 40,
      "season": {
@@ -12045,7 +12045,7 @@
      "trout_total": null
     },
     "Goodfish Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "89-5-W5",
      "page": 40,
      "season": {
@@ -12082,7 +12082,7 @@
     "Graham (Trout) Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet downstream to Maria Lake",
        "page": 40,
        "season": {
@@ -12122,7 +12122,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "87-4-W5",
      "page": 40,
      "season": {
@@ -12164,7 +12164,7 @@
     "Haig Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet for 1 km",
        "page": 40,
        "season": {
@@ -12200,7 +12200,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 40,
      "season": {
@@ -12238,7 +12238,7 @@
     "Hebephrenic (Jackfish) Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet for 1 km",
        "page": 40,
        "season": {
@@ -12275,7 +12275,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 40,
      "season": {
@@ -12312,7 +12312,7 @@
      "trout_total": null
     },
     "Hutch Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes tributaries",
      "page": 40,
      "season": {
@@ -12342,7 +12342,7 @@
      "trout_total": null
     },
     "Joker Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 40,
      "season": {
@@ -12367,7 +12367,7 @@
      "trout_total": null
     },
     "Legend Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "12-7-97-18-W4",
      "page": 40,
      "season": {
@@ -12392,7 +12392,7 @@
     "Little Sandy Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet for 1 km",
        "page": 40,
        "season": {
@@ -12424,7 +12424,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 40,
      "season": {
@@ -12456,7 +12456,7 @@
      "trout_total": null
     },
     "Long Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Second Last Lake; 90-2-W5",
      "page": 41,
      "season": {
@@ -12489,7 +12489,7 @@
      "trout_total": null
     },
     "Margaret Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 41,
      "season": {
@@ -12520,7 +12520,7 @@
      "trout_total": null
     },
     "Mink Lake #1": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "17-82-11-W5",
      "page": 41,
      "season": {
@@ -12543,7 +12543,7 @@
      "trout_total": null
     },
     "Mistehae Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "80-2-W5",
      "page": 41,
      "season": {
@@ -12574,7 +12574,7 @@
      "trout_total": null
     },
     "Muskwa Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 41,
      "season": {
@@ -12605,7 +12605,7 @@
      "trout_total": null
     },
     "Nipisi Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "13-23-78-7-W5",
      "page": 41,
      "season": {
@@ -12638,7 +12638,7 @@
     "North Wabasca Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Remainder of the lake",
        "page": 41,
        "season": {
@@ -12675,7 +12675,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Portion south of a line drawn from the northern boundary of Wabasca Reserve 166b in NW 35-80-26-W4 to the point of land in the east half of NE 31-80-25-W4, which includes the mouth of the Willow River and channel of the Wabasca River",
      "page": 41,
      "season": {
@@ -12712,7 +12712,7 @@
      "trout_total": null
     },
     "Pastecho Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 41,
      "season": {
@@ -12740,7 +12740,7 @@
     "Peerless Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "",
        "page": 41,
        "season": {
@@ -12779,7 +12779,7 @@
        "trout_total": null
       },
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet",
        "page": 41,
        "season": {
@@ -12818,7 +12818,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 41,
      "season": {
@@ -12858,7 +12858,7 @@
      "trout_total": null
     },
     "Pitchimi Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 41,
      "season": {
@@ -12889,7 +12889,7 @@
      "trout_total": null
     },
     "Rainbow Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 41,
      "season": {
@@ -12918,7 +12918,7 @@
     "Round Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet",
        "page": 41,
        "season": {
@@ -12954,7 +12954,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 41,
      "season": {
@@ -12992,7 +12992,7 @@
     "Sandy Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Portion south of a line drawn from the point of land on the west shore in the SW half of 5-79-22-W4 to the point of land on the east shore in the SW half of 3-79-22-W4",
        "page": 41,
        "season": {
@@ -13028,7 +13028,7 @@
        "trout_total": null
       },
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Remainder of the lake",
        "page": 41,
        "season": {
@@ -13064,7 +13064,7 @@
        "trout_total": null
       },
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet",
        "page": 41,
        "season": {
@@ -13100,7 +13100,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Portion north of a line drawn from the point of land on the west shore in the SE half of 19-79-22-W4 to the point of land on the east shore in the SW half of 21-79-22-W4",
      "page": 41,
      "season": {
@@ -13136,7 +13136,7 @@
      "trout_total": null
     },
     "Sawn Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 41,
      "season": {
@@ -13164,7 +13164,7 @@
      "trout_total": null
     },
     "Semo Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 41,
      "season": {
@@ -13193,7 +13193,7 @@
     "South Wabasca Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Portion south and west of a line drawn from the easternmost point of land in SE 31-79-24-W4 to the point of land in NW 27-79-24-W4",
        "page": 41,
        "season": {
@@ -13231,7 +13231,7 @@
        "trout_total": null
       },
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Remainder of the lake",
        "page": 41,
        "season": {
@@ -13269,7 +13269,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Portion north of a line drawn from the southernmost point of land in E1/2 13-80-25-W4 to the point of land in the SW 15- 80-25-W4, which includes the channel of the Wabasca River",
      "page": 41,
      "season": {
@@ -13308,7 +13308,7 @@
     "Spawn Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries",
        "page": 42,
        "season": {
@@ -13341,7 +13341,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 42,
      "season": {
@@ -13374,7 +13374,7 @@
      "trout_total": null
     },
     "Talbot Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes tributaries",
      "page": 42,
      "season": {
@@ -13399,7 +13399,7 @@
     "Thurston Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet for 1 km",
        "page": 42,
        "season": {
@@ -13428,7 +13428,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 42,
      "season": {
@@ -13457,7 +13457,7 @@
      "trout_total": null
     },
     "Twin Lakes": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "29-97-22-W5",
      "page": 42,
      "season": {
@@ -13487,7 +13487,7 @@
      }
     },
     "Utikuma Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 42,
      "season": {
@@ -13523,7 +13523,7 @@
      "trout_total": null
     },
     "Utikumasis Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 42,
      "season": {
@@ -13561,7 +13561,7 @@
     "Vandersteene Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet",
        "page": 42,
        "season": {
@@ -13597,7 +13597,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 42,
      "season": {
@@ -13635,7 +13635,7 @@
     "Wadlin Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries and outlet for 1 km",
        "page": 42,
        "season": {
@@ -13670,7 +13670,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 42,
      "season": {
@@ -13705,7 +13705,7 @@
      "trout_total": null
     },
     "Wentzel Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 42,
      "season": {
@@ -13955,7 +13955,7 @@
     "Peace River": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries to the Peace River except Mikkwa, Smoky, Notikewin and Wabasca river drainages",
        "page": 43,
        "season": {
@@ -14033,7 +14033,7 @@
      "trout_total": null
     },
     "Petitot River": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Mainstem including tributaries upstream to Spawn Lake",
      "page": 43,
      "season": {
@@ -14169,7 +14169,7 @@
   "NB4": {
    "lakes": {
     "Alexander Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14223,7 +14223,7 @@
      "trout_total": null
     },
     "Arch Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14242,7 +14242,7 @@
      "trout_total": null
     },
     "Ashton Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14265,7 +14265,7 @@
      "trout_total": null
     },
     "Barrow Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14299,7 +14299,7 @@
      "trout_total": null
     },
     "Base Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14325,7 +14325,7 @@
      "trout_total": null
     },
     "Bayonet Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14352,7 +14352,7 @@
      "trout_total": null
     },
     "Big Island Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14379,7 +14379,7 @@
      "trout_total": null
     },
     "Blanche Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes outlet",
      "page": 45,
      "season": {
@@ -14412,7 +14412,7 @@
      "trout_total": null
     },
     "Bocquene Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14445,7 +14445,7 @@
      "trout_total": null
     },
     "Bryant Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14472,7 +14472,7 @@
      "trout_total": null
     },
     "Burstall Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14503,7 +14503,7 @@
      "trout_total": null
     },
     "Charles Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14534,7 +14534,7 @@
      "trout_total": null
     },
     "Cherry Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14567,7 +14567,7 @@
     "Christina Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Remainder of lake. For flowing water refer to Christina Lake Tributaries and Outflows.",
        "page": 45,
        "season": {
@@ -14602,7 +14602,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Portion locally known as Sawbones Bay (2-77-6-W4)",
      "page": 45,
      "season": {
@@ -14637,7 +14637,7 @@
      "trout_total": null
     },
     "Cockscomb Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14664,7 +14664,7 @@
      "trout_total": null
     },
     "Colin Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14695,7 +14695,7 @@
      "trout_total": null
     },
     "Collins Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14726,7 +14726,7 @@
      "trout_total": null
     },
     "Cornwall Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14757,7 +14757,7 @@
      "trout_total": null
     },
     "Cowper Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14782,7 +14782,7 @@
      "trout_total": null
     },
     "Daly Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14809,7 +14809,7 @@
      "trout_total": null
     },
     "Darwin Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14836,7 +14836,7 @@
      "trout_total": null
     },
     "Dawson Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14867,7 +14867,7 @@
      "trout_total": null
     },
     "Disappointment Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14894,7 +14894,7 @@
      "trout_total": null
     },
     "Ells Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14913,7 +14913,7 @@
      "trout_total": null
     },
     "Fletcher Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -14946,7 +14946,7 @@
      "trout_total": null
     },
     "Florence Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -15037,7 +15037,7 @@
      "trout_total": null
     },
     "Gipsy Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -15068,7 +15068,7 @@
      "trout_total": null
     },
     "Glover (Birch) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "79-5-W4",
      "page": 45,
      "season": {
@@ -15094,7 +15094,7 @@
      "trout_total": null
     },
     "Gregoire (Willow) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 45,
      "season": {
@@ -15129,7 +15129,7 @@
      "trout_total": null
     },
     "Grist Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15160,7 +15160,7 @@
      "trout_total": null
     },
     "Hooker Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15179,7 +15179,7 @@
      "trout_total": null
     },
     "Kimowin (Hook) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15202,7 +15202,7 @@
      "trout_total": null
     },
     "Kirby (Sterner) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "75-5-W4",
      "page": 46,
      "season": {
@@ -15228,7 +15228,7 @@
      "trout_total": null
     },
     "Lake Athabasca": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15273,7 +15273,7 @@
      "trout_total": null
     },
     "Leggo Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15304,7 +15304,7 @@
      "trout_total": null
     },
     "Leland Lakes": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15341,7 +15341,7 @@
      "trout_total": null
     },
     "Limon Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes outlet",
      "page": 46,
      "season": {
@@ -15370,7 +15370,7 @@
      "trout_total": null
     },
     "Loutit Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15403,7 +15403,7 @@
      "trout_total": null
     },
     "Mcclelland Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15440,7 +15440,7 @@
      "trout_total": null
     },
     "Mercredi Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15471,7 +15471,7 @@
      "trout_total": null
     },
     "Myers Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15541,7 +15541,7 @@
      "trout_total": null
     },
     "One Week Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15568,7 +15568,7 @@
      "trout_total": null
     },
     "Pans Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15585,7 +15585,7 @@
      "trout_total": null
     },
     "Peters Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15612,7 +15612,7 @@
      "trout_total": null
     },
     "Potts Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15643,7 +15643,7 @@
      "trout_total": null
     },
     "Richardson Backcountry": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "All water within area between Twp. 103 and 107, and Rge 01-W4 and Rge 08-W4; Locally known as Richardson Backcountry",
      "page": 46,
      "season": {
@@ -15680,7 +15680,7 @@
      "trout_total": null
     },
     "Richardson Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes outlet (Jackfish Channel)",
      "page": 46,
      "season": {
@@ -15709,7 +15709,7 @@
      "trout_total": null
     },
     "Roderick Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15736,7 +15736,7 @@
      "trout_total": null
     },
     "Royemma Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "75-1-W4",
      "page": 46,
      "season": {
@@ -15762,7 +15762,7 @@
      "trout_total": null
     },
     "Ryan Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15795,7 +15795,7 @@
      "trout_total": null
     },
     "St. Agnes Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15826,7 +15826,7 @@
      "trout_total": null
     },
     "Steepbank Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15849,7 +15849,7 @@
      "trout_total": null
     },
     "Treasure Loch Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15872,7 +15872,7 @@
      "trout_total": null
     },
     "Tulip Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15903,7 +15903,7 @@
      "trout_total": null
     },
     "Turtle Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -15922,7 +15922,7 @@
      "trout_total": null
     },
     "Wappau Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "14-75-11-W4",
      "page": 46,
      "season": {
@@ -15943,7 +15943,7 @@
      "trout_total": null
     },
     "Weekes Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -16000,7 +16000,7 @@
      "trout_total": null
     },
     "Winnifred Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "118-3-W4",
      "page": 46,
      "season": {
@@ -16023,7 +16023,7 @@
      "trout_total": null
     },
     "Woodman Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -16046,7 +16046,7 @@
      "trout_total": null
     },
     "Wylie Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 46,
      "season": {
@@ -16082,7 +16082,7 @@
     "Athabasca River": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Mainstem north of the north boundary of TWP78 (Near Pelican River). For area south of this, see Athabasca Mainstem in NB1 Rivers, Creeks and Streams",
        "page": 47,
        "season": {
@@ -16121,7 +16121,7 @@
        "trout_total": null
       },
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries except Clearwater and Hangingstone rivers",
        "page": 47,
        "season": {
@@ -16164,7 +16164,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Mainstem north of the north boundary of TWP78 (Near Pelican River). For area south of this, see Athabasca Mainstem in NB1 Rivers, Creeks and Streams",
      "page": 47,
      "season": {
@@ -16202,7 +16202,7 @@
      "trout_total": null
     },
     "Birch Creek": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Beyond 10 km of Christina Lake",
      "page": 47,
      "season": {
@@ -16226,7 +16226,7 @@
      "trout_total": null
     },
     "Christina Lake Tributaries and Outflows": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes all named and unnamed tributaries and outflows within 10km of Christina Lake including Jackfish River, Birch, Sawbones, Sunday and Monday Creeks. Excludes the Christina River",
      "page": 47,
      "season": {
@@ -16263,7 +16263,7 @@
     "Clearwater River": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Mainstem including tributaries; the portion upstream of the Christina River",
        "page": 47,
        "season": {
@@ -16298,7 +16298,7 @@
        "trout_total": null
       },
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Mainstem including tributaries; the portion downstream of the Christina River",
        "page": 47,
        "season": {
@@ -16337,7 +16337,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Snye Channel",
      "page": 47,
      "season": {
@@ -16415,7 +16415,7 @@
      "trout_total": null
     },
     "Hangingstone River": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 47,
      "season": {
@@ -16434,7 +16434,7 @@
      "trout_total": null
     },
     "House River": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Mainstem including tributaries",
      "page": 47,
      "season": {
@@ -16459,7 +16459,7 @@
      "trout_total": null
     },
     "Monday Creek": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Beyond 10 km of Christina Lake",
      "page": 47,
      "season": {
@@ -16483,7 +16483,7 @@
      "trout_total": null
     },
     "Richardson Backcountry": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "All water within area between Twp. 103 and 107, and Rge 01-W4 and Rge 08-W4; Locally known as Richardson Backcountry",
      "page": 47,
      "season": {
@@ -16520,7 +16520,7 @@
      "trout_total": null
     },
     "Richardson River": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 47,
      "season": {
@@ -16563,7 +16563,7 @@
      "trout_total": null
     },
     "Sunday Creek": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Beyond 10 km of Christina Lake",
      "page": 47,
      "season": {
@@ -16625,7 +16625,7 @@
   "PP1": {
    "lakes": {
     "Badger Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 22,
      "season": {
@@ -16690,7 +16690,7 @@
     "Bow River": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Bassano Dam downstream to South Saskatchewan River",
        "page": 24,
        "season": {
@@ -16758,7 +16758,7 @@
      }
     },
     "Burdett (Unnamed) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "10-12-W4",
      "page": 22,
      "season": {
@@ -16793,7 +16793,7 @@
      "trout_total": null
     },
     "CPR Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 22,
      "season": {
@@ -16814,7 +16814,7 @@
      "trout_total": null
     },
     "Carseland-Bow River Headwater Canal": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Between McGregor Lk and the drop structure 1 km upstream of Sec. Rd. 542",
      "page": 24,
      "season": {
@@ -16844,7 +16844,7 @@
      "trout_total": null
     },
     "Chestermere Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 22,
      "season": {
@@ -16867,7 +16867,7 @@
      "trout_total": null
     },
     "Chin Lakes": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 22,
      "season": {
@@ -16897,7 +16897,7 @@
      "trout_total": null
     },
     "Clear Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "14-25-W4",
      "page": 22,
      "season": {
@@ -16945,7 +16945,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 22,
      "season": {
@@ -16972,7 +16972,7 @@
     "Crawling Valley Reservoir": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "3-21-18-W4; Includes inlet canal downstream of canal headworks",
        "page": 22,
        "season": {
@@ -17006,7 +17006,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "3-21-18-W4; Includes inlet canal downstream of canal headworks",
      "page": 22,
      "season": {
@@ -17040,7 +17040,7 @@
      "trout_total": null
     },
     "Cross Coulee Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "5-20-W4",
      "page": 22,
      "season": {
@@ -17071,7 +17071,7 @@
      "trout_total": null
     },
     "Eagle Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 22,
      "season": {
@@ -17102,7 +17102,7 @@
      "trout_total": null
     },
     "Elkwater Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 22,
      "season": {
@@ -17123,7 +17123,7 @@
      "trout_total": null
     },
     "Fincastle Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 22,
      "season": {
@@ -17158,7 +17158,7 @@
      "trout_total": null
     },
     "Forty Mile Coulee Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 22,
      "season": {
@@ -17208,7 +17208,7 @@
      }
     },
     "Gun Club (Cann) Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "17-19-14-W4",
      "page": 22,
      "season": {
@@ -17231,7 +17231,7 @@
      "trout_total": null
     },
     "Hays (Grantham Reservoir) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 22,
      "season": {
@@ -17264,7 +17264,7 @@
      "trout_total": null
     },
     "Henderson Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 22,
      "season": {
@@ -17285,7 +17285,7 @@
      "trout_total": null
     },
     "Horsefly Lake Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 22,
      "season": {
@@ -17310,7 +17310,7 @@
      "trout_total": null
     },
     "Jamieson Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "16-19-14-W4",
      "page": 22,
      "season": {
@@ -17329,7 +17329,7 @@
      "trout_total": null
     },
     "Jensen Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "4-22-W4",
      "page": 22,
      "season": {
@@ -17360,7 +17360,7 @@
      "trout_total": null
     },
     "Johnson Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Interlakes Reservoir; 9-19-14-W4",
      "page": 22,
      "season": {
@@ -17381,7 +17381,7 @@
      "trout_total": null
     },
     "Keho Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes inlet canal to the first drop structure",
      "page": 22,
      "season": {
@@ -17410,7 +17410,7 @@
      "trout_total": null
     },
     "Kitsim Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "17-16-W4",
      "page": 22,
      "season": {
@@ -17433,7 +17433,7 @@
      "trout_total": null
     },
     "Lake Newell": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "NE-32-16-15-W4; inlet canal downstream of the Bow Slope turnout structure. Includes connected water and ponds west of Highway 873, including the square outlet pond.",
      "page": 22,
      "season": {
@@ -17532,7 +17532,7 @@
      }
     },
     "Lethbridge University Pond": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 22,
      "season": {
@@ -17549,7 +17549,7 @@
      "trout_total": null
     },
     "Little Bow Lake Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes inlet canal",
      "page": 22,
      "season": {
@@ -17585,7 +17585,7 @@
     "Little Bow River": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Township Rd. 144A upstream to Carmangay",
        "page": 24,
        "season": {
@@ -17646,7 +17646,7 @@
      "trout_total": null
     },
     "Lost Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 22,
      "season": {
@@ -17663,7 +17663,7 @@
      "trout_total": null
     },
     "Marsh Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 23,
      "season": {
@@ -17682,7 +17682,7 @@
     "Mcgregor Reservoir": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "",
        "page": 23,
        "season": {
@@ -17716,7 +17716,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 23,
      "season": {
@@ -17750,7 +17750,7 @@
      "trout_total": null
     },
     "Mcvinnie Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 23,
      "season": {
@@ -17778,7 +17778,7 @@
      }
     },
     "Michel Creek Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "5-7-3-W4",
      "page": 23,
      "season": {
@@ -17807,7 +17807,7 @@
      }
     },
     "Milk River Ridge Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes upstream to the inlet canal to the first drop structure",
      "page": 23,
      "season": {
@@ -17837,7 +17837,7 @@
      "trout_total": null
     },
     "Murray Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "10-7-8-W4",
      "page": 23,
      "season": {
@@ -17874,7 +17874,7 @@
      "trout_total": null
     },
     "Oldman River": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Mainstem from Sec. Rd. 509 downstream to South Saskatchewan River and tributaries",
      "page": 24,
      "season": {
@@ -17937,7 +17937,7 @@
      }
     },
     "Park Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 23,
      "season": {
@@ -17962,7 +17962,7 @@
      "trout_total": null
     },
     "Picture Butte Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 23,
      "season": {
@@ -17979,7 +17979,7 @@
      "trout_total": null
     },
     "Rattlesnake (Sauder) Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 23,
      "season": {
@@ -18013,7 +18013,7 @@
      "trout_total": null
     },
     "Raymond Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 23,
      "season": {
@@ -18030,7 +18030,7 @@
      "trout_total": null
     },
     "Raymond Sugar Factory Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 23,
      "season": {
@@ -18047,7 +18047,7 @@
      "trout_total": null
     },
     "Reesor Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "20-8-1-W4",
      "page": 23,
      "season": {
@@ -18076,7 +18076,7 @@
      }
     },
     "Rock Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "20-15-W4",
      "page": 23,
      "season": {
@@ -18097,7 +18097,7 @@
      "trout_total": null
     },
     "Rolling Hills Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 23,
      "season": {
@@ -18131,7 +18131,7 @@
      "trout_total": null
     },
     "Scope (Unnamed) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Scope Reservoir ; 13-14-W4",
      "page": 23,
      "season": {
@@ -18164,7 +18164,7 @@
      "trout_total": null
     },
     "Shays Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 23,
      "season": {
@@ -18181,7 +18181,7 @@
      "trout_total": null
     },
     "Sherburne Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Sherburne Reservoir",
      "page": 23,
      "season": {
@@ -18216,7 +18216,7 @@
      "trout_total": null
     },
     "Snake Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "19-17-W4",
      "page": 23,
      "season": {
@@ -18239,7 +18239,7 @@
      "trout_total": null
     },
     "South Saskatchewan River": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 24,
      "season": {
@@ -18266,7 +18266,7 @@
      "trout_total": null
     },
     "Spruce Coulee Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "26-8-2-W4",
      "page": 23,
      "season": {
@@ -18294,7 +18294,7 @@
      }
     },
     "St. Mary Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 23,
      "season": {
@@ -18425,7 +18425,7 @@
      }
     },
     "Stafford Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 23,
      "season": {
@@ -18454,7 +18454,7 @@
      "trout_total": null
     },
     "Stonehill Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 23,
      "season": {
@@ -18473,7 +18473,7 @@
      "trout_total": null
     },
     "Taber Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 23,
      "season": {
@@ -18490,7 +18490,7 @@
      "trout_total": null
     },
     "Tilley B Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 23,
      "season": {
@@ -18519,7 +18519,7 @@
      "trout_total": null
     },
     "Timko Lake (J Or Bantry Reservoir)": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "33-17-13-W4",
      "page": 23,
      "season": {
@@ -18552,7 +18552,7 @@
   "PP2": {
    "lakes": {
     "Arm Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 26,
      "season": {
@@ -18577,7 +18577,7 @@
     "Battle Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Remainder of the lake",
        "page": 26,
        "season": {
@@ -18611,7 +18611,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Portion west of the west boundary of section 22-46-2-W5; Includes tributaries and outlet downstream to Sec. Rd. 771",
      "page": 26,
      "season": {
@@ -18645,7 +18645,7 @@
      "trout_total": null
     },
     "Berry Creek (Carolside) Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "27-12-W4",
      "page": 26,
      "season": {
@@ -18670,7 +18670,7 @@
      "trout_total": null
     },
     "Big Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes tributaries",
      "page": 26,
      "season": {
@@ -18695,7 +18695,7 @@
      "trout_total": null
     },
     "Blood Indian Creek Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "21-26-9-W4; Includes tributaries",
      "page": 26,
      "season": {
@@ -18726,7 +18726,7 @@
      }
     },
     "Buck Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes tributaries and the portion of the outlet located in 3-47-6-W5",
      "page": 26,
      "season": {
@@ -18763,7 +18763,7 @@
     "Buffalo Lake": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Remainder of the lake",
        "page": 26,
        "season": {
@@ -18786,7 +18786,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Portion located in 40-22-W4 (the Narrows)",
      "page": 26,
      "season": {
@@ -18808,7 +18808,7 @@
      "trout_total": null
     },
     "Chain Lakes (Upper and Middle)": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "42-24,25-W4",
      "page": 26,
      "season": {
@@ -18825,7 +18825,7 @@
      "trout_total": null
     },
     "Clear (Barnes) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes tributaries upstream 1 km and outlet downstream 1 km; 44-5-W4",
      "page": 26,
      "season": {
@@ -18851,7 +18851,7 @@
      "trout_total": null
     },
     "Coal Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 26,
      "season": {
@@ -18872,7 +18872,7 @@
      "trout_total": null
     },
     "Driedmeat Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 26,
      "season": {
@@ -18895,7 +18895,7 @@
      "trout_total": null
     },
     "East Twin Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 26,
      "season": {
@@ -18918,7 +18918,7 @@
      "trout_total": null
     },
     "Forestburg Reservoir": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes the Battle River upstream to Sec. Rd. 855",
      "page": 26,
      "season": {
@@ -18958,7 +18958,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 26,
      "season": {
@@ -18992,7 +18992,7 @@
      "trout_total": null
     },
     "Hubbles Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 26,
      "season": {
@@ -19015,7 +19015,7 @@
      "trout_total": null
     },
     "Isle Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes tributaries and outlet (Sturgeon River)",
      "page": 26,
      "season": {
@@ -19047,7 +19047,7 @@
      "trout_total": null
     },
     "Jack Fish Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "52-2-W5",
      "page": 27,
      "season": {
@@ -19114,7 +19114,7 @@
      }
     },
     "Lac Ste. Anne": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes tributaries & outlet (Sturgeon River)",
      "page": 27,
      "season": {
@@ -19149,7 +19149,7 @@
      "trout_total": null
     },
     "Lessard Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 27,
      "season": {
@@ -19172,7 +19172,7 @@
      "trout_total": null
     },
     "Little Fish Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes tributaries & outlet",
      "page": 27,
      "season": {
@@ -19195,7 +19195,7 @@
      "trout_total": null
     },
     "Lloydminster Pond": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "SE-6-50-1-W4",
      "page": 27,
      "season": {
@@ -19223,7 +19223,7 @@
      }
     },
     "Magee Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 27,
      "season": {
@@ -19240,7 +19240,7 @@
      "trout_total": null
     },
     "Matchayaw (Devil's) Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes tributaries and outlet (Sturgeon River)",
      "page": 27,
      "season": {
@@ -19272,7 +19272,7 @@
      "trout_total": null
     },
     "Mayatan Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 27,
      "season": {
@@ -19293,7 +19293,7 @@
      "trout_total": null
     },
     "Medicine Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 27,
      "season": {
@@ -19316,7 +19316,7 @@
      "trout_total": null
     },
     "Mere Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 27,
      "season": {
@@ -19339,7 +19339,7 @@
      "trout_total": null
     },
     "Mink Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 27,
      "season": {
@@ -19392,7 +19392,7 @@
      }
     },
     "Pigeon Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes tributaries and outlet",
      "page": 27,
      "season": {
@@ -19429,7 +19429,7 @@
      "trout_total": null
     },
     "Pine Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes tributaries and outlet",
      "page": 27,
      "season": {
@@ -19456,7 +19456,7 @@
      "trout_total": null
     },
     "Raft Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 27,
      "season": {
@@ -19479,7 +19479,7 @@
      "trout_total": null
     },
     "Rat Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "10-46-6-W5",
      "page": 27,
      "season": {
@@ -19501,7 +19501,7 @@
      "trout_total": null
     },
     "Spotted Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 27,
      "season": {
@@ -19523,7 +19523,7 @@
      "trout_total": null
     },
     "Spring Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "SW 30-52-1-W5",
      "page": 27,
      "season": {
@@ -19551,7 +19551,7 @@
      }
     },
     "Sylvan Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes tributaries",
      "page": 27,
      "season": {
@@ -19585,7 +19585,7 @@
      "trout_total": null
     },
     "Wabamun Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes tributaries, outlet and canals",
      "page": 27,
      "season": {
@@ -19619,7 +19619,7 @@
      "trout_total": null
     },
     "West Twin Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Includes Tributaries and outlet; 9,10-46-3-W5",
      "page": 27,
      "season": {
@@ -19642,7 +19642,7 @@
      "trout_total": null
     },
     "Wizard Lake": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "",
      "page": 27,
      "season": {
@@ -19674,7 +19674,7 @@
     "Battle River": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Mainstem from Hwy. 771 downstream to Hwy. 855",
        "page": 28,
        "season": {
@@ -19705,7 +19705,7 @@
        "trout_total": null
       },
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Mainstem from downstream of the Forestburg Reservoir and tributaries",
        "page": 28,
        "season": {
@@ -19744,7 +19744,7 @@
      "trout_total": null
     },
     "Berry Creek": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Mainstem including ALL tributaries",
      "page": 28,
      "season": {
@@ -19765,7 +19765,7 @@
      "trout_total": null
     },
     "Blindman River": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Mainstem including ALL tributaries",
      "page": 28,
      "season": {
@@ -19878,7 +19878,7 @@
     "North Saskatchewan River": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Tributaries (excluding the Sturgeon River; See Redwater River in NB1); from Hwy. 22/39 downstream to the Alberta/ Saskatchewan border",
        "page": 28,
        "season": {
@@ -19911,7 +19911,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "Mainstem downstream Hwy. 22/39 (Drayton Valley) to the Alberta/ Saskatchewan border",
      "page": 28,
      "season": {
@@ -19944,7 +19944,7 @@
      "trout_total": null
     },
     "Parlby Creek": {
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "23-40-22-W4; Portion between Buffalo and Alix lakes",
      "page": 28,
      "season": {
@@ -19964,7 +19964,7 @@
     "Red Deer River": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "Mainstem and tributaries from Tolman Bridge (Sec. Hwy. 585) downstream to the Alberta/ Saskatchewan border",
        "page": 28,
        "season": {
@@ -20030,7 +20030,7 @@
     "Sturgeon River": {
      "also": [
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "From Big Lake downstream to Sec. Hwy. 825",
        "page": 28,
        "season": {
@@ -20061,7 +20061,7 @@
        "trout_total": null
       },
       {
-       "bait": "l",
+       "bait": "Bait allowed, except bait fish",
        "detail": "From Sec. Hwy. 825 downstream to North Saskatchewan River",
        "page": 28,
        "season": {
@@ -20092,7 +20092,7 @@
        "trout_total": null
       }
      ],
-     "bait": "l",
+     "bait": "Bait allowed, except bait fish",
      "detail": "From headwater downstream to Big Lake",
      "page": 28,
      "season": {

@@ -592,6 +592,55 @@ class RegulationTests(unittest.TestCase):
             self.assertGreater(len(regs["zones"].get(zone, {}).get("lakes", {})), 5,
                                f"{zone} has almost no site-specific rows")
 
+    def test_the_bait_legend_marker_is_expanded(self):
+        """Three quarters of rows print a lone "l" in the bait column, defined
+        in the heading as "Bait except Bait fish allowed". Passed through, it
+        would put a bare glyph in front of an angler."""
+        import regulations
+        self.assertEqual(regulations.parse_bait("l"), "Bait allowed, except bait fish")
+        self.assertEqual(regulations.parse_bait("Bait ban"), "Bait ban")
+        self.assertEqual(regulations.parse_bait(""), "")
+        baits = {row["bait"] for zone in self.regs()["zones"].values()
+                 for row in zone["lakes"].values()}
+        self.assertNotIn("l", baits, "a raw legend marker reached the output")
+
+    def test_an_unmatched_lake_gets_no_limits_rather_than_the_default(self):
+        """The unsafe fallback is the watershed default, because it is often
+        more permissive than the site-specific row it would stand in for: ES1
+        defaults to five trout with bait allowed, while Barnaby Lake inside ES1
+        is one trout over 40 cm under a bait ban. A near-miss on the name must
+        publish nothing, not the default."""
+        import regulations
+        regs = self.regs()
+        # A name close to a real one, but not close enough to trust.
+        resolved, review = regulations.match_lakes(regs, [
+            {"lake_id": "test1", "name": "Barnaby Lakes Reservoir", "zone": "ES1"},
+        ])
+        self.assertNotIn("test1", resolved, "a near-miss was resolved anyway")
+        self.assertEqual(len(review), 1)
+
+        # A name nothing in the zone resembles really is unlisted, and the
+        # guide says an unlisted water takes the default.
+        resolved, review = regulations.match_lakes(regs, [
+            {"lake_id": "test2", "name": "Zzyzx Quagmire", "zone": "ES1"},
+        ])
+        self.assertEqual(resolved["test2"]["basis"], "watershed-default")
+        self.assertEqual(review, [])
+
+    def test_published_per_lake_regulations_are_consistent(self):
+        path = DATA_DIR / "lake_regulations.json"
+        if not path.exists():
+            self.skipTest("data/lake_regulations.json not built")
+        published = json.loads(path.read_text())
+        self.assertEqual(published["guide_year"], self.regs()["guide_year"])
+        for key, entry in published["lakes"].items():
+            self.assertIn(entry["basis"],
+                          {"site-specific", "put-and-take", "watershed-default",
+                           "cross-reference"},
+                          f"{key} has an unknown basis")
+            if entry["basis"] != "cross-reference":
+                self.assertIn("season", entry, f"{key} published without a season")
+
     def test_stocked_names_are_not_corrupted_by_the_column_layout(self):
         """The stocked list is set in columns, and reading it flat merges
         neighbours — "Tim Horton Children's Pond Fairfax Lake" was one entry,

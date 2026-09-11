@@ -85,6 +85,13 @@
         so it can never reorder a day — asserted, not merely intended
     M58 a missing input is dropped and the rest renormalised, never defaulted;
         the score says how much of it was actually known
+    M59 catch limits and seasons per lake, read from the sportfishing guide,
+        stamped with the guide year and always beside the official link
+    M60 limits resolve site-specific, then provincial put-and-take, then the
+        watershed default — the order the guide itself states
+    M61 a lake that cannot be matched with confidence shows no limits at all
+    M62 "Open today" filter, which hides lakes whose season is shut but never
+        hides one whose season could not be read
 -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2b2e2a">
@@ -359,6 +366,20 @@
   .leaflet-popup-tip { background: var(--panel); }
   .leaflet-popup-content { margin: 12px 14px; font-size: 12px; min-width: 260px; max-height: 60vh; overflow-y: auto; }
   .lake-popup h3 { margin: 0 0 2px; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+  .reg-block { margin: 8px 0 4px; padding: 8px 10px; background: var(--panel-2);
+    border-left: 3px solid var(--accent); border-radius: 3px; font-size: 12px; }
+  .reg-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 5px; }
+  .reg-year { font-size: 10px; color: var(--ink-dim); text-transform: uppercase; letter-spacing: .04em; }
+  .reg-open { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 6px;
+    border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; color: #1f211e; }
+  .reg-open.yes { background: var(--good); }
+  .reg-open.no { background: var(--WSCT); }
+  .reg-row { display: flex; gap: 8px; margin: 2px 0; line-height: 1.4; }
+  .reg-k { flex: 0 0 52px; color: var(--ink-dim); }
+  .reg-v { flex: 1; }
+  .reg-why { margin-top: 5px; font-size: 11px; color: var(--ink-dim); font-style: italic; }
+  .reg-warn { margin-top: 4px; font-size: 11px; color: var(--ink-dim); }
+  .reg-none { font-size: 11.5px; color: var(--ink-dim); line-height: 1.45; }
   .lake-popup .ats { font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; font-family: "SF Mono", Menlo, monospace; }
   .lake-popup .meta { font-size: 12px; margin-bottom: 8px; }
   .lake-popup .meta strong { color: var(--accent); }
@@ -523,6 +544,14 @@
     <div class="count" id="result-count">Showing … lakes</div>
     <div class="filter-summary" id="filter-summary"></div>
     <div class="empty-state" id="empty-state">No lakes match these filters. Try more years, more species, or a longer distance.</div>
+
+    <div class="group" id="season-group" hidden>
+      <div class="group-label"><span>Season</span></div>
+      <div class="chips">
+        <button class="chip" id="open-now-chip" type="button" aria-pressed="false">Open today</button>
+      </div>
+      <div class="hint" id="open-now-note"></div>
+    </div>
 
     <div class="group">
       <div class="group-label"><span>Stocked recently</span></div>
@@ -799,6 +828,9 @@ const state = {
   openPopupAts: null,
   favourites: new Set(),
   pickingHome: false,
+  /** Hide lakes whose season is shut today. Off by default: a closed lake is
+   *  still worth seeing on a map you are using to plan next month. */
+  openNow: false,
 };
 
 /** A click on a pin can also reach the map, which would immediately undo the
@@ -810,6 +842,7 @@ const PIN_CLICK_GRACE_MS = 250;
 let LAKES = [];
 let ALL_YEARS = [];
 let QUALITY_SUMMARY = null;
+let REGULATIONS = null;
 let PROVISIONAL_YEARS = new Set();
 const DATA_ISSUES = { invalidStockings: 0, examples: [] };
 
@@ -895,6 +928,17 @@ async function loadAllData() {
   return { lakes, years };
 }
 
+/** Catch limits, resolved per lake when the data was built. Matching names to
+ *  the regulations is done there, not here: it needs the alias table and a
+ *  similarity threshold, and a lake we cannot match confidently must end up
+ *  with no limits shown rather than a guess. */
+async function loadRegulations() {
+  try {
+    const resp = await fetch("data/lake_regulations.json");
+    return resp.ok ? await resp.json() : null;
+  } catch { return null; }
+}
+
 async function loadQualitySummary() {
   try {
     const resp = await fetch("data/quality_summary.json");
@@ -968,6 +1012,10 @@ function lastStockedDate(lake) {
 function lakePassesFilters(lake) {
   if (lake.distanceKm > state.maxDistanceKm) return false;
   if (!lake.stockings.some(stockingPasses)) return false;
+  // A lake we cannot read a season for is kept, not hidden: "we do not know"
+  // is not the same as "closed", and hiding it would quietly shorten the list
+  // without saying why.
+  if (state.openNow && lakeOpenNow(lake) === false) return false;
   return recencyPasses(lake, recencyOption());
 }
 function recencyPasses(lake, option) {
@@ -1115,6 +1163,113 @@ function profileBlock(lake) {
   return html;
 }
 
+/** The regulation resolved for this lake, or null if none could be. */
+function regulationFor(lake) {
+  if (!REGULATIONS) return null;
+  return REGULATIONS.lakes[lakeKey(lake)] || null;
+}
+
+/* Season parsing lives in js/conditions.js, because a shut season has to
+ * suppress the bite score as well as label the popup, and because the
+ * year-wrapping case needs a test. */
+const seasonOpenOn = (text, when) => Conditions.seasonOpenOn(text, when);
+
+/** True, false, or null when we cannot tell. Null is not "open". */
+function lakeOpenNow(lake, when) {
+  const reg = regulationFor(lake);
+  if (!reg || !reg.season) return null;
+  return seasonOpenOn(reg.season.text, when || new Date());
+}
+
+/* The limits block in a lake popup.
+ *
+ * This is the one place in the app that reports something with a legal
+ * consequence, so three things are never omitted: which year's guide it came
+ * from, where the rule came from, and a link to the official tables. The limit
+ * wording is the guide's own, never a paraphrase — "3 over 63 cm" means three
+ * fish each over 63 cm, and rewriting that in our own words would be a
+ * liability. */
+function regulationBlock(lake) {
+  if (!REGULATIONS) return "";
+  const year = REGULATIONS.guide_year;
+  const zone = lake.zone;
+  const official = zone
+    ? `https://albertaregulations.ca/fishingregs/${encodeURIComponent(String(zone).toLowerCase())}.html`
+    : "https://albertaregulations.ca/fishingregs/";
+  const link = `<a class="zone-link" href="${official}" target="_blank" rel="noopener">`
+    + `official ${esc(zone || "Alberta")} tables ↗</a>`;
+  const head = `<div class="reg-head"><span class="profile-label">Catch limits</span>`
+    + `<span class="reg-year">${esc(year)} guide</span></div>`;
+
+  const reg = regulationFor(lake);
+  if (!reg) {
+    return `<div class="reg-block">${head}
+      <div class="reg-none">This lake could not be matched to the regulations with
+      confidence, so none are shown. Check the ${link}</div></div>`;
+  }
+  if (reg.basis === "cross-reference") {
+    return `<div class="reg-block">${head}
+      <div class="reg-none">The guide does not regulate this water on its own:
+      ${esc(reg.see)}. Check the ${link}</div></div>`;
+  }
+
+  const open = seasonOpenOn(reg.season && reg.season.text, new Date());
+  const badge = open === null ? ""
+    : `<span class="reg-open ${open ? "yes" : "no"}">${open ? "Open now" : "Closed now"}</span>`;
+  const rows = [];
+  const season = (reg.season && reg.season.text) || "";
+  rows.push(`<div class="reg-row"><span class="reg-k">Season</span>
+    <span class="reg-v">${esc(season || "not listed — treated as closed")}</span></div>`);
+
+  if (reg.basis === "site-specific") {
+    if (reg.trout_total && reg.trout_total.text) {
+      rows.push(`<div class="reg-row"><span class="reg-k">Trout</span>
+        <span class="reg-v">${esc(reg.trout_total.text)}</span></div>`);
+    }
+    if (reg.bait) {
+      rows.push(`<div class="reg-row"><span class="reg-k">Bait</span>
+        <span class="reg-v">${esc(reg.bait)}</span></div>`);
+    }
+    const others = Object.entries(reg.species || {})
+      .map(([code, v]) => `${esc(code)} ${esc(v.text)}`).join(" &nbsp;·&nbsp; ");
+    if (others) {
+      rows.push(`<div class="reg-row"><span class="reg-k">Other</span>
+        <span class="reg-v">${others}</span></div>`);
+    }
+    if ((reg.also || []).length) {
+      rows.push(`<div class="reg-row"><span class="reg-k">Also</span>
+        <span class="reg-v">${reg.also.map(a =>
+          `${esc(a.detail || "tributaries")}: ${esc(a.season.text || "closed")}`).join("; ")}</span></div>`);
+    }
+  } else {
+    const limits = reg.limits || {};
+    const listed = Object.entries(limits)
+      .map(([k, v]) => `${esc(k)} ${esc(v)}`).join(" &nbsp;·&nbsp; ");
+    if (reg.bait) {
+      rows.push(`<div class="reg-row"><span class="reg-k">Bait</span>
+        <span class="reg-v">${esc(reg.bait)}</span></div>`);
+    }
+    if (listed) {
+      rows.push(`<div class="reg-row"><span class="reg-k">Limits</span>
+        <span class="reg-v">${listed}</span></div>`);
+    }
+  }
+
+  const because = {
+    "site-specific": `listed for this lake in the ${esc(zone)} table`,
+    "put-and-take": "provincial put-and-take stocked lake regulations",
+    "watershed-default": `not listed individually — the ${esc(zone)} default applies`,
+  }[reg.basis] || "";
+  const matched = reg.matched_name && reg.matched_name !== lake.name
+    ? ` (matched to “${esc(reg.matched_name)}”)` : "";
+
+  return `<div class="reg-block">${head}${badge}
+    ${rows.join("")}
+    <div class="reg-why">${because}${matched}</div>
+    <div class="reg-warn">Confirm before you fish — regulations change. ${link}</div>
+  </div>`;
+}
+
 function popupHtml(lake) {
   const key = lakeKey(lake);
   const filteredTotal = filteredFishTotal(lake);
@@ -1170,6 +1325,7 @@ function popupHtml(lake) {
     ${changeRow}
     ${approx}
     ${profileBlock(lake)}
+    ${regulationBlock(lake)}
     <div class="popup-actions">
       <a class="gmaps" href="${driveUrl}" target="_blank" rel="noopener">Directions from ${esc(state.home.name)} ↗</a>
       <a class="gmaps" href="${gmapsUrl}" target="_blank" rel="noopener">Show on Google Maps ↗</a>
@@ -1591,6 +1747,33 @@ function buildSizeFilters() {
     if (cb.checked) state.sizes.add(cb.dataset.size); else state.sizes.delete(cb.dataset.size);
     onFilterChange();
   });
+}
+
+function buildSeasonFilter() {
+  const group = document.getElementById("season-group");
+  const chip = document.getElementById("open-now-chip");
+  // Nothing to filter on if the regulations did not load.
+  if (!REGULATIONS) return;
+  group.hidden = false;
+  const note = document.getElementById("open-now-note");
+  const sync = () => {
+    chip.classList.toggle("active", state.openNow);
+    chip.setAttribute("aria-pressed", state.openNow ? "true" : "false");
+    const shut = LAKES.filter(l => lakeOpenNow(l) === false).length;
+    // Two different unknowns, and conflating them would misdescribe both: a
+    // lake we never matched to the regulations is not a lake whose season we
+    // failed to read.
+    const unmatched = LAKES.filter(l => !regulationFor(l)).length;
+    note.textContent = `${shut} lake${shut === 1 ? "" : "s"} closed today`
+      + (unmatched ? ` · ${unmatched} not matched to the regulations, and never hidden` : "")
+      + ` · ${REGULATIONS.guide_year} guide`;
+  };
+  chip.addEventListener("click", () => {
+    state.openNow = !state.openNow;
+    sync();
+    onFilterChange();
+  });
+  sync();
 }
 
 function buildRecencyChips() {
@@ -2239,6 +2422,7 @@ function writeUrl() {
   if (state.years.size !== ALL_YEARS.length) p.set("yr", [...state.years].sort().join(","));
   if (state.maxDistanceKm !== 1000) p.set("d", state.maxDistanceKm);
   if (state.recency !== "any") p.set("rc", state.recency);
+  if (state.openNow) p.set("open", "1");
   if (state.view !== "map") p.set("v", state.view);
   if (state.colorMode !== "species") p.set("cm", state.colorMode);
   if (state.focusedLakeAts) p.set("lake", state.focusedLakeAts);
@@ -2259,6 +2443,7 @@ function readUrl() {
   if (p.has("v") && ["map", "list", "zones"].includes(p.get("v"))) state.view = p.get("v");
   if (p.has("cm") && COLOR_MODES.some(m => m.id === p.get("cm"))) state.colorMode = p.get("cm");
   if (p.has("c")) state.chartType = p.get("c");
+  if (p.get("open") === "1") state.openNow = true;
   if (p.has("home")) {
     const [lat, lon, ...rest] = p.get("home").split(",");
     if (Number.isFinite(Number(lat)) && Number.isFinite(Number(lon))) {
@@ -2378,6 +2563,7 @@ async function init() {
     const params = readUrl();
     const { lakes, years } = await loadAllData();
     QUALITY_SUMMARY = await loadQualitySummary();
+    REGULATIONS = await loadRegulations();
     LAKES = lakes;
     ALL_YEARS = years;
     state.years = params.has("yr")
@@ -2392,6 +2578,7 @@ async function init() {
     updateDataQualitySummary();
     initMap();
     buildSearch();
+    buildSeasonFilter();
     buildRecencyChips();
     buildSpeciesFilters();
     buildSizeFilters();

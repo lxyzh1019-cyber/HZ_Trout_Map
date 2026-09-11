@@ -44,6 +44,8 @@ from pathlib import Path
 import pdfplumber
 from pdfplumber.page import Page
 
+import registry
+
 ATS = r"(?:NE|NW|SE|SW)?\s*\d{1,2}-\d{1,3}-\d{1,2}-W\d"
 
 # The guide's own species codes. Happily these are the codes this repository
@@ -113,6 +115,20 @@ def parse_season(text):
     return {"text": raw, "closed": False, "implied": False}
 
 
+def parse_bait(text):
+    """Expand the bait column's legend marker into words.
+
+    The tables print a lone "l" in this column on most rows, and the column
+    heading defines it: "Bait l = Bait except Bait fish allowed". Three quarters
+    of the rows carry it, so leaving it alone would put a bare glyph in front of
+    an angler as though it meant something.
+    """
+    raw = _cell(text)
+    if raw in {"l", "I", "|"}:
+        return "Bait allowed, except bait fish"
+    return raw
+
+
 def _table_rows(page):
     tables = page.extract_tables()
     if not tables:
@@ -176,8 +192,8 @@ def read_tables(pdf):
             entry = {
                 "detail": detail,
                 "season": parse_season(row.get("Season")),
-                "bait": _cell(next((v for k, v in row.items()
-                                    if k.startswith("Bait")), "")),
+                "bait": parse_bait(next((v for k, v in row.items()
+                                         if k.startswith("Bait")), "")),
                 "species": species,
                 "trout_total": parse_limit(row.get("Trout Total")),
                 "page": number,
@@ -386,3 +402,91 @@ if __name__ == "__main__":
           f"{sum(len(z['rivers']) for z in regs['zones'].values())} rivers")
     print(f"zone defaults     : {len(regs['defaults'])}")
     print(f"put-and-take list : {len(regs['stocked'])}")
+
+
+# How alike two names must be before a fuzzy match is trusted, and how unlike
+# every candidate must be before a lake is accepted as genuinely unlisted.
+CONFIDENT = 0.92
+CLEARLY_ABSENT = 0.75
+
+
+def _best_match(target, candidates):
+    """The closest name and its score, using the registry's own comparison."""
+    best, score = None, 0.0
+    for candidate in candidates:
+        this = registry.name_similarity(target, candidate)
+        if this > score:
+            best, score = candidate, this
+    return best, score
+
+
+def match_lakes(regs, lakes):
+    """Resolve every lake to a regulation, or to nothing at all.
+
+    The unsafe move here is to fall back to the watershed default whenever a
+    name fails to match, because the default is often more permissive than the
+    site-specific row it would be standing in for: ES1 defaults to five trout
+    with bait allowed, while Barnaby Lake inside ES1 is one trout over 40 cm
+    under a bait ban. Missing that row and showing the default would invite
+    someone to keep four fish too many.
+
+    So the default is used only where there is positive evidence the lake is
+    unlisted — nothing in the zone resembles its name. Where something resembles
+    it but not closely enough to be sure, nothing is published and the lake is
+    written to the review file for a human to settle.
+    """
+    resolved, review = {}, []
+    for lake in lakes:
+        zone = lake.get("zone")
+        name = lake.get("name") or ""
+        key = lake.get("lake_id") or lake.get("ats")
+        if not key:
+            continue
+        if not zone:
+            review.append({"lake": name, "lake_id": key, "zone": "",
+                           "why": "no fish management zone recorded",
+                           "closest": "", "score": ""})
+            continue
+
+        target = registry.normalize_name(name)
+        site = {registry.normalize_name(k): k for k in regs["zones"].get(zone, {}).get("lakes", {})}
+        stock = {registry.normalize_name(k): k for k in regs["stocked"]}
+
+        if target in site:
+            found = resolve(site[target], zone, regs)
+            found["matched_name"] = site[target]
+            resolved[key] = found
+            continue
+        if target in stock:
+            found = resolve(stock[target], zone, regs)
+            found["matched_name"] = stock[target]
+            resolved[key] = found
+            continue
+
+        near_site, site_score = _best_match(target, site)
+        near_stock, stock_score = _best_match(target, stock)
+        near, score, pool = (
+            (near_site, site_score, "site") if site_score >= stock_score
+            else (near_stock, stock_score, "stocked"))
+
+        if score >= CONFIDENT:
+            original = site[near] if pool == "site" else stock[near]
+            found = resolve(original, zone, regs)
+            found["matched_name"] = original
+            found["match_score"] = round(score, 3)
+            resolved[key] = found
+        elif score < CLEARLY_ABSENT:
+            # Nothing in this zone looks anything like it, which is evidence
+            # that it really is unlisted — and an unlisted lake takes the
+            # default, by the guide's own rule.
+            found = resolve("__unlisted__", zone, regs)
+            if found:
+                resolved[key] = found
+        else:
+            review.append({
+                "lake": name, "lake_id": key, "zone": zone,
+                "why": "a similar name exists but is not close enough to trust",
+                "closest": (site[near] if pool == "site" else stock[near]) if near else "",
+                "score": round(score, 3),
+            })
+    return resolved, review

@@ -462,6 +462,29 @@ intended.</p>
     check("3,000 malformed inputs: never throws, never returns NaN", bad === 0,
       bad ? bad + " bad" : "clean");
 
+    // Seasons wrap the new year, and reading that backwards would report a
+    // lake open through April when it is shut, and shut all winter when it is
+    // open. NB1 runs May 15 to Mar. 31.
+    (function () {
+      var on = function (m, day) { return new Date(2026, m - 1, day); };
+      var nb = "OPEN May 15 to Mar. 31";
+      check("a season that wraps the new year reads correctly",
+        Conditions.seasonOpenOn(nb, on(12, 25)) === true &&
+        Conditions.seasonOpenOn(nb, on(1, 10)) === true &&
+        Conditions.seasonOpenOn(nb, on(4, 15)) === false &&
+        Conditions.seasonOpenOn(nb, on(5, 1)) === false,
+        "NB1: open in December and January, shut in April");
+      check("an ordinary season range reads correctly",
+        Conditions.seasonOpenOn("OPEN JULY 16 TO OCT. 31", on(8, 1)) === true &&
+        Conditions.seasonOpenOn("OPEN JULY 16 TO OCT. 31", on(6, 1)) === false);
+      check("all-year seasons read correctly",
+        Conditions.seasonOpenOn("OPEN ALL YEAR", on(2, 2)) === true &&
+        Conditions.seasonOpenOn("CLOSED ALL YEAR", on(7, 7)) === false);
+      check("wording we do not recognise is unknown, never 'open'",
+        Conditions.seasonOpenOn("", on(7, 7)) === null &&
+        Conditions.seasonOpenOn("see Bow River", on(7, 7)) === null);
+    })();
+
     // Depth is unknown for most lakes, so the advisory has to fail closed.
     var noDepth = Conditions.stratification({ surfaceC: 23, month: 8,
       band: Conditions.BANDS.RNTR, maxDepthM: null });

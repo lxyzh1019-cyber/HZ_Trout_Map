@@ -487,8 +487,45 @@
     return best;
   }
 
+  // ============================================================
+  // SEASONS
+  // ============================================================
+
+  var MONTHS = ["jan", "feb", "mar", "apr", "may", "jun",
+                "jul", "aug", "sep", "oct", "nov", "dec"];
+
+  /* Whether a season from the regulations covers a date.
+   *
+   * Returns null rather than guessing when the wording is not one we
+   * recognise. An unrecognised season must not quietly become "open".
+   *
+   * The case worth writing a test for is that seasons wrap the new year. NB1
+   * lakes run May 15 to Mar. 31 — most of the year, but shut through April.
+   * Treated as an ordinary start-before-end range that reads backwards for
+   * eleven months of the twelve, which is the kind of wrong that looks right
+   * in January.
+   */
+  function seasonOpenOn(text, when) {
+    var t = String(text || "");
+    if (!t) return null;
+    if (/CLOSED\s+ALL\s+YEAR/i.test(t)) return false;
+    if (/OPEN\s+ALL\s+YEAR/i.test(t)) return true;
+    var m = t.match(/OPEN\s+([A-Za-z]+)\.?\s+(\d{1,2})\s+TO\s+([A-Za-z]+)\.?\s+(\d{1,2})/i);
+    if (!m) return null;
+    var from = MONTHS.indexOf(m[1].slice(0, 3).toLowerCase());
+    var to = MONTHS.indexOf(m[3].slice(0, 3).toLowerCase());
+    if (from < 0 || to < 0) return null;
+    var at = function (mo, d) { return mo * 100 + d; };
+    var day = when instanceof Date ? when : new Date();
+    var now = at(day.getMonth(), day.getDate());
+    var start = at(from, Number(m[2])), end = at(to, Number(m[4]));
+    return start <= end ? (now >= start && now <= end)
+                        : (now >= start || now <= end);
+  }
+
   window.Conditions = {
     scoreSlot: scoreSlot,
+    seasonOpenOn: seasonOpenOn,
     bestOf: bestOf,
     waterFromAir: waterFromAir,
     stratification: stratification,
