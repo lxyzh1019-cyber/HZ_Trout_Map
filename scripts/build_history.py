@@ -257,7 +257,7 @@ def link_all(reg, rows_by_year, aliases, verbose=True):
                 stats["review"] += 1
                 continue
 
-            reg.absorb(lake, row)
+            reg.absorb(lake, row, wrong_ats=aliases["wrong_ats"])
             linked[year].append((lake["lake_id"], row))
             stats[method] += 1
 

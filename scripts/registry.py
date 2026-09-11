@@ -242,10 +242,17 @@ class Registry:
         return self.add_lake(f"lk{self._minted:04d}", name, lat, lon,
                              ats_codes=ats_codes, aliases=aliases or [name])
 
-    def absorb(self, lake, row):
-        """Fold one resolved row's identifying details into the lake."""
+    def absorb(self, lake, row, wrong_ats=()):
+        """Fold one resolved row's identifying details into the lake.
+
+        `wrong_ats` holds land descriptions a review has established point at
+        the wrong place. Learning one would be worse than ignoring the row: it
+        teaches the matcher that a real location belongs to a lake that is not
+        there, so a future report naming that spot would silently link here.
+        """
         changed = False
-        if row.get("ats") and row["ats"] not in lake["ats_codes"]:
+        if row.get("ats") and row["ats"] not in lake["ats_codes"] \
+                and row["ats"].upper() not in wrong_ats:
             lake["ats_codes"] = sorted(set(lake["ats_codes"] + [row["ats"]]))
             changed = True
         nm = display_name(row.get("official_name"), row.get("common_name"))
@@ -422,7 +429,7 @@ class Registry:
 # ─────────────────────────────────────────────────────────────────────────
 def load_aliases():
     """Return {'name': {normalized name: lake_id}, 'ats': {code: lake_id}}."""
-    out = {"name": {}, "ats": {}, "new": set(), "skip": set()}
+    out = {"name": {}, "ats": {}, "new": set(), "skip": set(), "wrong_ats": set()}
     if not ALIASES_PATH.exists():
         return out
     with open(ALIASES_PATH, newline="", encoding="utf-8") as f:
@@ -434,6 +441,8 @@ def load_aliases():
                 out["name"][normalize_name(value)] = lake_id
             elif kind == "ats" and value and lake_id:
                 out["ats"][value.upper()] = lake_id
+            elif kind == "wrong_ats" and value:
+                out["wrong_ats"].add(value.upper())
             elif kind in ("new", "skip") and value:
                 out[kind].add(normalize_name(value))
     return out

@@ -259,6 +259,41 @@ class CoordinateHygieneTests(unittest.TestCase):
         suffixed = [l["name"] for l in self.registry if "[" in l["name"]]
         self.assertEqual(suffixed, [])
 
+    def test_a_land_description_ruled_wrong_is_never_learned(self):
+        """Alberta filed the 2014 North Two Lake shipment under a second id,
+        with a land description 166 km away near Valleyview. The fish belong to
+        North Two Lake; the location does not. Learning it would tell the
+        matcher that a real place belongs to a lake that is not there, so a
+        future report naming that spot would silently link here."""
+        wrong = registry.load_aliases()["wrong_ats"]
+        self.assertIn("NW1-73-25-W5", wrong, "the ruling itself has gone missing")
+        for lake in self.registry:
+            for code in lake["ats_codes"]:
+                self.assertNotIn(code.upper(), wrong,
+                                 f"{lake['name']} learned a land description ruled wrong")
+
+    def test_the_two_unqualified_two_lakes_rows_belong_to_north(self):
+        """Both carry exactly 7,200 rainbows, which is North Two Lake's
+        standing shipment in ten other years. South is stocked with cutthroat
+        in every year but 2024, and never at that size."""
+        for year, when in ((2014, "2014-05-26"), (2015, "2015-05-25")):
+            lakes = json.loads((DATA_DIR / f"lakes_{year}.json").read_text(encoding="utf-8"))
+            owner = [l for l in lakes
+                     if any(s["date"] == when and s["species"] == "RNTR" and s["number"] == 7200
+                            for s in l["stockings"])]
+            self.assertEqual([l["lake_id"] for l in owner], ["wb6535"],
+                             f"the {year} unqualified Two Lakes row moved off North Two Lake")
+
+    def test_north_two_lake_is_stocked_in_every_year_on_record(self):
+        """The point of both rulings. While the 2014 shipment sat under a
+        second Alberta id and the 2015 one under South, North's history showed
+        two holes in a run that has otherwise never missed a year."""
+        years = json.loads((DATA_DIR / "manifest.json").read_text(encoding="utf-8"))["years"]
+        missing = [y for y in years
+                   if not any(l["lake_id"] == "wb6535" and l["stockings"]
+                              for l in json.loads((DATA_DIR / f"lakes_{y}.json").read_text(encoding="utf-8")))]
+        self.assertEqual(missing, [], f"North Two Lake has no stocking in {missing}")
+
 
 class LinkingCompletenessTests(unittest.TestCase):
     def test_every_report_row_found_a_lake(self):

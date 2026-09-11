@@ -2508,15 +2508,15 @@
     ]
   },
   {
-    "lake_id": "wb6052",
-    "ats": "NW1-73-25-W5",
-    "name": "Two Lakes (North)",
-    "lat": 55.3,
-    "lon": -117.716667,
-    "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
-    "amenities": null,
+    "lake_id": "wb6535",
+    "ats": "20-62-12-W6",
+    "name": "North Two Lake",
+    "lat": 54.380594,
+    "lon": -119.755438,
+    "coord_source": "profile",
+    "zone": "ES4",
+    "surface_area_ha": 3.6,
+    "amenities": "Boat launch, fire pits, firewood for purchase, fish cleaning stations, hand launch, vault toilets, water pump, camping, canoeing, kayaking, front country hiking, ice fishing, mountain biking, cycling, power boating, wildlife viewing.",
     "stockings": [
       {
         "species": "RNTR",

@@ -3023,12 +3023,10 @@
     ],
     "aliases": [
       "south two lake",
-      "two lakes",
       "two lakes south two lake"
     ],
     "name_variants": [
       "South Two Lake",
-      "TWO LAKES",
       "TWO LAKES (SOUTH TWO LAKE)",
       "Two Lakes (South Two Lake)",
       "Two Lakes South Two Lake"
@@ -3038,29 +3036,6 @@
     "amenities": "Boat launch, fire pits, firewood for purchase, fish cleaning stations, hand launch, vault toilets, water pump, camping, canoeing, kayaking, front country hiking, ice fishing, mountain biking, cycling, power boating, wildlife viewing.",
     "years": [],
     "base_name": "South Two Lake"
-  },
-  {
-    "lake_id": "wb6052",
-    "name": "Two Lakes (North)",
-    "waterbody_id": "6052",
-    "lat": 55.3,
-    "lon": -117.716667,
-    "coord_source": "alberta",
-    "ats_codes": [
-      "NW1-73-25-W5"
-    ],
-    "aliases": [
-      "two lakes north"
-    ],
-    "name_variants": [
-      "TWO LAKES (NORTH)",
-      "Two Lakes (North)"
-    ],
-    "zone": null,
-    "surface_area_ha": null,
-    "amenities": null,
-    "years": [],
-    "base_name": "Two Lakes (North)"
   },
   {
     "lake_id": "wb6061",
@@ -3366,11 +3341,15 @@
     ],
     "aliases": [
       "north two lake",
+      "two lakes",
+      "two lakes north",
       "two lakes north two lake"
     ],
     "name_variants": [
       "North Two Lake",
+      "TWO LAKES",
       "TWO LAKES (NORTH TWO LAKE)",
+      "TWO LAKES (NORTH)",
       "Two Lakes (North Two Lake)",
       "Two Lakes North Two Lake"
     ],

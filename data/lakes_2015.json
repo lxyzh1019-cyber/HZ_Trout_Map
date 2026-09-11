@@ -2324,12 +2324,12 @@
     ]
   },
   {
-    "lake_id": "wb6051",
-    "ats": "NE7-62-12-W6",
-    "name": "South Two Lake",
-    "lat": 54.35553,
-    "lon": -119.78669,
-    "coord_source": "alberta",
+    "lake_id": "wb6535",
+    "ats": "20-62-12-W6",
+    "name": "North Two Lake",
+    "lat": 54.380594,
+    "lon": -119.755438,
+    "coord_source": "profile",
     "zone": "ES4",
     "surface_area_ha": 3.6,
     "amenities": "Boat launch, fire pits, firewood for purchase, fish cleaning stations, hand launch, vault toilets, water pump, camping, canoeing, kayaking, front country hiking, ice fishing, mountain biking, cycling, power boating, wildlife viewing.",
