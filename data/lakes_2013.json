@@ -4701,6 +4701,43 @@
     ]
   },
   {
+    "lake_id": "wb22993",
+    "ats": "NW29-40-26-W4",
+    "name": "East Stormwater Pond [NW29-40-26-W4]",
+    "lat": 52.469538,
+    "lon": -113.709921,
+    "coord_source": "alberta",
+    "zone": "PP2",
+    "surface_area_ha": 2.0,
+    "amenities": "Public parking.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "Triploid",
+        "length_cm": 22.0,
+        "number": 1500,
+        "date": "2013-05-10",
+        "year": 2013,
+        "date_precision": "day"
+      },
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "Triploid",
+        "length_cm": 22.0,
+        "number": 1500,
+        "date": "2013-05-10",
+        "year": 2013,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 3000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb6735",
     "ats": "1-39-3-W5",
     "name": "Niemela Reservoir (Ray's Pond)",
@@ -6103,33 +6140,6 @@
     ]
   },
   {
-    "lake_id": "wb22993",
-    "ats": "NW29-40-26-W4",
-    "name": "East Stormwater Pond [NW29-40-26-W4]",
-    "lat": 52.469538,
-    "lon": -113.709921,
-    "coord_source": "alberta",
-    "zone": "PP2",
-    "surface_area_ha": 2.0,
-    "amenities": "Public parking.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "Triploid",
-        "length_cm": 22.0,
-        "number": 1500,
-        "date": "2013-05-10",
-        "year": 2013,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 1500,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
     "lake_id": "wb2129",
     "ats": "11-65-2-W4",
     "name": "Medley River",
@@ -6145,33 +6155,6 @@
         "strain": null,
         "genotype": "Pressure Treated as Triploid",
         "length_cm": 16.0,
-        "number": 1500,
-        "date": "2013-05-10",
-        "year": 2013,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 1500,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
-    "lake_id": "wb22994",
-    "ats": "SE29-40-26-W4",
-    "name": "East Stormwater Pond [SE29-40-26-W4]",
-    "lat": 52.469538,
-    "lon": -113.709921,
-    "coord_source": "profile",
-    "zone": "PP2",
-    "surface_area_ha": 1.3,
-    "amenities": "Day use, no open fires, foot access only.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "Triploid",
-        "length_cm": 22.0,
         "number": 1500,
         "date": "2013-05-10",
         "year": 2013,
@@ -6724,7 +6707,7 @@
   },
   {
     "lake_id": "wb23791",
-    "ats": "SE26-46-19-W5",
+    "ats": "26-46-19-W5",
     "name": "Pit 45 Lake",
     "lat": 52.992815,
     "lon": -116.645687,
@@ -7206,7 +7189,7 @@
   },
   {
     "lake_id": "wb6721",
-    "ats": "SW27-83-23-W5",
+    "ats": "27-83-23-W5",
     "name": "MD Peace Pond #1",
     "lat": 56.222511,
     "lon": -117.556197,
@@ -7233,7 +7216,7 @@
   },
   {
     "lake_id": "wb22995",
-    "ats": "27-83-23-W5",
+    "ats": "SW27-83-23-W5",
     "name": "Md Peace Pond #2",
     "lat": 56.224205,
     "lon": -117.553092,
@@ -8636,7 +8619,7 @@
   },
   {
     "lake_id": "wb6914",
-    "ats": "SE32-40-15-W5",
+    "ats": "32-40-15-W5",
     "name": "Nordegg Borrow Pit (East)",
     "lat": 52.480398,
     "lon": -116.122018,

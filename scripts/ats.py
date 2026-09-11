@@ -63,6 +63,9 @@ QUARTER_OFFSETS = {
 }
 
 ATS_RE = re.compile(r"^(NE|NW|SE|SW)(\d+)-(\d+)-(\d+)-(W[456])$")
+# The 2011-2013 reports print the land description without its quarter-section
+# letter. That still pins the lake to a one-mile section, so use its centre.
+ATS_PARTIAL_RE = re.compile(r"^(\d+)-(\d+)-(\d+)-(W[456])$")
 
 # Base lines are surveyed every 4 townships; range lines run true north
 # from the base line below (townships 1-2 of each block) or south from the
@@ -96,17 +99,29 @@ def _base_line_latitude(township):
 
 
 def ats_to_latlng(ats):
-    """Convert an ATS code to (lat, lon), or (None, None) if unparseable."""
-    m = ATS_RE.match((ats or "").strip())
-    if not m:
-        return None, None
-    quarter, section, township, rng, meridian = m.groups()
+    """Convert an ATS code to (lat, lon), or (None, None) if unparseable.
+
+    Accepts the full form (NE10-2-28-W4) and the partial form printed by the
+    2011-2013 reports (10-2-28-W4), which names the section but not the
+    quarter. A section is one mile across, so its centre is within about
+    800 m of wherever in it the lake actually sits.
+    """
+    text = (ats or "").strip().upper()
+    m = ATS_RE.match(text)
+    if m:
+        quarter, section, township, rng, meridian = m.groups()
+        qx, qy = QUARTER_OFFSETS[quarter]
+    else:
+        m = ATS_PARTIAL_RE.match(text)
+        if not m:
+            return None, None
+        section, township, rng, meridian = m.groups()
+        qx, qy = 0.5, 0.5                      # centre of the section
     section, township, rng = int(section), int(township), int(rng)
     if not 1 <= section <= 36:
         return None, None
 
     x, y = section_grid_xy(section)
-    qx, qy = QUARTER_OFFSETS[quarter]
 
     # Latitude: stack whole townships north from 49°N, then the section row
     # and quarter within this township.

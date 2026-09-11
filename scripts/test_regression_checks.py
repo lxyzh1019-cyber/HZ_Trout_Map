@@ -235,17 +235,26 @@ class PublishedDataTests(unittest.TestCase):
         self.assertEqual(sorted(self.manifest["provisional"]),
                          sorted(sources.PROVISIONAL_YEARS))
 
-    def test_every_lake_has_an_identity_a_position_and_a_source(self):
+    def test_every_lake_has_an_identity_and_a_declared_coordinate_source(self):
         for year, lakes in self.by_year.items():
             for lk in lakes:
                 self.assertTrue(lk.get("lake_id"), f"{year} {lk['name']}")
-                self.assertIsNotNone(lk.get("lat"), f"{year} {lk['name']}")
-                self.assertIsNotNone(lk.get("lon"), f"{year} {lk['name']}")
-                self.assertIn(lk.get("coord_source"), ("profile", "alberta", "ats"))
+                self.assertIn(lk.get("coord_source"),
+                              ("profile", "alberta", "ats", "unknown"), lk["name"])
+                # A missing position is allowed only when it is declared as
+                # such, never as a silent null that would drop a pin.
+                if lk.get("lat") is None or lk.get("lon") is None:
+                    self.assertEqual(lk["coord_source"], "unknown", f"{year} {lk['name']}")
+
+    def test_almost_every_lake_can_be_placed_on_the_map(self):
+        registry_ids = {lk["lake_id"] for lk in self.registry}
+        unplaced = {lk["lake_id"] for lk in self.registry if lk["coord_source"] == "unknown"}
+        self.assertLess(len(unplaced) / len(registry_ids), 0.02,
+                        f"{len(unplaced)} lakes have no position")
 
     def test_coordinates_are_inside_alberta(self):
         for year, lakes in self.by_year.items():
-            for lk in lakes:
+            for lk in (l for l in lakes if l["lat"] is not None):
                 self.assertTrue(48.9 < lk["lat"] < 60.1, f"{year} {lk['name']} {lk['lat']}")
                 self.assertTrue(-120.5 < lk["lon"] < -109.9, f"{year} {lk['name']} {lk['lon']}")
 
@@ -261,12 +270,14 @@ class PublishedDataTests(unittest.TestCase):
             for lk in lakes:
                 prev = seen.setdefault(lk["lake_id"], lk)
                 self.assertEqual(prev["name"], lk["name"], lk["lake_id"])
-                self.assertAlmostEqual(prev["lat"], lk["lat"], places=4)
-                self.assertAlmostEqual(prev["lon"], lk["lon"], places=4)
+                if prev["lat"] is not None and lk["lat"] is not None:
+                    self.assertAlmostEqual(prev["lat"], lk["lat"], places=4)
+                    self.assertAlmostEqual(prev["lon"], lk["lon"], places=4)
 
     def test_no_two_lakes_share_a_name_and_a_position(self):
         for year, lakes in self.by_year.items():
-            keyed = [(lk["name"], round(lk["lat"], 4), round(lk["lon"], 4)) for lk in lakes]
+            keyed = [(lk["name"], round(lk["lat"], 4), round(lk["lon"], 4))
+                     for lk in lakes if lk["lat"] is not None]
             self.assertEqual(len(keyed), len(set(keyed)), year)
 
     def test_stocking_rows_are_well_formed(self):

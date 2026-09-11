@@ -4968,7 +4968,7 @@
   },
   {
     "lake_id": "wb6537",
-    "ats": "SW31-49-26-W5",
+    "ats": "31-49-26-W5",
     "name": "Lower Wildhorse Lakes",
     "lat": 53.269491,
     "lon": -117.792759,
@@ -5295,7 +5295,7 @@
   },
   {
     "lake_id": "wb23791",
-    "ats": "SE26-46-19-W5",
+    "ats": "26-46-19-W5",
     "name": "Pit 45 Lake",
     "lat": 52.992815,
     "lon": -116.645687,
@@ -5595,7 +5595,7 @@
   },
   {
     "lake_id": "wb6721",
-    "ats": "SW27-83-23-W5",
+    "ats": "27-83-23-W5",
     "name": "MD Peace Pond #1",
     "lat": 56.222511,
     "lon": -117.556197,
@@ -5622,7 +5622,7 @@
   },
   {
     "lake_id": "wb22995",
-    "ats": "27-83-23-W5",
+    "ats": "SW27-83-23-W5",
     "name": "Md Peace Pond #2",
     "lat": 56.224205,
     "lon": -117.553092,
@@ -6755,7 +6755,7 @@
   },
   {
     "lake_id": "wb6608",
-    "ats": "NW26-21-5-W5",
+    "ats": "26-21-5-W5",
     "name": "Champion Lakes (Lower)",
     "lat": 50.815306,
     "lon": -114.599941,
@@ -6836,7 +6836,7 @@
   },
   {
     "lake_id": "wb6914",
-    "ats": "SE32-40-15-W5",
+    "ats": "32-40-15-W5",
     "name": "Nordegg Borrow Pit (East)",
     "lat": 52.480398,
     "lon": -116.122018,
@@ -7054,12 +7054,12 @@
     ]
   },
   {
-    "lake_id": "wb395187",
+    "lake_id": "wb26854",
     "ats": "NE23-54-23-W4",
-    "name": "Fort Lions Park Pond",
-    "lat": 53.683307,
-    "lon": -113.273966,
-    "coord_source": "alberta",
+    "name": "West Rivers Edge Pond (Fort Lions Park Pond)",
+    "lat": 53.683219,
+    "lon": -113.274136,
+    "coord_source": "profile",
     "zone": "PP2",
     "surface_area_ha": 4.8,
     "amenities": "Handicap accessible, washrooms, day use.",

@@ -2058,6 +2058,44 @@
     ]
   },
   {
+    "lake_id": "wb6537",
+    "ats": "31-49-26-W5",
+    "name": "Lower Wildhorse Lakes",
+    "lat": 53.269491,
+    "lon": -117.792759,
+    "coord_source": "profile",
+    "zone": "ES3",
+    "surface_area_ha": 25.4,
+    "amenities": "Boat launch, fire pit, firewood available for purchase, fish cleaning stations, hand launch, pier, pit/vault toilets, water pump.",
+    "stockings": [
+      {
+        "species": "BKTR",
+        "strain": null,
+        "genotype": "3N",
+        "length_cm": 9.0,
+        "number": 2700,
+        "date": "2011-05-01",
+        "year": 2011,
+        "date_precision": "month"
+      },
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "3N",
+        "length_cm": 17.0,
+        "number": 7500,
+        "date": "2011-05-01",
+        "year": 2011,
+        "date_precision": "month"
+      }
+    ],
+    "total_fish": 10200,
+    "species_set": [
+      "BKTR",
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb5569",
     "ats": "17-36-7-W5",
     "name": "Phyllis Lake",
@@ -5186,6 +5224,43 @@
     ]
   },
   {
+    "lake_id": "wb6721",
+    "ats": "27-83-23-W5",
+    "name": "MD Peace Pond #1",
+    "lat": 56.222511,
+    "lon": -117.556197,
+    "coord_source": "profile",
+    "zone": "NB3",
+    "surface_area_ha": 1.1,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "2N",
+        "length_cm": 22.0,
+        "number": 1000,
+        "date": "2011-05-01",
+        "year": 2011,
+        "date_precision": "month"
+      },
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "2N",
+        "length_cm": 22.0,
+        "number": 1000,
+        "date": "2011-05-01",
+        "year": 2011,
+        "date_precision": "month"
+      }
+    ],
+    "total_fish": 2000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb6882",
     "ats": "15-17-17-W4",
     "name": "Bow City East Ponds",
@@ -5479,6 +5554,33 @@
     ]
   },
   {
+    "lake_id": "lk0002",
+    "ats": "20-31-23-W4",
+    "name": "Braconnier Reservoir",
+    "lat": 51.67231,
+    "lon": -113.23414,
+    "coord_source": "alberta",
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "2N",
+        "length_cm": 21.0,
+        "number": 2000,
+        "date": "2011-09-01",
+        "year": 2011,
+        "date_precision": "month"
+      }
+    ],
+    "total_fish": 2000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb6904",
     "ats": "29-67-9-W5",
     "name": "Atlantic Richfield Reservoir",
@@ -5550,54 +5652,6 @@
     "total_fish": 1770,
     "species_set": [
       "CTTR",
-      "RNTR"
-    ]
-  },
-  {
-    "lake_id": "wb23790",
-    "ats": "26-46-19-W5",
-    "name": "Pit 35 Lake",
-    "lat": 52.992044,
-    "lon": -116.649313,
-    "coord_source": "profile",
-    "zone": "ES3",
-    "surface_area_ha": 2.6,
-    "amenities": "Day use, no open fires, foot access only.",
-    "stockings": [
-      {
-        "species": "BNTR",
-        "strain": null,
-        "genotype": "3N",
-        "length_cm": 15.0,
-        "number": 250,
-        "date": "2011-06-01",
-        "year": 2011,
-        "date_precision": "month"
-      },
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "2N",
-        "length_cm": 8.0,
-        "number": 390,
-        "date": "2011-06-01",
-        "year": 2011,
-        "date_precision": "month"
-      },
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "2N",
-        "length_cm": 8.0,
-        "number": 1100,
-        "date": "2011-06-01",
-        "year": 2011,
-        "date_precision": "month"
-      }
-    ],
-    "total_fish": 1740,
-    "species_set": [
-      "BNTR",
       "RNTR"
     ]
   },
@@ -5907,6 +5961,44 @@
     "coord_source": "profile",
     "zone": "ES3",
     "surface_area_ha": 7.1,
+    "amenities": "Day use, no open fires, foot access only.",
+    "stockings": [
+      {
+        "species": "BNTR",
+        "strain": null,
+        "genotype": "3N",
+        "length_cm": 15.0,
+        "number": 250,
+        "date": "2011-06-01",
+        "year": 2011,
+        "date_precision": "month"
+      },
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "2N",
+        "length_cm": 8.0,
+        "number": 1100,
+        "date": "2011-06-01",
+        "year": 2011,
+        "date_precision": "month"
+      }
+    ],
+    "total_fish": 1350,
+    "species_set": [
+      "BNTR",
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb23791",
+    "ats": "26-46-19-W5",
+    "name": "Pit 45 Lake",
+    "lat": 52.992815,
+    "lon": -116.645687,
+    "coord_source": "profile",
+    "zone": "ES3",
+    "surface_area_ha": 7.5,
     "amenities": "Day use, no open fires, foot access only.",
     "stockings": [
       {
@@ -6514,33 +6606,6 @@
     ]
   },
   {
-    "lake_id": "wb22995",
-    "ats": "27-83-23-W5",
-    "name": "Md Peace Pond #2",
-    "lat": 56.224205,
-    "lon": -117.553092,
-    "coord_source": "alberta",
-    "zone": "NB3",
-    "surface_area_ha": 1.1,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "2N",
-        "length_cm": 22.0,
-        "number": 1000,
-        "date": "2011-05-01",
-        "year": 2011,
-        "date_precision": "month"
-      }
-    ],
-    "total_fish": 1000,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
     "lake_id": "wb6609",
     "ats": "7-85-21-W5",
     "name": "Weberville Pond",
@@ -6983,6 +7048,63 @@
     ]
   },
   {
+    "lake_id": "wb6914",
+    "ats": "32-40-15-W5",
+    "name": "Nordegg Borrow Pit (East)",
+    "lat": 52.480398,
+    "lon": -116.122018,
+    "coord_source": "profile",
+    "zone": "ES2",
+    "surface_area_ha": 2.0,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "2N",
+        "length_cm": 57.0,
+        "number": 5,
+        "date": "2011-05-01",
+        "year": 2011,
+        "date_precision": "month"
+      },
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "3N",
+        "length_cm": 26.0,
+        "number": 300,
+        "date": "2011-05-01",
+        "year": 2011,
+        "date_precision": "month"
+      },
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "2N",
+        "length_cm": 57.0,
+        "number": 10,
+        "date": "2011-05-01",
+        "year": 2011,
+        "date_precision": "month"
+      },
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "3N",
+        "length_cm": 26.0,
+        "number": 400,
+        "date": "2011-05-01",
+        "year": 2011,
+        "date_precision": "month"
+      }
+    ],
+    "total_fish": 715,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb6892",
     "ats": "11-4-1-W5",
     "name": "Bathing Lake",
@@ -7101,6 +7223,43 @@
     ]
   },
   {
+    "lake_id": "wb6608",
+    "ats": "26-21-5-W5",
+    "name": "Champion Lakes (Lower)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "profile",
+    "zone": "ES1",
+    "surface_area_ha": 8.0,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "2N",
+        "length_cm": 21.0,
+        "number": 300,
+        "date": "2011-07-01",
+        "year": 2011,
+        "date_precision": "month"
+      },
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "2N",
+        "length_cm": 22.0,
+        "number": 300,
+        "date": "2011-07-01",
+        "year": 2011,
+        "date_precision": "month"
+      }
+    ],
+    "total_fish": 600,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb21353",
     "ats": "1-62-3-W4",
     "name": "Ardmore Community Pond",
@@ -7177,6 +7336,33 @@
       }
     ],
     "total_fish": 550,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "lk0003",
+    "ats": "15-35-6-W4",
+    "name": "Consort Reservoir",
+    "lat": 52.00725,
+    "lon": -110.77606,
+    "coord_source": "alberta",
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "2N",
+        "length_cm": 17.0,
+        "number": 510,
+        "date": "2011-05-01",
+        "year": 2011,
+        "date_precision": "month"
+      }
+    ],
+    "total_fish": 510,
     "species_set": [
       "RNTR"
     ]
@@ -7732,6 +7918,33 @@
     ]
   },
   {
+    "lake_id": "wb23790",
+    "ats": "26-46-19-W5",
+    "name": "Pit 35 Lake",
+    "lat": 52.992044,
+    "lon": -116.649313,
+    "coord_source": "profile",
+    "zone": "ES3",
+    "surface_area_ha": 2.6,
+    "amenities": "Day use, no open fires, foot access only.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "2N",
+        "length_cm": 8.0,
+        "number": 390,
+        "date": "2011-06-01",
+        "year": 2011,
+        "date_precision": "month"
+      }
+    ],
+    "total_fish": 390,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb6917",
     "ats": "28-50-25-W5",
     "name": "Hinton Fish and Game Pond (Cold Creek Trout Pond)",
@@ -7781,6 +7994,33 @@
       }
     ],
     "total_fish": 300,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "lk0001",
+    "ats": "31-4-27-W4",
+    "name": "Mountain Vista Estates Pond",
+    "lat": 49.34223,
+    "lon": -113.63275,
+    "coord_source": "alberta",
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "2N",
+        "length_cm": 18.0,
+        "number": 100,
+        "date": "2011-06-01",
+        "year": 2011,
+        "date_precision": "month"
+      }
+    ],
+    "total_fish": 100,
     "species_set": [
       "RNTR"
     ]

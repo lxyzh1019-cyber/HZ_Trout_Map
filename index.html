@@ -524,7 +524,9 @@ function prepareLakes() {
   DATA_ISSUES.invalidStockings = 0;
   DATA_ISSUES.examples = [];
   for (const lake of LAKES) {
-    lake.distanceKm = haversineKm(HOME.lat, HOME.lon, lake.lat, lake.lon);
+    lake.distanceKm = (lake.lat == null || lake.lon == null)
+      ? Infinity
+      : haversineKm(HOME.lat, HOME.lon, lake.lat, lake.lon);
     if (lake.total_fish > maxFish) maxFish = lake.total_fish;
     for (const s of lake.stockings) {
       if (!s || typeof s !== "object") {
@@ -707,6 +709,9 @@ function renderPins() {
 
   for (const lake of LAKES) {
     if (!lakePassesFilters(lake)) continue;
+    // A handful of lakes come from reports that gave a name and nothing else,
+    // so there is nowhere to put a pin. They still count in the charts.
+    if (lake.lat == null || lake.lon == null) continue;
     shown++;
 
     const order = filteredDominantOrder(lake);
@@ -858,8 +863,11 @@ function updateDataQualitySummary() {
   const malformed = DATA_ISSUES.invalidStockings;
   const estimated = LAKES.filter(l => l.coord_source === "ats").length;
   const parts = [];
-  parts.push(`<strong>${LAKES.length - estimated}</strong> of <strong>${LAKES.length}</strong> lakes at verified coordinates`);
+  const unknown = LAKES.filter(l => l.coord_source === "unknown").length;
+  parts.push(`<strong>${LAKES.length - estimated - unknown}</strong> of <strong>${LAKES.length}</strong> lakes at verified coordinates`);
   if (estimated) parts.push(`<strong>${estimated}</strong> estimated from the land description`);
+  const unplaced = LAKES.filter(l => l.lat == null || l.lon == null).length;
+  if (unplaced) parts.push(`<strong>${unplaced}</strong> lake(s) with no known position, not shown on the map`);
   if (malformed) parts.push(`<strong>${malformed}</strong> malformed row(s) skipped`);
   if (QUALITY_SUMMARY) {
     const q = QUALITY_SUMMARY;

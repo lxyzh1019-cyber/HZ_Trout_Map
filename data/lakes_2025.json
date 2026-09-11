@@ -1917,7 +1917,7 @@
   },
   {
     "lake_id": "wb6537",
-    "ats": "SW31-49-26-W5",
+    "ats": "31-49-26-W5",
     "name": "Lower Wildhorse Lakes",
     "lat": 53.269491,
     "lon": -117.792759,
@@ -2433,7 +2433,7 @@
     ]
   },
   {
-    "lake_id": "lk0002",
+    "lake_id": "lk0007",
     "ats": "NW4-6-20-W4",
     "name": "Corner Lake",
     "lat": 49.44781,
@@ -6037,6 +6037,85 @@
     ]
   },
   {
+    "lake_id": "wb26854",
+    "ats": "NE23-54-23-W4",
+    "name": "West Rivers Edge Pond (Fort Lions Park Pond)",
+    "lat": 53.683219,
+    "lon": -113.274136,
+    "coord_source": "profile",
+    "zone": "PP2",
+    "surface_area_ha": 4.8,
+    "amenities": "Handicap accessible, washrooms, day use.",
+    "stockings": [
+      {
+        "species": "BNTR",
+        "strain": "Bow River",
+        "genotype": "3N",
+        "length_cm": 19.1,
+        "number": 250,
+        "date": "2025-05-06",
+        "year": 2025,
+        "date_precision": "day"
+      },
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Jumpers",
+        "genotype": "AF3N",
+        "length_cm": 20.1,
+        "number": 800,
+        "date": "2025-05-06",
+        "year": 2025,
+        "date_precision": "day"
+      },
+      {
+        "species": "TGTR",
+        "strain": "Beitty/Bow River",
+        "genotype": "3N",
+        "length_cm": 20.4,
+        "number": 200,
+        "date": "2025-05-06",
+        "year": 2025,
+        "date_precision": "day"
+      },
+      {
+        "species": "TGTR",
+        "strain": "Beitty/Bow River",
+        "genotype": "3N",
+        "length_cm": 20.4,
+        "number": 250,
+        "date": "2025-05-12",
+        "year": 2025,
+        "date_precision": "day"
+      },
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Kamloops",
+        "genotype": "AF3N",
+        "length_cm": 20.6,
+        "number": 1000,
+        "date": "2025-05-29",
+        "year": 2025,
+        "date_precision": "day"
+      },
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Kamloops",
+        "genotype": "AF3N",
+        "length_cm": 32.0,
+        "number": 50,
+        "date": "2025-05-29",
+        "year": 2025,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 2550,
+    "species_set": [
+      "BNTR",
+      "RNTR",
+      "TGTR"
+    ]
+  },
+  {
     "lake_id": "wb6695",
     "ats": "5-49-4-W5",
     "name": "Sardine Lake",
@@ -6118,7 +6197,7 @@
     ]
   },
   {
-    "lake_id": "lk0001",
+    "lake_id": "lk0006",
     "ats": "NE18-39-27-W4",
     "name": "Boulder Lake",
     "lat": 52.36041,
@@ -6533,7 +6612,7 @@
     ]
   },
   {
-    "lake_id": "lk0005",
+    "lake_id": "lk0013",
     "ats": "NE6-54-20-W4",
     "name": "Unnamed Fort Saskatchewan Fish & Game Pond",
     "lat": 53.64195,
@@ -6715,7 +6794,7 @@
     ]
   },
   {
-    "lake_id": "lk0003",
+    "lake_id": "lk0008",
     "ats": "NW36-56-7-W4",
     "name": "Elk Point Pond",
     "lat": 53.88952,
@@ -7475,6 +7554,44 @@
     ]
   },
   {
+    "lake_id": "wb22993",
+    "ats": "NW29-40-26-W4",
+    "name": "East Stormwater Pond [NW29-40-26-W4]",
+    "lat": 52.469538,
+    "lon": -113.709921,
+    "coord_source": "alberta",
+    "zone": "PP2",
+    "surface_area_ha": 2.0,
+    "amenities": "Public parking.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Kamloops",
+        "genotype": "AF3N",
+        "length_cm": 20.3,
+        "number": 1000,
+        "date": "2025-04-30",
+        "year": 2025,
+        "date_precision": "day"
+      },
+      {
+        "species": "BNTR",
+        "strain": "Bow River",
+        "genotype": "3N",
+        "length_cm": 18.9,
+        "number": 100,
+        "date": "2025-05-01",
+        "year": 2025,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1100,
+    "species_set": [
+      "BNTR",
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb6776",
     "ats": "5-54-25-W4",
     "name": "Lacombe Park Pond",
@@ -7541,7 +7658,7 @@
   },
   {
     "lake_id": "wb23791",
-    "ats": "SE26-46-19-W5",
+    "ats": "26-46-19-W5",
     "name": "Pit 45 Lake",
     "lat": 52.992815,
     "lon": -116.645687,
@@ -7978,7 +8095,7 @@
   },
   {
     "lake_id": "wb6721",
-    "ats": "SW27-83-23-W5",
+    "ats": "27-83-23-W5",
     "name": "MD Peace Pond #1",
     "lat": 56.222511,
     "lon": -117.556197,
@@ -8187,12 +8304,12 @@
     ]
   },
   {
-    "lake_id": "wb317719",
+    "lake_id": "wb6751",
     "ats": "SW26-5-22-W4",
-    "name": "Magrath Childrens Pond",
-    "lat": 49.410488,
-    "lon": -112.864549,
-    "coord_source": "alberta",
+    "name": "Magrath Children's Pond",
+    "lat": 49.4103,
+    "lon": -112.8647,
+    "coord_source": "profile",
     "zone": "PP1",
     "surface_area_ha": 3.7,
     "amenities": "Day use, no open fires, foot access only.",
@@ -9751,38 +9868,11 @@
   },
   {
     "lake_id": "wb6608",
-    "ats": "NW26-21-5-W5",
+    "ats": "26-21-5-W5",
     "name": "Champion Lakes (Lower)",
     "lat": 50.815306,
     "lon": -114.599941,
     "coord_source": "profile",
-    "zone": "ES1",
-    "surface_area_ha": 8.0,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "CTTR",
-        "strain": "Allison Creek",
-        "genotype": "2N",
-        "length_cm": 14.1,
-        "number": 300,
-        "date": "2025-06-03",
-        "year": 2025,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 300,
-    "species_set": [
-      "CTTR"
-    ]
-  },
-  {
-    "lake_id": "wb6607",
-    "ats": "NW26-21-5-W5",
-    "name": "Champion Lakes (Upper Champion Lake)",
-    "lat": 50.815306,
-    "lon": -114.599941,
-    "coord_source": "alberta",
     "zone": "ES1",
     "surface_area_ha": 8.0,
     "amenities": "This waterbody has no amenities.",
@@ -9832,7 +9922,7 @@
   },
   {
     "lake_id": "wb6914",
-    "ats": "SE32-40-15-W5",
+    "ats": "32-40-15-W5",
     "name": "Nordegg Borrow Pit (East)",
     "lat": 52.480398,
     "lon": -116.122018,

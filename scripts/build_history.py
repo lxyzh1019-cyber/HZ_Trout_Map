@@ -122,6 +122,10 @@ def settle_coordinates(reg):
                 counts["ats"] += 1
                 break
         else:
+            # Minted from a report row that gave only a name — 2015 publishes
+            # nothing else. It stays in the history and its fish still count,
+            # but it cannot be drawn until someone gives it a position.
+            lake["coord_source"] = "unknown"
             counts["none"] += 1
     reg.reindex()
     return counts
@@ -211,22 +215,35 @@ def mint_unlinked(reg, review):
     Everything else stays in the review file for a human.
     """
     minted, still = [], []
-    by_code = defaultdict(list)
+    groups = defaultdict(list)
     for item in review:
         code = item["row"].get("ats")
         # "none" = nothing at all nearby. "unknown_lake" = the nearest known
         # lake is far away and named nothing like this one. Both mean new.
-        if item["method"] in ("none", "unknown_lake") and code:
-            by_code[code].append(item)
-        else:
-            still.append(item)
+        # A row you marked NEW yourself counts even with no land description:
+        # some 2015 rows give a name and nothing else, and leaving them in the
+        # queue forever would quietly drop their fish from the history.
+        if item["method"] in ("none", "unknown_lake"):
+            key = code or ("name:" + normalize_name(
+                display_name(item["row"]["official_name"], item["row"]["common_name"])))
+            if code or item["note"].startswith("you marked"):
+                groups[key].append(item)
+                continue
+        still.append(item)
 
-    for code, items in by_code.items():
+    for key, items in groups.items():
         row = items[0]["row"]
-        lat, lon = (row["lat"], row["lon"]) if row["lat"] is not None else ats_to_latlng(code)
-        name = _title(display_name(row["official_name"], row["common_name"])) or code
-        lake = reg.mint(name, lat, lon, ats_codes=[code], aliases=[name])
-        lake["coord_source"] = "alberta" if row["lat"] is not None else "ats"
+        code = row.get("ats")
+        if row["lat"] is not None:
+            lat, lon, source = row["lat"], row["lon"], "alberta"
+        elif code:
+            lat, lon = ats_to_latlng(code)
+            source = "ats" if lat is not None else "unknown"
+        else:
+            lat, lon, source = None, None, "unknown"
+        name = _title(display_name(row["official_name"], row["common_name"])) or key
+        lake = reg.mint(name, lat, lon, ats_codes=[code] if code else [], aliases=[name])
+        lake["coord_source"] = source
         minted.append((lake, items))
     reg.reindex()
     return minted, still
@@ -320,13 +337,13 @@ def write_quality_summary(reg, review_count, linked_rows, trout_rows):
     """A small file the map reads to tell the user how solid the data is."""
     sources_count = defaultdict(int)
     for lake in reg.lakes:
-        sources_count[lake["coord_source"] or "none"] += 1
+        sources_count[lake["coord_source"] or "unknown"] += 1
     summary = dict(
         lakes=len(reg.lakes),
         verified_coords=sources_count["profile"],
         alberta_coords=sources_count["alberta"],
         estimated_coords=sources_count["ats"],
-        no_coords=sources_count["none"],
+        no_coords=sources_count["unknown"],
         confusable=len(reg.confusable),
         rows_linked=linked_rows,
         rows_total=trout_rows,

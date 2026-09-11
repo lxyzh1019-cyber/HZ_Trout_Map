@@ -124,14 +124,19 @@ DISCRIMINATING_TOKENS = {
 
 
 def discriminating_conflict(a, b):
-    """True when two names disagree on a word that exists to separate lakes."""
-    ta, tb = set(normalize_name(a).split()), set(normalize_name(b).split())
-    differing = (ta ^ tb) & DISCRIMINATING_TOKENS
-    if not differing:
+    """True when two names disagree on a word that exists to separate lakes.
+
+    One name being silent is not a disagreement: a report saying "Dollars Lake"
+    may well mean East Dollar Lake, and "Pierre Greys Lake #1" agrees with
+    "Pierre Greys Lakes (Lower) #1" even though only one of them says "Lower".
+    A conflict needs both sides to make a claim, and the claims to differ —
+    "#2" against "#1", or "Upper" against "Lower".
+    """
+    ta = set(normalize_name(a).split()) & DISCRIMINATING_TOKENS
+    tb = set(normalize_name(b).split()) & DISCRIMINATING_TOKENS
+    if not ta or not tb:
         return False
-    # Only a conflict if the two sides actually disagree, rather than one name
-    # simply being shorter and silent on the matter.
-    return bool((ta & DISCRIMINATING_TOKENS) and (tb & DISCRIMINATING_TOKENS)) or bool(differing)
+    return not (ta <= tb or tb <= ta)
 
 
 def strip_quarter(ats):

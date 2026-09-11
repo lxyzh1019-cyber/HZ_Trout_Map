@@ -1041,10 +1041,12 @@
     ],
     "aliases": [
       "dollar lakes east dollar lake",
+      "dollars lake",
       "east dollar lake"
     ],
     "name_variants": [
       "DOLLAR LAKES (EAST DOLLAR LAKE)",
+      "DOLLARS LAKE",
       "Dollar Lakes (East Dollar Lake)",
       "EAST DOLLAR LAKE",
       "East Dollar Lake"
@@ -1360,11 +1362,13 @@
       "SW13-52-2-W5"
     ],
     "aliases": [
-      "hasse lake"
+      "hasse lake",
+      "little bear lake hasse"
     ],
     "name_variants": [
       "HASSE LAKE",
-      "Hasse Lake"
+      "Hasse Lake",
+      "LITTLE BEAR LAKE (HASSE)"
     ],
     "zone": "PP2",
     "surface_area_ha": 90.0,
@@ -2125,10 +2129,12 @@
       "NW30-84-12-W6"
     ],
     "aliases": [
-      "ole lake"
+      "ole lake",
+      "oles lake"
     ],
     "name_variants": [
       "OLE LAKE",
+      "OLES LAKE",
       "Ole Lake"
     ],
     "zone": "NB3",
@@ -2341,11 +2347,13 @@
       "SW7-57-4-W6"
     ],
     "aliases": [
+      "pierre greys lake 3",
       "pierre greys lakes upper 3",
       "pierre greys lakes upper pierre greys lake",
       "pierre greys lakes upper pierre greys lakes"
     ],
     "name_variants": [
+      "PIERRE GREYS LAKE #3",
       "PIERRE GREYS LAKES (UPPER PIERRE GREYS LAKES)",
       "Pierre Greys Lakes (Upper Pierre Greys Lake)",
       "Pierre Greys Lakes (Upper Pierre Greys Lakes)",
@@ -2861,9 +2869,11 @@
       "SW6-40-7-W5"
     ],
     "aliases": [
+      "twin lake",
       "twin lakes"
     ],
     "name_variants": [
+      "TWIN LAKE",
       "TWIN LAKES",
       "Twin Lakes"
     ],
@@ -2911,10 +2921,12 @@
     ],
     "aliases": [
       "south two lake",
+      "two lakes",
       "two lakes south two lake"
     ],
     "name_variants": [
       "South Two Lake",
+      "TWO LAKES",
       "TWO LAKES (SOUTH TWO LAKE)",
       "Two Lakes (South Two Lake)",
       "Two Lakes South Two Lake"
@@ -3057,9 +3069,11 @@
       "SW31-49-26-W5"
     ],
     "aliases": [
+      "upper wildhorse lake",
       "wildhorse lakes upper wildhorse lake"
     ],
     "name_variants": [
+      "UPPER WILDHORSE LAKE",
       "WILDHORSE LAKES (UPPER WILDHORSE LAKE)",
       "Wildhorse Lakes (Upper Wildhorse Lake)",
       "Wildhorse Lakes Upper Wildhorse Lake"
@@ -3201,10 +3215,12 @@
       "NW6-57-4-W6"
     ],
     "aliases": [
+      "pierre greys lake 2",
       "pierre greys lakes middle 2",
       "pierre greys lakes middle pierre greys lake"
     ],
     "name_variants": [
+      "PIERRE GREYS LAKE #2",
       "PIERRE GREYS LAKES (MIDDLE PIERRE GREYS LAKE)",
       "Pierre Greys Lakes (Middle Pierre Greys Lake)",
       "Pierre Greys Lakes (Middle) #2",
@@ -3227,10 +3243,12 @@
       "SE12-57-5-W6"
     ],
     "aliases": [
+      "pierre greys lake 1",
       "pierre greys lakes lower 1",
       "pierre greys lakes lower pierre greys lake"
     ],
     "name_variants": [
+      "PIERRE GREYS LAKE #1",
       "PIERRE GREYS LAKES (LOWER PIERRE GREYS LAKE)",
       "Pierre Greys Lakes (Lower Pierre Greys Lake)",
       "Pierre Greys Lakes (Lower) #1",
@@ -3275,15 +3293,18 @@
     "lon": -117.792759,
     "coord_source": "profile",
     "ats_codes": [
+      "31-49-26-W5",
       "SW31-49-26-W5"
     ],
     "aliases": [
       "lower wildhorse lakes",
-      "wildhorse lakes lower wildhorse lake"
+      "wildhorse lakes lower wildhorse lake",
+      "wildhorse lakes upper wildhorse lake"
     ],
     "name_variants": [
       "Lower Wildhorse Lakes",
       "WILDHORSE LAKES (LOWER WILDHORSE LAKE)",
+      "WILDHORSE LAKES (UPPER WILDHORSE LAKE)",
       "Wildhorse Lakes (Lower Wildhorse Lake)",
       "Wildhorse Lakes Lower Wildhorse Lake"
     ],
@@ -3430,12 +3451,13 @@
       "NW26-21-5-W5"
     ],
     "aliases": [
-      "champion lakes upper champion lake"
+      "champion lakes upper champion lake",
+      "upper champion lake"
     ],
     "name_variants": [
       "CHAMPION LAKES (UPPER CHAMPION LAKE)",
       "Champion Lakes (Upper Champion Lake)",
-      "Champion Lakes Upper Champion Lake"
+      "UPPER CHAMPION LAKE"
     ],
     "zone": "ES1",
     "surface_area_ha": 8.0,
@@ -3450,17 +3472,22 @@
     "lon": -114.599941,
     "coord_source": "profile",
     "ats_codes": [
+      "26-21-5-W5",
       "NW26-21-5-W5"
     ],
     "aliases": [
       "champion lakes lower",
-      "champion lakes lower champion lake"
+      "champion lakes lower champion lake",
+      "champion lakes upper champion lake",
+      "lower champion lake"
     ],
     "name_variants": [
       "CHAMPION LAKES (LOWER CHAMPION LAKE)",
+      "CHAMPION LAKES (UPPER CHAMPION LAKE)",
       "Champion Lakes (Lower Champion Lake)",
       "Champion Lakes (Lower)",
-      "Champion Lakes Lower Champion Lake"
+      "Champion Lakes Lower Champion Lake",
+      "LOWER CHAMPION LAKE"
     ],
     "zone": "ES1",
     "surface_area_ha": 8.0,
@@ -4089,10 +4116,12 @@
     ],
     "aliases": [
       "highway 63 pond",
+      "hwy 63 pond",
       "unnamed highway 63 pond"
     ],
     "name_variants": [
       "HIGHWAY 63 POND",
+      "HWY 63 POND",
       "Highway 63 Pond",
       "Unnamed Highway 63 Pond"
     ],
@@ -4702,16 +4731,21 @@
     "lon": -117.556197,
     "coord_source": "profile",
     "ats_codes": [
+      "27-83-23-W5",
       "SW27-83-23-W5"
     ],
     "aliases": [
       "md peace pond 1",
+      "peace pond 1",
+      "peace pond 2",
       "unnamed md peace pond 1"
     ],
     "name_variants": [
       "MD PEACE POND #1",
       "MD Peace Pond #1",
       "Md Peace Pond #1",
+      "PEACE POND #1",
+      "PEACE POND #2",
       "Unnamed Md Peace Pond #1"
     ],
     "zone": "NB3",
@@ -5010,12 +5044,18 @@
       "SW26-5-22-W4"
     ],
     "aliases": [
-      "magrath children s pond"
+      "magrath children s pond",
+      "magrath childrens pond",
+      "unnamed magrath childrens pond"
     ],
     "name_variants": [
       "MAGRATH CHILDREN'S POND",
+      "MAGRATH CHILDRENS POND",
       "Magrath Children'S Pond",
-      "Magrath Children's Pond"
+      "Magrath Children's Pond",
+      "Magrath Childrens Pond",
+      "Magrath Children’s Pond",
+      "Unnamed Magrath Childrens Pond"
     ],
     "zone": "PP1",
     "surface_area_ha": 3.7,
@@ -5245,10 +5285,12 @@
       "SE34-1-28-W4"
     ],
     "aliases": [
+      "little beaver dam",
       "little beaverdam lake",
       "unnamed little beaverdam lake"
     ],
     "name_variants": [
+      "LITTLE BEAVER DAM",
       "LITTLE BEAVERDAM LAKE",
       "Little Beaverdam Lake",
       "Unnamed Little Beaverdam Lake"
@@ -6982,14 +7024,19 @@
     "lon": -116.122018,
     "coord_source": "profile",
     "ats_codes": [
+      "32-40-15-W5",
       "SE32-40-15-W5"
     ],
     "aliases": [
       "nordegg borrow pit east",
+      "nordegg borrow pit west",
+      "nordegg pond east pit",
       "unnamed nordegg borrow pit east"
     ],
     "name_variants": [
       "NORDEGG BORROW PIT (EAST)",
+      "NORDEGG BORROW PIT (WEST)",
+      "NORDEGG POND EAST PIT",
       "Nordegg Borrow Pit (East)",
       "Unnamed Nordegg Borrow Pit (East)"
     ],
@@ -7010,10 +7057,12 @@
     ],
     "aliases": [
       "nordegg borrow pit west",
+      "nordegg pond west pit",
       "unnamed nordegg borrow pit west"
     ],
     "name_variants": [
       "NORDEGG BORROW PIT (WEST)",
+      "NORDEGG POND WEST PIT",
       "Nordegg Borrow Pit (West)",
       "Unnamed Nordegg Borrow Pit (West)"
     ],
@@ -7062,10 +7111,12 @@
       "SE32-45-10-W5"
     ],
     "aliases": [
-      "brazeau borrow pit 1"
+      "brazeau borrow pit 1",
+      "brazeau burrow pit"
     ],
     "name_variants": [
       "BRAZEAU BORROW PIT #1",
+      "BRAZEAU BURROW PIT",
       "Brazeau Borrow Pit #1"
     ],
     "zone": null,
@@ -7107,10 +7158,12 @@
       "NW11-49-18-W4"
     ],
     "aliases": [
+      "black nugget lake",
       "black nugget mine pit",
       "unnamed black nugget mine pit"
     ],
     "name_variants": [
+      "BLACK NUGGET LAKE",
       "BLACK NUGGET MINE PIT",
       "Black Nugget Mine Pit",
       "Unnamed Black Nugget Mine Pit"
@@ -7509,11 +7562,15 @@
       "SE29-40-26-W4"
     ],
     "aliases": [
-      "east stormwater pond"
+      "central stormwater pond",
+      "east stormwater pond",
+      "unnamed east stormwater pond"
     ],
     "name_variants": [
+      "CENTRAL STORMWATER POND",
       "EAST STORMWATER POND",
-      "East Stormwater Pond"
+      "East Stormwater Pond",
+      "Unnamed East Stormwater Pond"
     ],
     "zone": "PP2",
     "surface_area_ha": 2.0,
@@ -7535,7 +7592,6 @@
       "east stormwater pond"
     ],
     "name_variants": [
-      "CENTRAL STORMWATER POND",
       "Central Stormwater Pond",
       "East Stormwater Pond"
     ],
@@ -7552,7 +7608,6 @@
     "lon": -117.553092,
     "coord_source": "alberta",
     "ats_codes": [
-      "27-83-23-W5",
       "SW27-83-23-W5"
     ],
     "aliases": [
@@ -7686,12 +7741,10 @@
     "aliases": [
       "pit 35",
       "pit 35 lake",
-      "pit 45",
       "unnamed pit 35"
     ],
     "name_variants": [
       "PIT 35",
-      "PIT 45",
       "Pit 35",
       "Pit 35 Lake",
       "Unnamed Pit 35"
@@ -7709,6 +7762,7 @@
     "lon": -116.645687,
     "coord_source": "profile",
     "ats_codes": [
+      "26-46-19-W5",
       "SE26-46-19-W5"
     ],
     "aliases": [
@@ -8078,12 +8132,16 @@
       "NE23-54-23-W4"
     ],
     "aliases": [
+      "fort lions park pond",
+      "west rivers edge fort lions park pond pond",
       "west rivers edge pond",
       "west rivers edge pond fort lions park pond"
     ],
     "name_variants": [
+      "FORT LIONS PARK POND",
       "WEST RIVERS EDGE POND",
       "WEST RIVERS EDGE POND (FORT LIONS PARK POND)",
+      "West Rivers Edge Fort Lions Park Pond Pond",
       "West Rivers Edge Pond",
       "West Rivers Edge Pond (Fort Lions Park Pond)"
     ],
@@ -8103,13 +8161,10 @@
       "SW26-5-22-W4"
     ],
     "aliases": [
-      "magrath childrens pond",
-      "unnamed magrath childrens pond"
+      "magrath childrens pond"
     ],
     "name_variants": [
-      "MAGRATH CHILDRENS POND",
-      "Magrath Childrens Pond",
-      "Unnamed Magrath Childrens Pond"
+      "Magrath Childrens Pond"
     ],
     "zone": "PP1",
     "surface_area_ha": 3.7,
@@ -8202,7 +8257,6 @@
       "fort lions park pond"
     ],
     "name_variants": [
-      "FORT LIONS PARK POND",
       "Fort Lions Park Pond"
     ],
     "zone": "PP2",
@@ -8286,6 +8340,112 @@
   },
   {
     "lake_id": "lk0001",
+    "name": "Mountain Vista Estates Pond",
+    "waterbody_id": null,
+    "lat": 49.34223,
+    "lon": -113.63275,
+    "coord_source": "alberta",
+    "ats_codes": [
+      "31-4-27-W4"
+    ],
+    "aliases": [
+      "mountain vista estates pond"
+    ],
+    "name_variants": [
+      "MOUNTAIN VISTA ESTATES POND",
+      "Mountain Vista Estates Pond"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "years": []
+  },
+  {
+    "lake_id": "lk0002",
+    "name": "Braconnier Reservoir",
+    "waterbody_id": null,
+    "lat": 51.67231,
+    "lon": -113.23414,
+    "coord_source": "alberta",
+    "ats_codes": [
+      "20-31-23-W4"
+    ],
+    "aliases": [
+      "braconnier reservoir"
+    ],
+    "name_variants": [
+      "BRACONNIER RESERVOIR",
+      "Braconnier Reservoir"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "years": []
+  },
+  {
+    "lake_id": "lk0003",
+    "name": "Consort Reservoir",
+    "waterbody_id": null,
+    "lat": 52.00725,
+    "lon": -110.77606,
+    "coord_source": "alberta",
+    "ats_codes": [
+      "15-35-6-W4"
+    ],
+    "aliases": [
+      "consort reservoir"
+    ],
+    "name_variants": [
+      "CONSORT RESERVOIR",
+      "Consort Reservoir"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "years": []
+  },
+  {
+    "lake_id": "lk0004",
+    "name": "Niton Pond",
+    "waterbody_id": null,
+    "lat": null,
+    "lon": null,
+    "coord_source": "unknown",
+    "ats_codes": [],
+    "aliases": [
+      "niton pond"
+    ],
+    "name_variants": [
+      "NITON POND",
+      "Niton Pond"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "years": []
+  },
+  {
+    "lake_id": "lk0005",
+    "name": "Morinville Lake",
+    "waterbody_id": null,
+    "lat": null,
+    "lon": null,
+    "coord_source": "unknown",
+    "ats_codes": [],
+    "aliases": [
+      "morinville lake"
+    ],
+    "name_variants": [
+      "MORINVILLE LAKE",
+      "Morinville Lake"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "years": []
+  },
+  {
+    "lake_id": "lk0006",
     "name": "Boulder Lake",
     "waterbody_id": null,
     "lat": 52.36041,
@@ -8308,7 +8468,7 @@
     "years": []
   },
   {
-    "lake_id": "lk0002",
+    "lake_id": "lk0007",
     "name": "Corner Lake",
     "waterbody_id": null,
     "lat": 49.44781,
@@ -8331,7 +8491,7 @@
     "years": []
   },
   {
-    "lake_id": "lk0003",
+    "lake_id": "lk0008",
     "name": "Elk Point Pond",
     "waterbody_id": null,
     "lat": 53.88952,
@@ -8354,7 +8514,28 @@
     "years": []
   },
   {
-    "lake_id": "lk0004",
+    "lake_id": "lk0009",
+    "name": "Rawson Lake",
+    "waterbody_id": null,
+    "lat": 50.591,
+    "lon": -115.15215,
+    "coord_source": "alberta",
+    "ats_codes": [
+      "SW11-19-9-W5"
+    ],
+    "aliases": [
+      "rawson lake"
+    ],
+    "name_variants": [
+      "Rawson Lake"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "years": []
+  },
+  {
+    "lake_id": "lk0010",
     "name": "Goodwin Reservoir",
     "waterbody_id": null,
     "lat": 50.84586,
@@ -8375,7 +8556,49 @@
     "years": []
   },
   {
-    "lake_id": "lk0005",
+    "lake_id": "lk0011",
+    "name": "Kinglet Lake",
+    "waterbody_id": null,
+    "lat": 52.05458,
+    "lon": -116.47743,
+    "coord_source": "alberta",
+    "ats_codes": [
+      "NW35-35-18-W5"
+    ],
+    "aliases": [
+      "kinglet lake"
+    ],
+    "name_variants": [
+      "Kinglet Lake"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "years": []
+  },
+  {
+    "lake_id": "lk0012",
+    "name": "Watridge Lake",
+    "waterbody_id": null,
+    "lat": 50.85314,
+    "lon": -115.43005,
+    "coord_source": "alberta",
+    "ats_codes": [
+      "SW11-22-11-W5"
+    ],
+    "aliases": [
+      "watridge lake"
+    ],
+    "name_variants": [
+      "Watridge Lake"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "years": []
+  },
+  {
+    "lake_id": "lk0013",
     "name": "Unnamed Fort Saskatchewan Fish & Game Pond",
     "waterbody_id": null,
     "lat": 53.64195,

@@ -732,6 +732,111 @@
     ]
   },
   {
+    "lake_id": "wb4794",
+    "ats": "SW13-52-2-W5",
+    "name": "Hasse Lake",
+    "lat": 53.487212,
+    "lon": -114.173756,
+    "coord_source": "profile",
+    "zone": "PP2",
+    "surface_area_ha": 90.0,
+    "amenities": "Walking trails, boat launch, fishing, picnic areas, pit toilets, fire pits.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "CLCL",
+        "genotype": "2N",
+        "length_cm": 16.0,
+        "number": 2400,
+        "date": "2015-05-04",
+        "year": 2015,
+        "date_precision": "day"
+      },
+      {
+        "species": "RNTR",
+        "strain": "CLCL",
+        "genotype": "2N",
+        "length_cm": 16.0,
+        "number": 8518,
+        "date": "2015-05-11",
+        "year": 2015,
+        "date_precision": "day"
+      },
+      {
+        "species": "RNTR",
+        "strain": "TLTLK",
+        "genotype": "AF3N",
+        "length_cm": 14.1,
+        "number": 10258,
+        "date": "2015-05-11",
+        "year": 2015,
+        "date_precision": "day"
+      },
+      {
+        "species": "RNTR",
+        "strain": "TLTLK",
+        "genotype": "AF3N",
+        "length_cm": 16.0,
+        "number": 2791,
+        "date": "2015-05-11",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 23967,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6923",
+    "ats": "11-49-18-W4",
+    "name": "Black Nugget Mine Pit",
+    "lat": 53.217685,
+    "lon": -112.532662,
+    "coord_source": "profile",
+    "zone": "PP2",
+    "surface_area_ha": 2.1,
+    "amenities": "Camping on site, firewood available, tap water available, sewage dumping station, playground, picnic shelter, day use area, group camping, boat launch.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "BEBL",
+        "genotype": "3N",
+        "length_cm": 21.8,
+        "number": 12500,
+        "date": "2015-05-11",
+        "year": 2015,
+        "date_precision": "day"
+      },
+      {
+        "species": "TGTR",
+        "strain": "BRBE",
+        "genotype": "3N",
+        "length_cm": 25.8,
+        "number": 4897,
+        "date": "2015-10-05",
+        "year": 2015,
+        "date_precision": "day"
+      },
+      {
+        "species": "TGTR",
+        "strain": "BRBE",
+        "genotype": "3N",
+        "length_cm": 34.0,
+        "number": 3032,
+        "date": "2015-10-05",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 20429,
+    "species_set": [
+      "RNTR",
+      "TGTR"
+    ]
+  },
+  {
     "lake_id": "wb5729",
     "ats": "26-54-2-W5",
     "name": "Salter's Lake",
@@ -1032,6 +1137,33 @@
         "length_cm": 16.6,
         "number": 15000,
         "date": "2015-04-20",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 15000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6533",
+    "ats": "6-57-4-W6",
+    "name": "Pierre Greys Lakes (Middle) #2",
+    "lat": 53.90135,
+    "lon": -118.588692,
+    "coord_source": "profile",
+    "zone": "ES4",
+    "surface_area_ha": 29.6,
+    "amenities": "Pierre grey?€?s waterbody provincial park, boat launch, cook shelters, fire pits, firewood sales, fish cleaning stations, hand launch, pit toilets, warm-up shelter, water pump.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "TLTLK",
+        "genotype": "AF3N",
+        "length_cm": 15.1,
+        "number": 15000,
+        "date": "2015-06-08",
         "year": 2015,
         "date_precision": "day"
       }
@@ -1867,6 +1999,43 @@
     ]
   },
   {
+    "lake_id": "wb5572",
+    "ats": "7-57-4-W6",
+    "name": "Pierre Greys Lakes (Upper) #3",
+    "lat": 53.908548,
+    "lon": -118.585692,
+    "coord_source": "profile",
+    "zone": "ES4",
+    "surface_area_ha": 53.4,
+    "amenities": "Pierre grey?€?s waterbody provincial park, boat launch, cook shelters, fire pits, firewood sales, fish cleaning stations, hand launch, pit toilets, warm-up shelter, water pump.",
+    "stockings": [
+      {
+        "species": "BKTR",
+        "strain": "BEBE",
+        "genotype": "3N",
+        "length_cm": 22.3,
+        "number": 4500,
+        "date": "2015-05-25",
+        "year": 2015,
+        "date_precision": "day"
+      },
+      {
+        "species": "BKTR",
+        "strain": "BEBE",
+        "genotype": "3N",
+        "length_cm": 22.2,
+        "number": 4500,
+        "date": "2015-06-08",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 9000,
+    "species_set": [
+      "BKTR"
+    ]
+  },
+  {
     "lake_id": "wb6827",
     "ats": "20-84-25-W5",
     "name": "Figure Eight Lake",
@@ -2088,6 +2257,100 @@
     ]
   },
   {
+    "lake_id": "wb6039",
+    "ats": "6-40-7-W5",
+    "name": "Twin Lakes",
+    "lat": 52.41472,
+    "lon": -115.00078,
+    "coord_source": "profile",
+    "zone": "ES2",
+    "surface_area_ha": 27.5,
+    "amenities": "Hand water pump, dry toilets, firewood, playground, boat launch, fish cleaning station, wildlife viewing areas, handicap accessible.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "MLML",
+        "genotype": "3N",
+        "length_cm": 25.0,
+        "number": 4550,
+        "date": "2015-05-11",
+        "year": 2015,
+        "date_precision": "day"
+      },
+      {
+        "species": "RNTR",
+        "strain": "MLML",
+        "genotype": "3N",
+        "length_cm": 19.4,
+        "number": 1000,
+        "date": "2015-05-11",
+        "year": 2015,
+        "date_precision": "day"
+      },
+      {
+        "species": "RNTR",
+        "strain": "MLML",
+        "genotype": "2N",
+        "length_cm": 55.0,
+        "number": 60,
+        "date": "2015-05-11",
+        "year": 2015,
+        "date_precision": "day"
+      },
+      {
+        "species": "RNTR",
+        "strain": "MLML",
+        "genotype": "3N",
+        "length_cm": 16.9,
+        "number": 1450,
+        "date": "2015-06-01",
+        "year": 2015,
+        "date_precision": "day"
+      },
+      {
+        "species": "RNTR",
+        "strain": "MLML",
+        "genotype": "2N",
+        "length_cm": 55.0,
+        "number": 200,
+        "date": "2015-09-14",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 7260,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6051",
+    "ats": "NE7-62-12-W6",
+    "name": "South Two Lake",
+    "lat": 54.380594,
+    "lon": -119.755438,
+    "coord_source": "profile",
+    "zone": "ES4",
+    "surface_area_ha": 3.6,
+    "amenities": "Boat launch, fire pits, firewood for purchase, fish cleaning stations, hand launch, vault toilets, water pump, camping, canoeing, kayaking, front country hiking, ice fishing, mountain biking, cycling, power boating, wildlife viewing.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "TLTLK",
+        "genotype": "AF3N",
+        "length_cm": 15.1,
+        "number": 7200,
+        "date": "2015-05-25",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 7200,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb3522",
     "ats": "20-22-5-W5",
     "name": "McLean Pond",
@@ -2120,6 +2383,33 @@
       }
     ],
     "total_fish": 7100,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6534",
+    "ats": "12-57-5-W6",
+    "name": "Pierre Greys Lakes (Lower) #1",
+    "lat": 53.910427,
+    "lon": -118.60656,
+    "coord_source": "profile",
+    "zone": "ES4",
+    "surface_area_ha": 15.8,
+    "amenities": "Pierre grey?€?s waterbody provincial park, boat launch, cook shelters, fire pits, firewood sales, fish cleaning stations, hand launch, pit toilets, warm-up shelter, water pump.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "TLTLS",
+        "genotype": "AF3N",
+        "length_cm": 19.9,
+        "number": 7000,
+        "date": "2015-06-08",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 7000,
     "species_set": [
       "RNTR"
     ]
@@ -2953,6 +3243,44 @@
     ]
   },
   {
+    "lake_id": "wb4460",
+    "ats": "8-73-21-W5",
+    "name": "East Dollar Lake",
+    "lat": 55.314926,
+    "lon": -117.204628,
+    "coord_source": "profile",
+    "zone": "ES4",
+    "surface_area_ha": 5.9,
+    "amenities": "Day use area.",
+    "stockings": [
+      {
+        "species": "BNTR",
+        "strain": "BRBR",
+        "genotype": "3N",
+        "length_cm": 21.8,
+        "number": 500,
+        "date": "2015-05-18",
+        "year": 2015,
+        "date_precision": "day"
+      },
+      {
+        "species": "RNTR",
+        "strain": "TLTLS",
+        "genotype": "AF3N",
+        "length_cm": 21.2,
+        "number": 3000,
+        "date": "2015-05-18",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 3500,
+    "species_set": [
+      "BNTR",
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb5387",
     "ats": "32-53-27-W4",
     "name": "Muir Lake",
@@ -3109,6 +3437,33 @@
     ]
   },
   {
+    "lake_id": "wb5476",
+    "ats": "30-84-12-W6",
+    "name": "Ole Lake",
+    "lat": 56.316771,
+    "lon": -119.894419,
+    "coord_source": "profile",
+    "zone": "NB3",
+    "surface_area_ha": 18.6,
+    "amenities": "Camping on site, fire pits, firewood available, fish cleaning station, hand launch, pit toilets, playground, water pump, swimming.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "BEBL",
+        "genotype": "3N",
+        "length_cm": 22.4,
+        "number": 3000,
+        "date": "2015-06-01",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 3000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb5714",
     "ats": "34-88-7-W6",
     "name": "Running Lake",
@@ -3180,6 +3535,33 @@
         "length_cm": null,
         "number": 3000,
         "date": "2015-04-27",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 3000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "lk0005",
+    "ats": null,
+    "name": "Morinville Lake",
+    "lat": null,
+    "lon": null,
+    "coord_source": "unknown",
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "TLTLK",
+        "genotype": "AF3N",
+        "length_cm": 25.9,
+        "number": 3000,
+        "date": "2015-09-21",
         "year": 2015,
         "date_precision": "day"
       }
@@ -3325,6 +3707,33 @@
     ]
   },
   {
+    "lake_id": "wb6767",
+    "ats": "34-1-28-W4",
+    "name": "Little Beaverdam Lake",
+    "lat": 49.079532,
+    "lon": -113.655918,
+    "coord_source": "alberta",
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "stockings": [
+      {
+        "species": "BKTR",
+        "strain": "BEBE",
+        "genotype": "3N",
+        "length_cm": 13.0,
+        "number": 2500,
+        "date": "2015-09-28",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 2500,
+    "species_set": [
+      "BKTR"
+    ]
+  },
+  {
     "lake_id": "wb6695",
     "ats": "5-49-4-W5",
     "name": "Sardine Lake",
@@ -3349,6 +3758,33 @@
     "total_fish": 2500,
     "species_set": [
       "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6160",
+    "ats": "SW31-49-26-W5",
+    "name": "Wildhorse Lakes (Upper Wildhorse Lake)",
+    "lat": 53.271338,
+    "lon": -117.80152,
+    "coord_source": "alberta",
+    "zone": "ES3",
+    "surface_area_ha": 25.4,
+    "amenities": "Boat launch, fire pit, firewood available for purchase, fish cleaning stations, hand launch, pier, pit/vault toilets, water pump.",
+    "stockings": [
+      {
+        "species": "BKTR",
+        "strain": "BEBE",
+        "genotype": "3N",
+        "length_cm": 7.3,
+        "number": 2500,
+        "date": "2015-06-08",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 2500,
+    "species_set": [
+      "BKTR"
     ]
   },
   {
@@ -4076,6 +4512,33 @@
     ]
   },
   {
+    "lake_id": "wb6921",
+    "ats": "32-45-10-W5",
+    "name": "Brazeau Borrow Pit #1",
+    "lat": 52.916194,
+    "lon": -115.414317,
+    "coord_source": "alberta",
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "MLML",
+        "genotype": "2N",
+        "length_cm": 25.0,
+        "number": 1500,
+        "date": "2015-05-11",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1500,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb6637",
     "ats": "20-88-8-W4",
     "name": "Texaco Pond",
@@ -4211,6 +4674,33 @@
     ]
   },
   {
+    "lake_id": "lk0004",
+    "ats": null,
+    "name": "Niton Pond",
+    "lat": null,
+    "lon": null,
+    "coord_source": "unknown",
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "BEBL",
+        "genotype": "3N",
+        "length_cm": 22.4,
+        "number": 1500,
+        "date": "2015-05-11",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1500,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb23293",
     "ats": "27-28-1-W5",
     "name": "Crossfield Trout Pond",
@@ -4329,6 +4819,33 @@
     ]
   },
   {
+    "lake_id": "wb23791",
+    "ats": "26-46-19-W5",
+    "name": "Pit 45 Lake",
+    "lat": 52.992815,
+    "lon": -116.645687,
+    "coord_source": "profile",
+    "zone": "ES3",
+    "surface_area_ha": 7.5,
+    "amenities": "Day use, no open fires, foot access only.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "BEBL",
+        "genotype": "3N",
+        "length_cm": 7.5,
+        "number": 1100,
+        "date": "2015-06-15",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1100,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb6659",
     "ats": "9-53-19-W5",
     "name": "Dandurand Lake",
@@ -4400,6 +4917,33 @@
         "length_cm": 22.4,
         "number": 1000,
         "date": "2015-06-01",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6668",
+    "ats": "15-87-9-W4",
+    "name": "Highway 63 Pond",
+    "lat": 56.588109,
+    "lon": -111.320447,
+    "coord_source": "profile",
+    "zone": "NB4",
+    "surface_area_ha": 1.8,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "MLML",
+        "genotype": "2N",
+        "length_cm": 14.8,
+        "number": 1000,
+        "date": "2015-05-11",
         "year": 2015,
         "date_precision": "day"
       }
@@ -4491,12 +5035,12 @@
     ]
   },
   {
-    "lake_id": "wb22995",
+    "lake_id": "wb6721",
     "ats": "27-83-23-W5",
-    "name": "Md Peace Pond #2",
-    "lat": 56.224205,
-    "lon": -117.553092,
-    "coord_source": "alberta",
+    "name": "MD Peace Pond #1",
+    "lat": 56.222511,
+    "lon": -117.556197,
+    "coord_source": "profile",
     "zone": "NB3",
     "surface_area_ha": 1.1,
     "amenities": "This waterbody has no amenities.",
@@ -5533,6 +6077,33 @@
     ]
   },
   {
+    "lake_id": "wb6915",
+    "ats": "SW32-40-15-W5",
+    "name": "Nordegg Borrow Pit (West)",
+    "lat": 52.484878,
+    "lon": -116.128512,
+    "coord_source": "profile",
+    "zone": "ES2",
+    "surface_area_ha": 7.0,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "MLML",
+        "genotype": "3N",
+        "length_cm": 25.0,
+        "number": 400,
+        "date": "2015-05-11",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 400,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb6785",
     "ats": "34-45-9-W4",
     "name": "Irma Fish and Game Pond",
@@ -5587,6 +6158,60 @@
     ]
   },
   {
+    "lake_id": "wb6608",
+    "ats": "26-21-5-W5",
+    "name": "Champion Lakes (Lower)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "profile",
+    "zone": "ES1",
+    "surface_area_ha": 8.0,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "TLTLS",
+        "genotype": "AF3N",
+        "length_cm": 24.0,
+        "number": 300,
+        "date": "2015-06-29",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 300,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6607",
+    "ats": "NW26-21-5-W5",
+    "name": "Champion Lakes (Upper Champion Lake)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "alberta",
+    "zone": "ES1",
+    "surface_area_ha": 8.0,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "TLTLS",
+        "genotype": "AF3N",
+        "length_cm": 24.0,
+        "number": 300,
+        "date": "2015-06-29",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 300,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb6910",
     "ats": "22-63-20-W5",
     "name": "Pine Point Borrow Pit",
@@ -5631,6 +6256,33 @@
         "length_cm": 17.9,
         "number": 300,
         "date": "2015-05-25",
+        "year": 2015,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 300,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6914",
+    "ats": "32-40-15-W5",
+    "name": "Nordegg Borrow Pit (East)",
+    "lat": 52.480398,
+    "lon": -116.122018,
+    "coord_source": "profile",
+    "zone": "ES2",
+    "surface_area_ha": 2.0,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "MLML",
+        "genotype": "3N",
+        "length_cm": 25.0,
+        "number": 300,
+        "date": "2015-05-11",
         "year": 2015,
         "date_precision": "day"
       }
