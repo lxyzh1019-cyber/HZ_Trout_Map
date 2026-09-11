@@ -12,7 +12,7 @@ Hosted via GitHub Pages: push to `main` and the map is live at
 ```
 alberta-trout-map/
 ├── index.html                      ← the map (open in browser)
-├── vendor/                         ← Leaflet 1.9.4 + Chart.js 4.4.0, checked in
+├── vendor/                         ← Leaflet, MarkerCluster and Chart.js, checked in
 ├── data/
 │   ├── raw/                        ← the reports as published (PDF, CSV, XLSX)
 │   ├── manifest.json               ← which years exist, and which are provisional
@@ -186,17 +186,61 @@ On GitHub Pages it works natively.
 
 ## Features
 
-- **Species filter** — six species, including westslope cutthroat, which
-  Alberta began reporting separately in 2023.
-- **Distance slider** — hide lakes beyond N km from Red Deer.
-- **Year chips** — 2011 to 2026. Shortcuts: All / None / Last 5 / Latest.
-  A year marked `*` is still in progress.
-- **Charts** — stacked by species, spring versus fall, and per-species trend.
-- **Basemap toggle** — topographic or street.
-- **Popups** — per-lake stocking history, zone link, surface area, amenities,
-  Google Maps link. Reflects current filters and stays open while you change
-  them. Dates from 2011 to 2013 show a month only, because that is all those
-  reports give.
-- **Planning summary** — year-over-year totals and trend direction.
-- **Data quality indicator** — how many lakes sit at verified coordinates and
-  how much of the history linked without a human.
+Built around one question: where should I fish, and has anything been put in
+there lately.
+
+**Finding a lake**
+- Search by name, with distance shown, jumping straight to the lake.
+- Pins group together when zoomed out and separate as you zoom in, so the
+  Kananaskis and Pierre Greys clusters stop being one unreadable blob.
+- Hover a pin for the name, distance, fish in view and last stocking date.
+- Zoom to fit whatever the current filters leave on the map.
+
+**Filters**
+- **Stocked recently** — 30, 60, 90 days, or this season. Each option shows how
+  many lakes it would find, and the panel states the newest stocking on record,
+  so an empty window is never a mystery.
+- **Species** — six, including westslope cutthroat, which Alberta began
+  reporting separately in 2023.
+- **Fish size** — fry under 15 cm, 15 to 20 cm, and catchable 20 cm and over.
+  A lake given 60,000 fry is not the same prospect as one given 3,000 catchable
+  trout.
+- **Distance from home**, where home is yours to set: use your location, pick a
+  point on the map, drag the marker, or go back to Red Deer. It is remembered
+  between visits.
+- **Years** — 2011 to 2026, with All / None / Last 5 / Latest. A year marked
+  `*` is still in progress.
+
+**Reading the history**
+- Charts: by species, by season, per-species trend, and a stocking calendar
+  that folds every selected year into one twelve-month view, so you can see
+  which weeks a lake is usually stocked.
+- Seasons are Spring (Mar–Jun), Summer (Jul–Aug) and Fall (Sep–Nov).
+- Planning summary with year-over-year totals, direction, and the lakes that
+  moved most. A provisional year is labelled, so a partial report does not read
+  as a collapse in stocking.
+- Click a pin to scope every chart to that lake.
+
+**Taking it with you**
+- List view, sortable on any column, with a CSV download.
+- Favourites, saved in your browser, and a one-click multi-stop driving route
+  from home through all of them.
+- Every filter and your home location live in the URL, so a link reproduces
+  exactly what you are looking at.
+- Works at phone width, with the filters in a slide-over panel.
+
+**Honesty about the data**
+- Popups say when a position is estimated from the land description rather than
+  verified.
+- The data quality panel reports how many lakes sit at verified coordinates,
+  how many cannot be placed at all, and how much of the sixteen-year history
+  linked without a human.
+
+## Accessibility note
+
+Species colours come from a validated categorical palette, ordered so every
+neighbouring pair stays separable for colour-blind readers. The previous
+naturalistic set put brown trout and brook trout 2.0 ΔE apart under
+protanopia, which is indistinguishable. Six categories still cannot be made
+safe on colour alone, so each pin also carries the species initial and every
+popup names the species in words.

@@ -4,149 +4,251 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Alberta Trout Stocking Map</title>
-<!-- Leaflet and Chart.js are vendored in vendor/ so the map works offline
-     and cannot break when a CDN is unreachable. See README for versions. -->
+<!--
+  FEATURE MANIFEST v2 — anything listed here must survive every future edit.
+
+  Data
+    M01 reads data/manifest.json for the year list and provisional seasons
+    M02 fetches every data/lakes_YYYY.json in parallel
+    M03 merges years by stable lake_id, falling back to the land description
+    M04 reads data/quality_summary.json
+    M05 startup failure names the real cause and how to serve the folder
+    M06 missing vendor libraries are reported by filename
+
+  Map
+    M07 Leaflet map, topo and street basemaps
+    M08 home marker, draggable, with tooltip
+    M09 pins sized by fish (root-scaled), coloured by dominant species
+    M10 second species shown as a ring around the pin
+    M11 pin click scopes the charts to that lake and opens its popup
+    M12 background click clears the scope and closes the popup
+    M13 popups survive filter changes and reopen after a re-render
+    M14 lakes with no known position are excluded from pins and counted
+    M15 marker clustering, with counts, opening up as you zoom in
+    M16 hover tooltip: name, last stocked, fish in view
+    M17 zoom to fit the lakes currently shown
+    M18 species initial drawn on pins large enough to hold it
+
+  Popup
+    M19 name, land description, distance from home, fish shown
+    M20 years and species in view, and a note when the position is estimated
+    M21 zone link to the regulations, surface area, amenities
+    M22 stocking table newest first, dates at their true precision
+    M23 Google Maps link, favourite toggle
+    M24 every field HTML-escaped
+
+  Filters
+    M25 species checkboxes with per-lake counts
+    M26 distance from home
+    M27 year chips with All / None / Last 5 / Latest, provisional marked
+    M28 filter summary, result count, empty state
+    M29 recency: stocked within the last 7, 14, 30 or 60 days
+    M30 size class: fry, sub-catchable, catchable
+    M31 search by lake name, jumping to the lake
+
+  Charts
+    M32 panel toggles, map resizes, button stays clear of the panel
+    M33 stacked by species, by season, per-species trend, stocking calendar
+    M34 helper text per chart, summary stats
+    M35 planning summary with year-over-year, trend, risers and decliners
+    M36 provisional year labelled in the year-over-year line
+    M37 chart scope row naming the focused lake, with a clear button
+
+  Other
+    M38 list view, sortable, with CSV export
+    M39 favourites, saved locally, with a multi-stop driving route
+    M40 home location settable by geolocation, map click, or preset
+    M41 filters and home shared through the URL
+    M42 data quality panel, collapsed
+    M43 works at phone width with a slide-over sidebar
+-->
 <link rel="stylesheet" href="vendor/leaflet.css"/>
+<link rel="stylesheet" href="vendor/MarkerCluster.css"/>
 <style>
   :root {
     --bg: #2b2e2a;
     --panel: #3a3d38;
+    --panel-2: #33362f;
     --panel-edge: #1f211e;
     --ink: #e8e4d8;
     --ink-dim: #a8a396;
     --accent: #c98a3e;
-    --RNTR: #4a7fa8;
-    --BKTR: #2f6b3a;
-    --BNTR: #8b5a2b;
-    --TGTR: #7b4a8a;
-    --CTTR: #c85a2e;
-    --WSCT: #c9a227;
+    /* Species colours come from a validated categorical palette, ordered so
+       that every neighbouring pair stays separable for colour-blind readers.
+       The old naturalistic set (brown for brown trout, green for brook) put
+       those two 2.0 ΔE apart under protanopia — indistinguishable. Pins also
+       carry the species initial, so colour is never the only cue. */
+    --RNTR: #3987e5;
+    --BKTR: #d95926;
+    --BNTR: #199e70;
+    --TGTR: #c98500;
+    --CTTR: #9085e9;
+    --WSCT: #e66767;
+    --good: #5cb27f;
+    --sidebar-w: 320px;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; height: 100%; overflow: hidden;
     font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
     color: var(--ink); background: var(--bg); }
-  #app { display: flex; height: 100vh; width: 100vw; }
+  button, input, select { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 
-  /* Sidebar */
+  #app { display: flex; height: 100vh; height: 100dvh; width: 100vw; }
+
+  /* ---------- Sidebar ---------- */
   #sidebar {
-    width: 320px;
-    flex-shrink: 0;
-    background: var(--panel);
-    border-right: 2px solid var(--panel-edge);
-    overflow-y: auto;
-    padding: 16px 18px;
+    width: var(--sidebar-w); flex-shrink: 0; background: var(--panel);
+    border-right: 2px solid var(--panel-edge); overflow-y: auto; padding: 14px 16px 28px;
   }
-  #sidebar h1 { font-size: 18px; font-weight: 600; margin: 0 0 4px 0; letter-spacing: 0.3px; }
-  #sidebar .subtitle { font-size: 12px; color: var(--ink-dim); margin-bottom: 18px; }
-  #sidebar .count {
-    font-size: 13px; color: var(--accent); margin-bottom: 18px;
-    padding: 8px 10px; background: rgba(201,138,62,0.08);
-    border-left: 3px solid var(--accent);
+  #sidebar h1 { font-size: 17px; font-weight: 600; margin: 0 0 2px; letter-spacing: 0.3px; }
+  #sidebar .subtitle { font-size: 12px; color: var(--ink-dim); margin-bottom: 14px; }
+  .count {
+    font-size: 13px; color: var(--accent); margin-bottom: 6px;
+    padding: 8px 10px; background: rgba(201,138,62,0.08); border-left: 3px solid var(--accent);
   }
-  #sidebar .filter-summary {
-    font-size: 11px; color: var(--ink-dim); margin-top: -10px; margin-bottom: 16px;
-    line-height: 1.45;
-  }
-  #sidebar .empty-state {
-    display: none; font-size: 11px; color: var(--ink-dim); margin-bottom: 14px;
+  .filter-summary { font-size: 11px; color: var(--ink-dim); margin-bottom: 12px; line-height: 1.45; }
+  .empty-state {
+    display: none; font-size: 11px; color: var(--ink-dim); margin-bottom: 12px;
     padding: 8px 10px; border: 1px dashed var(--panel-edge); border-radius: 3px;
   }
-  #sidebar .empty-state.show { display: block; }
-  #sidebar .data-quality {
-    font-size: 11px; color: var(--ink-dim); margin-top: -10px; margin-bottom: 14px;
-    padding: 7px 9px; border: 1px solid var(--panel-edge); border-radius: 3px;
-  }
-  #sidebar .data-quality strong { color: var(--ink); }
-  #sidebar .group { margin-bottom: 22px; }
-  #sidebar .group-label {
+  .empty-state.show { display: block; }
+  .group { margin-bottom: 18px; }
+  .group-label {
     font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
-    color: var(--ink-dim); margin-bottom: 8px;
+    color: var(--ink-dim); margin-bottom: 7px; display: flex;
+    justify-content: space-between; align-items: baseline; gap: 8px;
   }
-  #sidebar .species-row {
-    display: flex; align-items: center; padding: 4px 0;
-    cursor: pointer; user-select: none;
+  .group-label .aside { text-transform: none; letter-spacing: 0; font-size: 11px; }
+  .linkish {
+    background: none; border: 0; color: var(--accent); cursor: pointer;
+    font-size: 11px; padding: 0; text-decoration: underline;
   }
-  #sidebar .species-row input { margin-right: 8px; }
-  #sidebar .species-swatch {
-    display: inline-block; width: 12px; height: 12px; border-radius: 50%;
-    margin-right: 8px; border: 1.5px solid rgba(255,255,255,0.4);
-  }
-  #sidebar .species-label { font-size: 13px; flex: 1; }
-  #sidebar .species-count { font-size: 11px; color: var(--ink-dim); }
+  .linkish:hover { color: var(--ink); }
 
-  #sidebar input[type=range] { width: 100%; accent-color: var(--accent); }
-  #sidebar .slider-row {
-    display: flex; justify-content: space-between;
-    font-size: 12px; color: var(--ink-dim); margin-top: 4px;
+  .species-row { display: flex; align-items: center; padding: 3px 0; cursor: pointer; user-select: none; }
+  .species-row input { margin-right: 8px; }
+  .species-swatch {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 15px; height: 15px; border-radius: 50%; margin-right: 8px;
+    border: 1.5px solid rgba(255,255,255,0.45); font-size: 9px; font-weight: 700; color: #12140f;
   }
-  #sidebar .slider-value { color: var(--ink); font-weight: 500; }
+  .species-label { font-size: 13px; flex: 1; }
+  .species-count { font-size: 11px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
 
-  /* Year chips */
-  .year-chips {
-    display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px;
-  }
-  .year-chip {
-    padding: 4px 8px; font-size: 12px; border-radius: 3px;
-    background: var(--bg); border: 1px solid var(--panel-edge);
-    color: var(--ink-dim); cursor: pointer; user-select: none;
-    font-variant-numeric: tabular-nums;
-  }
-  .year-chip:hover { color: var(--ink); }
-  .year-chip.active {
-    background: var(--accent); color: #1f211e;
-    border-color: var(--accent); font-weight: 600;
-  }
-  .year-shortcuts {
-    display: flex; gap: 4px; font-size: 11px;
-  }
-  .year-shortcut {
-    padding: 3px 7px; background: transparent;
-    border: 1px solid var(--panel-edge); color: var(--ink-dim);
-    cursor: pointer; border-radius: 3px;
-  }
-  .year-shortcut:hover { color: var(--ink); border-color: var(--ink-dim); }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+  .slider-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-dim); margin-top: 2px; }
+  .slider-value { color: var(--ink); font-weight: 500; }
 
-  #sidebar .basemap-row { display: flex; gap: 6px; }
-  #sidebar .basemap-btn {
-    flex: 1; padding: 6px 8px; font-size: 12px;
-    background: var(--bg); border: 1px solid var(--panel-edge);
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+  .chip {
+    padding: 4px 8px; font-size: 12px; border-radius: 3px; background: var(--bg);
+    border: 1px solid var(--panel-edge); color: var(--ink-dim); cursor: pointer;
+    user-select: none; font-variant-numeric: tabular-nums;
+  }
+  .chip:hover { color: var(--ink); }
+  .chip.active { background: var(--accent); color: #1f211e; border-color: var(--accent); font-weight: 600; }
+  .chip .rc-n { opacity: 0.65; font-variant-numeric: tabular-nums; margin-left: 3px; }
+  .shortcuts { display: flex; flex-wrap: wrap; gap: 4px; font-size: 11px; }
+  .shortcut {
+    padding: 3px 7px; background: transparent; border: 1px solid var(--panel-edge);
     color: var(--ink-dim); cursor: pointer; border-radius: 3px;
   }
-  #sidebar .basemap-btn.active {
-    background: var(--accent); color: #1f211e;
-    border-color: var(--accent); font-weight: 600;
-  }
+  .shortcut:hover { color: var(--ink); border-color: var(--ink-dim); }
 
-  #sidebar .legend {
-    font-size: 11px; color: var(--ink-dim);
-    border-top: 1px solid var(--panel-edge);
-    padding-top: 12px; line-height: 1.5;
+  .btn-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .btn {
+    flex: 1; min-width: 78px; padding: 6px 8px; font-size: 12px; background: var(--bg);
+    border: 1px solid var(--panel-edge); color: var(--ink-dim); cursor: pointer; border-radius: 3px;
   }
+  .btn:hover { color: var(--ink); border-color: var(--ink-dim); }
+  .btn.active { background: var(--accent); color: #1f211e; border-color: var(--accent); font-weight: 600; }
 
-  /* Map + chart panel container */
-  #map-wrap {
-    flex: 1; position: relative; display: flex; flex-direction: column;
-    min-width: 0;
+  .home-name { font-size: 12px; color: var(--ink); margin-bottom: 6px; }
+  .home-name .coord { color: var(--ink-dim); font-size: 11px; }
+  .hint { font-size: 11px; color: var(--ink-dim); margin-top: 6px; line-height: 1.45; }
+  .hint.armed { color: var(--accent); }
+
+  details.quality { border-top: 1px solid var(--panel-edge); padding-top: 10px; }
+  details.quality > summary {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
+    color: var(--ink-dim); cursor: pointer; list-style: revert;
   }
+  .data-quality { font-size: 11px; color: var(--ink-dim); margin-top: 8px; line-height: 1.55; }
+  .data-quality strong { color: var(--ink); }
+  .legend { font-size: 11px; color: var(--ink-dim); line-height: 1.5; margin-top: 10px; }
+
+  #fav-list { list-style: none; margin: 0; padding: 0; font-size: 12px; }
+  #fav-list li { display: flex; align-items: center; gap: 6px; padding: 2px 0; }
+  #fav-list button { background: none; border: 0; color: var(--ink-dim); cursor: pointer; padding: 0 2px; }
+  #fav-list button:hover { color: var(--accent); }
+  #fav-list .fav-name { flex: 1; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* ---------- Search ---------- */
+  .search-wrap { position: relative; }
+  #search {
+    width: 100%; padding: 7px 9px; font-size: 13px; background: var(--bg);
+    border: 1px solid var(--panel-edge); color: var(--ink); border-radius: 3px;
+  }
+  #search::placeholder { color: var(--ink-dim); }
+  #search-results {
+    position: absolute; z-index: 1200; left: 0; right: 0; top: 100%; margin-top: 2px;
+    background: var(--panel-2); border: 1px solid var(--panel-edge); border-radius: 3px;
+    max-height: 260px; overflow-y: auto; list-style: none; padding: 0;
+  }
+  #search-results:empty { display: none; }
+  #search-results li { padding: 6px 9px; font-size: 12px; cursor: pointer; display: flex; gap: 8px; }
+  #search-results li:hover, #search-results li[aria-selected="true"] { background: var(--accent); color: #1f211e; }
+  #search-results .r-dist { color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+  #search-results li:hover .r-dist, #search-results li[aria-selected="true"] .r-dist { color: #1f211e; }
+
+  /* ---------- Map ---------- */
+  #map-wrap { flex: 1; position: relative; display: flex; flex-direction: column; min-width: 0; }
   #map { flex: 1; background: #1a1c1a; }
-
-  /* Chart toggle button — sits above the chart panel when it is open, so it
-     never covers the chart's axis. --panel-h mirrors #chart-panel.open. */
   #map-wrap { --panel-open-h: 368px; --panel-h: 0px; }
   #map-wrap.charts-open { --panel-h: var(--panel-open-h); }
+
+  .map-btns { position: absolute; top: 10px; right: 10px; z-index: 500; display: flex; flex-direction: column; gap: 6px; }
+  .map-btn {
+    padding: 6px 10px; font-size: 12px; background: var(--panel); color: var(--ink);
+    border: 1px solid var(--panel-edge); border-radius: 3px; cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  }
+  .map-btn:hover { border-color: var(--accent); }
+
   #chart-toggle {
     position: absolute; bottom: calc(16px + var(--panel-h)); left: 16px; z-index: 500;
-    transition: bottom 0.25s ease-out;
-    padding: 8px 14px; font-size: 13px; font-weight: 500;
-    background: var(--panel); color: var(--ink);
-    border: 1px solid var(--panel-edge); border-radius: 3px;
-    cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: bottom 0.25s ease-out; padding: 8px 14px; font-size: 13px; font-weight: 500;
+    background: var(--panel); color: var(--ink); border: 1px solid var(--panel-edge);
+    border-radius: 3px; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   }
   #chart-toggle:hover { border-color: var(--accent); }
   #chart-toggle.open { background: var(--accent); color: #1f211e; border-color: var(--accent); }
 
-  /* Chart panel (slides up from bottom) */
+  /* Pins are divIcons so they can carry a species initial as well as colour. */
+  .pin { border-radius: 50%; border: 1.2px solid #12140f; display: flex;
+         align-items: center; justify-content: center; font-weight: 700;
+         color: rgba(10,12,8,0.82); box-sizing: border-box; }
+  .pin.fav { border-color: var(--accent); border-width: 2px; }
+  .leaflet-marker-icon.pin-wrap { background: none; border: 0; }
+  .marker-cluster {
+    background: rgba(201,138,62,0.28); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .marker-cluster div {
+    background: rgba(201,138,62,0.85); color: #1f211e; border-radius: 50%;
+    width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums;
+  }
+  .leaflet-tooltip.lake-tip {
+    background: var(--panel); color: var(--ink); border: 1px solid var(--panel-edge);
+    font-size: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+  .leaflet-tooltip.lake-tip::before { border-top-color: var(--panel-edge); }
+  .lake-tip b { color: var(--ink); }
+  .lake-tip .tip-sub { color: var(--ink-dim); font-size: 11px; }
+
+  /* ---------- Chart panel ---------- */
   #chart-panel {
     background: var(--panel); border-top: 2px solid var(--panel-edge);
     height: 0; overflow: hidden; transition: height 0.25s ease-out;
@@ -154,111 +256,132 @@
   }
   #chart-panel.open { height: var(--panel-open-h); }
   .chart-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 10px 16px; border-bottom: 1px solid var(--panel-edge);
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 9px 14px; border-bottom: 1px solid var(--panel-edge); flex-shrink: 0; flex-wrap: wrap;
   }
-  .chart-summary {
-    display: flex; gap: 22px; font-size: 12px; color: var(--ink-dim);
-  }
+  .chart-summary { display: flex; gap: 18px; font-size: 12px; color: var(--ink-dim); }
   .chart-summary .stat-value {
     color: var(--ink); font-weight: 600; font-size: 14px; margin-right: 4px;
     font-variant-numeric: tabular-nums;
   }
   .chart-summary .stat-value.accent { color: var(--accent); }
-  .chart-type-row { display: flex; gap: 4px; }
+  .chart-type-row { display: flex; gap: 4px; flex-wrap: wrap; }
   .chart-type-btn {
-    padding: 5px 10px; font-size: 11px; border-radius: 3px;
-    background: var(--bg); border: 1px solid var(--panel-edge);
-    color: var(--ink-dim); cursor: pointer;
+    padding: 5px 9px; font-size: 11px; border-radius: 3px; background: var(--bg);
+    border: 1px solid var(--panel-edge); color: var(--ink-dim); cursor: pointer;
   }
-  .chart-type-btn.active {
-    background: var(--accent); color: #1f211e;
-    border-color: var(--accent); font-weight: 600;
-  }
-  .chart-helper {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 6px 16px; font-size: 11px; color: var(--ink-dim);
-    border-bottom: 1px solid var(--panel-edge); gap: 8px;
-  }
+  .chart-type-btn.active { background: var(--accent); color: #1f211e; border-color: var(--accent); font-weight: 600; }
+  .chart-helper { padding: 6px 14px; font-size: 11px; color: var(--ink-dim); border-bottom: 1px solid var(--panel-edge); }
   .planning-summary {
-    display: flex; flex-wrap: wrap; gap: 12px;
-    padding: 6px 16px; font-size: 11px; color: var(--ink-dim);
-    border-bottom: 1px solid var(--panel-edge);
+    display: flex; flex-wrap: wrap; gap: 12px; padding: 6px 14px; font-size: 11px;
+    color: var(--ink-dim); border-bottom: 1px solid var(--panel-edge);
   }
   .planning-summary strong { color: var(--ink); }
   .chart-scope-row {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 10px; padding: 6px 16px; font-size: 11px; color: var(--ink-dim);
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 6px 14px; font-size: 11px; color: var(--ink-dim);
     border-bottom: 1px solid var(--panel-edge); flex-shrink: 0;
   }
-  /* A class-level `display: flex` outranks the UA rule for [hidden], so
-     setting el.hidden alone would leave this row on screen. */
+  /* A class-level display:flex outranks the UA rule for [hidden]. */
   .chart-scope-row[hidden] { display: none; }
   .chart-scope-row strong { color: var(--ink); font-weight: 600; }
   .chart-scope-clear {
-    flex-shrink: 0; padding: 3px 8px; font-size: 11px; cursor: pointer;
-    background: var(--bg); border: 1px solid var(--panel-edge); color: var(--accent);
-    border-radius: 3px;
+    flex-shrink: 0; padding: 3px 8px; font-size: 11px; cursor: pointer; background: var(--bg);
+    border: 1px solid var(--panel-edge); color: var(--accent); border-radius: 3px;
   }
   .chart-scope-clear:hover { border-color: var(--accent); color: var(--ink); }
-
-  .chart-body { flex: 1; padding: 10px 16px 14px; min-height: 0; position: relative; }
+  .chart-body { flex: 1; padding: 10px 14px 12px; min-height: 0; position: relative; }
   .chart-body canvas { max-height: 100%; }
 
-  /* Popup (unchanged) */
-  .leaflet-popup-content-wrapper {
-    background: var(--panel); color: var(--ink);
-    border-radius: 3px; border: 1px solid var(--panel-edge);
+  /* ---------- List view ---------- */
+  #list-view { flex: 1; overflow: auto; display: none; background: var(--bg); }
+  #map-wrap.list-mode #map, #map-wrap.list-mode #chart-toggle, #map-wrap.list-mode .map-btns { display: none; }
+  #map-wrap.list-mode #list-view { display: block; }
+  #list-view table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+  #list-view th, #list-view td { padding: 6px 10px; border-bottom: 1px solid var(--panel-edge); text-align: left; white-space: nowrap; }
+  #list-view th {
+    position: sticky; top: 0; background: var(--panel); color: var(--ink-dim); cursor: pointer;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; z-index: 2;
   }
+  #list-view th.sorted { color: var(--ink); }
+  #list-view th.sorted::after { content: " ↓"; }
+  #list-view th.sorted.asc::after { content: " ↑"; }
+  #list-view td.num, #list-view th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  #list-view td.name { white-space: normal; min-width: 170px; }
+  #list-view tr:hover td { background: var(--panel-2); }
+  .list-bar {
+    display: flex; gap: 10px; align-items: center; padding: 8px 12px;
+    border-bottom: 1px solid var(--panel-edge); background: var(--panel); font-size: 12px;
+    position: sticky; top: 0; z-index: 3; flex-wrap: wrap;
+  }
+  .sp-tag { display: inline-block; padding: 1px 5px; border-radius: 2px; font-size: 10px; font-weight: 700; color: #12140f; }
+  .star { background: none; border: 0; cursor: pointer; color: var(--ink-dim); font-size: 14px; padding: 0 2px; }
+  .star.on { color: var(--accent); }
+
+  /* ---------- Popup ---------- */
+  .leaflet-popup-content-wrapper { background: var(--panel); color: var(--ink); border-radius: 3px; border: 1px solid var(--panel-edge); }
   .leaflet-popup-tip { background: var(--panel); }
-  .leaflet-popup-content { margin: 12px 14px; font-size: 12px; min-width: 280px; }
-  .lake-popup h3 { margin: 0 0 2px 0; font-size: 14px; color: var(--ink); }
-  .lake-popup .ats { font-size: 11px; color: var(--ink-dim); margin-bottom: 8px;
-    font-family: "SF Mono", Menlo, monospace; }
-  .lake-popup .meta { font-size: 12px; margin-bottom: 10px; }
+  .leaflet-popup-content { margin: 12px 14px; font-size: 12px; min-width: 260px; max-height: 60vh; overflow-y: auto; }
+  .lake-popup h3 { margin: 0 0 2px; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+  .lake-popup .ats { font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; font-family: "SF Mono", Menlo, monospace; }
+  .lake-popup .meta { font-size: 12px; margin-bottom: 8px; }
   .lake-popup .meta strong { color: var(--accent); }
   .lake-popup table { width: 100%; border-collapse: collapse; font-size: 11px; }
-  .lake-popup th {
-    text-align: left; padding: 3px 5px 3px 0;
-    border-bottom: 1px solid var(--panel-edge);
-    color: var(--ink-dim); font-weight: 500;
-  }
+  .lake-popup th { text-align: left; padding: 3px 5px 3px 0; border-bottom: 1px solid var(--panel-edge); color: var(--ink-dim); font-weight: 500; }
   .lake-popup td { padding: 3px 5px 3px 0; border-bottom: 1px dotted var(--panel-edge); }
   .lake-popup td:last-child, .lake-popup th:last-child { text-align: right; padding-right: 0; }
-  .lake-popup .sp-tag {
-    display: inline-block; padding: 1px 5px; border-radius: 2px;
-    font-size: 10px; font-weight: 600; color: white;
-  }
   .lake-popup .profile-row { font-size: 11px; color: var(--ink-dim); margin-bottom: 6px; }
-  .lake-popup .profile-amenities { font-size: 11px; color: var(--ink-dim);
-    margin-bottom: 10px; line-height: 1.45; }
-  .lake-popup .profile-label { color: var(--accent); font-weight: 600;
-    text-transform: uppercase; letter-spacing: 0.6px; font-size: 10px; margin-right: 3px; }
-  .lake-popup a.zone-link { color: var(--ink); border-bottom: 1px dotted var(--accent);
-    text-decoration: none; }
+  .lake-popup .profile-amenities { font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; line-height: 1.45; }
+  .lake-popup .profile-label { color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; font-size: 10px; margin-right: 3px; }
+  .lake-popup a.zone-link { color: var(--ink); border-bottom: 1px dotted var(--accent); text-decoration: none; }
   .lake-popup a.zone-link:hover { color: var(--accent); }
   .lake-popup a.gmaps {
-    display: inline-block; margin-top: 10px;
-    color: var(--accent); text-decoration: none;
+    display: inline-block; margin-top: 10px; color: var(--accent); text-decoration: none;
     border-bottom: 1px solid var(--accent); font-size: 11px;
   }
   .lake-popup a.gmaps:hover { color: var(--ink); border-color: var(--ink); }
 
-  .leaflet-control-attribution {
-    background: rgba(43,46,42,0.85) !important;
-    color: var(--ink-dim) !important; font-size: 10px !important;
-  }
+  .leaflet-control-attribution { background: rgba(43,46,42,0.85) !important; color: var(--ink-dim) !important; font-size: 10px !important; }
   .leaflet-control-attribution a { color: var(--accent) !important; }
 
-  /* Loading overlay */
-  #loading {
-    position: fixed; inset: 0; z-index: 9999;
-    background: var(--bg); display: flex;
-    align-items: center; justify-content: center;
-    color: var(--ink-dim); font-size: 14px;
-  }
+  #loading { position: fixed; inset: 0; z-index: 9999; background: var(--bg);
+    display: flex; align-items: center; justify-content: center; color: var(--ink-dim); font-size: 14px; padding: 20px; }
   #loading.hidden { display: none; }
+
+  /* ---------- Phone ---------- */
+  #menu-btn { display: none; }
+  #scrim { display: none; }
+  @media (max-width: 760px) {
+    #menu-btn {
+      display: block; position: absolute; top: 10px; left: 10px; z-index: 900;
+      padding: 8px 11px; font-size: 15px; line-height: 1; background: var(--panel);
+      color: var(--ink); border: 1px solid var(--panel-edge); border-radius: 3px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4); cursor: pointer;
+    }
+    #sidebar {
+      position: fixed; top: 0; bottom: 0; left: 0; z-index: 1000; width: min(88vw, 340px);
+      transform: translateX(-102%); transition: transform 0.22s ease-out;
+      box-shadow: 4px 0 18px rgba(0,0,0,0.5);
+    }
+    #app.menu-open #sidebar { transform: translateX(0); }
+    #app.menu-open #scrim { display: block; position: fixed; inset: 0; z-index: 950; background: rgba(0,0,0,0.45); }
+    /* Leaflet puts its zoom control top-left, exactly where the menu button
+       goes, and it wins the click. Push the controls below it on a phone. */
+    .leaflet-top.leaflet-left { margin-top: 46px; }
+    #map-wrap { --panel-open-h: 54vh; }
+    #chart-toggle { left: 10px; bottom: calc(10px + var(--panel-h)); padding: 7px 11px; font-size: 12px; }
+    .map-btns { top: 10px; right: 10px; }
+    .chart-summary { gap: 12px; font-size: 11px; }
+    .leaflet-popup-content { min-width: 200px; max-height: 46vh; }
+    #sidebar-close { display: block; }
+  }
+  #sidebar-close {
+    display: none; background: none; border: 0; color: var(--ink-dim);
+    font-size: 20px; line-height: 1; cursor: pointer; float: right; padding: 0 0 6px 10px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #sidebar, #chart-panel, #chart-toggle { transition: none; }
+  }
 </style>
 </head>
 <body>
@@ -266,57 +389,119 @@
 <div id="loading">Loading stocking data…</div>
 
 <div id="app">
+  <div id="scrim"></div>
   <aside id="sidebar">
+    <button id="sidebar-close" type="button" aria-label="Close filters">×</button>
     <h1>Alberta Trout Map</h1>
     <div class="subtitle" id="subtitle">Stocking data</div>
+
+    <div class="group search-wrap">
+      <label class="group-label" for="search">Find a lake</label>
+      <input type="search" id="search" autocomplete="off" placeholder="Lake name…"
+             role="combobox" aria-expanded="false" aria-controls="search-results">
+      <ul id="search-results" role="listbox"></ul>
+    </div>
+
     <div class="count" id="result-count">Showing … lakes</div>
-    <div class="filter-summary" id="filter-summary">Filters: all species · all years · ≤ 1000 km</div>
-    <div class="empty-state" id="empty-state">No lakes match the current filters. Try All years, All species, or increase distance.</div>
-    <div class="data-quality" id="data-quality">Data quality: checking…</div>
+    <div class="filter-summary" id="filter-summary"></div>
+    <div class="empty-state" id="empty-state">No lakes match these filters. Try more years, more species, or a longer distance.</div>
 
     <div class="group">
-      <div class="group-label">Species</div>
+      <div class="group-label"><span>Stocked recently</span></div>
+      <div class="chips" id="recency-chips"></div>
+      <div class="hint" id="recency-note"></div>
+    </div>
+
+    <div class="group">
+      <div class="group-label"><span>Species</span><button type="button" class="linkish" data-all="species">all</button></div>
       <div id="species-filters"></div>
     </div>
 
     <div class="group">
-      <div class="group-label">Distance from Red Deer</div>
+      <div class="group-label"><span>Fish size</span><button type="button" class="linkish" data-all="size">all</button></div>
+      <div id="size-filters"></div>
+    </div>
+
+    <div class="group">
+      <div class="group-label"><span>Distance from home</span></div>
+      <div class="home-name" id="home-name"></div>
       <input type="range" id="dist-slider" min="0" max="1000" step="10" value="1000">
-      <div class="slider-row">
-        <span>0 km</span>
-        <span class="slider-value" id="dist-value">≤ 1000 km</span>
+      <div class="slider-row"><span>0 km</span><span class="slider-value" id="dist-value">≤ 1000 km</span></div>
+      <div class="btn-row" style="margin-top:8px">
+        <button class="btn" id="home-locate" type="button">Use my location</button>
+        <button class="btn" id="home-pick" type="button">Pick on map</button>
+        <button class="btn" id="home-reset" type="button">Red Deer</button>
+      </div>
+      <div class="hint" id="home-hint">Drag the home marker to move it.</div>
+    </div>
+
+    <div class="group">
+      <div class="group-label"><span>Years</span></div>
+      <div class="chips" id="year-chips"></div>
+      <div class="shortcuts">
+        <button class="shortcut" data-range="all">All</button>
+        <button class="shortcut" data-range="none">None</button>
+        <button class="shortcut" data-range="last5">Last 5</button>
+        <button class="shortcut" data-range="latest">Latest</button>
       </div>
     </div>
 
     <div class="group">
-      <div class="group-label">Years</div>
-      <div class="year-chips" id="year-chips"></div>
-      <div class="year-shortcuts">
-        <button class="year-shortcut" data-range="all">All</button>
-        <button class="year-shortcut" data-range="none">None</button>
-        <button class="year-shortcut" data-range="last5">Last 5</button>
-        <button class="year-shortcut" data-range="latest">Latest</button>
+      <div class="group-label"><span>Favourites</span><button type="button" class="linkish" id="fav-route">plan a route</button></div>
+      <ul id="fav-list"></ul>
+      <div class="hint" id="fav-empty">Star a lake in its popup to keep it here.</div>
+    </div>
+
+    <div class="group">
+      <div class="group-label"><span>View</span></div>
+      <div class="btn-row">
+        <button class="btn active" data-view="map">Map</button>
+        <button class="btn" data-view="list">List</button>
       </div>
     </div>
 
     <div class="group">
-      <div class="group-label">Basemap</div>
-      <div class="basemap-row">
-        <button class="basemap-btn active" data-base="topo">Topo</button>
-        <button class="basemap-btn" data-base="osm">Street</button>
+      <div class="group-label"><span>Basemap</span></div>
+      <div class="btn-row">
+        <button class="btn active" data-base="topo">Topo</button>
+        <button class="btn" data-base="osm">Street</button>
       </div>
     </div>
 
-    <div class="legend">
-      <span id="provisional-note"></span>
-      Pin size scales with total fish stocked (√-scaled).<br>
-      Multi-species lakes show a secondary ring in the runner-up species' color.<br>
-      Click a pin → zone code links to regulations.
-    </div>
+    <details class="quality">
+      <summary>Data quality</summary>
+      <div class="data-quality" id="data-quality">checking…</div>
+      <div class="legend" id="legend"></div>
+    </details>
   </aside>
 
   <div id="map-wrap">
+    <button id="menu-btn" type="button" aria-label="Filters">☰</button>
     <div id="map"></div>
+    <div class="map-btns">
+      <button class="map-btn" id="zoom-results" type="button">Zoom to results</button>
+      <button class="map-btn" id="share-btn" type="button">Copy link</button>
+    </div>
+
+    <div id="list-view">
+      <div class="list-bar">
+        <span id="list-count"></span>
+        <button class="btn" id="export-csv" type="button" style="flex:0 0 auto">Download CSV</button>
+      </div>
+      <table id="list-table">
+        <thead><tr>
+          <th data-k="name">Lake</th>
+          <th class="num" data-k="distanceKm">km</th>
+          <th data-k="lastDate">Last stocked</th>
+          <th class="num" data-k="fish">Fish shown</th>
+          <th data-k="species">Species</th>
+          <th data-k="zone">Zone</th>
+          <th>Links</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
     <button id="chart-toggle">📊 Show Charts</button>
     <div id="chart-panel">
       <div class="chart-header">
@@ -326,55 +511,80 @@
           <div><span class="stat-value" id="stat-years">—</span>years</div>
         </div>
         <div class="chart-type-row">
-          <button class="chart-type-btn active" data-chart="stacked-species">Stacked by species</button>
-          <button class="chart-type-btn" data-chart="grouped-season">Spring vs Fall</button>
+          <button class="chart-type-btn active" data-chart="stacked-species">By species</button>
+          <button class="chart-type-btn" data-chart="grouped-season">By season</button>
           <button class="chart-type-btn" data-chart="line-trend">Trend</button>
+          <button class="chart-type-btn" data-chart="calendar">Calendar</button>
         </div>
       </div>
-      <div class="chart-helper" id="chart-helper">Stacked by species compares annual stocking mix across selected years.</div>
-      <div class="planning-summary" id="planning-summary">
-        <span><strong>YoY:</strong> —</span>
-        <span><strong>Trend:</strong> —</span>
-        <span><strong>Top risers:</strong> —</span>
-        <span><strong>Top decliners:</strong> —</span>
-      </div>
+      <div class="chart-helper" id="chart-helper"></div>
+      <div class="planning-summary" id="planning-summary"></div>
       <div id="chart-scope-row" class="chart-scope-row" hidden>
         <span>Chart: <strong id="chart-scope-name"></strong></span>
         <button type="button" class="chart-scope-clear" id="chart-scope-clear">All lakes</button>
       </div>
-      <div class="chart-body">
-        <canvas id="chart-canvas"></canvas>
-      </div>
+      <div class="chart-body"><canvas id="chart-canvas"></canvas></div>
     </div>
   </div>
 </div>
 
 <script src="vendor/leaflet.js"></script>
+<script src="vendor/leaflet.markercluster.js"></script>
 <script src="vendor/chart.umd.js"></script>
 <script>
 // ============================================================
 // CONFIG
 // ============================================================
-const HOME = { lat: 52.2681, lon: -113.8112, name: "Red Deer" };
+const DEFAULT_HOME = { lat: 52.2681, lon: -113.8112, name: "Red Deer" };
+
 const SPECIES_META = {
-  RNTR: { label: "Rainbow Trout",   color: "#4a7fa8" },
-  BKTR: { label: "Brook Trout",     color: "#2f6b3a" },
-  BNTR: { label: "Brown Trout",     color: "#8b5a2b" },
-  TGTR: { label: "Tiger Trout",     color: "#7b4a8a" },
-  CTTR: { label: "Cutthroat Trout", color: "#c85a2e" },
-  WSCT: { label: "Westslope Cutthroat", color: "#c9a227" },
+  RNTR: { label: "Rainbow Trout",       short: "Rainbow",    initial: "R", color: "#3987e5" },
+  BKTR: { label: "Brook Trout",         short: "Brook",      initial: "B", color: "#d95926" },
+  BNTR: { label: "Brown Trout",         short: "Brown",      initial: "N", color: "#199e70" },
+  TGTR: { label: "Tiger Trout",         short: "Tiger",      initial: "T", color: "#c98500" },
+  CTTR: { label: "Cutthroat Trout",     short: "Cutthroat",  initial: "C", color: "#9085e9" },
+  WSCT: { label: "Westslope Cutthroat", short: "Westslope",  initial: "W", color: "#e66767" },
 };
 const SPECIES_ORDER = ["RNTR", "BKTR", "BNTR", "TGTR", "CTTR", "WSCT"];
 
-const PIN_MIN = 5;
-const PIN_MAX = 28;
+/** Size classes an angler actually cares about. A lake given 60,000 fry is
+ *  not the same prospect as one given 3,000 catchable trout. */
+const SIZE_CLASSES = [
+  { id: "fry",   label: "Fry, under 15 cm",      test: cm => cm != null && cm < 15 },
+  { id: "sub",   label: "15 to 20 cm",           test: cm => cm != null && cm >= 15 && cm < 20 },
+  { id: "catch", label: "Catchable, 20 cm plus", test: cm => cm != null && cm >= 20 },
+];
+const SIZE_IDS = SIZE_CLASSES.map(s => s.id);
+
+/** The newest report is only as fresh as Alberta's last update — in September
+ *  2026 it still stopped at 22 July — so every window carries a live count.
+ *  A filter silently matching nothing is worse than one that says so. */
+const RECENCY_OPTIONS = [
+  { id: "any",    label: "Any time",    days: null },
+  { id: "30",     label: "30 days",     days: 30 },
+  { id: "60",     label: "60 days",     days: 60 },
+  { id: "90",     label: "90 days",     days: 90 },
+  { id: "season", label: "This season", days: null, season: true },
+];
+
+const PIN_MIN = 7;
+const PIN_MAX = 30;
 let SQRT_MAX = 1;
 const STOCKING_ISSUE_SAMPLE_LIMIT = 6;
+const CLUSTER_OFF_ZOOM = 11;
 
-// Dates arrive as "2025-04-14". Reports before 2014 give only a month, and
-// those are recorded as the first of the month with date_precision "month".
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+/** Alberta's stocking year: spring is the big run, a short summer, then a
+ *  fall top-up. Splitting at the half-year put September with July. */
+const SEASONS = [
+  { id: "spring", label: "Spring (Mar–Jun)", months: [3, 4, 5, 6],  color: "#199e70" },
+  { id: "summer", label: "Summer (Jul–Aug)", months: [7, 8],        color: "#c98500" },
+  { id: "fall",   label: "Fall (Sep–Nov)",   months: [9, 10, 11],   color: "#d95926" },
+  { id: "winter", label: "Winter (Dec–Feb)", months: [12, 1, 2],    color: "#3987e5" },
+];
+
 function monthOf(dateStr) {
   const m = /^\d{4}-(\d{2})-/.exec(dateStr || "");
   return m ? Number(m[1]) : null;
@@ -382,7 +592,7 @@ function monthOf(dateStr) {
 function seasonOf(dateStr) {
   const m = monthOf(dateStr);
   if (!m) return null;
-  return m <= 6 ? "spring" : "fall";
+  return (SEASONS.find(s => s.months.includes(m)) || {}).id || null;
 }
 /** "2025-04-14" -> "14 Apr 2025", or "Apr 2011" when only the month is known. */
 function fmtDate(dateStr, precision) {
@@ -391,38 +601,47 @@ function fmtDate(dateStr, precision) {
   const label = `${MONTH_NAMES[Number(m[2]) - 1]} ${m[1]}`;
   return precision === "month" ? label : `${Number(m[3])} ${label}`;
 }
+function daysAgo(dateStr) {
+  const t = Date.parse((dateStr || "") + "T12:00:00Z");
+  if (Number.isNaN(t)) return null;
+  return Math.floor((Date.now() - t) / 86400000);
+}
 
 // ============================================================
 // STATE
 // ============================================================
 const state = {
   species: new Set(SPECIES_ORDER),
+  sizes: new Set(SIZE_IDS),
+  recency: "any",
   maxDistanceKm: 1000,
   years: new Set(),
   chartType: "stacked-species",
   chartOpen: false,
-  /** When set, chart aggregates only this lake (ATS id). Cleared on map background click or filters. */
+  view: "map",
+  home: { ...DEFAULT_HOME },
+  /** Stable lake id the charts are scoped to, or null for every lake. */
   focusedLakeAts: null,
   /** Lake whose popup is open, so it survives a re-render of the pin layer. */
   openPopupAts: null,
+  favourites: new Set(),
+  pickingHome: false,
 };
 
 /** A click on a pin can also reach the map, which would immediately undo the
  *  focus the pin just set. Whether it does depends on Leaflet internals, so
- *  the map handler ignores clicks that land right after a pin click rather
- *  than relying on a flag someone has to remember to clear. */
+ *  the map handler ignores clicks landing right after a pin click. */
 let lastPinClickAt = 0;
 const PIN_CLICK_GRACE_MS = 250;
 
-let LAKES = [];         // populated after fetch
-let ALL_YEARS = [];     // sorted ascending
+let LAKES = [];
+let ALL_YEARS = [];
 let QUALITY_SUMMARY = null;
-/** Seasons still under way — Alberta updates these reports again later. */
 let PROVISIONAL_YEARS = new Set();
-const DATA_ISSUES = {
-  invalidStockings: 0,
-  examples: [],
-};
+const DATA_ISSUES = { invalidStockings: 0, examples: [] };
+
+const STORE_HOME = "troutmap.home";
+const STORE_FAVS = "troutmap.favourites";
 
 // ============================================================
 // UTILITIES
@@ -432,56 +651,51 @@ function haversineKm(lat1, lon1, lat2, lon2) {
   const toRad = d => d * Math.PI / 180;
   const dLat = toRad(lat2 - lat1);
   const dLon = toRad(lon2 - lon1);
-  const a = Math.sin(dLat/2)**2 +
-    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon/2)**2;
+  const a = Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
   return 2 * R * Math.asin(Math.sqrt(a));
 }
-
 function fmtNum(n) { return Number(n || 0).toLocaleString(); }
-
-/** Stable identity for a lake across years, even when a report mistypes
- *  its land description. Falls back to the code for older data files. */
 function lakeKey(lake) { return lake.lake_id || lake.ats; }
-
-/** Lake names, strains and amenities come from a PDF and a hand-edited CSV.
- *  Escape them before they go anywhere near innerHTML. */
 function esc(s) {
   return String(s == null ? "" : s).replace(/[&<>"']/g, c =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
+function stockingSortKey(s) { return String(s.date || `${s.year || 0}-00-00`); }
 
-/** Sort key for a stocking row. ISO dates already sort correctly as text,
- *  so no Date parsing is needed — which also keeps Safari happy. */
-function stockingSortKey(s) {
-  return String(s.date || `${s.year || 0}-00-00`);
+/** Browser storage is a convenience, never a requirement. */
+function readStore(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch { return fallback; }
+}
+function writeStore(key, value) {
+  try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* private mode */ }
 }
 
 // ============================================================
 // DATA LOADING
 // ============================================================
 async function loadAllData() {
-  // 1. Fetch manifest
   const manifestResp = await fetch("data/manifest.json");
-  if (!manifestResp.ok) throw new Error("manifest.json not found");
+  if (!manifestResp.ok) throw new Error("data/manifest.json could not be read");
   const manifest = await manifestResp.json();
   const years = manifest.years.slice().sort((a, b) => a - b);
   PROVISIONAL_YEARS = new Set(manifest.provisional || []);
 
-  // 2. Fetch all year files in parallel
-  const fetches = years.map(y =>
+  const results = await Promise.all(years.map(y =>
     fetch(`data/lakes_${y}.json`).then(r => {
-      if (!r.ok) throw new Error(`lakes_${y}.json failed`);
+      if (!r.ok) throw new Error(`data/lakes_${y}.json could not be read`);
       return r.json().then(data => ({ year: y, data }));
     })
-  );
-  const results = await Promise.all(fetches);
+  ));
 
-  // 3. Merge into a single lake list keyed by ATS.
-  // Each year file has its own set of lakes. Same ATS across years → merge stockings.
+  // Merge years by the registry's stable id, so a lake whose land description
+  // was mistyped in one report still appears as one lake.
   const byLake = new Map();
   for (const { year, data } of results) {
     for (const lk of data) {
-      // Defensively tag every stocking with its year (already done by extractor, but safe)
       for (const s of lk.stockings) if (s.year == null) s.year = year;
       const key = lk.lake_id || lk.ats;
       if (!byLake.has(key)) {
@@ -489,7 +703,6 @@ async function loadAllData() {
       } else {
         const existing = byLake.get(key);
         existing.stockings.push(...lk.stockings);
-        // Prefer the newer year's non-null lake/profile values.
         if (lk.name) existing.name = lk.name;
         if (lk.lat != null) existing.lat = lk.lat;
         if (lk.lon != null) existing.lon = lk.lon;
@@ -512,11 +725,8 @@ async function loadAllData() {
 async function loadQualitySummary() {
   try {
     const resp = await fetch("data/quality_summary.json");
-    if (!resp.ok) return null;
-    return await resp.json();
-  } catch {
-    return null;
-  }
+    return resp.ok ? await resp.json() : null;
+  } catch { return null; }
 }
 
 function prepareLakes() {
@@ -524,20 +734,10 @@ function prepareLakes() {
   DATA_ISSUES.invalidStockings = 0;
   DATA_ISSUES.examples = [];
   for (const lake of LAKES) {
-    lake.distanceKm = (lake.lat == null || lake.lon == null)
-      ? Infinity
-      : haversineKm(HOME.lat, HOME.lon, lake.lat, lake.lon);
     if (lake.total_fish > maxFish) maxFish = lake.total_fish;
     for (const s of lake.stockings) {
-      if (!s || typeof s !== "object") {
-        DATA_ISSUES.invalidStockings++;
-        continue;
-      }
-      const bad =
-        !s.species ||
-        s.year == null ||
-        !s.date ||
-        !Number.isFinite(Number(s.number));
+      if (!s || typeof s !== "object") { DATA_ISSUES.invalidStockings++; continue; }
+      const bad = !s.species || s.year == null || !s.date || !Number.isFinite(Number(s.number));
       if (!bad) continue;
       DATA_ISSUES.invalidStockings++;
       if (DATA_ISSUES.examples.length < STOCKING_ISSUE_SAMPLE_LIMIT) {
@@ -547,24 +747,63 @@ function prepareLakes() {
   }
   SQRT_MAX = Math.sqrt(Math.max(1, maxFish));
   if (DATA_ISSUES.invalidStockings > 0) {
-    console.warn(
-      `Skipped ${DATA_ISSUES.invalidStockings} malformed stocking row(s).`,
-      DATA_ISSUES.examples
-    );
+    console.warn(`Skipped ${DATA_ISSUES.invalidStockings} malformed stocking row(s).`, DATA_ISSUES.examples);
+  }
+  recomputeDistances();
+}
+
+function recomputeDistances() {
+  for (const lake of LAKES) {
+    lake.distanceKm = (lake.lat == null || lake.lon == null)
+      ? Infinity
+      : haversineKm(state.home.lat, state.home.lon, lake.lat, lake.lon);
   }
 }
 
 // ============================================================
 // FILTERING
 // ============================================================
+function sizeClassOf(lengthCm) {
+  const cls = SIZE_CLASSES.find(c => c.test(lengthCm));
+  return cls ? cls.id : null;
+}
 function stockingPasses(s) {
   if (!s || typeof s !== "object") return false;
   if (!s.species || s.year == null || !Number.isFinite(Number(s.number))) return false;
-  return state.species.has(s.species) && state.years.has(s.year);
+  if (!state.species.has(s.species) || !state.years.has(s.year)) return false;
+  const cls = sizeClassOf(s.length_cm);
+  // A row with no recorded length cannot be excluded on size without guessing.
+  if (cls && !state.sizes.has(cls)) return false;
+  return true;
+}
+function recencyOption(id) {
+  return RECENCY_OPTIONS.find(o => o.id === (id ?? state.recency)) || RECENCY_OPTIONS[0];
+}
+function recencyDays() { return recencyOption().days ?? null; }
+function recencyIsActive() {
+  const o = recencyOption();
+  return o.days != null || !!o.season;
+}
+function lastStockedDate(lake) {
+  let latest = null;
+  for (const s of lake.stockings) {
+    if (!stockingPasses(s)) continue;
+    if (latest === null || stockingSortKey(s) > latest) latest = stockingSortKey(s);
+  }
+  return latest;
 }
 function lakePassesFilters(lake) {
   if (lake.distanceKm > state.maxDistanceKm) return false;
-  return lake.stockings.some(stockingPasses);
+  if (!lake.stockings.some(stockingPasses)) return false;
+  return recencyPasses(lake, recencyOption());
+}
+function recencyPasses(lake, option) {
+  if (!option.days && !option.season) return true;
+  const last = lastStockedDate(lake);
+  if (!last) return false;
+  if (option.season) return Number(last.slice(0, 4)) === ALL_YEARS[ALL_YEARS.length - 1];
+  const age = daysAgo(last);
+  return age !== null && age <= option.days;
 }
 function filteredFishTotal(lake) {
   let total = 0;
@@ -580,22 +819,22 @@ function filteredDominantOrder(lake) {
 }
 function pinRadius(totalFish) {
   if (totalFish <= 0) return PIN_MIN;
-  const frac = Math.sqrt(totalFish) / SQRT_MAX;
-  return PIN_MIN + frac * (PIN_MAX - PIN_MIN);
+  return PIN_MIN + (Math.sqrt(totalFish) / SQRT_MAX) * (PIN_MAX - PIN_MIN);
 }
+function visibleLakes() { return LAKES.filter(lakePassesFilters); }
+function mappableLakes() { return visibleLakes().filter(l => l.lat != null && l.lon != null); }
 
 // ============================================================
-// POPUP HTML
+// POPUP
 // ============================================================
 function profileBlock(lake) {
   const parts = [];
   if (lake.zone) {
-    const zone = esc(lake.zone);
     const url = `https://albertaregulations.ca/fishingregs/${encodeURIComponent(lake.zone.toLowerCase())}.html`;
-    parts.push(`<span class="profile-item"><span class="profile-label">Zone</span> <a class="zone-link" href="${url}" target="_blank" rel="noopener">${zone}</a></span>`);
+    parts.push(`<span><span class="profile-label">Zone</span> <a class="zone-link" href="${url}" target="_blank" rel="noopener">${esc(lake.zone)}</a></span>`);
   }
   if (lake.surface_area_ha != null) {
-    parts.push(`<span class="profile-item"><span class="profile-label">Area</span> ${esc(lake.surface_area_ha)} ha</span>`);
+    parts.push(`<span><span class="profile-label">Area</span> ${esc(lake.surface_area_ha)} ha</span>`);
   }
   if (!parts.length && !lake.amenities) return "";
   let html = parts.length ? `<div class="profile-row">${parts.join(" &nbsp;·&nbsp; ")}</div>` : "";
@@ -606,17 +845,24 @@ function profileBlock(lake) {
 }
 
 function popupHtml(lake) {
+  const key = lakeKey(lake);
   const filteredTotal = filteredFishTotal(lake);
   const gmapsUrl = `https://www.google.com/maps/search/?api=1&query=${lake.lat},${lake.lon}`;
-  const activeYears = [...new Set(lake.stockings.filter(stockingPasses).map(s => s.year))].sort((a, b) => a - b);
+  const rows = [...lake.stockings].filter(stockingPasses)
+    .sort((a, b) => stockingSortKey(b).localeCompare(stockingSortKey(a)));
+  const activeYears = [...new Set(rows.map(s => s.year))].sort((a, b) => a - b);
   const activeSpecies = filteredDominantOrder(lake);
   const yearRangeText = activeYears.length
     ? (activeYears.length === 1 ? String(activeYears[0]) : `${activeYears[0]}–${activeYears[activeYears.length - 1]}`)
     : "none";
-  const speciesText = activeSpecies.length ? activeSpecies.join(", ") : "none";
-  const rows = [...lake.stockings]
-    .filter(stockingPasses)
-    .sort((a, b) => stockingSortKey(b).localeCompare(stockingSortKey(a)));
+  const speciesText = activeSpecies.length
+    ? activeSpecies.map(c => SPECIES_META[c]?.short || c).join(", ") : "none";
+
+  const last = rows[0];
+  const age = last ? daysAgo(last.date) : null;
+  const lastText = last
+    ? `${fmtDate(last.date, last.date_precision)}${age != null && age <= 365 ? ` · ${age} days ago` : ""}`
+    : "—";
 
   const tableRows = rows.map(s => {
     const color = SPECIES_META[s.species]?.color || "#888";
@@ -629,21 +875,18 @@ function popupHtml(lake) {
     </tr>`;
   }).join("");
 
-  const approxCoord = lake.coord_source === "ats"
-    ? `<div class="profile-row">Position estimated from the report's land description; expect a few hundred metres of error.</div>`
-    : "";
+  const approx = lake.coord_source === "ats"
+    ? `<div class="profile-row">Position estimated from the report's land description; expect a few hundred metres of error.</div>` : "";
+  const fav = state.favourites.has(key);
+  const distText = Number.isFinite(lake.distanceKm) ? `${Math.round(lake.distanceKm)} km` : "—";
 
   return `<div class="lake-popup">
-    <h3>${esc(lake.name)}</h3>
-    <div class="ats">${esc(lake.ats || lakeKey(lake))}</div>
-    <div class="meta">
-      <strong>${Math.round(lake.distanceKm)} km</strong> from Red Deer &nbsp;·&nbsp;
-      <strong>${fmtNum(filteredTotal)}</strong> fish (shown)
-    </div>
-    <div class="meta">
-      <strong>Years shown:</strong> ${esc(yearRangeText)} &nbsp;·&nbsp; <strong>Species:</strong> ${esc(speciesText)}
-    </div>
-    ${approxCoord}
+    <h3><button class="star ${fav ? "on" : ""}" data-fav="${esc(key)}" title="${fav ? "Remove from favourites" : "Add to favourites"}" aria-label="${fav ? "Remove from favourites" : "Add to favourites"}">${fav ? "★" : "☆"}</button>${esc(lake.name)}</h3>
+    <div class="ats">${esc(lake.ats || key)}</div>
+    <div class="meta"><strong>${distText}</strong> from ${esc(state.home.name)} &nbsp;·&nbsp; <strong>${fmtNum(filteredTotal)}</strong> fish shown</div>
+    <div class="meta"><strong>Last stocked:</strong> ${esc(lastText)}</div>
+    <div class="meta"><strong>Years:</strong> ${esc(yearRangeText)} &nbsp;·&nbsp; <strong>Species:</strong> ${esc(speciesText)}</div>
+    ${approx}
     ${profileBlock(lake)}
     <table>
       <thead><tr><th>Date</th><th>Sp.</th><th>Strain</th><th>cm</th><th>Number</th></tr></thead>
@@ -654,41 +897,65 @@ function popupHtml(lake) {
 }
 
 // ============================================================
-// MAP + RENDERING
+// MAP
 // ============================================================
-let map;
-let pinLayer;
-let currentBasemap;
+let map, pinLayer, homeMarker, currentBasemap = "topo";
 let rerenderingPins = false;
 const basemaps = {};
 
-function initMap() {
-  map = L.map("map", { zoomControl: true }).setView([52.5, -114.5], 6);
+function pinIcon(lake, radius, order) {
+  const primary = SPECIES_META[order[0]]?.color || "#888";
+  const secondary = order.length > 1 ? SPECIES_META[order[1]]?.color : null;
+  const size = Math.round(radius * 2);
+  const ring = secondary ? `box-shadow:0 0 0 2.5px ${secondary};` : "";
+  const initial = size >= 20 ? (SPECIES_META[order[0]]?.initial || "") : "";
+  const fontSize = Math.max(8, Math.round(size * 0.42));
+  const fav = state.favourites.has(lakeKey(lake)) ? " fav" : "";
+  return L.divIcon({
+    className: "pin-wrap",
+    html: `<div class="pin${fav}" style="width:${size}px;height:${size}px;background:${primary};${ring}font-size:${fontSize}px">${initial}</div>`,
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
+  });
+}
 
+function tooltipHtml(lake) {
+  const last = [...lake.stockings].filter(stockingPasses)
+    .sort((a, b) => stockingSortKey(b).localeCompare(stockingSortKey(a)))[0];
+  const when = last ? fmtDate(last.date, last.date_precision) : "—";
+  const dist = Number.isFinite(lake.distanceKm) ? `${Math.round(lake.distanceKm)} km · ` : "";
+  return `<b>${esc(lake.name)}</b><br><span class="tip-sub">${dist}${fmtNum(filteredFishTotal(lake))} fish · last ${esc(when)}</span>`;
+}
+
+function initMap() {
+  map = L.map("map", { zoomControl: true }).setView([53.2, -114.5], 6);
   basemaps.topo = L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
-    maxZoom: 17,
-    attribution: '© OpenTopoMap (CC-BY-SA) · © OpenStreetMap contributors'
+    maxZoom: 17, attribution: '© OpenTopoMap (CC-BY-SA) · © OpenStreetMap contributors'
   });
   basemaps.osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution: '© OpenStreetMap contributors'
+    maxZoom: 19, attribution: '© OpenStreetMap contributors'
   });
   basemaps.topo.addTo(map);
-  currentBasemap = "topo";
 
-  const homeIcon = L.divIcon({
-    className: "home-marker",
-    html: `<div style="width:14px;height:14px;background:#c98a3e;border:2px solid #1f211e;
-      border-radius:50%;box-shadow:0 0 0 2px #c98a3e66;"></div>`,
-    iconSize: [14, 14], iconAnchor: [7, 7]
-  });
-  L.marker([HOME.lat, HOME.lon], { icon: homeIcon, zIndexOffset: 1000 })
-    .bindTooltip("Red Deer", { permanent: false, direction: "right" })
-    .addTo(map);
+  pinLayer = L.markerClusterGroup({
+    disableClusteringAtZoom: CLUSTER_OFF_ZOOM,
+    spiderfyOnMaxZoom: true,
+    showCoverageOnHover: false,
+    maxClusterRadius: 44,
+    iconCreateFunction(cluster) {
+      const n = cluster.getChildCount();
+      const size = n >= 100 ? 46 : n >= 20 ? 40 : 34;
+      return L.divIcon({
+        html: `<div>${n}</div>`, className: "marker-cluster",
+        iconSize: [size, size],
+      });
+    },
+  }).addTo(map);
 
-  pinLayer = L.layerGroup().addTo(map);
+  placeHomeMarker();
 
-  map.on("click", () => {
+  map.on("click", ev => {
+    if (state.pickingHome) { setHome({ lat: ev.latlng.lat, lon: ev.latlng.lng, name: "Chosen point" }); return; }
     if (Date.now() - lastPinClickAt < PIN_CLICK_GRACE_MS) return;
     state.openPopupAts = null;
     if (state.focusedLakeAts != null) {
@@ -697,96 +964,250 @@ function initMap() {
       renderChart();
     }
   });
-  // Clearing the pin layer closes any open popup; that is bookkeeping, not the
-  // user dismissing it, so don't forget which lake to re-open.
   map.on("popupclose", () => { if (!rerenderingPins) state.openPopupAts = null; });
+  map.on("popupopen", e => {
+    const btn = e.popup.getElement()?.querySelector("[data-fav]");
+    if (btn) btn.addEventListener("click", () => toggleFavourite(btn.dataset.fav));
+  });
+}
+
+function placeHomeMarker() {
+  const icon = L.divIcon({
+    className: "pin-wrap",
+    html: `<div style="width:15px;height:15px;background:#c98a3e;border:2px solid #1f211e;border-radius:50%;box-shadow:0 0 0 3px rgba(201,138,62,0.4)"></div>`,
+    iconSize: [15, 15], iconAnchor: [7.5, 7.5],
+  });
+  if (homeMarker) map.removeLayer(homeMarker);
+  homeMarker = L.marker([state.home.lat, state.home.lon], { icon, draggable: true, zIndexOffset: 1000 })
+    .bindTooltip(() => `Home: ${state.home.name}`, { direction: "right" })
+    .addTo(map);
+  homeMarker.on("dragend", () => {
+    const p = homeMarker.getLatLng();
+    setHome({ lat: p.lat, lon: p.lng, name: "Chosen point" }, { skipMarker: true });
+  });
 }
 
 function renderPins() {
   rerenderingPins = true;
   pinLayer.clearLayers();
-  let shown = 0;
+  const markers = [];
+  let shown = 0, unplaced = 0;
 
   for (const lake of LAKES) {
     if (!lakePassesFilters(lake)) continue;
-    // A handful of lakes come from reports that gave a name and nothing else,
-    // so there is nowhere to put a pin. They still count in the charts.
-    if (lake.lat == null || lake.lon == null) continue;
+    if (lake.lat == null || lake.lon == null) { unplaced++; continue; }
     shown++;
-
     const order = filteredDominantOrder(lake);
-    const primaryColor = SPECIES_META[order[0]]?.color || "#888";
-    const hasSecondary = order.length > 1;
-    const secondaryColor = hasSecondary ? SPECIES_META[order[1]]?.color : null;
-    const r = pinRadius(filteredFishTotal(lake));
-
-    if (hasSecondary) {
-      L.circleMarker([lake.lat, lake.lon], {
-        radius: r + 2.5, fillOpacity: 0,
-        color: secondaryColor, weight: 2.5, interactive: false
-      }).addTo(pinLayer);
-    }
-
-    const marker = L.circleMarker([lake.lat, lake.lon], {
-      radius: r, fillColor: primaryColor, fillOpacity: 0.82,
-      color: "#1f211e", weight: 1.2,
+    const marker = L.marker([lake.lat, lake.lon], {
+      icon: pinIcon(lake, pinRadius(filteredFishTotal(lake)), order),
+      riseOnHover: true,
     });
-    // Popup content is generated on open so it always reflects current filters.
+    marker.bindTooltip(() => tooltipHtml(lake), { className: "lake-tip", direction: "top", offset: [0, -6] });
     marker.bindPopup(() => popupHtml(lake), { maxWidth: 380 });
-    marker.on("click", function() {
+    marker.on("click", () => {
       lastPinClickAt = Date.now();
       state.openPopupAts = lakeKey(lake);
       state.focusedLakeAts = lakeKey(lake);
       updateChartScopeUI();
       renderChart();
     });
-    marker.addTo(pinLayer);
-    // Re-opened after a filter change rebuilt the layer.
-    if (state.openPopupAts === lakeKey(lake)) marker.openPopup();
+    marker._lakeKey = lakeKey(lake);
+    markers.push(marker);
   }
-
+  pinLayer.addLayers(markers);
   rerenderingPins = false;
-  if (shown === 0) state.openPopupAts = null;
+
+  if (state.openPopupAts) {
+    const target = markers.find(m => m._lakeKey === state.openPopupAts);
+    if (target) pinLayer.zoomToShowLayer(target, () => target.openPopup());
+    else state.openPopupAts = null;
+  }
 
   document.getElementById("result-count").textContent =
     `Showing ${shown} of ${LAKES.length} lakes`;
-  const emptyState = document.getElementById("empty-state");
-  emptyState.classList.toggle("show", shown === 0);
+  document.getElementById("empty-state").classList.toggle("show", shown === 0 && unplaced === 0);
   updateFilterSummary();
+  return shown;
+}
+
+function zoomToResults() {
+  const lakes = mappableLakes();
+  if (!lakes.length) return;
+  map.fitBounds(L.latLngBounds(lakes.map(l => [l.lat, l.lon])).pad(0.12));
 }
 
 // ============================================================
-// SIDEBAR UI
+// HOME LOCATION
+// ============================================================
+function setHome(next, opts = {}) {
+  state.home = { lat: Number(next.lat), lon: Number(next.lon), name: next.name || "Chosen point" };
+  state.pickingHome = false;
+  writeStore(STORE_HOME, state.home);
+  if (!opts.skipMarker) placeHomeMarker();
+  else homeMarker.setLatLng([state.home.lat, state.home.lon]);
+  recomputeDistances();
+  updateHomeUI();
+  onFilterChange();
+}
+
+function updateHomeUI() {
+  document.getElementById("home-name").innerHTML =
+    `<strong>${esc(state.home.name)}</strong> <span class="coord">${state.home.lat.toFixed(3)}, ${state.home.lon.toFixed(3)}</span>`;
+  const hint = document.getElementById("home-hint");
+  hint.textContent = state.pickingHome
+    ? "Now click anywhere on the map to set home."
+    : "Drag the home marker to move it.";
+  hint.classList.toggle("armed", state.pickingHome);
+  document.getElementById("home-pick").classList.toggle("active", state.pickingHome);
+}
+
+function buildHomeControls() {
+  document.getElementById("home-reset").addEventListener("click", () => setHome(DEFAULT_HOME));
+  document.getElementById("home-pick").addEventListener("click", () => {
+    state.pickingHome = !state.pickingHome;
+    updateHomeUI();
+    if (state.pickingHome) closeMenu();
+  });
+  document.getElementById("home-locate").addEventListener("click", () => {
+    const hint = document.getElementById("home-hint");
+    if (!navigator.geolocation) { hint.textContent = "This browser will not share a location."; return; }
+    hint.textContent = "Asking for your location…";
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        setHome({ lat: pos.coords.latitude, lon: pos.coords.longitude, name: "My location" });
+        map.setView([pos.coords.latitude, pos.coords.longitude], 9);
+      },
+      () => { hint.textContent = "Location declined. Pick on the map instead."; },
+      { timeout: 10000 }
+    );
+  });
+}
+
+// ============================================================
+// FAVOURITES
+// ============================================================
+function toggleFavourite(key) {
+  if (state.favourites.has(key)) state.favourites.delete(key);
+  else state.favourites.add(key);
+  writeStore(STORE_FAVS, [...state.favourites]);
+  renderFavourites();
+  renderPins();
+  if (state.view === "list") renderList();
+  const open = document.querySelector(".leaflet-popup [data-fav]");
+  if (open && open.dataset.fav === key) {
+    const on = state.favourites.has(key);
+    open.textContent = on ? "★" : "☆";
+    open.classList.toggle("on", on);
+  }
+}
+
+function renderFavourites() {
+  const host = document.getElementById("fav-list");
+  const favs = [...state.favourites]
+    .map(k => LAKES.find(l => lakeKey(l) === k))
+    .filter(Boolean)
+    .sort((a, b) => a.distanceKm - b.distanceKm);
+  host.innerHTML = favs.map(l => `
+    <li>
+      <button data-goto="${esc(lakeKey(l))}" title="Show on the map">★</button>
+      <span class="fav-name">${esc(l.name)}</span>
+      <span class="species-count">${Number.isFinite(l.distanceKm) ? Math.round(l.distanceKm) + " km" : ""}</span>
+      <button data-unfav="${esc(lakeKey(l))}" title="Remove" aria-label="Remove ${esc(l.name)}">×</button>
+    </li>`).join("");
+  document.getElementById("fav-empty").style.display = favs.length ? "none" : "";
+  document.getElementById("fav-route").style.display = favs.length >= 1 ? "" : "none";
+}
+
+function favouriteRouteUrl() {
+  const favs = [...state.favourites]
+    .map(k => LAKES.find(l => lakeKey(l) === k))
+    .filter(l => l && l.lat != null)
+    .sort((a, b) => a.distanceKm - b.distanceKm);
+  if (!favs.length) return null;
+  const origin = `${state.home.lat},${state.home.lon}`;
+  const stops = favs.map(l => `${l.lat},${l.lon}`);
+  const destination = stops.pop();
+  const waypoints = stops.length ? `&waypoints=${stops.join("|")}` : "";
+  return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}${waypoints}`;
+}
+
+// ============================================================
+// SIDEBAR CONTROLS
 // ============================================================
 function buildSpeciesFilters() {
   const host = document.getElementById("species-filters");
-  // Count lakes, not stocking rows — the sidebar's headline number is lakes,
-  // and a lake stocked twelve times is still one place to fish.
   const counts = {};
   for (const l of LAKES) {
     for (const code of new Set(l.stockings.map(s => s.species).filter(Boolean))) {
       counts[code] = (counts[code] || 0) + 1;
     }
   }
-
   host.innerHTML = SPECIES_ORDER.map(code => {
     const meta = SPECIES_META[code];
     const n = counts[code] || 0;
     return `<label class="species-row">
-      <input type="checkbox" data-species="${code}" checked>
-      <span class="species-swatch" style="background:${meta.color}"></span>
+      <input type="checkbox" data-species="${code}" ${state.species.has(code) ? "checked" : ""}>
+      <span class="species-swatch" style="background:${meta.color}">${meta.initial}</span>
       <span class="species-label">${meta.label}</span>
       <span class="species-count" title="${n} lake${n === 1 ? "" : "s"}">${n}</span>
     </label>`;
   }).join("");
-
   host.addEventListener("change", e => {
     const cb = e.target;
     if (!cb.matches("input[type=checkbox]")) return;
-    const code = cb.dataset.species;
-    if (cb.checked) state.species.add(code); else state.species.delete(code);
+    if (cb.checked) state.species.add(cb.dataset.species); else state.species.delete(cb.dataset.species);
     onFilterChange();
   });
+}
+
+function buildSizeFilters() {
+  const host = document.getElementById("size-filters");
+  host.innerHTML = SIZE_CLASSES.map(c => `
+    <label class="species-row">
+      <input type="checkbox" data-size="${c.id}" ${state.sizes.has(c.id) ? "checked" : ""}>
+      <span class="species-label">${c.label}</span>
+    </label>`).join("");
+  host.addEventListener("change", e => {
+    const cb = e.target;
+    if (!cb.matches("input[type=checkbox]")) return;
+    if (cb.checked) state.sizes.add(cb.dataset.size); else state.sizes.delete(cb.dataset.size);
+    onFilterChange();
+  });
+}
+
+function buildRecencyChips() {
+  const host = document.getElementById("recency-chips");
+  host.innerHTML = RECENCY_OPTIONS.map(o =>
+    `<button class="chip ${state.recency === o.id ? "active" : ""}" data-recency="${o.id}">${o.label}<span class="rc-n"></span></button>`).join("");
+  host.addEventListener("click", e => {
+    const chip = e.target.closest("[data-recency]");
+    if (!chip) return;
+    state.recency = chip.dataset.recency;
+    host.querySelectorAll(".chip").forEach(c => c.classList.toggle("active", c === chip));
+    onFilterChange();
+  });
+  updateRecencyCounts();
+}
+
+/** Count how many lakes each window would show, ignoring the window itself. */
+function updateRecencyCounts() {
+  const base = LAKES.filter(l =>
+    l.distanceKm <= state.maxDistanceKm && l.stockings.some(stockingPasses));
+  for (const o of RECENCY_OPTIONS) {
+    const chip = document.querySelector(`[data-recency="${o.id}"] .rc-n`);
+    if (!chip) continue;
+    const n = o.id === "any" ? base.length : base.filter(l => recencyPasses(l, o)).length;
+    chip.textContent = ` ${n}`;
+  }
+  const newest = LAKES.reduce((acc, l) => {
+    for (const s of l.stockings) if (!acc || s.date > acc) acc = s.date;
+    return acc;
+  }, null);
+  const note = document.getElementById("recency-note");
+  if (note && newest) {
+    const age = daysAgo(newest);
+    note.textContent = `Newest stocking on record: ${fmtDate(newest)}${age != null ? `, ${age} days ago` : ""}.`;
+  }
 }
 
 function buildYearChips() {
@@ -794,124 +1215,298 @@ function buildYearChips() {
   host.innerHTML = ALL_YEARS.map(y => {
     const partial = PROVISIONAL_YEARS.has(y);
     const title = partial ? ` title="${y} is still under way; Alberta updates this report later in the season"` : "";
-    return `<button class="year-chip active" data-year="${y}"${title}>${y}${partial ? "*" : ""}</button>`;
+    return `<button class="chip ${state.years.has(y) ? "active" : ""}" data-year="${y}"${title}>${y}${partial ? "*" : ""}</button>`;
   }).join("");
-
   host.addEventListener("click", e => {
-    const chip = e.target.closest(".year-chip");
+    const chip = e.target.closest("[data-year]");
     if (!chip) return;
     const y = Number(chip.dataset.year);
-    if (state.years.has(y)) {
-      state.years.delete(y);
-      chip.classList.remove("active");
-    } else {
-      state.years.add(y);
-      chip.classList.add("active");
-    }
+    if (state.years.has(y)) { state.years.delete(y); chip.classList.remove("active"); }
+    else { state.years.add(y); chip.classList.add("active"); }
     onFilterChange();
   });
-
-  document.querySelectorAll(".year-shortcut").forEach(btn => {
+  document.querySelectorAll(".shortcut").forEach(btn => {
     btn.addEventListener("click", () => {
       const range = btn.dataset.range;
       if (range === "all") state.years = new Set(ALL_YEARS);
       else if (range === "none") state.years = new Set();
-      else if (range === "last5") {
-        const last5 = ALL_YEARS.slice(-5);
-        state.years = new Set(last5);
-      } else if (range === "latest") {
-        state.years = new Set([ALL_YEARS[ALL_YEARS.length - 1]]);
-      }
+      else if (range === "last5") state.years = new Set(ALL_YEARS.slice(-5));
+      else if (range === "latest") state.years = new Set([ALL_YEARS[ALL_YEARS.length - 1]]);
       syncYearChips();
       onFilterChange();
     });
   });
 }
-
 function syncYearChips() {
-  document.querySelectorAll(".year-chip").forEach(chip => {
-    const y = Number(chip.dataset.year);
-    chip.classList.toggle("active", state.years.has(y));
-  });
+  document.querySelectorAll("[data-year]").forEach(chip =>
+    chip.classList.toggle("active", state.years.has(Number(chip.dataset.year))));
 }
 
 function buildDistanceSlider() {
   const slider = document.getElementById("dist-slider");
-  const value = document.getElementById("dist-value");
+  slider.value = state.maxDistanceKm;
   slider.addEventListener("input", () => {
-    const km = Number(slider.value);
-    state.maxDistanceKm = km;
-    value.textContent = km >= 1000 ? "≤ 1000 km" : `≤ ${km} km`;
+    state.maxDistanceKm = Number(slider.value);
+    updateDistanceLabel();
     onFilterChange();
   });
+  updateDistanceLabel();
+}
+function updateDistanceLabel() {
+  document.getElementById("dist-value").textContent =
+    state.maxDistanceKm >= 1000 ? "≤ 1000 km" : `≤ ${state.maxDistanceKm} km`;
 }
 
 function updateFilterSummary() {
-  const speciesLabel = state.species.size === SPECIES_ORDER.length
-    ? "all species"
-    : `${state.species.size}/${SPECIES_ORDER.length} species`;
-  const yearsLabel = state.years.size === ALL_YEARS.length
-    ? "all years"
-    : `${state.years.size}/${ALL_YEARS.length} years`;
+  const speciesLabel = state.species.size === SPECIES_ORDER.length ? "all species" : `${state.species.size}/${SPECIES_ORDER.length} species`;
+  const yearsLabel = state.years.size === ALL_YEARS.length ? "all years" : `${state.years.size}/${ALL_YEARS.length} years`;
   const distLabel = state.maxDistanceKm >= 1000 ? "≤ 1000 km" : `≤ ${state.maxDistanceKm} km`;
+  const sizeLabel = state.sizes.size === SIZE_IDS.length ? "all sizes" : `${state.sizes.size}/${SIZE_IDS.length} sizes`;
+  const recency = recencyOption();
+  const recencyLabel = recency.season ? "this season"
+    : recency.days ? `stocked in ${recency.label}` : "any time";
   document.getElementById("filter-summary").textContent =
-    `Filters: ${speciesLabel} · ${yearsLabel} · ${distLabel}`;
+    `${speciesLabel} · ${yearsLabel} · ${sizeLabel} · ${distLabel} · ${recencyLabel}`;
 }
 
 function updateDataQualitySummary() {
   const el = document.getElementById("data-quality");
-  const malformed = DATA_ISSUES.invalidStockings;
   const estimated = LAKES.filter(l => l.coord_source === "ats").length;
-  const parts = [];
   const unknown = LAKES.filter(l => l.coord_source === "unknown").length;
+  const parts = [];
   parts.push(`<strong>${LAKES.length - estimated - unknown}</strong> of <strong>${LAKES.length}</strong> lakes at verified coordinates`);
   if (estimated) parts.push(`<strong>${estimated}</strong> estimated from the land description`);
-  const unplaced = LAKES.filter(l => l.lat == null || l.lon == null).length;
-  if (unplaced) parts.push(`<strong>${unplaced}</strong> lake(s) with no known position, not shown on the map`);
-  if (malformed) parts.push(`<strong>${malformed}</strong> malformed row(s) skipped`);
-  if (QUALITY_SUMMARY) {
-    const q = QUALITY_SUMMARY;
-    if (q.rows_total) {
-      const pct = (q.rows_linked / q.rows_total * 100).toFixed(1);
-      parts.push(`<strong>${pct}%</strong> of ${fmtNum(q.rows_total)} report rows linked across years`);
-    }
-    if (q.rows_awaiting_review) {
-      parts.push(`<strong>${q.rows_awaiting_review}</strong> row(s) awaiting a linking decision`);
+  if (unknown) parts.push(`<strong>${unknown}</strong> with no known position, not shown on the map`);
+  if (DATA_ISSUES.invalidStockings) parts.push(`<strong>${DATA_ISSUES.invalidStockings}</strong> malformed row(s) skipped`);
+  if (QUALITY_SUMMARY && QUALITY_SUMMARY.rows_total) {
+    const pct = (QUALITY_SUMMARY.rows_linked / QUALITY_SUMMARY.rows_total * 100).toFixed(1);
+    parts.push(`<strong>${pct}%</strong> of ${fmtNum(QUALITY_SUMMARY.rows_total)} report rows linked across years`);
+    if (QUALITY_SUMMARY.rows_awaiting_review) {
+      parts.push(`<strong>${QUALITY_SUMMARY.rows_awaiting_review}</strong> row(s) awaiting a linking decision`);
     }
   }
-  el.innerHTML = `Data quality: ${parts.join(" · ")}`;
+  el.innerHTML = parts.join(" · ");
+
+  const partial = ALL_YEARS.filter(y => PROVISIONAL_YEARS.has(y));
+  document.getElementById("legend").innerHTML =
+    (partial.length ? `<strong>${partial.join(", ")}*</strong> is still in progress — Alberta updates that report later in the season.<br><br>` : "") +
+    `Pin size follows the number of fish shown. The letter is the main species; a ring means a second species is stocked there too. Pins group together when zoomed out.`;
 }
 
 function buildBasemapToggle() {
-  document.querySelectorAll(".basemap-btn").forEach(btn => {
+  document.querySelectorAll("[data-base]").forEach(btn => {
     btn.addEventListener("click", () => {
       const target = btn.dataset.base;
       if (target === currentBasemap) return;
       map.removeLayer(basemaps[currentBasemap]);
       basemaps[target].addTo(map);
       currentBasemap = target;
-      document.querySelectorAll(".basemap-btn").forEach(b =>
-        b.classList.toggle("active", b === btn));
+      document.querySelectorAll("[data-base]").forEach(b => b.classList.toggle("active", b === btn));
+    });
+  });
+}
+
+function buildSelectAll() {
+  document.querySelectorAll("[data-all]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (btn.dataset.all === "species") {
+        state.species = new Set(SPECIES_ORDER);
+        document.querySelectorAll("[data-species]").forEach(cb => { cb.checked = true; });
+      } else {
+        state.sizes = new Set(SIZE_IDS);
+        document.querySelectorAll("[data-size]").forEach(cb => { cb.checked = true; });
+      }
+      onFilterChange();
     });
   });
 }
 
 // ============================================================
-// CHART PANEL
+// SEARCH
+// ============================================================
+function buildSearch() {
+  const input = document.getElementById("search");
+  const results = document.getElementById("search-results");
+  let active = -1;
+
+  const close = () => { results.innerHTML = ""; active = -1; input.setAttribute("aria-expanded", "false"); };
+
+  const render = () => {
+    const q = input.value.trim().toLowerCase();
+    if (q.length < 2) return close();
+    const matches = LAKES
+      .filter(l => l.name.toLowerCase().includes(q))
+      .sort((a, b) => {
+        const aStarts = a.name.toLowerCase().startsWith(q) ? 0 : 1;
+        const bStarts = b.name.toLowerCase().startsWith(q) ? 0 : 1;
+        return aStarts - bStarts || a.distanceKm - b.distanceKm;
+      })
+      .slice(0, 12);
+    results.innerHTML = matches.map((l, i) =>
+      `<li role="option" data-key="${esc(lakeKey(l))}" ${i === active ? 'aria-selected="true"' : ""}>
+        <span style="flex:1">${esc(l.name)}</span>
+        <span class="r-dist">${Number.isFinite(l.distanceKm) ? Math.round(l.distanceKm) + " km" : ""}</span>
+      </li>`).join("");
+    input.setAttribute("aria-expanded", matches.length ? "true" : "false");
+  };
+
+  input.addEventListener("input", () => { active = -1; render(); });
+  input.addEventListener("keydown", e => {
+    const items = [...results.querySelectorAll("li")];
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      if (!items.length) return;
+      active = (active + (e.key === "ArrowDown" ? 1 : -1) + items.length) % items.length;
+      render();
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      const pick = items[active >= 0 ? active : 0];
+      if (pick) gotoLake(pick.dataset.key);
+    } else if (e.key === "Escape") { close(); }
+  });
+  results.addEventListener("click", e => {
+    const li = e.target.closest("li[data-key]");
+    if (li) gotoLake(li.dataset.key);
+  });
+  document.addEventListener("click", e => {
+    if (!e.target.closest(".search-wrap")) close();
+  });
+}
+
+function gotoLake(key) {
+  const lake = LAKES.find(l => lakeKey(l) === key);
+  if (!lake) return;
+  document.getElementById("search-results").innerHTML = "";
+  document.getElementById("search").value = "";
+  closeMenu();
+  if (state.view !== "map") setView("map");
+  if (lake.lat == null) {
+    document.getElementById("home-hint").textContent = `${lake.name} has no recorded position.`;
+    return;
+  }
+  // The lake may be filtered out; make sure it is on the map before flying to it.
+  if (!lakePassesFilters(lake)) {
+    state.recency = "any";
+    state.maxDistanceKm = 1000;
+    document.getElementById("dist-slider").value = 1000;
+    updateDistanceLabel();
+    buildRecencyChipsState();
+    onFilterChange();
+  }
+  state.openPopupAts = key;
+  state.focusedLakeAts = key;
+  updateChartScopeUI();
+  map.setView([lake.lat, lake.lon], Math.max(map.getZoom(), CLUSTER_OFF_ZOOM + 1));
+  renderPins();
+  renderChart();
+}
+function buildRecencyChipsState() {
+  document.querySelectorAll("[data-recency]").forEach(c =>
+    c.classList.toggle("active", c.dataset.recency === state.recency));
+}
+
+// ============================================================
+// LIST VIEW
+// ============================================================
+let listSort = { key: "distanceKm", asc: true };
+
+function listRows() {
+  return visibleLakes().map(l => {
+    const last = lastStockedDate(l);
+    return {
+      key: lakeKey(l), name: l.name, distanceKm: l.distanceKm,
+      lastDate: last || "", fish: filteredFishTotal(l),
+      species: filteredDominantOrder(l), zone: l.zone || "",
+      lat: l.lat, lon: l.lon,
+    };
+  });
+}
+
+function renderList() {
+  const rows = listRows();
+  const { key, asc } = listSort;
+  rows.sort((a, b) => {
+    let va = a[key], vb = b[key];
+    if (key === "species") { va = va.join(","); vb = vb.join(","); }
+    if (typeof va === "string") return asc ? va.localeCompare(vb) : vb.localeCompare(va);
+    va = Number.isFinite(va) ? va : (asc ? Infinity : -Infinity);
+    vb = Number.isFinite(vb) ? vb : (asc ? Infinity : -Infinity);
+    return asc ? va - vb : vb - va;
+  });
+  document.querySelector("#list-table tbody").innerHTML = rows.map(r => {
+    const fav = state.favourites.has(r.key);
+    return `<tr>
+      <td class="name"><button class="star ${fav ? "on" : ""}" data-listfav="${esc(r.key)}" aria-label="Favourite">${fav ? "★" : "☆"}</button> ${esc(r.name)}</td>
+      <td class="num">${Number.isFinite(r.distanceKm) ? Math.round(r.distanceKm) : "—"}</td>
+      <td>${esc(r.lastDate ? fmtDate(r.lastDate) : "—")}</td>
+      <td class="num">${fmtNum(r.fish)}</td>
+      <td>${r.species.map(c => `<span class="sp-tag" style="background:${SPECIES_META[c]?.color || "#888"}">${c}</span>`).join(" ")}</td>
+      <td>${esc(r.zone || "—")}</td>
+      <td>${r.lat != null ? `<a class="linkish" data-listgoto="${esc(r.key)}">map</a>` : "—"}</td>
+    </tr>`;
+  }).join("");
+  document.getElementById("list-count").textContent = `${rows.length} lakes`;
+  document.querySelectorAll("#list-table th[data-k]").forEach(th => {
+    th.classList.toggle("sorted", th.dataset.k === key);
+    th.classList.toggle("asc", th.dataset.k === key && asc);
+  });
+}
+
+function buildList() {
+  document.querySelectorAll("#list-table th[data-k]").forEach(th => {
+    th.addEventListener("click", () => {
+      if (listSort.key === th.dataset.k) listSort.asc = !listSort.asc;
+      else listSort = { key: th.dataset.k, asc: th.dataset.k === "name" || th.dataset.k === "zone" };
+      renderList();
+    });
+  });
+  document.querySelector("#list-table tbody").addEventListener("click", e => {
+    const fav = e.target.closest("[data-listfav]");
+    if (fav) return toggleFavourite(fav.dataset.listfav);
+    const goto = e.target.closest("[data-listgoto]");
+    if (goto) gotoLake(goto.dataset.listgoto);
+  });
+  document.getElementById("export-csv").addEventListener("click", exportCsv);
+}
+
+function exportCsv() {
+  const header = ["Lake", "Distance km", "Last stocked", "Fish shown", "Species", "Zone", "Latitude", "Longitude"];
+  const quote = v => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const lines = [header.map(quote).join(",")];
+  for (const r of listRows()) {
+    lines.push([r.name, Number.isFinite(r.distanceKm) ? Math.round(r.distanceKm) : "",
+                r.lastDate, r.fish, r.species.join(" "), r.zone, r.lat ?? "", r.lon ?? ""].map(quote).join(","));
+  }
+  const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `alberta-trout-${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+
+function setView(view) {
+  state.view = view;
+  document.getElementById("map-wrap").classList.toggle("list-mode", view === "list");
+  document.querySelectorAll("[data-view]").forEach(b => b.classList.toggle("active", b.dataset.view === view));
+  if (view === "list") renderList();
+  else setTimeout(() => map.invalidateSize(), 60);
+  writeUrl();
+}
+
+// ============================================================
+// CHARTS
 // ============================================================
 let chart = null;
 function chart_ref() { return chart; }
 
 function updateChartScopeUI() {
   const row = document.getElementById("chart-scope-row");
-  const nameEl = document.getElementById("chart-scope-name");
-  if (!state.focusedLakeAts) {
-    row.hidden = true;
-    return;
-  }
+  if (!state.focusedLakeAts) { row.hidden = true; return; }
   const lk = LAKES.find(l => lakeKey(l) === state.focusedLakeAts);
   row.hidden = false;
-  nameEl.textContent = lk ? `${lk.name}${lk.ats ? ` (${lk.ats})` : ""}` : state.focusedLakeAts;
+  document.getElementById("chart-scope-name").textContent =
+    lk ? `${lk.name}${lk.ats ? ` (${lk.ats})` : ""}` : state.focusedLakeAts;
 }
 
 function buildChartToggle() {
@@ -929,232 +1524,209 @@ function buildChartToggle() {
     btn.classList.toggle("open", state.chartOpen);
     document.getElementById("map-wrap").classList.toggle("charts-open", state.chartOpen);
     btn.textContent = state.chartOpen ? "📊 Hide Charts" : "📊 Show Charts";
-    // Give the CSS transition a moment to settle, then invalidate map + draw chart
-    setTimeout(() => {
-      map.invalidateSize();
-      if (state.chartOpen) renderChart();
-    }, 260);
+    setTimeout(() => { map.invalidateSize(); if (state.chartOpen) renderChart(); }, 260);
   });
-
   document.querySelectorAll(".chart-type-btn").forEach(b => {
     b.addEventListener("click", () => {
       state.chartType = b.dataset.chart;
-      document.querySelectorAll(".chart-type-btn").forEach(x =>
-        x.classList.toggle("active", x === b));
+      document.querySelectorAll(".chart-type-btn").forEach(x => x.classList.toggle("active", x === b));
       updateChartHelperText();
       renderChart();
+      writeUrl();
     });
   });
+  updateChartHelperText();
 }
 
 function updateChartHelperText() {
-  const map = {
-    "stacked-species": "Stacked by species compares annual stocking mix across selected years.",
-    "grouped-season": "Spring vs Fall shows seasonal stocking split for each selected year.",
-    "line-trend": "Trend highlights year-over-year species direction and magnitude.",
+  const text = {
+    "stacked-species": "How much of each species went in, year by year.",
+    "grouped-season": "When in the year the fish went in. Spring is the main run; fall is the top-up.",
+    "line-trend": "Each species over time, so a rising or falling programme shows up.",
+    "calendar": "Every selected year folded into one calendar, so you can see which weeks a lake is usually stocked.",
   };
-  document.getElementById("chart-helper").textContent = map[state.chartType];
+  document.getElementById("chart-helper").textContent = text[state.chartType] || "";
+}
+
+function chartLakes() {
+  return state.focusedLakeAts
+    ? LAKES.filter(l => lakeKey(l) === state.focusedLakeAts)
+    : LAKES;
+}
+
+function computeChartData() {
+  const byYearSpecies = new Map();
+  const byYearSeason = new Map();
+  const byMonthSpecies = new Map();
+  let totalFish = 0;
+  const shownLakes = new Set();
+
+  for (const lake of chartLakes()) {
+    if (lake.distanceKm > state.maxDistanceKm) continue;
+    if (recencyIsActive() && !lakePassesFilters(lake)) continue;
+    let contributed = false;
+    for (const s of lake.stockings) {
+      if (!stockingPasses(s)) continue;
+      contributed = true;
+      const n = Number(s.number);
+      totalFish += n;
+
+      if (!byYearSpecies.has(s.year)) {
+        const zeros = {}; for (const c of SPECIES_ORDER) zeros[c] = 0;
+        byYearSpecies.set(s.year, zeros);
+      }
+      byYearSpecies.get(s.year)[s.species] += n;
+
+      if (!byYearSeason.has(s.year)) {
+        const zeros = {}; for (const sn of SEASONS) zeros[sn.id] = 0;
+        byYearSeason.set(s.year, zeros);
+      }
+      const season = seasonOf(s.date);
+      if (season) byYearSeason.get(s.year)[season] += n;
+
+      const month = monthOf(s.date);
+      if (month) {
+        if (!byMonthSpecies.has(month)) {
+          const zeros = {}; for (const c of SPECIES_ORDER) zeros[c] = 0;
+          byMonthSpecies.set(month, zeros);
+        }
+        byMonthSpecies.get(month)[s.species] += n;
+      }
+    }
+    if (contributed) shownLakes.add(lakeKey(lake));
+  }
+  return { totalFish, totalLakes: shownLakes.size, yearsCount: state.years.size,
+           byYearSpecies, byYearSeason, byMonthSpecies };
 }
 
 function updatePlanningSummary(data) {
   const el = document.getElementById("planning-summary");
   const years = [...data.byYearSpecies.keys()].sort((a, b) => a - b);
   if (years.length < 2) {
-    el.innerHTML = `<span><strong>YoY:</strong> need 2+ years</span><span><strong>Trend:</strong> —</span><span><strong>Top risers:</strong> —</span><span><strong>Top decliners:</strong> —</span>`;
+    el.innerHTML = `<span><strong>Year on year:</strong> pick two or more years</span>`;
     return;
   }
-  const latest = years[years.length - 1];
-  const prev = years[years.length - 2];
-  const totalForYear = y => {
-    const bucket = data.byYearSpecies.get(y);
-    return SPECIES_ORDER.reduce((sum, sp) => sum + (bucket?.[sp] || 0), 0);
-  };
-  const latestTotal = totalForYear(latest);
-  const prevTotal = totalForYear(prev);
+  const latest = years[years.length - 1], prev = years[years.length - 2];
+  const totalFor = y => SPECIES_ORDER.reduce((sum, sp) => sum + (data.byYearSpecies.get(y)?.[sp] || 0), 0);
+  const latestTotal = totalFor(latest), prevTotal = totalFor(prev);
   const delta = latestTotal - prevTotal;
   const pct = prevTotal > 0 ? (delta / prevTotal) * 100 : null;
-  const slope = (latestTotal - totalForYear(years[0])) / (years.length - 1);
+  const slope = (latestTotal - totalFor(years[0])) / (years.length - 1);
   const trend = slope > 0 ? "up" : slope < 0 ? "down" : "flat";
-  const perLakeDelta = [];
-  const lakesForChart = state.focusedLakeAts ? LAKES.filter(l => lakeKey(l) === state.focusedLakeAts) : LAKES;
-  for (const lake of lakesForChart) {
+
+  const perLake = [];
+  for (const lake of chartLakes()) {
     if (lake.distanceKm > state.maxDistanceKm) continue;
-    let latestLake = 0;
-    let prevLake = 0;
+    let a = 0, b = 0;
     for (const s of lake.stockings) {
       if (!stockingPasses(s)) continue;
-      if (s.year === latest) latestLake += s.number;
-      if (s.year === prev) prevLake += s.number;
+      if (s.year === latest) a += Number(s.number);
+      if (s.year === prev) b += Number(s.number);
     }
-    const d = latestLake - prevLake;
-    if (d !== 0) perLakeDelta.push({ lake: lake.name, delta: d });
+    if (a - b !== 0) perLake.push({ lake: lake.name, delta: a - b });
   }
-  perLakeDelta.sort((a, b) => b.delta - a.delta);
-  const risers = perLakeDelta.slice(0, 3).map(x => `${x.lake} (+${fmtNum(x.delta)})`).join(", ") || "none";
-  const decliners = perLakeDelta.slice(-3).reverse().map(x => `${x.lake} (${fmtNum(x.delta)})`).join(", ") || "none";
+  perLake.sort((x, y) => y.delta - x.delta);
+  const risers = perLake.slice(0, 3).filter(x => x.delta > 0).map(x => `${x.lake} (+${fmtNum(x.delta)})`).join(", ") || "none";
+  const decliners = perLake.slice(-3).reverse().filter(x => x.delta < 0).map(x => `${x.lake} (${fmtNum(x.delta)})`).join(", ") || "none";
   const deltaText = `${delta >= 0 ? "+" : ""}${fmtNum(delta)}${pct == null ? "" : ` (${pct >= 0 ? "+" : ""}${pct.toFixed(1)}%)`}`;
-  // Comparing a finished season against one still under way reads as a crash
-  // in stocking when it is only a report that is not finished yet.
   const partial = PROVISIONAL_YEARS.has(latest)
     ? ` <span title="${latest} is still in progress">(${latest} incomplete)</span>` : "";
+
   el.innerHTML =
-    `<span><strong>YoY:</strong> ${prev}→${latest} ${deltaText}${partial}</span>` +
+    `<span><strong>Year on year:</strong> ${prev}→${latest} ${deltaText}${partial}</span>` +
     `<span><strong>Trend:</strong> ${trend}</span>` +
-    `<span><strong>Top risers:</strong> ${risers}</span>` +
-    `<span><strong>Top decliners:</strong> ${decliners}</span>`;
-}
-
-// Returns { totalFish, totalLakes, yearsCount, byYearSpecies, byYearSeason }
-function computeChartData() {
-  const byYearSpecies = new Map();  // year -> {RNTR, BKTR, ...}
-  const byYearSeason  = new Map();  // year -> {spring, fall}
-  let totalFish = 0;
-  const shownLakes = new Set();
-
-  const lakesForChart = state.focusedLakeAts
-    ? LAKES.filter(l => lakeKey(l) === state.focusedLakeAts)
-    : LAKES;
-
-  for (const lake of lakesForChart) {
-    if (lake.distanceKm > state.maxDistanceKm) continue;
-    let lakeContributed = false;
-    for (const s of lake.stockings) {
-      if (!stockingPasses(s)) continue;
-      lakeContributed = true;
-      totalFish += s.number;
-
-      if (!byYearSpecies.has(s.year)) {
-        const zeros = {};
-        for (const c of SPECIES_ORDER) zeros[c] = 0;
-        byYearSpecies.set(s.year, zeros);
-      }
-      byYearSpecies.get(s.year)[s.species] += s.number;
-
-      if (!byYearSeason.has(s.year)) byYearSeason.set(s.year, { spring: 0, fall: 0 });
-      const season = seasonOf(s.date);
-      if (season) byYearSeason.get(s.year)[season] += s.number;
-    }
-    if (lakeContributed) shownLakes.add(lake.ats);
-  }
-
-  return {
-    totalFish,
-    totalLakes: shownLakes.size,
-    yearsCount: state.years.size,
-    byYearSpecies,
-    byYearSeason,
-  };
+    `<span><strong>Most increased:</strong> ${esc(risers)}</span>` +
+    `<span><strong>Most reduced:</strong> ${esc(decliners)}</span>`;
 }
 
 function renderChart() {
   const data = computeChartData();
   updatePlanningSummary(data);
-
-  // Summary stats
   document.getElementById("stat-fish").textContent = fmtNum(data.totalFish) + " ";
   document.getElementById("stat-lakes").textContent = fmtNum(data.totalLakes) + " ";
   document.getElementById("stat-years").textContent = data.yearsCount + " ";
-
   if (!state.chartOpen) return;
 
-  const sortedYears = [...data.byYearSpecies.keys()].sort((a, b) => a - b);
-  if (sortedYears.length === 0) {
+  const years = [...data.byYearSpecies.keys()].sort((a, b) => a - b);
+  if (!years.length && state.chartType !== "calendar") {
     if (chart) { chart.destroy(); chart = null; }
     return;
   }
 
   let config;
   if (state.chartType === "stacked-species") {
-    const datasets = SPECIES_ORDER
-      .filter(sp => state.species.has(sp))
-      .map(sp => ({
-        label: SPECIES_META[sp].label,
-        data: sortedYears.map(y => data.byYearSpecies.get(y)[sp] || 0),
-        backgroundColor: SPECIES_META[sp].color,
-        borderWidth: 0,
-      }));
-    config = {
-      type: "bar",
-      data: { labels: sortedYears, datasets },
-      options: chartOptions({ stacked: true, yTitle: "Fish stocked" }),
-    };
-  } else if (state.chartType === "grouped-season") {
     config = {
       type: "bar",
       data: {
-        labels: sortedYears,
-        datasets: [
-          {
-            label: "Spring (Jan–Jun)",
-            data: sortedYears.map(y => data.byYearSeason.get(y)?.spring || 0),
-            backgroundColor: "#c98a3e",
-            borderWidth: 0,
-          },
-          {
-            label: "Fall (Jul–Dec)",
-            data: sortedYears.map(y => data.byYearSeason.get(y)?.fall || 0),
-            backgroundColor: "#4a7fa8",
-            borderWidth: 0,
-          },
-        ],
+        labels: years,
+        datasets: SPECIES_ORDER.filter(sp => state.species.has(sp)).map(sp => ({
+          label: SPECIES_META[sp].short,
+          data: years.map(y => data.byYearSpecies.get(y)[sp] || 0),
+          backgroundColor: SPECIES_META[sp].color, borderWidth: 0,
+        })),
       },
-      options: chartOptions({ stacked: false, yTitle: "Fish stocked" }),
+      options: chartOptions({ stacked: true, yTitle: "Fish stocked" }),
+    };
+  } else if (state.chartType === "grouped-season") {
+    const used = SEASONS.filter(sn => years.some(y => (data.byYearSeason.get(y)?.[sn.id] || 0) > 0));
+    config = {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: used.map(sn => ({
+          label: sn.label,
+          data: years.map(y => data.byYearSeason.get(y)?.[sn.id] || 0),
+          backgroundColor: sn.color, borderWidth: 0,
+        })),
+      },
+      options: chartOptions({ stacked: true, yTitle: "Fish stocked" }),
+    };
+  } else if (state.chartType === "calendar") {
+    const months = [...Array(12).keys()].map(i => i + 1);
+    config = {
+      type: "bar",
+      data: {
+        labels: months.map(m => MONTH_NAMES[m - 1]),
+        datasets: SPECIES_ORDER.filter(sp => state.species.has(sp)).map(sp => ({
+          label: SPECIES_META[sp].short,
+          data: months.map(m => data.byMonthSpecies.get(m)?.[sp] || 0),
+          backgroundColor: SPECIES_META[sp].color, borderWidth: 0,
+        })),
+      },
+      options: chartOptions({ stacked: true, yTitle: "Fish stocked, all selected years" }),
     };
   } else {
-    // line-trend: one line per species
-    const datasets = SPECIES_ORDER
-      .filter(sp => state.species.has(sp))
-      .map(sp => ({
-        label: SPECIES_META[sp].label,
-        data: sortedYears.map(y => data.byYearSpecies.get(y)[sp] || 0),
-        borderColor: SPECIES_META[sp].color,
-        backgroundColor: SPECIES_META[sp].color,
-        fill: false,
-        tension: 0.15,
-        pointRadius: 3,
-        borderWidth: 2,
-      }));
     config = {
       type: "line",
-      data: { labels: sortedYears, datasets },
+      data: {
+        labels: years,
+        datasets: SPECIES_ORDER.filter(sp => state.species.has(sp)).map(sp => ({
+          label: SPECIES_META[sp].short,
+          data: years.map(y => data.byYearSpecies.get(y)[sp] || 0),
+          borderColor: SPECIES_META[sp].color, backgroundColor: SPECIES_META[sp].color,
+          fill: false, tension: 0.15, pointRadius: 3, borderWidth: 2,
+        })),
+      },
       options: chartOptions({ stacked: false, yTitle: "Fish stocked" }),
     };
   }
 
   if (chart) chart.destroy();
-  const ctx = document.getElementById("chart-canvas").getContext("2d");
-  chart = new Chart(ctx, config);
+  chart = new Chart(document.getElementById("chart-canvas").getContext("2d"), config);
 }
 
 function chartOptions({ stacked, yTitle }) {
   return {
-    responsive: true,
-    maintainAspectRatio: false,
-    animation: { duration: 200 },
+    responsive: true, maintainAspectRatio: false, animation: { duration: 200 },
     plugins: {
-      legend: {
-        labels: { color: "#e8e4d8", font: { size: 11 }, boxWidth: 12 },
-        position: "top",
-      },
-      tooltip: {
-        callbacks: {
-          label: ctx => `${ctx.dataset.label}: ${fmtNum(ctx.parsed.y)}`,
-        },
-      },
+      legend: { labels: { color: "#e8e4d8", font: { size: 11 }, boxWidth: 12 }, position: "top" },
+      tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${fmtNum(ctx.parsed.y)}` } },
     },
     scales: {
-      x: {
-        stacked,
-        ticks: { color: "#a8a396" },
-        grid: { color: "#1f211e" },
-      },
+      x: { stacked, ticks: { color: "#a8a396" }, grid: { color: "#1f211e" } },
       y: {
-        stacked,
-        beginAtZero: true,
-        ticks: {
-          color: "#a8a396",
-          callback: v => v >= 1000 ? (v / 1000) + "k" : v,
-        },
+        stacked, beginAtZero: true,
+        ticks: { color: "#a8a396", callback: v => v >= 1000 ? (v / 1000) + "k" : v },
         grid: { color: "#1f211e" },
         title: { display: true, text: yTitle, color: "#a8a396" },
       },
@@ -1163,7 +1735,54 @@ function chartOptions({ stacked, yTitle }) {
 }
 
 // ============================================================
-// FILTER CHANGE HANDLER
+// URL STATE
+// ============================================================
+function writeUrl() {
+  const p = new URLSearchParams();
+  if (state.species.size !== SPECIES_ORDER.length) p.set("sp", [...state.species].join(","));
+  if (state.sizes.size !== SIZE_IDS.length) p.set("sz", [...state.sizes].join(","));
+  if (state.years.size !== ALL_YEARS.length) p.set("yr", [...state.years].sort().join(","));
+  if (state.maxDistanceKm !== 1000) p.set("d", state.maxDistanceKm);
+  if (state.recency !== "any") p.set("rc", state.recency);
+  if (state.view !== "map") p.set("v", state.view);
+  if (state.chartType !== "stacked-species") p.set("c", state.chartType);
+  if (state.home.lat !== DEFAULT_HOME.lat || state.home.lon !== DEFAULT_HOME.lon) {
+    p.set("home", `${state.home.lat.toFixed(5)},${state.home.lon.toFixed(5)},${state.home.name}`);
+  }
+  const qs = p.toString();
+  history.replaceState(null, "", qs ? `?${qs}` : location.pathname);
+}
+
+function readUrl() {
+  const p = new URLSearchParams(location.search);
+  if (p.has("sp")) state.species = new Set(p.get("sp").split(",").filter(c => SPECIES_META[c]));
+  if (p.has("sz")) state.sizes = new Set(p.get("sz").split(",").filter(c => SIZE_IDS.includes(c)));
+  if (p.has("d")) state.maxDistanceKm = Math.max(0, Math.min(1000, Number(p.get("d")) || 1000));
+  if (p.has("rc") && RECENCY_OPTIONS.some(o => o.id === p.get("rc"))) state.recency = p.get("rc");
+  if (p.has("v") && ["map", "list"].includes(p.get("v"))) state.view = p.get("v");
+  if (p.has("c")) state.chartType = p.get("c");
+  if (p.has("home")) {
+    const [lat, lon, ...rest] = p.get("home").split(",");
+    if (Number.isFinite(Number(lat)) && Number.isFinite(Number(lon))) {
+      state.home = { lat: Number(lat), lon: Number(lon), name: rest.join(",") || "Chosen point" };
+    }
+  }
+  return p;
+}
+
+// ============================================================
+// PHONE MENU
+// ============================================================
+function closeMenu() { document.getElementById("app").classList.remove("menu-open"); }
+function buildMenu() {
+  document.getElementById("menu-btn").addEventListener("click", () =>
+    document.getElementById("app").classList.toggle("menu-open"));
+  document.getElementById("sidebar-close").addEventListener("click", closeMenu);
+  document.getElementById("scrim").addEventListener("click", closeMenu);
+}
+
+// ============================================================
+// FILTER CHANGE
 // ============================================================
 function clearChartFocusIfInvalid() {
   if (state.openPopupAts) {
@@ -1182,6 +1801,10 @@ function onFilterChange() {
   clearChartFocusIfInvalid();
   renderPins();
   renderChart();
+  renderFavourites();
+  updateRecencyCounts();
+  if (state.view === "list") renderList();
+  writeUrl();
 }
 
 // ============================================================
@@ -1189,45 +1812,83 @@ function onFilterChange() {
 // ============================================================
 async function init() {
   try {
-    if (typeof L === "undefined" || typeof Chart === "undefined") {
-      const missing = [typeof L === "undefined" ? "vendor/leaflet.js" : null,
-                       typeof Chart === "undefined" ? "vendor/chart.umd.js" : null]
-                      .filter(Boolean).join(" and ");
-      throw new Error(`${missing} did not load. Check the vendor/ folder is present.`);
-    }
+    const missing = [
+      typeof L === "undefined" ? "vendor/leaflet.js" : null,
+      typeof L !== "undefined" && !L.markerClusterGroup ? "vendor/leaflet.markercluster.js" : null,
+      typeof Chart === "undefined" ? "vendor/chart.umd.js" : null,
+    ].filter(Boolean);
+    if (missing.length) throw new Error(`${missing.join(" and ")} did not load. Check the vendor/ folder is present.`);
+
+    const stored = readStore(STORE_HOME, null);
+    if (stored && Number.isFinite(stored.lat)) state.home = stored;
+    state.favourites = new Set(readStore(STORE_FAVS, []));
+
+    const params = readUrl();
     const { lakes, years } = await loadAllData();
     QUALITY_SUMMARY = await loadQualitySummary();
     LAKES = lakes;
     ALL_YEARS = years;
-    state.years = new Set(years);
+    state.years = params.has("yr")
+      ? new Set(params.get("yr").split(",").map(Number).filter(y => years.includes(y)))
+      : new Set(years);
 
-    const sub = document.getElementById("subtitle");
-    sub.textContent = years.length === 1
+    document.getElementById("subtitle").textContent = years.length === 1
       ? `Stocking data · ${years[0]}`
       : `Stocking data · ${years[0]}–${years[years.length - 1]}`;
 
-    const partial = years.filter(y => PROVISIONAL_YEARS.has(y));
-    if (partial.length) {
-      document.getElementById("provisional-note").innerHTML =
-        `<strong>${partial.join(", ")}*</strong> is still in progress — Alberta updates that report later in the season.<br><br>`;
-    }
     prepareLakes();
     updateDataQualitySummary();
     initMap();
+    buildSearch();
+    buildRecencyChips();
     buildSpeciesFilters();
-    buildYearChips();
+    buildSizeFilters();
     buildDistanceSlider();
+    buildHomeControls();
+    buildYearChips();
     buildBasemapToggle();
+    buildSelectAll();
     buildChartToggle();
+    buildList();
+    buildMenu();
+    updateHomeUI();
+    renderFavourites();
+
+    document.getElementById("zoom-results").addEventListener("click", zoomToResults);
+    document.getElementById("share-btn").addEventListener("click", async () => {
+      writeUrl();
+      const btn = document.getElementById("share-btn");
+      try { await navigator.clipboard.writeText(location.href); btn.textContent = "Link copied"; }
+      catch { btn.textContent = "Copy from the address bar"; }
+      setTimeout(() => { btn.textContent = "Copy link"; }, 2200);
+    });
+    document.getElementById("fav-route").addEventListener("click", () => {
+      const url = favouriteRouteUrl();
+      if (url) window.open(url, "_blank", "noopener");
+    });
+    document.getElementById("fav-list").addEventListener("click", e => {
+      const go = e.target.closest("[data-goto]");
+      if (go) return gotoLake(go.dataset.goto);
+      const un = e.target.closest("[data-unfav]");
+      if (un) toggleFavourite(un.dataset.unfav);
+    });
+    document.querySelectorAll("[data-view]").forEach(b =>
+      b.addEventListener("click", () => setView(b.dataset.view)));
+
+    document.querySelectorAll(".chart-type-btn").forEach(b =>
+      b.classList.toggle("active", b.dataset.chart === state.chartType));
+    updateChartHelperText();
+
     renderPins();
-    renderChart();  // populate summary stats even when closed
+    renderChart();
+    if (state.view === "list") setView("list");
 
     document.getElementById("loading").classList.add("hidden");
   } catch (err) {
     document.getElementById("loading").innerHTML =
-      `<div style="color:#c85a2e;max-width:520px;text-align:center;line-height:1.5">
+      `<div style="color:#e66767;max-width:520px;text-align:center;line-height:1.5">
         Could not start the map: ${esc(err.message)}<br>
-        <span style="color:#a8a396;font-size:12px">Opening this file directly from disk will not work —
+        <span style="color:#a8a396;font-size:12px">Opening this file straight from disk will not work —
         the browser blocks the data files. Serve the folder instead:
         <code>python3 -m http.server 8000</code>, then open http://localhost:8000</span>
       </div>`;
