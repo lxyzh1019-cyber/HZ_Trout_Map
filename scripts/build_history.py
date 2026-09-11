@@ -26,6 +26,7 @@ How the review loop works
 """
 
 import argparse
+import csv
 import json
 import sys
 from collections import defaultdict
@@ -415,6 +416,74 @@ def write_quality_summary(reg, review_count, linked_rows, trout_rows):
     return summary
 
 
+REGULATIONS_PDF = "alberta-sportfishing-regulations-2026-tables.pdf"
+
+
+def write_depths(reg):
+    """Lake depth, and what it implies in summer and winter.
+
+    Skipped quietly when the collection has not been run: a missing depth file
+    should cost the map its depth advice, not its data. Everything downstream
+    is built to say nothing rather than guess when depth is absent.
+    """
+    import depth
+    stats = depth.write(reg.lakes, DATA_DIR)
+    if not stats:
+        print("\nNo data/raw/mywildalberta_lakes.csv; skipping depth and winterkill.")
+        print("  Collect it once with: cd scripts && python3 fetch_lake_pages.py")
+        return None
+    print("\nReading lake depth...")
+    print(f"  {stats['with_depth']} lake(s) with a depth, "
+          f"{stats['stated_unavailable']} where Alberta states none is available")
+    if not stats["aeration_known"]:
+        print("  no aerated-lake list present; winterkill uses depth alone")
+    return stats
+
+
+def write_regulations(reg=None):
+    """Catch limits and seasons, read out of the sportfishing guide.
+
+    Skipped quietly when the guide is not present, so the rest of the pipeline
+    still builds: a missing guide should cost the map its limits, not its data.
+    """
+    source = sources.RAW_DIR / REGULATIONS_PDF
+    if not source.exists():
+        print(f"\n{REGULATIONS_PDF} not present; skipping catch limits.")
+        return None
+    import regulations
+    print("\nReading catch limits from the sportfishing regulations...")
+    regs = regulations.load(source)
+    year = regs["guide_year"]
+    rows = sum(len(z["lakes"]) + len(z["rivers"]) for z in regs["zones"].values())
+    (DATA_DIR / f"regulations_{year}.json").write_text(
+        json.dumps(regs, indent=1, ensure_ascii=False, sort_keys=True) + "\n",
+        encoding="utf-8")
+    print(f"  {rows} site-specific rows, {len(regs['defaults'])} watershed defaults, "
+          f"{len(regs['stocked'])} put-and-take waters")
+
+    if reg is not None:
+        resolved, review = regulations.match_lakes(regs, reg.lakes)
+        (DATA_DIR / "lake_regulations.json").write_text(
+            json.dumps({"guide_year": year, "lakes": resolved},
+                       indent=1, ensure_ascii=False, sort_keys=True) + "\n",
+            encoding="utf-8")
+        with (DATA_DIR / "regs_review.csv").open("w", newline="", encoding="utf-8") as handle:
+            writer = csv.DictWriter(
+                handle, fieldnames=["lake", "lake_id", "zone", "why", "closest", "score"])
+            writer.writeheader()
+            for row in sorted(review, key=lambda r: (r["zone"], r["lake"])):
+                writer.writerow(row)
+        basis = {}
+        for entry in resolved.values():
+            basis[entry["basis"]] = basis.get(entry["basis"], 0) + 1
+        print(f"  matched {len(resolved)} lakes: "
+              + ", ".join(f"{n} {k}" for k, n in sorted(basis.items(), key=lambda kv: -kv[1])))
+        if review:
+            print(f"  {len(review)} lake(s) left unresolved on purpose "
+                  f"-> data/regs_review.csv")
+    return year, rows, len(regs["stocked"])
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--years", nargs="*", type=int)
@@ -484,7 +553,14 @@ def main():
     n_review = write_review(still, reg)
     years_written = write_year_files(reg, linked, sources.PROVISIONAL_YEARS)
     write_quality_summary(reg, len(still), linked_rows, trout_rows)
+    n_depth = write_depths(reg)
+    n_regs = write_regulations(reg)
     print(f"\nWrote data/lake_registry.json ({len(reg.lakes)} lakes)")
+    if n_depth:
+        print(f"Wrote data/lake_depth.json ({n_depth['with_depth']} lakes with a depth)")
+    if n_regs:
+        print(f"Wrote data/regulations_{n_regs[0]}.json "
+              f"({n_regs[1]} site-specific rows, {n_regs[2]} put-and-take waters)")
     print(f"Wrote {len(years_written)} year file(s): {years_written[0]}-{years_written[-1]}")
     print(f"Wrote data/link_review.csv ({n_review} question(s) for you)")
     if n_review:

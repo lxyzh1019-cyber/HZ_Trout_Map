@@ -1,0 +1,41 @@
+name: Advisories
+
+# Alberta's closures and consumption advisories are the one thing on this map
+# that can change between planning a trip and taking it, and the one that
+# decides whether to go at all.
+on:
+  schedule:
+    - cron: "17 13 * * *"      # daily, early morning in Alberta
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check what Alberta has published
+        working-directory: scripts
+        run: python3 advisories.py
+
+      # Writes to live/, never data/. The build's byte-exact check on data/ is
+      # what stops anyone hand-editing published data, and a daily commit into
+      # data/ would trip it every morning until somebody weakened the check.
+      - name: Commit only if something actually changed
+        run: |
+          if [ -z "$(git status --porcelain live/)" ]; then
+            echo "No change in live/; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add live/
+          git commit -m "Record today's Alberta fishing advisories"
+          git push

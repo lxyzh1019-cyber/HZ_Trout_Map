@@ -72,6 +72,42 @@
     M50 works offline: service worker precaches app, libraries, data and tiles
     M51 offline badge, and a reload prompt when a newer version is cached
     M52 installable as an app through a web manifest
+
+  Added in v4
+    M53 sun and moon times computed offline, from the clock alone
+    M54 solunar major and minor periods, kept as their own channel and never
+        allowed to move or suppress the dawn and dusk peaks
+    M55 evidence page stating what each factor is worth and why, with its own
+        self-check at evidence.html?selfcheck=1
+    M56 conditions score weighted by strength of evidence: light 0.40, water
+        temperature 0.35, pressure 0.15 as a front proxy, wind and rain 0.10
+    M57 the moon is a multiplier capped at five percent, applied after the sum,
+        so it can never reorder a day — asserted, not merely intended
+    M58 a missing input is dropped and the rest renormalised, never defaulted;
+        the score says how much of it was actually known
+    M59 catch limits and seasons per lake, read from the sportfishing guide,
+        stamped with the guide year and always beside the official link
+    M60 limits resolve site-specific, then provincial put-and-take, then the
+        watershed default — the order the guide itself states
+    M61 a lake that cannot be matched with confidence shows no limits at all
+    M62 "Open today" filter, which hides lakes whose season is shut but never
+        hides one whose season could not be read
+    M63 conditions panel: the next six hours as a strip, and seven days by five
+        parts of the day as a grid, from one weather call
+    M64 sun and moon drawn as separate tracks, so the moon can be seen not to
+        move the dawn peak
+    M65 day parts anchored to the sun, and clock times shown at the lake
+    M66 forecast confidence fades with lead time in the number, not only in the
+        styling: pressure's weight decays and light takes up the slack
+    M67 a lake whose season is shut is not scored at all
+    M68 lake depth from Alberta's own pages, joined on its waterbody id, with
+        the summer layer and winterkill risk that depth makes possible
+    M69 no depth means no depth advice: neither is ever guessed
+    M70 Alberta's advisories and closures, checked daily, shown as published
+        and never interpreted into a per-lake flag
+    M71 a water temperature you measured overrides the model, is remembered per
+        lake, and works with no signal — the one input that helps most exactly
+        where the app can do least
 -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2b2e2a">
@@ -344,15 +380,55 @@
   /* ---------- Popup ---------- */
   .leaflet-popup-content-wrapper { background: var(--panel); color: var(--ink); border-radius: 3px; border: 1px solid var(--panel-edge); }
   .leaflet-popup-tip { background: var(--panel); }
-  .leaflet-popup-content { margin: 12px 14px; font-size: 12px; min-width: 260px; max-height: 60vh; overflow-y: auto; }
+  /* The popup scrolls once a lake has a long stocking history, and the
+     scrollbar sits over the content. Reserving the gutter keeps it off the
+     right-aligned Number column, which was losing its last digit. */
+  .leaflet-popup-content { margin: 12px 14px; font-size: 12px; min-width: 260px;
+    max-height: 60vh; overflow-y: auto; scrollbar-gutter: stable; padding-right: 4px; }
   .lake-popup h3 { margin: 0 0 2px; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+  #advisory-list { list-style: none; padding: 0; margin: 4px 0 0; }
+  #advisory-list li { font-size: 11px; line-height: 1.45; margin-bottom: 5px;
+    padding-left: 9px; border-left: 2px solid var(--TGTR); }
+  #advisory-list a { color: var(--ink-dim); text-decoration: none; }
+  #advisory-list a:hover { color: var(--ink); }
+  .lake-popup .depth-row { font-size: 11px; color: var(--ink-dim); margin-bottom: 5px; }
+  .lake-popup .dim { color: var(--ink-dim); }
+  .lake-popup .wk-row { font-size: 11px; margin-bottom: 7px; display: flex;
+    align-items: baseline; gap: 6px; flex-wrap: wrap; }
+  .wk-badge { font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .04em; padding: 1px 6px; border-radius: 999px; color: #1f211e;
+    white-space: nowrap; }
+  .wk-badge.low { background: var(--good); }
+  .wk-badge.moderate { background: var(--TGTR); }
+  .wk-badge.high { background: var(--WSCT); }
+  .reg-block { margin: 8px 0 4px; padding: 8px 10px; background: var(--panel-2);
+    border-left: 3px solid var(--accent); border-radius: 3px; font-size: 12px; }
+  .reg-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 5px; }
+  .reg-year { font-size: 10px; color: var(--ink-dim); text-transform: uppercase; letter-spacing: .04em; }
+  .reg-open { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 6px;
+    border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; color: #1f211e; }
+  .reg-open.yes { background: var(--good); }
+  .reg-open.no { background: var(--WSCT); }
+  .reg-row { display: flex; gap: 8px; margin: 2px 0; line-height: 1.4; }
+  .reg-k { flex: 0 0 52px; color: var(--ink-dim); }
+  .reg-v { flex: 1; }
+  .reg-why { margin-top: 5px; font-size: 11px; color: var(--ink-dim); font-style: italic; }
+  .reg-warn { margin-top: 4px; font-size: 11px; color: var(--ink-dim); }
+  .reg-none { font-size: 11.5px; color: var(--ink-dim); line-height: 1.45; }
   .lake-popup .ats { font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; font-family: "SF Mono", Menlo, monospace; }
   .lake-popup .meta { font-size: 12px; margin-bottom: 8px; }
   .lake-popup .meta strong { color: var(--accent); }
   .lake-popup table { width: 100%; border-collapse: collapse; font-size: 11px; }
   .lake-popup th { text-align: left; padding: 3px 5px 3px 0; border-bottom: 1px solid var(--panel-edge); color: var(--ink-dim); font-weight: 500; }
   .lake-popup td { padding: 3px 5px 3px 0; border-bottom: 1px dotted var(--panel-edge); }
-  .lake-popup td:last-child, .lake-popup th:last-child { text-align: right; padding-right: 0; }
+  .lake-popup td:last-child, .lake-popup th:last-child { text-align: right; padding-right: 4px; }
+  .lake-popup td:last-child { font-variant-numeric: tabular-nums; }
+  /* Reports give some shipments only to the month. Rather than inventing a day
+     or leaving the column ragged, the day sits in a fixed slot and reads as a
+     dash when it is genuinely not known. */
+  .lake-popup .d { display: inline-block; width: 1.25em; text-align: right; }
+  .lake-popup .d.unknown { color: var(--ink-dim); }
+  .lake-popup td.date-cell { font-variant-numeric: tabular-nums; white-space: nowrap; }
   .lake-popup .profile-row { font-size: 11px; color: var(--ink-dim); margin-bottom: 6px; }
   .lake-popup .profile-amenities { font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; line-height: 1.45; }
   .lake-popup .profile-label { color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; font-size: 10px; margin-right: 3px; }
@@ -390,6 +466,117 @@
   .zone-bubble:hover { opacity: 1; }
   .zone-bubble-code { font-size: 12px; letter-spacing: 0.5px; }
   .zone-bubble-fish { font-size: 10px; font-weight: 600; opacity: 0.85; }
+  /* ---- conditions panel ------------------------------------------------ */
+  #conditions-panel {
+    position: absolute; top: 10px; right: 56px; z-index: 500;
+    width: 360px; max-height: 78%; overflow: auto; padding: 10px 12px 12px;
+    background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.45); font-size: 12px;
+  }
+  .cx-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .cx-title { font-size: 13px; color: var(--accent); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.6px; }
+  .cx-place { display: block; font-size: 12px; color: var(--ink); font-weight: 400;
+    text-transform: none; letter-spacing: 0; margin-top: 1px; }
+  .cx-close { background: none; border: 0; color: var(--ink-dim); font-size: 18px;
+    line-height: 1; cursor: pointer; padding: 0 2px; }
+  .cx-close:hover { color: var(--ink); }
+  .cx-row { display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; margin: 8px 0 4px; }
+  .cx-horizon { margin: 0; }
+  .cx-conf { font-size: 10px; text-transform: uppercase; letter-spacing: .04em;
+    color: var(--ink-dim); }
+  .cx-src-row { font-size: 10.5px; color: var(--ink-dim); margin-bottom: 8px;
+    display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .cx-tz { font-style: italic; }
+  .cx-warn { color: var(--TGTR); }
+
+  /* The six-hour strip. */
+  .cx-strip { display: flex; gap: 2px; align-items: flex-end; height: 92px; }
+  .cx-slot { flex: 1; display: flex; flex-direction: column; justify-content: flex-end;
+    height: 100%; cursor: default; }
+  .cx-slot:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .cx-bar { width: 100%; border-radius: 4px 4px 0 0; }
+  .cx-time { font-size: 9px; color: var(--ink-dim); text-align: center; margin-top: 2px;
+    height: 11px; font-variant-numeric: tabular-nums; }
+  /* Sun and moon are separate rows on purpose: the moon has to be seen NOT to
+     move the dawn peak. Folding them into one ranking is how a solunar app ends
+     up recommending two in the afternoon in July. */
+  .cx-track { display: flex; align-items: center; gap: 6px; margin-top: 3px; }
+  .cx-track-label { flex: 0 0 30px; font-size: 9px; color: var(--ink-dim);
+    text-transform: uppercase; letter-spacing: .04em; }
+  .cx-ticks { flex: 1; display: flex; gap: 2px; }
+  .cx-tick { flex: 1; height: 7px; border-radius: 2px; background: #3f4139; }
+  .cx-tick.day { background: #5a5c4e; }
+  .cx-tick.twilight { background: var(--accent); }
+  .cx-tick.night { background: #35382f; }
+  .cx-tick.major { background: #b69551; }
+  .cx-tick.minor { background: #736440; }
+  .cx-best { margin-top: 7px; font-size: 11.5px; color: var(--ink-dim); }
+  .cx-best strong { color: var(--ink); }
+
+  /* The seven-day grid. */
+  .cx-grid { display: grid; grid-template-columns: 46px repeat(7, 1fr); gap: 2px; }
+  .cx-gcell { min-height: 26px; display: flex; align-items: center; justify-content: center;
+    border-radius: 3px; font-size: 10px; }
+  .cx-ghead { flex-direction: column; gap: 0; color: var(--ink-dim); font-size: 9.5px;
+    text-transform: uppercase; letter-spacing: .03em; }
+  .cx-ghead span { color: var(--ink); font-size: 11px; font-variant-numeric: tabular-nums; }
+  .cx-glabel { justify-content: flex-start; color: var(--ink-dim); font-size: 10px; }
+  .cx-score { color: #1f211e; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .cx-score:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+  .cx-n { pointer-events: none; }
+  .cx-gempty { background: #33362f; color: var(--ink-dim); }
+  /* Further out the weather half is guesswork, and the cell should not look as
+     certain as tomorrow. Hatching survives colour blindness and print, which a
+     lighter shade alone would not. */
+  .cx-score.lead-mid { opacity: .82;
+    background-image: repeating-linear-gradient(45deg, rgba(31,33,30,.20) 0 2px, transparent 2px 5px); }
+  .cx-score.lead-far { opacity: .62;
+    background-image: repeating-linear-gradient(45deg, rgba(31,33,30,.34) 0 3px, transparent 3px 6px); }
+  .cx-legend { display: flex; align-items: center; gap: 3px; margin-top: 8px;
+    font-size: 9.5px; color: var(--ink-dim); flex-wrap: wrap; }
+  .cx-legend i { width: 16px; height: 8px; border-radius: 2px; display: inline-block; }
+  .cx-key { margin: 0 3px; }
+  .cx-faded { flex-basis: 100%; margin-top: 2px; }
+
+  /* Why the number is what it is. */
+  .cx-factors { margin-top: 10px; border-top: 1px solid var(--panel-edge); padding-top: 7px; }
+  .cx-factor { display: grid; grid-template-columns: 62px 56px 1fr 46px;
+    align-items: center; gap: 5px; margin: 3px 0; font-size: 10.5px; }
+  .cx-factor.absent { opacity: .5; }
+  .cx-fname { color: var(--ink); }
+  .cx-tier { font-size: 8.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .03em; padding: 1px 4px; border-radius: 999px; text-align: center;
+    color: #1f211e; background: #5a5c4e; }
+  .cx-tier.strong { background: var(--good); }
+  .cx-tier.moderate { background: var(--TGTR); }
+  .cx-tier.weak { background: var(--BKTR); }
+  .cx-tier.none { background: #4a4c44; color: var(--ink-dim); }
+  .cx-fval { color: var(--ink-dim); }
+  .cx-fbar { height: 5px; background: #33362f; border-radius: 3px; overflow: hidden; }
+  .cx-fbar i { display: block; height: 100%; }
+  .cx-measure { display: flex; align-items: center; gap: 7px; margin-top: 9px;
+    padding-top: 8px; border-top: 1px solid var(--panel-edge); font-size: 10.5px; }
+  .cx-measure label { color: var(--ink-dim); }
+  .cx-measure input { width: 64px; background: var(--panel-2); color: var(--ink);
+    border: 1px solid var(--panel-edge); border-radius: 3px; padding: 2px 5px;
+    font-size: 11px; font-variant-numeric: tabular-nums; }
+  .cx-measure-note { color: var(--ink-dim); font-style: italic; }
+  .cx-clear { background: none; border: 0; color: var(--accent); cursor: pointer;
+    font-size: 10.5px; padding: 0; }
+  .cx-advisory { margin-top: 8px; padding: 7px 9px; background: var(--panel-2);
+    border-left: 3px solid var(--TGTR); font-size: 10.5px; line-height: 1.45;
+    color: var(--ink-dim); }
+  .cx-closed { padding: 14px 10px; text-align: center; }
+  .cx-closed strong { color: var(--WSCT); font-size: 14px; letter-spacing: .04em; }
+  .cx-closed div { font-size: 11px; color: var(--ink-dim); margin-top: 4px; }
+  .cx-why { font-style: italic; }
+  .cx-foot { margin-top: 9px; font-size: 10.5px; }
+  .cx-foot a { color: var(--accent); text-decoration: none;
+    border-bottom: 1px dotted var(--accent); }
+  .map-btn.active { background: var(--accent); color: #1f211e; border-color: var(--accent); }
+
   #zone-panel {
     display: none; position: absolute; top: 10px; left: 56px; z-index: 500;
     width: 318px; max-height: 62%; overflow: auto; padding: 10px 12px 12px;
@@ -469,6 +656,10 @@
     #sidebar-close { display: block; }
     /* The zone table cannot float beside a phone-width map, so it sits under
        the map buttons across the full width, with its own scroll. */
+    /* Two floating panels cannot share a phone-width map, so the conditions
+       panel takes the bottom of the screen and the zone table is closed. */
+    #conditions-panel { top: auto; bottom: 8px; left: 8px; right: 8px; width: auto;
+      max-height: 60%; }
     #zone-panel {
       left: 8px; right: 8px; width: auto; top: auto; bottom: calc(50px + var(--panel-h));
       max-height: 38vh;
@@ -510,6 +701,21 @@
     <div class="count" id="result-count">Showing … lakes</div>
     <div class="filter-summary" id="filter-summary"></div>
     <div class="empty-state" id="empty-state">No lakes match these filters. Try more years, more species, or a longer distance.</div>
+
+    <div class="group" id="advisory-group" hidden>
+      <div class="group-label"><span>Alberta advisories</span></div>
+      <div class="hint" id="advisory-note"></div>
+      <ul id="advisory-list"></ul>
+      <button class="linkish" id="advisory-more" type="button" hidden>Show all</button>
+    </div>
+
+    <div class="group" id="season-group" hidden>
+      <div class="group-label"><span>Season</span></div>
+      <div class="chips">
+        <button class="chip" id="open-now-chip" type="button" aria-pressed="false">Open today</button>
+      </div>
+      <div class="hint" id="open-now-note"></div>
+    </div>
 
     <div class="group">
       <div class="group-label"><span>Stocked recently</span></div>
@@ -596,7 +802,9 @@
     <div class="map-btns">
       <button class="map-btn" id="zoom-results" type="button">Zoom to results</button>
       <button class="map-btn" id="share-btn" type="button">Copy link</button>
+      <button class="map-btn" id="conditions-btn" type="button" aria-pressed="false">Conditions</button>
     </div>
+    <div id="conditions-panel" hidden aria-live="polite"></div>
     <div id="offline-badge" hidden>Offline · showing cached data</div>
     <div id="update-toast" hidden>
       <span>A newer version is ready.</span>
@@ -652,6 +860,10 @@
 <script src="vendor/leaflet.js"></script>
 <script src="vendor/leaflet.markercluster.js"></script>
 <script src="vendor/chart.umd.js"></script>
+<script src="js/astro.js"></script>
+<script src="js/conditions.js"></script>
+<script src="js/weather.js"></script>
+<script src="js/conditions-ui.js"></script>
 <script>
 // ============================================================
 // CONFIG
@@ -784,6 +996,15 @@ const state = {
   openPopupAts: null,
   favourites: new Set(),
   pickingHome: false,
+  /** Hide lakes whose season is shut today. Off by default: a closed lake is
+   *  still worth seeing on a map you are using to plan next month. */
+  openNow: false,
+  conditions: {
+    open: false,
+    horizon: "now",          // "now" | "week"
+    anchorKey: null,         // a lake, or null for home
+    waterOverrides: {},      // lakeKey -> { tempC, atISO }
+  },
 };
 
 /** A click on a pin can also reach the map, which would immediately undo the
@@ -795,11 +1016,15 @@ const PIN_CLICK_GRACE_MS = 250;
 let LAKES = [];
 let ALL_YEARS = [];
 let QUALITY_SUMMARY = null;
+let REGULATIONS = null;
+let DEPTHS = null;
+let ADVISORIES = null;
 let PROVISIONAL_YEARS = new Set();
 const DATA_ISSUES = { invalidStockings: 0, examples: [] };
 
 const STORE_HOME = "troutmap.home";
 const STORE_FAVS = "troutmap.favourites";
+const STORE_WATER = "troutmap.watertemp";
 
 // ============================================================
 // UTILITIES
@@ -880,6 +1105,39 @@ async function loadAllData() {
   return { lakes, years };
 }
 
+/** Catch limits, resolved per lake when the data was built. Matching names to
+ *  the regulations is done there, not here: it needs the alias table and a
+ *  similarity threshold, and a lake we cannot match confidently must end up
+ *  with no limits shown rather than a guess. */
+async function loadRegulations() {
+  try {
+    const resp = await fetch("data/lake_regulations.json");
+    return resp.ok ? await resp.json() : null;
+  } catch { return null; }
+}
+
+/** Depth, and what it implies in summer and winter. Absent until the one-time
+ *  collection has been run, and everything downstream is built to say nothing
+ *  rather than guess when it is. */
+async function loadDepths() {
+  try {
+    const resp = await fetch("data/lake_depth.json");
+    return resp.ok ? await resp.json() : null;
+  } catch { return null; }
+}
+
+/* Alberta's closures and consumption advisories, refreshed daily by a scheduled
+ * job. Deliberately NOT matched to individual lakes: turning a sentence written
+ * for a human into a per-lake closure flag means guessing at its scope, and
+ * guessing generously puts someone on shut water. They are shown as published,
+ * with the date, and the reader follows the link. */
+async function loadAdvisories() {
+  try {
+    const resp = await fetch("live/advisories.json");
+    return resp.ok ? await resp.json() : null;
+  } catch { return null; }
+}
+
 async function loadQualitySummary() {
   try {
     const resp = await fetch("data/quality_summary.json");
@@ -953,6 +1211,10 @@ function lastStockedDate(lake) {
 function lakePassesFilters(lake) {
   if (lake.distanceKm > state.maxDistanceKm) return false;
   if (!lake.stockings.some(stockingPasses)) return false;
+  // A lake we cannot read a season for is kept, not hidden: "we do not know"
+  // is not the same as "closed", and hiding it would quietly shorten the list
+  // without saying why.
+  if (state.openNow && lakeOpenNow(lake) === false) return false;
   return recencyPasses(lake, recencyOption());
 }
 function recencyPasses(lake, option) {
@@ -1100,6 +1362,169 @@ function profileBlock(lake) {
   return html;
 }
 
+/** What is known about this lake's depth, or null. */
+function depthFor(lake) {
+  if (!DEPTHS) return null;
+  return DEPTHS.lakes[lakeKey(lake)] || null;
+}
+
+/* Depth, the summer layer, and winterkill risk.
+ *
+ * Every part of this is omitted when the depth is unknown. A thermocline band
+ * for a lake we have never measured would be an invented number with a metre
+ * sign after it, and someone would fish to it. */
+function depthBlock(lake) {
+  const d = depthFor(lake);
+  if (!d) return "";
+  if (d.max_depth_m == null) {
+    return d.depth_stated_unavailable
+      ? `<div class="depth-row"><span class="profile-label">Depth</span>
+           <span class="dim">Alberta lists no depth for this lake</span></div>`
+      : "";
+  }
+  const parts = [`<span><span class="profile-label">Max depth</span> ${esc(d.max_depth_m)} m</span>`];
+  const strat = d.stratification;
+  if (strat && strat.stratifies) {
+    parts.push(`<span><span class="profile-label">Summer layer</span> about ${strat.band_m[0]}–${strat.band_m[1]} m</span>`);
+  } else if (strat) {
+    parts.push(`<span class="dim">${esc(strat.why)}</span>`);
+  }
+  let html = `<div class="depth-row">${parts.join(" &nbsp;·&nbsp; ")}</div>`;
+
+  const wk = d.winterkill;
+  if (wk) {
+    const notCounted = [];
+    if (!wk.inputs.aeration) notCounted.push("whether it is aerated");
+    if (!wk.inputs.eutrophy) notCounted.push("how productive it is");
+    html += `<div class="wk-row"><span class="wk-badge ${esc(wk.level)}">Winterkill ${esc(wk.level)}</span>
+      <span class="dim">${esc(wk.reasons.join("; "))}`
+      + (notCounted.length ? ` — not counting ${esc(notCounted.join(" or "))}` : "")
+      + `</span></div>`;
+  }
+  return html;
+}
+
+/** The regulation resolved for this lake, or null if none could be. */
+function regulationFor(lake) {
+  if (!REGULATIONS) return null;
+  return REGULATIONS.lakes[lakeKey(lake)] || null;
+}
+
+/* Season parsing lives in js/conditions.js, because a shut season has to
+ * suppress the bite score as well as label the popup, and because the
+ * year-wrapping case needs a test. */
+const seasonOpenOn = (text, when) => Conditions.seasonOpenOn(text, when);
+
+/** True, false, or null when we cannot tell. Null is not "open". */
+function lakeOpenNow(lake, when) {
+  const reg = regulationFor(lake);
+  if (!reg || !reg.season) return null;
+  return seasonOpenOn(reg.season.text, when || new Date());
+}
+
+/* The limits block in a lake popup.
+ *
+ * This is the one place in the app that reports something with a legal
+ * consequence, so three things are never omitted: which year's guide it came
+ * from, where the rule came from, and a link to the official tables. The limit
+ * wording is the guide's own, never a paraphrase — "3 over 63 cm" means three
+ * fish each over 63 cm, and rewriting that in our own words would be a
+ * liability. */
+function regulationBlock(lake) {
+  if (!REGULATIONS) return "";
+  const year = REGULATIONS.guide_year;
+  const zone = lake.zone;
+  const official = zone
+    ? `https://albertaregulations.ca/fishingregs/${encodeURIComponent(String(zone).toLowerCase())}.html`
+    : "https://albertaregulations.ca/fishingregs/";
+  const link = `<a class="zone-link" href="${official}" target="_blank" rel="noopener">`
+    + `official ${esc(zone || "Alberta")} tables ↗</a>`;
+  const head = `<div class="reg-head"><span class="profile-label">Catch limits</span>`
+    + `<span class="reg-year">${esc(year)} guide</span></div>`;
+
+  const reg = regulationFor(lake);
+  if (!reg) {
+    return `<div class="reg-block">${head}
+      <div class="reg-none">This lake could not be matched to the regulations with
+      confidence, so none are shown. Check the ${link}</div></div>`;
+  }
+  if (reg.basis === "cross-reference") {
+    return `<div class="reg-block">${head}
+      <div class="reg-none">The guide does not regulate this water on its own:
+      ${esc(reg.see)}. Check the ${link}</div></div>`;
+  }
+
+  const open = seasonOpenOn(reg.season && reg.season.text, new Date());
+  const badge = open === null ? ""
+    : `<span class="reg-open ${open ? "yes" : "no"}">${open ? "Open now" : "Closed now"}</span>`;
+  const rows = [];
+  const season = (reg.season && reg.season.text) || "";
+  rows.push(`<div class="reg-row"><span class="reg-k">Season</span>
+    <span class="reg-v">${esc(season || "not listed — treated as closed")}</span></div>`);
+
+  if (reg.basis === "site-specific") {
+    if (reg.trout_total && reg.trout_total.text) {
+      rows.push(`<div class="reg-row"><span class="reg-k">Trout</span>
+        <span class="reg-v">${esc(reg.trout_total.text)}</span></div>`);
+    }
+    if (reg.bait) {
+      rows.push(`<div class="reg-row"><span class="reg-k">Bait</span>
+        <span class="reg-v">${esc(reg.bait)}</span></div>`);
+    }
+    const others = Object.entries(reg.species || {})
+      .map(([code, v]) => `${esc(code)} ${esc(v.text)}`).join(" &nbsp;·&nbsp; ");
+    if (others) {
+      rows.push(`<div class="reg-row"><span class="reg-k">Other</span>
+        <span class="reg-v">${others}</span></div>`);
+    }
+    if ((reg.also || []).length) {
+      rows.push(`<div class="reg-row"><span class="reg-k">Also</span>
+        <span class="reg-v">${reg.also.map(a =>
+          `${esc(a.detail || "tributaries")}: ${esc(a.season.text || "closed")}`).join("; ")}</span></div>`);
+    }
+  } else {
+    const limits = reg.limits || {};
+    const listed = Object.entries(limits)
+      .map(([k, v]) => `${esc(k)} ${esc(v)}`).join(" &nbsp;·&nbsp; ");
+    if (reg.bait) {
+      rows.push(`<div class="reg-row"><span class="reg-k">Bait</span>
+        <span class="reg-v">${esc(reg.bait)}</span></div>`);
+    }
+    if (listed) {
+      rows.push(`<div class="reg-row"><span class="reg-k">Limits</span>
+        <span class="reg-v">${listed}</span></div>`);
+    }
+  }
+
+  const because = {
+    "site-specific": `listed for this lake in the ${esc(zone)} table`,
+    "put-and-take": "provincial put-and-take stocked lake regulations",
+    "watershed-default": `not listed individually — the ${esc(zone)} default applies`,
+  }[reg.basis] || "";
+  const matched = reg.matched_name && reg.matched_name !== lake.name
+    ? ` (matched to “${esc(reg.matched_name)}”)` : "";
+
+  return `<div class="reg-block">${head}${badge}
+    ${rows.join("")}
+    <div class="reg-why">${because}${matched}</div>
+    <div class="reg-warn">Confirm before you fish — regulations change. ${link}</div>
+  </div>`;
+}
+
+/* The stocking table's date column, with the day in a fixed slot so the whole
+ * column lines up. Alberta reports some shipments only to the month; that is
+ * shown as a dash rather than guessed at or left to ragged the column. */
+function dateCell(dateStr, precision) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr || "");
+  if (!m) return `<td class="date-cell">${esc(dateStr || "—")}</td>`;
+  const monthYear = `${MONTH_NAMES[Number(m[2]) - 1]} ${m[1]}`;
+  const day = precision === "month"
+    ? `<span class="d unknown" title="the report gave only the month">–</span>`
+    : `<span class="d">${Number(m[3])}</span>`;
+  const title = precision === "month" ? ` title="the report gave only the month"` : "";
+  return `<td class="date-cell"${title}>${day} ${esc(monthYear)}</td>`;
+}
+
 function popupHtml(lake) {
   const key = lakeKey(lake);
   const filteredTotal = filteredFishTotal(lake);
@@ -1124,7 +1549,7 @@ function popupHtml(lake) {
   const tableRows = rows.map(s => {
     const color = SPECIES_META[s.species]?.color || "#888";
     return `<tr>
-      <td>${esc(fmtDate(s.date, s.date_precision))}</td>
+      ${dateCell(s.date, s.date_precision)}
       <td><span class="sp-tag" style="background:${color}">${esc(s.species)}</span></td>
       <td>${esc(s.strain) || "—"}</td>
       <td>${s.length_cm ? Number(s.length_cm).toFixed(1) : "—"}</td>
@@ -1155,10 +1580,13 @@ function popupHtml(lake) {
     ${changeRow}
     ${approx}
     ${profileBlock(lake)}
+    ${depthBlock(lake)}
+    ${regulationBlock(lake)}
     <div class="popup-actions">
       <a class="gmaps" href="${driveUrl}" target="_blank" rel="noopener">Directions from ${esc(state.home.name)} ↗</a>
       <a class="gmaps" href="${gmapsUrl}" target="_blank" rel="noopener">Show on Google Maps ↗</a>
-      <button type="button" class="gmaps as-btn" data-lakelink="${esc(key)}">Copy link to this lake</button>
+      <button type="button" class="gmaps as-btn" data-conditions="${esc(key)}">Conditions here</button>
+      <button type="button" class="gmaps as-btn" data-lakelink="${esc(key)}" title="Copies a web address that reopens the map on this lake, with your filters, ready to paste into a message">Copy link to this lake</button>
     </div>
     <table>
       <thead><tr><th>Date</th><th>Sp.</th><th>Strain</th><th>cm</th><th>Number</th></tr></thead>
@@ -1496,6 +1924,10 @@ function toggleFavourite(key) {
   renderFavourites();
   renderPins();
   if (state.view === "list") renderList();
+  const conditions = document.querySelector(".leaflet-popup [data-conditions]");
+  if (conditions) {
+    conditions.addEventListener("click", () => ConditionsUI.focusLake(conditions.dataset.conditions));
+  }
   const open = document.querySelector(".leaflet-popup [data-fav]");
   if (open && open.dataset.fav === key) {
     const on = state.favourites.has(key);
@@ -1576,6 +2008,73 @@ function buildSizeFilters() {
     if (cb.checked) state.sizes.add(cb.dataset.size); else state.sizes.delete(cb.dataset.size);
     onFilterChange();
   });
+}
+
+function buildAdvisories() {
+  if (!ADVISORIES) return;
+  const lines = Object.values(ADVISORIES.sources || {})
+    .flatMap(src => (src.entries || []).map(text => ({ text, url: src.url })));
+  if (!lines.length) return;
+  document.getElementById("advisory-group").hidden = false;
+  const note = document.getElementById("advisory-note");
+  const list = document.getElementById("advisory-list");
+  const more = document.getElementById("advisory-more");
+
+  const checked = ADVISORIES.checked ? new Date(ADVISORIES.checked) : null;
+  note.textContent = `${lines.length} notice${lines.length === 1 ? "" : "s"}`
+    + (checked ? ` · checked ${daysAgo(ADVISORIES.checked.slice(0, 10)) === 0
+        ? "today" : fmtDate(ADVISORIES.checked.slice(0, 10), "day")}` : "");
+
+  let expanded = false;
+  const draw = () => {
+    const shown = expanded ? lines : lines.slice(0, 3);
+    list.innerHTML = shown.map(l =>
+      `<li><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.text)}</a></li>`).join("");
+    more.hidden = lines.length <= 3;
+    more.textContent = expanded ? "Show fewer" : `Show all ${lines.length}`;
+  };
+  more.addEventListener("click", () => { expanded = !expanded; draw(); });
+  draw();
+}
+
+function buildConditionsPanel() {
+  const btn = document.getElementById("conditions-btn");
+  btn.addEventListener("click", () => {
+    ConditionsUI.toggle();
+    btn.setAttribute("aria-pressed", state.conditions.open ? "true" : "false");
+  });
+  if (state.conditions.open) {          // restored from the URL
+    state.conditions.open = false;
+    ConditionsUI.toggle(true);
+    btn.setAttribute("aria-pressed", "true");
+  }
+}
+
+function buildSeasonFilter() {
+  const group = document.getElementById("season-group");
+  const chip = document.getElementById("open-now-chip");
+  // Nothing to filter on if the regulations did not load.
+  if (!REGULATIONS) return;
+  group.hidden = false;
+  const note = document.getElementById("open-now-note");
+  const sync = () => {
+    chip.classList.toggle("active", state.openNow);
+    chip.setAttribute("aria-pressed", state.openNow ? "true" : "false");
+    const shut = LAKES.filter(l => lakeOpenNow(l) === false).length;
+    // Two different unknowns, and conflating them would misdescribe both: a
+    // lake we never matched to the regulations is not a lake whose season we
+    // failed to read.
+    const unmatched = LAKES.filter(l => !regulationFor(l)).length;
+    note.textContent = `${shut} lake${shut === 1 ? "" : "s"} closed today`
+      + (unmatched ? ` · ${unmatched} not matched to the regulations, and never hidden` : "")
+      + ` · ${REGULATIONS.guide_year} guide`;
+  };
+  chip.addEventListener("click", () => {
+    state.openNow = !state.openNow;
+    sync();
+    onFilterChange();
+  });
+  sync();
 }
 
 function buildRecencyChips() {
@@ -2224,6 +2723,8 @@ function writeUrl() {
   if (state.years.size !== ALL_YEARS.length) p.set("yr", [...state.years].sort().join(","));
   if (state.maxDistanceKm !== 1000) p.set("d", state.maxDistanceKm);
   if (state.recency !== "any") p.set("rc", state.recency);
+  if (state.openNow) p.set("open", "1");
+  if (state.conditions.open) p.set("cx", state.conditions.horizon);
   if (state.view !== "map") p.set("v", state.view);
   if (state.colorMode !== "species") p.set("cm", state.colorMode);
   if (state.focusedLakeAts) p.set("lake", state.focusedLakeAts);
@@ -2244,6 +2745,11 @@ function readUrl() {
   if (p.has("v") && ["map", "list", "zones"].includes(p.get("v"))) state.view = p.get("v");
   if (p.has("cm") && COLOR_MODES.some(m => m.id === p.get("cm"))) state.colorMode = p.get("cm");
   if (p.has("c")) state.chartType = p.get("c");
+  if (p.get("open") === "1") state.openNow = true;
+  if (["now", "week"].includes(p.get("cx"))) {
+    state.conditions.open = true;
+    state.conditions.horizon = p.get("cx");
+  }
   if (p.has("home")) {
     const [lat, lon, ...rest] = p.get("home").split(",");
     if (Number.isFinite(Number(lat)) && Number.isFinite(Number(lon))) {
@@ -2339,6 +2845,9 @@ function onFilterChange() {
   updateColorModeHint();
   if (state.view === "list") renderList();
   if (state.view === "zones") renderZones();
+  // The species filter decides which thermal band applies, so the panel has to
+  // follow the filters rather than only the map.
+  if (state.conditions.open) ConditionsUI.render();
   writeUrl();
 }
 
@@ -2351,16 +2860,24 @@ async function init() {
       typeof L === "undefined" ? "vendor/leaflet.js" : null,
       typeof L !== "undefined" && !L.markerClusterGroup ? "vendor/leaflet.markercluster.js" : null,
       typeof Chart === "undefined" ? "vendor/chart.umd.js" : null,
+      typeof Astro === "undefined" ? "js/astro.js" : null,
+      typeof Conditions === "undefined" ? "js/conditions.js" : null,
+      typeof Weather === "undefined" ? "js/weather.js" : null,
+      typeof ConditionsUI === "undefined" ? "js/conditions-ui.js" : null,
     ].filter(Boolean);
-    if (missing.length) throw new Error(`${missing.join(" and ")} did not load. Check the vendor/ folder is present.`);
+    if (missing.length) throw new Error(`${missing.join(" and ")} did not load. Check the vendor/ and js/ folders are present.`);
 
     const stored = readStore(STORE_HOME, null);
     if (stored && Number.isFinite(stored.lat)) state.home = stored;
     state.favourites = new Set(readStore(STORE_FAVS, []));
+    state.conditions.waterOverrides = readStore(STORE_WATER, {}) || {};
 
     const params = readUrl();
     const { lakes, years } = await loadAllData();
     QUALITY_SUMMARY = await loadQualitySummary();
+    REGULATIONS = await loadRegulations();
+    DEPTHS = await loadDepths();
+    ADVISORIES = await loadAdvisories();
     LAKES = lakes;
     ALL_YEARS = years;
     state.years = params.has("yr")
@@ -2375,6 +2892,9 @@ async function init() {
     updateDataQualitySummary();
     initMap();
     buildSearch();
+    buildAdvisories();
+    buildConditionsPanel();
+    buildSeasonFilter();
     buildRecencyChips();
     buildSpeciesFilters();
     buildSizeFilters();

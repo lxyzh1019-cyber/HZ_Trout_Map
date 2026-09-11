@@ -1,0 +1,5347 @@
+{
+ "guide_year": 2026,
+ "lakes": {
+  "wb17894": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Anderson Dam",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb18007": {
+   "bait": "Bait allowed",
+   "basis": "watershed-default",
+   "limits": {
+    "Burbot": "2 (Burbot limit 0 Feb. 1 to Mar. 31)",
+    "Lake Whitefish": "10",
+    "Mountain Whitefish": "5 over 30 cm",
+    "Northern Pike": "3 over 63 cm",
+    "Trout": "5",
+    "Walleye": "3 over 50 cm",
+    "Yellow Perch": "15"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb18019": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Wetaskiwin Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb18020": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Oyen (Concrete Plant) Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb18022": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Castor Eastside Trout Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb19525": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Mayan Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb19760": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "Alexander Hamilton Pond",
+   "matched_name": "Lac La Biche Trout Pond",
+   "page": 31,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 3,
+    "text": "3 trout"
+   },
+   "zone": "NB1"
+  },
+  "wb20258": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Castaway Trout Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb20267": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "La Crete Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb21137": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Whitecourt Town Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb2129": {
+   "bait": "Bait allowed",
+   "basis": "watershed-default",
+   "limits": {
+    "Arctic Grayling": "0",
+    "Burbot": "10",
+    "Lake Whitefish": "10",
+    "Northern Pike": "3 over 63 cm",
+    "Trout": "3",
+    "Walleye": "3 over 50 cm",
+    "Yellow Perch": "15"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN May 15 to Mar. 31"
+   },
+   "zone": "NB1"
+  },
+  "wb21353": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Ardmore Community Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB1"
+  },
+  "wb22504": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Riverstone Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP1"
+  },
+  "wb22993": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "East Stormwater Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb22995": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "MD Peace Pond #2",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb23292": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Genesee Trout Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb23293": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Crossfield Trout Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb23789": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "15,16, NE4-47-19-W5",
+   "matched_name": "Pit 24 Lake",
+   "page": 17,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 40,
+    "size_op": "over",
+    "text": "1 trout over 40 cm"
+   },
+   "zone": "ES3"
+  },
+  "wb23790": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "24-46-19-W5",
+   "matched_name": "Pit 35 Lake",
+   "page": 17,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 40,
+    "size_op": "over",
+    "text": "1 trout over 40 cm"
+   },
+   "zone": "ES3"
+  },
+  "wb23791": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "24-46-19-W5",
+   "matched_name": "Pit 45 Lake",
+   "page": 17,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 40,
+    "size_op": "over",
+    "text": "1 trout over 40 cm"
+   },
+   "zone": "ES3"
+  },
+  "wb24053": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Lara Fish Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB1"
+  },
+  "wb24312": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "SW 35-46-19-W5",
+   "matched_name": "Pit 44 Lake",
+   "page": 17,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 40,
+    "size_op": "over",
+    "text": "1 trout over 40 cm"
+   },
+   "zone": "ES3"
+  },
+  "wb24364": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "12-35-6-W5",
+   "matched_name": "Fiesta Lake",
+   "page": 13,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN APR. 16 TO OCT. 31"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 0,
+    "text": "0 trout",
+    "zero": true
+   },
+   "zone": "ES2"
+  },
+  "wb24702": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "St. Paul Fish Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB1"
+  },
+  "wb26033": {
+   "bait": "",
+   "basis": "watershed-default",
+   "limits": {
+    "Arctic Grayling": "0",
+    "Bull Trout": "0",
+    "Burbot": "10",
+    "Lake Whitefish": "10",
+    "Mountain Whitefish": "5 over 30 cm",
+    "Northern Pike": "3",
+    "Trout": "5",
+    "Walleye": "3 over 50 cm",
+    "Yellow Perch": "15"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb26047": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Radway Fish Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB1"
+  },
+  "wb26322": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Len Thompson Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb26431": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "High Level Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb26447": {
+   "bait": "Bait allowed",
+   "basis": "watershed-default",
+   "limits": {
+    "Burbot": "2 (Burbot limit 0 Feb. 1 to Mar. 31)",
+    "Lake Whitefish": "10",
+    "Mountain Whitefish": "5 over 30 cm",
+    "Northern Pike": "3 over 63 cm",
+    "Trout": "5",
+    "Walleye": "3 over 50 cm",
+    "Yellow Perch": "15"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb26854": {
+   "bait": "Bait allowed",
+   "basis": "watershed-default",
+   "limits": {
+    "Burbot": "2 (Burbot limit 0 Feb. 1 to Mar. 31)",
+    "Lake Whitefish": "10",
+    "Mountain Whitefish": "5 over 30 cm",
+    "Northern Pike": "3 over 63 cm",
+    "Trout": "5",
+    "Walleye": "3 over 50 cm",
+    "Yellow Perch": "15"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb318138": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Taber Trout Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb328085": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Shell True North Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES4"
+  },
+  "wb3476": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Grotto Mountain Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb3479": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Lambert Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb3482": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "19-23-8-W5",
+   "matched_name": "Mount Lorette Ponds",
+   "page": 8,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES1"
+  },
+  "wb3485": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Rocky Children’s Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb3486": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Sibbald Meadows Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb3494": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "21-26-9-W4; Includes tributaries",
+   "matched_name": "Blood Indian Creek Reservoir",
+   "page": 26,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "size_cm": 50,
+     "size_op": "over",
+     "text": "3 over 50 cm"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "size_cm": 35,
+    "size_op": "over",
+    "text": "Trout limit 3; BNTR, BKTR, TGTR over 35 cm; RNTR no size limit; only 1 trout of that total may be a BNTR, BKTR, or TGTR"
+   },
+   "zone": "PP2"
+  },
+  "wb3499": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Chain Lakes Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb3522": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Mclean Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb3523": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "5-7-3-W4",
+   "match_score": 0.95,
+   "matched_name": "Michel Creek Reservoir",
+   "page": 23,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "size_cm": 35,
+    "size_op": "over",
+    "text": "Trout limit 5; BNTR over 35 cm; RNTR no size limit; only one trout may be BNTR"
+   },
+   "zone": "PP1"
+  },
+  "wb3524": {
+   "bait": "Bait allowed",
+   "basis": "watershed-default",
+   "limits": {
+    "Burbot": "2 (Burbot limit 0 Feb. 1 to Mar. 31)",
+    "Lake Whitefish": "10",
+    "Mountain Whitefish": "5 over 30 cm",
+    "Northern Pike": "3 over 63 cm",
+    "Trout": "5",
+    "Walleye": "3 over 50 cm",
+    "Yellow Perch": "15"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb3534": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "26-8-2-W4",
+   "matched_name": "Spruce Coulee Reservoir",
+   "page": 23,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 5,
+    "text": "5 trout"
+   },
+   "zone": "PP1"
+  },
+  "wb3899": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Alford Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb3909": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "30-38-17-W5",
+   "matched_name": "Allstones Lake",
+   "page": 13,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES2"
+  },
+  "wb3948": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "5-19-9-W5",
+   "matched_name": "Aster Lake",
+   "page": 7,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES1"
+  },
+  "wb395186": {
+   "bait": "Bait allowed",
+   "basis": "site-specific",
+   "detail": "NE-01-48-10-W5",
+   "match_score": 0.95,
+   "matched_name": "Lodgepole (Unnamed) Pond",
+   "page": 17,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES3"
+  },
+  "wb395196": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "SE 4-26-4-W5",
+   "match_score": 0.96,
+   "matched_name": "Mitford Ponds",
+   "page": 8,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN APR. 1 TO NOV. 30"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 5,
+    "text": "5 trout"
+   },
+   "zone": "ES1"
+  },
+  "wb4005": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "36-14-4-W5",
+   "matched_name": "Bear Pond",
+   "page": 7,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 30,
+    "size_op": "over",
+    "text": "1 trout over 30 cm; 0 ARGR"
+   },
+   "zone": "ES1"
+  },
+  "wb4011": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Beauvais Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb4014": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "16-35-6-W5",
+   "matched_name": "Beaver Lake",
+   "page": 13,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN APR. 1 TO NOV. 30"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 0,
+    "text": "0 trout",
+    "zero": true
+   },
+   "zone": "ES2"
+  },
+  "wb4018": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Beaver Mines Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb4061": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "18-35-6-W5",
+   "matched_name": "Birch Lake",
+   "page": 13,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "RNTR": {
+     "count": 1,
+     "text": "1 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 3,
+    "text": "3 trout"
+   },
+   "zone": "ES2"
+  },
+  "wb4167": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "confirmed_by": "repo owner",
+   "detail": "All lakes; 16-21-10-W5",
+   "matched_name": "Burstall Lakes",
+   "page": 7,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES1"
+  },
+  "wb4171": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Butcher’s Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb417477": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "",
+   "match_score": 0.977,
+   "matched_name": "County Sportplex Pond",
+   "page": 20,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN APR. 1 TO OCT. 31"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 0,
+    "text": "0 fish",
+    "zero": true
+   },
+   "zone": "ES4"
+  },
+  "wb4208": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Captain Eyre Lake (Capt Ayre)",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb4231": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Cavan Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP1"
+  },
+  "wb4252": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Chatwin Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB1"
+  },
+  "wb4318": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "Birdwood Lake; 29-21-10-W5",
+   "match_score": 0.95,
+   "matched_name": "Commonwealth Lake",
+   "page": 7,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES1"
+  },
+  "wb4340": {
+   "bait": "Bait and bait fish allowed",
+   "basis": "site-specific",
+   "detail": "12-38-8-W5",
+   "matched_name": "Cow Lake",
+   "page": 13,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 15 TO MAR. 31"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 5,
+    "text": "5 trout"
+   },
+   "zone": "ES2"
+  },
+  "wb4374": {
+   "also": [
+    {
+     "bait": "Bait ban",
+     "detail": "Tributaries",
+     "page": 7,
+     "season": {
+      "closed": false,
+      "implied": false,
+      "text": "OPEN JUNE 16 TO AUG. 31"
+     },
+     "species": {
+      "BKTR": {
+       "count": 2,
+       "text": "2 fish"
+      },
+      "MNWH": {
+       "count": 5,
+       "size_cm": 30,
+       "size_op": "over",
+       "text": "5 over 30 cm"
+      }
+     },
+     "trout_total": {
+      "text": "Other trout 0"
+     }
+    },
+    {
+     "bait": "Bait ban",
+     "detail": "Tributaries",
+     "page": 7,
+     "season": {
+      "closed": false,
+      "implied": false,
+      "text": "OPEN SEPT. 1 TO OCT. 31"
+     },
+     "species": {
+      "MNWH": {
+       "count": 0,
+       "text": "0 fish",
+       "zero": true
+      }
+     },
+     "trout_total": {
+      "count": 0,
+      "text": "0 trout",
+      "zero": true
+     }
+    }
+   ],
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "",
+   "matched_name": "Crowsnest Lake",
+   "page": 7,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "LKTR": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "MNWH": {
+     "count": 5,
+     "size_cm": 30,
+     "size_op": "over",
+     "text": "5 over 30 cm"
+    },
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 5,
+    "text": "5 trout"
+   },
+   "zone": "ES1"
+  },
+  "wb4446": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Dillberry Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb4458": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "8-1-60-8-W5",
+   "matched_name": "Dolberg Lake",
+   "page": 37,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 50,
+    "size_op": "over",
+    "text": "1 trout over 50 cm"
+   },
+   "zone": "NB2"
+  },
+  "wb4460": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "East Dollar Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES4"
+  },
+  "wb4488": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Dunn Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb4495": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "11-32-11-W5",
+   "matched_name": "Eagle Lake",
+   "page": 13,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES2"
+  },
+  "wb4505": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Edith Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB2"
+  },
+  "wb4539": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Engstrom Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB4"
+  },
+  "wb4562": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Fairfax Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb4647": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "5-39-13-W5",
+   "matched_name": "Gap Lake",
+   "page": 13,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES2"
+  },
+  "wb4697": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Goldeye Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb4725": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Grande Cache Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb4794": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Hasse Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb4837": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "Upper, middle, lower; 21-21-10-W5",
+   "match_score": 0.95,
+   "matched_name": "Hogarth Lakes",
+   "page": 7,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 40,
+    "size_op": "over",
+    "text": "1 trout over 40 cm"
+   },
+   "zone": "ES1"
+  },
+  "wb4909": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Island Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb4920": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "52-2-W5",
+   "matched_name": "Jack Fish Lake",
+   "page": 27,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 15 TO MAR. 31"
+   },
+   "species": {
+    "BURB": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "LKWH": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "NRPK": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "WALL": {
+     "count": 1,
+     "text": "1 fish 50- 55 cm"
+    },
+    "YLPR": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    }
+   },
+   "trout_total": null,
+   "zone": "PP2"
+  },
+  "wb4935": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Jane Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB2"
+  },
+  "wb5002": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Kinky Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb5029": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "7-36-18-W5",
+   "matched_name": "Landslide Lake",
+   "page": 14,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES2"
+  },
+  "wb5050": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Lees Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb5078": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "7-75-5-W5",
+   "match_score": 0.947,
+   "matched_name": "Lily Lake",
+   "page": 37,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 BKTR; 0 TGTR"
+   },
+   "zone": "NB2"
+  },
+  "wb5093": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Little Bear Lake (Hasse Lake)",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB1"
+  },
+  "wb5223": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Margaret Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb5232": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Marigold Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB2"
+  },
+  "wb5245": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Mary Gregg Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb5253": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "14-20-10-W5",
+   "matched_name": "Maude Lake",
+   "page": 8,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES1"
+  },
+  "wb5286": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Mcleod Lake (Carson Lake)",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb5324": {
+   "bait": "Bait allowed",
+   "basis": "site-specific",
+   "detail": "8-53-19-W5",
+   "matched_name": "Millers Lake",
+   "page": 17,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "size_cm": 40,
+    "size_op": "over",
+    "text": "2 RNTR, TGTR 1 over 40 cm, BNTR 1 over 40 cm"
+   },
+   "zone": "ES3"
+  },
+  "wb5348": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Mitchell Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb5360": {
+   "bait": "Bait allowed",
+   "basis": "watershed-default",
+   "limits": {
+    "Arctic Grayling": "0",
+    "Burbot": "10",
+    "Lake Whitefish": "10",
+    "Northern Pike": "3 over 63 cm",
+    "Trout": "3",
+    "Walleye": "3 over 50 cm",
+    "Yellow Perch": "15"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN May 15 to Mar. 31"
+   },
+   "zone": "NB3"
+  },
+  "wb5387": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "31-53-27-W4",
+   "matched_name": "Muir Lake",
+   "page": 27,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 1 TO OCT. 31"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 50,
+    "size_op": "over",
+    "text": "1 trout over 50 cm"
+   },
+   "zone": "PP2"
+  },
+  "wb5407": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "5-45-20-W5",
+   "matched_name": "Muskiki Lake",
+   "page": 14,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "CTTR": {
+     "count": 1,
+     "size_cm": 40,
+     "size_op": "over",
+     "text": "1 fish over 40 cm"
+    },
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 5,
+    "text": "5 trout"
+   },
+   "zone": "ES2"
+  },
+  "wb5466": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Obed Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb5476": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Ole Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb5504": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "8-1-26-W4",
+   "match_score": 0.95,
+   "matched_name": "Outpost (Police) Lake",
+   "page": 23,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN APR. 1 TO OCT. 31"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 50,
+    "size_op": "over",
+    "text": "1 trout over 50 cm"
+   },
+   "zone": "PP1"
+  },
+  "wb5513": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Payne Lake (Mami Lake)",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb5521": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Parker Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB2"
+  },
+  "wb5538": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Peanut Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB2"
+  },
+  "wb5555": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Peppers Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb5565": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Petite Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb5569": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Phyllis Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb5572": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "Lower or MacDonald Lake; 7-57-4-W6",
+   "match_score": 0.95,
+   "matched_name": "Pierre Greys Lakes",
+   "page": 20,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 40,
+    "size_op": "over",
+    "text": "1 trout over 40 cm"
+   },
+   "zone": "ES4"
+  },
+  "wb5661": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "20-8-1-W4",
+   "matched_name": "Reesor Lake",
+   "page": 23,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "size_cm": 50,
+    "size_op": "over",
+    "text": "Trout limit 5; TGTR over 50 cm; RNTR no size limit; only one trout may be TGTR"
+   },
+   "zone": "PP1"
+  },
+  "wb5714": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Running Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb5729": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Salter’s Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb5753": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Sauer Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb5766": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "35-61-8-W5",
+   "matched_name": "Schuman Lake",
+   "page": 38,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 5,
+    "text": "5 RNTR; 0 TGTR"
+   },
+   "zone": "NB2"
+  },
+  "wb5788": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "NW-1-22-11-W5",
+   "matched_name": "Shark Lake",
+   "page": 8,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES1"
+  },
+  "wb5804": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Shunda (Fish) Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb5805": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Sibbald Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb5858": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "6-20-8-W5; Includes tributaries and outlet",
+   "match_score": 0.971,
+   "matched_name": "Sparrow's Egg Lake",
+   "page": 8,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN JULY 1 TO OCT. 31"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 50,
+    "size_op": "over",
+    "text": "1 trout over 50 cm"
+   },
+   "zone": "ES1"
+  },
+  "wb5874": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "SW 30-52-1-W5",
+   "match_score": 0.95,
+   "matched_name": "Spring Lake",
+   "page": 27,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "PP2"
+  },
+  "wb5895": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Star Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb5901": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "35-25-10-W5; Includes tributaries and outlet",
+   "matched_name": "Stenton Lake",
+   "page": 9,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 40,
+    "size_op": "over",
+    "text": "1 trout over 40 cm"
+   },
+   "zone": "ES1"
+  },
+  "wb5919": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Strubel Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb5929": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Sulphur Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb5944": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Swan Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES4"
+  },
+  "wb5968": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Tay Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb5971": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.941,
+   "matched_name": "Tea Lakes",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB2"
+  },
+  "wb5990": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "23-19-10-W5",
+   "matched_name": "Three Isle Lake",
+   "page": 9,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES1"
+  },
+  "wb6039": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Twin Lakes",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb6051": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Two Lakes (South Two Lake)",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES4"
+  },
+  "wb6061": {
+   "also": [
+    {
+     "bait": "Bait ban",
+     "detail": "The remainder of the lake",
+     "page": 9,
+     "season": {
+      "closed": false,
+      "implied": false,
+      "text": "OPEN ALL YEAR"
+     },
+     "species": {
+      "CTTR": {
+       "size_cm": 50,
+       "size_op": "over",
+       "text": "over 50 cm"
+      },
+      "NRPK": {
+       "count": 3,
+       "text": "3 fish"
+      },
+      "RNTR": {
+       "size_cm": 50,
+       "size_op": "over",
+       "text": "over 50 cm"
+      },
+      "WALL": {
+       "count": 3,
+       "text": "3 fish"
+      },
+      "YLPR": {
+       "count": 15,
+       "text": "15 fish"
+      }
+     },
+     "trout_total": {
+      "count": 1,
+      "text": "1 trout"
+     }
+    }
+   ],
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "The portion of the lake within 100m of Rawson Creek inlet",
+   "matched_name": "Upper Kananaskis Lake",
+   "page": 9,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN JULY 16 TO MAY 31"
+   },
+   "species": {
+    "CTTR": {
+     "size_cm": 50,
+     "size_op": "over",
+     "text": "over 50 cm"
+    },
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "RNTR": {
+     "size_cm": 50,
+     "size_op": "over",
+     "text": "over 50 cm"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "text": "1 trout"
+   },
+   "zone": "ES1"
+  },
+  "wb6082": {
+   "bait": "Bait allowed",
+   "basis": "watershed-default",
+   "limits": {
+    "Burbot": "2 (Burbot limit 0 Feb. 1 to Mar. 31)",
+    "Lake Whitefish": "10",
+    "Mountain Whitefish": "5 over 30 cm",
+    "Northern Pike": "3 over 63 cm",
+    "Trout": "5",
+    "Walleye": "3 over 50 cm",
+    "Yellow Perch": "15"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6086": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "63-14-W4",
+   "matched_name": "Victor Lake",
+   "page": 34,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 15 TO MAR. 31"
+   },
+   "species": {
+    "NRPK": {
+     "count": 1,
+     "size_cm": 63,
+     "size_op": "over",
+     "text": "1 over 63 cm"
+    }
+   },
+   "trout_total": null,
+   "zone": "NB1"
+  },
+  "wb6160": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Upper Wildhorse Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb6173": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Windsor Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6524": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "West Dollar Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES4"
+  },
+  "wb6525": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "confirmed_by": "repo owner",
+   "detail": "All lakes; 16-21-10-W5",
+   "matched_name": "Burstall Lakes",
+   "page": 7,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES1"
+  },
+  "wb6528": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "69-23-W4",
+   "match_score": 0.95,
+   "matched_name": "Chain (Lower) Lake",
+   "page": 37,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 RNTR any size; 0 TGTR; 0 BNTR"
+   },
+   "zone": "NB2"
+  },
+  "wb6533": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "Lower or MacDonald Lake; 7-57-4-W6",
+   "match_score": 0.95,
+   "matched_name": "Pierre Greys Lakes",
+   "page": 20,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 40,
+    "size_op": "over",
+    "text": "1 trout over 40 cm"
+   },
+   "zone": "ES4"
+  },
+  "wb6534": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "Lower or MacDonald Lake; 7-57-4-W6",
+   "match_score": 0.95,
+   "matched_name": "Pierre Greys Lakes",
+   "page": 20,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 40,
+    "size_op": "over",
+    "text": "1 trout over 40 cm"
+   },
+   "zone": "ES4"
+  },
+  "wb6535": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Two Lakes (North Two Lake)",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES4"
+  },
+  "wb6537": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.976,
+   "matched_name": "Lower Wildhorse Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb6541": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "Upper, middle, lower; 21-21-10-W5",
+   "match_score": 0.95,
+   "matched_name": "Hogarth Lakes",
+   "page": 7,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 40,
+    "size_op": "over",
+    "text": "1 trout over 40 cm"
+   },
+   "zone": "ES1"
+  },
+  "wb6598": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.974,
+   "matched_name": "Zama Community Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb6601": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Yellowhead Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb6605": {
+   "bait": "Bait allowed",
+   "basis": "watershed-default",
+   "limits": {
+    "Arctic Grayling": "0",
+    "Bull Trout": "0",
+    "Burbot": "10",
+    "Lake Whitefish": "10",
+    "Mountain Whitefish": "5 over 30 cm",
+    "Perch": "15",
+    "Pike": "3",
+    "Trout": "5",
+    "Walleye": "3 over 50 cm"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb6606": {
+   "bait": "Bait allowed",
+   "basis": "watershed-default",
+   "limits": {
+    "Arctic Grayling": "0",
+    "Bull Trout": "0",
+    "Burbot": "10",
+    "Lake Whitefish": "10",
+    "Mountain Whitefish": "5 over 30 cm",
+    "Perch": "15",
+    "Pike": "3",
+    "Trout": "5",
+    "Walleye": "3 over 50 cm"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb6607": {
+   "bait": "Bait allowed",
+   "basis": "watershed-default",
+   "limits": {
+    "Arctic Grayling": "0",
+    "Bull Trout": "0",
+    "Burbot": "10",
+    "Lake Whitefish": "10",
+    "Mountain Whitefish": "5 over 30 cm",
+    "Perch": "15",
+    "Pike": "3",
+    "Trout": "5",
+    "Walleye": "3 over 50 cm"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb6608": {
+   "bait": "Bait allowed",
+   "basis": "watershed-default",
+   "limits": {
+    "Arctic Grayling": "0",
+    "Bull Trout": "0",
+    "Burbot": "10",
+    "Lake Whitefish": "10",
+    "Mountain Whitefish": "5 over 30 cm",
+    "Perch": "15",
+    "Pike": "3",
+    "Trout": "5",
+    "Walleye": "3 over 50 cm"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb6609": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Weberville Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb6613": {
+   "bait": "Bait allowed",
+   "basis": "watershed-default",
+   "limits": {
+    "Arctic Grayling": "0",
+    "Burbot": "10",
+    "Lake Whitefish": "10",
+    "Northern Pike": "3 over 63 cm",
+    "Trout": "3",
+    "Walleye": "3 over 50 cm",
+    "Yellow Perch": "15"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN May 15 to Mar. 31"
+   },
+   "zone": "NB2"
+  },
+  "wb6614": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "By The Lake Park",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6617": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Winchell Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb6619": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Vegreville Children’s Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6620": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Vegreville Trout Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6622": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Wallace Park Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6623": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Mitchell Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6625": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Wildwood Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb6626": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Wolf Creek Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb6635": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Tamarack Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB2"
+  },
+  "wb6636": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Texaco East Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB4"
+  },
+  "wb6637": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Texaco Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB4"
+  },
+  "wb6642": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Mile 07 Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB1"
+  },
+  "wb6647": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Niton Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb6651": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "9-47-19-W5",
+   "matched_name": "Silkstone Lake",
+   "page": 17,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 40,
+    "size_op": "over",
+    "text": "1 trout over 40 cm"
+   },
+   "zone": "ES3"
+  },
+  "wb6658": {
+   "bait": "",
+   "basis": "watershed-default",
+   "limits": {
+    "Arctic Grayling": "0",
+    "Bull Trout": "0",
+    "Burbot": "10",
+    "Mountain Whitefish": "5 over 30 cm",
+    "Northern Pike": "3",
+    "Perch": "15",
+    "Trout": "5",
+    "Walleye": "3 over 50 cm"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb6659": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Dandurand Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb6662": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "18-36-18-W5",
+   "matched_name": "Entry Lake",
+   "page": 13,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES2"
+  },
+  "wb6668": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Highway 63 Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB4"
+  },
+  "wb6671": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Nose Creek Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb6674": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Telegraph Park Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6682": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Stirling Children’s Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP1"
+  },
+  "wb6684": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "confirmed_by": "repo owner",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Montaganeusse Lake (Stoney Lake)",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES4"
+  },
+  "wb6686": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Strathmore Children’s Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP1"
+  },
+  "wb6688": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Shuster Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6692": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Spring Coulee Park Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP1"
+  },
+  "wb6693": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Spring Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES4"
+  },
+  "wb6695": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Sardine Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6697": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Severn Creek Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6699": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Shemeluk Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB1"
+  },
+  "wb6702": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Rat Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb6705": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Rainbow Lake Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb6706": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Pleasure Island Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6718": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Parlby Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6721": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "MD Peace Pond #1",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb6724": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Nuggent Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6726": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "confirmed_by": "repo owner",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Open Ck Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6730": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Muskoseepi Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES4"
+  },
+  "wb6732": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Nardam Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb6734": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Nicholas Sheran Park Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP1"
+  },
+  "wb6735": {
+   "bait": "Bait allowed",
+   "basis": "watershed-default",
+   "limits": {
+    "Burbot": "2 (Burbot limit 0 Feb. 1 to Mar. 31)",
+    "Lake Whitefish": "10",
+    "Mountain Whitefish": "5 over 30 cm",
+    "Northern Pike": "3 over 63 cm",
+    "Trout": "5",
+    "Walleye": "3 over 50 cm",
+    "Yellow Perch": "15"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6736": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Morinville Fish And Game Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6737": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Mound Red Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6741": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Midway Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6750": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Machesis Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb6751": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.978,
+   "matched_name": "Magrath Childrens Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP1"
+  },
+  "wb6753": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "McClennan Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB2"
+  },
+  "wb6755": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Mclaren’s Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6757": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Mcquillan Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP1"
+  },
+  "wb6758": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "",
+   "matched_name": "Mcvinnie Reservoir",
+   "page": 23,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 5,
+    "text": "5 trout"
+   },
+   "zone": "PP1"
+  },
+  "wb6760": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "SE-6-50-1-W4",
+   "match_score": 0.95,
+   "matched_name": "Lloydminster Pond",
+   "page": 27,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "PP2"
+  },
+  "wb6761": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Lougheed Trout Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6764": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Leduc Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6770": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "NE-19-36-20-W4",
+   "matched_name": "Kerbe's Pond",
+   "page": 27,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN APR. 1 TO NOV. 30"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 50,
+    "size_op": "over",
+    "text": "1 trout over 50 cm"
+   },
+   "zone": "PP2"
+  },
+  "wb6773": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.947,
+   "matched_name": "Kraft Wimborne Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6776": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Lacombe Park Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6778": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Cecil Thompson Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb6780": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Huber Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6785": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Irma Fish And Game Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6786": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "7-38-7-W5",
+   "matched_name": "Ironside Pond",
+   "page": 13,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN APR. 16 TO OCT. 31"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 0,
+    "text": "0 trout",
+    "zero": true
+   },
+   "zone": "ES2"
+  },
+  "wb6788": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Jarvis Creek Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb6790": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "confirmed_by": "repo owner",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Hermitage Park Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6791": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.963,
+   "matched_name": "Heritage Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6794": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Highway 40 Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES4"
+  },
+  "wb6795": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Highway 686 Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb6796": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Hiller’s Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6803": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Helmer Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6806": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Hansen’s Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6808": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Harleck Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb6809": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Gooseberry Park Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6810": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Granum Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP1"
+  },
+  "wb6815": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Fox Creek Trout Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb6816": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Gibbons Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6820": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Elk Creek Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb6821": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Emerald Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb6822": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Emerson Lakes",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb6823": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Enchant Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP1"
+  },
+  "wb6825": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Fairview College Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb6827": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Figure Eight Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb6830": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Footner Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB3"
+  },
+  "wb6831": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Foremost Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP1"
+  },
+  "wb6833": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Diplomat Mine Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6840": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "East Pit Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6844": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Dickson Trout Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb6845": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Coronation Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6852": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Daysland Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6853": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Dewitt’s Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb6858": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Coleman Fish And Game Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb6860": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Chrystina Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB2"
+  },
+  "wb6868": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Cardiff Park Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6871": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Ponoka Centennial Park Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6873": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Brooks Aquaduct Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb6876": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Bud Miller Park Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6879": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Burmis Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb6880": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Burn’s Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb6882": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Bow City East Ponds",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6884": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Boyle Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB2"
+  },
+  "wb6892": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Bathing Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb6893": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Beaumont Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6894": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Bellis Beach Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB1"
+  },
+  "wb6897": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "1-15-4-W5",
+   "matched_name": "Big Iron Lake",
+   "page": 7,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 30,
+    "size_op": "over",
+    "text": "1 trout over 30 cm; 0 ARGR"
+   },
+   "zone": "ES1"
+  },
+  "wb6900": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Acadia Valley Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6902": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "match_score": 0.95,
+   "matched_name": "Allison Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES1"
+  },
+  "wb6903": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Ashland Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6904": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Atlantic Richfield Reservoir",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB2"
+  },
+  "wb6905": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Bashaw Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6914": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Nordegg Borrow Pit (East)",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb6915": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Nordegg Borrow Pit (West)",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES2"
+  },
+  "wb6917": {
+   "bait": "",
+   "basis": "watershed-default",
+   "limits": {
+    "Arctic Grayling": "0",
+    "Bull Trout": "0",
+    "Burbot": "10",
+    "Lake Whitefish": "10",
+    "Mountain Whitefish": "5 over 30 cm",
+    "Northern Pike": "3",
+    "Trout": "5",
+    "Walleye": "3 over 50 cm",
+    "Yellow Perch": "15"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES3"
+  },
+  "wb6923": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Black Nugget Mine Pit",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  }
+ }
+}

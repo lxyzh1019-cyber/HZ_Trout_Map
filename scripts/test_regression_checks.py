@@ -1,5 +1,6 @@
 import csv
 import json
+import re
 import statistics
 import unittest
 from pathlib import Path
@@ -413,3 +414,501 @@ class PublishedDataTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class OfflineAssetTests(unittest.TestCase):
+    """Every script the page loads must also be precached.
+
+    This is the one bug class that cannot be caught by using the app: a file
+    missing from SHELL_FILES works perfectly at a desk with a network and throws
+    a ReferenceError at a lake with no signal, months later. Cheap to assert,
+    impossible to notice otherwise.
+    """
+
+    INDEX = ROOT / "index.html"
+    SW = ROOT / "sw.js"
+
+    def shell_files(self):
+        text = self.SW.read_text(encoding="utf-8")
+        start = text.index("const SHELL_FILES = [")
+        end = text.index("]", start)
+        return set(re.findall(r'"([^"]+)"', text[start:end]))
+
+    def test_every_js_file_is_precached(self):
+        shell = self.shell_files()
+        for path in sorted((ROOT / "js").glob("*.js")):
+            rel = f"js/{path.name}"
+            self.assertIn(rel, shell, f"{rel} exists but is not in SHELL_FILES in sw.js")
+
+    def test_every_script_tag_is_precached(self):
+        shell = self.shell_files()
+        srcs = re.findall(r'<script src="([^"]+)"', self.INDEX.read_text(encoding="utf-8"))
+        for src in srcs:
+            self.assertIn(src, shell, f"index.html loads {src} but sw.js does not precache it")
+
+    def test_every_script_tag_points_at_a_real_file(self):
+        srcs = re.findall(r'<script src="([^"]+)"', self.INDEX.read_text(encoding="utf-8"))
+        for src in srcs:
+            self.assertTrue((ROOT / src).is_file(), f"index.html loads {src}, which does not exist")
+
+    def test_missing_library_check_names_every_script(self):
+        """The app promises a named, actionable error for a missing library."""
+        text = self.INDEX.read_text(encoding="utf-8")
+        # Find the array that actually lists the libraries, not merely the first
+        # variable that happens to share the name — an unrelated `const missing
+        # = []` elsewhere in the file silently emptied this check once.
+        block = re.search(r"const missing = \[(.*?)\]\.filter\(Boolean\)", text, re.S)
+        self.assertIsNotNone(block, "could not find the missing-library check")
+        named = set(re.findall(r'"((?:vendor|js)/[^"]+)"', block.group(1)))
+        self.assertTrue(named, "the missing-library check named nothing at all")
+        for src in re.findall(r'<script src="([^"]+)"', text):
+            self.assertIn(src, named,
+                          f"{src} is loaded but not named in the missing-library check")
+
+
+class RegulationTests(unittest.TestCase):
+    """The catch limits are the only thing here with a legal consequence.
+
+    Every value asserted below was read off the published guide by eye first.
+    The point is not that the parser is self-consistent — it is that it agrees
+    with the document a warden would hold.
+    """
+
+    _cache = None
+
+    @classmethod
+    def regs(cls):
+        if cls._cache is None:
+            import regulations
+            pdf = ROOT / "data" / "raw" / "alberta-sportfishing-regulations-2026-tables.pdf"
+            if not pdf.exists():
+                raise unittest.SkipTest(f"{pdf.name} is not present")
+            cls._cache = regulations.load(pdf)
+        return cls._cache
+
+    # -- the three rules that are easy to get backwards --------------------
+
+    def test_unlisted_waterbody_takes_the_zone_default(self):
+        """"If a ES1 lake ... is not listed, follow the default regulations."
+
+        Not "unknown". A lake absent from every table still has a limit.
+        """
+        import regulations
+        found = regulations.resolve("No Such Lake At All", "ES1", self.regs())
+        self.assertEqual(found["basis"], "watershed-default")
+        self.assertEqual(found["limits"]["Trout"], "5")
+        self.assertEqual(found["season"]["text"], "OPEN all year")
+
+        northern = regulations.resolve("No Such Lake At All", "NB1", self.regs())
+        self.assertEqual(northern["limits"]["Trout"], "3")
+        self.assertEqual(northern["season"]["text"], "OPEN May 15 to Mar. 31")
+
+    def test_blank_season_on_a_listed_waterbody_means_closed(self):
+        """"If a listed waterbody does not have a season listed, it is CLOSED."
+
+        Reading this as "unknown" would put someone on water that is shut.
+        """
+        import regulations
+        self.assertEqual(regulations.parse_season(""),
+                         {"text": "", "closed": True, "implied": True})
+        self.assertTrue(regulations.parse_season("CLOSED ALL YEAR")["closed"])
+        self.assertFalse(regulations.parse_season("CLOSED ALL YEAR")["implied"])
+        self.assertFalse(regulations.parse_season("OPEN ALL YEAR")["closed"])
+
+    def test_blank_species_cell_means_absent_not_unlimited(self):
+        """An empty cell indicates the species is not likely present."""
+        import regulations
+        self.assertIsNone(regulations.parse_limit(""))
+        self.assertIsNone(regulations.parse_limit(None))
+
+    # -- the legend, parsed and preserved ----------------------------------
+
+    def test_limit_is_parsed_without_losing_the_original_wording(self):
+        """"'3 over 63 cm' indicates ... '3 fish each over 63 cm'."
+
+        The structured form is for filtering. The words are what gets shown,
+        because a paraphrase of a legal limit is a liability.
+        """
+        import regulations
+        limit = regulations.parse_limit("3 over 63 cm")
+        self.assertEqual(limit["count"], 3)
+        self.assertEqual(limit["size_op"], "over")
+        self.assertEqual(limit["size_cm"], 63)
+        self.assertEqual(limit["text"], "3 over 63 cm")
+        self.assertEqual(regulations.parse_limit("10 fish")["count"], 10)
+        self.assertTrue(regulations.parse_limit("0 trout")["zero"])
+
+    # -- a row read off the page by hand -----------------------------------
+
+    def test_barnaby_lake_matches_the_printed_page(self):
+        row = self.regs()["zones"]["ES1"]["lakes"]["Barnaby Lake"]
+        self.assertEqual(row["season"]["text"], "OPEN JULY 16 TO OCT. 31")
+        self.assertEqual(row["trout_total"]["text"], "1 trout over 40 cm")
+        self.assertEqual(row["trout_total"]["count"], 1)
+        self.assertEqual(row["trout_total"]["size_cm"], 40)
+        self.assertEqual(row["bait"], "Bait ban")
+        # Its tributaries carry their own, stricter season.
+        self.assertTrue(any(sub["season"]["text"] == "CLOSED ALL YEAR"
+                            for sub in row.get("also", [])))
+
+    def test_a_cross_reference_is_not_reported_as_a_closure(self):
+        """PP1's Bassano Reservoir has no season and points at the Bow River.
+
+        Applied blindly, the blank-season rule calls that CLOSED ALL YEAR,
+        which is false. Errs safe rather than dangerous, but still wrong.
+        """
+        import regulations
+        found = regulations.resolve("Bassano Reservoir", "PP1", self.regs())
+        self.assertEqual(found["basis"], "cross-reference")
+        self.assertIn("Bow River", found["see"])
+
+    # -- precedence ---------------------------------------------------------
+
+    def test_resolution_follows_the_guide_precedence(self):
+        """Site-specific, then the put-and-take list, then the zone default."""
+        import regulations
+        regs = self.regs()
+        site = regulations.resolve("Barnaby Lake", "ES1", regs)
+        self.assertEqual(site["basis"], "site-specific")
+        stocked = regulations.resolve("Beauvais Lake", "ES1", regs)
+        self.assertEqual(stocked["basis"], "put-and-take")
+        self.assertEqual(stocked["limits"]["Trout"], "5 trout of any size")
+        default = regulations.resolve("Nowhere Lake", "ES3", regs)
+        self.assertEqual(default["basis"], "watershed-default")
+
+    # -- coverage and hygiene ----------------------------------------------
+
+    def test_every_zone_in_the_published_data_has_a_default(self):
+        """A zone whose defaults failed to parse would silently leave its
+        unlisted lakes with no limit at all."""
+        regs = self.regs()
+        latest = max(int(p.stem.split("_")[1]) for p in DATA_DIR.glob("lakes_*.json"))
+        lakes = json.loads((DATA_DIR / f"lakes_{latest}.json").read_text())
+        lakes = lakes["lakes"] if isinstance(lakes, dict) and "lakes" in lakes else lakes
+        for zone in {lk.get("zone") for lk in lakes if lk.get("zone")}:
+            self.assertIn(zone, regs["defaults"], f"no default parsed for {zone}")
+            self.assertTrue(regs["defaults"][zone]["lakes"]["limits"],
+                            f"{zone} default parsed with no limits")
+
+    def test_all_ten_watershed_units_have_tables(self):
+        regs = self.regs()
+        for zone in ("ES1", "ES2", "ES3", "ES4", "PP1", "PP2",
+                     "NB1", "NB2", "NB3", "NB4"):
+            self.assertGreater(len(regs["zones"].get(zone, {}).get("lakes", {})), 5,
+                               f"{zone} has almost no site-specific rows")
+
+    def test_the_bait_legend_marker_is_expanded(self):
+        """Three quarters of rows print a lone "l" in the bait column, defined
+        in the heading as "Bait except Bait fish allowed". Passed through, it
+        would put a bare glyph in front of an angler."""
+        import regulations
+        self.assertEqual(regulations.parse_bait("l"), "Bait allowed, except bait fish")
+        self.assertEqual(regulations.parse_bait("Bait ban"), "Bait ban")
+        self.assertEqual(regulations.parse_bait(""), "")
+        baits = {row["bait"] for zone in self.regs()["zones"].values()
+                 for row in zone["lakes"].values()}
+        self.assertNotIn("l", baits, "a raw legend marker reached the output")
+
+    def test_an_unmatched_lake_gets_no_limits_rather_than_the_default(self):
+        """The unsafe fallback is the watershed default, because it is often
+        more permissive than the site-specific row it would stand in for: ES1
+        defaults to five trout with bait allowed, while Barnaby Lake inside ES1
+        is one trout over 40 cm under a bait ban. A near-miss on the name must
+        publish nothing, not the default."""
+        import regulations
+        regs = self.regs()
+        # A name close to a real one, but not close enough to trust.
+        resolved, review = regulations.match_lakes(regs, [
+            {"lake_id": "test1", "name": "Barnaby Lakes Reservoir", "zone": "ES1"},
+        ])
+        self.assertNotIn("test1", resolved, "a near-miss was resolved anyway")
+        self.assertEqual(len(review), 1)
+
+        # A name nothing in the zone resembles really is unlisted, and the
+        # guide says an unlisted water takes the default.
+        resolved, review = regulations.match_lakes(regs, [
+            {"lake_id": "test2", "name": "Zzyzx Quagmire", "zone": "ES1"},
+        ])
+        self.assertEqual(resolved["test2"]["basis"], "watershed-default")
+        self.assertEqual(review, [])
+
+    def test_published_per_lake_regulations_are_consistent(self):
+        path = DATA_DIR / "lake_regulations.json"
+        if not path.exists():
+            self.skipTest("data/lake_regulations.json not built")
+        published = json.loads(path.read_text())
+        self.assertEqual(published["guide_year"], self.regs()["guide_year"])
+        for key, entry in published["lakes"].items():
+            self.assertIn(entry["basis"],
+                          {"site-specific", "put-and-take", "watershed-default",
+                           "cross-reference"},
+                          f"{key} has an unknown basis")
+            if entry["basis"] != "cross-reference":
+                self.assertIn("season", entry, f"{key} published without a season")
+
+    def test_stocked_names_are_not_corrupted_by_the_column_layout(self):
+        """The stocked list is set in columns, and reading it flat merges
+        neighbours — "Tim Horton Children's Pond Fairfax Lake" was one entry,
+        and a land description was glued onto another. Either would attach a
+        real limit to the wrong water."""
+        stocked = self.regs()["stocked"]
+        for name in stocked:
+            self.assertFalse(re.match(r"^(NE|NW|SE|SW|\d)", name),
+                             f"{name!r} starts with a land description fragment")
+            self.assertLess(len(name), 46, f"{name!r} looks like two merged entries")
+        for expected in ("Beauvais Lake", "Chain Lakes Reservoir", "Fairfax Lake",
+                         "Shunda (Fish) Lake", "Mcleod Lake (Carson Lake)",
+                         "Tim Horton Children’s Pond"):
+            self.assertIn(expected, stocked, f"{expected!r} missing from the stocked list")
+
+
+class DepthTests(unittest.TestCase):
+    """Depth decides two pieces of advice, and both must stay silent without it.
+
+    Sending someone to fish eight metres down in three metres of water is a real
+    harm, so "probably deep enough" is never good enough.
+    """
+
+    def test_unknown_depth_produces_no_advice_at_all(self):
+        import depth
+        self.assertIsNone(depth.stratification(None, 120))
+        self.assertIsNone(depth.winterkill(None, False, False))
+
+    def test_a_shallow_lake_is_never_told_to_fish_deep(self):
+        import depth
+        for shallow in (1.5, 2.0, 3.0, 4.9):
+            found = depth.stratification(shallow, 120)
+            self.assertFalse(found["stratifies"], f"{shallow} m reported as stratifying")
+            self.assertNotIn("band_m", found)
+
+    def test_the_layer_never_sits_below_the_bottom(self):
+        """A big lake's thermocline band is deeper than a small one's, so a
+        large but shallow lake has nowhere to put it."""
+        import depth
+        found = depth.stratification(7.6, 900)      # big surface, not deep
+        self.assertFalse(found["stratifies"])
+        deep = depth.stratification(25.0, 900)
+        self.assertTrue(deep["stratifies"])
+        self.assertLessEqual(deep["band_m"][1], 25.0 - 1)
+
+    def test_the_band_follows_fetch_not_a_fraction_of_depth(self):
+        """Thermocline depth is set by how far the wind blows across the water.
+        Taking a fraction of max depth gave a 7.6 m and a 12 m lake the same
+        band, with the deeper one's layer placed too shallow."""
+        import depth
+        small = depth.stratification(20.0, 20)
+        large = depth.stratification(20.0, 900)
+        self.assertGreater(large["band_m"][0], small["band_m"][0])
+        # Same lake size, different depths, both deep enough: same band.
+        self.assertEqual(depth.stratification(12.0, 120)["band_m"],
+                         depth.stratification(25.0, 120)["band_m"])
+
+    def test_winterkill_says_what_it_did_not_count(self):
+        import depth
+        risk = depth.winterkill(2.0, aerated=False, aeration_known=False)
+        self.assertEqual(risk["level"], "high")
+        self.assertFalse(risk["inputs"]["eutrophy"])
+        self.assertFalse(risk["inputs"]["ice_duration"])
+        self.assertFalse(risk["inputs"]["aeration"])
+
+    def test_aeration_cuts_both_ways(self):
+        """A lake is aerated because it is expected to winterkill, and is less
+        likely to because it is aerated. Both belong in the reasons."""
+        import depth
+        plain = depth.winterkill(2.0, aerated=False, aeration_known=True)
+        helped = depth.winterkill(2.0, aerated=True, aeration_known=True)
+        self.assertEqual(plain["level"], "high")
+        self.assertEqual(helped["level"], "moderate")
+        self.assertTrue(any("expected to winterkill" in r for r in helped["reasons"]))
+
+    def test_depth_is_joined_on_albertas_own_waterbody_id(self):
+        """The join is exact rather than by name: MyWildAlberta addresses a lake
+        as ?id=6537 and the registry stores that same id."""
+        registry_file = DATA_DIR / "lake_registry.json"
+        data = json.loads(registry_file.read_text())
+        lakes = data["lakes"] if isinstance(data, dict) and "lakes" in data else data
+        with_id = [l for l in lakes if l.get("waterbody_id")]
+        self.assertGreater(len(with_id), 300, "the id join would cover too few lakes")
+        for lake in with_id[:50]:
+            self.assertTrue(str(lake["waterbody_id"]).isdigit())
+            self.assertEqual(lake["lake_id"], "wb" + str(lake["waterbody_id"]))
+
+    def test_the_collector_discovers_the_page_schema(self):
+        """The collector was written without being able to open the site, so it
+        must not depend on having guessed the labels. It harvests every
+        label/value pair the markup offers, in whatever form, and maps those
+        onto the columns the build wants."""
+        import fetch_lake_pages as collector
+
+        definition_list = ("<h1>Beauvais Lake - Fish Stocking</h1>"
+                           "<dl><dt>Watershed Unit</dt><dd>ES1</dd>"
+                           "<dt>Surface Area</dt><dd>219.2 ha</dd>"
+                           "<dt>Maximum Depth</dt><dd>12.0 m</dd></dl>")
+        found = collector.interpret(collector.harvest(definition_list), definition_list)
+        self.assertEqual(found["page_name"], "Beauvais Lake")
+        self.assertEqual(found["zone"], "ES1")
+        self.assertEqual(found["max_depth_m"], 12.0)
+        self.assertEqual(found["surface_area_ha"], 219.2)
+
+        table = ("<title>Chain Lakes Reservoir | My Wild Alberta</title>"
+                 "<table><tr><th>Zone</th><td>ES1</td></tr>"
+                 "<tr><th>Max. Depth</th><td>9.1 m</td></tr></table>")
+        found = collector.interpret(collector.harvest(table), table)
+        self.assertEqual(found["max_depth_m"], 9.1,
+                         "a differently worded label was missed")
+        self.assertEqual(found["page_name"], "Chain Lakes Reservoir")
+
+        # A zone mentioned only in prose still counts: it is the field that
+        # decides whether a lake gets catch limits at all.
+        prose = "<h1>Jarvis Creek</h1><p>Lies within watershed unit ES3.</p>"
+        self.assertEqual(
+            collector.interpret(collector.harvest(prose), prose)["zone"], "ES3")
+
+    def test_no_depth_available_is_an_answer_not_a_failure(self):
+        import fetch_lake_pages as collector
+        stated = "<h1>Some Pond</h1><p>Depth information is not available.</p>"
+        found = collector.interpret(collector.harvest(stated), stated)
+        self.assertIsNone(found.get("max_depth_m"))
+        self.assertTrue(found["depth_stated_unavailable"])
+
+        silent = "<h1>Quiet Lake</h1><p>Stocked with trout.</p>"
+        found = collector.interpret(collector.harvest(silent), silent)
+        self.assertIsNone(found.get("max_depth_m"))
+        self.assertFalse(found["depth_stated_unavailable"],
+                         "a page that simply says nothing must not be read as "
+                         "Alberta stating no depth exists")
+
+    def test_reconciliation_separates_filling_from_overwriting(self):
+        """Alberta is the authority on its own lakes, but this repo's values came
+        from its own sources for reasons. A blank may be filled; a disagreement
+        goes to a person."""
+        import reconcile
+        lakes = [
+            {"lake_id": "wb1", "waterbody_id": "1", "name": "Blank Zone", "zone": None},
+            {"lake_id": "wb2", "waterbody_id": "2", "name": "Agrees", "zone": "ES1"},
+            {"lake_id": "wb3", "waterbody_id": "3", "name": "Differs", "zone": "PP2"},
+            {"lake_id": "wb4", "waterbody_id": "4", "name": "Close Area",
+             "surface_area_ha": 100.0},
+        ]
+        site = {
+            "1": {"waterbody_id": "1", "zone": "ES2"},
+            "2": {"waterbody_id": "2", "zone": "ES1"},
+            "3": {"waterbody_id": "3", "zone": "NB1"},
+            "4": {"waterbody_id": "4", "surface_area_ha": "104"},
+        }
+        fills, confirms, disagreements = reconcile.compare(lakes, site)
+        self.assertEqual([r["lake"] for r in fills], ["Blank Zone"])
+        self.assertEqual({r["lake"] for r in confirms}, {"Agrees", "Close Area"},
+                         "a 4% area difference should count as agreement")
+        self.assertEqual([r["lake"] for r in disagreements], ["Differs"])
+
+    def test_coordinates_are_read_however_the_page_spells_them(self):
+        """Alberta writes a west longitude either as a minus sign or as a
+        trailing W, and puts both coordinates on one line. Each of those broke a
+        different part of the collector, and each one silently: a missed
+        coordinate is indistinguishable from a page that does not publish one."""
+        import fetch_lake_pages as collector
+        spellings = {
+            "minus sign": "<p>Latitude: 53.487212  Longitude: -114.173756</p>",
+            "trailing W": "<p>Latitude: 53.487212  Longitude: 114.173756 W</p>",
+            "numeric entity": "<p>53.487212&#176; N, 114.173756&#176; W</p>",
+            "named entity": "<p>53.487212&deg;N, 114.173756&deg;W</p>",
+            "table": ("<table><tr><th>Latitude</th><td>53.487212</td></tr>"
+                      "<tr><th>Longitude</th><td>-114.173756</td></tr></table>"),
+        }
+        for how, body in spellings.items():
+            html = "<h1>Hasse Lake</h1>" + body
+            found = collector.interpret(collector.harvest(html), html)
+            self.assertEqual(found.get("latitude"), 53.487212, how)
+            self.assertEqual(found.get("longitude"), -114.173756,
+                             f"{how}: a west longitude must be stored negative")
+
+    def test_two_labels_on_one_line_are_both_read(self):
+        """The plain-text pass used to take everything after the first colon,
+        so "Latitude: 53.4 Longitude: 114.1" stored the whole remainder as the
+        latitude and lost the longitude entirely."""
+        import fetch_lake_pages as collector
+        html = "<p>Maximum Depth: 14 m Surface Area: 90 ha</p>"
+        found = collector.interpret(collector.harvest(html), html)
+        self.assertEqual(found.get("max_depth_m"), 14.0)
+        self.assertEqual(found.get("surface_area_ha"), 90.0,
+                         "the second pair on the line was swallowed by the first")
+
+    def test_a_quarter_section_matches_whatever_the_spacing(self):
+        """Alberta prints SW 13-52-2-W5 and this repo stores SW13-52-2-W5. They
+        are the same quarter section, and comparing them as written would report
+        every lake in the province as a disagreement."""
+        import reconcile
+        lakes = [
+            {"lake_id": "wb1", "waterbody_id": "1", "name": "Spaced",
+             "ats_codes": ["SW13-52-2-W5"]},
+            {"lake_id": "wb2", "waterbody_id": "2", "name": "Several",
+             "ats_codes": ["NE9-47-19-W5", "SE9-47-19-W5"]},
+            {"lake_id": "wb3", "waterbody_id": "3", "name": "Elsewhere",
+             "ats_codes": ["SW13-52-2-W5"]},
+            {"lake_id": "wb4", "waterbody_id": "4", "name": "None Held",
+             "ats_codes": []},
+        ]
+        site = {
+            "1": {"waterbody_id": "1", "legal_land_description": "SW 13-52-2-W5"},
+            "2": {"waterbody_id": "2", "legal_land_description": "SE 9-47-19-W5"},
+            "3": {"waterbody_id": "3", "legal_land_description": "NE 1-1-1-W4"},
+            "4": {"waterbody_id": "4", "legal_land_description": "SW 13-52-2-W5"},
+        }
+        fills, confirms, disagreements = reconcile.compare(lakes, site)
+        self.assertEqual({r["lake"] for r in confirms}, {"Spaced", "Several"},
+                         "a lake touching several quarter sections agrees if the "
+                         "published one is any of them")
+        self.assertEqual([r["lake"] for r in disagreements], ["Elsewhere"])
+        self.assertEqual([r["lake"] for r in fills], ["None Held"])
+
+    def test_a_published_position_checks_a_derived_one(self):
+        """Most of this repo's coordinates were derived from land descriptions,
+        and a derivation cannot catch its own arithmetic error. An independently
+        published pair can — but only if "the same lake described from a
+        different point" is not reported as a disagreement."""
+        import reconcile
+        held_lat, held_lon = 53.269494, -117.792760
+        lakes = [
+            {"lake_id": "wb1", "waterbody_id": "1", "name": "Exact",
+             "lat": held_lat, "lon": held_lon},
+            {"lake_id": "wb2", "waterbody_id": "2", "name": "Boat Launch",
+             "lat": held_lat, "lon": held_lon},
+            {"lake_id": "wb3", "waterbody_id": "3", "name": "Wrong Lake",
+             "lat": held_lat, "lon": held_lon},
+            {"lake_id": "wb4", "waterbody_id": "4", "name": "Unplaced",
+             "lat": None, "lon": None},
+        ]
+        site = {
+            "1": {"waterbody_id": "1", "latitude": str(held_lat),
+                  "longitude": str(held_lon)},
+            # ~520 m away: the same lake, measured from somewhere else on it.
+            "2": {"waterbody_id": "2", "latitude": str(held_lat + 0.004),
+                  "longitude": str(held_lon + 0.004)},
+            # Most of a province away.
+            "3": {"waterbody_id": "3", "latitude": "52.0", "longitude": "-113.0"},
+            "4": {"waterbody_id": "4", "latitude": str(held_lat),
+                  "longitude": str(held_lon)},
+        }
+        fills, confirms, disagreements = reconcile.compare(lakes, site)
+        self.assertEqual({r["lake"] for r in confirms}, {"Exact", "Boat Launch"})
+        self.assertEqual([r["lake"] for r in disagreements], ["Wrong Lake"])
+        self.assertEqual([r["lake"] for r in fills], ["Unplaced"])
+        # The distance is recorded either way, so the threshold never has to be
+        # taken on trust when someone reads the review file.
+        apart = {r["lake"]: r["note"] for r in confirms + disagreements}
+        self.assertEqual(apart["Exact"], "0 m apart")
+        self.assertTrue(apart["Boat Launch"].endswith("m apart"))
+        self.assertGreater(int(apart["Wrong Lake"].split()[0]), 100000)
+
+    def test_a_disagreeing_position_is_never_applied(self):
+        """--apply fills blanks. A coordinate the repo already holds is a
+        disagreement for a person to settle, and must survive --apply untouched
+        however confident the published value looks."""
+        import reconcile
+        lakes = [{"lake_id": "wb1", "waterbody_id": "1", "name": "Wrong Lake",
+                  "lat": 53.269494, "lon": -117.792760}]
+        site = {"1": {"waterbody_id": "1", "latitude": "52.0", "longitude": "-113.0"}}
+        fills, _, disagreements = reconcile.compare(lakes, site)
+        self.assertEqual(fills, [], "an existing coordinate is not a blank")
+        self.assertEqual(len(disagreements), 1)
