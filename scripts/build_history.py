@@ -455,9 +455,9 @@ def write_regulations(reg=None):
     regs = regulations.load(source)
     year = regs["guide_year"]
     rows = sum(len(z["lakes"]) + len(z["rivers"]) for z in regs["zones"].values())
-    (DATA_DIR / f"regulations_{year}.json").write_text(
-        json.dumps(regs, indent=1, ensure_ascii=False, sort_keys=True) + "\n",
-        encoding="utf-8")
+    # The full parse is deliberately not written out. Only the per-lake
+    # resolution below is read by anything; a second copy of the guide in
+    # data/ was 404 KB that every build rewrote and nothing ever opened.
     print(f"  {rows} site-specific rows, {len(regs['defaults'])} watershed defaults, "
           f"{len(regs['stocked'])} put-and-take waters")
 
@@ -559,8 +559,8 @@ def main():
     if n_depth:
         print(f"Wrote data/lake_depth.json ({n_depth['with_depth']} lakes with a depth)")
     if n_regs:
-        print(f"Wrote data/regulations_{n_regs[0]}.json "
-              f"({n_regs[1]} site-specific rows, {n_regs[2]} put-and-take waters)")
+        print(f"Wrote data/lake_regulations.json (guide {n_regs[0]}: "
+              f"{n_regs[1]} site-specific rows, {n_regs[2]} put-and-take waters)")
     print(f"Wrote {len(years_written)} year file(s): {years_written[0]}-{years_written[-1]}")
     print(f"Wrote data/link_review.csv ({n_review} question(s) for you)")
     if n_review:

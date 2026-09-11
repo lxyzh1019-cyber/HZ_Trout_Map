@@ -61,7 +61,6 @@ def load_depths():
                 "max_depth_m": number("max_depth_m"),
                 "surface_area_ha": number("surface_area_ha"),
                 "stated_unavailable": (row.get("depth_stated_unavailable") or "").strip() == "yes",
-                "page_name": (row.get("page_name") or "").strip(),
             }
     return out
 

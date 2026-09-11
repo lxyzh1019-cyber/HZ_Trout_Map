@@ -232,7 +232,7 @@ class Registry:
                     ats_codes=sorted(set(c for c in ats_codes if c)),
                     aliases=sorted({normalize_name(a) for a in aliases if normalize_name(a)}),
                     name_variants=sorted({n for n in [name, *aliases] if n}),
-                    zone=None, surface_area_ha=None, amenities=None, years=[])
+                    zone=None, surface_area_ha=None, amenities=None)
         self.lakes.append(lake)
         self._index(lake)
         return lake
