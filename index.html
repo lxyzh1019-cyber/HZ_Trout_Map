@@ -364,7 +364,11 @@
   /* ---------- Popup ---------- */
   .leaflet-popup-content-wrapper { background: var(--panel); color: var(--ink); border-radius: 3px; border: 1px solid var(--panel-edge); }
   .leaflet-popup-tip { background: var(--panel); }
-  .leaflet-popup-content { margin: 12px 14px; font-size: 12px; min-width: 260px; max-height: 60vh; overflow-y: auto; }
+  /* The popup scrolls once a lake has a long stocking history, and the
+     scrollbar sits over the content. Reserving the gutter keeps it off the
+     right-aligned Number column, which was losing its last digit. */
+  .leaflet-popup-content { margin: 12px 14px; font-size: 12px; min-width: 260px;
+    max-height: 60vh; overflow-y: auto; scrollbar-gutter: stable; padding-right: 4px; }
   .lake-popup h3 { margin: 0 0 2px; font-size: 14px; display: flex; align-items: center; gap: 6px; }
   .reg-block { margin: 8px 0 4px; padding: 8px 10px; background: var(--panel-2);
     border-left: 3px solid var(--accent); border-radius: 3px; font-size: 12px; }
@@ -386,7 +390,14 @@
   .lake-popup table { width: 100%; border-collapse: collapse; font-size: 11px; }
   .lake-popup th { text-align: left; padding: 3px 5px 3px 0; border-bottom: 1px solid var(--panel-edge); color: var(--ink-dim); font-weight: 500; }
   .lake-popup td { padding: 3px 5px 3px 0; border-bottom: 1px dotted var(--panel-edge); }
-  .lake-popup td:last-child, .lake-popup th:last-child { text-align: right; padding-right: 0; }
+  .lake-popup td:last-child, .lake-popup th:last-child { text-align: right; padding-right: 4px; }
+  .lake-popup td:last-child { font-variant-numeric: tabular-nums; }
+  /* Reports give some shipments only to the month. Rather than inventing a day
+     or leaving the column ragged, the day sits in a fixed slot and reads as a
+     dash when it is genuinely not known. */
+  .lake-popup .d { display: inline-block; width: 1.25em; text-align: right; }
+  .lake-popup .d.unknown { color: var(--ink-dim); }
+  .lake-popup td.date-cell { font-variant-numeric: tabular-nums; white-space: nowrap; }
   .lake-popup .profile-row { font-size: 11px; color: var(--ink-dim); margin-bottom: 6px; }
   .lake-popup .profile-amenities { font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; line-height: 1.45; }
   .lake-popup .profile-label { color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; font-size: 10px; margin-right: 3px; }
@@ -1270,6 +1281,20 @@ function regulationBlock(lake) {
   </div>`;
 }
 
+/* The stocking table's date column, with the day in a fixed slot so the whole
+ * column lines up. Alberta reports some shipments only to the month; that is
+ * shown as a dash rather than guessed at or left to ragged the column. */
+function dateCell(dateStr, precision) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr || "");
+  if (!m) return `<td class="date-cell">${esc(dateStr || "—")}</td>`;
+  const monthYear = `${MONTH_NAMES[Number(m[2]) - 1]} ${m[1]}`;
+  const day = precision === "month"
+    ? `<span class="d unknown" title="the report gave only the month">–</span>`
+    : `<span class="d">${Number(m[3])}</span>`;
+  const title = precision === "month" ? ` title="the report gave only the month"` : "";
+  return `<td class="date-cell"${title}>${day} ${esc(monthYear)}</td>`;
+}
+
 function popupHtml(lake) {
   const key = lakeKey(lake);
   const filteredTotal = filteredFishTotal(lake);
@@ -1294,7 +1319,7 @@ function popupHtml(lake) {
   const tableRows = rows.map(s => {
     const color = SPECIES_META[s.species]?.color || "#888";
     return `<tr>
-      <td>${esc(fmtDate(s.date, s.date_precision))}</td>
+      ${dateCell(s.date, s.date_precision)}
       <td><span class="sp-tag" style="background:${color}">${esc(s.species)}</span></td>
       <td>${esc(s.strain) || "—"}</td>
       <td>${s.length_cm ? Number(s.length_cm).toFixed(1) : "—"}</td>
