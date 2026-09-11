@@ -36,6 +36,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from html import unescape as unescape_entities
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
@@ -59,13 +60,29 @@ INTERESTING = {
     "mean_depth_m": r"(?i)^(mean|average) depth",
     "surface_area_ha": r"(?i)^(surface )?area",
     "zone": r"(?i)^(fish management |watershed )?(zone|unit)",
+    # Alberta's own land description, which this repo also stores and which is
+    # the second exact join after the waterbody id. Confirmed wording: Hasse
+    # Lake publishes "SW 13-52-2-W5" under "legal land description", against
+    # "SW13-52-2-W5" in the registry.
+    "legal_land_description": r"(?i)^(legal )?(land )?(description|location)|^ats",
+    "latitude": r"(?i)^lat",
+    "longitude": r"(?i)^long",
     "elevation_m": r"(?i)^elevation",
     "species": r"(?i)^(species|fish|stocked with)",
+    "average_length_cm": r"(?i)^(average|mean)? ?(length|size)",
+    "stocked_years": r"(?i)^(stocked|stocking)( by)? ?(year|history|record)",
     "access": r"(?i)^(access|directions|how to get)",
     "amenities": r"(?i)^(amenities|facilities|services)",
     "region": r"(?i)^region",
     "county": r"(?i)^(county|municipal)",
 }
+
+# Columns that hold numbers even though their names carry no unit suffix.
+NUMERIC = ("latitude", "longitude")
+
+# A land description as Alberta writes it: an optional quarter, then
+# section-township-range-meridian.
+ATS_PATTERN = r"(?:NE|NW|SE|SW)?\s*\d{1,2}-\d{1,3}-\d{1,2}-W\d"
 
 
 def strip_tags(html):
@@ -73,10 +90,10 @@ def strip_tags(html):
     html = re.sub(r"(?i)<br\s*/?>", "\n", html)
     html = re.sub(r"(?i)</(p|div|tr|li|h\d|dd|dt)>", "\n", html)
     html = re.sub(r"<[^>]+>", " ", html)
-    for entity, plain in (("&nbsp;", " "), ("&amp;", "&"), ("&#39;", "'"),
-                          ("&rsquo;", "’"), ("&lt;", "<"), ("&gt;", ">"),
-                          ("&quot;", '"'), ("&deg;", "°")):
-        html = html.replace(entity, plain)
+    # Every named and numeric entity, not a hand-written handful: the site
+    # writes its degree sign as &#176;, and a list that happened not to carry
+    # that one read the coordinates as prose and dropped them.
+    html = unescape_entities(html).replace("\xa0", " ")
     html = re.sub(r"[ \t ]+", " ", html)
     return re.sub(r"\n\s*\n+", "\n", html)
 
@@ -101,9 +118,18 @@ def harvest(html):
     for label, value in re.findall(r"(?is)<(?:strong|b)[^>]*>(.*?)</(?:strong|b)>\s*:?\s*([^<]{1,200})", html):
         record(label, value)
     # Plain "Label: value" lines, last so marked-up pairs win.
+    #
+    # finditer, not match: one line can carry several pairs, and a single
+    # greedy capture swallows the lot. "Latitude: 53.4 Longitude: 114.1 W"
+    # recorded latitude as the whole remainder of the line, so the longitude
+    # was lost and the latitude was no longer a number.
+    # Two letters to start, not one: on "Maximum Depth: 14 m Surface Area: 90 ha"
+    # a single-letter start lets the unit join the next label, and "m Surface
+    # Area" matches nothing the build is looking for.
+    label_ahead = r"[A-Za-z]{2}[A-Za-z ()./'-]{1,40}?\s*:"
     for line in strip_tags(html).split("\n"):
-        found = re.match(r"\s*([A-Za-z][A-Za-z ()./'-]{2,40}?)\s*:\s*(.+?)\s*$", line)
-        if found:
+        for found in re.finditer(
+                r"(" + label_ahead + r")\s*(.+?)\s*(?=" + label_ahead + r"|$)", line):
             record(found.group(1), found.group(2))
     return pairs
 
@@ -131,7 +157,7 @@ def interpret(pairs, html):
     for column, pattern in INTERESTING.items():
         for label, value in pairs.items():
             if re.search(pattern, label):
-                if column.endswith(("_m", "_ha")):
+                if column.endswith(("_m", "_ha", "_cm")) or column in NUMERIC:
                     out[column] = number(value)
                 else:
                     out[column] = value
@@ -145,6 +171,37 @@ def interpret(pairs, html):
         found = re.search(r"\b(ES[1-4]|NB[1-4]|PP[12])\b", str(out["zone"]))
         if found:
             out["zone"] = found.group(1)
+    # The land description and the coordinates are worth digging for even when
+    # they carry no label, because each is an independent check on a position
+    # this repo mostly derived from land descriptions itself.
+    text = strip_tags(html)
+    if not out.get("legal_land_description"):
+        found = re.search(ATS_PATTERN, text)
+        if found:
+            out["legal_land_description"] = found.group(0).strip()
+    if not out.get("latitude"):
+        # Alberta spans 49 to 60 north.
+        found = re.search(r"(?<![\d.-])([45]\d\.\d{3,})\s*(?:[°º]?\s*N\b|,)", text)
+        if found:
+            out["latitude"] = float(found.group(1))
+    if not out.get("longitude"):
+        # 110 to 120 west, written with a minus sign or with a trailing W — and
+        # a word boundary cannot precede a minus, which is why the first attempt
+        # here found every latitude and no longitude at all.
+        found = re.search(r"(?<![\d.])(-?1[0-2]\d\.\d{3,})\s*(?:[°º]?\s*W\b)?", text)
+        if found:
+            value = float(found.group(1))
+            out["longitude"] = value if value < 0 else -value
+    # Alberta is west of Greenwich, and the site writes that either way: a
+    # bare 114.17 with a trailing W means the same as -114.17. Store one form,
+    # or every comparison against the repo's own coordinates is a sign error.
+    if isinstance(out.get("longitude"), float) and out["longitude"] > 0:
+        out["longitude"] = -out["longitude"]
+    # Years this lake appears to have been stocked, as a compact list.
+    years = sorted(set(re.findall(r"\b(20[0-2]\d)\b", text)))
+    if years and not out.get("stocked_years"):
+        out["stocked_years"] = " ".join(years)
+
     out["depth_stated_unavailable"] = bool(
         re.search(r"(?i)depth[^.\n]{0,40}(not available|unavailable|unknown)", strip_tags(html)))
     return out

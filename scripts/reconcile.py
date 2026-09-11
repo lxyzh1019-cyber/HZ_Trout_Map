@@ -27,6 +27,8 @@ Three questions, answered separately because they deserve different treatment:
 import argparse
 import csv
 import json
+import math
+import re
 import sys
 from pathlib import Path
 
@@ -35,13 +37,48 @@ SITE_CSV = ROOT / "data" / "raw" / "mywildalberta_lakes.csv"
 REGISTRY = ROOT / "data" / "lake_registry.json"
 REVIEW = ROOT / "data" / "lake_facts_review.csv"
 
-# What to compare, and how close counts as agreement. Depth has no repo value
-# to compare against, so it is fill-only.
+# What to compare, and how close counts as agreement. A field with no repo
+# counterpart is fill-only: there is nothing to disagree with.
 COMPARE = [
     ("zone", "zone", None),
     ("surface_area_ha", "surface_area_ha", 0.10),   # within 10%
     ("max_depth_m", None, None),                     # nothing to compare to yet
+    ("average_length_cm", None, None),
+    ("stocked_years", None, None),
 ]
+
+# The land description and the coordinates are the two independent checks on a
+# position this repo largely derived from land descriptions itself, so they get
+# their own comparators rather than a string match.
+#
+# A quarter section is about 800 m on a side, so a point anywhere inside one can
+# sit ~570 m from its centre; a large lake's centroid and Alberta's own
+# reference point for it can differ by more again. A kilometre therefore still
+# means "the same lake, described from a different point", while a genuinely
+# wrong match lands tens of kilometres out. The distance is written into the
+# review file either way, so nobody has to take the threshold on trust.
+POSITION_TOLERANCE_M = 1000.0
+EARTH_RADIUS_M = 6371008.8
+
+
+def metres_apart(lat1, lon1, lat2, lon2):
+    """Great-circle distance. Flat-earth would do at these separations, but this
+    costs four trig calls and cannot be wrong near a meridian."""
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dp = math.radians(lat2 - lat1)
+    dl = math.radians(lon2 - lon1)
+    a = (math.sin(dp / 2) ** 2
+         + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2)
+    return 2 * EARTH_RADIUS_M * math.asin(min(1.0, math.sqrt(a)))
+
+
+def normalise_ats(text):
+    """SW 13-52-2-W5 and SW13-52-2-W5 are the same quarter section.
+
+    Alberta prints the space, this repo stores it closed up, and comparing the
+    two as written would report every single lake as a disagreement.
+    """
+    return re.sub(r"[^A-Z0-9-]", "", str(text or "").upper())
 
 
 def load_site():
@@ -70,22 +107,69 @@ def close_enough(a, b, tolerance):
     return abs(a - b) / max(abs(a), abs(b)) <= tolerance
 
 
+def land_description(lake, row, base):
+    """Alberta's quarter section against the repo's, as a verdict or nothing.
+
+    A lake can legitimately touch several quarter sections and the repo stores a
+    list, so a published description matching ANY held code is agreement. Only a
+    description matching none of them is a disagreement worth a person's time.
+    """
+    published = str(row.get("legal_land_description") or "").strip()
+    if not published:
+        return None
+    held = [c for c in (lake.get("ats_codes") or []) if c]
+    record = dict(base, field="legal_land_description",
+                  repo_value=" ".join(str(c) for c in held),
+                  alberta_value=published, note="")
+    if not held:
+        return "fill", record
+    wanted = normalise_ats(published)
+    if any(normalise_ats(code) == wanted for code in held):
+        return "confirm", record
+    record["note"] = "matches none of the quarter sections held"
+    return "disagree", record
+
+
+def position(lake, row, base):
+    """Alberta's coordinates against the repo's, as a distance.
+
+    This is the check the repo could not previously make: most of its
+    coordinates were derived from land descriptions, and a derivation has no way
+    to catch its own arithmetic error. An independently published pair does.
+    """
+    lat, lon = number(row.get("latitude")), number(row.get("longitude"))
+    if lat is None or lon is None:
+        return None
+    held_lat, held_lon = number(lake.get("lat")), number(lake.get("lon"))
+    record = dict(base, field="position",
+                  repo_value=("" if held_lat is None or held_lon is None
+                              else f"{held_lat:.5f},{held_lon:.5f}"),
+                  alberta_value=f"{lat:.5f},{lon:.5f}", note="")
+    if not record["repo_value"]:
+        return "fill", record
+    apart = metres_apart(held_lat, held_lon, lat, lon)
+    record["note"] = f"{apart:.0f} m apart"
+    return ("confirm" if apart <= POSITION_TOLERANCE_M else "disagree"), record
+
+
 def compare(lakes, site):
     fills, confirms, disagreements = [], [], []
+    bucket = {"fill": fills, "confirm": confirms, "disagree": disagreements}
     for lake in lakes:
         wid = str(lake.get("waterbody_id") or "")
         row = site.get(wid)
         if not row:
             continue
+        base = {"lake_id": lake.get("lake_id", ""), "waterbody_id": wid,
+                "lake": lake.get("name", "")}
         for site_field, repo_field, tolerance in COMPARE:
-            published = (row.get(site_field) or "").strip()
+            published = str(row.get(site_field) or "").strip()
             if not published:
                 continue
             held = "" if not repo_field else str(lake.get(repo_field) or "").strip()
             held = "" if held in ("None", "") else held
-            record = {"lake_id": lake.get("lake_id", ""), "waterbody_id": wid,
-                      "lake": lake.get("name", ""), "field": site_field,
-                      "repo_value": held, "alberta_value": published}
+            record = dict(base, field=site_field, repo_value=held,
+                          alberta_value=published, note="")
             if not held:
                 fills.append(record)
             elif tolerance is None and held.strip().lower() == published.strip().lower():
@@ -94,6 +178,9 @@ def compare(lakes, site):
                 confirms.append(record)
             else:
                 disagreements.append(record)
+        for verdict in (land_description(lake, row, base), position(lake, row, base)):
+            if verdict:
+                bucket[verdict[0]].append(verdict[1])
     return fills, confirms, disagreements
 
 
@@ -130,8 +217,9 @@ def main():
         print(f"\n{title}, a sample:")
         for row in sample(rows):
             held = row["repo_value"] or "—"
-            print(f"  {row['lake'][:32]:<34} {row['field']:<16} "
-                  f"repo {held:<12} alberta {row['alberta_value'][:24]}")
+            print(f"  {row['lake'][:32]:<34} {row['field']:<22} "
+                  f"repo {held[:22]:<24} alberta {row['alberta_value'][:22]:<24}"
+                  f"{row.get('note', '')}")
 
     by_field = {}
     for row in fills:
@@ -145,7 +233,7 @@ def main():
     with REVIEW.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=[
             "verdict", "lake", "lake_id", "waterbody_id", "field",
-            "repo_value", "alberta_value"])
+            "repo_value", "alberta_value", "note"])
         writer.writeheader()
         for verdict, rows in (("disagree", disagreements), ("fill", fills)):
             for row in sorted(rows, key=lambda r: (r["field"], r["lake"])):
@@ -159,12 +247,27 @@ def main():
         for row in fills:
             lake = index.get(row["waterbody_id"])
             field = row["field"]
-            if not lake or field not in ("zone", "surface_area_ha"):
+            if not lake:
                 continue
-            if lake.get(field) in (None, "", "None"):
-                lake[field] = (number(row["alberta_value"])
-                               if field.endswith("_ha") else row["alberta_value"])
-                applied += 1
+            if field == "position":
+                # Only for a lake that has no position at all. A coordinate the
+                # repo already holds is never moved from here, however far off
+                # the published pair says it is — that is a disagreement, and
+                # disagreements go to a person.
+                if lake.get("lat") is None or lake.get("lon") is None:
+                    lat, lon = row["alberta_value"].split(",")
+                    lake["lat"], lake["lon"] = float(lat), float(lon)
+                    lake["coord_source"] = "mywildalberta"
+                    applied += 1
+            elif field == "legal_land_description":
+                if not lake.get("ats_codes"):
+                    lake["ats_codes"] = [normalise_ats(row["alberta_value"])]
+                    applied += 1
+            elif field in ("zone", "surface_area_ha"):
+                if lake.get(field) in (None, "", "None"):
+                    lake[field] = (number(row["alberta_value"])
+                                   if field.endswith("_ha") else row["alberta_value"])
+                    applied += 1
         REGISTRY.write_text(json.dumps(registry, indent=1, ensure_ascii=False,
                                        sort_keys=True) + "\n", encoding="utf-8")
         print(f"filled {applied} blank field(s) in the registry — nothing was overwritten")

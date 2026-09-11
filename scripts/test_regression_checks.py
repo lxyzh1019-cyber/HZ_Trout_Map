@@ -801,3 +801,114 @@ class DepthTests(unittest.TestCase):
         self.assertEqual({r["lake"] for r in confirms}, {"Agrees", "Close Area"},
                          "a 4% area difference should count as agreement")
         self.assertEqual([r["lake"] for r in disagreements], ["Differs"])
+
+    def test_coordinates_are_read_however_the_page_spells_them(self):
+        """Alberta writes a west longitude either as a minus sign or as a
+        trailing W, and puts both coordinates on one line. Each of those broke a
+        different part of the collector, and each one silently: a missed
+        coordinate is indistinguishable from a page that does not publish one."""
+        import fetch_lake_pages as collector
+        spellings = {
+            "minus sign": "<p>Latitude: 53.487212  Longitude: -114.173756</p>",
+            "trailing W": "<p>Latitude: 53.487212  Longitude: 114.173756 W</p>",
+            "numeric entity": "<p>53.487212&#176; N, 114.173756&#176; W</p>",
+            "named entity": "<p>53.487212&deg;N, 114.173756&deg;W</p>",
+            "table": ("<table><tr><th>Latitude</th><td>53.487212</td></tr>"
+                      "<tr><th>Longitude</th><td>-114.173756</td></tr></table>"),
+        }
+        for how, body in spellings.items():
+            html = "<h1>Hasse Lake</h1>" + body
+            found = collector.interpret(collector.harvest(html), html)
+            self.assertEqual(found.get("latitude"), 53.487212, how)
+            self.assertEqual(found.get("longitude"), -114.173756,
+                             f"{how}: a west longitude must be stored negative")
+
+    def test_two_labels_on_one_line_are_both_read(self):
+        """The plain-text pass used to take everything after the first colon,
+        so "Latitude: 53.4 Longitude: 114.1" stored the whole remainder as the
+        latitude and lost the longitude entirely."""
+        import fetch_lake_pages as collector
+        html = "<p>Maximum Depth: 14 m Surface Area: 90 ha</p>"
+        found = collector.interpret(collector.harvest(html), html)
+        self.assertEqual(found.get("max_depth_m"), 14.0)
+        self.assertEqual(found.get("surface_area_ha"), 90.0,
+                         "the second pair on the line was swallowed by the first")
+
+    def test_a_quarter_section_matches_whatever_the_spacing(self):
+        """Alberta prints SW 13-52-2-W5 and this repo stores SW13-52-2-W5. They
+        are the same quarter section, and comparing them as written would report
+        every lake in the province as a disagreement."""
+        import reconcile
+        lakes = [
+            {"lake_id": "wb1", "waterbody_id": "1", "name": "Spaced",
+             "ats_codes": ["SW13-52-2-W5"]},
+            {"lake_id": "wb2", "waterbody_id": "2", "name": "Several",
+             "ats_codes": ["NE9-47-19-W5", "SE9-47-19-W5"]},
+            {"lake_id": "wb3", "waterbody_id": "3", "name": "Elsewhere",
+             "ats_codes": ["SW13-52-2-W5"]},
+            {"lake_id": "wb4", "waterbody_id": "4", "name": "None Held",
+             "ats_codes": []},
+        ]
+        site = {
+            "1": {"waterbody_id": "1", "legal_land_description": "SW 13-52-2-W5"},
+            "2": {"waterbody_id": "2", "legal_land_description": "SE 9-47-19-W5"},
+            "3": {"waterbody_id": "3", "legal_land_description": "NE 1-1-1-W4"},
+            "4": {"waterbody_id": "4", "legal_land_description": "SW 13-52-2-W5"},
+        }
+        fills, confirms, disagreements = reconcile.compare(lakes, site)
+        self.assertEqual({r["lake"] for r in confirms}, {"Spaced", "Several"},
+                         "a lake touching several quarter sections agrees if the "
+                         "published one is any of them")
+        self.assertEqual([r["lake"] for r in disagreements], ["Elsewhere"])
+        self.assertEqual([r["lake"] for r in fills], ["None Held"])
+
+    def test_a_published_position_checks_a_derived_one(self):
+        """Most of this repo's coordinates were derived from land descriptions,
+        and a derivation cannot catch its own arithmetic error. An independently
+        published pair can — but only if "the same lake described from a
+        different point" is not reported as a disagreement."""
+        import reconcile
+        held_lat, held_lon = 53.269494, -117.792760
+        lakes = [
+            {"lake_id": "wb1", "waterbody_id": "1", "name": "Exact",
+             "lat": held_lat, "lon": held_lon},
+            {"lake_id": "wb2", "waterbody_id": "2", "name": "Boat Launch",
+             "lat": held_lat, "lon": held_lon},
+            {"lake_id": "wb3", "waterbody_id": "3", "name": "Wrong Lake",
+             "lat": held_lat, "lon": held_lon},
+            {"lake_id": "wb4", "waterbody_id": "4", "name": "Unplaced",
+             "lat": None, "lon": None},
+        ]
+        site = {
+            "1": {"waterbody_id": "1", "latitude": str(held_lat),
+                  "longitude": str(held_lon)},
+            # ~520 m away: the same lake, measured from somewhere else on it.
+            "2": {"waterbody_id": "2", "latitude": str(held_lat + 0.004),
+                  "longitude": str(held_lon + 0.004)},
+            # Most of a province away.
+            "3": {"waterbody_id": "3", "latitude": "52.0", "longitude": "-113.0"},
+            "4": {"waterbody_id": "4", "latitude": str(held_lat),
+                  "longitude": str(held_lon)},
+        }
+        fills, confirms, disagreements = reconcile.compare(lakes, site)
+        self.assertEqual({r["lake"] for r in confirms}, {"Exact", "Boat Launch"})
+        self.assertEqual([r["lake"] for r in disagreements], ["Wrong Lake"])
+        self.assertEqual([r["lake"] for r in fills], ["Unplaced"])
+        # The distance is recorded either way, so the threshold never has to be
+        # taken on trust when someone reads the review file.
+        apart = {r["lake"]: r["note"] for r in confirms + disagreements}
+        self.assertEqual(apart["Exact"], "0 m apart")
+        self.assertTrue(apart["Boat Launch"].endswith("m apart"))
+        self.assertGreater(int(apart["Wrong Lake"].split()[0]), 100000)
+
+    def test_a_disagreeing_position_is_never_applied(self):
+        """--apply fills blanks. A coordinate the repo already holds is a
+        disagreement for a person to settle, and must survive --apply untouched
+        however confident the published value looks."""
+        import reconcile
+        lakes = [{"lake_id": "wb1", "waterbody_id": "1", "name": "Wrong Lake",
+                  "lat": 53.269494, "lon": -117.792760}]
+        site = {"1": {"waterbody_id": "1", "latitude": "52.0", "longitude": "-113.0"}}
+        fills, _, disagreements = reconcile.compare(lakes, site)
+        self.assertEqual(fills, [], "an existing coordinate is not a blank")
+        self.assertEqual(len(disagreements), 1)
