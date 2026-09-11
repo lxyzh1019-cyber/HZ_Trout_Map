@@ -1,0 +1,19 @@
+{
+  "name": "Alberta Trout Stocking Map",
+  "short_name": "Trout Map",
+  "description": "Sixteen years of Alberta trout stocking on one map, usable with no signal.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#2b2e2a",
+  "theme_color": "#2b2e2a",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "lakes": 345,
+  "verified_coords": 250,
+  "alberta_coords": 93,
+  "estimated_coords": 0,
+  "no_coords": 2,
+  "confusable": 46,
+  "rows_linked": 7255,
+  "rows_total": 7255,
+  "rows_awaiting_review": 0,
+  "lakes_with_multiple_land_descriptions": 249
+}

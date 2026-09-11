@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Alberta Trout Map">
+  <!-- Full-bleed background, because a maskable icon is cropped to whatever
+       shape the platform uses. Everything that matters stays inside the middle
+       80%, which is the safe zone for maskable icons. -->
+  <rect width="512" height="512" fill="#2b2e2a"/>
+  <g transform="translate(256 256)">
+    <!-- Water -->
+    <ellipse cx="0" cy="46" rx="150" ry="42" fill="#1f3b4d"/>
+    <path d="M-150 46a150 42 0 0 0 300 0" fill="#17303f"/>
+    <!-- Trout, in the map's rainbow-trout blue -->
+    <path d="M-104 -18c40-34 104-38 140-10 18-14 38-22 54-24-8 18-10 36-6 52 4 16 12 30 22 42-18-2-40-8-60-20-38 26-100 20-138-14-14-12-20-20-20-20s8-4 8 -6z"
+          fill="#3987e5"/>
+    <!-- Flank stripe and eye, so the shape still reads at 48px -->
+    <path d="M-96 -14c44-24 96-24 132-2" stroke="#7fb2f0" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <circle cx="-74" cy="-14" r="9" fill="#2b2e2a"/>
+    <!-- Tail fin -->
+    <path d="M112 -34c14-10 30-16 44-18-8 18-10 36-6 52-14-6-28-18-38-34z" fill="#2f6fc0"/>
+  </g>
+</svg>
