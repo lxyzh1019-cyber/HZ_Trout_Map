@@ -291,6 +291,26 @@
   // WHY
   // ============================================================
 
+  /* A thermometer beats the model outright, and this is the only input on the
+   * panel. It matters most exactly where the app is least able to help: with no
+   * signal at the lake there is no weather and no modelled water temperature,
+   * so the score falls back to sun and moon alone. One reading you took lifts
+   * it back to a real estimate. */
+  function waterInputHtml(place, water) {
+    if (!place.lake) return "";
+    var key = lakeKey(place.lake);
+    var override = state.conditions.waterOverrides[key];
+    var value = override && isFinite(override.tempC) ? override.tempC : "";
+    var measured = water && water.source === "measured";
+    return '<div class="cx-measure">'
+      + '<label for="cx-water">Water you measured</label>'
+      + '<input id="cx-water" type="number" inputmode="decimal" step="0.1" min="-2" max="35"'
+      + ' value="' + esc(value) + '" placeholder="°C">'
+      + (measured ? '<button type="button" class="cx-clear" title="Go back to the estimate">clear</button>'
+                  : '<span class="cx-measure-note">beats the estimate</span>')
+      + '</div>';
+  }
+
   function factorsHtml(result) {
     var order = ["light", "water", "pressure", "wind", "precip"];
     var names = { light: "Light", water: "Water temp", pressure: "Pressure",
@@ -346,7 +366,8 @@
       body = (state.conditions.horizon === "week"
         ? gridHtml(place, wx, water)
         : stripHtml(place, wx, water))
-        + '<div class="cx-factors">' + factorsHtml(now) + '</div>';
+        + '<div class="cx-factors">' + factorsHtml(now) + '</div>'
+        + waterInputHtml(place, water);
     }
 
     host.innerHTML =
@@ -373,6 +394,32 @@
       + 'What this score is built on ↗</a></div>';
 
     host.querySelector(".cx-close").addEventListener("click", function () { toggle(false); });
+
+    var input = host.querySelector("#cx-water");
+    if (input) {
+      var save = function () {
+        var key = lakeKey(place.lake);
+        var value = parseFloat(input.value);
+        if (isFinite(value)) {
+          state.conditions.waterOverrides[key] =
+            { tempC: value, atISO: new Date().toISOString() };
+        } else {
+          delete state.conditions.waterOverrides[key];
+        }
+        writeStore(STORE_WATER, state.conditions.waterOverrides);
+        render();
+      };
+      input.addEventListener("change", save);
+      input.addEventListener("keydown", function (e) { if (e.key === "Enter") save(); });
+    }
+    var clear = host.querySelector(".cx-clear");
+    if (clear) {
+      clear.addEventListener("click", function () {
+        delete state.conditions.waterOverrides[lakeKey(place.lake)];
+        writeStore(STORE_WATER, state.conditions.waterOverrides);
+        render();
+      });
+    }
     [...host.querySelectorAll("[data-horizon]")].forEach(function (b) {
       b.addEventListener("click", function () {
         state.conditions.horizon = b.dataset.horizon;

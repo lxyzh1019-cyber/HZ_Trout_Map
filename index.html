@@ -105,6 +105,9 @@
     M69 no depth means no depth advice: neither is ever guessed
     M70 Alberta's advisories and closures, checked daily, shown as published
         and never interpreted into a per-lake flag
+    M71 a water temperature you measured overrides the model, is remembered per
+        lake, and works with no signal — the one input that helps most exactly
+        where the app can do least
 -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2b2e2a">
@@ -553,6 +556,15 @@
   .cx-fval { color: var(--ink-dim); }
   .cx-fbar { height: 5px; background: #33362f; border-radius: 3px; overflow: hidden; }
   .cx-fbar i { display: block; height: 100%; }
+  .cx-measure { display: flex; align-items: center; gap: 7px; margin-top: 9px;
+    padding-top: 8px; border-top: 1px solid var(--panel-edge); font-size: 10.5px; }
+  .cx-measure label { color: var(--ink-dim); }
+  .cx-measure input { width: 64px; background: var(--panel-2); color: var(--ink);
+    border: 1px solid var(--panel-edge); border-radius: 3px; padding: 2px 5px;
+    font-size: 11px; font-variant-numeric: tabular-nums; }
+  .cx-measure-note { color: var(--ink-dim); font-style: italic; }
+  .cx-clear { background: none; border: 0; color: var(--accent); cursor: pointer;
+    font-size: 10.5px; padding: 0; }
   .cx-advisory { margin-top: 8px; padding: 7px 9px; background: var(--panel-2);
     border-left: 3px solid var(--TGTR); font-size: 10.5px; line-height: 1.45;
     color: var(--ink-dim); }
@@ -1012,6 +1024,7 @@ const DATA_ISSUES = { invalidStockings: 0, examples: [] };
 
 const STORE_HOME = "troutmap.home";
 const STORE_FAVS = "troutmap.favourites";
+const STORE_WATER = "troutmap.watertemp";
 
 // ============================================================
 // UTILITIES
@@ -2857,6 +2870,7 @@ async function init() {
     const stored = readStore(STORE_HOME, null);
     if (stored && Number.isFinite(stored.lat)) state.home = stored;
     state.favourites = new Set(readStore(STORE_FAVS, []));
+    state.conditions.waterOverrides = readStore(STORE_WATER, {}) || {};
 
     const params = readUrl();
     const { lakes, years } = await loadAllData();
