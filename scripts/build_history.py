@@ -430,13 +430,19 @@ def write_depths(reg):
     stats = depth.write(reg.lakes, DATA_DIR)
     if not stats:
         print("\nNo data/raw/mywildalberta_lakes.csv; skipping depth and winterkill.")
-        print("  Collect it once with: cd scripts && python3 fetch_lake_pages.py")
+        print("  Build it once with: cd scripts && python3 import_stocking_map.py")
         return None
     print("\nReading lake depth...")
     print(f"  {stats['with_depth']} lake(s) with a depth, "
           f"{stats['stated_unavailable']} where Alberta states none is available")
-    if not stats["aeration_known"]:
+    if stats["aerated"]:
+        print(f"  {stats['aerated']} aerated; Alberta states nothing either way "
+              f"for the rest")
+    else:
         print("  no aerated-lake list present; winterkill uses depth alone")
+    if stats["aeration_photo_only"]:
+        print(f"  {stats['aeration_photo_only']} with aeration seen only in a photo, "
+              f"shown but not counted")
     return stats
 
 

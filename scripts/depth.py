@@ -65,16 +65,36 @@ def load_depths():
     return out
 
 
+# Evidence strong enough to lower a winterkill band: Alberta's own lake
+# description, or ACA's published roster with the region agreeing. A photograph
+# is deliberately not on this list — it shows that equipment existed when the
+# picture was taken, not that the programme runs now, and the export's own notes
+# say the operating status was never verified. Marking a lake aerated makes it
+# read as safer than it is, so that is the one direction to be careful in.
+APPLIED_EVIDENCE = {"stated", "published_list"}
+
+
 def load_aerated():
-    """Waterbodies the province aerates, if that list has been collected."""
+    """Waterbodies the province aerates, and the ones only a photo suggests.
+
+    Returns two sets: the ones whose evidence may move a risk band, and the
+    ones that are recorded and shown but never applied.
+    """
     if not AERATED_CSV.exists():
-        return set()
+        return set(), set()
+    applied, noted = set(), set()
     with AERATED_CSV.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
-        field = "waterbody_id" if "waterbody_id" in (reader.fieldnames or []) else None
-        if not field:
-            return set()
-        return {(row.get(field) or "").strip() for row in reader if row.get(field)}
+        if "waterbody_id" not in (reader.fieldnames or []):
+            return set(), set()
+        for row in reader:
+            wid = (row.get("waterbody_id") or "").strip()
+            if not wid:
+                continue
+            # An older file with no confidence column is Alberta's stated list.
+            confidence = (row.get("confidence") or "stated").strip()
+            (applied if confidence in APPLIED_EVIDENCE else noted).add(wid)
+    return applied, noted
 
 
 def stratification(max_depth_m, surface_area_ha):
@@ -156,8 +176,7 @@ def winterkill(max_depth_m, aerated, aeration_known):
 def build(lakes):
     """Per-lake depth, stratification and winterkill, keyed as the app keys them."""
     depths = load_depths()
-    aerated = load_aerated()
-    aeration_known = bool(aerated)
+    aerated, aeration_noted = load_aerated()
 
     out, with_depth, unavailable = {}, 0, 0
     for lake in lakes:
@@ -173,19 +192,33 @@ def build(lakes):
             with_depth += 1
         elif found["stated_unavailable"]:
             unavailable += 1
+        # Aeration is known per lake, not per file. Alberta publishes the
+        # aerated ones and says nothing whatsoever about the rest, so for any
+        # lake off the list the status is unknown, not negative. The flag used
+        # to be set once for the whole run, which meant that the moment an
+        # aerated list existed at all, every one of the other 300-odd lakes was
+        # told "not on the aerated list" — which reads as "not aerated". The
+        # export's own notes are explicit: not stated does not mean no.
+        is_aerated = wid in aerated
+        aeration_known = is_aerated
         entry = {
             "max_depth_m": depth,
             "surface_area_ha": found["surface_area_ha"],
-            "source": "mywildalberta",
+            "source": "mywildalberta stocking map export 2026-09-11",
             "depth_stated_unavailable": found["stated_unavailable"],
             "stratification": stratification(depth, found["surface_area_ha"]),
-            "winterkill": winterkill(depth, wid in aerated, aeration_known),
+            "winterkill": winterkill(depth, is_aerated, aeration_known),
         }
-        if wid in aerated:
+        if is_aerated:
             entry["aerated"] = True
+        elif wid in aeration_noted:
+            # Shown beside the lake so the photograph is not lost, and kept
+            # out of the risk band because a photograph cannot carry it.
+            entry["aeration_photo_only"] = True
         out[key] = entry
     return out, {"with_depth": with_depth, "stated_unavailable": unavailable,
-                 "aeration_known": aeration_known, "rows": len(depths)}
+                 "aerated": len(aerated), "aeration_photo_only": len(aeration_noted),
+                 "rows": len(depths)}
 
 
 def write(lakes, data_dir):
@@ -193,7 +226,8 @@ def write(lakes, data_dir):
     if not built:
         return None
     (Path(data_dir) / "lake_depth.json").write_text(
-        json.dumps({"lakes": built, "source": "MyWildAlberta stocked lake pages",
+        json.dumps({"lakes": built,
+                    "source": "MyWildAlberta stocking map, exported 2026-09-11",
                     "joined_on": "Alberta waterbody id"},
                    indent=1, ensure_ascii=False, sort_keys=True) + "\n",
         encoding="utf-8")

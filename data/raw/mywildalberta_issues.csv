@@ -1,0 +1,13 @@
+waterbody_id,name,check,published,derived,note
+4426,George's Lake,zero_records,0 stocking records,,on the map with no stocking history of its own
+4532,Emerald Lake,duplicate_position,"54.3334,-115.6183",6821 Emerald Lake,two published ids at the same point; one is likely stale
+4532,Emerald Lake,zero_records,0 stocking records,,on the map with no stocking history of its own
+5568,Phillips Lake,zero_records,0 stocking records,,on the map with no stocking history of its own
+6120,Watridge Lake,position_vs_ats,"50.8708,-113.4265","50.85314,-115.43005",140.6 km from its own land description SW11-22-11-W5; position not published
+6821,Emerald Lake,duplicate_position,"54.3334,-115.6183",4532 Emerald Lake,two published ids at the same point; one is likely stale
+6846,Cottonwood Lake,zero_records,0 stocking records,,on the map with no stocking history of its own
+6910,Pine Point Borrow Pit,zero_records,0 stocking records,,on the map with no stocking history of its own
+18022,Castor Eastside Trout Pond,mean_exceeds_max,"mean 22 m, max 7 m",,a mean deeper than the maximum; depth.py refuses the pair rather than swapping them
+20258,Castaway Trout Pond,aeration_caption_only,Not stated,photo caption,"a photograph shows aeration equipment but the description does not say so; recorded, never applied"
+22996,High Level Pond,zero_records,0 stocking records,,on the map with no stocking history of its own
+24053,Lara Fish Pond,aeration_caption_only,Not stated,photo caption,"a photograph shows aeration equipment but the description does not say so; recorded, never applied"

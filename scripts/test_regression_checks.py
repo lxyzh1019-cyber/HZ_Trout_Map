@@ -912,3 +912,165 @@ class DepthTests(unittest.TestCase):
         fills, _, disagreements = reconcile.compare(lakes, site)
         self.assertEqual(fills, [], "an existing coordinate is not a blank")
         self.assertEqual(len(disagreements), 1)
+
+
+class ImportedSourceTests(unittest.TestCase):
+    """The stocking-map export, and the CSVs built from it.
+
+    The build never re-derives these, so nothing in the ordinary pipeline would
+    notice them drifting away from the workbook they came from. That is what
+    these tests are for.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        import import_stocking_map
+        cls.mod = import_stocking_map
+        if not cls.mod.WORKBOOK.exists():
+            raise unittest.SkipTest("the stocking-map workbook is not present")
+        cls.built, cls.stats = cls.mod.build()
+        cls.rows = list(csv.DictReader(cls.built[cls.mod.LAKES_CSV].splitlines()))
+
+    def test_the_committed_csvs_match_the_workbook(self):
+        """What is committed is what the workbook says, still.
+
+        The importer is deliberately outside the build, so this stands in for
+        the byte-exact check that covers everything else under data/.
+        """
+        for path, text in self.built.items():
+            name = path.relative_to(ROOT)
+            self.assertTrue(path.exists(), f"{name} has not been built")
+            self.assertEqual(path.read_text(encoding="utf-8"), text,
+                             f"{name} no longer matches the workbook; "
+                             f"re-run import_stocking_map.py")
+
+    def test_the_import_is_idempotent(self):
+        again, _ = self.mod.build()
+        for path, text in self.built.items():
+            self.assertEqual(again[path], text, f"{path.name} changed between runs")
+
+    def test_the_schema_is_exactly_what_the_collector_writes(self):
+        """depth.py and reconcile.py read the collector's columns by name.
+
+        If fetch_lake_pages.py ever changes its fields, this fails rather than
+        letting the two quietly diverge and the readers find nothing.
+        """
+        import fetch_lake_pages
+        expected = (["waterbody_id", "lake_id", "registry_name"]
+                    + list(fetch_lake_pages.INTERESTING) + ["depth_stated_unavailable"])
+        header = self.built[self.mod.LAKES_CSV].splitlines()[0].split(",")
+        self.assertEqual(header, expected)
+
+    def test_unknown_never_becomes_zero(self):
+        """A lake with no published depth is not a lake that is 0 m deep."""
+        for column in ("max_depth_m", "mean_depth_m", "surface_area_ha"):
+            for row in self.rows:
+                value = row[column]
+                self.assertNotEqual(value, "0", f"{row['waterbody_id']} {column}")
+                if value:
+                    self.assertGreater(float(value), 0,
+                                       f"{row['waterbody_id']} {column} is {value}")
+
+    def test_alberta_is_never_made_to_say_it_has_no_depth(self):
+        """The collector sets this only when a page says so in words.
+
+        The workbook's "Unknown" means its author found none, which is a
+        weaker claim, and passing it through would put words in Alberta's mouth.
+        """
+        self.assertEqual([r for r in self.rows if r["depth_stated_unavailable"]], [])
+
+    def test_a_position_that_contradicts_its_own_land_description_is_not_published(self):
+        """Watridge Lake publishes a point 140 km from its own quarter section.
+
+        The land description and the district agree with each other and with the
+        repo; one digit of the longitude does not. The row is refused rather
+        than passed on, and the refusal is written down.
+        """
+        watridge = [r for r in self.rows if r["waterbody_id"] == "6120"]
+        self.assertEqual(len(watridge), 1)
+        self.assertEqual(watridge[0]["latitude"], "")
+        self.assertEqual(watridge[0]["longitude"], "")
+        self.assertEqual(watridge[0]["legal_land_description"], "SW11-22-11-W5")
+        issues = list(csv.DictReader(self.built[self.mod.ISSUES_CSV].splitlines()))
+        self.assertIn("6120", [i["waterbody_id"] for i in issues
+                               if i["check"] == "position_vs_ats"])
+
+    def test_only_one_position_is_ever_refused(self):
+        """The threshold sits in measured empty space, not on a round number.
+
+        Every other lake is within 2.2 km of its own land description, which is
+        what the geometry predicts. A tighter rule throws away good positions.
+        """
+        issues = list(csv.DictReader(self.built[self.mod.ISSUES_CSV].splitlines()))
+        refused = [i for i in issues if i["check"] == "position_vs_ats"]
+        self.assertEqual(len(refused), 1, [i["name"] for i in refused])
+
+    def test_aeration_not_stated_is_not_recorded_as_no(self):
+        """Alberta names the aerated lakes and says nothing about the others."""
+        aerated = list(csv.DictReader(self.built[self.mod.AERATED_CSV].splitlines()))
+        self.assertTrue(aerated)
+        for row in aerated:
+            self.assertIn(row["confidence"], {"stated", "published_list", "photo_caption"})
+            self.assertTrue(row["evidence"], f"{row['name']} is on the list with no reason")
+        stated = [r for r in aerated if r["confidence"] == "stated"]
+        self.assertEqual(len(stated), 12)
+
+    def test_a_photograph_is_never_enough_to_call_a_lake_aerated(self):
+        """Castaway and Lara show a windmill in a picture and nothing in prose.
+
+        A photograph shows that equipment existed when it was taken, not that
+        the programme runs now. Marking a lake aerated makes it read as safer
+        than it is, so that evidence is carried and not applied.
+        """
+        import depth
+        aerated = list(csv.DictReader(self.built[self.mod.AERATED_CSV].splitlines()))
+        caption_only = {r["waterbody_id"] for r in aerated
+                        if r["confidence"] == "photo_caption"}
+        self.assertEqual(caption_only, {"20258", "24053"})
+        self.assertFalse(caption_only & depth.load_aerated()[0],
+                         "photo evidence reached the applied list")
+
+    def test_photo_evidence_never_lowers_a_winterkill_band(self):
+        import depth
+        applied, noted = depth.load_aerated()
+        for wid in noted:
+            self.assertNotIn(wid, applied)
+        shallow = 2.0
+        self.assertEqual(depth.winterkill(shallow, False, False)["level"], "high")
+        self.assertEqual(depth.winterkill(shallow, True, True)["level"], "moderate")
+
+
+class AerationIsKnownPerLakeTests(unittest.TestCase):
+    """Absence from the aerated list is not a statement that a lake is not aerated.
+
+    The flag used to be set once for the whole run, so the moment any aerated
+    list existed every lake missing from it was told "not on the aerated list".
+    """
+
+    def test_a_lake_off_the_list_is_not_told_it_is_unaerated(self):
+        import depth
+        found = depth.winterkill(2.0, False, False)
+        self.assertFalse(found["inputs"]["aeration"])
+        self.assertNotIn("not on the aerated list", found["reasons"])
+
+    def test_the_published_file_never_asserts_the_negative(self):
+        path = DATA_DIR / "lake_depth.json"
+        if not path.exists():
+            self.skipTest("depth has not been built")
+        lakes = json.loads(path.read_text(encoding="utf-8"))["lakes"]
+        wrong = [k for k, v in lakes.items()
+                 if not v.get("aerated") and v.get("winterkill")
+                 and any("not on the aerated list" in r for r in v["winterkill"]["reasons"])]
+        self.assertEqual(wrong, [], "lakes told they are not aerated")
+
+    def test_an_aerated_lake_still_says_it_cuts_both_ways(self):
+        path = DATA_DIR / "lake_depth.json"
+        if not path.exists():
+            self.skipTest("depth has not been built")
+        lakes = json.loads(path.read_text(encoding="utf-8"))["lakes"]
+        aerated = [v for v in lakes.values() if v.get("aerated") and v.get("winterkill")]
+        self.assertTrue(aerated, "no aerated lake carries a winterkill band")
+        for entry in aerated:
+            self.assertTrue(entry["winterkill"]["inputs"]["aeration"])
+            self.assertTrue(any("aerated by the province" in r
+                                for r in entry["winterkill"]["reasons"]))

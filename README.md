@@ -16,13 +16,20 @@ alberta-trout-map/
 ├── manifest.webmanifest            ← lets the map install as an app
 ├── icon.svg                        ← the app icon
 ├── vendor/                         ← Leaflet, MarkerCluster and Chart.js, checked in
+├── js/                             ← conditions, weather and sun/moon, split out
+├── live/
+│   └── advisories.json             ← what Alberta published today, collected daily
+├── evidence.html                   ← the working shown, lake by lake
 ├── data/
-│   ├── raw/                        ← the reports as published (PDF, CSV, XLSX)
+│   ├── raw/                        ← inputs; see "What data/raw holds" below
 │   ├── manifest.json               ← which years exist, and which are provisional
 │   ├── lakes_YYYY.json             ← one file per year, generated
 │   ├── lake_registry.json          ← one entry per physical lake, generated
+│   ├── lake_depth.json             ← depth, summer layer and winterkill, generated
+│   ├── lake_regulations.json       ← seasons and catch limits per lake, generated
 │   ├── lake_aliases.csv            ← your answers to past linking questions
 │   ├── link_review.csv             ← linking questions still open, generated
+│   ├── regs_review.csv             ← lakes the guide could not be matched to
 │   └── quality_summary.json        ← headline data-quality figures, generated
 ├── profiles/
 │   └── mywildalberta_profiles.csv  ← coordinates, zone, amenities
@@ -32,12 +39,42 @@ alberta-trout-map/
 │   ├── registry.py                 ← lake identity and the matching rules
 │   ├── build_history.py            ← the pipeline: raw reports → data/
 │   ├── apply_review.py             ← turns your review answers into aliases
+│   ├── import_stocking_map.py      ← the stocking-map workbook → CSVs in data/raw/
+│   ├── fetch_lake_pages.py         ← the same facts from the live site, one page at a time
+│   ├── depth.py                    ← depth → summer layer and winterkill risk
+│   ├── reconcile.py                ← the repo against Alberta, field by field
+│   ├── regulations.py              ← seasons and limits out of the sportfishing guide
+│   ├── strip_regulations.py        ← the published guide → only its regulatory pages
+│   ├── advisories.py               ← closures and consumption advisories, daily
 │   └── test_regression_checks.py   ← the test suite
 └── README.md
 ```
 
-Everything under `data/` except `raw/`, `lake_aliases.csv` and the profiles CSV
-is generated. Never edit those by hand; change the inputs and rebuild.
+Everything under `data/` except `raw/`, `lake_aliases.csv`, `regs_aliases.csv`
+and the profiles CSV is generated. Never edit those by hand; change the inputs
+and rebuild.
+
+### What `data/raw/` holds
+
+Two kinds of thing, and the difference matters:
+
+**Documents as Alberta published them** — every year's stocking report, the
+sportfishing guide, and the stocking-map workbook under `mywildalberta/`. These
+arrive by hand and are never written by the build.
+
+**One-time collector output, committed** — `mywildalberta_lakes.csv`,
+`aca_aerated_lakes.csv`, `mywildalberta_photos.csv` and
+`mywildalberta_issues.csv`. These are derived, but they are committed rather
+than rebuilt, so a rebuild never has to reach the network and never depends on
+a spreadsheet parser. Regenerate them with:
+
+```bash
+cd scripts && python3 import_stocking_map.py         # rewrite them
+cd scripts && python3 import_stocking_map.py --check # confirm they still match
+```
+
+`--check` is also a test, so a workbook edited without a re-import fails CI the
+same way hand-edited generated data would.
 
 The map libraries are committed under `vendor/` rather than loaded from a CDN,
 so the map keeps working offline and cannot break when a CDN is unreachable.
@@ -162,6 +199,17 @@ grid. Every pin is positioned from one of three sources, recorded per lake in
 | `profile` | `lat`/`lon` in the profiles CSV, verified by hand | on the lake |
 | `alberta` | Coordinates Alberta published in the 2012–2020 files | on the lake |
 | `ats` | Computed from the land description by `ats.py` | ~0.5 km |
+| `mywildalberta` | Filled from the stocking map where the repo had no position | on the lake |
+
+A published position that contradicts its own land description is discarded
+rather than passed on. Watridge Lake's row on the stocking map places it 140 km
+from the quarter section printed beside it and from the district printed beside
+that — one digit of the longitude, and the repo's own coordinate agrees with the
+land description exactly. Every other lake sits within 2.2 km of its own
+quarter section, which is what the survey grid predicts, so the rule refuses
+one row and keeps the other 340. The refusal is written to
+`data/raw/mywildalberta_issues.csv` with the distance, so nobody has to take it
+on trust.
 
 To correct a single lake, add `override_lat` and `override_lon` columns to
 `profiles/mywildalberta_profiles.csv`, fill them in for that row, and rebuild.
@@ -178,6 +226,57 @@ Converted correctly they agree to a median of 0.53 km, with 252 of 256 lakes
 inside 1.5 km — about the width of a quarter-section. The test suite fails if
 that median ever rises above 1 km.
 
+## How deep each lake is
+
+Alberta publishes a depth for some of its stocked lakes and not for others.
+Where it does, two pieces of advice follow; where it does not, the map says
+nothing at all rather than estimating, because sending someone to fish eight
+metres down in three metres of water is a real harm.
+
+| | lakes |
+| --- | --- |
+| a maximum depth is published | 109 |
+| deep enough to form a summer layer | 83 |
+| the province aerates it | 12 |
+| nothing is published, so nothing is shown | the rest |
+
+**The summer layer.** Below about 5 m an Alberta lake stays mixed all summer and
+a hot surface reading describes the water the trout are actually in. Above it
+the lake separates and they sit under the warm top. The band is set by how far
+the wind can blow across the water — surface area is the usable stand-in — and
+not by a fraction of the maximum depth, which would put a deep lake's
+thermocline shallower than it belongs.
+
+**Winterkill.** A risk band with its inputs named, not a prediction. Depth and
+aeration are real inputs. Eutrophy is not available at all. Ice duration is
+deliberately not modelled: across these lakes it varies far less than depth
+does, so it would add arithmetic without adding discrimination. The app names
+what was not counted.
+
+**Aeration is known one lake at a time.** Alberta names the lakes it aerates and
+says nothing whatsoever about the rest, so absence from that list is not a
+statement that a lake is unaerated — the stocking map's own notes say so in
+those words. A lake off the list therefore reads "not counting whether it is
+aerated", never "not on the aerated list".
+
+Aeration cuts both ways and the app says both halves: a lake is aerated because
+the province expects it to winterkill, and is less likely to winterkill because
+it is aerated.
+
+**A photograph is not enough.** Castaway Trout Pond and Lara Fish Pond show a
+windmill aerator in a picture and say nothing about it in prose. That evidence
+is recorded and shown, and never lowers a risk band: a photograph shows that
+equipment existed when it was taken, not that the programme runs now, and the
+export's own notes say the operating status was never verified. Marking a lake
+aerated makes it read as safer than it is, which is the one direction worth
+being careful in.
+
+**A contradiction is refused, not repaired.** Castor Eastside Trout Pond
+publishes a mean depth of 22 m against a maximum of 7 m on a one-hectare pond.
+The maximum is kept and the mean is dropped. Swapping them would not be a
+repair, only a different guess.
+
+
 ## Tests
 
 ```bash
@@ -187,7 +286,10 @@ cd scripts && python3 -m unittest discover -p "test_*.py"
 Covers the survey-grid conversion and its accuracy, the name-matching rules,
 every year's reader (including the specific parsing failures that once welded
 a district onto a lake name and a fish strain into another), the linker's
-held-out accuracy, and the committed data itself.
+held-out accuracy, the committed data itself, and the stocking-map import —
+that the CSVs still match the workbook, that "Unknown" never becomes zero, that
+a position contradicting its own land description is not published, and that a
+lake Alberta says nothing about is never reported as unaerated.
 
 GitHub Actions runs the same suite on every push and additionally rebuilds
 `data/` from the raw reports, failing if the result differs from what is

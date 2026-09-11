@@ -1,0 +1,30 @@
+{
+ "how": "Exported by hand from Alberta's stocking map. This is the same material fetch_lake_pages.py was written to collect, obtained without the network. scripts/import_stocking_map.py turns it into the CSVs under data/raw/.",
+ "notes_from_the_export": {
+  "2026 data": "2026 is partial-year data as available at extraction. No records in a year does not prove no stocking occurred.",
+  "Aeration": "Yes means the map description explicitly mentions aeration or the ACA Lake Aeration Program. Not stated does not mean No. None explicitly stated No. Operating status was not independently verified.",
+  "Aeration coverage": "12 descriptions explicitly mention aeration. Castaway Trout Pond and Lara Fish Pond have aeration-related photo captions only; their status remains Not stated with the caption evidence recorded.",
+  "Coverage": "346 waterbodies, 3,302 individual stocking records, years 2021–2026. This is the history shown on the map, not a claim of complete historical coverage.",
+  "Identifiers": "Lake IDs are stored as text to preserve their identifier meaning. District is the source label, not an inferred nearest town.",
+  "Missing measurements": "Unknown is preserved as text, never converted to zero. Known areas and depths are numeric with units in headers.",
+  "Page update label": "The page footer says Updated: Jul 22, 2025, but its records include 2026. Retrieval date is the export snapshot date.",
+  "Photos": "669 original photo URLs and captions, covering 188 waterbodies. 158 waterbodies had no gallery photos. Embedded thumbnails could not be downloaded through the available connection.",
+  "Refresh": "This file is a static export, not a live connection. Formulas update totals if existing detail values are edited; new records require extending summary groups and formula ranges.",
+  "Retrieved": "September 11, 2026",
+  "Source": "https://mywildalberta.ca/fishing/fish-stocking/stocking-map.aspx",
+  "Source discrepancies": "Source entries are retained without deduplication or corrections. Similar records on different dates remain separate and contribute to annual totals.",
+  "Use": "Use table header filters for lake, year, species or aeration. Rows with long descriptions can be expanded in Excel. Photo URLs open the original site.",
+  "Year grouping": "Annual stocking has one row per lake ID, calendar year and species. Totals and event counts are formulas linked to Stocking details."
+ },
+ "retrieved": "2026-09-11",
+ "rows_per_sheet": {
+  "Annual stocking": 2164,
+  "Pictures": 669,
+  "Read me": 14,
+  "Stocking details": 3302,
+  "Waterbodies": 346
+ },
+ "source_file": "Alberta_Stocked_Waterbodies_20260911.xlsx",
+ "source_sha256": "ce69e44e59ba98fd88a273dd45c9d1648a446e5c44b8e5b83eee0ecb06c87751",
+ "source_url": "https://mywildalberta.ca/fishing/fish-stocking/stocking-map.aspx"
+}
