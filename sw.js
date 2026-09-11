@@ -61,7 +61,7 @@ const SHELL_FILES = [
 async function precacheData() {
   const cache = await caches.open(DATA_CACHE);
   const fixed = ["data/manifest.json", "data/quality_summary.json",
-                 "data/lake_regulations.json"];
+                 "data/lake_regulations.json", "data/lake_depth.json"];
   await Promise.all(fixed.map(u => cache.add(u).catch(() => {})));
 
   let years = [];

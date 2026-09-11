@@ -419,6 +419,27 @@ def write_quality_summary(reg, review_count, linked_rows, trout_rows):
 REGULATIONS_PDF = "alberta-sportfishing-regulations-2026-tables.pdf"
 
 
+def write_depths(reg):
+    """Lake depth, and what it implies in summer and winter.
+
+    Skipped quietly when the collection has not been run: a missing depth file
+    should cost the map its depth advice, not its data. Everything downstream
+    is built to say nothing rather than guess when depth is absent.
+    """
+    import depth
+    stats = depth.write(reg.lakes, DATA_DIR)
+    if not stats:
+        print("\nNo data/raw/mywildalberta_depths.csv; skipping depth and winterkill.")
+        print("  Collect it once with: cd scripts && python3 fetch_depths.py")
+        return None
+    print("\nReading lake depth...")
+    print(f"  {stats['with_depth']} lake(s) with a depth, "
+          f"{stats['stated_unavailable']} where Alberta states none is available")
+    if not stats["aeration_known"]:
+        print("  no aerated-lake list present; winterkill uses depth alone")
+    return stats
+
+
 def write_regulations(reg=None):
     """Catch limits and seasons, read out of the sportfishing guide.
 
@@ -532,8 +553,11 @@ def main():
     n_review = write_review(still, reg)
     years_written = write_year_files(reg, linked, sources.PROVISIONAL_YEARS)
     write_quality_summary(reg, len(still), linked_rows, trout_rows)
+    n_depth = write_depths(reg)
     n_regs = write_regulations(reg)
     print(f"\nWrote data/lake_registry.json ({len(reg.lakes)} lakes)")
+    if n_depth:
+        print(f"Wrote data/lake_depth.json ({n_depth['with_depth']} lakes with a depth)")
     if n_regs:
         print(f"Wrote data/regulations_{n_regs[0]}.json "
               f"({n_regs[1]} site-specific rows, {n_regs[2]} put-and-take waters)")

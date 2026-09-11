@@ -120,7 +120,10 @@
       water: water,
       astro: astroFor(place, startOfDay(when)),
       leadDays: Weather.leadDays(when),
-      maxDepthM: null,
+      // Known depth turns the thermocline advisory from a guess into a
+      // statement; unknown depth keeps it silent, which is the whole point.
+      maxDepthM: place.lake && typeof depthFor === "function"
+        ? ((depthFor(place.lake) || {}).max_depth_m ?? null) : null,
       areaHa: place.lake ? place.lake.surface_area_ha : null,
     });
   }

@@ -454,8 +454,13 @@ class OfflineAssetTests(unittest.TestCase):
     def test_missing_library_check_names_every_script(self):
         """The app promises a named, actionable error for a missing library."""
         text = self.INDEX.read_text(encoding="utf-8")
-        start = text.index("const missing = [")
-        named = set(re.findall(r'"((?:vendor|js)/[^"]+)"', text[start:start + 1200]))
+        # Find the array that actually lists the libraries, not merely the first
+        # variable that happens to share the name — an unrelated `const missing
+        # = []` elsewhere in the file silently emptied this check once.
+        block = re.search(r"const missing = \[(.*?)\]\.filter\(Boolean\)", text, re.S)
+        self.assertIsNotNone(block, "could not find the missing-library check")
+        named = set(re.findall(r'"((?:vendor|js)/[^"]+)"', block.group(1)))
+        self.assertTrue(named, "the missing-library check named nothing at all")
         for src in re.findall(r'<script src="([^"]+)"', text):
             self.assertIn(src, named,
                           f"{src} is loaded but not named in the missing-library check")
@@ -655,3 +660,91 @@ class RegulationTests(unittest.TestCase):
                          "Shunda (Fish) Lake", "Mcleod Lake (Carson Lake)",
                          "Tim Horton Children’s Pond"):
             self.assertIn(expected, stocked, f"{expected!r} missing from the stocked list")
+
+
+class DepthTests(unittest.TestCase):
+    """Depth decides two pieces of advice, and both must stay silent without it.
+
+    Sending someone to fish eight metres down in three metres of water is a real
+    harm, so "probably deep enough" is never good enough.
+    """
+
+    def test_unknown_depth_produces_no_advice_at_all(self):
+        import depth
+        self.assertIsNone(depth.stratification(None, 120))
+        self.assertIsNone(depth.winterkill(None, False, False))
+
+    def test_a_shallow_lake_is_never_told_to_fish_deep(self):
+        import depth
+        for shallow in (1.5, 2.0, 3.0, 4.9):
+            found = depth.stratification(shallow, 120)
+            self.assertFalse(found["stratifies"], f"{shallow} m reported as stratifying")
+            self.assertNotIn("band_m", found)
+
+    def test_the_layer_never_sits_below_the_bottom(self):
+        """A big lake's thermocline band is deeper than a small one's, so a
+        large but shallow lake has nowhere to put it."""
+        import depth
+        found = depth.stratification(7.6, 900)      # big surface, not deep
+        self.assertFalse(found["stratifies"])
+        deep = depth.stratification(25.0, 900)
+        self.assertTrue(deep["stratifies"])
+        self.assertLessEqual(deep["band_m"][1], 25.0 - 1)
+
+    def test_the_band_follows_fetch_not_a_fraction_of_depth(self):
+        """Thermocline depth is set by how far the wind blows across the water.
+        Taking a fraction of max depth gave a 7.6 m and a 12 m lake the same
+        band, with the deeper one's layer placed too shallow."""
+        import depth
+        small = depth.stratification(20.0, 20)
+        large = depth.stratification(20.0, 900)
+        self.assertGreater(large["band_m"][0], small["band_m"][0])
+        # Same lake size, different depths, both deep enough: same band.
+        self.assertEqual(depth.stratification(12.0, 120)["band_m"],
+                         depth.stratification(25.0, 120)["band_m"])
+
+    def test_winterkill_says_what_it_did_not_count(self):
+        import depth
+        risk = depth.winterkill(2.0, aerated=False, aeration_known=False)
+        self.assertEqual(risk["level"], "high")
+        self.assertFalse(risk["inputs"]["eutrophy"])
+        self.assertFalse(risk["inputs"]["ice_duration"])
+        self.assertFalse(risk["inputs"]["aeration"])
+
+    def test_aeration_cuts_both_ways(self):
+        """A lake is aerated because it is expected to winterkill, and is less
+        likely to because it is aerated. Both belong in the reasons."""
+        import depth
+        plain = depth.winterkill(2.0, aerated=False, aeration_known=True)
+        helped = depth.winterkill(2.0, aerated=True, aeration_known=True)
+        self.assertEqual(plain["level"], "high")
+        self.assertEqual(helped["level"], "moderate")
+        self.assertTrue(any("expected to winterkill" in r for r in helped["reasons"]))
+
+    def test_depth_is_joined_on_albertas_own_waterbody_id(self):
+        """The join is exact rather than by name: MyWildAlberta addresses a lake
+        as ?id=6537 and the registry stores that same id."""
+        registry_file = DATA_DIR / "lake_registry.json"
+        data = json.loads(registry_file.read_text())
+        lakes = data["lakes"] if isinstance(data, dict) and "lakes" in data else data
+        with_id = [l for l in lakes if l.get("waterbody_id")]
+        self.assertGreater(len(with_id), 300, "the id join would cover too few lakes")
+        for lake in with_id[:50]:
+            self.assertTrue(str(lake["waterbody_id"]).isdigit())
+            self.assertEqual(lake["lake_id"], "wb" + str(lake["waterbody_id"]))
+
+    def test_the_parser_reads_the_shapes_the_page_uses(self):
+        import fetch_depths
+        found = fetch_depths.parse(
+            "<h1>Somewhere Lake</h1><tr><th>Maximum Depth</th><td>7.6 m</td></tr>"
+            "<tr><th>Surface Area</th><td>25.4 ha</td></tr>")
+        self.assertEqual(found["max_depth_m"], 7.6)
+        self.assertEqual(found["surface_area_ha"], 25.4)
+        # "no depth available" is an answer, not a failure to read the page
+        stated = fetch_depths.parse("<p>Depth information is not available.</p>")
+        self.assertIsNone(stated["max_depth_m"])
+        self.assertTrue(stated["states_unavailable"])
+        # and a page with neither is neither
+        blank = fetch_depths.parse("<h1>Quiet Lake</h1><p>Stocked with trout.</p>")
+        self.assertIsNone(blank["max_depth_m"])
+        self.assertFalse(blank["states_unavailable"])

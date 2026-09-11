@@ -1178,6 +1178,38 @@
    },
    "zone": "ES2"
   },
+  "wb4167": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "confirmed_by": "repo owner",
+   "detail": "All lakes; 16-21-10-W5",
+   "matched_name": "Burstall Lakes",
+   "page": 7,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES1"
+  },
   "wb4171": {
    "bait": "Bait is allowed",
    "basis": "put-and-take",
@@ -2969,6 +3001,38 @@
    },
    "zone": "ES4"
   },
+  "wb6525": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "confirmed_by": "repo owner",
+   "detail": "All lakes; 16-21-10-W5",
+   "matched_name": "Burstall Lakes",
+   "page": 7,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES1"
+  },
   "wb6528": {
    "bait": "Bait allowed, except bait fish",
    "basis": "site-specific",
@@ -3686,6 +3750,24 @@
    },
    "zone": "PP1"
   },
+  "wb6684": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "confirmed_by": "repo owner",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Montaganeusse Lake (Stoney Lake)",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "ES4"
+  },
   "wb6686": {
    "bait": "Bait is allowed",
    "basis": "put-and-take",
@@ -3902,6 +3984,24 @@
     "Yellow Perch": "15 Yellow Perch of any size"
    },
    "matched_name": "Nuggent Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
+  },
+  "wb6726": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "confirmed_by": "repo owner",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Open Ck Reservoir",
    "note": "For other species, see Maximum Possession limits.",
    "season": {
     "closed": false,
@@ -4381,6 +4481,24 @@
     "text": "OPEN all year"
    },
    "zone": "ES3"
+  },
+  "wb6790": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "confirmed_by": "repo owner",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Hermitage Park Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
   },
   "wb6791": {
    "bait": "Bait is allowed",

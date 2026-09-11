@@ -37,6 +37,7 @@ is quoted where it is implemented, and each has a test:
     a blank species cell means the species is not likely present, not unlimited
 """
 
+import csv
 import json
 import re
 from pathlib import Path
@@ -409,6 +410,28 @@ if __name__ == "__main__":
 CONFIDENT = 0.92
 CLEARLY_ABSENT = 0.75
 
+ALIASES_PATH = Path(__file__).parent.parent / "data" / "regs_aliases.csv"
+
+
+def load_aliases():
+    """Answers a person has already given, so the same question is asked once.
+
+    Put DEFAULT in regulation_name to record that a lake really is not listed,
+    which is a different claim from "we could not tell" and has its own rule in
+    the guide.
+
+    The fuzzy matcher deliberately refuses anything it is not sure of, which
+    leaves a short list of real waters whose names the guide spells its own way
+    — "Open Ck Reservoir" for Open Creek Reservoir, one entry for both Burstall
+    lakes. Those are settled by someone who knows the water, recorded here with
+    who settled them, and never asked again.
+    """
+    if not ALIASES_PATH.exists():
+        return {}
+    with ALIASES_PATH.open(newline="", encoding="utf-8") as handle:
+        return {row["lake_id"]: row for row in csv.DictReader(handle)
+                if row.get("lake_id") and row.get("regulation_name")}
+
 
 def _best_match(target, candidates):
     """The closest name and its score, using the registry's own comparison."""
@@ -420,7 +443,7 @@ def _best_match(target, candidates):
     return best, score
 
 
-def match_lakes(regs, lakes):
+def match_lakes(regs, lakes, aliases=None):
     """Resolve every lake to a regulation, or to nothing at all.
 
     The unsafe move here is to fall back to the watershed default whenever a
@@ -435,6 +458,7 @@ def match_lakes(regs, lakes):
     it but not closely enough to be sure, nothing is published and the lake is
     written to the review file for a human to settle.
     """
+    aliases = load_aliases() if aliases is None else aliases
     resolved, review = {}, []
     for lake in lakes:
         zone = lake.get("zone")
@@ -451,6 +475,26 @@ def match_lakes(regs, lakes):
         target = registry.normalize_name(name)
         site = {registry.normalize_name(k): k for k in regs["zones"].get(zone, {}).get("lakes", {})}
         stock = {registry.normalize_name(k): k for k in regs["stocked"]}
+
+        # A name someone has already confirmed wins over anything measured.
+        settled = aliases.get(key)
+        if settled:
+            wanted = settled["regulation_name"].strip()
+            # DEFAULT means "I checked, it really is not listed" — which is a
+            # different statement from "we could not tell", and the guide has a
+            # rule for it.
+            if wanted.upper() == "DEFAULT":
+                found = resolve("__confirmed_unlisted__", zone, regs)
+                if found:
+                    found["confirmed_by"] = settled.get("confirmed_by") or "review"
+                    resolved[key] = found
+                continue
+            found = resolve(wanted, zone, regs)
+            if found:
+                found["matched_name"] = wanted
+                found["confirmed_by"] = settled.get("confirmed_by") or "review"
+                resolved[key] = found
+                continue
 
         if target in site:
             found = resolve(site[target], zone, regs)

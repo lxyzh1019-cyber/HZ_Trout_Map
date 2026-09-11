@@ -378,6 +378,16 @@
   .leaflet-popup-content { margin: 12px 14px; font-size: 12px; min-width: 260px;
     max-height: 60vh; overflow-y: auto; scrollbar-gutter: stable; padding-right: 4px; }
   .lake-popup h3 { margin: 0 0 2px; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+  .lake-popup .depth-row { font-size: 11px; color: var(--ink-dim); margin-bottom: 5px; }
+  .lake-popup .dim { color: var(--ink-dim); }
+  .lake-popup .wk-row { font-size: 11px; margin-bottom: 7px; display: flex;
+    align-items: baseline; gap: 6px; flex-wrap: wrap; }
+  .wk-badge { font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .04em; padding: 1px 6px; border-radius: 999px; color: #1f211e;
+    white-space: nowrap; }
+  .wk-badge.low { background: var(--good); }
+  .wk-badge.moderate { background: var(--TGTR); }
+  .wk-badge.high { background: var(--WSCT); }
   .reg-block { margin: 8px 0 4px; padding: 8px 10px; background: var(--panel-2);
     border-left: 3px solid var(--accent); border-radius: 3px; font-size: 12px; }
   .reg-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 5px; }
@@ -978,6 +988,7 @@ let LAKES = [];
 let ALL_YEARS = [];
 let QUALITY_SUMMARY = null;
 let REGULATIONS = null;
+let DEPTHS = null;
 let PROVISIONAL_YEARS = new Set();
 const DATA_ISSUES = { invalidStockings: 0, examples: [] };
 
@@ -1070,6 +1081,16 @@ async function loadAllData() {
 async function loadRegulations() {
   try {
     const resp = await fetch("data/lake_regulations.json");
+    return resp.ok ? await resp.json() : null;
+  } catch { return null; }
+}
+
+/** Depth, and what it implies in summer and winter. Absent until the one-time
+ *  collection has been run, and everything downstream is built to say nothing
+ *  rather than guess when it is. */
+async function loadDepths() {
+  try {
+    const resp = await fetch("data/lake_depth.json");
     return resp.ok ? await resp.json() : null;
   } catch { return null; }
 }
@@ -1298,6 +1319,48 @@ function profileBlock(lake) {
   return html;
 }
 
+/** What is known about this lake's depth, or null. */
+function depthFor(lake) {
+  if (!DEPTHS) return null;
+  return DEPTHS.lakes[lakeKey(lake)] || null;
+}
+
+/* Depth, the summer layer, and winterkill risk.
+ *
+ * Every part of this is omitted when the depth is unknown. A thermocline band
+ * for a lake we have never measured would be an invented number with a metre
+ * sign after it, and someone would fish to it. */
+function depthBlock(lake) {
+  const d = depthFor(lake);
+  if (!d) return "";
+  if (d.max_depth_m == null) {
+    return d.depth_stated_unavailable
+      ? `<div class="depth-row"><span class="profile-label">Depth</span>
+           <span class="dim">Alberta lists no depth for this lake</span></div>`
+      : "";
+  }
+  const parts = [`<span><span class="profile-label">Max depth</span> ${esc(d.max_depth_m)} m</span>`];
+  const strat = d.stratification;
+  if (strat && strat.stratifies) {
+    parts.push(`<span><span class="profile-label">Summer layer</span> about ${strat.band_m[0]}–${strat.band_m[1]} m</span>`);
+  } else if (strat) {
+    parts.push(`<span class="dim">${esc(strat.why)}</span>`);
+  }
+  let html = `<div class="depth-row">${parts.join(" &nbsp;·&nbsp; ")}</div>`;
+
+  const wk = d.winterkill;
+  if (wk) {
+    const notCounted = [];
+    if (!wk.inputs.aeration) notCounted.push("whether it is aerated");
+    if (!wk.inputs.eutrophy) notCounted.push("how productive it is");
+    html += `<div class="wk-row"><span class="wk-badge ${esc(wk.level)}">Winterkill ${esc(wk.level)}</span>
+      <span class="dim">${esc(wk.reasons.join("; "))}`
+      + (notCounted.length ? ` — not counting ${esc(notCounted.join(" or "))}` : "")
+      + `</span></div>`;
+  }
+  return html;
+}
+
 /** The regulation resolved for this lake, or null if none could be. */
 function regulationFor(lake) {
   if (!REGULATIONS) return null;
@@ -1474,6 +1537,7 @@ function popupHtml(lake) {
     ${changeRow}
     ${approx}
     ${profileBlock(lake)}
+    ${depthBlock(lake)}
     ${regulationBlock(lake)}
     <div class="popup-actions">
       <a class="gmaps" href="${driveUrl}" target="_blank" rel="noopener">Directions from ${esc(state.home.name)} ↗</a>
@@ -2741,6 +2805,7 @@ async function init() {
     const { lakes, years } = await loadAllData();
     QUALITY_SUMMARY = await loadQualitySummary();
     REGULATIONS = await loadRegulations();
+    DEPTHS = await loadDepths();
     LAKES = lakes;
     ALL_YEARS = years;
     state.years = params.has("yr")
