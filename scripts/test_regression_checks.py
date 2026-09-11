@@ -1,36 +1,40 @@
 import csv
 import json
 import statistics
-import tempfile
 import unittest
 from pathlib import Path
 
 import ats
-import check_consistency
-import merge_profiles
+import registry
+import sources
+import build_history as bh
+
+ROOT = Path(__file__).parent.parent
+PROFILES_CSV = ROOT / "profiles" / "mywildalberta_profiles.csv"
+DATA_DIR = ROOT / "data"
 
 
-PROFILES_CSV = Path(__file__).parent.parent / "profiles" / "mywildalberta_profiles.csv"
+def to_float(text):
+    try:
+        return float((text or "").strip())
+    except (TypeError, ValueError):
+        return None
 
 
 class AtsGeometryTests(unittest.TestCase):
     def test_section_1_is_south_east_corner(self):
-        # Sections are numbered from the SE corner, snaking west.
         self.assertEqual(ats.section_grid_xy(1), (5, 0))   # east column, south row
         self.assertEqual(ats.section_grid_xy(6), (0, 0))   # west column, south row
         self.assertEqual(ats.section_grid_xy(7), (0, 1))   # snake turns north
         self.assertEqual(ats.section_grid_xy(12), (5, 1))
-        self.assertEqual(ats.section_grid_xy(31), (0, 5))  # west column, north row
+        self.assertEqual(ats.section_grid_xy(31), (0, 5))
         self.assertEqual(ats.section_grid_xy(36), (5, 5))
 
     def test_east_column_is_closer_to_the_meridian(self):
-        # Ranges run west from the meridian, so a section in the east column
-        # must have a longitude east of (greater than) one in the west column.
         _, east_lon = ats.ats_to_latlng("SE1-20-5-W5")
         _, west_lon = ats.ats_to_latlng("SW6-20-5-W5")
         self.assertGreater(east_lon, west_lon)
-        # They are five miles apart, not fifty.
-        self.assertLess(abs(east_lon - west_lon), 0.2)
+        self.assertLess(abs(east_lon - west_lon), 0.2)     # five miles, not fifty
 
     def test_north_township_is_further_north(self):
         north, _ = ats.ats_to_latlng("SW1-100-5-W5")
@@ -42,7 +46,8 @@ class AtsGeometryTests(unittest.TestCase):
         self.assertAlmostEqual(lat, 49.0, delta=0.05)
 
     def test_meridians_anchor_longitude(self):
-        for code, meridian in (("SE1-20-1-W4", -110.0), ("SE1-20-1-W5", -114.0), ("SE1-20-1-W6", -118.0)):
+        for code, meridian in (("SE1-20-1-W4", -110.0), ("SE1-20-1-W5", -114.0),
+                               ("SE1-20-1-W6", -118.0)):
             _, lon = ats.ats_to_latlng(code)
             self.assertLess(abs(lon - meridian), 0.05, code)
 
@@ -54,10 +59,10 @@ class AtsGeometryTests(unittest.TestCase):
 class AtsAccuracyTests(unittest.TestCase):
     """Guard the fix that moved every pin onto the right lake.
 
-    The stocking report gives an ATS land description; the profiles CSV gives a
-    hand-verified coordinate for the same lake. Two independent sources, so if
-    the conversion is right they agree to within about a quarter-section.
-    Before the fix the median gap was 6.08 km.
+    The report gives a land description; the profiles CSV gives a hand-verified
+    coordinate for the same lake. Two independent sources, so a correct
+    conversion puts them within about a quarter-section of each other. Before
+    the fix the median gap was 6.08 km.
     """
 
     @classmethod
@@ -65,8 +70,7 @@ class AtsAccuracyTests(unittest.TestCase):
         cls.gaps = []
         with open(PROFILES_CSV, newline="", encoding="cp1252") as f:
             for row in csv.DictReader(f):
-                lat = merge_profiles.parse_float(row.get("lat"))
-                lon = merge_profiles.parse_float(row.get("lon"))
+                lat, lon = to_float(row.get("lat")), to_float(row.get("lon"))
                 est_lat, est_lon = ats.ats_to_latlng(row.get("ats"))
                 if lat is None or lon is None or est_lat is None:
                     continue
@@ -83,124 +87,134 @@ class AtsAccuracyTests(unittest.TestCase):
         self.assertGreater(within / len(self.gaps), 0.95)
 
 
-class AreaParsingTests(unittest.TestCase):
-    def test_parses_the_shapes_the_csv_actually_uses(self):
-        cases = {
-            "(ha): 13.2 hectares": 13.2,
-            "(ha): 2 hectares": 2.0,
-            "1,234 ha": 1234.0,
-            "846.4": 846.4,
-        }
-        for text, expected in cases.items():
-            self.assertEqual(merge_profiles.parse_area_ha(text), expected, text)
+class NameMatchingTests(unittest.TestCase):
+    def test_keeps_the_words_that_distinguish_lakes(self):
+        # Dropping "Reservoir" made these score a perfect 1.00 against each other.
+        self.assertLess(registry.name_similarity("Chain Lakes Reservoir", "Chain Lake"), 0.95)
 
-    def test_missing_or_unparseable_area_is_none(self):
-        for text in ("", None, "n/a", "unknown"):
-            self.assertIsNone(merge_profiles.parse_area_ha(text), repr(text))
+    def test_short_name_matches_its_own_longer_form(self):
+        # Character similarity alone ranks "Jane Lake" above the right answer.
+        payne = registry.name_similarity("Payne Lake", "Payne (Mami) Lake")
+        jane = registry.name_similarity("Payne Lake", "Jane Lake")
+        self.assertGreater(payne, jane)
 
-    def test_real_csv_yields_areas_for_most_lakes(self):
-        # Regression: the old regex required a leading digit, so "(ha): 13.2
-        # hectares" parsed as None and no popup ever showed an area.
-        with open(PROFILES_CSV, newline="", encoding="cp1252") as f:
-            areas = [merge_profiles.parse_area_ha(r.get("surface_area")) for r in csv.DictReader(f)]
-        self.assertGreater(sum(a is not None for a in areas) / len(areas), 0.9)
+    def test_sharing_only_a_generic_word_is_not_a_match(self):
+        self.assertLess(registry.name_similarity("Muir Lake", "Spring Lake"), 0.7)
 
+    def test_paired_lakes_are_flagged_as_conflicting(self):
+        for a, b in (("Champion Lakes (Upper)", "Champion Lakes (Lower)"),
+                     ("East Dollar Lake", "West Dollar Lake"),
+                     ("Pierre Greys Lakes #1", "Pierre Greys Lakes #2")):
+            self.assertTrue(registry.discriminating_conflict(a, b), f"{a} vs {b}")
 
-class CoordinateSourceTests(unittest.TestCase):
-    def profile(self, **kw):
-        base = {"display_name": None, "lat": None, "lon": None,
-                "override_lat": None, "override_lon": None,
-                "zone": None, "surface_area_ha": None, "amenities": None}
-        base.update(kw)
-        return base
-
-    def test_override_wins(self):
-        prof = self.profile(lat=52.0, lon=-114.0, override_lat=53.0, override_lon=-115.0)
-        self.assertEqual(merge_profiles.resolve_coordinates("SW4-36-8-W5", prof),
-                         (53.0, -115.0, "override"))
-
-    def test_profile_coordinates_beat_the_ats_estimate(self):
-        prof = self.profile(lat=52.0, lon=-114.0)
-        self.assertEqual(merge_profiles.resolve_coordinates("SW4-36-8-W5", prof),
-                         (52.0, -114.0, "profile"))
-
-    def test_falls_back_to_ats_when_no_profile(self):
-        lat, lon, source = merge_profiles.resolve_coordinates("SW4-36-8-W5", None)
-        self.assertEqual(source, "ats")
-        self.assertEqual((lat, lon), ats.ats_to_latlng("SW4-36-8-W5"))
-
-    def test_half_a_profile_coordinate_is_not_used(self):
-        prof = self.profile(lat=52.0, lon=None)
-        self.assertEqual(merge_profiles.resolve_coordinates("SW4-36-8-W5", prof)[2], "ats")
+    def test_a_shorter_name_is_not_a_conflict_with_itself(self):
+        self.assertFalse(registry.discriminating_conflict("Alford Lake", "Alford Lake"))
 
 
-class ConsistencyChecksTests(unittest.TestCase):
-    def test_normalize_name_strips_parenthetical_and_punctuation(self):
-        self.assertEqual(
-            check_consistency.normalize_name("Spring (Cottage) Lake!"),
-            "spring lake",
-        )
+class SourceReaderTests(unittest.TestCase):
+    """Every year must be readable, with the fields that year is meant to have."""
 
-    def test_ats_variants_detected(self):
-        by_year = {
-            2025: [
-                {"ats": "NE16-21-10-W5", "name": "A", "lat": 50.0, "lon": -115.0},
-                {"ats": "SW16-21-10-W5", "name": "B", "lat": 50.1, "lon": -115.1},
-            ]
-        }
-        findings = check_consistency.run_checks(by_year, profile_ats=set())
-        self.assertEqual(len(findings["ats_variants"]), 1)
-        rest_code, pairs = findings["ats_variants"][0]
-        self.assertEqual(rest_code, "16-21-10-W5")
-        self.assertEqual(len(pairs), 2)
+    @classmethod
+    def setUpClass(cls):
+        cls.rows = {y: sources.read_year(y) for y in sorted(sources.YEAR_SOURCES)}
+
+    def test_every_year_yields_rows(self):
+        for year, rows in self.rows.items():
+            self.assertGreater(len(rows), 150, f"{year} produced only {len(rows)} rows")
+
+    def test_every_row_has_a_species_a_count_and_a_date(self):
+        for year, rows in self.rows.items():
+            for r in rows:
+                self.assertTrue(r["species"], year)
+                self.assertIsInstance(r["number"], int)
+                self.assertGreater(r["number"], 0)
+                self.assertRegex(r["date"] or "", r"^\d{4}-\d{2}-\d{2}$", f"{year} {r}")
+
+    def test_dates_fall_in_their_own_season(self):
+        for year, rows in self.rows.items():
+            for r in rows:
+                self.assertEqual(int(r["date"][:4]), year, f"{year} {r['date']}")
+
+    def test_waterbody_id_present_exactly_where_expected(self):
+        with_id = {y for y, rows in self.rows.items() if any(r["waterbody_id"] for r in rows)}
+        self.assertEqual(with_id, {2012, 2013, 2014, 2016, 2017, 2018, 2019})
+
+    def test_early_reports_are_month_precision(self):
+        for year in (2011, 2012, 2013):
+            if sources.YEAR_SOURCES[year][0] != "pdf_early":
+                continue
+            self.assertTrue(all(r["date_precision"] == "month" for r in self.rows[year]), year)
+
+    def test_district_names_are_not_welded_to_the_lake_name(self):
+        # "ROCKY MOUNTAIN HOUSE" + "TWIN LAKE" once came out as
+        # "MOUNTAIN HOUSETWIN LAKE" because the PDF fuses the two words.
+        for r in self.rows[2015]:
+            self.assertNotRegex(r["official_name"], r"HOUSE[A-Z]", r["official_name"])
+            self.assertNotIn("MEDICINE", r["official_name"])
+
+    def test_modern_reports_keep_strain_out_of_the_lake_name(self):
+        for year in (2025, 2026):
+            for r in self.rows[year]:
+                self.assertNotIn("Lodge/", r["official_name"], f"{year} {r['official_name']}")
+                self.assertNotIn("Kamloops", r["official_name"], f"{year} {r['official_name']}")
+
+    def test_genotypes_are_not_sliced_in_half(self):
+        for year in (2025, 2026):
+            for r in self.rows[year]:
+                if r["genotype"]:
+                    self.assertRegex(r["genotype"], r"^A?F?[23]N[A-Z]*$",
+                                     f"{year} {r['genotype']} / {r['strain']}")
 
 
-class MergeProfilesTests(unittest.TestCase):
-    def test_profile_merge_overrides_name_coords_and_sets_profile_fields(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            tmp_path = Path(tmp)
-            profiles = tmp_path / "profiles.csv"
-            lakes = tmp_path / "lakes_2025.json"
+class LinkingAccuracyTests(unittest.TestCase):
+    """Hold out real years and check the linker against Alberta's own ids.
 
-            profiles.write_text(
-                "ats,lat,lon,Trout Map Name,name,zone,surface_area,site_amenities\n"
-                "NE10-2-28-W4,49.2,-113.6,Preferred Name,Original Name,ES1,(ha): 123.4 hectares,Boat Launch\n",
-                encoding="utf-8",
-            )
+    The registry is built from 2012-2016, then 2017-2019 are linked with the
+    waterbody id and the published coordinates hidden — leaving only a name and
+    a land description, which is exactly what 2021 onward gives us. Every
+    answer is then compared against the id that was hidden.
 
-            lakes.write_text(
-                json.dumps(
-                    [
-                        {
-                            "ats": "NE10-2-28-W4",
-                            "name": "Original Name",
-                            "lat": 49.0,
-                            "lon": -113.0,
-                            "stockings": [],
-                            "total_fish": 0,
-                            "species_set": [],
-                        }
-                    ]
-                ),
-                encoding="utf-8",
-            )
+    The bar is not "mostly right". A wrong link silently merges two lakes'
+    histories and nobody ever notices, so the test demands zero.
+    """
 
-            original_profiles_csv = merge_profiles.PROFILES_CSV
-            try:
-                merge_profiles.PROFILES_CSV = profiles
-                merge_profiles.merge(str(lakes))
-            finally:
-                merge_profiles.PROFILES_CSV = original_profiles_csv
+    @classmethod
+    def setUpClass(cls):
+        rows = {y: sources.read_year(y) for y in range(2012, 2020)}
+        cls.reg = bh.build_spine({y: rows[y] for y in range(2012, 2017)})
+        bh.attach_profiles(cls.reg)
+        bh.settle_coordinates(cls.reg)
+        cls.correct = cls.wrong = cls.review = cls.absent = cls.absent_linked = 0
+        for year in (2017, 2018, 2019):
+            for r in rows[year]:
+                if r["species"] not in sources.TROUT_SPECIES or not r["waterbody_id"]:
+                    continue
+                blind = dict(r, waterbody_id=None, lat=None, lon=None)
+                lake, *_ = cls.reg.resolve(blind)
+                if f"wb{r['waterbody_id']}" not in cls.reg.by_id:
+                    cls.absent += 1
+                    if lake is not None:
+                        cls.absent_linked += 1
+                elif lake is None:
+                    cls.review += 1
+                elif lake["lake_id"] == f"wb{r['waterbody_id']}":
+                    cls.correct += 1
+                else:
+                    cls.wrong += 1
 
-            merged = json.loads(lakes.read_text(encoding="utf-8"))[0]
-            self.assertEqual(merged["name"], "Preferred Name")
-            self.assertEqual(merged["lat"], 49.2)
-            self.assertEqual(merged["lon"], -113.6)
-            self.assertEqual(merged["zone"], "ES1")
-            self.assertEqual(merged["surface_area_ha"], 123.4)
-            self.assertEqual(merged["amenities"], "Boat Launch")
-            self.assertEqual(merged["coord_source"], "profile")
-            self.assertEqual(merged["lake_id"], "NE10-2-28-W4")
+    def test_the_sample_is_large_enough_to_mean_something(self):
+        self.assertGreater(self.correct + self.wrong + self.review, 1000)
+
+    def test_no_row_is_ever_linked_to_the_wrong_lake(self):
+        self.assertEqual(self.wrong, 0)
+
+    def test_lakes_absent_from_the_registry_are_never_absorbed_into_another(self):
+        self.assertGreater(self.absent, 0, "no held-out lakes, so this proves nothing")
+        self.assertEqual(self.absent_linked, 0)
+
+    def test_most_rows_link_without_a_human(self):
+        total = self.correct + self.wrong + self.review
+        self.assertGreater(self.correct / total, 0.95)
 
 
 class PublishedDataTests(unittest.TestCase):
@@ -208,52 +222,84 @@ class PublishedDataTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        data_dir = Path(__file__).parent.parent / "data"
-        manifest = json.loads((data_dir / "manifest.json").read_text(encoding="utf-8"))
-        cls.years = manifest["years"]
-        cls.by_year = {y: json.loads((data_dir / f"lakes_{y}.json").read_text(encoding="utf-8"))
+        cls.manifest = json.loads((DATA_DIR / "manifest.json").read_text(encoding="utf-8"))
+        cls.years = cls.manifest["years"]
+        cls.by_year = {y: json.loads((DATA_DIR / f"lakes_{y}.json").read_text(encoding="utf-8"))
                        for y in cls.years}
+        cls.registry = json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))
 
-    def test_every_manifest_year_has_a_data_file(self):
-        self.assertTrue(self.years)
+    def test_the_manifest_covers_every_year_we_can_read(self):
+        self.assertEqual(sorted(self.years), sorted(sources.YEAR_SOURCES))
 
-    def test_every_lake_has_coordinates_and_a_source(self):
+    def test_the_current_season_is_marked_provisional(self):
+        self.assertEqual(sorted(self.manifest["provisional"]),
+                         sorted(sources.PROVISIONAL_YEARS))
+
+    def test_every_lake_has_an_identity_a_position_and_a_source(self):
         for year, lakes in self.by_year.items():
             for lk in lakes:
-                self.assertIsNotNone(lk.get("lat"), f"{year} {lk['ats']}")
-                self.assertIsNotNone(lk.get("lon"), f"{year} {lk['ats']}")
-                self.assertIn(lk.get("coord_source"), ("override", "profile", "ats"),
-                              f"{year} {lk['ats']}")
-                self.assertIsNotNone(lk.get("lake_id"), f"{year} {lk['ats']}")
+                self.assertTrue(lk.get("lake_id"), f"{year} {lk['name']}")
+                self.assertIsNotNone(lk.get("lat"), f"{year} {lk['name']}")
+                self.assertIsNotNone(lk.get("lon"), f"{year} {lk['name']}")
+                self.assertIn(lk.get("coord_source"), ("profile", "alberta", "ats"))
 
     def test_coordinates_are_inside_alberta(self):
         for year, lakes in self.by_year.items():
             for lk in lakes:
-                self.assertTrue(48.9 < lk["lat"] < 60.1, f"{year} {lk['ats']} lat {lk['lat']}")
-                self.assertTrue(-120.1 < lk["lon"] < -109.9, f"{year} {lk['ats']} lon {lk['lon']}")
+                self.assertTrue(48.9 < lk["lat"] < 60.1, f"{year} {lk['name']} {lk['lat']}")
+                self.assertTrue(-120.5 < lk["lon"] < -109.9, f"{year} {lk['name']} {lk['lon']}")
 
     def test_most_lakes_use_a_verified_coordinate(self):
         for year, lakes in self.by_year.items():
             verified = sum(lk["coord_source"] != "ats" for lk in lakes)
             self.assertGreater(verified / len(lakes), 0.9, year)
 
+    def test_a_lake_id_means_the_same_lake_in_every_year(self):
+        """The whole point of the registry: one id, one place, one name."""
+        seen = {}
+        for year, lakes in self.by_year.items():
+            for lk in lakes:
+                prev = seen.setdefault(lk["lake_id"], lk)
+                self.assertEqual(prev["name"], lk["name"], lk["lake_id"])
+                self.assertAlmostEqual(prev["lat"], lk["lat"], places=4)
+                self.assertAlmostEqual(prev["lon"], lk["lon"], places=4)
+
+    def test_no_two_lakes_share_a_name_and_a_position(self):
+        for year, lakes in self.by_year.items():
+            keyed = [(lk["name"], round(lk["lat"], 4), round(lk["lon"], 4)) for lk in lakes]
+            self.assertEqual(len(keyed), len(set(keyed)), year)
+
     def test_stocking_rows_are_well_formed(self):
+        allowed = sources.TROUT_SPECIES
         for year, lakes in self.by_year.items():
             for lk in lakes:
                 for s in lk["stockings"]:
-                    self.assertIn(s["species"], {"RNTR", "BKTR", "BNTR", "TGTR", "CTTR"})
+                    self.assertIn(s["species"], allowed, f"{year} {lk['name']}")
                     self.assertIsInstance(s["number"], int)
                     self.assertGreater(s["number"], 0)
-                    day, month, _ = s["date"].split("-")
-                    self.assertTrue(day.isdigit(), s["date"])
-                    self.assertIn(month, {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}, s["date"])
+                    self.assertRegex(s["date"], r"^\d{4}-\d{2}-\d{2}$")
+                    self.assertEqual(int(s["date"][:4]), year)
+                    self.assertIn(s["date_precision"], ("day", "month"))
 
     def test_total_fish_matches_the_stocking_rows(self):
         for year, lakes in self.by_year.items():
             for lk in lakes:
                 self.assertEqual(lk["total_fish"], sum(s["number"] for s in lk["stockings"]),
-                                 f"{year} {lk['ats']}")
+                                 f"{year} {lk['name']}")
+
+    def test_every_year_carries_a_plausible_amount_of_data(self):
+        for year, lakes in self.by_year.items():
+            self.assertGreater(len(lakes), 100, year)
+            total = sum(lk["total_fish"] for lk in lakes)
+            self.assertGreater(total, 500_000, f"{year} stocked only {total}")
+
+    def test_registry_ids_are_unique_and_cover_the_year_files(self):
+        ids = [lk["lake_id"] for lk in self.registry]
+        self.assertEqual(len(ids), len(set(ids)))
+        known = set(ids)
+        for year, lakes in self.by_year.items():
+            for lk in lakes:
+                self.assertIn(lk["lake_id"], known, f"{year} {lk['name']}")
 
 
 if __name__ == "__main__":

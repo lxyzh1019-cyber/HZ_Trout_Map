@@ -16,28 +16,25 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Install the report readers
+        run: pip install --quiet pdfplumber openpyxl
+
       - name: Run the regression suite
         working-directory: scripts
         run: python -m unittest discover -p "test_*.py" -v
 
-      - name: Report data consistency
-        run: python3 scripts/check_consistency.py
-
-      - name: Fail if the consistency summary is stale
+      - name: Fail if the published data is stale
         run: |
-          python3 scripts/check_consistency.py --json-out /tmp/summary.json >/dev/null
-          if ! diff -u data/consistency_summary.json /tmp/summary.json; then
-            echo "::error::data/consistency_summary.json is out of date."
-            echo "Run: python3 scripts/check_consistency.py --json-out data/consistency_summary.json"
+          # Rebuilding from the raw reports must reproduce exactly what is
+          # committed. If it does not, someone edited data/ by hand or changed
+          # the pipeline without regenerating.
+          cp -r data /tmp/data-before
+          (cd scripts && python3 build_history.py > /tmp/build.log)
+          if ! diff -r -q /tmp/data-before data; then
+            echo "::error::data/ does not match what the scripts produce."
+            echo "Run: cd scripts && python3 build_history.py"
+            diff -r /tmp/data-before data | head -40
             exit 1
           fi
-
-      - name: Fail if merged data is stale
-        run: |
-          cp data/lakes_2025.json /tmp/before.json
-          (cd scripts && python3 merge_profiles.py ../data/lakes_2025.json >/dev/null)
-          if ! diff -q /tmp/before.json data/lakes_2025.json; then
-            echo "::error::data/lakes_2025.json does not match the profiles CSV."
-            echo "Run: cd scripts && python3 merge_profiles.py ../data/lakes_2025.json"
-            exit 1
-          fi
+          echo "data/ is current."
+          tail -20 /tmp/build.log

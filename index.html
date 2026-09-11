@@ -20,6 +20,7 @@
     --BNTR: #8b5a2b;
     --TGTR: #7b4a8a;
     --CTTR: #c85a2e;
+    --WSCT: #c9a227;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; height: 100%; overflow: hidden;
@@ -307,6 +308,7 @@
     </div>
 
     <div class="legend">
+      <span id="provisional-note"></span>
       Pin size scales with total fish stocked (√-scaled).<br>
       Multi-species lakes show a secondary ring in the runner-up species' color.<br>
       Click a pin → zone code links to regulations.
@@ -360,24 +362,34 @@ const SPECIES_META = {
   BNTR: { label: "Brown Trout",     color: "#8b5a2b" },
   TGTR: { label: "Tiger Trout",     color: "#7b4a8a" },
   CTTR: { label: "Cutthroat Trout", color: "#c85a2e" },
+  WSCT: { label: "Westslope Cutthroat", color: "#c9a227" },
 };
-const SPECIES_ORDER = ["RNTR", "BKTR", "BNTR", "TGTR", "CTTR"];
+const SPECIES_ORDER = ["RNTR", "BKTR", "BNTR", "TGTR", "CTTR", "WSCT"];
 
 const PIN_MIN = 5;
 const PIN_MAX = 28;
 let SQRT_MAX = 1;
 const STOCKING_ISSUE_SAMPLE_LIMIT = 6;
 
-// Spring: Jan-Jun (months 1-6). Fall: Jul-Dec (months 7-12).
-// "xx-Mon-YY" dates — parse month name to number.
-const MONTH_NUM = { Jan:1, Feb:2, Mar:3, Apr:4, May:5, Jun:6,
-                    Jul:7, Aug:8, Sep:9, Oct:10, Nov:11, Dec:12 };
+// Dates arrive as "2025-04-14". Reports before 2014 give only a month, and
+// those are recorded as the first of the month with date_precision "month".
+const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+function monthOf(dateStr) {
+  const m = /^\d{4}-(\d{2})-/.exec(dateStr || "");
+  return m ? Number(m[1]) : null;
+}
 function seasonOf(dateStr) {
-  // "14-Apr-25" → "spring", "22-Sep-25" → "fall"
-  const parts = dateStr.split("-");
-  const m = MONTH_NUM[parts[1]];
+  const m = monthOf(dateStr);
   if (!m) return null;
   return m <= 6 ? "spring" : "fall";
+}
+/** "2025-04-14" -> "14 Apr 2025", or "Apr 2011" when only the month is known. */
+function fmtDate(dateStr, precision) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr || "");
+  if (!m) return dateStr || "—";
+  const label = `${MONTH_NAMES[Number(m[2]) - 1]} ${m[1]}`;
+  return precision === "month" ? label : `${Number(m[3])} ${label}`;
 }
 
 // ============================================================
@@ -405,6 +417,8 @@ const PIN_CLICK_GRACE_MS = 250;
 let LAKES = [];         // populated after fetch
 let ALL_YEARS = [];     // sorted ascending
 let QUALITY_SUMMARY = null;
+/** Seasons still under way — Alberta updates these reports again later. */
+let PROVISIONAL_YEARS = new Set();
 const DATA_ISSUES = {
   invalidStockings: 0,
   examples: [],
@@ -425,6 +439,10 @@ function haversineKm(lat1, lon1, lat2, lon2) {
 
 function fmtNum(n) { return Number(n || 0).toLocaleString(); }
 
+/** Stable identity for a lake across years, even when a report mistypes
+ *  its land description. Falls back to the code for older data files. */
+function lakeKey(lake) { return lake.lake_id || lake.ats; }
+
 /** Lake names, strains and amenities come from a PDF and a hand-edited CSV.
  *  Escape them before they go anywhere near innerHTML. */
 function esc(s) {
@@ -432,14 +450,10 @@ function esc(s) {
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
 
-/** Sort key for a stocking row. Dates are "14-Apr-25"; Safari rejects that
- *  format in new Date(), so build the key from the month table instead. */
+/** Sort key for a stocking row. ISO dates already sort correctly as text,
+ *  so no Date parsing is needed — which also keeps Safari happy. */
 function stockingSortKey(s) {
-  const parts = String(s.date || "").split("-");
-  const day = Number(parts[0]) || 0;
-  const month = MONTH_NUM[parts[1]] || 0;
-  const year = Number(s.year) || 0;
-  return year * 10000 + month * 100 + day;
+  return String(s.date || `${s.year || 0}-00-00`);
 }
 
 // ============================================================
@@ -451,6 +465,7 @@ async function loadAllData() {
   if (!manifestResp.ok) throw new Error("manifest.json not found");
   const manifest = await manifestResp.json();
   const years = manifest.years.slice().sort((a, b) => a - b);
+  PROVISIONAL_YEARS = new Set(manifest.provisional || []);
 
   // 2. Fetch all year files in parallel
   const fetches = years.map(y =>
@@ -463,15 +478,16 @@ async function loadAllData() {
 
   // 3. Merge into a single lake list keyed by ATS.
   // Each year file has its own set of lakes. Same ATS across years → merge stockings.
-  const byAts = new Map();
+  const byLake = new Map();
   for (const { year, data } of results) {
     for (const lk of data) {
       // Defensively tag every stocking with its year (already done by extractor, but safe)
       for (const s of lk.stockings) if (s.year == null) s.year = year;
-      if (!byAts.has(lk.ats)) {
-        byAts.set(lk.ats, { ...lk, stockings: [...lk.stockings] });
+      const key = lk.lake_id || lk.ats;
+      if (!byLake.has(key)) {
+        byLake.set(key, { ...lk, stockings: [...lk.stockings] });
       } else {
-        const existing = byAts.get(lk.ats);
+        const existing = byLake.get(key);
         existing.stockings.push(...lk.stockings);
         // Prefer the newer year's non-null lake/profile values.
         if (lk.name) existing.name = lk.name;
@@ -485,7 +501,7 @@ async function loadAllData() {
       }
     }
   }
-  const lakes = [...byAts.values()];
+  const lakes = [...byLake.values()];
   for (const lk of lakes) {
     lk.total_fish = lk.stockings.reduce((acc, s) => acc + (Number(s.number) || 0), 0);
     lk.species_set = [...new Set(lk.stockings.map(s => s.species).filter(Boolean))].sort();
@@ -495,7 +511,7 @@ async function loadAllData() {
 
 async function loadQualitySummary() {
   try {
-    const resp = await fetch("data/consistency_summary.json");
+    const resp = await fetch("data/quality_summary.json");
     if (!resp.ok) return null;
     return await resp.json();
   } catch {
@@ -523,7 +539,7 @@ function prepareLakes() {
       if (!bad) continue;
       DATA_ISSUES.invalidStockings++;
       if (DATA_ISSUES.examples.length < STOCKING_ISSUE_SAMPLE_LIMIT) {
-        DATA_ISSUES.examples.push(`${lake.ats}: ${JSON.stringify(s)}`);
+        DATA_ISSUES.examples.push(`${lakeKey(lake)}: ${JSON.stringify(s)}`);
       }
     }
   }
@@ -598,12 +614,12 @@ function popupHtml(lake) {
   const speciesText = activeSpecies.length ? activeSpecies.join(", ") : "none";
   const rows = [...lake.stockings]
     .filter(stockingPasses)
-    .sort((a, b) => stockingSortKey(b) - stockingSortKey(a));
+    .sort((a, b) => stockingSortKey(b).localeCompare(stockingSortKey(a)));
 
   const tableRows = rows.map(s => {
     const color = SPECIES_META[s.species]?.color || "#888";
     return `<tr>
-      <td>${esc(s.date)}</td>
+      <td>${esc(fmtDate(s.date, s.date_precision))}</td>
       <td><span class="sp-tag" style="background:${color}">${esc(s.species)}</span></td>
       <td>${esc(s.strain) || "—"}</td>
       <td>${s.length_cm ? Number(s.length_cm).toFixed(1) : "—"}</td>
@@ -617,7 +633,7 @@ function popupHtml(lake) {
 
   return `<div class="lake-popup">
     <h3>${esc(lake.name)}</h3>
-    <div class="ats">${esc(lake.ats)}</div>
+    <div class="ats">${esc(lake.ats || lakeKey(lake))}</div>
     <div class="meta">
       <strong>${Math.round(lake.distanceKm)} km</strong> from Red Deer &nbsp;·&nbsp;
       <strong>${fmtNum(filteredTotal)}</strong> fish (shown)
@@ -714,14 +730,14 @@ function renderPins() {
     marker.bindPopup(() => popupHtml(lake), { maxWidth: 380 });
     marker.on("click", function() {
       lastPinClickAt = Date.now();
-      state.openPopupAts = lake.ats;
-      state.focusedLakeAts = lake.ats;
+      state.openPopupAts = lakeKey(lake);
+      state.focusedLakeAts = lakeKey(lake);
       updateChartScopeUI();
       renderChart();
     });
     marker.addTo(pinLayer);
     // Re-opened after a filter change rebuilt the layer.
-    if (state.openPopupAts === lake.ats) marker.openPopup();
+    if (state.openPopupAts === lakeKey(lake)) marker.openPopup();
   }
 
   rerenderingPins = false;
@@ -770,9 +786,11 @@ function buildSpeciesFilters() {
 
 function buildYearChips() {
   const host = document.getElementById("year-chips");
-  host.innerHTML = ALL_YEARS.map(y =>
-    `<button class="year-chip active" data-year="${y}">${y}</button>`
-  ).join("");
+  host.innerHTML = ALL_YEARS.map(y => {
+    const partial = PROVISIONAL_YEARS.has(y);
+    const title = partial ? ` title="${y} is still under way; Alberta updates this report later in the season"` : "";
+    return `<button class="year-chip active" data-year="${y}"${title}>${y}${partial ? "*" : ""}</button>`;
+  }).join("");
 
   host.addEventListener("click", e => {
     const chip = e.target.closest(".year-chip");
@@ -844,10 +862,14 @@ function updateDataQualitySummary() {
   if (estimated) parts.push(`<strong>${estimated}</strong> estimated from the land description`);
   if (malformed) parts.push(`<strong>${malformed}</strong> malformed row(s) skipped`);
   if (QUALITY_SUMMARY) {
-    const u = QUALITY_SUMMARY.unmatched_count || 0;
-    const v = QUALITY_SUMMARY.ats_variant_count || 0;
-    if (u) parts.push(`<strong>${u}</strong> lake(s) missing a profile entry`);
-    if (v) parts.push(`<strong>${v}</strong> land-description variant(s) to review`);
+    const q = QUALITY_SUMMARY;
+    if (q.rows_total) {
+      const pct = (q.rows_linked / q.rows_total * 100).toFixed(1);
+      parts.push(`<strong>${pct}%</strong> of ${fmtNum(q.rows_total)} report rows linked across years`);
+    }
+    if (q.rows_awaiting_review) {
+      parts.push(`<strong>${q.rows_awaiting_review}</strong> row(s) awaiting a linking decision`);
+    }
   }
   el.innerHTML = `Data quality: ${parts.join(" · ")}`;
 }
@@ -870,6 +892,7 @@ function buildBasemapToggle() {
 // CHART PANEL
 // ============================================================
 let chart = null;
+function chart_ref() { return chart; }
 
 function updateChartScopeUI() {
   const row = document.getElementById("chart-scope-row");
@@ -878,9 +901,9 @@ function updateChartScopeUI() {
     row.hidden = true;
     return;
   }
-  const lk = LAKES.find(l => l.ats === state.focusedLakeAts);
+  const lk = LAKES.find(l => lakeKey(l) === state.focusedLakeAts);
   row.hidden = false;
-  nameEl.textContent = lk ? `${lk.name} (${lk.ats})` : state.focusedLakeAts;
+  nameEl.textContent = lk ? `${lk.name}${lk.ats ? ` (${lk.ats})` : ""}` : state.focusedLakeAts;
 }
 
 function buildChartToggle() {
@@ -945,7 +968,7 @@ function updatePlanningSummary(data) {
   const slope = (latestTotal - totalForYear(years[0])) / (years.length - 1);
   const trend = slope > 0 ? "up" : slope < 0 ? "down" : "flat";
   const perLakeDelta = [];
-  const lakesForChart = state.focusedLakeAts ? LAKES.filter(l => l.ats === state.focusedLakeAts) : LAKES;
+  const lakesForChart = state.focusedLakeAts ? LAKES.filter(l => lakeKey(l) === state.focusedLakeAts) : LAKES;
   for (const lake of lakesForChart) {
     if (lake.distanceKm > state.maxDistanceKm) continue;
     let latestLake = 0;
@@ -962,8 +985,12 @@ function updatePlanningSummary(data) {
   const risers = perLakeDelta.slice(0, 3).map(x => `${x.lake} (+${fmtNum(x.delta)})`).join(", ") || "none";
   const decliners = perLakeDelta.slice(-3).reverse().map(x => `${x.lake} (${fmtNum(x.delta)})`).join(", ") || "none";
   const deltaText = `${delta >= 0 ? "+" : ""}${fmtNum(delta)}${pct == null ? "" : ` (${pct >= 0 ? "+" : ""}${pct.toFixed(1)}%)`}`;
+  // Comparing a finished season against one still under way reads as a crash
+  // in stocking when it is only a report that is not finished yet.
+  const partial = PROVISIONAL_YEARS.has(latest)
+    ? ` <span title="${latest} is still in progress">(${latest} incomplete)</span>` : "";
   el.innerHTML =
-    `<span><strong>YoY:</strong> ${prev}→${latest} ${deltaText}</span>` +
+    `<span><strong>YoY:</strong> ${prev}→${latest} ${deltaText}${partial}</span>` +
     `<span><strong>Trend:</strong> ${trend}</span>` +
     `<span><strong>Top risers:</strong> ${risers}</span>` +
     `<span><strong>Top decliners:</strong> ${decliners}</span>`;
@@ -977,7 +1004,7 @@ function computeChartData() {
   const shownLakes = new Set();
 
   const lakesForChart = state.focusedLakeAts
-    ? LAKES.filter(l => l.ats === state.focusedLakeAts)
+    ? LAKES.filter(l => lakeKey(l) === state.focusedLakeAts)
     : LAKES;
 
   for (const lake of lakesForChart) {
@@ -1132,11 +1159,11 @@ function chartOptions({ stacked, yTitle }) {
 // ============================================================
 function clearChartFocusIfInvalid() {
   if (state.openPopupAts) {
-    const open = LAKES.find(l => l.ats === state.openPopupAts);
+    const open = LAKES.find(l => lakeKey(l) === state.openPopupAts);
     if (!open || !lakePassesFilters(open)) state.openPopupAts = null;
   }
   if (!state.focusedLakeAts) return;
-  const lk = LAKES.find(l => l.ats === state.focusedLakeAts);
+  const lk = LAKES.find(l => lakeKey(l) === state.focusedLakeAts);
   if (!lk || !lakePassesFilters(lk)) {
     state.focusedLakeAts = null;
     updateChartScopeUI();
@@ -1171,6 +1198,11 @@ async function init() {
       ? `Stocking data · ${years[0]}`
       : `Stocking data · ${years[0]}–${years[years.length - 1]}`;
 
+    const partial = years.filter(y => PROVISIONAL_YEARS.has(y));
+    if (partial.length) {
+      document.getElementById("provisional-note").innerHTML =
+        `<strong>${partial.join(", ")}*</strong> is still in progress — Alberta updates that report later in the season.<br><br>`;
+    }
     prepareLakes();
     updateDataQualitySummary();
     initMap();
