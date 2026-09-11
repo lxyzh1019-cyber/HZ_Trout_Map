@@ -117,6 +117,18 @@
         layer or the winterkill band
     M75 a published mean deeper than the published maximum is shown as nothing:
         one of the two is wrong and there is no way to tell which
+    M76 a verdict line at the top of every popup: how recently it was stocked,
+        whether the season is open, what the winterkill risk is — and one clause
+        fewer rather than one invented, when a piece is missing
+    M77 filter by facilities, with narrower kinds rolled into broader ones so
+        Trails matches a lake that only says Trails Hiking
+    M78 a lake that states no facilities is never counted as having none, and
+        the panel says how many lakes are in that position
+    M79 Alberta's own description of the lake, and its photographs, in a panel
+        rather than a popup: what you read after deciding, not what decides
+    M80 photographs stay on Alberta's server — linked, never copied, loaded only
+        when asked for, with no referrer, and replaced by their captions when
+        they cannot load
 -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2b2e2a">
@@ -479,6 +491,39 @@
   .zone-bubble:hover { opacity: 1; }
   .zone-bubble-code { font-size: 12px; letter-spacing: 0.5px; }
   .zone-bubble-fish { font-size: 10px; font-weight: 600; opacity: 0.85; }
+  /* ---- the lake detail panel ------------------------------------------- */
+  /* Same footing as the conditions panel: a floating panel inside the map, not
+     a modal. The popup holds what decides the trip; this holds what you read
+     once you have decided. */
+  #lake-panel {
+    position: absolute; top: 10px; right: 56px; z-index: 501;
+    width: 360px; max-height: 78%; overflow: auto; padding: 10px 12px 12px;
+    background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.45); font-size: 12px;
+  }
+  .lp-desc { color: var(--ink-dim); line-height: 1.5; margin: 8px 0 10px; }
+  .lp-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .lp-shot { display: block; border: 1px solid var(--panel-edge); background: var(--panel-2);
+    color: var(--ink-dim); font-size: 10px; text-decoration: none; padding: 0; }
+  .lp-shot img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .lp-cap { display: block; padding: 3px 5px; line-height: 1.3; }
+  .lp-shot:hover { border-color: var(--accent); }
+  .lp-offline { color: var(--ink-dim); font-style: italic; }
+
+  /* ---- the verdict line ------------------------------------------------- */
+  /* One line, at the top, answering whether the drive is worth it. */
+  .lake-popup .verdict { font-size: 11px; font-weight: 600; color: var(--ink);
+    border-left: 3px solid var(--ink-dim); padding: 2px 0 2px 7px; margin: 6px 0 8px; }
+  .lake-popup .verdict.fresh { border-left-color: var(--good); }
+  .lake-popup .verdict.shut { border-left-color: var(--BKTR); color: var(--ink-dim); }
+
+  /* ---- facility chips --------------------------------------------------- */
+  .lake-popup .fac-row { font-size: 11px; margin-bottom: 8px; line-height: 1.9; }
+  .fac-chip { display: inline-block; background: var(--bg); border: 1px solid var(--panel-edge);
+    border-radius: 999px; padding: 1px 7px; margin-right: 4px; font-size: 10px;
+    color: var(--ink-dim); white-space: nowrap; }
+  .lake-popup .photo-row { margin-bottom: 8px; }
+
   /* ---- conditions panel ------------------------------------------------ */
   #conditions-panel {
     position: absolute; top: 10px; right: 56px; z-index: 500;
@@ -671,6 +716,8 @@
        the map buttons across the full width, with its own scroll. */
     /* Two floating panels cannot share a phone-width map, so the conditions
        panel takes the bottom of the screen and the zone table is closed. */
+    #lake-panel { top: auto; bottom: 8px; left: 8px; right: 8px; width: auto;
+      max-height: 60vh; }
     #conditions-panel { top: auto; bottom: 8px; left: 8px; right: 8px; width: auto;
       max-height: 60%; }
     #zone-panel {
@@ -746,6 +793,12 @@
       <div id="size-filters"></div>
     </div>
 
+    <div class="group" id="facility-group" hidden>
+      <div class="group-label"><span>Facilities</span><button type="button" class="linkish" data-all="facility">none</button></div>
+      <div id="facility-chips" class="chips"></div>
+      <div class="hint" id="facility-note"></div>
+    </div>
+
     <div class="group">
       <div class="group-label"><span>Distance from home</span></div>
       <div class="home-name" id="home-name"></div>
@@ -818,6 +871,7 @@
       <button class="map-btn" id="conditions-btn" type="button" aria-pressed="false">Conditions</button>
     </div>
     <div id="conditions-panel" hidden aria-live="polite"></div>
+    <div id="lake-panel" hidden aria-live="polite"></div>
     <div id="offline-badge" hidden>Offline · showing cached data</div>
     <div id="update-toast" hidden>
       <span>A newer version is ready.</span>
@@ -877,6 +931,7 @@
 <script src="js/conditions.js"></script>
 <script src="js/weather.js"></script>
 <script src="js/conditions-ui.js"></script>
+<script src="js/lake-panel.js"></script>
 <script>
 // ============================================================
 // CONFIG
@@ -1012,6 +1067,11 @@ const state = {
   /** Hide lakes whose season is shut today. Off by default: a closed lake is
    *  still worth seeing on a map you are using to plan next month. */
   openNow: false,
+  /** Facilities a lake must be KNOWN to have. Empty means no facility filter.
+   *  Never inverted into "known not to have": 95 mapped lakes state no
+   *  amenities at all, and that is Alberta not saying, not a lake with no
+   *  toilet. */
+  facilities: new Set(),
   conditions: {
     open: false,
     horizon: "now",          // "now" | "week"
@@ -1031,6 +1091,8 @@ let ALL_YEARS = [];
 let QUALITY_SUMMARY = null;
 let REGULATIONS = null;
 let DEPTHS = null;
+let PROFILES = null;
+let PHOTOS = null;
 let ADVISORIES = null;
 let PROVISIONAL_YEARS = new Set();
 const DATA_ISSUES = { invalidStockings: 0, examples: [] };
@@ -1139,6 +1201,37 @@ async function loadDepths() {
   } catch { return null; }
 }
 
+/* What Alberta says about the lake itself: its facilities, its own description
+ * of the place, and how many photographs it has taken. Soft, like the rest. */
+async function loadProfiles() {
+  try {
+    const resp = await fetch("data/lake_profile.json");
+    return resp.ok ? await resp.json() : null;
+  } catch { return null; }
+}
+
+/* The photographs are fetched only when someone asks to see them, and are
+ * deliberately not precached: they live on Alberta's server, the service
+ * worker does not handle other origins, and an index of pictures that cannot
+ * load is worth less than the bytes it costs at startup. */
+/* Facility names read from the URL before the profile file has loaded. They
+ * cannot be validated until it has, so they wait here. */
+let pendingFacilities = null;
+let photosPending = null;
+async function loadPhotos() {
+  if (PHOTOS) return PHOTOS;
+  if (!photosPending) {
+    photosPending = (async () => {
+      try {
+        const resp = await fetch("data/lake_photos.json");
+        PHOTOS = resp.ok ? await resp.json() : null;
+      } catch { PHOTOS = null; }
+      return PHOTOS;
+    })();
+  }
+  return photosPending;
+}
+
 /* Alberta's closures and consumption advisories, refreshed daily by a scheduled
  * job. Deliberately NOT matched to individual lakes: turning a sentence written
  * for a human into a per-lake closure flag means guessing at its scope, and
@@ -1228,7 +1321,23 @@ function lakePassesFilters(lake) {
   // is not the same as "closed", and hiding it would quietly shorten the list
   // without saying why.
   if (state.openNow && lakeOpenNow(lake) === false) return false;
+  if (!facilitiesPass(lake)) return false;
   return recencyPasses(lake, recencyOption());
+}
+
+/* Every facility asked for has to be one this lake is KNOWN to have.
+ *
+ * A lake Alberta says nothing about is excluded, which is correct — it cannot
+ * be shown to have a boat launch — but it is excluded for want of a statement
+ * and not for want of a boat launch, and the panel says so rather than letting
+ * a shorter list imply the stronger claim. */
+function facilitiesPass(lake) {
+  if (!state.facilities.size) return true;
+  const profile = profileFor(lake);
+  const has = profile && profile.facets;
+  if (!has) return false;
+  for (const want of state.facilities) if (!has.includes(want)) return false;
+  return true;
 }
 function recencyPasses(lake, option) {
   if (!option.days && !option.season) return true;
@@ -1375,10 +1484,71 @@ function profileBlock(lake) {
   return html;
 }
 
+/* One line at the top of the popup answering the only question the popup is
+ * really for: is this worth the drive?
+ *
+ * It is built from three things the app already works out — how recently the
+ * lake was stocked, whether the season is open, and the winterkill band — and
+ * it says fewer things rather than inventing one when a piece is missing. A
+ * lake with no depth simply has no winterkill clause.
+ */
+function verdictLine(lake) {
+  const bits = [];
+  const last = lastStockedDate(lake);
+  const age = last ? daysAgo(last) : null;
+  if (age != null) {
+    bits.push(age <= 14 ? `Stocked ${age} day${age === 1 ? "" : "s"} ago`
+      : age <= 365 ? `Stocked ${age} days ago`
+      : `Last stocked ${fmtDate(last)}`);
+  }
+  const open = lakeOpenNow(lake);
+  if (open === true) bits.push("open today");
+  else if (open === false) bits.push("season shut today");
+  const d = depthFor(lake);
+  if (d && d.winterkill) bits.push(`${d.winterkill.level} winterkill risk`);
+  if (!bits.length) return "";
+  const tone = open === false ? "shut" : (age != null && age <= 30 ? "fresh" : "");
+  return `<div class="verdict ${tone}">${esc(bits.join(" · "))}</div>`;
+}
+
+/* Facilities as chips, and the province's own words about the place.
+ *
+ * Two vocabularies describe the same lakes: a controlled token list from the
+ * stocking map, and hand-written prose in the profiles CSV. They are not
+ * merged — one is a list and the other is English, and reconciling them would
+ * be guesswork. Chips when there are tokens, the sentence otherwise.
+ */
+function facilityBlock(lake) {
+  const profile = profileFor(lake);
+  if (!profile || !profile.amenities) return "";
+  const chips = profile.amenities.map(a =>
+    `<span class="fac-chip">${esc(a)}</span>`).join("");
+  return `<div class="fac-row"><span class="profile-label">Facilities</span>${chips}</div>`;
+}
+
+/* How many photographs Alberta has of this lake, and a way in.
+ *
+ * The count comes from the profile file, which is precached, so it still shows
+ * with no signal. The pictures themselves live on Alberta's server and load
+ * only when asked for, which is also the only time they can load at all. */
+function photoBlock(lake) {
+  const profile = profileFor(lake);
+  const n = profile && profile.photo_count;
+  if (!n) return "";
+  return `<div class="photo-row"><button type="button" class="gmaps as-btn"
+    data-photos="${esc(lakeKey(lake))}">${n} photo${n === 1 ? "" : "s"} of this lake</button></div>`;
+}
+
 /** What is known about this lake's depth, or null. */
 function depthFor(lake) {
   if (!DEPTHS) return null;
   return DEPTHS.lakes[lakeKey(lake)] || null;
+}
+
+/** What Alberta publishes about the place itself, or null. */
+function profileFor(lake) {
+  if (!PROFILES) return null;
+  return PROFILES.lakes[lakeKey(lake)] || null;
 }
 
 /* Depth, the summer layer, and winterkill risk.
@@ -1620,14 +1790,17 @@ function popupHtml(lake) {
   return `<div class="lake-popup">
     <h3><button class="star ${fav ? "on" : ""}" data-fav="${esc(key)}" title="${fav ? "Remove from favourites" : "Add to favourites"}" aria-label="${fav ? "Remove from favourites" : "Add to favourites"}">${fav ? "★" : "☆"}</button>${esc(lake.name)}</h3>
     <div class="ats">${esc(lake.ats || key)}</div>
+    ${verdictLine(lake)}
     <div class="meta"><strong>${distText}</strong> from ${esc(state.home.name)} &nbsp;·&nbsp; <strong>${fmtNum(filteredTotal)}</strong> fish shown</div>
     <div class="meta"><strong>Last stocked:</strong> ${esc(lastText)}</div>
     <div class="meta"><strong>Years:</strong> ${esc(yearRangeText)} &nbsp;·&nbsp; <strong>Species:</strong> ${esc(speciesText)}</div>
     ${changeRow}
     ${approx}
     ${profileBlock(lake)}
+    ${facilityBlock(lake)}
     ${depthBlock(lake)}
     ${regulationBlock(lake)}
+    ${photoBlock(lake)}
     <div class="popup-actions">
       <a class="gmaps" href="${driveUrl}" target="_blank" rel="noopener">Directions from ${esc(state.home.name)} ↗</a>
       <a class="gmaps" href="${gmapsUrl}" target="_blank" rel="noopener">Show on Google Maps ↗</a>
@@ -1742,6 +1915,15 @@ function initMap() {
     const el = e.popup.getElement();
     const btn = el?.querySelector("[data-fav]");
     if (btn) btn.addEventListener("click", () => toggleFavourite(btn.dataset.fav));
+    // Every popup button is wired here, when the popup opens. "Conditions here"
+    // used to be wired only inside toggleFavourite(), so it did nothing at all
+    // until you happened to star a lake first.
+    const conditions = el?.querySelector("[data-conditions]");
+    if (conditions) conditions.addEventListener("click",
+      () => ConditionsUI.focusLake(conditions.dataset.conditions));
+    const photos = el?.querySelector("[data-photos]");
+    if (photos) photos.addEventListener("click",
+      () => LakePanel.open(photos.dataset.photos));
     const link = el?.querySelector("[data-lakelink]");
     if (link) link.addEventListener("click", async () => {
       const url = lakeLinkUrl(link.dataset.lakelink);
@@ -1970,10 +2152,6 @@ function toggleFavourite(key) {
   renderFavourites();
   renderPins();
   if (state.view === "list") renderList();
-  const conditions = document.querySelector(".leaflet-popup [data-conditions]");
-  if (conditions) {
-    conditions.addEventListener("click", () => ConditionsUI.focusLake(conditions.dataset.conditions));
-  }
   const open = document.querySelector(".leaflet-popup [data-fav]");
   if (open && open.dataset.fav === key) {
     const on = state.favourites.has(key);
@@ -2121,6 +2299,62 @@ function buildSeasonFilter() {
     onFilterChange();
   });
   sync();
+}
+
+/* Facilities Alberta has stated a lake has.
+ *
+ * The vocabulary is hierarchical — "Trails Hiking" and "Trails Cross-Country
+ * Ski" are both Trails — and the rollup into parents happens at build time, in
+ * scripts/profile.py, so a filter for Trails matches a lake that only says
+ * Trails Hiking. Only parents and standalone tokens are offered: after the
+ * rollup a child is redundant, since every lake with Paddling Canoe also has
+ * Paddling, and offering both is the same filter twice under two names.
+ *
+ * The ones that decide a fishing trip come first, not the ones with the
+ * biggest counts. Day Use covers 116 lakes and settles nothing.
+ */
+function buildFacilityFilters() {
+  const group = document.getElementById("facility-group");
+  const host = document.getElementById("facility-chips");
+  const facets = (PROFILES && PROFILES.facets) || [];
+  if (!facets.length) return;            // nothing collected; the group stays hidden
+  group.hidden = false;
+  if (pendingFacilities) {
+    const known = new Set(facets.map(f => f.name));
+    state.facilities = new Set(pendingFacilities.filter(n => known.has(n)));
+    pendingFacilities = null;
+  }
+  host.innerHTML = facets.map(f =>
+    `<button class="chip ${state.facilities.has(f.name) ? "active" : ""}" ` +
+    `data-facility="${esc(f.name)}" aria-pressed="${state.facilities.has(f.name)}">` +
+    `${esc(f.name)}<span class="rc-n">${f.lakes}</span></button>`).join("");
+  host.addEventListener("click", e => {
+    const chip = e.target.closest("[data-facility]");
+    if (!chip) return;
+    const name = chip.dataset.facility;
+    const on = !state.facilities.has(name);
+    if (on) state.facilities.add(name); else state.facilities.delete(name);
+    chip.classList.toggle("active", on);
+    chip.setAttribute("aria-pressed", String(on));
+    onFilterChange();
+  });
+  updateFacilityNote();
+}
+
+/* Says what the filter is actually doing, because the honest version of it is
+ * not what a shorter list implies. */
+function updateFacilityNote() {
+  const note = document.getElementById("facility-note");
+  if (!note) return;
+  const unstated = LAKES.filter(l => {
+    const p = profileFor(l);
+    return !p || !p.facets;
+  }).length;
+  note.textContent = state.facilities.size
+    ? `Showing lakes known to have ${[...state.facilities].join(" and ")}. ` +
+      `${unstated} lakes state no facilities at all and are left out — Alberta ` +
+      `not saying is not the same as a lake with none.`
+    : `${unstated} of ${LAKES.length} lakes state no facilities at all.`;
 }
 
 function buildRecencyChips() {
@@ -2320,6 +2554,12 @@ function buildSelectAll() {
       if (btn.dataset.all === "species") {
         state.species = new Set(SPECIES_ORDER);
         document.querySelectorAll("[data-species]").forEach(cb => { cb.checked = true; });
+      } else if (btn.dataset.all === "facility") {
+        state.facilities.clear();
+        document.querySelectorAll("[data-facility]").forEach(chip => {
+          chip.classList.remove("active");
+          chip.setAttribute("aria-pressed", "false");
+        });
       } else {
         state.sizes = new Set(SIZE_IDS);
         document.querySelectorAll("[data-size]").forEach(cb => { cb.checked = true; });
@@ -2770,6 +3010,7 @@ function writeUrl() {
   if (state.maxDistanceKm !== 1000) p.set("d", state.maxDistanceKm);
   if (state.recency !== "any") p.set("rc", state.recency);
   if (state.openNow) p.set("open", "1");
+  if (state.facilities.size) p.set("fac", [...state.facilities].join("|"));
   if (state.conditions.open) p.set("cx", state.conditions.horizon);
   if (state.view !== "map") p.set("v", state.view);
   if (state.colorMode !== "species") p.set("cm", state.colorMode);
@@ -2792,6 +3033,9 @@ function readUrl() {
   if (p.has("cm") && COLOR_MODES.some(m => m.id === p.get("cm"))) state.colorMode = p.get("cm");
   if (p.has("c")) state.chartType = p.get("c");
   if (p.get("open") === "1") state.openNow = true;
+  // Validated against what was actually collected, so a stale or hand-typed
+  // link cannot leave a filter switched on that nothing can satisfy.
+  if (p.has("fac")) pendingFacilities = p.get("fac").split("|").filter(Boolean);
   if (["now", "week"].includes(p.get("cx"))) {
     state.conditions.open = true;
     state.conditions.horizon = p.get("cx");
@@ -2883,6 +3127,7 @@ function clearChartFocusIfInvalid() {
 }
 
 function onFilterChange() {
+  updateFacilityNote();
   clearChartFocusIfInvalid();
   renderPins();
   renderChart();
@@ -2910,6 +3155,7 @@ async function init() {
       typeof Conditions === "undefined" ? "js/conditions.js" : null,
       typeof Weather === "undefined" ? "js/weather.js" : null,
       typeof ConditionsUI === "undefined" ? "js/conditions-ui.js" : null,
+      typeof LakePanel === "undefined" ? "js/lake-panel.js" : null,
     ].filter(Boolean);
     if (missing.length) throw new Error(`${missing.join(" and ")} did not load. Check the vendor/ and js/ folders are present.`);
 
@@ -2923,6 +3169,7 @@ async function init() {
     QUALITY_SUMMARY = await loadQualitySummary();
     REGULATIONS = await loadRegulations();
     DEPTHS = await loadDepths();
+    PROFILES = await loadProfiles();
     ADVISORIES = await loadAdvisories();
     LAKES = lakes;
     ALL_YEARS = years;
@@ -2942,6 +3189,7 @@ async function init() {
     buildConditionsPanel();
     buildSeasonFilter();
     buildRecencyChips();
+    buildFacilityFilters();
     buildSpeciesFilters();
     buildSizeFilters();
     buildDistanceSlider();

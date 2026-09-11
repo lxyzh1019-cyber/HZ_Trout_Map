@@ -545,6 +545,26 @@ def write_depths(reg):
     return stats
 
 
+def write_profiles(reg):
+    """Amenities, the province's own prose, and the photo index.
+
+    Skipped quietly when the collection has not been run, like the depth step:
+    a missing profile file should cost the map its facilities filter, not its
+    data.
+    """
+    import profile
+    stats = profile.write(reg.lakes, DATA_DIR)
+    if not stats:
+        return None
+    print("\nReading what Alberta says about each lake...")
+    print(f"  {stats['with_amenities']} with amenities, "
+          f"{stats['with_description']} with a description")
+    print(f"  {stats['photos']} photo(s) across {stats['with_photos']} lake(s), "
+          f"linked and not copied")
+    print(f"  {stats['facets']} facet(s) worth filtering by")
+    return stats
+
+
 def write_regulations(reg=None):
     """Catch limits and seasons, read out of the sportfishing guide.
 
@@ -667,10 +687,15 @@ def main():
     years_written = write_year_files(reg, linked, sources.PROVISIONAL_YEARS)
     write_quality_summary(reg, len(still), linked_rows, trout_rows)
     n_depth = write_depths(reg)
+    n_profile = write_profiles(reg)
     n_regs = write_regulations(reg)
     print(f"\nWrote data/lake_registry.json ({len(reg.lakes)} lakes)")
     if n_depth:
         print(f"Wrote data/lake_depth.json ({n_depth['with_depth']} lakes with a depth)")
+    if n_profile:
+        print(f"Wrote data/lake_profile.json and data/lake_photos.json "
+              f"({n_profile['with_amenities']} with amenities, "
+              f"{n_profile['photos']} photos)")
     if n_regs:
         print(f"Wrote data/lake_regulations.json (guide {n_regs[0]}: "
               f"{n_regs[1]} site-specific rows, {n_regs[2]} put-and-take waters)")

@@ -436,6 +436,33 @@ class OfflineAssetTests(unittest.TestCase):
         end = text.index("]", start)
         return set(re.findall(r'"([^"]+)"', text[start:end]))
 
+    def test_every_data_file_the_page_fetches_is_precached(self):
+        """A forgotten cache entry is noticed only by someone offline at a lake.
+
+        sw.js already says that about scripts. The same hazard applies to data
+        files and nothing checked it, so a new one could ship uncached and the
+        app would work perfectly until it was needed.
+
+        One file is exempt and named here rather than skipped silently: the
+        photo index points at images on Alberta's server, this worker does not
+        handle other origins, and an index of pictures that cannot load is not
+        worth the bytes. The photo COUNT lives in the profile file, which is
+        cached, so a lake still says how many there are.
+        """
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        worker = (ROOT / "sw.js").read_text(encoding="utf-8")
+        lazy_on_purpose = {"data/lake_photos.json"}
+
+        fetched = set(re.findall(r'fetch\("((?:data|live)/[^"]+)"\)', page))
+        self.assertTrue(fetched, "no data fetches found; has the loader moved?")
+        for url in sorted(fetched):
+            if url in lazy_on_purpose:
+                self.assertNotIn('"' + url + '"', worker,
+                                 url + " is meant to stay out of the cache")
+                continue
+            self.assertIn('"' + url + '"', worker,
+                          "index.html fetches " + url + " but sw.js never caches it")
+
     def test_every_js_file_is_precached(self):
         shell = self.shell_files()
         for path in sorted((ROOT / "js").glob("*.js")):
@@ -1665,3 +1692,158 @@ class MeanDepthTests(unittest.TestCase):
         inside = sum(1 for r in ratios
                      if depth.MEAN_MAX_RATIO_LOW <= r <= depth.MEAN_MAX_RATIO_HIGH)
         self.assertAlmostEqual(inside / len(ratios), depth.MEAN_ESTIMATE_COVERS, places=1)
+
+
+class LakeProfileTests(unittest.TestCase):
+    """Facilities, the province's prose, and the photo index."""
+
+    @classmethod
+    def setUpClass(cls):
+        path = DATA_DIR / "lake_profile.json"
+        if not path.exists():
+            raise unittest.SkipTest("profiles have not been built")
+        cls.doc = json.loads(path.read_text(encoding="utf-8"))
+        cls.lakes = cls.doc["lakes"]
+        cls.registry = json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))
+
+    def test_it_is_keyed_the_way_the_app_keys_lakes(self):
+        known = {e["lake_id"] for e in self.registry}
+        for key in self.lakes:
+            self.assertIn(key, known, f"{key} is not a lake")
+
+    def test_a_blank_amenities_cell_is_null_and_not_an_empty_list(self):
+        """Alberta not saying is not a lake with no toilet.
+
+        An empty list would let the app report "has no facilities", which is a
+        claim nobody made. null is the absence of a statement, and the filter
+        panel says how many lakes are in that position.
+        """
+        nulls = 0
+        for key, entry in self.lakes.items():
+            if entry.get("amenities") is None:
+                nulls += 1
+                self.assertIsNone(entry.get("facets"), key)
+            else:
+                self.assertNotEqual(entry["amenities"], [], f"{key} has an empty list")
+                self.assertTrue(entry.get("facets"), key)
+        self.assertGreater(nulls, 0, "expected some lakes to state nothing")
+
+    def test_every_child_facet_carries_its_parent(self):
+        """A filter for Trails must match a lake that only says Trails Hiking."""
+        import profile
+        for key, entry in self.lakes.items():
+            facets = entry.get("facets") or []
+            for facet in facets:
+                parent = profile.parent_of(facet)
+                if parent:
+                    self.assertIn(parent, facets,
+                                  f"{key} has {facet} without {parent}")
+
+    def test_no_facet_offered_as_a_filter_is_a_child(self):
+        """After the rollup a child is the same filter under another name.
+
+        Every lake with Paddling Canoe also has Paddling, so the two have
+        identical counts and offering both is offering one filter twice.
+        """
+        import profile
+        for facet in self.doc["facets"]:
+            self.assertIsNone(profile.parent_of(facet["name"]),
+                              f"{facet['name']} is a narrower kind of something else")
+
+    def test_every_offered_facet_is_worth_filtering_by(self):
+        import profile
+        self.assertTrue(self.doc["facets"])
+        for facet in self.doc["facets"]:
+            self.assertGreaterEqual(facet["lakes"], profile.FILTER_FLOOR, facet["name"])
+
+    def test_the_counts_match_the_lakes(self):
+        counted = collections.Counter()
+        for entry in self.lakes.values():
+            for facet in entry.get("facets") or []:
+                counted[facet] += 1
+        for facet in self.doc["facets"]:
+            self.assertEqual(facet["lakes"], counted[facet["name"]], facet["name"])
+
+    def test_no_photo_leaves_the_published_host(self):
+        """These are Alberta's photographs and they stay on Alberta's server."""
+        path = DATA_DIR / "lake_photos.json"
+        if not path.exists():
+            self.skipTest("photos have not been built")
+        gallery = json.loads(path.read_text(encoding="utf-8"))["lakes"]
+        total = 0
+        for key, shots in gallery.items():
+            for shot in shots:
+                total += 1
+                self.assertTrue(shot["url"].startswith("https://mywildalberta.ca/"),
+                                f"{key}: {shot['url']}")
+        self.assertGreater(total, 500)
+
+    def test_a_photo_count_is_never_published_without_the_photos(self):
+        path = DATA_DIR / "lake_photos.json"
+        if not path.exists():
+            self.skipTest("photos have not been built")
+        gallery = json.loads(path.read_text(encoding="utf-8"))["lakes"]
+        for key, entry in self.lakes.items():
+            if entry.get("photo_count"):
+                self.assertEqual(entry["photo_count"], len(gallery.get(key, [])), key)
+
+    def test_the_year_files_did_not_grow(self):
+        """None of this changes year to year, so none of it belongs in a year file.
+
+        index.html merges lakes across the selected years and lets a later year
+        overwrite a scalar, so a description stored there would be written into
+        sixteen files and which copy you saw would depend on which years happen
+        to be selected.
+        """
+        sample = json.loads((DATA_DIR / "lakes_2026.json").read_text(encoding="utf-8"))
+        for lake in sample:
+            for field in ("description", "facets", "photo_count", "photos"):
+                self.assertNotIn(field, lake, f"{field} leaked into a year file")
+
+
+class OutOfScopeTests(unittest.TestCase):
+    """Waters Alberta stocks that this map deliberately does not show."""
+
+    @classmethod
+    def setUpClass(cls):
+        path = DATA_DIR / "out_of_scope.csv"
+        if not path.exists():
+            raise unittest.SkipTest("the out-of-scope list has not been built")
+        with path.open(newline="", encoding="utf-8") as handle:
+            cls.rows = list(csv.DictReader(handle))
+
+    def test_nothing_trout_bearing_was_quietly_dropped(self):
+        import sources
+        names = {"RAINBOW TROUT", "BROOK TROUT", "BROWN TROUT", "TIGER TROUT",
+                 "CUTTHROAT TROUT", "WESTSLOPE CUTTHROAT TROUT"}
+        self.assertEqual(len(names), len(sources.TROUT_SPECIES),
+                         "the species this map covers changed; revisit the list")
+        for row in self.rows:
+            published = {s.strip() for s in row["species"].split(";")}
+            self.assertFalse(published & names,
+                             f"{row['name']} is stocked with trout and is not out of scope")
+
+    def test_every_row_names_a_reason(self):
+        self.assertTrue(self.rows)
+        for row in self.rows:
+            self.assertTrue(row["why"], row["name"])
+            self.assertTrue(row["species"], row["name"])
+
+    def test_none_of_them_is_on_the_map(self):
+        registry = json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))
+        mapped = {str(e.get("waterbody_id") or "") for e in registry}
+        mapped |= {str(e.get("published_waterbody_id") or "") for e in registry}
+        for row in self.rows:
+            self.assertNotIn(row["waterbody_id"], mapped,
+                             f"{row['name']} is both mapped and listed as out of scope")
+
+    def test_no_waterbody_was_minted_from_the_stocking_map(self):
+        """The failure mode the README spends a page on: an invented lake.
+
+        The importer reads Alberta's map and writes CSVs. It never adds a lake;
+        only the stocking reports do that, through build_history.
+        """
+        source = (Path(__file__).parent / "import_stocking_map.py").read_text(encoding="utf-8")
+        for forbidden in ("reg.mint", ".mint(", "add_lake"):
+            self.assertNotIn(forbidden, source,
+                             f"the importer calls {forbidden}")

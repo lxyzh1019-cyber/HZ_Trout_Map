@@ -439,7 +439,8 @@
     if (!state.conditions.open) { writeUrl(); return; }
 
     // The two floating panels would collide at phone width.
-    if (typeof closeZonePanel === "function") closeZonePanel();
+    // Both panels float in the same corner, so only one is up at a time.
+    if (window.LakePanel) LakePanel.close();
     render();
     var place = anchor();
     Weather.load(place.lat, place.lon).then(function () { render(); });

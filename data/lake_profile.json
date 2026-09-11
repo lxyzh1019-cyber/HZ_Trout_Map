@@ -1,0 +1,4421 @@
+{
+ "facets": [
+  {
+   "lakes": 62,
+   "name": "Boat Launch"
+  },
+  {
+   "lakes": 33,
+   "name": "Dock/Pier"
+  },
+  {
+   "lakes": 33,
+   "name": "Fish Cleaning"
+  },
+  {
+   "lakes": 98,
+   "name": "Toilets"
+  },
+  {
+   "lakes": 63,
+   "name": "Camping"
+  },
+  {
+   "lakes": 116,
+   "name": "Day Use"
+  },
+  {
+   "lakes": 64,
+   "name": "Picnic"
+  },
+  {
+   "lakes": 53,
+   "name": "Water"
+  },
+  {
+   "lakes": 43,
+   "name": "Fire Pits"
+  },
+  {
+   "lakes": 42,
+   "name": "Firewood"
+  },
+  {
+   "lakes": 35,
+   "name": "Playground"
+  },
+  {
+   "lakes": 32,
+   "name": "Trails"
+  },
+  {
+   "lakes": 28,
+   "name": "Shelter"
+  },
+  {
+   "lakes": 18,
+   "name": "Paddling"
+  },
+  {
+   "lakes": 16,
+   "name": "Sports"
+  }
+ ],
+ "joined_on": "Alberta waterbody id",
+ "lakes": {
+  "wb17894": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "Anderson Dam is a popular destination for a relaxing afternoon of fishing and nature enjoyment. The pond is annually stocked with trout by the Alberta Conservation Association (ACA), enhancing angling opportunities for visitors. The shoreline is lined with willows and Saskatoon shrubs, which offer seasonal berry picking for those exploring the area. | Amenities notes: no open fires; foot access only.",
+   "district": "Drumheller",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb18007": {
+   "amenities": [
+    "Camping",
+    "Day Use"
+   ],
+   "description": "This waterbody has been recently designated as a quality fishery and stocked with rainbow trout.",
+   "district": "Claresholm",
+   "facets": [
+    "Camping",
+    "Day Use"
+   ],
+   "photo_count": 1
+  },
+  "wb18019": {
+   "amenities": [
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "This pond is on the north east side of Wetaskiwin. ACA stocks this pond annually with trout, typically before the May long weekend. | Amenities notes: garbage receptacles",
+   "district": "Wetaskiwin",
+   "facets": [
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ]
+  },
+  "wb18020": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Oyen",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 7
+  },
+  "wb18022": {
+   "amenities": [
+    "Day Use",
+    "Picnic"
+   ],
+   "description": "The fish pond is located on the south side of Highway 12, just before entering the Town of Castor. It is stocked annually with trout, providing anglers with a reliable fishing opportunity throughout the season.",
+   "district": "Stettler",
+   "facets": [
+    "Day Use",
+    "Picnic"
+   ]
+  },
+  "wb18997": {
+   "amenities": null,
+   "description": "Odlum Pond Trail is a 220 kilometer moderately trafficked out back trail located near Kananaskis Improvement, that features beautiful wild flowers and is rated as difficult. The trail offers a number of activity options and is best used from March until October Dogs are also able to use this trail but must be kept on leash.",
+   "district": "High River",
+   "facets": null
+  },
+  "wb19525": {
+   "amenities": null,
+   "description": "This lake can only be accessed by ATV or by hiking.",
+   "district": "Hinton",
+   "facets": null,
+   "photo_count": 8
+  },
+  "wb19760": {
+   "amenities": [
+    "Retail/Services"
+   ],
+   "description": "The park contains a picnic shelter and a pond stocked with trout for fishing . The park has also been designated as an off-leash area for dogs, so park users and their four-legged companions can have fun for the day. | Amenities notes: This waterbody is located in Lac La Biche",
+   "district": "Lac La Biche",
+   "facets": [
+    "Retail/Services"
+   ],
+   "photo_count": 16
+  },
+  "wb20258": {
+   "amenities": [
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "Castaway Trout Pond, located near Viking southeast of Edmonton, is an excellent destination for both beginners and experienced anglers to enjoy fishing. The Alberta Conservation Association (ACA) typically stocks this water body before the May long weekend, ensuring great opportunities for anglers throughout the season.",
+   "district": "Vegreville",
+   "facets": [
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ],
+   "photo_count": 2
+  },
+  "wb20267": {
+   "amenities": null,
+   "description": "This pond may be subject to winterkill.",
+   "district": "Fort Vermilion",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb21137": {
+   "amenities": [
+    "Picnic",
+    "Playground",
+    "Trails"
+   ],
+   "description": "Grab your fishing rod and tackle, and take your family fishing at Rotary Park. Fishing is limited to people under the age of 16 years, or those accompanied by one or more people under the age of 16 years. | Amenities notes: sports fields; off-leash dog park; river slide attraction",
+   "district": "Whitecourt",
+   "facets": [
+    "Picnic",
+    "Playground",
+    "Trails"
+   ]
+  },
+  "wb2129": {
+   "amenities": [
+    "Beach",
+    "Parking",
+    "Toilets"
+   ],
+   "description": "Medley River Beach is a fantastic day use beach on the west shores of Cold Lake Like most Cold Lake beaches, the sand is plentiful and this beach is on a spit of land. This is a popular beach in July and August for those seeking a day trip and enjoy some stocked trout fishing. | Amenities notes: waste receptacles",
+   "district": "Cold Lake",
+   "facets": [
+    "Beach",
+    "Parking",
+    "Toilets"
+   ],
+   "photo_count": 2
+  },
+  "wb21332": {
+   "amenities": [
+    "Camping",
+    "Fire Pits",
+    "Picnic",
+    "Shelter",
+    "Toilets"
+   ],
+   "description": "The pond is located in a remote area and can be difficult to access due to a rough road. Fish are stocked in the upper section of the pond, and aeration is provided by a windmill system to maintain water quality. Nearby campsites are available on a first-come, first-served basis, offering a convenient option for visitors who wish to stay close to the pond.",
+   "district": "Rocky Mountain House",
+   "facets": [
+    "Camping",
+    "Fire Pits",
+    "Picnic",
+    "Shelter",
+    "Toilets"
+   ]
+  },
+  "wb21353": {
+   "amenities": null,
+   "description": "Ardmore Pond is a quiet small pond on the north side of the community of Ardmore, this small, but peaceful pond is perfect for a lazy day of shore fishing.",
+   "district": "Cold Lake",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb22504": {
+   "amenities": [
+    "Day Use",
+    "Picnic"
+   ],
+   "description": "Riverstone pond located in William Pearce Park.",
+   "district": "Lethbridge",
+   "facets": [
+    "Day Use",
+    "Picnic"
+   ],
+   "photo_count": 5
+  },
+  "wb22993": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA stocks this pond annually with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Ponoka",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb22995": {
+   "amenities": null,
+   "description": "The Peace Ponds are a great for fly fishing.",
+   "district": "Peace River",
+   "facets": null,
+   "photo_count": 4
+  },
+  "wb22996": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "High Level",
+   "facets": null
+  },
+  "wb23292": {
+   "amenities": [
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "Genesee Heritage Park offers visitors a great spot to have a picnic or spend the day fishing in other fully-stocked fish pond.",
+   "district": "Wetaskiwin",
+   "facets": [
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ],
+   "photo_count": 1
+  },
+  "wb23293": {
+   "amenities": null,
+   "description": "This pond is located in the town. Both ponds are stocked with fish.",
+   "district": "Cochrane",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb23789": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "This is a small re-claimed mine pond on Cole Valley Mine site. | Amenities notes: no open fires; foot access only.",
+   "district": "Edson",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb23790": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "This is a small re-claimed mine pond on Cole Valley Mine site. | Amenities notes: no open fires; foot access only.",
+   "district": "Edson",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb23791": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "This is a small re-claimed mine pond on Cole Valley Mine site. | Amenities notes: no open fires; foot access only.",
+   "district": "Edson",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 1
+  },
+  "wb24053": {
+   "amenities": null,
+   "description": "This pond may winterkill.",
+   "district": "Bonnyville",
+   "facets": null,
+   "photo_count": 3
+  },
+  "wb24312": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "This is a small re-claimed mine pond on Cole Valley Mine site. | Amenities notes: no open fires; foot access only.",
+   "district": "Edson",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb24364": {
+   "amenities": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Parking",
+    "Toilets"
+   ],
+   "description": "The lake is stocked annually by AEP with trout and is aerated (October - April) through ACA's Lake Aeration Program.",
+   "district": "Sundre",
+   "facets": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Parking",
+    "Toilets"
+   ],
+   "photo_count": 1
+  },
+  "wb24702": {
+   "amenities": [
+    "Camping",
+    "Camping Power",
+    "Retail/Services"
+   ],
+   "description": "The pond is flooded in the winter, where people can enjoy some outdoor skating. | Amenities notes: also amenities can be located within the town",
+   "district": "St Paul",
+   "facets": [
+    "Camping",
+    "Camping Power",
+    "Retail/Services"
+   ],
+   "photo_count": 1
+  },
+  "wb26033": {
+   "amenities": [
+    "Dock/Pier",
+    "Fire Pits",
+    "Picnic",
+    "Toilets",
+    "Trails",
+    "Water"
+   ],
+   "description": "Fishing enthusiasts will be intrigued to know that the south lake was stocked with trout and is now managed as a quality stocked trout fishery. | Amenities notes: bench",
+   "district": "Whitecourt",
+   "facets": [
+    "Dock/Pier",
+    "Fire Pits",
+    "Picnic",
+    "Toilets",
+    "Trails",
+    "Water"
+   ],
+   "photo_count": 19
+  },
+  "wb26047": {
+   "amenities": [
+    "Accessibility",
+    "Day Use"
+   ],
+   "description": "This is an accessible fish pond, with a cook shack, benches, fire pits for the perfect day out fishing.",
+   "district": "Smoky Lake",
+   "facets": [
+    "Accessibility",
+    "Day Use"
+   ]
+  },
+  "wb26322": {
+   "amenities": [
+    "Parking"
+   ],
+   "description": "The Len Thompson Fishing Pond in Lacombe, is a stocked retention pond that provides catch and release recreational fishing opportunities for local residents. Home of the worlds largest lure.",
+   "district": "Red Deer",
+   "facets": [
+    "Parking"
+   ]
+  },
+  "wb26431": {
+   "amenities": [
+    "Sports",
+    "Sports Baseball",
+    "Sports Disc Golf"
+   ],
+   "description": "The pond is located in the town of High Level in the community park. There are baseball diamonds, a disc golf course and an off-leash dog park. Enjoy the day fishing at the day-use area. | Amenities notes: off leash dog park",
+   "district": "High Level",
+   "facets": [
+    "Sports",
+    "Sports Baseball",
+    "Sports Disc Golf"
+   ],
+   "photo_count": 3
+  },
+  "wb26447": {
+   "amenities": null,
+   "description": "This is an urban community pond that can be fished by all ages. A fishing license is not required for anglers under the age of 16. | Amenities notes: Bow habitat station has amenities.",
+   "district": "Calgary",
+   "facets": null
+  },
+  "wb26729": {
+   "amenities": [
+    "Camping",
+    "Paddling",
+    "Paddling Canoe",
+    "Playground",
+    "Shelter",
+    "Sports",
+    "Sports Baseball"
+   ],
+   "description": "Kakut Lake is located in northern Alberta and offers a great camping experience. Fish the stocked pond for trout with the possibility of perch being caught. | Amenities notes: community hall.",
+   "district": "Spirit River",
+   "facets": [
+    "Camping",
+    "Paddling",
+    "Paddling Canoe",
+    "Playground",
+    "Shelter",
+    "Sports",
+    "Sports Baseball"
+   ],
+   "photo_count": 2
+  },
+  "wb26854": {
+   "amenities": [
+    "Accessibility",
+    "Day Use",
+    "Washrooms"
+   ],
+   "description": "This pond is in the south west corner of Fort Saskatchewan's West River's Edge Recreational Area and is maintained and managed by the city of Fort Saskatchewan. This pond is stocked with trout by ACA.",
+   "district": "Edmonton",
+   "facets": [
+    "Accessibility",
+    "Day Use",
+    "Toilets"
+   ]
+  },
+  "wb318138": {
+   "amenities": [
+    "Camping",
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "Camp at the pond in one of the nine sites, and throw your line into the stocked pond.",
+   "district": "Medicine Hat",
+   "facets": [
+    "Camping",
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ]
+  },
+  "wb328085": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this 8-ha pond with trout. Permission is not required to access the pond for fishing. | Amenities notes: no open fires; foot access only.",
+   "district": "Grande Prairie",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 12
+  },
+  "wb3476": {
+   "amenities": [
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "Pond is usually stocked at least three-four times a year due to its popularity.",
+   "district": "Canmore",
+   "facets": [
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ],
+   "photo_count": 3
+  },
+  "wb3479": {
+   "amenities": null,
+   "description": "This lake is south of highway 16, and has an elevation of 912m.",
+   "district": "Edson",
+   "facets": null,
+   "photo_count": 2
+  },
+  "wb3482": {
+   "amenities": [
+    "Accessibility",
+    "Day Use",
+    "Picnic",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "description": "There is a paved trail around the pond for easy wheelchair accessibility. Day use areas are well treed. The ponds are stocked 3-4 times in spring and early summer with trout. | Amenities notes: park benches",
+   "district": "Canmore",
+   "facets": [
+    "Accessibility",
+    "Day Use",
+    "Picnic",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "photo_count": 4
+  },
+  "wb3485": {
+   "amenities": [
+    "Dock/Pier",
+    "Fire Pits",
+    "Toilets",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "description": "Fish Game Pond is a little fishing hole for children located in the community of Rocky Mountain House. | Amenities notes: benches; group",
+   "district": "Rocky Mountain House",
+   "facets": [
+    "Dock/Pier",
+    "Fire Pits",
+    "Toilets",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "photo_count": 17
+  },
+  "wb3486": {
+   "amenities": [
+    "Day Use",
+    "Toilets"
+   ],
+   "description": "This small pond surrounded by aspen groves is named after Frank Sibbald, a long time rancher who settled in the area in 1875. It is a perfect place to stop, relax and enjoy the foothills environment. You can walk the easy trail along the shore to cast a line and try a little fishing, or simply sit and enjoy a snack at the picnic area.",
+   "district": "Canmore",
+   "facets": [
+    "Day Use",
+    "Toilets"
+   ],
+   "photo_count": 1
+  },
+  "wb3494": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Day Use Picnic",
+    "Dock/Pier",
+    "Fish Cleaning",
+    "Laundry",
+    "Picnic",
+    "Retail/Services",
+    "Showers",
+    "Toilets"
+   ],
+   "description": "Blood Indian Park Campground operates on a first-come, first-served basis and is open seasonally from April 1 to November 1, with winter camping available outside of these dates. The campground features 300 campsites, including 29 serviced sites, making it suitable for a wide range of camping preferences. During the summer months, guests have access to coin-operated showers and a laundromat. Wi-Fi is available in the main camping area for added convenience. Families can also enjoy the Splash Park, which is open daily from 12:00 PM to 5:00 PM throughout the summer season. | Amenities notes: rave sewer drainage",
+   "district": "Hanna",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Day Use Picnic",
+    "Dock/Pier",
+    "Fish Cleaning",
+    "Laundry",
+    "Picnic",
+    "Retail/Services",
+    "Showers",
+    "Toilets"
+   ],
+   "photo_count": 13
+  },
+  "wb3499": {
+   "amenities": [
+    "Beach",
+    "Boat Launch",
+    "Camping",
+    "Camping Power",
+    "Firewood",
+    "Playground",
+    "Retail/Services",
+    "Sewage Disposal",
+    "Shelter",
+    "Washrooms",
+    "Water"
+   ],
+   "description": "Chain Lakes Reservoir Campground offers more than 90 serviced and unserviced campsites, providing a comfortable and scenic setting for outdoor enthusiasts. Visitors can enjoy a variety of recreational activities, including swimming, beach relaxation, canoeing, fishing, windsurfing, and sailing, making this lakeside destination ideal for both adventure and leisure.",
+   "district": "Claresholm",
+   "facets": [
+    "Beach",
+    "Boat Launch",
+    "Camping",
+    "Camping Power",
+    "Firewood",
+    "Playground",
+    "Retail/Services",
+    "Sewage Disposal",
+    "Shelter",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 4
+  },
+  "wb3522": {
+   "amenities": [
+    "Day Use",
+    "Fire Pits",
+    "Picnic",
+    "Playground",
+    "Sewage Disposal",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Day use area with fishing, hiking and picnic area.",
+   "district": "Cochrane",
+   "facets": [
+    "Day Use",
+    "Fire Pits",
+    "Picnic",
+    "Playground",
+    "Sewage Disposal",
+    "Toilets",
+    "Water"
+   ]
+  },
+  "wb3523": {
+   "amenities": [
+    "Day Use",
+    "Toilets"
+   ],
+   "description": "Ice fishing access can be difficult at times due to snow accumulation and drifting.",
+   "district": "Medicine Hat",
+   "facets": [
+    "Day Use",
+    "Toilets"
+   ],
+   "photo_count": 2
+  },
+  "wb3524": {
+   "amenities": [
+    "Camping",
+    "Camping Group",
+    "Firewood",
+    "Picnic",
+    "Playground",
+    "Sewage Disposal",
+    "Shelter",
+    "Showers",
+    "Water"
+   ],
+   "description": "Michichi Dam Recreation Area has 18 formal power campsites complete with fire pits and picnic tables. There are also 20 overflow campsites, group camping areas, and camp kitchen facilities. There are coin-operated shower facilities with handicap access. There is an RV water and sewer station available for your convenience. Ice fishing is accessible in the winter, but beware of drifting snow when traveling down to the boat launch.",
+   "district": "Drumheller",
+   "facets": [
+    "Camping",
+    "Camping Group",
+    "Firewood",
+    "Picnic",
+    "Playground",
+    "Sewage Disposal",
+    "Shelter",
+    "Showers",
+    "Water"
+   ],
+   "photo_count": 16
+  },
+  "wb3534": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Dock/Pier",
+    "Fishing Access",
+    "Fishing Access Dock",
+    "Picnic",
+    "Shelter",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Foot access only all year around (weather permitting). After the September long weekend, the services offered at the campsite are reduced.",
+   "district": "Medicine Hat",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Dock/Pier",
+    "Fishing Access",
+    "Fishing Access Dock",
+    "Picnic",
+    "Shelter",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 3
+  },
+  "wb3899": {
+   "amenities": null,
+   "description": "Alford Lake borders the Conservation Education Centre for Excellence, established in 1974 to provide youth-focused wildlife conservation education. The centre offers hands-on programs that immerse students in outdoor experiences, helping them develop essential survival skills and environmental awareness. On the opposite side of the lake, a designated public fishing area is available, complete with a small picnic site—ideal for enjoying a relaxing day by the water.",
+   "district": "Rocky Mountain House",
+   "facets": null,
+   "photo_count": 2
+  },
+  "wb3909": {
+   "amenities": [
+    "Camping",
+    "Toilets"
+   ],
+   "description": "Allstones Lake Trail is a moderately trafficked 62-mile backcountry route located near Nordegg. The trail is best accessed between April and October, offering scenic views and a rewarding hike to the lake. Dogs are permitted on the trail but must be kept on a leash at all times to ensure safety and environmental protection.",
+   "district": "Nordegg",
+   "facets": [
+    "Camping",
+    "Toilets"
+   ]
+  },
+  "wb3948": {
+   "amenities": [
+    "Toilets"
+   ],
+   "description": "This trail is considered challenging and is recommended for experienced hikers only due to its steep and rugged terrain. Those making the climb to the campground are encouraged to bring a fishing rod and take advantage of the opportunity to fish in the nearby waterbody. | Amenities notes: bear boxes for security.",
+   "district": "Canmore",
+   "facets": [
+    "Toilets"
+   ],
+   "photo_count": 2
+  },
+  "wb395186": {
+   "amenities": null,
+   "description": "This pond is north of the town of Lodgepole. This pond has lots of shore fishing opportunities and surrounded by trees.",
+   "district": "Drayton Valley",
+   "facets": null
+  },
+  "wb395196": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks these ponds with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Cochrane",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb4005": {
+   "amenities": null,
+   "description": "Bear Pond Trail is an 18-kilometre out-and-back route accessible via the Iron Creek Mountain Trail, located near Longview. Suitable for hikers of all skill levels, the trail is best used from May through November. Dogs are permitted but must be kept on a leash at all times to ensure safety and environmental protection.",
+   "district": "Canmore",
+   "facets": null
+  },
+  "wb4011": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Picnic",
+    "Playground",
+    "Sewage Disposal",
+    "Sports",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "description": "Beauvais Lake borders the Beauvais Main Campground, offering convenient access to the water for campers. Powered sites 1 through 15 are open year-round, from October 1 to April 30. These quiet, well-treed sites provide a peaceful setting and are located close to the lake, making them ideal for both relaxation and recreation.",
+   "district": "Pincher Creek",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Picnic",
+    "Playground",
+    "Sewage Disposal",
+    "Sports",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "photo_count": 1
+  },
+  "wb4014": {
+   "amenities": [
+    "Camping",
+    "Day Use",
+    "Day Use Picnic",
+    "Parking",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "The lake is stocked annually with trout by the Alberta Environment and Protected Areas (EPA) and is aerated from October through April as part of the Alberta Conservation Association’s (ACA) Lake Aeration Program. Access to the lake is available by foot, and only electric-powered motors are permitted to help maintain the tranquility and ecological integrity of the area.",
+   "district": "Sundre",
+   "facets": [
+    "Camping",
+    "Day Use",
+    "Day Use Picnic",
+    "Parking",
+    "Picnic",
+    "Toilets"
+   ],
+   "photo_count": 2
+  },
+  "wb4018": {
+   "amenities": [
+    "Boat Launch",
+    "Fishing Access",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Swimming",
+    "Trails",
+    "Trails Hiking",
+    "Water",
+    "Winter Recreation"
+   ],
+   "description": "Located within Castle Provincial Park, Beaver Mines Campground offers a scenic and well-equipped setting for both RV and tent camping. Most campsites are nestled among mature trees, providing privacy and shade, while select sites offer picturesque views of the nearby lake. This peaceful location is ideal for nature enthusiasts seeking a relaxing outdoor experience.",
+   "district": "Pincher Creek",
+   "facets": [
+    "Boat Launch",
+    "Fishing Access",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Swimming",
+    "Trails",
+    "Trails Hiking",
+    "Water",
+    "Winter Recreation"
+   ],
+   "photo_count": 1
+  },
+  "wb4061": {
+   "amenities": [
+    "Boat Launch",
+    "Parking",
+    "Toilets"
+   ],
+   "description": "Birch lake lacks a formal boat launch. Recreational users must carry their watercraft to the shoreline and hand-launch directly from the shore. To preserve the natural environment and ensure a quiet experience for all visitors, gas-powered motors are prohibited. Additionally, overnight camping is not permitted at this location.",
+   "district": "Sundre",
+   "facets": [
+    "Boat Launch",
+    "Parking",
+    "Toilets"
+   ],
+   "photo_count": 1
+  },
+  "wb4159": {
+   "amenities": null,
+   "description": "Access to this lake is either via a very long trail via the Sheep River Trail.",
+   "district": "High River",
+   "facets": null,
+   "photo_count": 2
+  },
+  "wb4167": {
+   "amenities": null,
+   "description": "The hike to Burstall Lakes is an all-season adventure, with winter being a favorite time for many visitors. The trail is relatively flat and easy, making it ideal for snowshoeing or cross-country skiing. Most of the route winds through forested terrain, but expect stronger winds as you approach the lake where tree cover thins. At the trailhead, you’ll find a large parking lot and an outhouse for convenience. | Amenities notes: The upper and lower lakes helicopter stocked. These lakes have recently been stocked in the fall of 2025.",
+   "district": "Canmore",
+   "facets": null
+  },
+  "wb4171": {
+   "amenities": [
+    "Accessibility",
+    "Toilets"
+   ],
+   "description": "Butcher’s Lake is nestled in the Castle Region, approximately 21 kilometers south of Pincher Creek. Known for its crystal-clear waters and stunning natural backdrop, this lake is a popular fishing destination throughout the year. Butcher’s Lake is particularly renowned for its excellent brook trout fishing, with regular stocking programs ensuring healthy fish populations and consistent angling opportunities for visitors. | Amenities notes: The lake features a designated day-use area with basic amenities",
+   "district": "Pincher Creek",
+   "facets": [
+    "Accessibility",
+    "Toilets"
+   ],
+   "photo_count": 5
+  },
+  "wb417476": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Lethbridge",
+   "facets": null
+  },
+  "wb417477": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "There is currently paved vehicle access to within 100 m of the pond and a paved walking path around the pond's perimeter ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Grande Prairie",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 5
+  },
+  "wb4208": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Camping Group",
+    "Day Use",
+    "Laundry",
+    "Picnic",
+    "Playground",
+    "Shelter",
+    "Sports",
+    "Sports Baseball"
+   ],
+   "description": "Visitors to the park can enjoy a variety of activities, including swimming, canoeing, and trout fishing. The park offers full-service campsites along with convenient amenities such as a laundromat, concession, showers, and washrooms. For recreation, guests can take advantage of ball diamonds, a sand volleyball court, a rugged nine-hole golf course, and multiple playgrounds, making it an ideal destination for families and outdoor enthusiasts. | Amenities notes: golf course nearby",
+   "district": "Provost",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Camping Group",
+    "Day Use",
+    "Laundry",
+    "Picnic",
+    "Playground",
+    "Shelter",
+    "Sports",
+    "Sports Baseball"
+   ],
+   "photo_count": 1
+  },
+  "wb4221": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "High River",
+   "facets": null
+  },
+  "wb4231": {
+   "amenities": [
+    "Camping",
+    "Camping Group",
+    "Day Use",
+    "Fire Pits",
+    "Firewood",
+    "Picnic",
+    "Playground",
+    "Sewage Disposal",
+    "Shelter",
+    "Sports",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Cavan Lake Recreational Campground offers 78 campsites, including 60 sites equipped with 30-amp power. Each site features a fire pit, and complimentary firewood is provided for campers. The campground includes amenities such as a playground and horseshoe pits, making it suitable for family recreation. Both campers and anglers can take advantage of the day-use area or reserve group campsites for larger gatherings.",
+   "district": "Medicine Hat",
+   "facets": [
+    "Camping",
+    "Camping Group",
+    "Day Use",
+    "Fire Pits",
+    "Firewood",
+    "Picnic",
+    "Playground",
+    "Sewage Disposal",
+    "Shelter",
+    "Sports",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 3
+  },
+  "wb4252": {
+   "amenities": [
+    "Boat Launch",
+    "Parking"
+   ],
+   "description": "Chatwin Lake was stocked with trout in the spring of 2020 after many years without fish. The lake boarders the Bonnyville golf course and private residences. The staging area is gravel, with a crude boat launch and smaller boats are recommended.",
+   "district": "Bonnyville",
+   "facets": [
+    "Boat Launch",
+    "Parking"
+   ],
+   "photo_count": 5
+  },
+  "wb4261": {
+   "amenities": [
+    "Boat Launch",
+    "Paddling",
+    "Paddling Canoe",
+    "Picnic",
+    "Trails",
+    "Trails Biking",
+    "Trails Cross-Country Ski",
+    "Trails Equestrian",
+    "Trails Hiking",
+    "Washrooms"
+   ],
+   "description": "Chickakoo Lake Recreation Area is a scenic mix of woods and lakes that attracts a diversity of birds and other wildlife such as moose, dear, beavers and more. The 480 acres of woodland and over 14 km of trails are a popular destination for hikers, cyclists and horseback riders in summer and are groomed for cross country skiers in winter.",
+   "district": "Stony Plain",
+   "facets": [
+    "Boat Launch",
+    "Paddling",
+    "Paddling Canoe",
+    "Picnic",
+    "Toilets",
+    "Trails",
+    "Trails Biking",
+    "Trails Cross-Country Ski",
+    "Trails Equestrian",
+    "Trails Hiking"
+   ]
+  },
+  "wb4318": {
+   "amenities": null,
+   "description": "Formerly called Jeanette, then Lost and now, officially, Commonwealth. Trail Start: Hwy 742 (Smith-Dorrien/Spray Trail) Turn west onto Mt Shark Road In 1 km turn left onto a side road and park a little way in.",
+   "district": "Canmore",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb4340": {
+   "amenities": [
+    "Beach",
+    "Boat Launch",
+    "Boating",
+    "Camping",
+    "Camping Group",
+    "Fishing Access",
+    "Laundry",
+    "Playground",
+    "Shelter",
+    "Showers",
+    "Water"
+   ],
+   "description": "This a popular winter fishing destination. There is a public boat launch available, with a day use area. | Amenities notes: Serviced and un-serviced sites",
+   "district": "Rocky Mountain House",
+   "facets": [
+    "Beach",
+    "Boat Launch",
+    "Boating",
+    "Camping",
+    "Camping Group",
+    "Fishing Access",
+    "Laundry",
+    "Playground",
+    "Shelter",
+    "Showers",
+    "Water"
+   ],
+   "photo_count": 10
+  },
+  "wb4374": {
+   "amenities": [
+    "Parking"
+   ],
+   "description": "This large, deep, natural lake lies just east of the Continental Divide along Alberta Highway 3 There is a vast parking area at the west end of the lake, a necessary amenity when winter blizzards close the mountain pass. The parking area includes a boat launch where ice fishermen skid their huts onto the ice",
+   "district": "Blairmore",
+   "facets": [
+    "Parking"
+   ],
+   "photo_count": 2
+  },
+  "wb4426": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "Boat access to the lake is challenging and use the trail at your own risk. | Amenities notes: no open fires; foot access only.",
+   "district": "St Paul",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb4446": {
+   "amenities": [
+    "Beach",
+    "Boat Launch",
+    "Dock/Pier",
+    "Firewood",
+    "Fish Cleaning",
+    "Playground",
+    "Sewage Disposal",
+    "Shelter",
+    "Showers",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Sites in this prairie campground are suitable for RVs and tents and most have power. There are many amenities here including a playground, small campground store, toilets, and showers. This park is a great getaway for families who want to devote time to spending time together and fishing for trout. | Amenities notes: life jacket loaner station",
+   "district": "Lloydminster",
+   "facets": [
+    "Beach",
+    "Boat Launch",
+    "Dock/Pier",
+    "Firewood",
+    "Fish Cleaning",
+    "Playground",
+    "Sewage Disposal",
+    "Shelter",
+    "Showers",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 1
+  },
+  "wb4458": {
+   "amenities": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Trails",
+    "Trails Hiking",
+    "Water"
+   ],
+   "description": "Doleberg Lake campground borders the lake. This campground is a self-registration campground with twelve sites with lots of natural trees. This is a great place to relax a fish for stocked trout.",
+   "district": "Barrhead",
+   "facets": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Trails",
+    "Trails Hiking",
+    "Water"
+   ],
+   "photo_count": 7
+  },
+  "wb4460": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "This waterbody is stocked by EPA with trout and is aerated during the winter months.",
+   "district": "Valleyview",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 3
+  },
+  "wb4488": {
+   "amenities": null,
+   "description": "Dunn Lake is situated east of Petite Lake, and northeast of Jarvis Creek.",
+   "district": "Edson",
+   "facets": null
+  },
+  "wb4495": {
+   "amenities": null,
+   "description": "Access found on the Ya Ha Tinda Road or the forestry trunk road through James Pass. Both routes provide direct access to the lake and accommodate horseback and foot travel, with limited ATV/UTV access permitted. Seasonal timing restrictions apply to ATV and UTV use on certain trail segments.",
+   "district": "Sundre",
+   "facets": null,
+   "photo_count": 6
+  },
+  "wb4505": {
+   "amenities": [
+    "Day Use",
+    "Dock/Pier",
+    "Picnic",
+    "Shelter"
+   ],
+   "description": "Electric motors only. There are rocks around the shore making it easy to access the reservoir, fly fishing is preferable.",
+   "district": "High Prairie",
+   "facets": [
+    "Day Use",
+    "Dock/Pier",
+    "Picnic",
+    "Shelter"
+   ],
+   "photo_count": 5
+  },
+  "wb4532": {
+   "amenities": null,
+   "description": "A great brook trout destination located 32km north of McLeod Lake.",
+   "district": "Whitecourt",
+   "facets": null,
+   "photo_count": 6
+  },
+  "wb4535": {
+   "amenities": [
+    "Camping",
+    "Day Use",
+    "Fire Pits",
+    "Picnic",
+    "Trails",
+    "Trails Hiking",
+    "Trails Interpretive"
+   ],
+   "description": "The park is off the beaten path, but once you find it, you'll be rewarded with a chain of 5 small lakes and about 7 km of trails to explore. You can fish for stocked trout, canoe, or take an electric powered boat on the lakes and view the hoodoos on the Wild Sculpture Trail.",
+   "district": "Edson",
+   "facets": [
+    "Camping",
+    "Day Use",
+    "Fire Pits",
+    "Picnic",
+    "Trails",
+    "Trails Hiking",
+    "Trails Interpretive"
+   ],
+   "photo_count": 4
+  },
+  "wb4539": {
+   "amenities": [
+    "Boating",
+    "Boating Motorized",
+    "Fishing Access",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Toilets",
+    "Trails",
+    "Trails Hiking",
+    "Winter Recreation"
+   ],
+   "description": "A boat launch and day use area are available for day users. Overnight camping and campfires are prohibited.",
+   "district": "Fort McMurray",
+   "facets": [
+    "Boating",
+    "Boating Motorized",
+    "Fishing Access",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Toilets",
+    "Trails",
+    "Trails Hiking",
+    "Winter Recreation"
+   ],
+   "photo_count": 3
+  },
+  "wb4562": {
+   "amenities": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Fairfax Lake Provincial Recreation Area has 27 spacious and private sites near the shores of Fairfax Lake. It is ideal for fishing, canoeing , and hiking trails are available in the surrounding area.",
+   "district": "Edson",
+   "facets": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Toilets",
+    "Water"
+   ]
+  },
+  "wb4564": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Nordegg",
+   "facets": null
+  },
+  "wb4614": {
+   "amenities": null,
+   "description": "It is encourage to hike or bike up to Fortress Lake up the road access to the trail head. Moterized vehicles access is restricted at this time. Ths is a low intensity hike. The estimated time is 3.4 to 4 hours with a total length of 8.9km with an elevation gain of 559m. To access the hiking trails, you can start from the trailhead located at the Sunwapta Falls parking lot. This is situated along the Icefields Parkway (Highway 93) in Jasper National Park. From there, follow the signs and directions to reach the trail leading to your destination.",
+   "district": "Canmore",
+   "facets": null,
+   "photo_count": 2
+  },
+  "wb4642": {
+   "amenities": null,
+   "description": "Galatea Lakes Hike is a 169 kilometer back trail located near Kananaskis Improvement. The trail offers a number of activity options and is best used from May until October. Dogs are also able to use this trail but must be kept on leash.",
+   "district": "Canmore",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb4647": {
+   "amenities": [
+    "Boat Launch",
+    "Day Use",
+    "Toilets"
+   ],
+   "description": "Open all year round.",
+   "district": "Nordegg",
+   "facets": [
+    "Boat Launch",
+    "Day Use",
+    "Toilets"
+   ]
+  },
+  "wb4697": {
+   "amenities": [
+    "Boat Launch",
+    "Boating",
+    "Camping",
+    "Day Use",
+    "Dock/Pier",
+    "Firewood",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Swimming",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Goldeye Lake Campground is located in Goldeye Lake Provincial Recreation Area. There are over 40 un-serviced sites, most surrounded by aspen and spruce trees. Canoe, swim or fish in the stocked lake, or walk the loop trail around it.",
+   "district": "Nordegg",
+   "facets": [
+    "Boat Launch",
+    "Boating",
+    "Camping",
+    "Day Use",
+    "Dock/Pier",
+    "Firewood",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Swimming",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 2
+  },
+  "wb4725": {
+   "amenities": [
+    "Beach",
+    "Boat Launch",
+    "Day Use",
+    "Day Use Picnic",
+    "Dock/Pier",
+    "Fire Pits",
+    "Picnic",
+    "Playground"
+   ],
+   "description": "Grande Cache Lake has 8 day use sites that include picnic tables and fire pits. Fire wood is available and has one handicap accessible outhouse facility. Grande Cache Lake has a developed beach area with a playground. For the fishing enthusiasts, there is a boat dock, boat launch, and a fish cleaning station.",
+   "district": "Grande Cache",
+   "facets": [
+    "Beach",
+    "Boat Launch",
+    "Day Use",
+    "Day Use Picnic",
+    "Dock/Pier",
+    "Fire Pits",
+    "Picnic",
+    "Playground"
+   ],
+   "photo_count": 3
+  },
+  "wb4794": {
+   "amenities": [
+    "Boat Launch",
+    "Fire Pits",
+    "Fishing Access",
+    "Picnic",
+    "Toilets",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "description": "Hasse Lake Recreation area provides a day-use area with walking trails, beach, playground and a picnic shelter. There is a primitive boat launch area with a floating dock east of the main parking area. The shoreline is soft and weedy, but a fishing pier has been installed to increase angling opportunities.",
+   "district": "Stony Plain",
+   "facets": [
+    "Boat Launch",
+    "Fire Pits",
+    "Fishing Access",
+    "Picnic",
+    "Toilets",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "photo_count": 1
+  },
+  "wb4806": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Canmore",
+   "facets": null
+  },
+  "wb4837": {
+   "amenities": null,
+   "description": "This lake is one of our helicopter stocked lakes. The lower lake was stocked in the fall of 2025 with 1,200 cutthroat trout. Hogarth Lakes Trail is a scenic 4.2-kilometer loop near Kananaskis Improvement District that features beautiful lakes and is suitable for all skill levels. The trail is best enjoyed from March through October and is dog-friendly, provided pets are kept on a leash.",
+   "district": "Canmore",
+   "facets": null
+  },
+  "wb4854": {
+   "amenities": null,
+   "description": "Absolutely stunning and well worth the days effort. You will have to cross the Highwood River so expect to get your feet wet. The Alberta - British Columbia boundary runs along the mountains ridge.",
+   "district": "High River",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb4888": {
+   "amenities": null,
+   "description": "The route to Ice Lake includes numerous river crossings and significant elevation gain. The trail is well-marked along the Panther River Trail, with clear signage at intersections. The round trip from the staging area typically requires 10–12 hours, with the final two hours involving steep elevation gain.",
+   "district": "Sundre",
+   "facets": null,
+   "photo_count": 5
+  },
+  "wb4897": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Canmore",
+   "facets": null
+  },
+  "wb4909": {
+   "amenities": [
+    "Camping",
+    "Firewood",
+    "Washrooms",
+    "Water"
+   ],
+   "description": "This campground is in Island Lake Provincial Recreation Area. It has 40 sites which are suited to RVs. This campground offers close access to lakes for canoeing, sailing, boating, fishing for stocked trout or windsurfing.",
+   "district": "Blairmore",
+   "facets": [
+    "Camping",
+    "Firewood",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 3
+  },
+  "wb4920": {
+   "amenities": [
+    "Boating",
+    "Fire Pits",
+    "Picnic",
+    "Water"
+   ],
+   "description": "The road leading to the campground is paved except for 2km of gravel road at the entrance. Two of the five of the campsites are located on the lake.",
+   "district": "Vermilion",
+   "facets": [
+    "Boating",
+    "Fire Pits",
+    "Picnic",
+    "Water"
+   ],
+   "photo_count": 4
+  },
+  "wb4935": {
+   "amenities": null,
+   "description": "Jane lake is one of our helicopter stocked lakes, which is stocked every three years. The lake was stocked with 1,800 rainbow trout in 2025. The next stocking will happen in 2028.Jane Lake and its surrounding wilderness offer a truly remote and breathtaking escape. A network of scenic trails encircles the lake, providing opportunities for hiking, biking, and camping. These trails have been upgraded and expanded for a safer and more enjoyable experience. The former 4x4 access road has been transformed into a dedicated hiking and biking route, making it easier than ever to reach the lake and explore its natural beauty.",
+   "district": "Slave Lake",
+   "facets": null
+  },
+  "wb4944": {
+   "amenities": null,
+   "description": "Jessie is one of our helicopter stocked lakes. It was stocked in the fall of 2025 with 3,500 rainbow trout.Jesse Lake is located approximately 45 km from Swan Hills via off-road trails. Alternatively, you can travel 26 km from Swan Hills to the staging area (4-wheel drive recommended), then continue another 16 km on off-road trails to reach the lake. A 4-wheel drive vehicle is strongly recommended for lake access.",
+   "district": "Slave Lake",
+   "facets": null
+  },
+  "wb5002": {
+   "amenities": [
+    "Beach",
+    "Boat Launch",
+    "Firewood",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Kinky Lake Campground is found in Wildhorse Lake Provincial Recreation Area, with close lake access. Enjoy the scenic mountain views while fishing for trout. Non-motorized or electric-powered boats only.",
+   "district": "Hinton",
+   "facets": [
+    "Beach",
+    "Boat Launch",
+    "Firewood",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 5
+  },
+  "wb5029": {
+   "amenities": [
+    "Camping",
+    "Fishing Access",
+    "Swimming",
+    "Water"
+   ],
+   "description": "Landslide Lake is a 290km lightly trafficked out and back trail located near Improvement District No 9, Alberta, Canada that offers the chance to see wildlife and is only recommended for very experienced adventurers The trail offers a number of activity options and is best used from July until October.",
+   "district": "Nordegg",
+   "facets": [
+    "Camping",
+    "Fishing Access",
+    "Swimming",
+    "Water"
+   ],
+   "photo_count": 1
+  },
+  "wb5050": {
+   "amenities": [
+    "Day Use",
+    "Parking"
+   ],
+   "description": "ACA maintains a fishing access and boat launch is off highway 507. | Amenities notes: no open fires; garbage cans; sanitary receptacles.",
+   "district": "Pincher Creek",
+   "facets": [
+    "Day Use",
+    "Parking"
+   ],
+   "photo_count": 3
+  },
+  "wb5074": {
+   "amenities": [
+    "Fire Pits",
+    "Firewood",
+    "Toilets"
+   ],
+   "description": "Lillian Lake Backcountry Campground is in Spray Valley Provincial Park. The closest access is at Galatea Day Use Area, 42 km south of Hwy 1 on Hwy 40. It is 63 km from the trailhead via Galatea Creek Trail Camp. There are group fire pits, pit/vault toilets, secure food storage lockers, and raised tent platforms. Note: While there are group fire pits available, firewood is not provided at this site. Please note that it is illegal to remove, deface, injure or destroy trees and using dead wood lying on the ground for firewood is also prohibited. | Amenities notes: bear proof storage containers",
+   "district": "Canmore",
+   "facets": [
+    "Fire Pits",
+    "Firewood",
+    "Toilets"
+   ]
+  },
+  "wb5078": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "The Lily Lake Trail, located only 25 minutes out of Slave Lake. Beginning at Marten Mountain Viewpoint, this trail descends 28 km to the beautiful Lily Lake.",
+   "district": "Slave Lake",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb5093": {
+   "amenities": null,
+   "description": "Access is very poor for launching larger watercrafts. Parking is close to lake so you may carry your hand launch type watercraft to the waters edge.",
+   "district": "Cold Lake",
+   "facets": null,
+   "photo_count": 2
+  },
+  "wb5149": {
+   "amenities": [
+    "Camping"
+   ],
+   "description": "Park in the Lineham Creek recreation area parking lot 134kms west of Calgary located on Highwood Trail #40 highway. Note: Highway #40 is closed at the Upper Lakes and Highwood House Junction from Dec 1st to June 14th for wildlife preservation.",
+   "district": "High River",
+   "facets": [
+    "Camping"
+   ],
+   "photo_count": 1
+  },
+  "wb5158": {
+   "amenities": null,
+   "description": "Lost Guide Lake has an elevation of 2172 metres.",
+   "district": "Rocky Mountain House",
+   "facets": null,
+   "photo_count": 2
+  },
+  "wb5179": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Canmore",
+   "facets": null
+  },
+  "wb5223": {
+   "amenities": null,
+   "description": "Access to Margaret Lake is via the Forestry Trunk Road, continuing onto Waiparous Valley Road, which is very rough. The road terminates at a cutline, and the lake is accessible by ATV or UTV. The route leads directly to the lake, with an easy walk from the parking area to the waterbody. Travel time varies depending on road and trail conditions.",
+   "district": "Canmore",
+   "facets": null,
+   "photo_count": 6
+  },
+  "wb5232": {
+   "amenities": null,
+   "description": "This lake is helicopter stocked and is more accessible with ATV's.",
+   "district": "Swan Hills",
+   "facets": null
+  },
+  "wb5245": {
+   "amenities": null,
+   "description": "Mary Gregg Lake is a popular fishing lake for local fishermen.",
+   "district": "Hinton",
+   "facets": null
+  },
+  "wb5253": {
+   "amenities": null,
+   "description": "Maude Lake is located almost on top North Kananaskis Pass. It's accessed via the Turbine Canyon trail. The Turbine backcountry campground which is only about 2kms away.",
+   "district": "Canmore",
+   "facets": null
+  },
+  "wb5286": {
+   "amenities": [
+    "Boat Launch",
+    "Boating",
+    "Dock/Pier",
+    "Fish Cleaning",
+    "Laundry",
+    "Playground",
+    "Retail/Services",
+    "Water"
+   ],
+   "description": "Carson-Pegasus Provincial Park at McLeod Lake includes a campground featuring 182 campsites, day use sites, and a group use site, and offers winter camping. Other recreational activities at the provincial park and lake include bird-watching, canoeing/kayaking, cross-country skiing, fishing, hiking, horseshoes, ice fishing, power boating, swimming. | Amenities notes: life jacket loaner station; horse shoe pits",
+   "district": "Whitecourt",
+   "facets": [
+    "Boat Launch",
+    "Boating",
+    "Dock/Pier",
+    "Fish Cleaning",
+    "Laundry",
+    "Playground",
+    "Retail/Services",
+    "Water"
+   ],
+   "photo_count": 4
+  },
+  "wb5324": {
+   "amenities": [
+    "Boat Launch",
+    "Day Use"
+   ],
+   "description": "There is a boat launch, and the lake is stocked annually by AEP with trout and is aerated in winter through ACA’s Lake Aeration Program.",
+   "district": "Edson",
+   "facets": [
+    "Boat Launch",
+    "Day Use"
+   ],
+   "photo_count": 1
+  },
+  "wb5348": {
+   "amenities": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Toilets"
+   ],
+   "description": "There is a small campground at the waterbody with walk-in tent sites. There is a pier where you can hand launch a canoe or electric powered boat.",
+   "district": "Rocky Mountain House",
+   "facets": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Toilets"
+   ],
+   "photo_count": 1
+  },
+  "wb5360": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Camping Group",
+    "Day Use",
+    "Playground",
+    "Retail/Services",
+    "Sewage Disposal",
+    "Sports",
+    "Sports Baseball",
+    "Trails",
+    "Water"
+   ],
+   "description": "The campground is located on the north and northeast side of the lake, while the day-use area and group camping is located on the south side of the lake. | Amenities notes: change house",
+   "district": "Spirit River",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Camping Group",
+    "Day Use",
+    "Playground",
+    "Retail/Services",
+    "Sewage Disposal",
+    "Sports",
+    "Sports Baseball",
+    "Trails",
+    "Water"
+   ],
+   "photo_count": 22
+  },
+  "wb5387": {
+   "amenities": null,
+   "description": "Muir Lake is an easily accessible quality stocked fishery. Muir Lake features seasonal closures, bait ban and reduced harvest regulations. Seasonal restrictions apply. Check the local regulations before heading out to the lake. | Amenities notes: Basic amenities.",
+   "district": "Stony Plain",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb5407": {
+   "amenities": null,
+   "description": "Enjoy the day fishing the lake, fish from shore or from a boat. The Max boat speed on the lake is 12km/hr.",
+   "district": "Edson",
+   "facets": null,
+   "photo_count": 2
+  },
+  "wb5466": {
+   "amenities": [
+    "Boat Launch",
+    "Boating",
+    "Boating Motorized",
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Toilets",
+    "Water"
+   ],
+   "description": "A small campground found in Obed Lake Provincial Park. A great spot to launch a boat and fish for trout.",
+   "district": "Hinton",
+   "facets": [
+    "Boat Launch",
+    "Boating",
+    "Boating Motorized",
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 3
+  },
+  "wb5467": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Nordegg",
+   "facets": null
+  },
+  "wb5476": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Playground",
+    "Swimming",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Wildlife viewing and canoeing are popular activities at this provincial recreation area.",
+   "district": "Fairview",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Playground",
+    "Swimming",
+    "Toilets",
+    "Water"
+   ]
+  },
+  "wb5504": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Picnic",
+    "Playground",
+    "Retail/Services",
+    "Sewage Disposal",
+    "Shelter",
+    "Toilets",
+    "Water"
+   ],
+   "description": "The well-spaced sites are suitable for tents and RVs and natural poplar forest provides privacy. Relax and spend lazy days fishing from your boat, canoe or shore. | Amenities notes: viewpoints",
+   "district": "Cardston",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Picnic",
+    "Playground",
+    "Retail/Services",
+    "Sewage Disposal",
+    "Shelter",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 5
+  },
+  "wb5513": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Toilets",
+    "Water"
+   ],
+   "description": "The mountains of Waterton National Park that lie 4 km to the southwest provide a dramatic background for the lake.",
+   "district": "Cardston",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 2
+  },
+  "wb5521": {
+   "amenities": null,
+   "description": "Foot or ATV access only.",
+   "district": "Slave Lake",
+   "facets": null
+  },
+  "wb5538": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Toilets",
+    "Trails",
+    "Trails Hiking",
+    "Wildlife Viewing"
+   ],
+   "description": "This lake often winter kills. Maximum boat speed 12km/h.",
+   "district": "Barrhead",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Toilets",
+    "Trails",
+    "Trails Hiking",
+    "Wildlife Viewing"
+   ],
+   "photo_count": 1
+  },
+  "wb5555": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Peppers Lake Campground is located in Peppers Lake Provincial Recreation Area. Go fishing or tour the shoreline by canoe or electric powered boat.",
+   "district": "Rocky Mountain House",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 1
+  },
+  "wb5565": {
+   "amenities": null,
+   "description": "The Petite Lake Campground is a small campground located adjacent to Petite Lake There are ATV trails in the area, and it is popular for base camping during the hunting season. Electric motors only. | Amenities notes: Located in the glacial cascades natural area - camping adjacent to waterbody.",
+   "district": "Hinton",
+   "facets": null
+  },
+  "wb5568": {
+   "amenities": null,
+   "description": "This lake is located just west of Coleman near the BC border.",
+   "district": "Blairmore",
+   "facets": null
+  },
+  "wb5569": {
+   "amenities": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Picnic",
+    "Toilets",
+    "Water"
+   ],
+   "description": "This scenic little foothills lake is suited to canoeing, fishing and boating with electric powered motors. There are about 20 sites, most of which are open to each other and face the lake. They are suited for both RVs and tents. | Amenities notes: refuse containers",
+   "district": "Rocky Mountain House",
+   "facets": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Picnic",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 6
+  },
+  "wb5572": {
+   "amenities": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Shelter",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Electric motor or hand launch boats allowed on the lake.",
+   "district": "Grande Cache",
+   "facets": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Shelter",
+    "Toilets",
+    "Water"
+   ]
+  },
+  "wb5661": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Dock/Pier",
+    "Fishing Access",
+    "Fishing Access Pier",
+    "Toilets"
+   ],
+   "description": "This is a large spring-fed lake in Cypress Hills Provincial Park.",
+   "district": "Medicine Hat",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Dock/Pier",
+    "Fishing Access",
+    "Fishing Access Pier",
+    "Toilets"
+   ],
+   "photo_count": 5
+  },
+  "wb5667": {
+   "amenities": [
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Picnic",
+    "Toilets",
+    "Water"
+   ],
+   "description": "There are several different ways to access the lake, including trail heads at Buller Mountain Day Use, Galatea Day Use, and Ribbon Creek Day Use. Note that there is a very steep section of trail with chains to aid climbing between Ribbon Falls and Ribbon Lake Ribbon Lake is a gem tucked away in the heart of Spray Valley. Enjoy the peace and tranquility at this site Here there are tent pads, group fire pits, pit/vault toilets, and secure food storage lockers . | Amenities notes: 10 storage lockers",
+   "district": "Canmore",
+   "facets": [
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Picnic",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 1
+  },
+  "wb5714": {
+   "amenities": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Fish Cleaning",
+    "Fishing Access",
+    "Fishing Access Pier",
+    "Picnic",
+    "Shelter",
+    "Toilets"
+   ],
+   "description": "There is a quiet little campground near the lake with treed sites.",
+   "district": "Fairview",
+   "facets": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Fish Cleaning",
+    "Fishing Access",
+    "Fishing Access Pier",
+    "Picnic",
+    "Shelter",
+    "Toilets"
+   ],
+   "photo_count": 1
+  },
+  "wb5729": {
+   "amenities": [
+    "Dock/Pier",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "Open to the public all year round, the lake is aerated in order to support the fish population. There is a boat launch and pier available for public use, electric motors only.",
+   "district": "Barrhead",
+   "facets": [
+    "Dock/Pier",
+    "Picnic",
+    "Toilets"
+   ],
+   "photo_count": 1
+  },
+  "wb5753": {
+   "amenities": null,
+   "description": "Sauer is a charming, tiny lake set among the rolling hills west of the city of Edmonton. It is a quiet spot for canoeing or fishing for rainbow trout.",
+   "district": "Stony Plain",
+   "facets": null,
+   "photo_count": 3
+  },
+  "wb5766": {
+   "amenities": [
+    "Camping",
+    "Day Use",
+    "Fire Pits",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "Only electric or non-motorized water crafts are permitted on lake. | Amenities notes: barbeque sites",
+   "district": "Swan Hills",
+   "facets": [
+    "Camping",
+    "Day Use",
+    "Fire Pits",
+    "Picnic",
+    "Toilets"
+   ],
+   "photo_count": 4
+  },
+  "wb5788": {
+   "amenities": null,
+   "description": "Shark Lake, also known as Marushka Lake, is a scenic hike suitable for both beginner and experienced hikers. The trail is well-compacted by frequent users, making it accessible year-round and an excellent option for snowshoeing during the winter months. The hike covers a 7.6-kilometer round trip with an elevation gain of approximately 170 meters and typically takes 2 to 2.5 hours one way. The trailhead is located at the end of Mount Shark Road in Spray Valley Provincial Park. Hikers should follow the white trail flags to reach the lake, where a faint path circles the shoreline, offering serene views and a peaceful natural setting.",
+   "district": "Canmore",
+   "facets": null
+  },
+  "wb5804": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Camping Power",
+    "Day Use",
+    "Fire Pits",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Picnic",
+    "Retail/Services",
+    "Shelter",
+    "Sports",
+    "Swimming",
+    "Toilets",
+    "Toilets",
+    "Trails",
+    "Trails Hiking",
+    "Water"
+   ],
+   "description": "Fish Lake is also referred to as Shunda Lake. There are over 100 sites, including power, un-serviced, waterfront and pull-through sites. Sites are spacious and most are surrounded by trees. You may canoe or boat using an electric motor on the beautiful foothill lake, which is stocked with rainbow trout. There is hiking, mountain biking, swimming, and access to OHV trails in the area.",
+   "district": "Nordegg",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Camping Power",
+    "Day Use",
+    "Fire Pits",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Picnic",
+    "Retail/Services",
+    "Shelter",
+    "Sports",
+    "Swimming",
+    "Toilets",
+    "Trails",
+    "Trails Hiking",
+    "Water"
+   ],
+   "photo_count": 30
+  },
+  "wb5805": {
+   "amenities": [
+    "Boat Launch",
+    "Fire Pits",
+    "Playground",
+    "Shelter",
+    "Toilets"
+   ],
+   "description": "The lake is a day use area.",
+   "district": "Canmore",
+   "facets": [
+    "Boat Launch",
+    "Fire Pits",
+    "Playground",
+    "Shelter",
+    "Toilets"
+   ],
+   "photo_count": 1
+  },
+  "wb5858": {
+   "amenities": null,
+   "description": "Sparrows Egg Lake was stocked in fall 2025 with 900 cutthroat trout. This remote lake, located west of Calgary in Kananaskis Country, is stocked by helicopter every two years. It’s a hike-in destination, offering anglers a pristine backcountry experience.",
+   "district": "Canmore",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb5874": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Swimming",
+    "Water"
+   ],
+   "description": "Public access is available for fishing. | Amenities notes: cottages for rent",
+   "district": "Stony Plain",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Swimming",
+    "Water"
+   ],
+   "photo_count": 6
+  },
+  "wb5895": {
+   "amenities": [
+    "Boat Launch",
+    "Picnic"
+   ],
+   "description": "This lake has a few private cabins surrounding it. Yellow Perch are present in the lake.",
+   "district": "Stony Plain",
+   "facets": [
+    "Boat Launch",
+    "Picnic"
+   ],
+   "photo_count": 2
+  },
+  "wb5901": {
+   "amenities": null,
+   "description": "Stenton Lake is highly remote, requiring approximately 7 hours of horseback travel (21 km) along the South Ghost drainage, followed by a 5 km hike through alpine meadows and unmaintained trails with some route finding. The lake spans approximately 10 acres and is located at an elevation of 2,250 meters above sea level. From the Forestry Trunk Road via the TransAlta Road (unmarked trail; route finding required). Or from Canmore via Cougar Creek (approximately 24 km round trip).Travel methods include horseback, hiking, and limited ATV/UTV use; however, motorized vehicles are prohibited within Don Getty Provincial Park. The route involves significant elevation gain, river crossings, and challenging terrain. Total travel time typically requires an overnight stay, with a round-trip duration of 20–24 hours.",
+   "district": "Canmore",
+   "facets": null,
+   "photo_count": 3
+  },
+  "wb5919": {
+   "amenities": null,
+   "description": "This is a great lake for families or for beginner ice fishing.",
+   "district": "Rocky Mountain House",
+   "facets": null,
+   "photo_count": 6
+  },
+  "wb5929": {
+   "amenities": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Fish Cleaning",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Sulphur Lake Provincial Recreation area is located about an hour drive north of Peace River. There's a hand launch and a boat launch, as well as a fishing pier and fish cleaning station.",
+   "district": "Fairview",
+   "facets": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Fish Cleaning",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 1
+  },
+  "wb5944": {
+   "amenities": [
+    "Fire Pits",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "Most of the campsites are surrounded by pine and spruce trees that provide good privacy with a few choice sites located next to the lake for fishing.",
+   "district": "Valleyview",
+   "facets": [
+    "Fire Pits",
+    "Picnic",
+    "Toilets"
+   ],
+   "photo_count": 4
+  },
+  "wb5968": {
+   "amenities": null,
+   "description": "The lake can only be accessed by foot or off road vehicle.",
+   "district": "Rocky Mountain House",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb5971": {
+   "amenities": null,
+   "description": "Tea Lakes can be accessed from the parking lot at the end of Highway 888 or via the trailhead near Lesser Slave Lake Provincial Park, located at Highway 2 and Range Road 125A. | Amenities notes: Tea Lakes is one of our helicopter-stocked lakes and was freshly stocked in 2025; ensuring excellent fishing opportunities for visitors.",
+   "district": "Slave Lake",
+   "facets": null
+  },
+  "wb5990": {
+   "amenities": [
+    "Camping",
+    "Toilets"
+   ],
+   "description": "Due to the 2013 flood, some trails and bridges remain washed out and select trails are closed. Significant work has already been done to re-open access to trails and areas. Check before heading into the area for updated conditions. | Amenities notes: bear proof containers",
+   "district": "Canmore",
+   "facets": [
+    "Camping",
+    "Toilets"
+   ],
+   "photo_count": 1
+  },
+  "wb6039": {
+   "amenities": [
+    "Accessibility",
+    "Boat Launch",
+    "Firewood",
+    "Fish Cleaning",
+    "Playground",
+    "Toilets",
+    "Water",
+    "Wildlife Viewing"
+   ],
+   "description": "Twin Lakes Campground is a popular campground for fishing enthusiasts. The boat launch makes it easy to get into the lake for fishing trout and perch, and the wheelchair-accessible pier is great for those looking to cast from shore.",
+   "district": "Rocky Mountain House",
+   "facets": [
+    "Accessibility",
+    "Boat Launch",
+    "Firewood",
+    "Fish Cleaning",
+    "Playground",
+    "Toilets",
+    "Water",
+    "Wildlife Viewing"
+   ],
+   "photo_count": 2
+  },
+  "wb6044": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Dock/Pier",
+    "Firewood",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Playground",
+    "Toilets",
+    "Water",
+    "Wildlife Viewing"
+   ],
+   "description": "The lake is excellent for canoeing and non-motorized boats with lots of wildlife viewing opportunities. Fish for trout, hike the loop trail to the second lake or take a dip in the cool deep waters.",
+   "district": "Manning",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Dock/Pier",
+    "Firewood",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Playground",
+    "Toilets",
+    "Water",
+    "Wildlife Viewing"
+   ],
+   "photo_count": 2
+  },
+  "wb6051": {
+   "amenities": [
+    "Boat Launch",
+    "Boating",
+    "Boating Motorized",
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Fishing Access",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Toilets",
+    "Trails",
+    "Trails Biking",
+    "Trails Hiking",
+    "Water",
+    "Wildlife Viewing",
+    "Winter Recreation"
+   ],
+   "description": "A self-guided trail leads through forests and meadows between the two lakes. Three other more challenging trails lead to scenic views. The lakes are stocked with trout and boat speed is limited to 12 km/h.",
+   "district": "Grande Prairie",
+   "facets": [
+    "Boat Launch",
+    "Boating",
+    "Boating Motorized",
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Fishing Access",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Toilets",
+    "Trails",
+    "Trails Biking",
+    "Trails Hiking",
+    "Water",
+    "Wildlife Viewing",
+    "Winter Recreation"
+   ]
+  },
+  "wb6061": {
+   "amenities": [
+    "Boat Launch",
+    "Toilets",
+    "Trails",
+    "Trails Hiking",
+    "Water"
+   ],
+   "description": "Upper Kananaskis Lake is located within Peter Lougheed Provincial Park and offers stunning mountain scenery and recreational opportunities. Visitors can access the lake by parking at the Upper Kananaskis Lake Day Use Area; please note that a Kananaskis Conservation Pass is required for parking. The main hiking loop around the lake is approximately 15.8 kilometers in length, with an elevation gain of 296 meters. This route typically takes 4 to 6 hours to complete and is considered an easy to moderate hike, providing panoramic views of the lake and surrounding peaks.",
+   "district": "Canmore",
+   "facets": [
+    "Boat Launch",
+    "Toilets",
+    "Trails",
+    "Trails Hiking",
+    "Water"
+   ],
+   "photo_count": 2
+  },
+  "wb6082": {
+   "amenities": null,
+   "description": "This pond is in Vermilion Provincial Park. Users are subject to Vermilion Provincial Park restrictions.",
+   "district": "Vermilion",
+   "facets": null
+  },
+  "wb6086": {
+   "amenities": [
+    "Fishing Access",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak"
+   ],
+   "description": "No motorized boats are permitted on this waterbody.",
+   "district": "Grande Cache",
+   "facets": [
+    "Fishing Access",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak"
+   ],
+   "photo_count": 2
+  },
+  "wb6160": {
+   "amenities": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Fishing Access",
+    "Fishing Access Pier",
+    "Toilets"
+   ],
+   "description": "Hand launching is provided at the lake, larger vessels may be more challenging.",
+   "district": "Hinton",
+   "facets": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Fishing Access",
+    "Fishing Access Pier",
+    "Toilets"
+   ]
+  },
+  "wb6173": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA stocks this pond annually with trout, typically before the May long weekend. A boat launch, dock, outhouse and garbage bins are available for public use. | Amenities notes: no open fires; foot access only.",
+   "district": "Ponoka",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6524": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "This 50-acre site is approximately 30 km N of Valleyview. These lakes are stocked annually by EPA with trout and aerated (October - April) through ACA’s Lake Aeration Program. The gravel boat launch is in fair condition and day-use facilities are available. | Amenities notes: no open fires; foot access only.",
+   "district": "Valleyview",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 11
+  },
+  "wb6525": {
+   "amenities": null,
+   "description": "The hike to Burstall Lakes is an all-season adventure, with winter being a favorite time for many visitors. The trail is relatively flat and easy, making it ideal for snowshoeing or cross-country skiing. Most of the route winds through forested terrain, but expect stronger winds as you approach the lake where tree cover thins. At the trailhead, you’ll find a large parking lot and an outhouse for convenience. | Amenities notes: The upper and lower lakes helicopter stocked. These lakes have recently been stocked in the fall of 2025.",
+   "district": "Canmore",
+   "facets": null
+  },
+  "wb6528": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Fish Cleaning",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Chain Lakes Campground is located in Chain Lakes Provincial Recreation Area. This small lake is stocked annually, providing a great opportunity to fish from shore, canoe, or electric powered boat. Check your local regulations before you go. | Amenities notes: firepits",
+   "district": "Athabasca",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Fish Cleaning",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 3
+  },
+  "wb6530": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Canmore",
+   "facets": null,
+   "photo_count": 2
+  },
+  "wb6533": {
+   "amenities": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Shelter",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Electric motor or hand launch boats allowed on the lake.",
+   "district": "Grande Cache",
+   "facets": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Shelter",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 1
+  },
+  "wb6534": {
+   "amenities": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Shelter",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Electric motor or hand launch boats allowed on the lake.",
+   "district": "Grande Cache",
+   "facets": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Shelter",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 4
+  },
+  "wb6535": {
+   "amenities": [
+    "Boat Launch",
+    "Boating",
+    "Boating Motorized",
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Fishing Access",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Toilets",
+    "Trails",
+    "Trails Biking",
+    "Trails Hiking",
+    "Water",
+    "Wildlife Viewing",
+    "Winter Recreation"
+   ],
+   "description": "This remote park offers fishing, wildlife viewing, and hiking . A self-guided trail leads through forests and meadows between the two lakes. The lakes are stocked with trout and the boat speed is limited to 12 km/h.",
+   "district": "Grande Prairie",
+   "facets": [
+    "Boat Launch",
+    "Boating",
+    "Boating Motorized",
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Fishing Access",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Toilets",
+    "Trails",
+    "Trails Biking",
+    "Trails Hiking",
+    "Water",
+    "Wildlife Viewing",
+    "Winter Recreation"
+   ],
+   "photo_count": 2
+  },
+  "wb6537": {
+   "amenities": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Wildhorse Lake provides a hand launch.",
+   "district": "Hinton",
+   "facets": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Fish Cleaning",
+    "Toilets",
+    "Water"
+   ]
+  },
+  "wb6541": {
+   "amenities": null,
+   "description": "This lake is one of our helicopter stocked lakes. The lower lake was stocked in the fall of 2025 with 1,200 cutthroat trout. Hogarth Lakes Trail is a scenic 4.2-kilometer loop near Kananaskis Improvement District that features beautiful lakes and is suitable for all skill levels. The trail is best enjoyed from March through October and is dog-friendly, provided pets are kept on a leash.",
+   "district": "Canmore",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb6598": {
+   "amenities": [
+    "Camping",
+    "Day Use",
+    "Swimming"
+   ],
+   "description": "This pond is located in the town of Zama. There is a swimming pond, camping area and a day use area near the fishing pond.",
+   "district": "High Level",
+   "facets": [
+    "Camping",
+    "Day Use",
+    "Swimming"
+   ]
+  },
+  "wb6601": {
+   "amenities": null,
+   "description": "There is a low risk of winter kill at this lake. Access roads are poor at all times of the year. An off-road vehicle is mandatory and you must walk the last 200m to the lake. Electric motors only. No overnight camping permitted.",
+   "district": "Sundre",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb6605": {
+   "amenities": null,
+   "description": "Smutts Lakes are located up a steep headwall trail and border Banff National Park.",
+   "district": "Canmore",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb6606": {
+   "amenities": null,
+   "description": "This waterbody is stocked by helicopter and is a hike in lake only.",
+   "district": "Canmore",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb6607": {
+   "amenities": null,
+   "description": "This site is stocked by helicopter. Foot or off-road vehicle access only. The hike in is very steep, and hiking may be difficult in muddy conditions. This lake has a high probability of winter kill.",
+   "district": "Cochrane",
+   "facets": null,
+   "photo_count": 2
+  },
+  "wb6608": {
+   "amenities": null,
+   "description": "Upper and Lower Champion Lake are Heli-stocked A short walk from McLean Creek Trail (range road 51A) will bring you to the lake The trail is closed from December to May.",
+   "district": "Cochrane",
+   "facets": null,
+   "photo_count": 3
+  },
+  "wb6609": {
+   "amenities": [
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "This 150-acre site is approximately 21 km N of Peace River. The pond is stocked annually by EPA with trout. | Amenities notes: garbage receptacles",
+   "district": "Peace River",
+   "facets": [
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ],
+   "photo_count": 2
+  },
+  "wb6610": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Canmore",
+   "facets": null
+  },
+  "wb6613": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA stocks this pond annually with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Barrhead",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6614": {
+   "amenities": [
+    "Day Use",
+    "Fishing Access",
+    "Picnic",
+    "Trails",
+    "Trails Cross-Country Ski",
+    "Winter Recreation"
+   ],
+   "description": "By-the-Lake Park is a 17-acre constructed lake surrounded by a 25 kilometre paved trail. A large picnic area, playground, and public washrooms make this an ideal spot to spend some time and fish.",
+   "district": "Wetaskiwin",
+   "facets": [
+    "Day Use",
+    "Fishing Access",
+    "Picnic",
+    "Trails",
+    "Trails Cross-Country Ski",
+    "Winter Recreation"
+   ]
+  },
+  "wb6617": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "This 12-acre lake is approximately 30 km north west of Cochrane. Consists of a small day-use area that provides access to good sport fishing opportunities. A boat launch is available for public use. The lake is stocked annually by EPA with trout and aerated in the winter through ACA’s Lake Aeration Program. | Amenities notes: no open fires; foot access only.",
+   "district": "Sundre",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 8
+  },
+  "wb6618": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Valleyview",
+   "facets": null
+  },
+  "wb6619": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "This pond is in Vegreville right beside the iconic \"World's Largest Easter Egg\". ACA stocks this pond annually with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Vegreville",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6620": {
+   "amenities": [
+    "Day Use",
+    "Toilets"
+   ],
+   "description": "This pond is located right outside of Vegreville. On the east side of the pond fishing is more accessible, due to a cleaner shoreline that is free from debris. | Amenities notes: no open fires; foot access only",
+   "district": "Vegreville",
+   "facets": [
+    "Day Use",
+    "Toilets"
+   ]
+  },
+  "wb6622": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA stocks this pond annually with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Vermilion",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6623": {
+   "amenities": [
+    "Day Use",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "description": "This stocked trout pond has everything to make a family outing enjoyable. | Amenities notes: foot access only",
+   "district": "Hanna",
+   "facets": [
+    "Day Use",
+    "Trails",
+    "Trails Hiking"
+   ]
+  },
+  "wb6625": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "The pond is open to public fishing year round. A great place to bring the family. | Amenities notes: no open fires; foot access only.",
+   "district": "Evansburg",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 1
+  },
+  "wb6626": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "This pond is off nestled in the trees just of the highway. | Amenities notes: no open fires; foot access only.",
+   "district": "Edson",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 1
+  },
+  "wb6635": {
+   "amenities": null,
+   "description": "Approximately 26 km's from Swan Hills via off road trails. Approximately 20 km's from Swan Hills to the staging area.",
+   "district": "Swan Hills",
+   "facets": null
+  },
+  "wb6636": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "The pond is a short walk from the parking area. | Amenities notes: no open fires; foot access only.",
+   "district": "Fort McMurray",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 1
+  },
+  "wb6637": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "The pond is a short walk from the parking area. | Amenities notes: no open fires; foot access only.",
+   "district": "Fort McMurray",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 2
+  },
+  "wb6638": {
+   "amenities": null,
+   "description": "Trappers Lake is a lake located just 85 miles from Josephburg.",
+   "district": "Edson",
+   "facets": null
+  },
+  "wb6642": {
+   "amenities": null,
+   "description": "This lake is 44 minutes north of Lac La Biche.",
+   "district": "Lac La Biche",
+   "facets": null,
+   "photo_count": 4
+  },
+  "wb6647": {
+   "amenities": null,
+   "description": "This pond is located off the Yellowhead highway.",
+   "district": "Evansburg",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb6651": {
+   "amenities": null,
+   "description": "This lake is a reclaimed mine site.",
+   "district": "Edson",
+   "facets": null,
+   "photo_count": 2
+  },
+  "wb6652": {
+   "amenities": [
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Toilets",
+    "Water"
+   ],
+   "description": "The park is made up of two areas, the Sundance Valley along Sundance Creek and Emerson Lakes to the west.",
+   "district": "Edson",
+   "facets": [
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Toilets",
+    "Water"
+   ]
+  },
+  "wb6655": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Vegreville",
+   "facets": null
+  },
+  "wb6658": {
+   "amenities": null,
+   "description": "Lake is only accessible by hiking or biking only.",
+   "district": "Edson",
+   "facets": null,
+   "photo_count": 2
+  },
+  "wb6659": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "Dandurand Lake is located north of Hwy #16 and just southeast of the boundary of Sundance Provincial Park. It is stocked annually and is a popular fishing hole. | Amenities notes: no open fires; foot access only.",
+   "district": "Edson",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 2
+  },
+  "wb6662": {
+   "amenities": null,
+   "description": "Entry lake is one of the helicopter stocked lakes. It was recently stocked in the fall of 2025 with 668 cutthroat trout.",
+   "district": "Nordegg",
+   "facets": null
+  },
+  "wb6668": {
+   "amenities": null,
+   "description": "Perch may be present at this pond.",
+   "district": "Fort McMurray",
+   "facets": null,
+   "photo_count": 2
+  },
+  "wb6669": {
+   "amenities": null,
+   "description": "Horseshoe Lake is a 16 kilometer near Jasper, that features beautiful wild flowers and is good for all skill levels. The trail is primarily used for hiking, walking, nature trips, and bird watching and is best used from May until October. Dogs are also able to use this trail but must be kept on leash.",
+   "district": "Athabasca",
+   "facets": null,
+   "photo_count": 3
+  },
+  "wb6670": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Vegreville",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6671": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "This pond is located in Airdrie. ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Cochrane",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6674": {
+   "amenities": [
+    "Camping",
+    "Camping Group",
+    "Day Use",
+    "Picnic",
+    "Playground",
+    "Shelter",
+    "Sports",
+    "Trails",
+    "Trails Hiking",
+    "Trails Interpretive"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend.",
+   "district": "Camrose",
+   "facets": [
+    "Camping",
+    "Camping Group",
+    "Day Use",
+    "Picnic",
+    "Playground",
+    "Shelter",
+    "Sports",
+    "Trails",
+    "Trails Hiking",
+    "Trails Interpretive"
+   ]
+  },
+  "wb6677": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Canmore",
+   "facets": null
+  },
+  "wb6682": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Lethbridge",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6684": {
+   "amenities": [
+    "Camping",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "This campground is user maintained campground bordering the shores of Montagneuse Lake. | Amenities notes: firepits",
+   "district": "Fairview",
+   "facets": [
+    "Camping",
+    "Picnic",
+    "Toilets"
+   ],
+   "photo_count": 2
+  },
+  "wb6686": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Strathmore",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6688": {
+   "amenities": null,
+   "description": "This lake is stocked annually by EPA with trout.",
+   "district": "Vermilion",
+   "facets": null,
+   "photo_count": 2
+  },
+  "wb6692": {
+   "amenities": [
+    "Camping",
+    "Toilets"
+   ],
+   "description": "This park has camping on site with the basic camping amenities. The site is well taken care of. | Amenities notes: garbage receptacles",
+   "district": "Cardston",
+   "facets": [
+    "Camping",
+    "Toilets"
+   ],
+   "photo_count": 3
+  },
+  "wb6693": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Dock/Pier",
+    "Picnic",
+    "Swimming",
+    "Toilets",
+    "Trails",
+    "Trails Hiking",
+    "Winter Recreation"
+   ],
+   "description": "Spring Lake is a fairly small lake stocked with rainbow trout. No gas powered motors are permitted on the lake.",
+   "district": "Spirit River",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Dock/Pier",
+    "Picnic",
+    "Swimming",
+    "Toilets",
+    "Trails",
+    "Trails Hiking",
+    "Winter Recreation"
+   ]
+  },
+  "wb6695": {
+   "amenities": null,
+   "description": "Sardine Lake is stocked with rainbow trout but perch can also be caught here.",
+   "district": "Drayton Valley",
+   "facets": null,
+   "photo_count": 11
+  },
+  "wb6697": {
+   "amenities": [
+    "Camping",
+    "Fire Pits",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "This is a county owned camp site Camping is allowed for 14 days at a time. There are no hook ups and firewood for sale. | Amenities notes: trash cans",
+   "district": "Strathmore",
+   "facets": [
+    "Camping",
+    "Fire Pits",
+    "Picnic",
+    "Toilets"
+   ],
+   "photo_count": 1
+  },
+  "wb6699": {
+   "amenities": [
+    "Boat Launch",
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "This calm clearwater lake offers some of the best rainbow trout fishing in the area.",
+   "district": "Smoky Lake",
+   "facets": [
+    "Boat Launch",
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ],
+   "photo_count": 2
+  },
+  "wb6702": {
+   "amenities": [
+    "Day Use",
+    "Dock/Pier"
+   ],
+   "description": "This lake is stocked with brook and tiger trout. It is a very shallow lake and some years can be affected by winter kill.",
+   "district": "Rocky Mountain House",
+   "facets": [
+    "Day Use",
+    "Dock/Pier"
+   ],
+   "photo_count": 1
+  },
+  "wb6705": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "This lake is a great place to spend the day and fish. | Amenities notes: no open fires; foot access only.",
+   "district": "High Level",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 6
+  },
+  "wb6706": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Camrose",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6714": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Oyen",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6718": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Ponoka",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6721": {
+   "amenities": null,
+   "description": "The Peace Ponds are a great for fly fishing.",
+   "district": "Peace River",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb6724": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. Mobility-impaired access improvements were made that include a wheelchair-friendly asphalt path, casting platform and outhouse. | Amenities notes: no open fires; foot access only.",
+   "district": "Ponoka",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6726": {
+   "amenities": [
+    "Accessibility",
+    "Boat Launch",
+    "Camping",
+    "Camping Group",
+    "Day Use",
+    "Fire Pits",
+    "Firewood",
+    "Picnic",
+    "Playground",
+    "Sewage Disposal",
+    "Shelter",
+    "Sports",
+    "Water"
+   ],
+   "description": "Electric motors only. No horses or off-road vehicles allowed in Open Creek Dam Campground.",
+   "district": "Rocky Mountain House",
+   "facets": [
+    "Accessibility",
+    "Boat Launch",
+    "Camping",
+    "Camping Group",
+    "Day Use",
+    "Fire Pits",
+    "Firewood",
+    "Picnic",
+    "Playground",
+    "Sewage Disposal",
+    "Shelter",
+    "Sports",
+    "Water"
+   ],
+   "photo_count": 6
+  },
+  "wb6730": {
+   "amenities": [
+    "Retail/Services",
+    "Washrooms"
+   ],
+   "description": "Muskoseepi Park Pond is located right beside the Muskoseepi Park Pavilion. This pond is used for skating during the winter season. | Amenities notes: Interactive programs; information; amphitheatre.",
+   "district": "Grande Prairie",
+   "facets": [
+    "Retail/Services",
+    "Toilets"
+   ],
+   "photo_count": 2
+  },
+  "wb6732": {
+   "amenities": [
+    "Camping",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Picnic",
+    "Playground",
+    "Sewage Disposal",
+    "Sports",
+    "Trails",
+    "Trails Biking",
+    "Trails Hiking"
+   ],
+   "description": "There are 16 full-service RV parking spots, 4 with 30 amp, and 12 with 15 amp power, and 3 tenting spots, Wi-Fi, bathroom facilities, RV dumping station for site renters, gazebo shelter for gatherings, and firewood available for visitors. | Amenities notes: full hookup; recreation hall",
+   "district": "Spirit River",
+   "facets": [
+    "Camping",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Picnic",
+    "Playground",
+    "Sewage Disposal",
+    "Sports",
+    "Trails",
+    "Trails Biking",
+    "Trails Hiking"
+   ],
+   "photo_count": 4
+  },
+  "wb6734": {
+   "amenities": [
+    "Picnic",
+    "Playground",
+    "Sports",
+    "Sports Baseball",
+    "Sports Soccer"
+   ],
+   "description": "Nicholas Sheran Park is the premier west side park featuring a man-made lake, pathway system, large open spaces, disk golf, a large playground, fitness equipment, and a large picnic shelter. Ice fishing is accessible in the winter.",
+   "district": "Lethbridge",
+   "facets": [
+    "Picnic",
+    "Playground",
+    "Sports",
+    "Sports Baseball",
+    "Sports Soccer"
+   ],
+   "photo_count": 5
+  },
+  "wb6735": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Red Deer",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6736": {
+   "amenities": [
+    "Trails",
+    "Trails Hiking"
+   ],
+   "description": "There is a fishing platform, and a walking path around the pond. | Amenities notes: park benches.",
+   "district": "Stony Plain",
+   "facets": [
+    "Trails",
+    "Trails Hiking"
+   ],
+   "photo_count": 3
+  },
+  "wb6737": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA stocks this pond annually with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Wetaskiwin",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6741": {
+   "amenities": [
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend.",
+   "district": "Olds",
+   "facets": [
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ]
+  },
+  "wb6746": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Ponoka",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6750": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Dock/Pier",
+    "Firewood",
+    "Fish Cleaning",
+    "Toilets"
+   ],
+   "description": "Campsite basics include fire pits, firewood, picnic tables and pit/vault toilets; also a picnic shelter, fish cleaning stand and sewage disposal station. There is a boat launch and a dock for fishing.",
+   "district": "High Level",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Dock/Pier",
+    "Firewood",
+    "Fish Cleaning",
+    "Toilets"
+   ],
+   "photo_count": 1
+  },
+  "wb6753": {
+   "amenities": [
+    "Day Use",
+    "Day Use Picnic",
+    "Firewood",
+    "Picnic",
+    "Playground",
+    "Sewage Disposal",
+    "Shelter",
+    "Showers",
+    "Washrooms",
+    "Water"
+   ],
+   "description": "The campground is open May 1st to September 30th, but fishing is accessible all year around. Check you local regulations before you go! | Amenities notes: Power sites",
+   "district": "Valleyview",
+   "facets": [
+    "Day Use",
+    "Day Use Picnic",
+    "Firewood",
+    "Picnic",
+    "Playground",
+    "Sewage Disposal",
+    "Shelter",
+    "Showers",
+    "Toilets",
+    "Water"
+   ]
+  },
+  "wb6755": {
+   "amenities": [
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Shelter",
+    "Toilets",
+    "Water"
+   ],
+   "description": "The McLaren Dam Recreation Area features 27 sites (15 with power), outhouse toilets, fire pits, free firewood, drinking water, a camp kitchen, and access to fishing for stocked trout. | Amenities notes: McLaren Dam Recreation Area features 27 sites (15 with power)",
+   "district": "Drumheller",
+   "facets": [
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Shelter",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 5
+  },
+  "wb6757": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Lethbridge",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6758": {
+   "amenities": [
+    "Day Use",
+    "Parking",
+    "Toilets"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend.",
+   "district": "Lethbridge",
+   "facets": [
+    "Day Use",
+    "Parking",
+    "Toilets"
+   ],
+   "photo_count": 2
+  },
+  "wb6760": {
+   "amenities": null,
+   "description": "The pond is located approximately 3 miles West of Lloydminster on Highway 16, on the North side of the highway. Check your local regulations before you go!",
+   "district": "Lloydminster",
+   "facets": null
+  },
+  "wb6761": {
+   "amenities": [
+    "Camping",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "The Lougheed Trout Pond, located within the village limits.",
+   "district": "Camrose",
+   "facets": [
+    "Camping",
+    "Picnic",
+    "Toilets"
+   ]
+  },
+  "wb6764": {
+   "amenities": [
+    "Playground",
+    "Toilets",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "description": "Leduc Reservoir borders Fred Johns Park. The park is connected to the Multiway Trail and offers a playground, ball diamonds, picnic area, and summer fishing for stocked trout. | Amenities notes: garbage receptacles.",
+   "district": "Wetaskiwin",
+   "facets": [
+    "Playground",
+    "Toilets",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "photo_count": 3
+  },
+  "wb6765": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA stocks this pond annually with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Stony Plain",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6767": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Cardston",
+   "facets": null
+  },
+  "wb6770": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "It offers good sport fishing opportunities. This waterbody is part of the ACA's Lake Aeration Program. | Amenities notes: no open fires; foot access only.",
+   "district": "Stettler",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 11
+  },
+  "wb6773": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Drumheller",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6774": {
+   "amenities": null,
+   "description": "This small pond gets quite snowy in the winter. Ice fish in the early winter, as this pond has a tendency to winterkill.",
+   "district": "Wetaskiwin",
+   "facets": null,
+   "photo_count": 4
+  },
+  "wb6776": {
+   "amenities": [
+    "Picnic",
+    "Swimming",
+    "Swimming Dog Area",
+    "Trails",
+    "Washrooms",
+    "Winter Recreation"
+   ],
+   "description": "A fenced dog park and trails wrap the lake, this park is a gathering place for those needing fresh air and outdoor fun that includes fishing for stocked trout. | Amenities notes: fenced dog park; change building",
+   "district": "Edmonton",
+   "facets": [
+    "Picnic",
+    "Swimming",
+    "Swimming Dog Area",
+    "Toilets",
+    "Trails",
+    "Winter Recreation"
+   ]
+  },
+  "wb6778": {
+   "amenities": [
+    "Camping",
+    "Day Use",
+    "Firewood",
+    "Picnic",
+    "Playground",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Cecil Thompson Park that features outdoor exercise equipment, an excellent fishing pond, a beautiful gazebo and a walking bridge. It is a perfect location to spend the day or spend the night at one of the 5 un-serviced lots, available first come, first serve basis at no charge.",
+   "district": "Peace River",
+   "facets": [
+    "Camping",
+    "Day Use",
+    "Firewood",
+    "Picnic",
+    "Playground",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 3
+  },
+  "wb6780": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Camping Group",
+    "Day Use",
+    "Firewood",
+    "Picnic",
+    "Playground",
+    "Shelter",
+    "Sports",
+    "Toilets"
+   ],
+   "description": "Huber Dam has 25 powered campsites as well as overflow and non-power campsites. There is a large group area for group camping with campfire pits and free firewood. Fishing and canoeing are also a fun choice and boats are easily launched at the boat launch. | Amenities notes: power sites available",
+   "district": "Coronation",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Camping Group",
+    "Day Use",
+    "Firewood",
+    "Picnic",
+    "Playground",
+    "Shelter",
+    "Sports",
+    "Toilets"
+   ],
+   "photo_count": 9
+  },
+  "wb6784": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access .",
+   "district": "Vegreville",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6785": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Vermilion",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6786": {
+   "amenities": [
+    "Boat Launch",
+    "Day Use"
+   ],
+   "description": "Foot access only with a primitive boat launch available. This pond is aerated October - April through the ACA Lake Aeration Program.",
+   "district": "Rocky Mountain House",
+   "facets": [
+    "Boat Launch",
+    "Day Use"
+   ],
+   "photo_count": 2
+  },
+  "wb6788": {
+   "amenities": [
+    "Camping",
+    "Firewood",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Picnic",
+    "Toilets",
+    "Trails",
+    "Trails Biking",
+    "Trails Hiking",
+    "Water",
+    "Wildlife Viewing"
+   ],
+   "description": "The pond is accessed by a short trail off Cache Lake Campground access road. Cross country skiing, tobogganing and snowmobiling off site. A total of 12 sites that are first come first serve, open year round. The site locations are poorly signed. | Amenities notes: guided tours",
+   "district": "Hinton",
+   "facets": [
+    "Camping",
+    "Firewood",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Picnic",
+    "Toilets",
+    "Trails",
+    "Trails Biking",
+    "Trails Hiking",
+    "Water",
+    "Wildlife Viewing"
+   ],
+   "photo_count": 2
+  },
+  "wb6790": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Stony Plain",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6791": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA stocks this pond annually with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Edmonton",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 2
+  },
+  "wb6794": {
+   "amenities": [
+    "Accessibility",
+    "Day Use",
+    "Dock/Pier",
+    "Fire Pits",
+    "Fish Cleaning",
+    "Toilets"
+   ],
+   "description": "Grovedale Fish Pond includes 10-day use sites that have picnic tables and fire pits. There is garbage/recycle containment’s place throughout. Firewood is provided which is located inside the gate One handicap accessible outhouse facility, fish cleaning station, 2 fishing docks, as well as a large parking area.",
+   "district": "Grande Prairie",
+   "facets": [
+    "Accessibility",
+    "Day Use",
+    "Dock/Pier",
+    "Fire Pits",
+    "Fish Cleaning",
+    "Toilets"
+   ],
+   "photo_count": 4
+  },
+  "wb6795": {
+   "amenities": null,
+   "description": "Quiet pond, snowshoes may be required to access pond in the winter season",
+   "district": "Peace River",
+   "facets": null,
+   "photo_count": 3
+  },
+  "wb6796": {
+   "amenities": [
+    "Day Use",
+    "Picnic",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "description": "Lots of action at this lake, it is a very fun place to spend a day and fish. No overnight camping, this is a free day use area.",
+   "district": "Olds",
+   "facets": [
+    "Day Use",
+    "Picnic",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "photo_count": 3
+  },
+  "wb6803": {
+   "amenities": [
+    "Beach",
+    "Firewood",
+    "Sewage Disposal",
+    "Water"
+   ],
+   "description": "Helmer Reservoir Campground located beside the reservoir. The campground has serviced sites, a beach and a day-use area This reservoir has a high risk of winter kill. Motorized boats are not permitted on Helmer Dam. | Amenities notes: fox waterbody park offers:; power sites",
+   "district": "Hanna",
+   "facets": [
+    "Beach",
+    "Firewood",
+    "Sewage Disposal",
+    "Water"
+   ]
+  },
+  "wb6806": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "The reservoir is aerated during winter and provides good sport fishing opportunities. It is stocked annually by ACA with trout, typically before the May long weekend. Site facilities include a parking area, outhouse, garbage bins and floating dock. | Amenities notes: no open fires; foot access only.",
+   "district": "Red Deer",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6808": {
+   "amenities": [
+    "Day Use",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Day use area with fishing, hiking and a picnic area.",
+   "district": "Nordegg",
+   "facets": [
+    "Day Use",
+    "Toilets",
+    "Water"
+   ],
+   "photo_count": 1
+  },
+  "wb6809": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Coronation",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6810": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Claresholm",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6815": {
+   "amenities": [
+    "Dock/Pier",
+    "Fishing Access",
+    "Fishing Access Dock"
+   ],
+   "description": "The local pond offers everyone the opportunity to enjoy the scenery, swim and fish. The fishing dock was recently upgraded and the site restored to its natural beauty.",
+   "district": "Fox Creek",
+   "facets": [
+    "Dock/Pier",
+    "Fishing Access",
+    "Fishing Access Dock"
+   ],
+   "photo_count": 2
+  },
+  "wb6816": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "This pond is in Gibbons, just off Landing Trail Landing Trail. ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
+   "district": "Edmonton",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6818": {
+   "amenities": [
+    "Camping",
+    "Playground",
+    "Showers",
+    "Sports",
+    "Sports Volleyball",
+    "Swimming"
+   ],
+   "description": "Located 10 km north of the Canada/US border this beautiful, well cared for campground has 70 sites, most with power, and other amazing amenities to make your fishing experience memorable.",
+   "district": "Lethbridge",
+   "facets": [
+    "Camping",
+    "Playground",
+    "Showers",
+    "Sports",
+    "Sports Volleyball",
+    "Swimming"
+   ]
+  },
+  "wb6820": {
+   "amenities": [
+    "Fire Pits",
+    "Toilets"
+   ],
+   "description": "Elk Creek Pond is a day use and picnic area. It is well manicured and is an ideal place for an adventure.",
+   "district": "Rocky Mountain House",
+   "facets": [
+    "Fire Pits",
+    "Toilets"
+   ],
+   "photo_count": 1
+  },
+  "wb6821": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Whitecourt",
+   "facets": null
+  },
+  "wb6822": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "High River",
+   "facets": null,
+   "photo_count": 2
+  },
+  "wb6823": {
+   "amenities": [
+    "Beach",
+    "Camping",
+    "Day Use",
+    "Sports",
+    "Sports Baseball",
+    "Swimming"
+   ],
+   "description": "This site is directly south of Enchant in Enchant Park. ACA annually stocks this pond with trout, typically before the May long weekend.",
+   "district": "Lethbridge",
+   "facets": [
+    "Beach",
+    "Camping",
+    "Day Use",
+    "Sports",
+    "Sports Baseball",
+    "Swimming"
+   ],
+   "photo_count": 1
+  },
+  "wb6825": {
+   "amenities": [
+    "Retail/Services",
+    "Water"
+   ],
+   "description": "The college has a small pond that is stocked with rainbows every spring. | Amenities notes: The waterbody is at Fairview college",
+   "district": "Fairview",
+   "facets": [
+    "Retail/Services",
+    "Water"
+   ],
+   "photo_count": 4
+  },
+  "wb6827": {
+   "amenities": [
+    "Boat Launch",
+    "Fire Pits",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Shelter",
+    "Swimming",
+    "Toilets",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "description": "This lakeside campground is at Figure Eight Lake Provincial Recreation Area and can accommodate both RVs and tents. There are lots of activities, including hiking, canoeing, wind surfing, boating, fishing, and bird watching OHV trails can be accessed nearby.",
+   "district": "Peace River",
+   "facets": [
+    "Boat Launch",
+    "Fire Pits",
+    "Fish Cleaning",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Shelter",
+    "Swimming",
+    "Toilets",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "photo_count": 4
+  },
+  "wb6830": {
+   "amenities": null,
+   "description": "This pond is also known as Pierre's Pond.",
+   "district": "High Level",
+   "facets": null,
+   "photo_count": 3
+  },
+  "wb6831": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: foot access; no open fires.",
+   "district": "Foremost",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 1
+  },
+  "wb6833": {
+   "amenities": [
+    "Fish Cleaning",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "The trout pond is home to many wildlife and plant species and can be seen from the nature trail or lakeside gazebo.",
+   "district": "Camrose",
+   "facets": [
+    "Fish Cleaning",
+    "Picnic",
+    "Toilets"
+   ],
+   "photo_count": 3
+  },
+  "wb6836": {
+   "amenities": null,
+   "description": "The trail includes multiple river crossings and is well-marked with directional signage. The round trip from the staging area to the lake typically requires 6–7 hours. Dormer Lake was not stocked in 2025.",
+   "district": "Canmore",
+   "facets": null,
+   "photo_count": 2
+  },
+  "wb6840": {
+   "amenities": [
+    "Trails",
+    "Trails Hiking"
+   ],
+   "description": "Designated a day-use area. There is a small 20 car parking lot is the entrance to a footpath that leads to the lake. No power boats are allowed; canoes and inflatables must be carried and hand-launched.",
+   "district": "Stony Plain",
+   "facets": [
+    "Trails",
+    "Trails Hiking"
+   ],
+   "photo_count": 4
+  },
+  "wb6842": {
+   "amenities": [
+    "Day Use",
+    "Picnic",
+    "Swimming"
+   ],
+   "description": "Claim your favorite fishing spot around the lake or set up for a family picnic. | Amenities notes: walk paths",
+   "district": "Medicine Hat",
+   "facets": [
+    "Day Use",
+    "Picnic",
+    "Swimming"
+   ]
+  },
+  "wb6844": {
+   "amenities": [
+    "Day Use",
+    "Dock/Pier",
+    "Toilets",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "description": "There are 18 campsites at Dickson Camping area, adjacent to the trout pond. Please note that amenities in the campsites are very limited. These are un-serviced sites with no potable water.",
+   "district": "Red Deer",
+   "facets": [
+    "Day Use",
+    "Dock/Pier",
+    "Toilets",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "photo_count": 2
+  },
+  "wb6845": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Camping Group",
+    "Playground",
+    "Sewage Disposal",
+    "Shelter",
+    "Showers",
+    "Washrooms"
+   ],
+   "description": "The campground is located along the Coronation Dam with 50 fully and partially serviced sites, five with power and water. The Coronation Dam is home year-round fishing There is a boat launch for small fishing boats.",
+   "district": "Coronation",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Camping Group",
+    "Playground",
+    "Sewage Disposal",
+    "Shelter",
+    "Showers",
+    "Toilets"
+   ],
+   "photo_count": 1
+  },
+  "wb6846": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Playground",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Cottonwood Campground is in Oldman Dam Provincial Recreation Area. Sites are suitable for RVs and tents, with un-serviced and powered options. Water is quite low in the winter months, and is not suitable for winter ice fishing. | Amenities notes: firepits",
+   "district": "Pincher Creek",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Playground",
+    "Toilets",
+    "Water"
+   ]
+  },
+  "wb6850": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Firewood",
+    "Fish Cleaning",
+    "Picnic",
+    "Playground",
+    "Showers",
+    "Toilets",
+    "Trails",
+    "Trails Hiking",
+    "Trails Interpretive",
+    "Water"
+   ],
+   "description": "There is 1 km of paved walk trails that connect to the gold course, there are lots of amenities at this pond. Enjoy the day of fishing for trout and hanging out at the day use group area. | Amenities notes: electrical hookups",
+   "district": "Fairview",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Firewood",
+    "Fish Cleaning",
+    "Picnic",
+    "Playground",
+    "Showers",
+    "Toilets",
+    "Trails",
+    "Trails Hiking",
+    "Trails Interpretive",
+    "Water"
+   ]
+  },
+  "wb6852": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "This pond is in Daysland and borders the golf course. The pond ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fire; foot access only.",
+   "district": "Camrose",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6853": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "ACA annually stocks this pond with trout, typically before the May long weekend. There are invasive Prussian Carp at this waterbody, if you catch one please do not return it to the waterbody. | Amenities notes: Foot access only; no open fires",
+   "district": "Cochrane",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6858": {
+   "amenities": null,
+   "description": "EPA stocks this pond annually with trout and it is aerated in winter through ACA’s Lake Aeration Program.",
+   "district": "Blairmore",
+   "facets": null,
+   "photo_count": 2
+  },
+  "wb6860": {
+   "amenities": [
+    "Boat Launch",
+    "Firewood",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Picnic",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Chrystina (Windy) Lake Campground is found in Chrystina Lake Provincial Recreation Area. Explore the shoreline in your canoe, fish for trout, or access the OHV/snowmobile trail system in the winter months.",
+   "district": "Slave Lake",
+   "facets": [
+    "Boat Launch",
+    "Firewood",
+    "Paddling",
+    "Paddling Canoe",
+    "Paddling Kayak",
+    "Picnic",
+    "Toilets",
+    "Water"
+   ]
+  },
+  "wb6861": {
+   "amenities": [
+    "Camping",
+    "Day Use",
+    "Toilets"
+   ],
+   "description": "Cipperley’s Reservoir is a popular fishing destination in Alberta, offering anglers a variety of opportunities. The Alberta Conservation Association (ACA) stocks the reservoir annually with trout, typically before the May long weekend. To reach the reservoir, travel south on Highway 2A, then west on Range Road 322, and finally south on Range Road 15. Access to the lake is available on the east side of the reservoir.",
+   "district": "Olds",
+   "facets": [
+    "Camping",
+    "Day Use",
+    "Toilets"
+   ]
+  },
+  "wb6868": {
+   "amenities": [
+    "Day Use",
+    "Fire Pits",
+    "Picnic",
+    "Playground",
+    "Shelter",
+    "Sports",
+    "Sports Volleyball",
+    "Trails",
+    "Trails Biking",
+    "Trails Cross-Country Ski",
+    "Trails Hiking"
+   ],
+   "description": "Cardiff Park is a day-use park with single-family and group picnic sites, picnic shelters, stand-up BBQs and fire pits. Cardiff Lake is situated within the park, and is a local fishing hole for trout.",
+   "district": "Stony Plain",
+   "facets": [
+    "Day Use",
+    "Fire Pits",
+    "Picnic",
+    "Playground",
+    "Shelter",
+    "Sports",
+    "Sports Volleyball",
+    "Trails",
+    "Trails Biking",
+    "Trails Cross-Country Ski",
+    "Trails Hiking"
+   ],
+   "photo_count": 5
+  },
+  "wb6871": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "Lions Centennial Park lies along the northwest side of Highway 2A, the major local thoroughfare, as it passes through town A long narrow park of several acres in size. | Amenities notes: no open fires; foot access only.",
+   "district": "Ponoka",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6873": {
+   "amenities": null,
+   "description": "Brooks Aqueduct, also known as Aqueduct Marshes, offers trout fishing in its pond and includes a boat launch for easy water access. While the site lacks additional amenities, it features a mowed walking path that leads east of the pond, providing excellent opportunities for birdwatching and viewing numerous species. The pond itself is shallow and weedy but remains accessible by boat, making it a suitable destination for anglers and nature enthusiasts seeking a quiet, scenic experience.",
+   "district": "Brooks",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb6876": {
+   "amenities": [
+    "Picnic",
+    "Playground",
+    "Sports",
+    "Sports Baseball",
+    "Sports Disc Golf",
+    "Sports Mini Golf",
+    "Sports Tennis"
+   ],
+   "description": "The fishing pond is located within Bud Miller All Seasons Park and is accessible via 59 Avenue. Both locals and visitors enjoy trout fishing at this popular spot. The Alberta Conservation Association (ACA) typically stocks the pond before the May long weekend, ensuring great fishing opportunities throughout the season. The park is designed to be highly accessible, featuring paved paths and facilities that cater to visitors of all mobility levels. | Amenities notes: lawn bowling",
+   "district": "Lloydminster",
+   "facets": [
+    "Picnic",
+    "Playground",
+    "Sports",
+    "Sports Baseball",
+    "Sports Disc Golf",
+    "Sports Mini Golf",
+    "Sports Tennis"
+   ]
+  },
+  "wb6878": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "-",
+   "facets": null
+  },
+  "wb6879": {
+   "amenities": [
+    "Toilets"
+   ],
+   "description": "There is no boat launch but canoes can be carried easily from the parking area. This little lake might be just right for young families. | Amenities notes: garbage receptacles.",
+   "district": "Pincher Creek",
+   "facets": [
+    "Toilets"
+   ],
+   "photo_count": 1
+  },
+  "wb6880": {
+   "amenities": [
+    "Camping",
+    "Picnic",
+    "Shelter",
+    "Toilets"
+   ],
+   "description": "This lake is operated and maintained by the Royal Canadian Legion Branch #43. Fishing is restricted to senior citizens 65+ and the handicapped. | Amenities notes: benches",
+   "district": "Pincher Creek",
+   "facets": [
+    "Camping",
+    "Picnic",
+    "Shelter",
+    "Toilets"
+   ],
+   "photo_count": 6
+  },
+  "wb6882": {
+   "amenities": null,
+   "description": "Bow City East pond is annually stocked with trout by the Alberta Conservation Association (ACA), typically prior to the May long weekend.",
+   "district": "Brooks",
+   "facets": null,
+   "photo_count": 3
+  },
+  "wb6884": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "This 10-acre pond with a camp kitchen, picnic area and ample parking. It is stocked annually by ACA with trout, typically before the May long weekend. | Amenities notes: fires in designated pits only.",
+   "district": "Athabasca",
+   "facets": [
+    "Day Use"
+   ],
+   "photo_count": 7
+  },
+  "wb6890": {
+   "amenities": null,
+   "description": "Located within the town of Bonnyville, this community pond provides convenient access for recreational fishing. The Alberta Conservation Association (ACA) stocks the pond annually with trout, typically prior to the May long weekend, ensuring excellent angling opportunities for both residents and visitors throughout the season.",
+   "district": "Bonnyville",
+   "facets": null
+  },
+  "wb6892": {
+   "amenities": [
+    "Parking",
+    "Toilets"
+   ],
+   "description": "Bathing Lake is located within Castle Provincial Park and Castle Wildland Provincial Park, nestled in the foothills of the Rocky Mountains. Its remote and scenic setting offers visitors a peaceful retreat surrounded by natural beauty, making it an ideal destination for outdoor recreation and relaxation.",
+   "district": "Pincher Creek",
+   "facets": [
+    "Parking",
+    "Toilets"
+   ],
+   "photo_count": 1
+  },
+  "wb6893": {
+   "amenities": null,
+   "description": "This small, local pond offers a quiet setting for recreational fishing, with the possibility of catching perch and stocked trout. Its accessible location and peaceful atmosphere make it a great spot for anglers of all experience levels.",
+   "district": "Wetaskiwin",
+   "facets": null
+  },
+  "wb6894": {
+   "amenities": [
+    "Firewood",
+    "Picnic",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Bellis Beach Lake offers a serene and inviting atmosphere, making it an excellent destination for a relaxing day outdoors. The site features a small sandy beach and a modern playground, providing an ideal setting for families with children to enjoy both leisure and recreation.",
+   "district": "Smoky Lake",
+   "facets": [
+    "Firewood",
+    "Picnic",
+    "Toilets",
+    "Water"
+   ]
+  },
+  "wb6897": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "This picturesque lake provides an ideal setting for a fishing adventure. Surrounded by natural beauty, it offers a peaceful and scenic environment for anglers of all skill levels to enjoy a relaxing day on the water. | Amenities notes: no open fires; foot access only.",
+   "district": "High River",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6900": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Picnic",
+    "Playground",
+    "Toilets"
+   ],
+   "description": "Acadia Valley offers a family-friendly summer camping experience, featuring a group cooking shelter, vault toilets, and recreational fishing opportunities. Please note that gas-powered motors are prohibited on the waterbody to preserve the area's natural environment and ensure a peaceful setting for all visitors.",
+   "district": "Oyen",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Picnic",
+    "Playground",
+    "Toilets"
+   ],
+   "photo_count": 5
+  },
+  "wb6902": {
+   "amenities": [
+    "Beach",
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Firewood",
+    "Picnic",
+    "Shelter",
+    "Water"
+   ],
+   "description": "Allison Lake is one of the most popular camping destinations in the Crowsnest Pass region. The area features an extensive network of trails and a spacious day-use area, making it ideal for both recreation and relaxation. Campers have the option to set up near the lakeshore or choose secluded sites nestled within the forest for a more immersive natural experience.",
+   "district": "Blairmore",
+   "facets": [
+    "Beach",
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Firewood",
+    "Picnic",
+    "Shelter",
+    "Water"
+   ],
+   "photo_count": 3
+  },
+  "wb6903": {
+   "amenities": [
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Picnic",
+    "Playground"
+   ],
+   "description": "Ashland features 21 campsites, all of which are suitable for RVs. Visitors are encouraged to explore the nearby waterbody, which offers excellent opportunities for trout fishing and a peaceful outdoor experience.",
+   "district": "Wetaskiwin",
+   "facets": [
+    "Camping",
+    "Fire Pits",
+    "Firewood",
+    "Picnic",
+    "Playground"
+   ],
+   "photo_count": 3
+  },
+  "wb6904": {
+   "amenities": null,
+   "description": "The reservoir offers a peaceful setting for a day of fishing or relaxation. Anglers can try their luck fishing for stocked trout, while visitors looking to unwind can enjoy the surrounding natural beauty with a picnic by the water.",
+   "district": "High Prairie",
+   "facets": null,
+   "photo_count": 1
+  },
+  "wb6905": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "The pond is stocked with rainbow trout every spring. This particular pond is included under the Enhanced Fish Stocking Program which is run and coordinated by the Alberta Conservation Association. | Amenities notes: no open fires; foot access only.",
+   "district": "Ponoka",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6910": {
+   "amenities": [
+    "Day Use"
+   ],
+   "description": "The Pines Campground is located near the pond. | Amenities notes: no open fires; foot access only.",
+   "district": "Fox Creek",
+   "facets": [
+    "Day Use"
+   ]
+  },
+  "wb6914": {
+   "amenities": null,
+   "description": "This is an old strip-mine that was flooded, where fishing and swimming are popular.",
+   "district": "Nordegg",
+   "facets": null,
+   "photo_count": 8
+  },
+  "wb6915": {
+   "amenities": null,
+   "description": "This is an old strip-mine that was flooded, where fishing and swimming are popular.",
+   "district": "Nordegg",
+   "facets": null,
+   "photo_count": 12
+  },
+  "wb6917": {
+   "amenities": [
+    "Day Use",
+    "Parking"
+   ],
+   "description": "Hinton Fish and Game Pond is located off highway 40. There is a small parking area and no amenities. It is a nice pond to bring the grandkids out for the day.",
+   "district": "Hinton",
+   "facets": [
+    "Day Use",
+    "Parking"
+   ]
+  },
+  "wb6921": {
+   "amenities": null,
+   "description": "Visitors to Brazeau Reservoir can enjoy a wide range of recreational activities, including fishing, powerboating, canoeing, and birdwatching. While Off-Highway Vehicle (OHV) trails are available nearby, OHV use is strictly prohibited within the campground to ensure a safe and peaceful environment. The reservoir is located approximately 50 minutes west of Drayton Valley, adjacent to Brazeau Reservoir Provincial Recreation Area. Fishing access is available at the West Canal Campground, providing convenient opportunities for anglers to enjoy this scenic destination.",
+   "district": "Rocky Mountain House",
+   "facets": null
+  },
+  "wb6922": {
+   "amenities": null,
+   "description": "Visitors to Brazeau Reservoir can enjoy a wide range of recreational activities, including fishing, powerboating, canoeing, and birdwatching. While Off-Highway Vehicle (OHV) trails are available nearby, OHV use is strictly prohibited within the campground to ensure a safe and peaceful environment. The reservoir is located approximately 50 minutes west of Drayton Valley, adjacent to Brazeau Reservoir Provincial Recreation Area.",
+   "district": "Rocky Mountain House",
+   "facets": null
+  },
+  "wb6923": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Camping Group",
+    "Day Use",
+    "Firewood",
+    "Picnic",
+    "Playground",
+    "Sewage Disposal",
+    "Shelter",
+    "Water"
+   ],
+   "description": "This well-appointed campground offers 21 sites suitable for both RVs and tents, with the option to gather with friends at one of the designated group sites. Most campsites are well-treed, providing privacy and shade, while several are located along a long, winding lake, offering scenic waterfront views. At the campground entrance, visitors will find a concession building equipped with flush toilets, showers, and firewood. A variety of concession items are also available for purchase, adding convenience to your stay.",
+   "district": "Vegreville",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Camping Group",
+    "Day Use",
+    "Firewood",
+    "Picnic",
+    "Playground",
+    "Sewage Disposal",
+    "Shelter",
+    "Water"
+   ],
+   "photo_count": 3
+  }
+ },
+ "source": "MyWildAlberta stocking map, exported 2026-09-11"
+}

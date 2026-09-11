@@ -16,7 +16,7 @@ alberta-trout-map/
 ├── manifest.webmanifest            ← lets the map install as an app
 ├── icon.svg                        ← the app icon
 ├── vendor/                         ← Leaflet, MarkerCluster and Chart.js, checked in
-├── js/                             ← conditions, weather and sun/moon, split out
+├── js/                             ← conditions, weather, sun/moon and the lake panel
 ├── live/
 │   └── advisories.json             ← what Alberta published today, collected daily
 ├── evidence.html                   ← the working shown, lake by lake
@@ -26,6 +26,9 @@ alberta-trout-map/
 │   ├── lakes_YYYY.json             ← one file per year, generated
 │   ├── lake_registry.json          ← one entry per physical lake, generated
 │   ├── lake_depth.json             ← depth, summer layer and winterkill, generated
+│   ├── lake_profile.json           ← facilities, description, photo count, generated
+│   ├── lake_photos.json            ← photo links, generated, fetched on demand
+│   ├── out_of_scope.csv            ← waters stocked with no trout, generated
 │   ├── lake_regulations.json       ← seasons and catch limits per lake, generated
 │   ├── lake_aliases.csv            ← your answers to past linking questions
 │   ├── lake_facts.csv              ← your answers to past attribute questions
@@ -42,6 +45,7 @@ alberta-trout-map/
 │   ├── build_history.py            ← the pipeline: raw reports → data/
 │   ├── apply_review.py             ← turns your review answers into aliases
 │   ├── import_stocking_map.py      ← the stocking-map workbook → CSVs in data/raw/
+│   ├── profile.py                  ← facilities, prose and photos → lake_profile.json
 │   ├── fetch_lake_pages.py         ← the same facts from the live site, one page at a time
 │   ├── depth.py                    ← depth → summer layer and winterkill risk
 │   ├── reconcile.py                ← the repo against Alberta, field by field
@@ -411,6 +415,84 @@ fitting the split to the sample, so it is recorded here and not used.
 from is surface area, and across the 114 lakes publishing both, the log-log
 correlation is 0.23. That is noise. The 225 lakes with no depth at all keep
 showing nothing.
+
+
+## What Alberta says about the place
+
+Beyond how deep a lake is and what swims in it, Alberta publishes facilities, a
+paragraph of its own about each lake, and photographs.
+
+| | lakes |
+| --- | --- |
+| facilities stated | 210 |
+| a description | 305 |
+| photographs (662 of them) | 184 |
+| **state no facilities at all** | **135** |
+
+**Absence is not absence.** That last row is the important one. A lake with a
+blank amenities cell is Alberta not saying, which is not a lake with no toilet.
+Those lakes are stored as `null` rather than an empty list so the app can tell
+the two apart, every filter count reads *"lakes known to have"*, and the panel
+says how many lakes are being left out for want of a statement rather than for
+want of a boat launch.
+
+**Facilities roll up.** The published vocabulary is hierarchical — `Trails
+Hiking` and `Trails Cross-Country Ski` are both `Trails`, `Paddling Canoe` is
+`Paddling` — so a filter for Trails matches a lake that only says Trails
+Hiking. The rollup happens at build time in `scripts/profile.py`, not in the
+browser, for the same reason the regulations are matched at build time.
+
+Only parents and standalone tokens are offered as filters. After the rollup a
+child is redundant: every lake with Paddling Canoe also has Paddling, so the two
+have identical counts and offering both is offering one filter twice under two
+names. That leaves **15 facets**, each covering at least 15 lakes, ordered by
+what decides a fishing trip rather than by count — `Day Use` covers 116 lakes
+and settles nothing.
+
+Two vocabularies describe the same lakes: the controlled token list above, and
+hand-written prose in the profiles CSV (*"Day use, camping on site, boat launch,
+pit toilets."*). They are **not** merged — one is a list and the other is
+English, and reconciling them would be guesswork. Chips where there are tokens,
+the sentence where there are not.
+
+### The photographs stay on Alberta's server
+
+They are linked, never copied. Three consequences, all deliberate:
+
+- They load **only when someone opens the panel**, so browsing the map never
+  tells a government server which lakes you looked at.
+- Every request carries **no referrer**, so opening the panel does not announce
+  where it was opened from.
+- They **cannot work offline**. The service worker only handles this app's own
+  origin, and caching a few hundred photographs would evict the map tiles that
+  make the app useful at the lake. So `data/lake_photos.json` is deliberately
+  *not* precached — a test names it as the one exception and fails if any other
+  data file the page fetches is left uncached. The photo *count* lives in the
+  profile file, which is cached, so a lake still says how many there are with no
+  signal, and a picture that fails to load is replaced by its caption as a link.
+
+### Popup or panel
+
+The popup holds what decides the trip and opens with a verdict line — how
+recently the lake was stocked, whether the season is open, what the winterkill
+risk is. It says one clause fewer rather than inventing one, so a lake with no
+depth simply has no winterkill clause.
+
+The description and the photographs go in a panel instead. They are long,
+neither changes a decision, and the popup is capped at 60% of the window height
+— putting them there would push the catch limits off the bottom.
+
+## Waters this map does not show
+
+Alberta stocks 31 further waterbodies with walleye or pike and no trout —
+Sylvan, Lake Newell, McGregor, Travers, Pinehurst, Winagami and 25 more. They
+are listed in `data/out_of_scope.csv` with the species that drove the decision.
+
+Adding them is not an import but a change of what the project is: sixteen years
+of reports would need re-reading with a wider species set, and the pin palette
+is already at the limit of what stays distinguishable under protanopia with six
+categories. The decision is recorded so the gap between 346 published
+waterbodies and the number mapped is accountable rather than unexplained.
 
 
 ## Tests

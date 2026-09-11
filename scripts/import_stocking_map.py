@@ -63,6 +63,8 @@ LAKES_CSV = ROOT / "data" / "raw" / "mywildalberta_lakes.csv"
 AERATED_CSV = ROOT / "data" / "raw" / "aca_aerated_lakes.csv"
 PHOTOS_CSV = ROOT / "data" / "raw" / "mywildalberta_photos.csv"
 ISSUES_CSV = ROOT / "data" / "raw" / "mywildalberta_issues.csv"
+DESCRIPTIONS_CSV = ROOT / "data" / "raw" / "mywildalberta_descriptions.csv"
+OUT_OF_SCOPE_CSV = ROOT / "data" / "out_of_scope.csv"
 
 # The header sits on row 5 of every data sheet; rows 1-4 are the title block.
 HEADER_ROW = 5
@@ -301,6 +303,76 @@ def aerated_rows(waterbodies, captioned):
     return rows
 
 
+# What this map is for. sources.py discards every other species before linking,
+# so these never reach the registry — but a gap between 346 published
+# waterbodies and the number mapped should be a decision on the record rather
+# than an absence nobody can account for.
+TROUT_ON_THE_MAP = {"RAINBOW TROUT", "BROOK TROUT", "BROWN TROUT", "TIGER TROUT",
+                    "CUTTHROAT TROUT", "WESTSLOPE CUTTHROAT TROUT"}
+
+
+def out_of_scope_rows(waterbodies, details, by_id):
+    """Waters Alberta stocks that this map deliberately does not show.
+
+    Every one is stocked with walleye or pike and no trout. Adding them is not
+    an import but a change of what the project is: sixteen years of reports
+    would need re-reading with a wider species set, and the pin palette is
+    already at the limit of what stays distinguishable under protanopia with
+    six categories.
+
+    So the decision is recorded, with the species that drove it, and anyone who
+    wants to revisit it can see exactly what they would be adding.
+    """
+    species = defaultdict(set)
+    records = defaultdict(int)
+    for row in details:
+        wid = cell_text(row.get("Lake ID"))
+        species[wid].add(cell_text(row.get("Species")))
+        records[wid] += 1
+
+    rows = []
+    for row in waterbodies:
+        wid = cell_text(row.get("Lake ID"))
+        if wid in by_id:
+            continue                       # already on the map
+        found = species.get(wid, set())
+        if found & TROUT_ON_THE_MAP:
+            continue                       # trout: not out of scope, see the issues file
+        rows.append({
+            "waterbody_id": wid,
+            "name": cell_text(row.get("Waterbody name")),
+            "species": "; ".join(sorted(found)) or "none published",
+            "records": str(records.get(wid, 0)),
+            "zone": published(row.get("Zone")),
+            "why": "stocked with no trout; this is a trout map",
+        })
+    return rows
+
+
+def description_rows(waterbodies, by_id):
+    """The paragraph Alberta writes about each lake.
+
+    Kept out of mywildalberta_lakes.csv on purpose. That file has to stay
+    column-for-column what fetch_lake_pages.py writes, so depth.py and
+    reconcile.py can read either one, and a page's prose is not one of the
+    label-and-value pairs that collector harvests. Prose belongs in its own
+    file rather than bent into a schema that was not built for it.
+    """
+    rows = []
+    for row in waterbodies:
+        text = published(row.get("Description"))
+        if not text:
+            continue
+        wid = cell_text(row.get("Lake ID"))
+        rows.append({
+            "waterbody_id": wid,
+            "lake_id": (by_id.get(wid) or {}).get("lake_id", ""),
+            "name": cell_text(row.get("Waterbody name")),
+            "description": text,
+        })
+    return rows
+
+
 def photo_rows(photos, by_id):
     rows = []
     for row in photos:
@@ -357,6 +429,10 @@ def build():
                            lambda r: (by_waterbody(r), r["caption"])),
         ISSUES_CSV: render(["waterbody_id", "name", "check", "published", "derived", "note"],
                            issues, lambda r: (by_waterbody(r), r["check"])),
+        DESCRIPTIONS_CSV: render(["waterbody_id", "lake_id", "name", "description"],
+                                 description_rows(waterbodies, by_id), by_waterbody),
+        OUT_OF_SCOPE_CSV: render(["waterbody_id", "name", "species", "records", "zone", "why"],
+                                 out_of_scope_rows(waterbodies, details, by_id), by_waterbody),
     }, {"waterbodies": len(waterbodies), "details": len(details),
         "photos": len(photos), "issues": len(issues), "refused_positions": len(refused)}
 
