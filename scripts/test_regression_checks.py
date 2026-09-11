@@ -1,5 +1,6 @@
 import csv
 import json
+import re
 import statistics
 import unittest
 from pathlib import Path
@@ -413,3 +414,48 @@ class PublishedDataTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class OfflineAssetTests(unittest.TestCase):
+    """Every script the page loads must also be precached.
+
+    This is the one bug class that cannot be caught by using the app: a file
+    missing from SHELL_FILES works perfectly at a desk with a network and throws
+    a ReferenceError at a lake with no signal, months later. Cheap to assert,
+    impossible to notice otherwise.
+    """
+
+    INDEX = ROOT / "index.html"
+    SW = ROOT / "sw.js"
+
+    def shell_files(self):
+        text = self.SW.read_text(encoding="utf-8")
+        start = text.index("const SHELL_FILES = [")
+        end = text.index("]", start)
+        return set(re.findall(r'"([^"]+)"', text[start:end]))
+
+    def test_every_js_file_is_precached(self):
+        shell = self.shell_files()
+        for path in sorted((ROOT / "js").glob("*.js")):
+            rel = f"js/{path.name}"
+            self.assertIn(rel, shell, f"{rel} exists but is not in SHELL_FILES in sw.js")
+
+    def test_every_script_tag_is_precached(self):
+        shell = self.shell_files()
+        srcs = re.findall(r'<script src="([^"]+)"', self.INDEX.read_text(encoding="utf-8"))
+        for src in srcs:
+            self.assertIn(src, shell, f"index.html loads {src} but sw.js does not precache it")
+
+    def test_every_script_tag_points_at_a_real_file(self):
+        srcs = re.findall(r'<script src="([^"]+)"', self.INDEX.read_text(encoding="utf-8"))
+        for src in srcs:
+            self.assertTrue((ROOT / src).is_file(), f"index.html loads {src}, which does not exist")
+
+    def test_missing_library_check_names_every_script(self):
+        """The app promises a named, actionable error for a missing library."""
+        text = self.INDEX.read_text(encoding="utf-8")
+        start = text.index("const missing = [")
+        named = set(re.findall(r'"((?:vendor|js)/[^"]+)"', text[start:start + 1200]))
+        for src in re.findall(r'<script src="([^"]+)"', text):
+            self.assertIn(src, named,
+                          f"{src} is loaded but not named in the missing-library check")

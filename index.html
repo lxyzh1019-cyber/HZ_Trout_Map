@@ -72,6 +72,13 @@
     M50 works offline: service worker precaches app, libraries, data and tiles
     M51 offline badge, and a reload prompt when a newer version is cached
     M52 installable as an app through a web manifest
+
+  Added in v4
+    M53 sun and moon times computed offline, from the clock alone
+    M54 solunar major and minor periods, kept as their own channel and never
+        allowed to move or suppress the dawn and dusk peaks
+    M55 evidence page stating what each factor is worth and why, with its own
+        self-check at evidence.html?selfcheck=1
 -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2b2e2a">
@@ -652,6 +659,7 @@
 <script src="vendor/leaflet.js"></script>
 <script src="vendor/leaflet.markercluster.js"></script>
 <script src="vendor/chart.umd.js"></script>
+<script src="js/astro.js"></script>
 <script>
 // ============================================================
 // CONFIG
@@ -2351,8 +2359,9 @@ async function init() {
       typeof L === "undefined" ? "vendor/leaflet.js" : null,
       typeof L !== "undefined" && !L.markerClusterGroup ? "vendor/leaflet.markercluster.js" : null,
       typeof Chart === "undefined" ? "vendor/chart.umd.js" : null,
+      typeof Astro === "undefined" ? "js/astro.js" : null,
     ].filter(Boolean);
-    if (missing.length) throw new Error(`${missing.join(" and ")} did not load. Check the vendor/ folder is present.`);
+    if (missing.length) throw new Error(`${missing.join(" and ")} did not load. Check the vendor/ and js/ folders are present.`);
 
     const stored = readStore(STORE_HOME, null);
     if (stored && Number.isFinite(stored.lat)) state.home = stored;

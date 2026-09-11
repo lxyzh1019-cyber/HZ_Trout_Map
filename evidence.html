@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What the conditions score is built on — Alberta Trout Map</title>
+<meta name="theme-color" content="#2b2e2a">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<style>
+  :root {
+    --bg: #2b2e2a; --panel: #3a3d38; --panel-2: #33362f; --panel-edge: #1f211e;
+    --ink: #e8e4d8; --ink-dim: #a8a396; --accent: #c98a3e;
+    --strong: #5cb27f; --moderate: #c98500; --weak: #d95926;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 15px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    padding: 24px 16px 64px;
+  }
+  main { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 24px; line-height: 1.25; margin: 0 0 4px; }
+  h2 { font-size: 18px; margin: 34px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--panel-edge); }
+  h3 { font-size: 15px; margin: 22px 0 6px; color: var(--accent); }
+  .lede { color: var(--ink-dim); margin: 0 0 8px; }
+  a { color: var(--accent); }
+  a:hover { color: var(--ink); }
+  code { background: var(--panel-2); padding: 1px 5px; border-radius: 3px; font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13.5px; }
+  th, td { text-align: left; padding: 7px 9px; border-bottom: 1px solid var(--panel-edge); vertical-align: top; }
+  th { color: var(--ink-dim); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tier { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .04em;
+          padding: 2px 7px; border-radius: 999px; text-transform: uppercase; color: #1f211e; }
+  .tier.strong { background: var(--strong); }
+  .tier.moderate { background: var(--moderate); }
+  .tier.weak { background: var(--weak); }
+  .note { background: var(--panel-2); border-left: 3px solid var(--accent);
+          padding: 10px 14px; margin: 14px 0; font-size: 14px; }
+  .note strong { color: var(--accent); }
+  .back { display: inline-block; margin-bottom: 18px; font-size: 13px; }
+  ul { padding-left: 20px; }
+  li { margin: 5px 0; }
+  .scroller { overflow-x: auto; }
+  #selfcheck { margin-top: 40px; }
+  #selfcheck table { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; }
+  .ok { color: var(--strong); font-weight: 700; }
+  .bad { color: var(--weak); font-weight: 700; }
+  .summary { padding: 10px 14px; border-radius: 4px; font-weight: 600; margin: 12px 0; }
+  .summary.ok { background: rgba(92,178,127,.14); }
+  .summary.bad { background: rgba(217,89,38,.16); }
+  footer { margin-top: 44px; padding-top: 14px; border-top: 1px solid var(--panel-edge);
+           color: var(--ink-dim); font-size: 12.5px; }
+</style>
+</head>
+<body>
+<main>
+<a class="back" href="./">&larr; Back to the map</a>
+
+<h1>What the conditions score is built on</h1>
+<p class="lede">And, just as much, what it is not built on.</p>
+
+<p>Most fishing calendars hand you one number and ask you to trust it. The number
+usually blends sun, moon, and barometric pressure as though the evidence behind
+them were comparable. It is not. Two of those have a mechanism you can point at;
+the other two are weak, and one of them has been measured and found to be worth
+about five percent. This page says which is which, and the score on the map is
+weighted to match — not to match convention.</p>
+
+<div class="note">
+<strong>The short version.</strong> Light and water temperature carry the score.
+Pressure is included as a proxy for an approaching weather front, not because
+fish sense the barometer. The moon is a tiebreaker capped at &plusmn;5%, and it can
+never move or suppress the dawn and dusk peaks.
+</div>
+
+<h2>The weights, and why</h2>
+<div class="scroller">
+<table>
+  <thead><tr><th>Factor</th><th class="num">Weight</th><th>Evidence</th><th>Basis</th></tr></thead>
+  <tbody>
+    <tr><td>Light / sun</td><td class="num">0.40</td><td><span class="tier strong">Strong</span></td>
+        <td>Salmonids are demonstrably crepuscular. Light intensity directly governs prey
+            detection and predation success in trout, and it is computable to the minute
+            with no network at all.</td></tr>
+    <tr><td>Water temperature</td><td class="num">0.35</td><td><span class="tier strong">Strong</span></td>
+        <td>Fish are ectotherms, so metabolic rate drives digestion and therefore appetite.
+            Species thermal optima are well published. The weak link is our
+            <em>estimate</em> of the temperature, not the physiology &mdash; so the tier
+            shown on the map drops when the number is modelled rather than measured.</td></tr>
+    <tr><td>Pressure trend</td><td class="num">0.15</td><td><span class="tier moderate">Moderate</span></td>
+        <td>A front-arrival proxy. See below &mdash; the mechanism is the front, not the barometer.</td></tr>
+    <tr><td>Wind</td><td class="num">0.06</td><td><span class="tier moderate">Moderate</span></td>
+        <td>Chop cuts surface visibility and pushes food onto the windward shore. Also a safety input.</td></tr>
+    <tr><td>Precipitation</td><td class="num">0.04</td><td><span class="tier weak">Weak</span></td>
+        <td>Mostly comfort and safety rather than fish behaviour.</td></tr>
+    <tr><td>Moon</td><td class="num">&times;0.95&ndash;1.05</td><td><span class="tier weak">Weak</span></td>
+        <td>Applied after everything else, and hard-capped. See below.</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Any factor whose input is missing is dropped and the rest are renormalised. A
+missing input never becomes an invented default &mdash; offline, the score is honestly
+labelled as coming from sun and moon alone.</p>
+
+<h2>Pressure: the arithmetic that decides it</h2>
+<p>The usual story is that falling pressure expands a fish's swim bladder and makes
+it uncomfortable. That story does not survive the numbers.</p>
+<p><strong>One hectopascal of air pressure equals 1.02 cm of fresh water.</strong> A
+dramatic frontal swing of 30 hPa is therefore about 31 cm of depth-equivalent &mdash;
+less than a trout experiences drifting up off a shoal. A fish that rises one metre
+puts itself through three times the pressure change of a major storm, deliberately,
+without any apparent distress.</p>
+<p>Controlled work agrees. A feeding trial on yellow perch found no significant
+effect of barometric pressure on how much the fish ate; the apparent trend in the
+data turned out to be the fish acclimating to the laboratory.</p>
+<p>So why is pressure in the score at all? Because falling pressure is a reliable
+sign that <em>a front is coming</em>, and a front brings cloud, wind, a change in
+light and a change in temperature &mdash; all things that do affect feeding. Guide
+logbooks that report better fishing on a falling barometer are, on this reading,
+correct about the pattern and wrong about the cause. We score the front and label
+it as such. Nowhere in this app does a swim-bladder explanation appear.</p>
+
+<h2>The moon, and why a major can land at three in the afternoon</h2>
+<p>Solunar tables mark <strong>major periods</strong> (about two hours) centred on the
+moon's transit &mdash; when it is directly overhead &mdash; and its anti-transit, when it
+is underfoot on the far side of the Earth. <strong>Minor periods</strong> (about one
+hour) centre on moonrise and moonset.</p>
+<p>These are pure geometry and have nothing to do with light. The lunar day is
+24 h 50 m, so transit slides about fifty minutes later each calendar day and sweeps
+every hour of the clock over a month. The phase tells you where it sits:</p>
+<div class="scroller">
+<table>
+  <thead><tr><th>Phase</th><th>Major #1 (transit)</th><th>Major #2 (underfoot)</th></tr></thead>
+  <tbody>
+    <tr><td>New</td><td>near solar noon</td><td>near midnight</td></tr>
+    <tr><td>First quarter</td><td>near 18:00</td><td>near 06:00</td></tr>
+    <tr><td>Full</td><td>near midnight</td><td>near solar noon</td></tr>
+    <tr><td>Last quarter</td><td>near 06:00</td><td>near 18:00</td></tr>
+  </tbody>
+</table>
+</div>
+<p>A major in the middle of the afternoon simply means you are a few days off new or
+full moon. It is not a claim that the fish skipped dawn. Calendars that add the sun
+and moon into a single ranking blur exactly this, which is how an app ends up
+telling you to fish at two in the afternoon in July.</p>
+<p>This one keeps them apart. Sun and moon are drawn as two separate tracks on the
+same timeline, and the moon enters the score only as a multiplier applied
+<em>after</em> the weighted sum. The light score is never handed a lunar quantity of
+any kind.</p>
+
+<h3>Why &plusmn;5% specifically</h3>
+<p>Because that is what the largest study of the question found. Vinson and Angradi
+(2014) analysed <strong>341,959</strong> angler-caught muskellunge and found a real,
+consistent 29-day lunar signal in the catch &mdash; with a maximum relative effect of
+about five percent. Fishing only on the peak lunar day yields roughly five percent
+more fish than fishing on random days. The effect was stronger for large fish, in
+midsummer, and at high latitudes, which is mildly encouraging for Alberta.</p>
+<p>Five percent is real and worth showing. It is not worth letting it reorder your
+day. Since a dusk slot scores above 0.90 and a midday slot below 0.45, a &plusmn;5%
+rescale cannot swap them: the best window of the day is lunar-invariant by
+construction, and that is asserted in the self-check below rather than merely
+intended.</p>
+
+<h2>What this cannot know</h2>
+<ul>
+  <li><strong>The actual water temperature.</strong> Free weather services report air.
+      Surface water is estimated from a smoothed week of air temperature, which is a
+      published approach but carries roughly &plusmn;2 &deg;C, and more on small shallow
+      water or just after ice-off. Anything modelled is shown dimmed and marked as
+      modelled. If you measure it, type it in and it wins.</li>
+  <li><strong>What is happening below the surface.</strong> In midsummer a deep lake
+      separates into layers and the fish sit below the warm top. Surface temperature
+      then describes water the trout are deliberately avoiding.</li>
+  <li><strong>Whether the fish are there at all.</strong> Stocking records say what was
+      put in and when. They cannot say what survived the winter.</li>
+  <li><strong>Anything about your particular lake on your particular day.</strong> The
+      honest ceiling on all of this is modest. Environmental variables of this kind
+      typically explain a minority of the variation in catch. Treat the score as a
+      way to choose between Saturday and Sunday, not as a forecast of a fish.</li>
+</ul>
+
+<h2>Sources</h2>
+<ul>
+  <li>Vinson, M. R. &amp; Angradi, T. R. (2014). <em>Muskie Lunacy: does the lunar cycle
+      influence angler catch of muskellunge?</em> PLOS ONE 9(5): e98046.</li>
+  <li>VanderWeyst, D. (2014). <em>The effect of barometric pressure on feeding activity
+      of yellow perch.</em> Bemidji State University.</li>
+  <li>Light intensity and feeding behaviour in rainbow trout; comparative work on
+      photopic, mesopic and scotopic feeding in brown trout and Arctic charr.</li>
+  <li>Rainbow trout thermal performance literature; Raleigh et al. habitat suitability
+      index series; Bear et al. (2007) for cutthroat thermal limits.</li>
+  <li>Stefan &amp; Preud'homme (1993) and the air2water family, for lake surface
+      temperature from lagged and smoothed air temperature.</li>
+  <li>Pressure to depth equivalence: 1 hPa = 100 Pa; fresh water &rho;g = 9807 Pa/m;
+      therefore 1 hPa = 1.02 cm.</li>
+</ul>
+
+<section id="selfcheck"></section>
+
+<footer>
+  The self-check runs in your browser with no network:
+  <a href="?selfcheck=1">evidence.html?selfcheck=1</a>.
+  It verifies the astronomy against published almanac values and asserts the
+  properties this page claims &mdash; including the &plusmn;5% moon cap.
+</footer>
+</main>
+
+<script src="js/astro.js"></script>
+<script>
+/* The self-check ships with the app instead of living in a test runner. This
+ * repo has no bundler and no npm, and the one place these numbers matter is a
+ * phone at a lake — so the check runs there too, offline, on the same code the
+ * map uses. */
+(function () {
+  "use strict";
+  if (!/[?&]selfcheck=1/.test(location.search)) return;
+
+  var rows = [], fails = 0;
+  function check(name, pass, detail) {
+    rows.push({ name: name, pass: pass, detail: detail || "" });
+    if (!pass) fails++;
+  }
+  function mins(a, b) { return Math.abs(a - b) / 60000; }
+  /* Alberta clock times, so expectations can be read straight off an almanac.
+   * Fixed offsets rather than a timezone library: MDT is UTC-6, MST is UTC-7. */
+  function local(d, offsetH) {
+    return new Date(d.getTime() + offsetH * 3600000).toISOString().slice(11, 16);
+  }
+  function hhmmToDate(dateISO, hhmm, offsetH) {
+    var p = hhmm.split(":");
+    return new Date(Date.parse(dateISO + "T00:00:00Z") -
+      offsetH * 3600000 + (+p[0]) * 3600000 + (+p[1]) * 60000);
+  }
+
+  var RD = { lat: 52.2681, lon: -113.8112, name: "Red Deer" };
+
+  // --- Sun, against published Red Deer times -------------------------------
+  [
+    ["2026-06-21", "05:14", "22:01", -6, "June solstice"],
+    ["2026-12-21", "08:43", "16:25", -7, "December solstice"],
+    ["2026-03-20", "07:39", "19:48", -6, "March equinox"],
+  ].forEach(function (t) {
+    var s = Astro.sunTimes(new Date(t[0] + "T12:00:00Z"), RD.lat, RD.lon);
+    check("sunrise " + t[0] + " (" + t[4] + ")",
+      s.sunrise && mins(s.sunrise, hhmmToDate(t[0], t[1], t[3])) <= 2,
+      "got " + local(s.sunrise, t[3]) + ", expected " + t[1]);
+    check("sunset " + t[0],
+      s.sunset && mins(s.sunset, hhmmToDate(t[0], t[2], t[3])) <= 2,
+      "got " + local(s.sunset, t[3]) + ", expected " + t[2]);
+  });
+
+  // --- Lunations, against published 2026 new-moon dates --------------------
+  ["2026-01-18", "2026-06-15", "2026-09-11", "2026-12-09"].forEach(function (iso) {
+    var best = 1, bestT = null;
+    for (var m = -36; m <= 36; m++) {
+      var d = new Date(Date.parse(iso + "T12:00:00Z") + m * 3600000);
+      var ill = Astro.moonPhase(d).illumination;
+      if (ill < best) { best = ill; bestT = d; }
+    }
+    check("new moon falls on " + iso,
+      bestT && bestT.toISOString().slice(0, 10) === iso && best < 0.01,
+      "min illumination " + best.toFixed(4));
+  });
+
+  // --- The claim this page makes about major periods -----------------------
+  (function () {
+    var newMoon = new Date("2026-09-11T06:00:00Z");   // local midnight, MDT
+    var full = new Date("2026-09-26T06:00:00Z");
+    function transitHour(dayStart) {
+      var t = Astro.moonTimes(dayStart, RD.lat, RD.lon);
+      if (!t.transits.length) return null;
+      var d = new Date(t.transits[0].at.getTime() - 6 * 3600000);
+      return d.getUTCHours() + d.getUTCMinutes() / 60;
+    }
+    var nh = transitHour(newMoon), fh = transitHour(full);
+    check("new moon transits near solar noon", nh !== null && Math.abs(nh - 12) <= 2.5,
+      "transit at " + (nh === null ? "none" : nh.toFixed(2) + "h local"));
+    check("full moon transits near midnight", fh !== null && (fh <= 2.5 || fh >= 21.5),
+      "transit at " + (fh === null ? "none" : fh.toFixed(2) + "h local"));
+  })();
+
+  // --- Guards: null and empty, never NaN -----------------------------------
+  var polar = Astro.sunTimes(new Date("2026-06-21T12:00:00Z"), 82.5, -62.35);
+  check("polar day: sunrise is null, not NaN", polar.sunrise === null && polar.alwaysUp === true);
+  check("polar night: alwaysUp is false",
+    Astro.sunTimes(new Date("2026-12-21T12:00:00Z"), 82.5, -62.35).alwaysUp === false);
+  check("no crepuscular edge returns null, not NaN",
+    Astro.minutesToNearestEdge(new Date("2026-06-21T12:00:00Z"), polar) === null);
+
+  (function () {
+    var finite = true, noTurn = 0, skipped = 0;
+    for (var i = 0; i < 365; i++) {
+      var day = new Date(Date.UTC(2026, 0, 1) + i * 86400000);
+      var t = Astro.moonTimes(day, RD.lat, RD.lon);
+      if (!t.transits.length && !t.antiTransits.length) noTurn++;
+      if (!t.rises.length) skipped++;
+      t.rises.concat(t.sets).forEach(function (d) { if (isNaN(d.getTime())) finite = false; });
+      t.transits.concat(t.antiTransits).forEach(function (o) {
+        if (isNaN(o.at.getTime()) || !isFinite(o.altitude)) finite = false;
+      });
+    }
+    check("365 days of moon times contain no NaN", finite);
+    check("every day has a turning point", noTurn === 0, noTurn + " days without");
+    check("the moon skips a rise about monthly", skipped >= 8 && skipped <= 16,
+      skipped + " days in 2026");
+  })();
+
+  // --- Transit agrees with a brute-force search of the same curve ----------
+  (function () {
+    var worst = 0;
+    for (var i = 0; i < 20; i++) {
+      var day = new Date(Date.UTC(2026, 5, 1) + i * 86400000);
+      var t = Astro.moonTimes(day, RD.lat, RD.lon);
+      if (!t.transits.length) continue;
+      var alts = [], m;
+      for (m = 0; m <= 1440; m++) {
+        alts.push(Astro.moonPosition(new Date(day.getTime() + m * 60000), RD.lat, RD.lon).altitude);
+      }
+      var bi = -1, ba = -999;
+      for (m = 1; m < 1440; m++) {
+        if (alts[m] >= alts[m - 1] && alts[m] >= alts[m + 1] && alts[m] > ba) { ba = alts[m]; bi = m; }
+      }
+      if (bi < 0) continue;
+      var bt = day.getTime() + bi * 60000;
+      var d = Math.min.apply(null, t.transits.map(function (o) { return mins(o.at, bt); }));
+      if (d > worst) worst = d;
+    }
+    check("transit matches a minute-by-minute search", worst <= 1.5,
+      worst.toFixed(2) + " min worst over 20 days");
+  })();
+
+  // --- Periods are well formed --------------------------------------------
+  (function () {
+    var p = Astro.periods(new Date("2026-09-11T06:00:00Z"), RD.lat, RD.lon);
+    var ok = p.length > 0;
+    p.forEach(function (x) {
+      var span = (x.end - x.start) / 60000;
+      var want = x.kind === "major" ? 120 : 60;
+      if (Math.abs(span - want) > 0.01) ok = false;
+      if (!(x.start <= x.centre && x.centre <= x.end)) ok = false;
+    });
+    check("majors span 2 h, minors 1 h, centred correctly", ok, p.length + " periods");
+    check("majors win ties over minors in periodAt",
+      p.filter(function (x) { return x.kind === "major"; }).every(function (x) {
+        var hit = Astro.periodAt(x.centre, p);
+        return hit && hit.kind === "major";
+      }));
+  })();
+
+  // --- Render --------------------------------------------------------------
+  var html = '<h2>Self-check</h2><div class="summary ' + (fails ? "bad" : "ok") + '">' +
+    (fails ? fails + " of " + rows.length + " checks FAILED"
+           : "All " + rows.length + " checks pass") +
+    "</div><div class='scroller'><table><thead><tr><th></th><th>Check</th><th>Detail</th></tr></thead><tbody>";
+  rows.forEach(function (r) {
+    html += '<tr><td class="' + (r.pass ? "ok" : "bad") + '">' + (r.pass ? "PASS" : "FAIL") +
+      "</td><td>" + r.name + "</td><td>" + r.detail + "</td></tr>";
+  });
+  html += "</tbody></table></div>";
+  document.getElementById("selfcheck").innerHTML = html;
+})();
+</script>
+</body>
+</html>
