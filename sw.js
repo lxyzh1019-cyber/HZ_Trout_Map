@@ -46,6 +46,7 @@ const SHELL_FILES = [
   "js/astro.js",
   "js/conditions.js",
   "js/weather.js",
+  "js/conditions-ui.js",
   "evidence.html",
   "vendor/images/marker-icon.png",
   "vendor/images/marker-icon-2x.png",

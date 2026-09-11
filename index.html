@@ -92,6 +92,14 @@
     M61 a lake that cannot be matched with confidence shows no limits at all
     M62 "Open today" filter, which hides lakes whose season is shut but never
         hides one whose season could not be read
+    M63 conditions panel: the next six hours as a strip, and seven days by five
+        parts of the day as a grid, from one weather call
+    M64 sun and moon drawn as separate tracks, so the moon can be seen not to
+        move the dawn peak
+    M65 day parts anchored to the sun, and clock times shown at the lake
+    M66 forecast confidence fades with lead time in the number, not only in the
+        styling: pressure's weight decays and light takes up the slack
+    M67 a lake whose season is shut is not scored at all
 -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2b2e2a">
@@ -435,6 +443,108 @@
   .zone-bubble:hover { opacity: 1; }
   .zone-bubble-code { font-size: 12px; letter-spacing: 0.5px; }
   .zone-bubble-fish { font-size: 10px; font-weight: 600; opacity: 0.85; }
+  /* ---- conditions panel ------------------------------------------------ */
+  #conditions-panel {
+    position: absolute; top: 10px; right: 56px; z-index: 500;
+    width: 360px; max-height: 78%; overflow: auto; padding: 10px 12px 12px;
+    background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.45); font-size: 12px;
+  }
+  .cx-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .cx-title { font-size: 13px; color: var(--accent); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.6px; }
+  .cx-place { display: block; font-size: 12px; color: var(--ink); font-weight: 400;
+    text-transform: none; letter-spacing: 0; margin-top: 1px; }
+  .cx-close { background: none; border: 0; color: var(--ink-dim); font-size: 18px;
+    line-height: 1; cursor: pointer; padding: 0 2px; }
+  .cx-close:hover { color: var(--ink); }
+  .cx-row { display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; margin: 8px 0 4px; }
+  .cx-horizon { margin: 0; }
+  .cx-conf { font-size: 10px; text-transform: uppercase; letter-spacing: .04em;
+    color: var(--ink-dim); }
+  .cx-src-row { font-size: 10.5px; color: var(--ink-dim); margin-bottom: 8px;
+    display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .cx-tz { font-style: italic; }
+  .cx-warn { color: var(--TGTR); }
+
+  /* The six-hour strip. */
+  .cx-strip { display: flex; gap: 2px; align-items: flex-end; height: 92px; }
+  .cx-slot { flex: 1; display: flex; flex-direction: column; justify-content: flex-end;
+    height: 100%; cursor: default; }
+  .cx-slot:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .cx-bar { width: 100%; border-radius: 4px 4px 0 0; }
+  .cx-time { font-size: 9px; color: var(--ink-dim); text-align: center; margin-top: 2px;
+    height: 11px; font-variant-numeric: tabular-nums; }
+  /* Sun and moon are separate rows on purpose: the moon has to be seen NOT to
+     move the dawn peak. Folding them into one ranking is how a solunar app ends
+     up recommending two in the afternoon in July. */
+  .cx-track { display: flex; align-items: center; gap: 6px; margin-top: 3px; }
+  .cx-track-label { flex: 0 0 30px; font-size: 9px; color: var(--ink-dim);
+    text-transform: uppercase; letter-spacing: .04em; }
+  .cx-ticks { flex: 1; display: flex; gap: 2px; }
+  .cx-tick { flex: 1; height: 7px; border-radius: 2px; background: #3f4139; }
+  .cx-tick.day { background: #5a5c4e; }
+  .cx-tick.twilight { background: var(--accent); }
+  .cx-tick.night { background: #35382f; }
+  .cx-tick.major { background: #b69551; }
+  .cx-tick.minor { background: #736440; }
+  .cx-best { margin-top: 7px; font-size: 11.5px; color: var(--ink-dim); }
+  .cx-best strong { color: var(--ink); }
+
+  /* The seven-day grid. */
+  .cx-grid { display: grid; grid-template-columns: 46px repeat(7, 1fr); gap: 2px; }
+  .cx-gcell { min-height: 26px; display: flex; align-items: center; justify-content: center;
+    border-radius: 3px; font-size: 10px; }
+  .cx-ghead { flex-direction: column; gap: 0; color: var(--ink-dim); font-size: 9.5px;
+    text-transform: uppercase; letter-spacing: .03em; }
+  .cx-ghead span { color: var(--ink); font-size: 11px; font-variant-numeric: tabular-nums; }
+  .cx-glabel { justify-content: flex-start; color: var(--ink-dim); font-size: 10px; }
+  .cx-score { color: #1f211e; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .cx-score:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+  .cx-n { pointer-events: none; }
+  .cx-gempty { background: #33362f; color: var(--ink-dim); }
+  /* Further out the weather half is guesswork, and the cell should not look as
+     certain as tomorrow. Hatching survives colour blindness and print, which a
+     lighter shade alone would not. */
+  .cx-score.lead-mid { opacity: .82;
+    background-image: repeating-linear-gradient(45deg, rgba(31,33,30,.20) 0 2px, transparent 2px 5px); }
+  .cx-score.lead-far { opacity: .62;
+    background-image: repeating-linear-gradient(45deg, rgba(31,33,30,.34) 0 3px, transparent 3px 6px); }
+  .cx-legend { display: flex; align-items: center; gap: 3px; margin-top: 8px;
+    font-size: 9.5px; color: var(--ink-dim); flex-wrap: wrap; }
+  .cx-legend i { width: 16px; height: 8px; border-radius: 2px; display: inline-block; }
+  .cx-key { margin: 0 3px; }
+  .cx-faded { flex-basis: 100%; margin-top: 2px; }
+
+  /* Why the number is what it is. */
+  .cx-factors { margin-top: 10px; border-top: 1px solid var(--panel-edge); padding-top: 7px; }
+  .cx-factor { display: grid; grid-template-columns: 62px 56px 1fr 46px;
+    align-items: center; gap: 5px; margin: 3px 0; font-size: 10.5px; }
+  .cx-factor.absent { opacity: .5; }
+  .cx-fname { color: var(--ink); }
+  .cx-tier { font-size: 8.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .03em; padding: 1px 4px; border-radius: 999px; text-align: center;
+    color: #1f211e; background: #5a5c4e; }
+  .cx-tier.strong { background: var(--good); }
+  .cx-tier.moderate { background: var(--TGTR); }
+  .cx-tier.weak { background: var(--BKTR); }
+  .cx-tier.none { background: #4a4c44; color: var(--ink-dim); }
+  .cx-fval { color: var(--ink-dim); }
+  .cx-fbar { height: 5px; background: #33362f; border-radius: 3px; overflow: hidden; }
+  .cx-fbar i { display: block; height: 100%; }
+  .cx-advisory { margin-top: 8px; padding: 7px 9px; background: var(--panel-2);
+    border-left: 3px solid var(--TGTR); font-size: 10.5px; line-height: 1.45;
+    color: var(--ink-dim); }
+  .cx-closed { padding: 14px 10px; text-align: center; }
+  .cx-closed strong { color: var(--WSCT); font-size: 14px; letter-spacing: .04em; }
+  .cx-closed div { font-size: 11px; color: var(--ink-dim); margin-top: 4px; }
+  .cx-why { font-style: italic; }
+  .cx-foot { margin-top: 9px; font-size: 10.5px; }
+  .cx-foot a { color: var(--accent); text-decoration: none;
+    border-bottom: 1px dotted var(--accent); }
+  .map-btn.active { background: var(--accent); color: #1f211e; border-color: var(--accent); }
+
   #zone-panel {
     display: none; position: absolute; top: 10px; left: 56px; z-index: 500;
     width: 318px; max-height: 62%; overflow: auto; padding: 10px 12px 12px;
@@ -514,6 +624,10 @@
     #sidebar-close { display: block; }
     /* The zone table cannot float beside a phone-width map, so it sits under
        the map buttons across the full width, with its own scroll. */
+    /* Two floating panels cannot share a phone-width map, so the conditions
+       panel takes the bottom of the screen and the zone table is closed. */
+    #conditions-panel { top: auto; bottom: 8px; left: 8px; right: 8px; width: auto;
+      max-height: 60%; }
     #zone-panel {
       left: 8px; right: 8px; width: auto; top: auto; bottom: calc(50px + var(--panel-h));
       max-height: 38vh;
@@ -649,7 +763,9 @@
     <div class="map-btns">
       <button class="map-btn" id="zoom-results" type="button">Zoom to results</button>
       <button class="map-btn" id="share-btn" type="button">Copy link</button>
+      <button class="map-btn" id="conditions-btn" type="button" aria-pressed="false">Conditions</button>
     </div>
+    <div id="conditions-panel" hidden aria-live="polite"></div>
     <div id="offline-badge" hidden>Offline · showing cached data</div>
     <div id="update-toast" hidden>
       <span>A newer version is ready.</span>
@@ -708,6 +824,7 @@
 <script src="js/astro.js"></script>
 <script src="js/conditions.js"></script>
 <script src="js/weather.js"></script>
+<script src="js/conditions-ui.js"></script>
 <script>
 // ============================================================
 // CONFIG
@@ -843,6 +960,12 @@ const state = {
   /** Hide lakes whose season is shut today. Off by default: a closed lake is
    *  still worth seeing on a map you are using to plan next month. */
   openNow: false,
+  conditions: {
+    open: false,
+    horizon: "now",          // "now" | "week"
+    anchorKey: null,         // a lake, or null for home
+    waterOverrides: {},      // lakeKey -> { tempC, atISO }
+  },
 };
 
 /** A click on a pin can also reach the map, which would immediately undo the
@@ -1355,7 +1478,8 @@ function popupHtml(lake) {
     <div class="popup-actions">
       <a class="gmaps" href="${driveUrl}" target="_blank" rel="noopener">Directions from ${esc(state.home.name)} ↗</a>
       <a class="gmaps" href="${gmapsUrl}" target="_blank" rel="noopener">Show on Google Maps ↗</a>
-      <button type="button" class="gmaps as-btn" data-lakelink="${esc(key)}">Copy link to this lake</button>
+      <button type="button" class="gmaps as-btn" data-conditions="${esc(key)}">Conditions here</button>
+      <button type="button" class="gmaps as-btn" data-lakelink="${esc(key)}" title="Copies a web address that reopens the map on this lake, with your filters, ready to paste into a message">Copy link to this lake</button>
     </div>
     <table>
       <thead><tr><th>Date</th><th>Sp.</th><th>Strain</th><th>cm</th><th>Number</th></tr></thead>
@@ -1693,6 +1817,10 @@ function toggleFavourite(key) {
   renderFavourites();
   renderPins();
   if (state.view === "list") renderList();
+  const conditions = document.querySelector(".leaflet-popup [data-conditions]");
+  if (conditions) {
+    conditions.addEventListener("click", () => ConditionsUI.focusLake(conditions.dataset.conditions));
+  }
   const open = document.querySelector(".leaflet-popup [data-fav]");
   if (open && open.dataset.fav === key) {
     const on = state.favourites.has(key);
@@ -1773,6 +1901,19 @@ function buildSizeFilters() {
     if (cb.checked) state.sizes.add(cb.dataset.size); else state.sizes.delete(cb.dataset.size);
     onFilterChange();
   });
+}
+
+function buildConditionsPanel() {
+  const btn = document.getElementById("conditions-btn");
+  btn.addEventListener("click", () => {
+    ConditionsUI.toggle();
+    btn.setAttribute("aria-pressed", state.conditions.open ? "true" : "false");
+  });
+  if (state.conditions.open) {          // restored from the URL
+    state.conditions.open = false;
+    ConditionsUI.toggle(true);
+    btn.setAttribute("aria-pressed", "true");
+  }
 }
 
 function buildSeasonFilter() {
@@ -2449,6 +2590,7 @@ function writeUrl() {
   if (state.maxDistanceKm !== 1000) p.set("d", state.maxDistanceKm);
   if (state.recency !== "any") p.set("rc", state.recency);
   if (state.openNow) p.set("open", "1");
+  if (state.conditions.open) p.set("cx", state.conditions.horizon);
   if (state.view !== "map") p.set("v", state.view);
   if (state.colorMode !== "species") p.set("cm", state.colorMode);
   if (state.focusedLakeAts) p.set("lake", state.focusedLakeAts);
@@ -2470,6 +2612,10 @@ function readUrl() {
   if (p.has("cm") && COLOR_MODES.some(m => m.id === p.get("cm"))) state.colorMode = p.get("cm");
   if (p.has("c")) state.chartType = p.get("c");
   if (p.get("open") === "1") state.openNow = true;
+  if (["now", "week"].includes(p.get("cx"))) {
+    state.conditions.open = true;
+    state.conditions.horizon = p.get("cx");
+  }
   if (p.has("home")) {
     const [lat, lon, ...rest] = p.get("home").split(",");
     if (Number.isFinite(Number(lat)) && Number.isFinite(Number(lon))) {
@@ -2565,6 +2711,9 @@ function onFilterChange() {
   updateColorModeHint();
   if (state.view === "list") renderList();
   if (state.view === "zones") renderZones();
+  // The species filter decides which thermal band applies, so the panel has to
+  // follow the filters rather than only the map.
+  if (state.conditions.open) ConditionsUI.render();
   writeUrl();
 }
 
@@ -2580,6 +2729,7 @@ async function init() {
       typeof Astro === "undefined" ? "js/astro.js" : null,
       typeof Conditions === "undefined" ? "js/conditions.js" : null,
       typeof Weather === "undefined" ? "js/weather.js" : null,
+      typeof ConditionsUI === "undefined" ? "js/conditions-ui.js" : null,
     ].filter(Boolean);
     if (missing.length) throw new Error(`${missing.join(" and ")} did not load. Check the vendor/ and js/ folders are present.`);
 
@@ -2605,6 +2755,7 @@ async function init() {
     updateDataQualitySummary();
     initMap();
     buildSearch();
+    buildConditionsPanel();
     buildSeasonFilter();
     buildRecencyChips();
     buildSpeciesFilters();
