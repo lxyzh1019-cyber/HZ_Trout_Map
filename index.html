@@ -48,7 +48,7 @@
 
   Charts
     M32 panel toggles, map resizes, button stays clear of the panel
-    M33 stacked by species, by season, per-species trend, stocking calendar
+    M33 stacked by species, by season, per-species trend, stocking year
     M34 helper text per chart, summary stats
     M35 planning summary with year-over-year, trend, risers and decliners
     M36 provisional year labelled in the year-over-year line
@@ -172,6 +172,11 @@
         guide names carry the same pike-walleye-perch triplet
     M100 limits say whose rule they are — written for this lake, or the zone's
         default, or the province's — in colour and in words
+    M101 a month at a time for one lake: the best half-hour of each day, the
+         moon's phase, first and last light, and the solunar periods shown as
+         reference beside the score and never as the score
+    M102 the calendar fades past the seventh day rather than looking as certain
+         as tomorrow, because past there it is sun and moon alone
 -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2b2e2a">
@@ -423,6 +428,64 @@
   .chart-scope-clear:hover { border-color: var(--accent); color: var(--ink); }
   .chart-body { flex: 1; padding: 10px 14px 12px; min-height: 0; position: relative; }
   .chart-body canvas { max-height: 100%; }
+
+  /* ---------- Calendar view ---------- */
+  /* A month for one lake: which day in June, rather than whether to go now. */
+  #calendar-view { flex: 1; overflow: auto; display: none; background: var(--bg); padding: 12px 14px 20px; }
+  #map-wrap.calendar-mode #map,
+  #map-wrap.calendar-mode #chart-toggle,
+  #map-wrap.calendar-mode .map-btns { display: none; }
+  #map-wrap.calendar-mode #calendar-view { display: block; }
+  .cal-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .cal-bar .btn { flex: 0 0 auto; min-width: 34px; }
+  .cal-title { margin-right: auto; }
+  .cal-title { font-size: 15px; font-weight: 600; color: var(--ink); }
+  .cal-place { color: var(--ink-dim); font-weight: 400; font-size: 12px; margin-left: 8px; }
+  .cal-dow, .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cal-dow { margin-bottom: 4px; }
+  .cal-dow span { font-size: 9.5px; text-transform: uppercase; letter-spacing: .05em;
+    color: var(--ink-dim); text-align: center; }
+  .cal-blank { min-height: 54px; }
+  .cal-day {
+    position: relative; min-height: 54px; padding: 3px 4px; cursor: pointer;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 1px;
+    background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 3px;
+    color: var(--ink); font: inherit; text-align: left; overflow: hidden;
+  }
+  /* The day's colour is the score, laid on thin so the numbers stay readable. */
+  .cal-day[style*="--cal-tint"]::before {
+    content: ""; position: absolute; inset: 0; background: var(--cal-tint); opacity: .30;
+  }
+  .cal-day > * { position: relative; }
+  .cal-day:hover { border-color: var(--accent); }
+  .cal-day.today { border-color: var(--accent); }
+  .cal-day.picked { outline: 2px solid var(--accent); outline-offset: -2px; }
+  /* Beyond the forecast, and behind us. Both are drawn, neither pretends. */
+  .cal-day.far::before { opacity: .13; }
+  .cal-day.far .cal-score { opacity: .65; }
+  .cal-day.past { opacity: .45; }
+  .cal-n { font-size: 11px; font-weight: 600; }
+  .cal-moon { position: absolute; top: 2px; right: 4px; font-size: 10px; color: var(--ink-dim); }
+  .cal-score { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .cal-score.cal-none { color: var(--ink-dim); font-weight: 400; }
+  .cal-sun { font-size: 8.5px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+  .cal-detail { margin-top: 12px; padding: 9px 11px; background: var(--panel-2);
+    border-left: 3px solid var(--accent); border-radius: 3px; font-size: 12px; }
+  .cal-dhead { font-weight: 600; margin-bottom: 5px; }
+  .cal-dbest { color: var(--ink-dim); font-weight: 400; font-size: 11px; margin-left: 8px; }
+  .cal-drow { display: flex; gap: 8px; margin: 3px 0; line-height: 1.5; }
+  .cal-dk { flex: 0 0 58px; color: var(--ink-dim); }
+  .cal-periods { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cal-period { font-size: 11px; padding: 1px 6px; border-radius: 2px;
+    background: var(--panel); border: 1px solid var(--panel-edge); }
+  .cal-period.major { border-left: 3px solid var(--accent); }
+  .cal-period.minor { border-left: 3px solid var(--ink-dim); }
+  .cal-period i { color: var(--ink-dim); font-size: 10px; margin-left: 5px; }
+  .cal-foot { margin-top: 10px; font-size: 10.5px; color: var(--ink-dim); line-height: 1.5; }
+  @media (max-width: 560px) {
+    .cal-sun { display: none; }
+    .cal-day { min-height: 44px; }
+  }
 
   /* ---------- List view ---------- */
   #list-view { flex: 1; overflow: auto; display: none; background: var(--bg); }
@@ -951,6 +1014,7 @@
         <button class="btn active" data-view="map">Map</button>
         <button class="btn" data-view="list">List</button>
         <button class="btn" data-view="zones">Zones</button>
+        <button class="btn" data-view="calendar">Calendar</button>
       </div>
     </div>
 
@@ -996,6 +1060,8 @@
     </div>
     <div id="zone-panel"></div>
 
+    <div id="calendar-view"></div>
+
     <div id="list-view">
       <div class="list-bar">
         <span id="list-count"></span>
@@ -1027,7 +1093,7 @@
           <button class="chart-type-btn active" data-chart="stacked-species">By species</button>
           <button class="chart-type-btn" data-chart="grouped-season">By season</button>
           <button class="chart-type-btn" data-chart="line-trend">Trend</button>
-          <button class="chart-type-btn" data-chart="calendar">Calendar</button>
+          <button class="chart-type-btn" data-chart="calendar">Stocking year</button>
         </div>
       </div>
       <div class="chart-helper" id="chart-helper"></div>
@@ -1049,6 +1115,7 @@
 <script src="js/weather.js"></script>
 <script src="js/conditions-ui.js"></script>
 <script src="js/lake-panel.js"></script>
+<script src="js/calendar.js"></script>
 <script>
 // ============================================================
 // CONFIG
@@ -1624,7 +1691,7 @@ function profileBlock(lake) {
   let html = parts.length ? `<div class="profile-row">${parts.join(" &nbsp;·&nbsp; ")}</div>` : "";
   html += seen;
   if (lake.amenities) {
-    html += `<div class="profile-amenities"><span class="profile-label">Facilities</span> ${esc(lake.amenities)}</div>`;
+    html += `<div class="profile-amenities"><span class="profile-label" title="Alberta's own description of the site, in its words. The chips below are the same ground, reduced to the categories the filter uses.">On site</span> ${esc(lake.amenities)}</div>`;
   }
   return html;
 }
@@ -3050,6 +3117,7 @@ function setView(view) {
   const wrap = document.getElementById("map-wrap");
   wrap.classList.toggle("list-mode", view === "list");
   wrap.classList.toggle("zone-mode", view === "zones");
+  wrap.classList.toggle("calendar-mode", view === "calendar");
   document.querySelectorAll("[data-view]").forEach(b => b.classList.toggle("active", b.dataset.view === view));
 
   if (view === "zones") {
@@ -3062,6 +3130,7 @@ function setView(view) {
   }
 
   if (view === "list") renderList();
+  else if (view === "calendar") FishingCalendar.open();
   else setTimeout(() => map.invalidateSize(), 60);
   updateLegend();
   writeUrl();
@@ -3339,7 +3408,7 @@ function readUrl() {
   if (p.has("sz")) state.sizes = new Set(p.get("sz").split(",").filter(c => SIZE_IDS.includes(c)));
   if (p.has("d")) state.maxDistanceKm = Math.max(0, Math.min(1000, Number(p.get("d")) || 1000));
   if (p.has("rc") && RECENCY_OPTIONS.some(o => o.id === p.get("rc"))) state.recency = p.get("rc");
-  if (p.has("v") && ["map", "list", "zones"].includes(p.get("v"))) state.view = p.get("v");
+  if (p.has("v") && ["map", "list", "zones", "calendar"].includes(p.get("v"))) state.view = p.get("v");
   if (p.has("cm") && COLOR_MODES.some(m => m.id === p.get("cm"))) state.colorMode = p.get("cm");
   if (p.has("c")) state.chartType = p.get("c");
   if (p.get("open") === "1") state.openNow = true;

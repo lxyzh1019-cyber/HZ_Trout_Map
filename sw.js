@@ -18,7 +18,12 @@
  *                   capped           get at the lake
  */
 
-const SHELL_CACHE = "troutmap-shell-v1";
+/* v2: the shell is served cache-first-then-revalidate, so a returning user
+   gets yesterday's JavaScript alongside today's HTML on the first load after a
+   deploy. That is survivable for a tweak and not for this release, which adds a
+   file (js/calendar.js) the new index.html calls into, and fixes the photo URLs
+   in js/lake-panel.js. Bumping the name retires the old shell outright. */
+const SHELL_CACHE = "troutmap-shell-v2";
 const DATA_CACHE = "troutmap-data-v1";
 const TILE_CACHE = "troutmap-tiles-v1";
 const WX_CACHE = "troutmap-wx-v1";
@@ -48,6 +53,7 @@ const SHELL_FILES = [
   "js/weather.js",
   "js/conditions-ui.js",
   "js/lake-panel.js",
+  "js/calendar.js",
   "evidence.html",
   "vendor/images/marker-icon.png",
   "vendor/images/marker-icon-2x.png",

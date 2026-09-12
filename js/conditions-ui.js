@@ -541,6 +541,18 @@
     toggle: toggle,
     focusLake: focusLake,
     RAMP: RAMP,
-    _internal: { partWindow: partWindow, colourFor: colourFor, anchor: anchor },
+    /* The calendar is the same engine over a different span, so it borrows
+     * these rather than growing its own copy of the scoring, the day's
+     * astronomy or the clock at the lake. Anything that drifts between the two
+     * views is a bug in both. */
+    _internal: {
+      partWindow: partWindow, colourFor: colourFor, anchor: anchor,
+      astroFor: astroFor, scoreAt: scoreAt, waterFor: waterFor,
+      hhmm: hhmm, startOfDay: startOfDay,
+      setTz: function (wx) {
+        tzOffsetSec = wx && wx.data && typeof wx.data.offset === "number"
+          ? wx.data.offset : null;
+      },
+    },
   };
 })();

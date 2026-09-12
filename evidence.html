@@ -558,6 +558,89 @@ reach rather than the surface they are avoiding, and the water factor drops to
       }
     });
     check("the light score never sees a lunar quantity", !lightMoved);
+
+  /* --- The astronomy, against an implementation nobody here wrote -----------
+   *
+   * Every time in the conditions panel and every cell in the calendar rests on
+   * js/astro.js: Meeus chapter 25 for the sun, chapter 47 truncated to ten
+   * terms for the moon. A quiet error there would move every score in the app
+   * by a plausible-looking amount and nothing would look wrong.
+   *
+   * So these twelve fixtures were generated from suncalc, a widely used
+   * ephemeris written by somebody else, at three Alberta latitudes across four
+   * seasons. They are stored as UTC epoch milliseconds so no timezone can creep
+   * into the comparison.
+   *
+   * The tolerances are what the comparison actually measured when it was first
+   * run, rounded out: sun within 5 minutes, moon within 10, illumination within
+   * a percentage point. Tightening them would be pretending to a precision two
+   * truncated series do not have; loosening them would stop catching anything.
+   */
+  var ASTRO_REF = [
+    {s:"Red Deer",lat:52.2681,lon:-113.8112,d:"2026-01-15",sunrise:1768491437119,sunset:1768521161974,dawn:1768489077900,dusk:1768523522023,moonrise:1768485628780,moonset:1768508554759,illum:0.1042},
+    {s:"Red Deer",lat:52.2681,lon:-113.8112,d:"2026-04-15",sunrise:1776256652571,sunset:1776306841654,dawn:1776254483538,dusk:1776309022378,moonrise:1776253677337,moonset:null,illum:0.054},
+    {s:"Red Deer",lat:52.2681,lon:-113.8112,d:"2026-07-15",sunrise:1784115131011,sunset:1784173779370,dawn:1784112364883,dusk:1784176529948,moonrise:1784120336090,moonset:1784089861557,illum:0.018},
+    {s:"Red Deer",lat:52.2681,lon:-113.8112,d:"2026-10-15",sunrise:1792072847677,sunset:1792111215169,dawn:1792070787923,dusk:1792113271156,moonrise:1792095207927,moonset:1792029304430,illum:0.2185},
+    {s:"Crowsnest",lat:49.6723,lon:-114.6041,d:"2026-01-15",sunrise:1768490971400,sunset:1768522006533,dawn:1768488777952,dusk:1768524200658,moonrise:1768484662433,moonset:1768509923000,illum:0.1042},
+    {s:"Crowsnest",lat:49.6723,lon:-114.6041,d:"2026-04-15",sunrise:1776257142888,sunset:1776306724718,dawn:1776255109726,dusk:1776308767542,moonrise:1776253897926,moonset:null,illum:0.054},
+    {s:"Crowsnest",lat:49.6723,lon:-114.6041,d:"2026-07-15",sunrise:1784116063994,sunset:1784173233495,dawn:1784113568906,dusk:1784175717200,moonrise:1784121206827,moonset:1784089334646,illum:0.018},
+    {s:"Crowsnest",lat:49.6723,lon:-114.6041,d:"2026-10-15",sunrise:1792072813437,sunset:1792111634174,dawn:1792070868319,dusk:1792113576063,moonrise:1792094260349,moonset:1792030582467,illum:0.2185},
+    {s:"Far north",lat:57,lon:-111.5,d:"2026-01-15",sunrise:1768492362709,sunset:1768519130514,dawn:1768489589256,dusk:1768521905141,moonrise:1768487979055,moonset:1768505039084,illum:0.1042},
+    {s:"Far north",lat:57,lon:-111.5,d:"2026-04-15",sunrise:1776255441126,sunset:1776306960346,dawn:1776252948582,dusk:1776309470347,moonrise:1776253060141,moonset:null,illum:0.054},
+    {s:"Far north",lat:57,lon:-111.5,d:"2026-07-15",sunrise:1784112867823,sunset:1784174915504,dawn:1784109282308,dusk:1784178466909,moonrise:1784118220718,moonset:1784090928983,illum:0.018},
+    {s:"Far north",lat:57,lon:-111.5,d:"2026-10-15",sunrise:1792072779064,sunset:1792110165657,dawn:1792070456783,dusk:1792112482891,moonrise:1792097492000,moonset:1792026091451,illum:0.2185},
+  ];
+  var SUN_TOL_MIN = 5, MOON_TOL_MIN = 10, ILLUM_TOL = 0.01;
+
+  (function astroAgainstAnother() {
+    var worstSun = 0, worstMoon = 0, worstIllum = 0, compared = 0, missing = 0;
+    var worstNote = "";
+    ASTRO_REF.forEach(function (f) {
+      var day = Astro.dayFor(f.lat, f.lon, new Date(f.d + "T00:00:00Z"));
+      var mins = function (a, b) { return Math.abs(a - b) / 60000; };
+      var note = f.s + " " + f.d;
+
+      [["sunrise", day.sun.sunrise], ["sunset", day.sun.sunset],
+       ["dawn", day.sun.civilDawn], ["dusk", day.sun.civilDusk]].forEach(function (pair) {
+        if (!pair[1] || f[pair[0]] == null) { missing++; return; }
+        var d = mins(+pair[1], f[pair[0]]);
+        compared++;
+        if (d > worstSun) { worstSun = d; worstNote = note + " " + pair[0]; }
+      });
+
+      /* suncalc reports one rise and one set per UTC day; astro.js returns every
+       * crossing, because some local days have two and some none. Compare each
+       * reference against the nearest crossing of the same kind. */
+      [["moonrise", day.moonTimes.rises], ["moonset", day.moonTimes.sets]].forEach(function (pair) {
+        if (f[pair[0]] == null) return;
+        var best = null;
+        (pair[1] || []).forEach(function (t) {
+          var d = mins(+t, f[pair[0]]);
+          if (best === null || d < best) best = d;
+        });
+        if (best === null) { missing++; return; }
+        compared++;
+        if (best > worstMoon) worstMoon = best;
+      });
+
+      var illum = Math.abs(day.moon.illumination - f.illum);
+      if (illum > worstIllum) worstIllum = illum;
+    });
+
+    check("sun times agree with an independent ephemeris",
+      worstSun <= SUN_TOL_MIN,
+      "worst " + worstSun.toFixed(1) + " min (tolerance " + SUN_TOL_MIN + ")"
+        + (worstNote ? ", at " + worstNote : ""));
+    check("moon times agree with an independent ephemeris",
+      worstMoon <= MOON_TOL_MIN,
+      "worst " + worstMoon.toFixed(1) + " min (tolerance " + MOON_TOL_MIN + ")");
+    check("moon illumination agrees with an independent ephemeris",
+      worstIllum <= ILLUM_TOL,
+      "worst " + (worstIllum * 100).toFixed(2) + " percentage points");
+    check("every fixture was actually compared", missing === 0 && compared >= 40,
+      compared + " comparison(s), " + missing + " unmatched");
+  })();
+
     check("the moon never moves the best window of the day", movedAt === null,
       movedAt || "stays at " + baseBest + " local");
     check("the moon never shifts a score by more than 5%",

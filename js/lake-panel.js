@@ -137,11 +137,17 @@
       const index = await loadPhotos();
       const shots = (index && index.lakes && index.lakes[key]) || [];
       const viewable = shots.filter(p => !isHeic(p.url));
+      const unshowable = shots.filter(p => isHeic(p.url));
+      // Pine Coulee's only photograph is a HEIC. An empty grid there is not a
+      // fetch that failed, and saying so sends someone looking for a fault
+      // that is not there — the line below already explains it.
       slot.innerHTML = viewable.length
         ? viewable.map(shot).join("")
-        : `<div class="lp-offline">The photographs could not be fetched.</div>`;
+        : unshowable.length
+          ? ""
+          : `<div class="lp-offline">The photographs could not be fetched.</div>`;
       const heic = el.querySelector("[data-heic]");
-      if (heic) heic.innerHTML = heicHtml(shots.filter(p => isHeic(p.url)));
+      if (heic) heic.innerHTML = heicHtml(unshowable);
     }
   }
 
