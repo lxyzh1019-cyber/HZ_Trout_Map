@@ -41,6 +41,7 @@ ROOT = Path(__file__).parent.parent
 LAKES_CSV = ROOT / "data" / "raw" / "mywildalberta_lakes.csv"
 DESCRIPTIONS_CSV = ROOT / "data" / "raw" / "mywildalberta_descriptions.csv"
 PHOTOS_CSV = ROOT / "data" / "raw" / "mywildalberta_photos.csv"
+CONFIRMED_CSV = ROOT / "data" / "raw" / "lake_species_confirmed.csv"
 
 # A token that begins with one of these and a space is a narrower kind of it.
 PARENT_FACETS = ("Trails", "Paddling", "Camping", "Day Use", "Boating",
@@ -84,6 +85,45 @@ def load_rows(path, key="lake_id"):
         return {row[key]: row for row in csv.DictReader(handle) if row.get(key)}
 
 
+def load_confirmed():
+    """What is reported to actually swim in a lake, as opposed to what was put in.
+
+    The two are not the same question and this map could only answer the second
+    one. Stocking records say what a hatchery delivered; they say nothing about
+    the pike that got in on their own, and nothing about whether last decade's
+    trout are still there.
+
+    Catch limits are not an answer either, and reading them as one is the trap.
+    Cow Lake's regulation row lists a walleye limit, and 64 of the 65
+    site-specific rows in the guide carry the identical pike-walleye-perch
+    triplet: that is boilerplate covering species that may or may not be
+    present, not a survey. Independent reports of Cow Lake list rainbow, brown,
+    pike and perch, and no walleye at all.
+
+    So presence gets its own source, with a URL per lake so any row can be
+    checked. Angler's Atlas is an angling site rather than the province, and
+    the app says so rather than passing it off as a government fact.
+
+    Coverage is partial and a missing lake means NOT CHECKED. It must never
+    render as a lake with no fish in it.
+    """
+    if not CONFIRMED_CSV.exists():
+        return {}
+    out = {}
+    with CONFIRMED_CSV.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            codes = [c.strip() for c in (row.get("species") or "").split(";") if c.strip()]
+            if not row.get("lake_id") or not codes:
+                continue
+            out[row["lake_id"]] = {
+                "species": sorted(set(codes)),
+                "source": row.get("source") or None,
+                "url": row.get("source_url") or None,
+                "retrieved": row.get("retrieved") or None,
+            }
+    return out
+
+
 def load_photos():
     if not PHOTOS_CSV.exists():
         return {}
@@ -102,10 +142,11 @@ def build(lakes):
     site = load_rows(LAKES_CSV)
     prose = load_rows(DESCRIPTIONS_CSV)
     photos = load_photos()
+    confirmed = load_confirmed()
 
     profiles, gallery = {}, {}
     counts = defaultdict(int)
-    with_amenities = with_description = with_photos = 0
+    with_amenities = with_description = with_photos = with_confirmed = 0
 
     for lake in lakes:
         key = lake.get("lake_id") or lake.get("ats")
@@ -136,6 +177,11 @@ def build(lakes):
         if district:
             entry["district"] = district
 
+        seen = confirmed.get(key)
+        if seen:
+            entry["confirmed"] = seen
+            with_confirmed += 1
+
         shots = photos.get(key) or []
         if shots:
             entry["photo_count"] = len(shots)
@@ -160,7 +206,7 @@ def build(lakes):
                   "never copied, and they need a connection.")},
         {"with_amenities": with_amenities, "with_description": with_description,
          "with_photos": with_photos, "photos": sum(len(v) for v in gallery.values()),
-         "facets": len(filterable)},
+         "with_confirmed": with_confirmed, "facets": len(filterable)},
     )
 
 

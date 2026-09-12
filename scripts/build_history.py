@@ -695,6 +695,8 @@ def write_profiles(reg):
     print(f"  {stats['photos']} photo(s) across {stats['with_photos']} lake(s), "
           f"linked and not copied")
     print(f"  {stats['facets']} facet(s) worth filtering by")
+    print(f"  {stats.get('with_confirmed', 0)} lake(s) with a reported species list; "
+          f"the rest are unchecked, which is not the same as empty")
     return stats
 
 

@@ -2253,3 +2253,69 @@ class SpeciesBeyondTroutTests(unittest.TestCase):
         for code in ("WALL", "NRPK", "ARGR"):
             self.assertNotIn(f"{code}:", bands,
                              f"{code} was given a band; it needs a cited source first")
+
+
+class ReportedSpeciesTests(unittest.TestCase):
+    """What is reported to swim in a lake, as against what was put in.
+
+    Stocking records answer only the second question. The catch limits do not
+    answer the first one either, and reading them as though they did is the
+    mistake this data exists to prevent: 64 of the 65 lakes the guide lists by
+    name carry the identical pike-walleye-perch triplet, which is boilerplate
+    covering what might be there. Cow Lake's row lists a walleye limit and Cow
+    Lake is reported to hold rainbow, brown, pike and perch, and no walleye.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.profiles = json.loads(
+            (DATA_DIR / "lake_profile.json").read_text(encoding="utf-8"))["lakes"]
+        cls.confirmed = {k: v["confirmed"] for k, v in cls.profiles.items()
+                         if v.get("confirmed")}
+
+    def test_every_entry_cites_a_checkable_source(self):
+        """A presence claim nobody can check is worth less than none."""
+        for key, entry in self.confirmed.items():
+            self.assertTrue(entry.get("species"), key)
+            self.assertTrue(entry.get("url", "").startswith("https://"),
+                            f"{key} has no source URL")
+            self.assertTrue(entry.get("retrieved"), f"{key} has no retrieval date")
+
+    def test_an_absent_lake_is_unchecked_and_not_empty(self):
+        """Coverage is partial on purpose, so the absence must stay meaningful.
+
+        Nothing may store an empty species list: a lake nobody has looked up
+        and a lake with no fish in it are different claims, and only one of
+        them is ever true.
+        """
+        for key, entry in self.confirmed.items():
+            self.assertNotEqual(entry["species"], [], f"{key} stores an empty list")
+        self.assertLess(len(self.confirmed), len(self.profiles),
+                        "every lake is covered; the unchecked case needs a new test")
+
+    def test_cow_lake_holds_no_walleye(self):
+        """The case the whole distinction rests on.
+
+        Its regulation row lists a walleye limit. Its reported species list
+        does not include walleye. If these two ever agree by accident, the
+        block that keeps them apart has stopped being exercised.
+        """
+        cow = self.confirmed.get("wb4340")
+        if cow is None:
+            self.skipTest("Cow Lake has not been checked")
+        self.assertNotIn("WALL", cow["species"])
+        for code in ("RNTR", "BNTR", "NRPK", "YLPR"):
+            self.assertIn(code, cow["species"])
+
+        regs = json.loads(
+            (DATA_DIR / "lake_regulations.json").read_text(encoding="utf-8"))["lakes"]
+        self.assertIn("WALL", regs["wb4340"]["species"],
+                      "the guide no longer lists a walleye limit for Cow Lake")
+
+    def test_the_app_can_name_every_species_reported(self):
+        """A code with no label renders as four letters nobody reads as a fish."""
+        index = (ROOT / "index.html").read_text(encoding="utf-8")
+        for key, entry in self.confirmed.items():
+            for code in entry["species"]:
+                named = f"  {code}: {{ label:" in index or f"{code}: \"" in index
+                self.assertTrue(named, f"{code} (in {key}) has no name in the app")

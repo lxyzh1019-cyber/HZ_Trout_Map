@@ -355,6 +355,14 @@
   },
   "wb24236": {
    "amenities": null,
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "NRPK"
+    ],
+    "url": "https://www.anglersatlas.com/place/726192/brazeau-canal"
+   },
    "description": "Brazeau Canal is a small pond located along the Brazeau Canal, approximately 50 minutes west of Drayton Valley. The pond has been stocked with walleye fry, offering anglers a unique fishing opportunity in a scenic setting. Fishing access is available at the West Canal Campground, which also provides convenient amenities for visitors. In addition to fishing, the area offers a variety of recreational activities, including powerboating, canoeing, and birdwatching. While Off-Highway Vehicle (OHV) trails are available nearby, OHV use is strictly prohibited within the campground to maintain a safe and peaceful environment. The site is adjacent to Brazeau Reservoir Provincial Recreation Area, making it an excellent destination for outdoor enthusiasts.",
    "district": "Rocky Mountain House",
    "facets": null
@@ -475,6 +483,14 @@
     "Sports",
     "Sports Baseball"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "RNTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/130602/kakut-lake"
+   },
    "description": "Kakut Lake is located in northern Alberta and offers a great camping experience. Fish the stocked pond for trout with the possibility of perch being caught. | Amenities notes: community hall.",
    "district": "Spirit River",
    "facets": [
@@ -565,6 +581,14 @@
     "Trails",
     "Trails Hiking"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "RNTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/724129/mount-lorette-ponds"
+   },
    "description": "There is a paved trail around the pond for easy wheelchair accessibility. Day use areas are well treed. The ponds are stocked 3-4 times in spring and early summer with trout. | Amenities notes: park benches",
    "district": "Canmore",
    "facets": [
@@ -622,6 +646,15 @@
     "Showers",
     "Toilets"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "BKTR",
+     "BNTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/160987/blood-indian-creek-reservoir"
+   },
    "description": "Blood Indian Park Campground operates on a first-come, first-served basis and is open seasonally from April 1 to November 1, with winter camping available outside of these dates. The campground features 300 campsites, including 29 serviced sites, making it suitable for a wide range of camping preferences. During the summer months, guests have access to coin-operated showers and a laundromat. Wi-Fi is available in the main camping area for added convenience. Families can also enjoy the Splash Park, which is open daily from 12:00 PM to 5:00 PM throughout the summer season. | Amenities notes: rave sewer drainage",
    "district": "Hanna",
    "facets": [
@@ -758,6 +791,15 @@
     "Camping",
     "Wildlife Viewing"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "BURB",
+     "WALL"
+    ],
+    "url": "https://www.anglersatlas.com/place/101993/milk-river-ridge-reservoir"
+   },
    "description": "It's a great spot to enjoy boating, paddling, windsurfing, fishing, birdwatching, or camping.",
    "district": "Lethbridge",
    "facets": [
@@ -816,6 +858,18 @@
     "Paddling",
     "Paddling Canoe"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "BURB",
+     "LKWH",
+     "NRPK",
+     "WALL",
+     "YLPR"
+    ],
+    "url": "https://www.anglersatlas.com/place/102072/travers-reservoir"
+   },
    "description": "Travers Dam campground is in Travers Reservoir Provincial Recreation Area.",
    "district": "Lethbridge",
    "facets": [
@@ -899,6 +953,14 @@
     "Trails",
     "Trails Hiking"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "BNTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/129635/beauvais-lake"
+   },
    "description": "Beauvais Lake borders the Beauvais Main Campground, offering convenient access to the water for campers. Powered sites 1 through 15 are open year-round, from October 1 to April 30. These quiet, well-treed sites provide a peaceful setting and are located close to the lake, making them ideal for both relaxation and recreation.",
    "district": "Pincher Creek",
    "facets": [
@@ -926,6 +988,14 @@
     "Picnic",
     "Toilets"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "RNTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/129637/beaver-lake"
+   },
    "description": "The lake is stocked annually with trout by the Alberta Environment and Protected Areas (EPA) and is aerated from October through April as part of the Alberta Conservation Association’s (ACA) Lake Aeration Program. Access to the lake is available by foot, and only electric-powered motors are permitted to help maintain the tranquility and ecological integrity of the area.",
    "district": "Sundre",
    "facets": [
@@ -951,6 +1021,15 @@
     "Water",
     "Winter Recreation"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "BNTR",
+     "RNTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/101807/beaver-mines-lake"
+   },
    "description": "Located within Castle Provincial Park, Beaver Mines Campground offers a scenic and well-equipped setting for both RV and tent camping. Most campsites are nestled among mature trees, providing privacy and shade, while select sites offer picturesque views of the nearby lake. This peaceful location is ideal for nature enthusiasts seeking a relaxing outdoor experience.",
    "district": "Pincher Creek",
    "facets": [
@@ -991,6 +1070,16 @@
     "Parking",
     "Toilets"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "BKTR",
+     "BNTR",
+     "RNTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/101813/birch-lake"
+   },
    "description": "Birch lake lacks a formal boat launch. Recreational users must carry their watercraft to the shoreline and hand-launch directly from the shore. To preserve the natural environment and ensure a quiet experience for all visitors, gas-powered motors are prohibited. Additionally, overnight camping is not permitted at this location.",
    "district": "Sundre",
    "facets": [
@@ -1220,6 +1309,17 @@
     "Showers",
     "Water"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "BNTR",
+     "NRPK",
+     "RNTR",
+     "YLPR"
+    ],
+    "url": "https://www.anglersatlas.com/place/101853/cow-lake"
+   },
    "description": "This a popular winter fishing destination. There is a public boat launch available, with a day use area. | Amenities notes: Serviced and un-serviced sites",
    "district": "Rocky Mountain House",
    "facets": [
@@ -1261,6 +1361,16 @@
    "amenities": [
     "Parking"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "CTTR",
+     "LKTR",
+     "RNTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/101858/crowsnest-lake"
+   },
    "description": "This large, deep, natural lake lies just east of the Continental Divide along Alberta Highway 3 There is a vast parking area at the west end of the lake, a necessary amenity when winter blizzards close the mountain pass. The parking area includes a boat launch where ice fishermen skid their huts onto the ice",
    "district": "Blairmore",
    "facets": [
@@ -1292,6 +1402,16 @@
     "Toilets",
     "Water"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "RNTR",
+     "TGTR",
+     "YLPR"
+    ],
+    "url": "https://www.anglersatlas.com/place/154692/dillberry-lake"
+   },
    "description": "Sites in this prairie campground are suitable for RVs and tents and most have power. There are many amenities here including a playground, small campground store, toilets, and showers. This park is a great getaway for families who want to devote time to spending time together and fishing for trout. | Amenities notes: life jacket loaner station",
    "district": "Lloydminster",
    "facets": [
@@ -1320,6 +1440,15 @@
     "Trails Hiking",
     "Water"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "RNTR",
+     "TGTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/101867/dolberg-lake"
+   },
    "description": "Doleberg Lake campground borders the lake. This campground is a self-registration campground with twelve sites with lots of natural trees. This is a great place to relax a fish for stocked trout.",
    "district": "Barrhead",
    "facets": [
@@ -1477,6 +1606,14 @@
     "Toilets",
     "Water"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "LKWH"
+    ],
+    "url": "https://www.anglersatlas.com/place/101883/fickle-lake"
+   },
    "description": "Fickle Lake Campground has 36 sites for both RVs and tents, including lovely campsites with lakeside views. The lots are surrounded by natural spruce forest and allow easy access to the lake, boat launch, dock and shoreline. Although the campground is closed during the winter, the road to the lake and parking lot is still maintained allowing easy access for ice fishing.",
    "district": "Hinton",
    "facets": [
@@ -1606,6 +1743,17 @@
     "Trails",
     "Trails Hiking"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "NRPK",
+     "RNTR",
+     "TGTR",
+     "YLPR"
+    ],
+    "url": "https://www.anglersatlas.com/place/101919/hasse-lake"
+   },
    "description": "Hasse Lake Recreation area provides a day-use area with walking trails, beach, playground and a picnic shelter. There is a primitive boat launch area with a floating dock east of the main parking area. The shoreline is soft and weedy, but a fishing pier has been installed to increase angling opportunities.",
    "district": "Stony Plain",
    "facets": [
@@ -1704,6 +1852,14 @@
     "Fish Cleaning",
     "Toilets"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "NRPK"
+    ],
+    "url": "https://www.anglersatlas.com/place/101940/kehiwin-lake"
+   },
    "description": "Kehiwin Cree Nation is operating the Kehiwin Provincial Recreation Area, 28 km east of St. Paul on Hwy. 29, and 7 km north on Hwy. 41. Cozy little campground that offers basic facilities and access with canoe or boat on Kehiwin Lake. | Amenities notes: firepits",
    "district": "Bonnyville",
    "facets": [
@@ -1719,6 +1875,17 @@
     "Day Use",
     "Fishing Access"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "BURB",
+     "LKWH",
+     "NRPK",
+     "WALL"
+    ],
+    "url": "https://www.anglersatlas.com/place/101941/keho-lake"
+   },
    "description": "This waterbody has been recently stocked with walleye fry.",
    "district": "Lethbridge",
    "facets": [
@@ -1839,6 +2006,16 @@
   },
   "wb5179": {
    "amenities": null,
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "BLTR",
+     "CTTR",
+     "RNTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/129746/lower-kananaskis-lake"
+   },
    "description": "No description available.",
    "district": "Canmore",
    "facets": null
@@ -1914,6 +2091,14 @@
     "Boat Launch",
     "Day Use"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "TGTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/101994/millers-lake"
+   },
    "description": "There is a boat launch, and the lake is stocked annually by AEP with trout and is aerated in winter through ACA’s Lake Aeration Program.",
    "district": "Edson",
    "facets": [
@@ -1929,6 +2114,14 @@
     "Picnic",
     "Toilets"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "YLPR"
+    ],
+    "url": "https://www.anglersatlas.com/place/130141/minnow-lake"
+   },
    "description": "This waterbody has been recently stocked with walleye fry. | Amenities notes: group use",
    "district": "Edson",
    "facets": [
@@ -1988,6 +2181,15 @@
   },
   "wb5387": {
    "amenities": null,
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "BNTR",
+     "RNTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/102000/muir-lake"
+   },
    "description": "Muir Lake is an easily accessible quality stocked fishery. Muir Lake features seasonal closures, bait ban and reduced harvest regulations. Seasonal restrictions apply. Check the local regulations before heading out to the lake. | Amenities notes: Basic amenities.",
    "district": "Stony Plain",
    "facets": null,
@@ -1995,6 +2197,15 @@
   },
   "wb5407": {
    "amenities": null,
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "BKTR",
+     "CTTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/130318/muskiki-lake"
+   },
    "description": "Enjoy the day fishing the lake, fish from shore or from a boat. The Max boat speed on the lake is 12km/hr.",
    "district": "Edson",
    "facets": null,
@@ -2162,6 +2373,14 @@
     "Trails Hiking",
     "Wildlife Viewing"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "RNTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/102015/peanut-lake"
+   },
    "description": "This lake often winter kills. Maximum boat speed 12km/h.",
    "district": "Barrhead",
    "facets": [
@@ -2224,6 +2443,15 @@
     "Toilets",
     "Water"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "RNTR",
+     "YLPR"
+    ],
+    "url": "https://www.anglersatlas.com/place/136982/phyllis-lake"
+   },
    "description": "This scenic little foothills lake is suited to canoeing, fishing and boating with electric powered motors. There are about 20 sites, most of which are open to each other and face the lake. They are suited for both RVs and tents. | Amenities notes: refuse containers",
    "district": "Rocky Mountain House",
    "facets": [
@@ -2273,6 +2501,18 @@
     "Toilets",
     "Water"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "BURB",
+     "LKWH",
+     "NRPK",
+     "WALL",
+     "YLPR"
+    ],
+    "url": "https://www.anglersatlas.com/place/102022/pinehurst-lake"
+   },
    "description": "Pinehurst Lake and campground is located in Lakeland Provincial Recreation Area, 17 km south of Lac La Biche on Hwy. 36, 5km east on Hwy. 55, 3km north on Range Rd. 132, 19 km east on Township Rd. 652, and 7km north on access road. Pinehurst is a favourite destination for local anglers, and has a staging area outside of the campsite for OHV use for the trail network throughout Lakeland PRA. | Amenities notes: firepits; lifejacket loaner station",
    "district": "Lac La Biche",
    "facets": [
@@ -2317,6 +2557,14 @@
     "Fishing Access Pier",
     "Toilets"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "RNTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/102026/reesor-lake"
+   },
    "description": "This is a large spring-fed lake in Cypress Hills Provincial Park.",
    "district": "Medicine Hat",
    "facets": [
@@ -2560,6 +2808,14 @@
     "Boat Launch",
     "Picnic"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "RNTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/102057/star-lake"
+   },
    "description": "This lake has a few private cabins surrounding it. Yellow Perch are present in the lake.",
    "district": "Stony Plain",
    "facets": [
@@ -2577,6 +2833,15 @@
   },
   "wb5919": {
    "amenities": null,
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "RNTR",
+     "YLPR"
+    ],
+    "url": "https://www.anglersatlas.com/place/102060/strubel-lake"
+   },
    "description": "This is a great lake for families or for beginner ice fishing.",
    "district": "Rocky Mountain House",
    "facets": null,
@@ -2609,6 +2874,14 @@
     "Picnic",
     "Toilets"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "RNTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/130354/swan-lake"
+   },
    "description": "Most of the campsites are surrounded by pine and spruce trees that provide good privacy with a few choice sites located next to the lake for fishing.",
    "district": "Valleyview",
    "facets": [
@@ -2624,6 +2897,18 @@
     "Picnic",
     "Swimming"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "BURB",
+     "LKWH",
+     "NRPK",
+     "WALL",
+     "YLPR"
+    ],
+    "url": "https://www.anglersatlas.com/place/102064/sylvan-lake"
+   },
    "description": "Sylvan Lake offers swimming motorized and non motorized water activities and recreational fishing.",
    "district": "Edmonton",
    "facets": [
@@ -3723,6 +4008,14 @@
     "Trails",
     "Trails Hiking"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "RNTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/2049967/morinville-fish-and-game-pond"
+   },
    "description": "There is a fishing platform, and a walking path around the pond. | Amenities notes: park benches.",
    "district": "Stony Plain",
    "facets": [
@@ -4304,6 +4597,14 @@
     "Sports Baseball",
     "Swimming"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "YLPR"
+    ],
+    "url": "https://www.anglersatlas.com/place/875896/enchant-pond"
+   },
    "description": "This site is directly south of Enchant in Enchant Park. ACA annually stocks this pond with trout, typically before the May long weekend.",
    "district": "Lethbridge",
    "facets": [
@@ -4803,6 +5104,14 @@
     "Shelter",
     "Water"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "WSCT"
+    ],
+    "url": "https://www.anglersatlas.com/place/102602/allison-lake"
+   },
    "description": "Allison Lake is one of the most popular camping destinations in the Crowsnest Pass region. The area features an extensive network of trails and a spacious day-use area, making it ideal for both recreation and relaxation. Campers have the option to set up near the lakeshore or choose secluded sites nestled within the forest for a more immersive natural experience.",
    "district": "Blairmore",
    "facets": [
@@ -4914,6 +5223,15 @@
     "Shelter",
     "Water"
    ],
+   "confirmed": {
+    "retrieved": "2026-09-12",
+    "source": "anglersatlas",
+    "species": [
+     "RNTR",
+     "TGTR"
+    ],
+    "url": "https://www.anglersatlas.com/place/712623/black-nugget-mine-pit"
+   },
    "description": "This well-appointed campground offers 21 sites suitable for both RVs and tents, with the option to gather with friends at one of the designated group sites. Most campsites are well-treed, providing privacy and shade, while several are located along a long, winding lake, offering scenic waterfront views. At the campground entrance, visitors will find a concession building equipped with flush toilets, showers, and firewood. A variety of concession items are also available for purchase, adding convenience to your stay.",
    "district": "Vegreville",
    "facets": [

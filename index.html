@@ -165,6 +165,13 @@
     M97 a lake Alberta names on its stocking map takes Alberta's own id, so a
         lake first stocked after the reports stopped printing one is no longer
         minted an id of ours, nor mistaken for a neighbour 3 km away
+    M98 what is reported to swim in a lake, kept apart from what was stocked
+        and from what the guide sets a limit for, each lake citing its source;
+        a lake nobody has looked up says nothing rather than saying none
+    M99 a catch limit is never read as a species list: 64 of the 65 lakes the
+        guide names carry the same pike-walleye-perch triplet
+    M100 limits say whose rule they are — written for this lake, or the zone's
+        default, or the province's — in colour and in words
 -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2b2e2a">
@@ -478,6 +485,21 @@
     border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; color: #1f211e; }
   .reg-open.yes { background: var(--good); }
   .reg-open.no { background: var(--WSCT); }
+  /* Green where the guide names this lake, grey where it does not. The pill
+     beside it carries the same fact in words, because a border colour is not
+     something anyone should have to rely on to know whose rule they are
+     reading. */
+  .reg-block[data-basis="site-specific"] { border-left-color: var(--good); }
+  .reg-block[data-basis="put-and-take"],
+  .reg-block[data-basis="watershed-default"] { border-left-color: var(--ink-dim); }
+  .reg-block[data-basis="cross-reference"] { border-left-color: var(--TGTR); }
+  .reg-basis {
+    display: inline-block; font-size: 9.5px; font-weight: 700; padding: 1px 6px;
+    border-radius: 999px; text-transform: uppercase; letter-spacing: .04em;
+    background: var(--ink-dim); color: #1f211e;
+  }
+  .reg-block[data-basis="site-specific"] .reg-basis { background: var(--good); }
+  .reg-default { color: var(--ink-dim); font-size: 10px; font-style: italic; }
   .reg-row { display: flex; gap: 8px; margin: 2px 0; line-height: 1.4; }
   .reg-k { flex: 0 0 52px; color: var(--ink-dim); }
   .reg-v { flex: 1; }
@@ -500,6 +522,19 @@
   .lake-popup td.date-cell { font-variant-numeric: tabular-nums; white-space: nowrap; }
   .lake-popup .profile-row { font-size: 11px; color: var(--ink-dim); margin-bottom: 6px; }
   .lake-popup .profile-amenities { font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; line-height: 1.45; }
+  /* Reported present, which is not the same claim as stocked, and is not a
+     catch limit. Styled as a quieter row than the stocking table for that
+     reason — it is somebody's report, not Alberta's record. */
+  .seen-row { margin: 4px 0 2px; line-height: 1.9; }
+  .seen-chip {
+    display: inline-block; margin-right: 4px; padding: 1px 6px;
+    background: var(--panel-2); border: 1px solid var(--panel-edge);
+    border-left: 3px solid var(--ink-dim); border-radius: 2px;
+    font-size: 10px; color: var(--ink-dim);
+  }
+  .seen-chip.stocked { color: var(--ink); }
+  .seen-cite { font-size: 9.5px; color: var(--ink-dim); font-style: italic; }
+
   .lake-popup .profile-label { color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; font-size: 10px; margin-right: 3px; }
   .lake-popup a.zone-link { color: var(--ink); border-bottom: 1px dotted var(--accent); text-decoration: none; }
   .lake-popup a.zone-link:hover { color: var(--accent); }
@@ -1040,6 +1075,20 @@ const SPECIES_META = {
 const SPECIES_ORDER = ["RNTR", "BKTR", "BNTR", "TGTR", "CTTR", "WSCT",
                        "WALL", "NRPK", "ARGR"];
 
+/** Fish this map can name but does not stock, so that a reported species list
+ *  reads as fish rather than as four-letter codes. Alberta's own abbreviations,
+ *  the same ones the regulations tables use. */
+const OTHER_FISH = {
+  YLPR: "Yellow Perch", LKWH: "Lake Whitefish", MNWH: "Mountain Whitefish",
+  BURB: "Burbot", LKTR: "Lake Trout", BLTR: "Bull Trout", SPLK: "Splake",
+  GLTR: "Golden Trout", SAUG: "Sauger", GOLD: "Goldeye",
+  LKST: "Lake Sturgeon", WHSC: "White Sucker",
+};
+
+function fishName(code) {
+  return (SPECIES_META[code] && SPECIES_META[code].label) || OTHER_FISH[code] || code;
+}
+
 /** Size classes an angler actually cares about. A lake given 60,000 fry is
  *  not the same prospect as one given 3,000 catchable trout. */
 const SIZE_CLASSES = [
@@ -1570,12 +1619,50 @@ function profileBlock(lake) {
   if (lake.surface_area_ha != null) {
     parts.push(`<span><span class="profile-label">Area</span> ${esc(lake.surface_area_ha)} ha</span>`);
   }
-  if (!parts.length && !lake.amenities) return "";
+  const seen = speciesBlock(lake);
+  if (!parts.length && !lake.amenities && !seen) return "";
   let html = parts.length ? `<div class="profile-row">${parts.join(" &nbsp;·&nbsp; ")}</div>` : "";
+  html += seen;
   if (lake.amenities) {
     html += `<div class="profile-amenities"><span class="profile-label">Facilities</span> ${esc(lake.amenities)}</div>`;
   }
   return html;
+}
+
+/* What is reported to swim here, as against what was put in.
+ *
+ * Stocking records answer the second question only. They say nothing about the
+ * pike that arrived on their own, and nothing about whether a decade of trout
+ * is still there. The catch limits are not an answer either, and reading them
+ * as one is the trap this block exists to avoid: Cow Lake's row lists a walleye
+ * limit, and 64 of the 65 site-specific rows in the guide carry the identical
+ * pike-walleye-perch triplet. That is boilerplate covering species that may or
+ * may not be present, and Cow Lake is independently reported to hold rainbow,
+ * brown, pike and perch, with no walleye at all.
+ *
+ * Coverage is partial, and a lake with no entry is UNCHECKED. Nothing here may
+ * render as "this lake has no fish". */
+function speciesBlock(lake) {
+  const profile = profileFor(lake);
+  const seen = profile && profile.confirmed;
+  if (!seen || !seen.species || !seen.species.length) return "";
+  const stocked = new Set(lake.stockings.map(s => s.species));
+  const chips = seen.species.map(code => {
+    const meta = SPECIES_META[code];
+    const here = stocked.has(code);
+    const title = `${fishName(code)} — reported present`
+      + (here ? ", and stocked here" : ", though this map has no record of it being stocked here");
+    return `<span class="seen-chip${here ? " stocked" : ""}" title="${esc(title)}"${
+      meta ? ` style="border-left-color:${meta.color}"` : ""}>${esc(fishName(code))}</span>`;
+  }).join("");
+  const cite = seen.url
+    ? `<a class="zone-link" href="${esc(seen.url)}" target="_blank" rel="noopener">Angler's Atlas ↗</a>`
+    : "an angling report";
+  return `<div class="seen-row">
+    <span class="profile-label" title="Reported to be present in this lake, which is a different question from what Alberta has stocked. Not a government source, and not a catch limit.">Reported here</span>
+    ${chips}
+    <span class="seen-cite">per ${cite}</span>
+  </div>`;
 }
 
 /* One line at the top of the popup answering the only question the popup is
@@ -1757,6 +1844,23 @@ function regulationBlock(lake) {
     : "https://albertaregulations.ca/fishingregs/";
   const link = `<a class="zone-link" href="${official}" target="_blank" rel="noopener">`
     + `official ${esc(zone || "Alberta")} tables ↗</a>`;
+  /* Which of the guide's three kinds of row this lake's limits come from was
+   * only ever said in an italic sentence at the bottom of the block. It is the
+   * difference between a rule written for this water and a rule that happens to
+   * cover it, so it gets a colour and, because colour alone is not a signal
+   * anyone can rely on, the same thing in words. */
+  const BASIS_PILL = {
+    "site-specific": { text: "This lake", why: `Listed by name in the ${zone || "zone"} table.` },
+    "put-and-take": { text: "Stocked-lake default",
+      why: "The province's blanket rule for stocked put-and-take waters. Nothing here is written about this lake in particular." },
+    "watershed-default": { text: `${zone || "Zone"} default`,
+      why: `Not listed individually, so the ${zone || "zone"} default applies. Nothing here is written about this lake in particular.` },
+    "cross-reference": { text: "See elsewhere", why: "The guide regulates this water under another entry." },
+  };
+  const pillFor = basis => {
+    const p = BASIS_PILL[basis];
+    return p ? `<span class="reg-basis" title="${esc(p.why)}">${esc(p.text)}</span>` : "";
+  };
   const head = `<div class="reg-head"><span class="profile-label">Catch limits</span>`
     + `<span class="reg-year">${esc(year)} guide</span></div>`;
 
@@ -1790,9 +1894,13 @@ function regulationBlock(lake) {
         <span class="reg-v">${esc(reg.bait)}</span></div>`);
     }
     const others = Object.entries(reg.species || {})
-      .map(([code, v]) => `${esc(code)} ${esc(v.text)}`).join(" &nbsp;·&nbsp; ");
+      .map(([code, v]) => `${esc(fishName(code))} ${esc(v.text)}`).join(" &nbsp;·&nbsp; ");
     if (others) {
-      rows.push(`<div class="reg-row"><span class="reg-k">Other</span>
+      /* A limit is not a fish. Sixty-four of the sixty-five lakes listed by
+       * name in the guide carry the same pike-walleye-perch triplet, which is
+       * boilerplate covering what might be there rather than a survey of what
+       * is. Cow Lake's row lists walleye; Cow Lake is not reported to hold any. */
+      rows.push(`<div class="reg-row"><span class="reg-k" title="What you may keep IF you catch one. A species listed here is not a species this lake is known to hold — most of these rows carry the same three names.">Other</span>
         <span class="reg-v">${others}</span></div>`);
     }
     if ((reg.also || []).length) {
@@ -1804,13 +1912,15 @@ function regulationBlock(lake) {
     const limits = reg.limits || {};
     const listed = Object.entries(limits)
       .map(([k, v]) => `${esc(k)} ${esc(v)}`).join(" &nbsp;·&nbsp; ");
+    const defaultNote = reg.basis === "watershed-default"
+      ? `the ${esc(zone || "zone")} default` : "the provincial stocked-lake default";
     if (reg.bait) {
       rows.push(`<div class="reg-row"><span class="reg-k">Bait</span>
         <span class="reg-v">${esc(reg.bait)}</span></div>`);
     }
     if (listed) {
-      rows.push(`<div class="reg-row"><span class="reg-k">Limits</span>
-        <span class="reg-v">${listed}</span></div>`);
+      rows.push(`<div class="reg-row"><span class="reg-k" title="These are ${esc(defaultNote)}, not limits written for this lake. A species listed here is not a species this lake is known to hold.">Limits</span>
+        <span class="reg-v">${listed} <span class="reg-default">(${esc(defaultNote)})</span></span></div>`);
     }
   }
 
@@ -1822,7 +1932,7 @@ function regulationBlock(lake) {
   const matched = reg.matched_name && reg.matched_name !== lake.name
     ? ` (matched to “${esc(reg.matched_name)}”)` : "";
 
-  return `<div class="reg-block">${head}${badge}
+  return `<div class="reg-block" data-basis="${esc(reg.basis)}">${head}${pillFor(reg.basis)}${badge}
     ${rows.join("")}
     <div class="reg-why">${because}${matched}</div>
     <div class="reg-warn">Confirm before you fish — regulations change. ${link}</div>
