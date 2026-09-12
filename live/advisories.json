@@ -1,5 +1,18 @@
 {
- "checked": null,
- "sources": {},
- "note": "Not yet collected. The daily job writes this file."
+ "checked": "2026-09-12T16:18:04Z",
+ "note": "Recorded as published by Alberta. Nothing here is interpreted into a closure flag — read the source before you fish.",
+ "sources": {
+  "advisories": {
+   "entries": [
+    "Crowsnest Lake - Interim Fish Consumption Guidance"
+   ],
+   "url": "https://mywildalberta.ca/fishing/advisories-corrections-closures/default.aspx"
+  },
+  "consumption": {
+   "entries": [
+    "Crowsnest Lake - Interim Fish Consumption Guidance"
+   ],
+   "url": "https://mywildalberta.ca/fishing/advisories-corrections-closures/fish-consumption-advisory.aspx"
+  }
+ }
 }
