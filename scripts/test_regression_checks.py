@@ -341,7 +341,12 @@ class PublishedDataTests(unittest.TestCase):
             for lk in lakes:
                 self.assertTrue(lk.get("lake_id"), f"{year} {lk['name']}")
                 self.assertIn(lk.get("coord_source"),
-                              ("profile", "alberta", "ats", "unknown"), lk["name"])
+                              # mywildalberta: taken from the stocking map,
+                              # either to fill a lake that had no position or
+                              # because a person settled a disagreement in the
+                              # map's favour.
+                              ("profile", "alberta", "ats", "mywildalberta", "unknown"),
+                              lk["name"])
                 # A missing position is allowed only when it is declared as
                 # such, never as a silent null that would drop a pin.
                 if lk.get("lat") is None or lk.get("lon") is None:
@@ -1920,3 +1925,124 @@ class AcaRosterTests(unittest.TestCase):
                     self.assertIsNone(entry["winterkill"], key)
                 else:
                     self.assertTrue(entry["winterkill"]["inputs"]["aeration"], key)
+
+
+class SettledDisagreementTests(unittest.TestCase):
+    """A disagreement is a question, and a question can be answered.
+
+    reconcile.py compares the repo against Alberta and files anything where
+    both have a value and they differ. Those are the cases a blanks-only rule
+    cannot resolve, so they wait for a person — and once a person has looked at
+    both values and chosen, the answer has to stick and the question has to
+    stop being asked. Raising a settled question every run trains people to
+    ignore the file.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        path = DATA_DIR / "lake_facts.csv"
+        if not path.exists():
+            raise unittest.SkipTest("no answers recorded yet")
+        with path.open(newline="", encoding="utf-8") as handle:
+            cls.rows = list(csv.DictReader(handle))
+        cls.registry = {e["lake_id"]: e for e in
+                        json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))}
+
+    def test_every_row_declares_which_kind_of_answer_it_is(self):
+        for row in self.rows:
+            self.assertIn(row.get("decision"), {"fill", "settled", "keep"}, row)
+
+    def test_apply_only_ever_records_a_fill(self):
+        """Settling a disagreement is a judgement between two sources.
+
+        reconcile.py has not made one and must never write as though it had.
+        """
+        source = (Path(__file__).parent / "reconcile.py").read_text(encoding="utf-8")
+        self.assertIn('"decision": "fill"', source)
+        for verb in ('"decision": "settled"', '"decision": "keep"'):
+            self.assertNotIn(verb, source, f"reconcile.py writes {verb} on its own")
+
+    def test_a_settled_answer_wins_over_what_the_pipeline_derived(self):
+        settled = [r for r in self.rows if r["decision"] == "settled"]
+        self.assertTrue(settled, "no disagreement has been settled")
+        for row in settled:
+            lake = self.registry[row["lake_id"]]
+            if row["field"] == "surface_area_ha":
+                self.assertEqual(lake["surface_area_ha"], float(row["value"]), row["note"][:60])
+            elif row["field"] == "position":
+                lat, lon = (float(v) for v in row["value"].split(","))
+                self.assertAlmostEqual(lake["lat"], lat, places=4)
+                self.assertAlmostEqual(lake["lon"], lon, places=4)
+
+    def test_a_kept_answer_writes_nothing(self):
+        """"Checked, keeping ours" must not quietly become a value."""
+        import build_history
+
+        # zone is deliberately blank. A "keep" row and a "fill" row behave the
+        # same way on a field that already has a value — both fall through the
+        # blanks-only check — so the only case that tells them apart is a field
+        # the repo has nothing in, where "fill" would write and "keep" must not.
+        class Fake:
+            lakes = [{"lake_id": "wbkeep", "zone": None, "surface_area_ha": 3.0,
+                      "ats_codes": ["SW1-2-3-W4"], "lat": 50.0, "lon": -114.0,
+                      "coord_source": "profile"}]
+            def reindex(self):
+                pass
+
+        lake = Fake.lakes[0]
+        before = dict(lake)
+        facts = DATA_DIR / "lake_facts.csv"
+        backup = facts.read_text(encoding="utf-8")
+        try:
+            # Written with the csv module: a position is a pair, and the comma
+            # inside it is not a column break.
+            with facts.open("w", newline="", encoding="utf-8") as handle:
+                writer = csv.writer(handle)
+                writer.writerow(["lake_id", "field", "value", "decision", "note"])
+                writer.writerow(["wbkeep", "position", "1.0,2.0", "keep", "checked"])
+                writer.writerow(["wbkeep", "surface_area_ha", "999", "keep", "checked"])
+                writer.writerow(["wbkeep", "zone", "PP9", "keep", "checked"])
+            build_history.apply_facts(Fake())
+        finally:
+            facts.write_text(backup, encoding="utf-8")
+        self.assertEqual(lake["lat"], before["lat"], "a kept row moved the lake")
+        self.assertEqual(lake["lon"], before["lon"], "a kept row moved the lake")
+        self.assertEqual(lake["surface_area_ha"], before["surface_area_ha"],
+                         "a kept row rewrote the area")
+        self.assertIsNone(lake["zone"],
+                          "a kept row filled a blank; keep must write nothing at all")
+
+    def test_an_answered_question_is_not_asked_again(self):
+        answered = {(r["lake_id"], r["field"]) for r in self.rows
+                    if r["decision"] in ("settled", "keep")}
+        self.assertTrue(answered)
+        review = DATA_DIR / "lake_facts_review.csv"
+        if not review.exists():
+            self.skipTest("no review file")
+        with review.open(newline="", encoding="utf-8") as handle:
+            for row in csv.DictReader(handle):
+                self.assertNotIn((row["lake_id"], row["field"]), answered,
+                                 f"{row['lake']} {row['field']} was already settled")
+
+    def test_a_position_taken_from_the_map_says_so(self):
+        """settle_coordinates used to relabel it "alberta" on the next line.
+
+        The report coordinates and the stocking map are different sources with
+        different accuracy, and the app shows coord_source to the reader.
+        """
+        settled = [r for r in self.rows
+                   if r["field"] == "position" and r["decision"] == "settled"]
+        for row in settled:
+            self.assertEqual(self.registry[row["lake_id"]]["coord_source"], "mywildalberta",
+                             row["note"][:60])
+
+    def test_a_pair_on_one_quarter_section_comes_from_one_source(self):
+        """Champion Lakes carried Lower from the profile and Upper from the map.
+
+        The two sources disagree about this pair, so no source anywhere said
+        (8.0, 0.4) — whichever was right, the published pair was wrong.
+        """
+        lower = self.registry["wb6608"]["surface_area_ha"]
+        upper = self.registry["wb6607"]["surface_area_ha"]
+        self.assertEqual((lower, upper), (4.0, 0.4),
+                         "the pair is not the map's pair")

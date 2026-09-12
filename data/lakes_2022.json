@@ -8981,9 +8981,9 @@
     "lake_id": "wb6760",
     "ats": "SE6-50-1-W4",
     "name": "Lloydminster Trout Pond",
-    "lat": 53.25943,
-    "lon": -110.04075,
-    "coord_source": "profile",
+    "lat": 53.279,
+    "lon": -110.1391,
+    "coord_source": "mywildalberta",
     "zone": "PP2",
     "surface_area_ha": 6.0,
     "amenities": "This waterbody has no amenities.",
@@ -9444,7 +9444,7 @@
     "lon": -114.599941,
     "coord_source": "profile",
     "zone": "ES1",
-    "surface_area_ha": 8.0,
+    "surface_area_ha": 4.0,
     "amenities": "This waterbody has no amenities.",
     "stockings": [
       {

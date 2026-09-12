@@ -260,7 +260,21 @@ def existing_facts():
     if not FACTS.exists():
         return []
     with FACTS.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        rows = list(csv.DictReader(handle))
+    for row in rows:
+        row.setdefault("decision", "fill")
+    return rows
+
+
+def answered_already():
+    """Questions a person has already settled, so they are not asked again.
+
+    A disagreement is not a bug to be fixed once and forgotten; it is a
+    question, and once someone has looked at both values and chosen, raising it
+    every run trains people to ignore the file.
+    """
+    return {(row["lake_id"], row["field"]) for row in existing_facts()
+            if (row.get("decision") or "fill") in ("settled", "keep")}
 
 
 def write_facts(lakes, fills):
@@ -305,12 +319,16 @@ def write_facts(lakes, fills):
             continue
         rows.append({"lake_id": lake["lake_id"], "field": field,
                      "value": row["alberta_value"],
+                     # Never anything but a fill. Settling a disagreement is a
+                     # judgement between two sources, and this has not made one.
+                     "decision": "fill",
                      "note": f"{row['lake']} — {row['note'] or 'Alberta publishes it, the repo had nothing'}"})
         seen.add((lake["lake_id"], field))
         added += 1
     with FACTS.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["lake_id", "field", "value", "note"],
-                                lineterminator="\n")
+        writer = csv.DictWriter(
+            handle, fieldnames=["lake_id", "field", "value", "decision", "note"],
+            lineterminator="\n", extrasaction="ignore")
         writer.writeheader()
         for row in sorted(rows, key=lambda r: (r["lake_id"], r["field"])):
             writer.writerow(row)
@@ -337,6 +355,13 @@ def main():
     # Lakes minted from a land description carry no waterbody id, so
     # compare() cannot see them at all. These are proposals, not facts.
     fills.extend(propose_published_ids(lakes, site))
+    settled = answered_already()
+    by_waterbody = {str(l.get("waterbody_id") or ""): l["lake_id"] for l in lakes}
+    def is_open(row):
+        lake_id = row.get("lake_id") or by_waterbody.get(row["waterbody_id"], "")
+        return (lake_id, row["field"]) not in settled
+    disagreements = [r for r in disagreements if is_open(r)]
+    fills = [r for r in fills if is_open(r)]
 
     print(f"{len(site)} lake(s) collected from Alberta, {len(lakes)} in the registry\n")
     print(f"  FILL      {len(fills):>4}  the repo has nothing and Alberta publishes a value")

@@ -1,8 +1,4 @@
 verdict,lake,lake_id,waterbody_id,field,repo_value,alberta_value,note
-disagree,Emerald Lake (Hart Lake),wb4532,4532,position,"49.62677,-114.64192","54.33340,-115.61830",527595 m apart
-disagree,Lloydminster Trout Pond,wb6760,6760,position,"53.25943,-110.04075","53.27900,-110.13910",6893 m apart
-disagree,Upper Kananaskis Lake,wb6061,6061,position,"50.61702,-115.16123","50.62500,-115.15000",1189 m apart
-disagree,Champion Lakes (Lower),wb6608,6608,surface_area_ha,8.0,4,
 fill,Allison Lake (Chinook Lake),wb6902,6902,max_depth_m,,4,
 fill,Ashland Reservoir,wb6903,6903,max_depth_m,,6,
 fill,Bathing Lake,wb6892,6892,max_depth_m,,21,

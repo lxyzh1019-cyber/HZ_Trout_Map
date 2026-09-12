@@ -3429,7 +3429,7 @@
       "LOWER CHAMPION LAKE"
     ],
     "zone": "ES1",
-    "surface_area_ha": 8.0,
+    "surface_area_ha": 4.0,
     "amenities": "This waterbody has no amenities.",
     "base_name": "Champion Lakes (Lower)"
   },
@@ -5092,9 +5092,9 @@
     "lake_id": "wb6760",
     "name": "Lloydminster Trout Pond",
     "waterbody_id": "6760",
-    "lat": 53.25943,
-    "lon": -110.04075,
-    "coord_source": "profile",
+    "lat": 53.279,
+    "lon": -110.1391,
+    "coord_source": "mywildalberta",
     "ats_codes": [
       "SE6-50-1-W4"
     ],

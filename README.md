@@ -247,14 +247,45 @@ result: two independently produced sources describing the same lakes.
 **FILL** where the repo has nothing and Alberta publishes a value. **DISAGREE**
 where both have a value and they differ, which is never resolved automatically.
 
-`--apply` only ever records a blank, and the rebuild only ever fills a blank, so
-a value the pipeline derived for itself is never replaced from a file. It
-filled 34 fishing zones, 34 surface areas, and Alberta's own id for eight lakes
-this repo had minted from a land description.
+Each answer in `data/lake_facts.csv` says which kind it is:
 
-Four disagreements are left for a person, in `data/lake_facts_review.csv`. Three
-are positions and one is a surface area; each names both values and how far
-apart they are.
+| `decision` | who writes it | what it does |
+| --- | --- | --- |
+| `fill` | `--apply` | applies only while the repo still has nothing there |
+| `settled` | you | two sources disagreed, you picked one, and it wins |
+| `keep` | you | you compared them and kept what the repo had; nothing is written |
+
+`--apply` writes `fill` and nothing else, so nothing can start overriding the
+pipeline on its own. It filled 34 fishing zones, 34 surface areas, and
+Alberta's own id for eight lakes this repo had minted from a land description.
+
+A `settled` or `keep` row also stops `reconcile.py` raising that question
+again. A disagreement is a question, not a defect, and re-asking one that has
+been answered teaches people to ignore the file.
+
+### The four that were settled
+
+- **Emerald Lake (Hart Lake)** — `keep`. The map's row for id 4532 publishes no
+  land description, the wrong district and no stocking history, and the survey
+  grid puts this repo's position 0.37 km away against the map's 527 km. The
+  map carries the Whitecourt lake separately as 6821.
+- **Lloydminster Trout Pond** — `settled`, and the repo lost. Both sources
+  publish the same land description, `SE6-50-1-W4`, and the survey grid sits
+  0.99 km from the map's position and **6.49 km from the hand-verified profile
+  pair**. A profile row that contradicts its own land description by six
+  kilometres is not verification. This is the one lake whose `coord_source` is
+  `mywildalberta`.
+- **Upper Kananaskis Lake** — `keep`. 1.19 km apart, but the map gives
+  `50.625, -115.15` to three and two decimal places against the repo's six, and
+  the lake is 846 ha. Both positions are on the water; one of them is precise.
+- **Champion Lakes** — `settled`. The profile and the map disagree on *both*
+  halves (profile 8.0 / 4.0, map 4.0 / 0.4), and the profile's Upper equals the
+  map's Lower, so one of the two has the pair crossed. The map agrees with the
+  profile exactly on the other four shared-quarter-section pairs, so the pair is
+  taken from the map. Which source is crossed is still unknown — what is now
+  fixed is that the published pair came from *one* source. It previously held
+  Lower from the profile and Upper from the map, a combination no source
+  anywhere states.
 
 ### Alberta's id for a lake the reports never numbered
 

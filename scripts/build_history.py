@@ -81,9 +81,22 @@ def apply_facts(reg):
     This is the same arrangement as data/lake_aliases.csv, which holds the
     answers to past linking questions.
 
-    Blanks only, in both directions: reconcile.py records a row only where the
-    repo had nothing, and this fills only where the repo still has nothing. A
-    value the pipeline derived for itself is never replaced from here.
+    Three kinds of answer, in the decision column:
+
+      fill     what reconcile.py --apply records: Alberta publishes a value and
+               the repo had none. Applied only while the repo still has none, so
+               a value the pipeline later derives for itself is never replaced.
+
+      settled  a person compared two sources that disagreed and picked one.
+               This wins, because a disagreement is exactly the case a blanks-
+               only rule cannot resolve and a person just did.
+
+      keep     a person compared them and kept what the repo already had. No
+               value is written; the row exists so reconcile.py stops raising a
+               question that has been answered.
+
+    Only a person writes settled or keep. --apply emits fill and nothing else,
+    so nothing here can start overriding the pipeline on its own.
     """
     if not FACTS_PATH.exists():
         return 0
@@ -93,24 +106,28 @@ def apply_facts(reg):
         for row in csv.DictReader(handle):
             lake = by_id.get(row["lake_id"])
             field, value = row["field"], row["value"]
-            if not lake or not value:
+            decision = (row.get("decision") or "fill").strip()
+            if not lake or decision == "keep":
                 continue
+            if not value:
+                continue
+            settled = decision == "settled"
             if field == "position":
-                if lake.get("lat") is None:
+                if settled or lake.get("lat") is None:
                     lat, lon = value.split(",")
                     lake["lat"], lake["lon"] = float(lat), float(lon)
                     lake["coord_source"] = "mywildalberta"
                     applied += 1
             elif field == "legal_land_description":
-                if not lake["ats_codes"]:
+                if settled or not lake["ats_codes"]:
                     lake["ats_codes"] = [normalise_code(value)]
                     applied += 1
             elif field == "surface_area_ha":
-                if lake.get(field) is None:
+                if settled or lake.get(field) is None:
                     lake[field] = float(value)
                     applied += 1
             elif field == "zone":
-                if lake.get(field) is None:
+                if settled or lake.get(field) is None:
                     lake[field] = value
                     applied += 1
             elif field == "published_waterbody_id":
@@ -238,8 +255,14 @@ def settle_coordinates(reg):
     """Every lake needs a position. Prefer verified, then Alberta's, then the grid."""
     counts = defaultdict(int)
     for lake in reg.lakes:
-        if lake["coord_source"] == "profile":
-            counts["profile"] += 1
+        # A position that already names where it came from keeps that name.
+        # Everything else with a position came from the report rows, which is
+        # what "alberta" means. Without this, a coordinate taken from the
+        # stocking map or settled by hand in data/lake_facts.csv was relabelled
+        # "alberta" on the very next line and the map claimed a provenance the
+        # value does not have.
+        if lake["coord_source"] in ("profile", "mywildalberta"):
+            counts[lake["coord_source"]] += 1
             continue
         if lake["lat"] is not None:
             lake["coord_source"] = "alberta"
@@ -635,6 +658,7 @@ def main():
         print(f"  shared coordinate: {name} moved to its own land description ({gap} km away)")
     counts = settle_coordinates(reg)
     print(f"  positions: {counts['profile']} verified, {counts['alberta']} from Alberta, "
+          f"{counts['mywildalberta']} from the stocking map, "
           f"{counts['ats']} from the land description, {counts['none']} unknown")
     renamed = disambiguate_names(reg)
     if renamed:
