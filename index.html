@@ -130,6 +130,21 @@
         when asked for, with no referrer, at the address Alberta published and
         never re-encoded, keeping their frame and saying so when one fails, and
         offered as links where the format is one the browser cannot decode
+    M81 the conditions panel scores a lake and never a town: with none chosen it
+        takes the nearest one and names it, so the water-temperature input and
+        the species bands always have a lake to mean something about
+    M82 five years selected on arrival rather than sixteen, with the count
+        saying what is hidden and All one click away
+    M83 year chips follow the focused lake — no chip for a year that lake was
+        never stocked, because it could only ever empty the view
+    M84 the popup lists the years a lake was stocked as runs, so a skipped year
+        shows as a gap instead of hiding inside a span
+    M85 the filters collapse on a desktop and stay collapsed, and the map is
+        told it grew
+    M86 lake names on the pins close in, where the basemap names the big water
+        and leaves the stocked ponds blank
+    M87 the evidence page is reached with the map's state and hands it back, so
+        the way out returns to the lake and the filters you left
 -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2b2e2a">
@@ -326,6 +341,14 @@
     font-size: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.4);
   }
   .leaflet-tooltip.lake-tip::before { border-top-color: var(--panel-edge); }
+  /* A name, not a card: no box, no arrow, and never in the way of a click. */
+  .leaflet-tooltip.lake-label {
+    background: none; border: 0; box-shadow: none; padding: 0;
+    color: var(--ink); font-size: 10.5px; font-weight: 600; white-space: nowrap;
+    text-shadow: 0 0 3px var(--bg), 0 0 3px var(--bg), 0 0 5px var(--bg);
+    pointer-events: none;
+  }
+  .leaflet-tooltip.lake-label::before { display: none; }
   .lake-tip b { color: var(--ink); }
   .lake-tip .tip-sub { color: var(--ink-dim); font-size: 11px; }
 
@@ -720,6 +743,9 @@
     .chart-summary { gap: 12px; font-size: 11px; }
     .leaflet-popup-content { min-width: 200px; max-height: 46vh; }
     #sidebar-close { display: block; }
+    #app.sidebar-hidden #sidebar { display: block; }
+    #app.sidebar-hidden #sidebar-open { display: none; }
+    #app.sidebar-hidden .leaflet-top.leaflet-left { margin-top: 46px; }
     /* The zone table cannot float beside a phone-width map, so it sits under
        the map buttons across the full width, with its own scroll. */
     /* Two floating panels cannot share a phone-width map, so the conditions
@@ -739,10 +765,25 @@
        The badge comes first in the DOM, so it pushes the toast up. */
     #offline-badge:not([hidden]) ~ #update-toast { bottom: calc(48px + var(--panel-h)); }
   }
+  /* The filters are worth 320px of a laptop screen while you are choosing a
+     lake, and worth none of it once you have. The close control used to exist
+     only on a phone, so on a desktop there was no way to give the map the
+     space back. */
   #sidebar-close {
-    display: none; background: none; border: 0; color: var(--ink-dim);
+    display: block; background: none; border: 0; color: var(--ink-dim);
     font-size: 20px; line-height: 1; cursor: pointer; float: right; padding: 0 0 6px 10px;
   }
+  #app.sidebar-hidden #sidebar { display: none; }
+  #sidebar-open {
+    display: none; position: absolute; top: 10px; left: 10px; z-index: 900;
+    padding: 8px 11px; font-size: 12px; line-height: 1; background: var(--panel);
+    color: var(--ink); border: 1px solid var(--panel-edge); border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4); cursor: pointer;
+  }
+  #app.sidebar-hidden #sidebar-open { display: block; }
+  /* Leaflet's zoom control sits exactly where that tab goes, and wins the
+     click. Same remedy the phone layout already uses for the menu button. */
+  #app.sidebar-hidden .leaflet-top.leaflet-left { margin-top: 46px; }
   @media (prefers-reduced-motion: reduce) {
     #sidebar, #chart-panel, #chart-toggle { transition: none; }
   }
@@ -786,28 +827,6 @@
     </div>
 
     <div class="group">
-      <div class="group-label"><span>Stocked recently</span></div>
-      <div class="chips" id="recency-chips"></div>
-      <div class="hint" id="recency-note"></div>
-    </div>
-
-    <div class="group">
-      <div class="group-label"><span>Species</span><button type="button" class="linkish" data-all="species">all</button></div>
-      <div id="species-filters"></div>
-    </div>
-
-    <div class="group">
-      <div class="group-label"><span>Fish size</span><button type="button" class="linkish" data-all="size">all</button></div>
-      <div id="size-filters"></div>
-    </div>
-
-    <div class="group" id="facility-group" hidden>
-      <div class="group-label"><span>Facilities</span><button type="button" class="linkish" data-all="facility">none</button></div>
-      <div id="facility-chips" class="chips"></div>
-      <div class="hint" id="facility-note"></div>
-    </div>
-
-    <div class="group">
       <div class="group-label"><span>Distance from home</span></div>
       <div class="home-name" id="home-name"></div>
       <input type="range" id="dist-slider" min="0" max="1000" step="10" value="1000">
@@ -821,8 +840,31 @@
     </div>
 
     <div class="group">
-      <div class="group-label"><span>Years</span></div>
+      <div class="group-label"><span>Species</span><button type="button" class="linkish" data-all="species">all</button></div>
+      <div id="species-filters"></div>
+    </div>
+
+    <div class="group">
+      <div class="group-label"><span>Fish size</span><button type="button" class="linkish" data-all="size">all</button></div>
+      <div id="size-filters"></div>
+    </div>
+
+    <div class="group">
+      <div class="group-label"><span>Stocked recently</span></div>
+      <div class="chips" id="recency-chips"></div>
+      <div class="hint" id="recency-note"></div>
+    </div>
+
+    <div class="group" id="facility-group" hidden>
+      <div class="group-label"><span>Facilities</span><button type="button" class="linkish" data-all="facility">none</button></div>
+      <div id="facility-chips" class="chips"></div>
+      <div class="hint" id="facility-note"></div>
+    </div>
+
+    <div class="group">
+      <div class="group-label"><span>Years</span><span class="aside" id="year-count"></span></div>
       <div class="chips" id="year-chips"></div>
+      <div class="hint" id="year-scope" hidden></div>
       <div class="shortcuts">
         <button class="shortcut" data-range="all">All</button>
         <button class="shortcut" data-range="none">None</button>
@@ -872,6 +914,7 @@
 
   <div id="map-wrap">
     <button id="menu-btn" type="button" aria-label="Filters">☰</button>
+    <button id="sidebar-open" type="button" aria-label="Show filters">☰ Filters</button>
     <div id="map"></div>
     <div class="map-btns">
       <button class="map-btn" id="zoom-results" type="button">Zoom to results</button>
@@ -1083,7 +1126,8 @@ const state = {
   conditions: {
     open: false,
     horizon: "now",          // "now" | "week"
-    anchorKey: null,         // a lake, or null for home
+    anchorKey: null,         // the lake being scored
+    anchorAuto: false,       // true when we picked it, not the user
     waterOverrides: {},      // lakeKey -> { tempC, atISO }
   },
 };
@@ -1108,6 +1152,7 @@ const DATA_ISSUES = { invalidStockings: 0, examples: [] };
 const STORE_HOME = "troutmap.home";
 const STORE_FAVS = "troutmap.favourites";
 const STORE_WATER = "troutmap.watertemp";
+const STORE_SIDEBAR = "troutmap.sidebar";
 
 // ============================================================
 // UTILITIES
@@ -1749,6 +1794,22 @@ function dateCell(dateStr, precision) {
   return `<td class="date-cell"${title}>${day} ${esc(monthYear)}</td>`;
 }
 
+/** Years as runs, not as a span. "2011–2026" reads as sixteen years of stocking
+ *  even when the lake was skipped for six of them; "2019–2021, 2023, 2025–2026"
+ *  says what actually happened. Expects a sorted, de-duplicated list. */
+function yearRuns(years) {
+  if (!years.length) return "none";
+  const runs = [];
+  let start = years[0], prev = years[0];
+  for (const y of years.slice(1)) {
+    if (y === prev + 1) { prev = y; continue; }
+    runs.push([start, prev]);
+    start = prev = y;
+  }
+  runs.push([start, prev]);
+  return runs.map(([a, b]) => a === b ? String(a) : `${a}–${b}`).join(", ");
+}
+
 function popupHtml(lake) {
   const key = lakeKey(lake);
   const filteredTotal = filteredFishTotal(lake);
@@ -1758,9 +1819,7 @@ function popupHtml(lake) {
     .sort((a, b) => stockingSortKey(b).localeCompare(stockingSortKey(a)));
   const activeYears = [...new Set(rows.map(s => s.year))].sort((a, b) => a - b);
   const activeSpecies = filteredDominantOrder(lake);
-  const yearRangeText = activeYears.length
-    ? (activeYears.length === 1 ? String(activeYears[0]) : `${activeYears[0]}–${activeYears[activeYears.length - 1]}`)
-    : "none";
+  const yearRangeText = yearRuns(activeYears);
   const speciesText = activeSpecies.length
     ? activeSpecies.map(c => SPECIES_META[c]?.short || c).join(", ") : "none";
 
@@ -1840,7 +1899,7 @@ function lakeLinkUrl(key) {
 // ============================================================
 // MAP
 // ============================================================
-let map, pinLayer, zoneLayer, homeMarker, currentBasemap = "topo";
+let map, pinLayer, zoneLayer, labelLayer, homeMarker, currentBasemap = "topo";
 let rerenderingPins = false;
 const basemaps = {};
 
@@ -1901,6 +1960,11 @@ function initMap() {
       });
     },
   }).addTo(map);
+
+  /* Names sit in their own layer rather than in the pins, because a marker can
+     carry only one tooltip and the pins already use theirs for the hover card. */
+  labelLayer = L.layerGroup().addTo(map);
+  map.on("zoomend moveend", renderLabels);
 
   /* Zone bubbles are a separate layer, added only in zone view, so switching
      back to pins cannot leave a stale bubble behind. */
@@ -1964,6 +2028,39 @@ function placeHomeMarker() {
   });
 }
 
+/* Alberta's basemap names the big lakes and leaves the ponds blank, which is
+ * exactly backwards for this map: the ponds are the stocked ones. So the pins
+ * carry their own names.
+ *
+ * Only close in, and only for what is on screen. Two reasons, both about
+ * staying readable: clustering switches off at CLUSTER_OFF_ZOOM, so that is the
+ * first zoom at which every pin is its own marker and a label belongs to
+ * exactly one lake; and a province-wide view would be a wall of text. Past
+ * LABEL_MAX in view the labels would overlap into noise, so none are drawn. */
+const LABEL_MAX = 60;
+
+function renderLabels() {
+  if (!labelLayer || !map) return;
+  labelLayer.clearLayers();
+  if (state.view !== "map" || map.getZoom() < CLUSTER_OFF_ZOOM) return;
+
+  const bounds = map.getBounds();
+  const visible = [];
+  for (const lake of LAKES) {
+    if (lake.lat == null || lake.lon == null) continue;
+    if (!bounds.contains([lake.lat, lake.lon])) continue;
+    if (!lakePassesFilters(lake)) continue;
+    visible.push(lake);
+    if (visible.length > LABEL_MAX) return;
+  }
+  for (const lake of visible) {
+    L.tooltip({
+      permanent: true, direction: "bottom", offset: [0, 9],
+      className: "lake-label", interactive: false,
+    }).setLatLng([lake.lat, lake.lon]).setContent(esc(lake.name)).addTo(labelLayer);
+  }
+}
+
 function renderPins() {
   rerenderingPins = true;
   pinLayer.clearLayers();
@@ -2000,6 +2097,8 @@ function renderPins() {
     if (target) pinLayer.zoomToShowLayer(target, () => target.openPopup());
     else state.openPopupAts = null;
   }
+
+  renderLabels();
 
   document.getElementById("result-count").textContent =
     `Showing ${shown} of ${LAKES.length} lakes`;
@@ -2113,6 +2212,12 @@ function setHome(next, opts = {}) {
   if (!opts.skipMarker) placeHomeMarker();
   else homeMarker.setLatLng([state.home.lat, state.home.lon]);
   recomputeDistances();
+  // An anchor we chose was chosen as "nearest to home", so a new home has to
+  // re-choose it. One the user picked is theirs and stays put.
+  if (state.conditions.anchorAuto) {
+    state.conditions.anchorKey = null;
+    state.conditions.anchorAuto = false;
+  }
   updateHomeUI();
   onFilterChange();
 }
@@ -2400,19 +2505,51 @@ function updateRecencyCounts() {
   }
 }
 
-function buildYearChips() {
+/** The years worth offering: every year, or — when the charts are scoped to one
+ *  lake — only the years that lake was actually stocked. A chip for 2011 on a
+ *  lake first stocked in 2019 is a button that can only ever empty the view. */
+function yearsForChips() {
+  if (!state.focusedLakeAts) return ALL_YEARS;
+  const lake = LAKES.find(l => lakeKey(l) === state.focusedLakeAts);
+  if (!lake) return ALL_YEARS;
+  const stocked = new Set(lake.stockings.map(s => s.year));
+  const years = ALL_YEARS.filter(y => stocked.has(y));
+  return years.length ? years : ALL_YEARS;
+}
+
+function renderYearChips() {
   const host = document.getElementById("year-chips");
-  host.innerHTML = ALL_YEARS.map(y => {
+  if (!host) return;
+  const years = yearsForChips();
+  host.innerHTML = years.map(y => {
     const partial = PROVISIONAL_YEARS.has(y);
     const title = partial ? ` title="${y} is still under way; Alberta updates this report later in the season"` : "";
     return `<button class="chip ${state.years.has(y) ? "active" : ""}" data-year="${y}"${title}>${y}${partial ? "*" : ""}</button>`;
   }).join("");
+
+  const count = document.getElementById("year-count");
+  if (count) count.textContent = `${state.years.size} of ${ALL_YEARS.length}`;
+
+  const scope = document.getElementById("year-scope");
+  if (scope) {
+    const narrowed = years.length < ALL_YEARS.length;
+    scope.hidden = !narrowed;
+    if (narrowed) {
+      const lake = LAKES.find(l => lakeKey(l) === state.focusedLakeAts);
+      scope.textContent = `Only the years ${lake ? lake.name : "this lake"} was stocked.`;
+    }
+  }
+}
+
+function buildYearChips() {
+  const host = document.getElementById("year-chips");
+  renderYearChips();
   host.addEventListener("click", e => {
     const chip = e.target.closest("[data-year]");
     if (!chip) return;
     const y = Number(chip.dataset.year);
-    if (state.years.has(y)) { state.years.delete(y); chip.classList.remove("active"); }
-    else { state.years.add(y); chip.classList.add("active"); }
+    if (state.years.has(y)) state.years.delete(y); else state.years.add(y);
+    syncYearChips();
     onFilterChange();
   });
   document.querySelectorAll(".shortcut").forEach(btn => {
@@ -2430,6 +2567,8 @@ function buildYearChips() {
 function syncYearChips() {
   document.querySelectorAll("[data-year]").forEach(chip =>
     chip.classList.toggle("active", state.years.has(Number(chip.dataset.year))));
+  const count = document.getElementById("year-count");
+  if (count) count.textContent = `${state.years.size} of ${ALL_YEARS.length}`;
 }
 
 function buildDistanceSlider() {
@@ -2774,6 +2913,8 @@ let chart = null;
 function chart_ref() { return chart; }
 
 function updateChartScopeUI() {
+  // The year chips are scoped to the focused lake, so they move with it.
+  renderYearChips();
   const row = document.getElementById("chart-scope-row");
   if (!state.focusedLakeAts) { row.hidden = true; return; }
   const lk = LAKES.find(l => lakeKey(l) === state.focusedLakeAts);
@@ -3111,11 +3252,31 @@ function watchConnection() {
 // PHONE MENU
 // ============================================================
 function closeMenu() { document.getElementById("app").classList.remove("menu-open"); }
+
+/** Hide or show the filters on a desktop, and give Leaflet the news.
+ *  The map is sized by flexbox, so it only learns it grew if it is told; a
+ *  map that is not told draws grey where the sidebar used to be. */
+function setSidebarHidden(hidden) {
+  document.getElementById("app").classList.toggle("sidebar-hidden", hidden);
+  writeStore(STORE_SIDEBAR, { hidden: hidden });
+  // After the layout settles, not during it.
+  requestAnimationFrame(() => { if (typeof map !== "undefined" && map) map.invalidateSize(); });
+}
+
 function buildMenu() {
+  const app = document.getElementById("app");
   document.getElementById("menu-btn").addEventListener("click", () =>
-    document.getElementById("app").classList.toggle("menu-open"));
-  document.getElementById("sidebar-close").addEventListener("click", closeMenu);
+    app.classList.toggle("menu-open"));
+  // One control, two jobs: on a phone the sidebar is a slide-over and this
+  // closes it; on a desktop it is a column and this collapses it.
+  document.getElementById("sidebar-close").addEventListener("click", () => {
+    if (app.classList.contains("menu-open")) closeMenu();
+    else setSidebarHidden(true);
+  });
+  document.getElementById("sidebar-open").addEventListener("click", () => setSidebarHidden(false));
   document.getElementById("scrim").addEventListener("click", closeMenu);
+  const stored = readStore(STORE_SIDEBAR, null);
+  if (stored && stored.hidden) document.getElementById("app").classList.add("sidebar-hidden");
 }
 
 // ============================================================
@@ -3181,9 +3342,12 @@ async function init() {
     ADVISORIES = await loadAdvisories();
     LAKES = lakes;
     ALL_YEARS = years;
+    /* Sixteen years of everything is a poor first view: it buries this season
+     * under a decade of history. Five years is enough to see whether a lake is
+     * kept up, and "All" is one click away with the count saying what is hidden. */
     state.years = params.has("yr")
       ? new Set(params.get("yr").split(",").map(Number).filter(y => years.includes(y)))
-      : new Set(years);
+      : new Set(years.slice(-5));
 
     document.getElementById("subtitle").textContent = years.length === 1
       ? `Stocking data · ${years[0]}`

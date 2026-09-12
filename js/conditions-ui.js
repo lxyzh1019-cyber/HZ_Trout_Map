@@ -85,16 +85,46 @@
   // WHAT TO SCORE
   // ============================================================
 
-  /** The lake the panel is talking about, or home when none is chosen. */
+  function placeFor(lake) {
+    return { lat: lake.lat, lon: lake.lon, name: lake.name, lake: lake,
+             species: filteredDominantOrder(lake) };
+  }
+
+  /** The nearest lake to home, by the distance prepareLakes already measured.
+   *  Home itself is a town, and a forecast for a town is the one thing this
+   *  panel should never give: the water temperature input only exists for a
+   *  lake, the species bands only mean something at a lake, and nobody drives
+   *  to a postcode to fish. So when no lake has been chosen, the panel picks
+   *  the closest one and says which. */
+  function nearestLake() {
+    if (typeof LAKES === "undefined") return null;
+    var best = null;
+    for (var i = 0; i < LAKES.length; i++) {
+      var l = LAKES[i];
+      if (l.lat == null || l.lon == null || !isFinite(l.distanceKm)) continue;
+      if (!best || l.distanceKm < best.distanceKm) best = l;
+    }
+    return best;
+  }
+
+  /** The lake the panel is talking about — the chosen one, or the nearest. */
   function anchor() {
     var key = state.conditions && state.conditions.anchorKey;
     if (key) {
       var lake = LAKES.find(function (l) { return lakeKey(l) === key; });
-      if (lake) {
-        return { lat: lake.lat, lon: lake.lon, name: lake.name, lake: lake,
-                 species: filteredDominantOrder(lake) };
-      }
+      if (lake) return placeFor(lake);
     }
+    var near = nearestLake();
+    if (near) {
+      // Remember it, so the water-temperature input — which exists only for a
+      // lake — appears, and so a reading typed here is kept against that lake.
+      if (state.conditions) {
+        state.conditions.anchorKey = lakeKey(near);
+        state.conditions.anchorAuto = true;
+      }
+      return placeFor(near);
+    }
+    // No lake has a position yet. Home is the last resort, not the default.
     return { lat: state.home.lat, lon: state.home.lon, name: state.home.name,
              lake: null, species: [...state.species] };
   }
@@ -390,7 +420,7 @@
       + body
       + (now.advisories.length
           ? '<div class="cx-advisory">' + now.advisories.map(esc).join("<br>") + "</div>" : "")
-      + '<div class="cx-foot"><a href="evidence.html" target="_blank" rel="noopener">'
+      + '<div class="cx-foot"><a href="evidence.html' + esc(location.search) + '" target="_blank" rel="noopener">'
       + 'What this score is built on ↗</a></div>';
 
     host.querySelector(".cx-close").addEventListener("click", function () { toggle(false); });
@@ -450,6 +480,7 @@
   /** Point the panel at a lake, opening it if needed. */
   function focusLake(key) {
     state.conditions.anchorKey = key;
+    state.conditions.anchorAuto = false;
     astroCache = {};
     toggle(true);
   }
