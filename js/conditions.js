@@ -73,6 +73,25 @@
     CTTR: { lo: 3, optLo: 9,  optHi: 16, hi: 22 },
     WSCT: { lo: 2, optLo: 8,  optHi: 15, hi: 20 },
   };
+
+  /* Walleye, northern pike and arctic grayling are now on this map, and none
+   * of them has a band here.
+   *
+   * That is deliberate, not an oversight. Every band above is a published
+   * thermal preference for a salmonid, cited on evidence.html. Walleye and pike
+   * are warmwater fish whose optima sit well above any of these, and grayling
+   * is colder than all of them. Handing any of the three a trout curve would
+   * not be an approximation — it would score a 22 °C walleye lake as nearly
+   * lethal when 22 °C is close to where a walleye does its best growing.
+   *
+   * So they are named here as known-unbanded. The water factor drops out for a
+   * lake that holds only these, the remaining factors are renormalised the way
+   * they already are for any missing factor, and the panel says the water is
+   * not being scored. A mixed lake still scores on the salmonid it also holds.
+   *
+   * Filling these in means finding the same quality of source the salmonid
+   * bands rest on and citing it on the evidence page. Until then, silence. */
+  var UNBANDED = { WALL: 1, NRPK: 1, ARGR: 1 };
   var FALLBACK_BAND = BANDS.RNTR;
 
   // ============================================================
@@ -124,12 +143,15 @@
    * the opposite of useful. */
   function waterScore(tempC, speciesCodes) {
     var codes = (speciesCodes && speciesCodes.length) ? speciesCodes : ["RNTR"];
-    var best = null, bestCode = null;
+    var best = null, bestCode = null, skipped = 0;
     codes.forEach(function (c) {
+      if (UNBANDED[c]) { skipped++; return; }
       var s = waterScoreFor(tempC, BANDS[c] || FALLBACK_BAND);
       if (s !== null && (best === null || s > best)) { best = s; bestCode = c; }
     });
-    return { score: best, species: bestCode };
+    // Every species here is one we have no published band for. Score nothing.
+    return { score: best, species: bestCode,
+             unbanded: best === null && skipped > 0 };
   }
 
   /* Pressure is scored on its trend, never its level: Alberta lakes sit between
@@ -416,7 +438,20 @@
     var w = waterScore(water ? water.tempC : null, species);
     var waterTier = num(water && water.tempC) === null ? null
       : water.source === "measured" ? "strong" : "moderate";
-    var strat = stratification({
+
+    /* Nothing downstream may quietly reach for a trout band on a lake that
+     * holds no trout. Stratification is decided against a band, and the depth
+     * advice it produces is about where THIS species sits in the water column,
+     * so with no band there is no advice either. */
+    if (w.unbanded) {
+      waterTier = null;
+      advisories.push("Water temperature is not scored here: this map has no "
+        + "published thermal band for walleye, pike or grayling, and a trout "
+        + "curve would be wrong rather than approximate. The other factors "
+        + "carry the score.");
+    }
+
+    var strat = w.unbanded ? { advisory: null } : stratification({
       surfaceC: water ? water.tempC : null,
       band: species && species.length ? (BANDS[w.species] || FALLBACK_BAND) : FALLBACK_BAND,
       month: o.when ? o.when.getMonth() + 1 : null,
@@ -430,7 +465,8 @@
        * avoiding. The cost lands on confidence, not on the number. */
       if (strat.stratified) {
         var band = BANDS[w.species] || FALLBACK_BAND;
-        w = { score: waterScoreFor(Math.min(water.tempC, band.optHi), band), species: w.species };
+        w = { score: waterScoreFor(Math.min(water.tempC, band.optHi), band),
+              species: w.species, unbanded: w.unbanded };
       }
     }
     if (water && water.likelyIce) {
@@ -443,7 +479,8 @@
       species: w.species,
       source: water ? water.source : null,
       sigmaC: num(water && water.sigmaC),
-      note: num(water && water.tempC) === null ? null
+      note: w.unbanded ? "no band published for these species"
+        : num(water && water.tempC) === null ? null
         : (water.source === "measured"
             ? water.tempC.toFixed(1) + "°C measured"
             : "~" + Math.round(water.tempC) + "°C ±" + Math.round(num(water.sigmaC) || 2) + " modeled"),

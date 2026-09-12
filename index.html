@@ -156,6 +156,15 @@
         strength of the evidence, not the strength of the conditions
     M92 the summer layer says what it is and that it is a rule of thumb
     M93 the water input says where to hold a thermometer, and what kind
+    M94 walleye, pike and grayling are carried like any other stocked species,
+        and the 31 lakes that hold nothing else are on the map with the rest
+    M95 no thermal band is invented for them: the water factor drops out and
+        says so, rather than scoring a walleye on a rainbow's curve
+    M96 how heavy a stocked fish was, joined on the hatchery batch, from 2021
+        where Alberta publishes it and blank before that — never zero
+    M97 a lake Alberta names on its stocking map takes Alberta's own id, so a
+        lake first stocked after the reports stopped printing one is no longer
+        minted an id of ours, nor mistaken for a neighbour 3 km away
 -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2b2e2a">
@@ -1018,8 +1027,18 @@ const SPECIES_META = {
   TGTR: { label: "Tiger Trout",         short: "Tiger",      initial: "T", color: "#c98500" },
   CTTR: { label: "Cutthroat Trout",     short: "Cutthroat",  initial: "C", color: "#9085e9" },
   WSCT: { label: "Westslope Cutthroat", short: "Westslope",  initial: "W", color: "#e66767" },
+  /* Not trout, and on this map because Alberta stocks them and used to be
+     filtered out on the way in. The colours were picked by measuring: each is
+     at least 14 ΔE from all six above under normal vision and under simulated
+     protanopia, deuteranopia and tritanopia — roughly four times the
+     separation of the closest existing pair, Brown against Westslope at 3.7.
+     The letter on the pin is what actually carries it either way. */
+  WALL: { label: "Walleye",             short: "Walleye",    initial: "E", color: "#c9c24e" },
+  NRPK: { label: "Northern Pike",       short: "Pike",       initial: "P", color: "#3f5a22" },
+  ARGR: { label: "Arctic Grayling",     short: "Grayling",   initial: "G", color: "#5a6fa8" },
 };
-const SPECIES_ORDER = ["RNTR", "BKTR", "BNTR", "TGTR", "CTTR", "WSCT"];
+const SPECIES_ORDER = ["RNTR", "BKTR", "BNTR", "TGTR", "CTTR", "WSCT",
+                       "WALL", "NRPK", "ARGR"];
 
 /** Size classes an angler actually cares about. A lake given 60,000 fry is
  *  not the same prospect as one given 3,000 catchable trout. */
@@ -1866,6 +1885,8 @@ function popupHtml(lake) {
       <td><span class="sp-tag" style="background:${color}">${esc(s.species)}</span></td>
       <td>${esc(s.strain) || "—"}</td>
       <td>${s.length_cm ? Number(s.length_cm).toFixed(1) : "—"}</td>
+      <td${s.weight_g == null ? ' title="Alberta published no weight for this stocking. The weights come from its stocking map, which only goes back to 2021."' : ""}>${
+        s.weight_g == null ? "—" : fmtNum(Math.round(Number(s.weight_g)))}</td>
       <td>${fmtNum(s.number)}</td>
     </tr>`;
   }).join("");
@@ -1905,7 +1926,7 @@ function popupHtml(lake) {
       <button type="button" class="gmaps as-btn" data-lakelink="${esc(key)}" title="Copies a web address that reopens the map on this lake, with your filters, ready to paste into a message">Copy link to this lake</button>
     </div>
     <table>
-      <thead><tr><th>Date</th><th>Sp.</th><th>Strain</th><th>cm</th><th>Number</th></tr></thead>
+      <thead><tr><th>Date</th><th>Sp.</th><th>Strain</th><th>cm</th><th title="Average weight of a fish in this stocking, from Alberta's stocking map. Published from 2021 on; earlier years give a length and no weight.">g</th><th>Number</th></tr></thead>
       <tbody>${tableRows}</tbody>
     </table>
   </div>`;

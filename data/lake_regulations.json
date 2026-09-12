@@ -37,6 +37,44 @@
    },
    "zone": "PP2"
   },
+  "wb18014": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "",
+   "matched_name": "South Heart Reservoir",
+   "page": 38,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 15 TO MAR. 31"
+   },
+   "species": {
+    "BURB": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "LKWH": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "NRPK": {
+     "count": 1,
+     "text": "1 fish 63- 70 cm"
+    },
+    "WALL": {
+     "count": 1,
+     "size_cm": 55,
+     "size_op": "over",
+     "text": "1 over 55 cm"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": null,
+   "zone": "NB2"
+  },
   "wb18019": {
    "bait": "Bait is allowed",
    "basis": "put-and-take",
@@ -459,6 +497,32 @@
    },
    "zone": "NB1"
   },
+  "wb24236": {
+   "bait": "Bait and bait fish allowed",
+   "basis": "site-specific",
+   "detail": "3-46-11-W5",
+   "matched_name": "Brazeau Canal",
+   "page": 13,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "size_cm": 50,
+     "size_op": "over",
+     "text": "3 over 50 cm"
+    }
+   },
+   "trout_total": null,
+   "zone": "ES2"
+  },
   "wb24312": {
    "bait": "Bait ban",
    "basis": "site-specific",
@@ -853,6 +917,43 @@
    },
    "zone": "ES1"
   },
+  "wb3515": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "Includes inlet canal",
+   "matched_name": "Little Bow Lake Reservoir",
+   "page": 22,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 8 TO MAR. 15"
+   },
+   "species": {
+    "BURB": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "LKWH": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "NRPK": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "WALL": {
+     "count": 1,
+     "text": "1 fish 50-55 cm"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": null,
+   "zone": "PP1"
+  },
   "wb3522": {
    "bait": "Bait is allowed",
    "basis": "put-and-take",
@@ -921,6 +1022,39 @@
     "text": "OPEN all year"
    },
    "zone": "PP2"
+  },
+  "wb3526": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "Includes upstream to the inlet canal to the first drop structure",
+   "matched_name": "Milk River Ridge Reservoir",
+   "page": 23,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 8 TO MAR. 15"
+   },
+   "species": {
+    "BURB": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "LKWH": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "NRPK": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "WALL": {
+     "count": 1,
+     "text": "1 fish 50-55 cm"
+    }
+   },
+   "trout_total": null,
+   "zone": "PP1"
   },
   "wb3534": {
    "bait": "Bait allowed, except bait fish",
@@ -1195,6 +1329,35 @@
    },
    "zone": "ES1"
   },
+  "wb4027": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "56-9-W4",
+   "matched_name": "Lac Bellevue",
+   "page": 31,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 15 TO MAR. 31"
+   },
+   "species": {
+    "NRPK": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "WALL": {
+     "count": 1,
+     "text": "1 fish 45-50 cm"
+    },
+    "YLPR": {
+     "count": 10,
+     "text": "10 fish"
+    }
+   },
+   "trout_total": null,
+   "zone": "NB1"
+  },
   "wb4061": {
    "bait": "Bait allowed, except bait fish",
    "basis": "site-specific",
@@ -1260,6 +1423,40 @@
     "text": "2 trout"
    },
    "zone": "ES1"
+  },
+  "wb4161": {
+   "bait": "Bait and bait fish allowed",
+   "basis": "site-specific",
+   "detail": "12-35-7-W5; Includes tributaries for 1 km upstream",
+   "matched_name": "Burnstick Lake",
+   "page": 13,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 15 TO MAR. 31"
+   },
+   "species": {
+    "NRPK": {
+     "count": 1,
+     "size_cm": 63,
+     "size_op": "over",
+     "text": "1 over 63 cm"
+    },
+    "WALL": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "YLPR": {
+     "count": 5,
+     "text": "5 fish"
+    }
+   },
+   "trout_total": {
+    "count": 5,
+    "text": "5 trout"
+   },
+   "zone": "ES2"
   },
   "wb4167": {
    "bait": "Bait allowed, except bait fish",
@@ -1342,6 +1539,40 @@
     "zero": true
    },
    "zone": "ES4"
+  },
+  "wb417505": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Elk Point Pond",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "NB1"
+  },
+  "wb417506": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Boulder Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
   },
   "wb4208": {
    "bait": "Bait is allowed",
@@ -1475,6 +1706,40 @@
     "text": "5 trout"
    },
    "zone": "ES2"
+  },
+  "wb4351": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "Includes outlet stream",
+   "match_score": 0.95,
+   "matched_name": "Crane (Moore) Lake",
+   "page": 30,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 15 TO MAR. 31"
+   },
+   "species": {
+    "BURB": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "NRPK": {
+     "count": 1,
+     "text": "1 fish 63-70 cm"
+    },
+    "WALL": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": null,
+   "zone": "NB1"
   },
   "wb4374": {
    "also": [
@@ -1786,6 +2051,73 @@
    },
    "zone": "ES3"
   },
+  "wb4571": {
+   "also": [
+    {
+     "bait": "Bait allowed",
+     "detail": "Tributaries and outlet",
+     "page": 17,
+     "season": {
+      "closed": false,
+      "implied": false,
+      "text": "OPEN JUNE 16 TO OCT. 31"
+     },
+     "species": {
+      "LKWH": {
+       "count": 10,
+       "text": "10 fish"
+      },
+      "NRPK": {
+       "count": 0,
+       "text": "0 fish",
+       "zero": true
+      },
+      "WALL": {
+       "count": 0,
+       "text": "0 fish",
+       "zero": true
+      },
+      "YLPR": {
+       "count": 15,
+       "text": "15 fish"
+      }
+     },
+     "trout_total": null
+    }
+   ],
+   "bait": "Bait allowed",
+   "basis": "site-specific",
+   "detail": "",
+   "matched_name": "Fickle Lake",
+   "page": 17,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 15 TO MAR. 31"
+   },
+   "species": {
+    "LKWH": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "NRPK": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "WALL": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": null,
+   "zone": "ES3"
+  },
   "wb4614": {
    "bait": "Bait allowed, except bait fish",
    "basis": "site-specific",
@@ -1896,6 +2228,57 @@
     "text": "OPEN all year"
    },
    "zone": "ES2"
+  },
+  "wb4708": {
+   "also": [
+    {
+     "bait": "Bait allowed, except bait fish",
+     "detail": "Tributaries and outlet",
+     "page": 37,
+     "season": {
+      "closed": false,
+      "implied": false,
+      "text": "OPEN JUNE 1 TO OCT. 31"
+     },
+     "species": {
+      "NRPK": {
+       "count": 1,
+       "size_cm": 63,
+       "size_op": "over",
+       "text": "1 over 63 cm"
+      },
+      "YLPR": {
+       "count": 15,
+       "text": "15 fish"
+      }
+     },
+     "trout_total": null
+    }
+   ],
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "",
+   "matched_name": "Goose Lake",
+   "page": 37,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 15 TO MAR. 31"
+   },
+   "species": {
+    "NRPK": {
+     "count": 1,
+     "size_cm": 63,
+     "size_op": "over",
+     "text": "1 over 63 cm"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": null,
+   "zone": "NB2"
   },
   "wb4725": {
    "bait": "Bait is allowed",
@@ -2117,6 +2500,38 @@
     "text": "OPEN all year"
    },
    "zone": "NB2"
+  },
+  "wb4978": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "Includes inlet canal to the first drop structure",
+   "matched_name": "Keho Lake",
+   "page": 22,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 8 TO MAR. 15"
+   },
+   "species": {
+    "BURB": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "LKWH": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "NRPK": {
+     "count": 1,
+     "text": "1 fish 63-70 cm"
+    },
+    "WALL": {
+     "count": 1,
+     "text": "1 fish 50-55 cm"
+    }
+   },
+   "trout_total": null,
+   "zone": "PP1"
   },
   "wb5002": {
    "bait": "Bait is allowed",
@@ -2407,6 +2822,79 @@
    },
    "zone": "ES1"
   },
+  "wb5275": {
+   "also": [
+    {
+     "bait": "Bait allowed, except bait fish",
+     "detail": "",
+     "page": 23,
+     "season": {
+      "closed": false,
+      "implied": false,
+      "text": "OPEN ALL DAY DEC.1 TO MAR.15"
+     },
+     "species": {
+      "BURB": {
+       "count": 10,
+       "text": "10 fish"
+      },
+      "LKWH": {
+       "count": 10,
+       "text": "10 fish"
+      },
+      "NRPK": {
+       "count": 0,
+       "text": "0 fish",
+       "zero": true
+      },
+      "WALL": {
+       "count": 1,
+       "text": "1 fish 50-55 cm"
+      },
+      "YLPR": {
+       "count": 15,
+       "text": "15 fish"
+      }
+     },
+     "trout_total": null
+    }
+   ],
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "",
+   "matched_name": "Mcgregor Reservoir",
+   "page": 23,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 8 TO NOV. 30 between sunrise and sunset"
+   },
+   "species": {
+    "BURB": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "LKWH": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "NRPK": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "WALL": {
+     "count": 1,
+     "text": "1 fish 50-55 cm"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": null,
+   "zone": "PP1"
+  },
   "wb5286": {
    "bait": "Bait is allowed",
    "basis": "put-and-take",
@@ -2456,6 +2944,67 @@
     "size_op": "over",
     "text": "2 RNTR, TGTR 1 over 40 cm, BNTR 1 over 40 cm"
    },
+   "zone": "ES3"
+  },
+  "wb5336": {
+   "also": [
+    {
+     "bait": "Bait allowed",
+     "detail": "Tributaries and outlet",
+     "page": 17,
+     "season": {
+      "closed": false,
+      "implied": false,
+      "text": "OPEN JUNE 1 TO OCT. 31"
+     },
+     "species": {
+      "NRPK": {
+       "count": 0,
+       "text": "0 fish",
+       "zero": true
+      },
+      "WALL": {
+       "count": 1,
+       "size_cm": 50,
+       "size_op": "over",
+       "text": "1 over 50 cm"
+      },
+      "YLPR": {
+       "count": 15,
+       "text": "15 fish"
+      }
+     },
+     "trout_total": null
+    }
+   ],
+   "bait": "Bait allowed",
+   "basis": "site-specific",
+   "detail": "",
+   "matched_name": "Minnow Lake",
+   "page": 17,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 15 TO MAR. 31"
+   },
+   "species": {
+    "NRPK": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "WALL": {
+     "count": 1,
+     "size_cm": 50,
+     "size_op": "over",
+     "text": "1 over 50 cm"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": null,
    "zone": "ES3"
   },
   "wb5348": {
@@ -2563,6 +3112,25 @@
     "text": "5 trout"
    },
    "zone": "ES2"
+  },
+  "wb5434": {
+   "bait": "Bait allowed",
+   "basis": "watershed-default",
+   "limits": {
+    "Burbot": "2 (Burbot limit 0 Feb. 1 to Mar. 31)",
+    "Lake Whitefish": "10",
+    "Mountain Whitefish": "5 over 30 cm",
+    "Northern Pike": "3 over 63 cm",
+    "Trout": "5",
+    "Walleye": "3 over 50 cm",
+    "Yellow Perch": "15"
+   },
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP2"
   },
   "wb5466": {
    "bait": "Bait is allowed",
@@ -2769,6 +3337,128 @@
    },
    "zone": "ES4"
   },
+  "wb5581": {
+   "also": [
+    {
+     "bait": "Bait allowed, except bait fish",
+     "detail": "Remainder of the lake",
+     "page": 33,
+     "season": {
+      "closed": false,
+      "implied": false,
+      "text": "OPEN MAY 15 TO MAR. 31"
+     },
+     "species": {
+      "BURB": {
+       "count": 10,
+       "text": "10 fish"
+      },
+      "LKWH": {
+       "count": 10,
+       "text": "10 fish"
+      },
+      "NRPK": {
+       "count": 0,
+       "text": "0 fish",
+       "zero": true
+      },
+      "WALL": {
+       "count": 0,
+       "text": "0 fish",
+       "zero": true
+      },
+      "YLPR": {
+       "count": 15,
+       "text": "15 fish"
+      }
+     },
+     "trout_total": null
+    }
+   ],
+   "bait": "",
+   "basis": "site-specific",
+   "detail": "Portion north of a line drawn from the easternmost point of land in NW19-65-09-W4 easterly to the westernmost point of land in NE19-65-09-W4 locally known as Snug Cove (Mud Bay)",
+   "matched_name": "Pinehurst Lake",
+   "page": 33,
+   "season": {
+    "closed": true,
+    "implied": false,
+    "text": "CLOSED ALL YEAR"
+   },
+   "species": {},
+   "trout_total": null,
+   "zone": "NB1"
+  },
+  "wb5646": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "",
+   "match_score": 0.95,
+   "matched_name": "Rattlesnake (Sauder) Reservoir",
+   "page": 23,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 8 TO MAR. 15"
+   },
+   "species": {
+    "BURB": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "LKWH": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "NRPK": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "WALL": {
+     "count": 1,
+     "text": "1 fish 50-55 cm"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": null,
+   "zone": "PP1"
+  },
+  "wb5649": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "11-19-9-W5; Includes tributaries and outlet",
+   "matched_name": "Rawson Lake",
+   "page": 8,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN JULY 16 TO OCT. 31"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 0,
+    "text": "0 trout",
+    "zero": true
+   },
+   "zone": "ES1"
+  },
   "wb5661": {
    "bait": "Bait allowed, except bait fish",
    "basis": "site-specific",
@@ -2865,6 +3555,155 @@
     "text": "OPEN all year"
    },
    "zone": "PP2"
+  },
+  "wb5743": {
+   "also": [
+    {
+     "bait": "Bait allowed, except bait fish",
+     "detail": "Portion south of a line drawn from the point of land on the west shore in the SW half of 5-79-22-W4 to the point of land on the east shore in the SW half of 3-79-22-W4",
+     "page": 41,
+     "season": {
+      "closed": false,
+      "implied": false,
+      "text": "OPEN JUNE 1 TO MAR. 1"
+     },
+     "species": {
+      "BURB": {
+       "count": 10,
+       "text": "10 fish"
+      },
+      "LKWH": {
+       "count": 10,
+       "text": "10 fish"
+      },
+      "NRPK": {
+       "count": 1,
+       "size_cm": 75,
+       "size_op": "over",
+       "text": "1 over 75 cm"
+      },
+      "WALL": {
+       "count": 0,
+       "text": "0 fish",
+       "zero": true
+      },
+      "YLPR": {
+       "count": 15,
+       "text": "15 fish"
+      }
+     },
+     "trout_total": null
+    },
+    {
+     "bait": "Bait allowed, except bait fish",
+     "detail": "Remainder of the lake",
+     "page": 41,
+     "season": {
+      "closed": false,
+      "implied": false,
+      "text": "OPEN MAY 15 TO MAR. 31"
+     },
+     "species": {
+      "BURB": {
+       "count": 10,
+       "text": "10 fish"
+      },
+      "LKWH": {
+       "count": 10,
+       "text": "10 fish"
+      },
+      "NRPK": {
+       "count": 1,
+       "size_cm": 75,
+       "size_op": "over",
+       "text": "1 over 75 cm"
+      },
+      "WALL": {
+       "count": 0,
+       "text": "0 fish",
+       "zero": true
+      },
+      "YLPR": {
+       "count": 15,
+       "text": "15 fish"
+      }
+     },
+     "trout_total": null
+    },
+    {
+     "bait": "Bait allowed, except bait fish",
+     "detail": "Tributaries and outlet",
+     "page": 41,
+     "season": {
+      "closed": false,
+      "implied": false,
+      "text": "OPEN JUNE 1 TO OCT. 31"
+     },
+     "species": {
+      "BURB": {
+       "count": 10,
+       "text": "10 fish"
+      },
+      "LKWH": {
+       "count": 10,
+       "text": "10 fish"
+      },
+      "NRPK": {
+       "count": 1,
+       "size_cm": 75,
+       "size_op": "over",
+       "text": "1 over 75 cm"
+      },
+      "WALL": {
+       "count": 0,
+       "text": "0 fish",
+       "zero": true
+      },
+      "YLPR": {
+       "count": 15,
+       "text": "15 fish"
+      }
+     },
+     "trout_total": null
+    }
+   ],
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "Portion north of a line drawn from the point of land on the west shore in the SE half of 19-79-22-W4 to the point of land on the east shore in the SW half of 21-79-22-W4",
+   "matched_name": "Sandy Lake",
+   "page": 41,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN JUNE 1 TO MAR. 1"
+   },
+   "species": {
+    "BURB": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "LKWH": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "NRPK": {
+     "count": 1,
+     "size_cm": 75,
+     "size_op": "over",
+     "text": "1 over 75 cm"
+    },
+    "WALL": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": null,
+   "zone": "NB3"
   },
   "wb5753": {
    "bait": "Bait is allowed",
@@ -2979,6 +3818,42 @@
     "text": "OPEN all year"
    },
    "zone": "ES1"
+  },
+  "wb5820": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "65-18-W4",
+   "matched_name": "Skeleton Lake",
+   "page": 33,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 15 TO MAR. 31"
+   },
+   "species": {
+    "BURB": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "LKWH": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "NRPK": {
+     "count": 1,
+     "text": "1 fish 63-70 cm"
+    },
+    "WALL": {
+     "count": 1,
+     "text": "1 fish 50-55 cm"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": null,
+   "zone": "NB1"
   },
   "wb5858": {
    "bait": "Bait ban",
@@ -3146,6 +4021,43 @@
     "text": "OPEN all year"
    },
    "zone": "ES4"
+  },
+  "wb5952": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "Includes tributaries",
+   "matched_name": "Sylvan Lake",
+   "page": 27,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 15 TO OCT. 31 AND DEC. 11 TO MAR. 31"
+   },
+   "species": {
+    "BURB": {
+     "count": 2,
+     "text": "2 fish; but limit is 0 from Feb. 1 to Mar. 31"
+    },
+    "LKWH": {
+     "count": 5,
+     "text": "5 fish"
+    },
+    "NRPK": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "WALL": {
+     "count": 1,
+     "text": "1 fish"
+    },
+    "YLPR": {
+     "count": 5,
+     "text": "5 fish"
+    }
+   },
+   "trout_total": null,
+   "zone": "PP2"
   },
   "wb5968": {
    "bait": "Bait is allowed",
@@ -3370,6 +4282,81 @@
    "trout_total": null,
    "zone": "NB1"
   },
+  "wb6097": {
+   "also": [
+    {
+     "bait": "Bait allowed, except bait fish",
+     "detail": "Tributaries and outlet for 1 km",
+     "page": 42,
+     "season": {
+      "closed": false,
+      "implied": false,
+      "text": "OPEN JUNE 1 TO OCT. 31"
+     },
+     "species": {
+      "BURB": {
+       "count": 3,
+       "text": "3 fish"
+      },
+      "LKWH": {
+       "count": 10,
+       "text": "10 fish"
+      },
+      "NRPK": {
+       "count": 0,
+       "text": "0 fish",
+       "zero": true
+      },
+      "WALL": {
+       "count": 0,
+       "text": "0 or SHL tags",
+       "zero": true
+      },
+      "YLPR": {
+       "count": 5,
+       "text": "5 fish"
+      }
+     },
+     "trout_total": null
+    }
+   ],
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "",
+   "matched_name": "Wadlin Lake",
+   "page": 42,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN JUNE 1 TO MAR. 31"
+   },
+   "species": {
+    "BURB": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "LKWH": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "NRPK": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "WALL": {
+     "count": 0,
+     "text": "0 or SHL tags",
+     "zero": true
+    },
+    "YLPR": {
+     "count": 5,
+     "text": "5 fish"
+    }
+   },
+   "trout_total": null,
+   "zone": "NB3"
+  },
   "wb6160": {
    "bait": "Bait is allowed",
    "basis": "put-and-take",
@@ -3387,6 +4374,79 @@
     "text": "OPEN all year"
    },
    "zone": "ES3"
+  },
+  "wb6169": {
+   "also": [
+    {
+     "bait": "Bait allowed, except bait fish",
+     "detail": "Tributaries, inlet canal, outlet stream, and outlet canal",
+     "page": 38,
+     "season": {
+      "closed": false,
+      "implied": false,
+      "text": "OPEN JUNE 1 TO OCT. 31"
+     },
+     "species": {
+      "BURB": {
+       "count": 10,
+       "text": "10 fish"
+      },
+      "LKWH": {
+       "count": 10,
+       "text": "10 fish"
+      },
+      "NRPK": {
+       "count": 0,
+       "text": "0 fish",
+       "zero": true
+      },
+      "WALL": {
+       "count": 1,
+       "size_cm": 55,
+       "size_op": "over",
+       "text": "1 over 55 cm"
+      }
+     },
+     "trout_total": null
+    }
+   ],
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "Includes Boone's Slough",
+   "matched_name": "Winagami Lake",
+   "page": 38,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 15 TO MAR. 31"
+   },
+   "species": {
+    "BURB": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "LKWH": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "NRPK": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "WALL": {
+     "count": 1,
+     "size_cm": 55,
+     "size_op": "over",
+     "text": "1 over 55 cm"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": null,
+   "zone": "NB2"
   },
   "wb6173": {
    "bait": "Bait is allowed",
@@ -4068,6 +5128,38 @@
     "text": "OPEN all year"
    },
    "zone": "ES3"
+  },
+  "wb6654": {
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "detail": "35-35-18-W5",
+   "matched_name": "Kinglet Lake",
+   "page": 13,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 0,
+    "text": "0 trout",
+    "zero": true
+   },
+   "zone": "ES2"
   },
   "wb6658": {
    "bait": "",
@@ -5161,6 +6253,43 @@
    },
    "zone": "PP1"
   },
+  "wb6813": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "",
+   "matched_name": "Forty Mile Coulee Reservoir",
+   "page": 22,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 8 TO MAR. 15"
+   },
+   "species": {
+    "BURB": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "LKWH": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "NRPK": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "WALL": {
+     "count": 1,
+     "text": "1 fish 50-55 cm"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": null,
+   "zone": "PP1"
+  },
   "wb6815": {
    "bait": "Bait is allowed",
    "basis": "put-and-take",
@@ -5503,6 +6632,23 @@
     "text": "OPEN all year"
    },
    "zone": "ES1"
+  },
+  "wb6859": {
+   "bait": "Bait is allowed",
+   "basis": "put-and-take",
+   "limits": {
+    "Northern Pike": "3 Northern Pike of any size",
+    "Trout": "5 trout of any size",
+    "Yellow Perch": "15 Yellow Perch of any size"
+   },
+   "matched_name": "Corner Lake",
+   "note": "For other species, see Maximum Possession limits.",
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN all year"
+   },
+   "zone": "PP1"
   },
   "wb6860": {
    "bait": "Bait is allowed",

@@ -65,6 +65,7 @@ PHOTOS_CSV = ROOT / "data" / "raw" / "mywildalberta_photos.csv"
 ISSUES_CSV = ROOT / "data" / "raw" / "mywildalberta_issues.csv"
 DESCRIPTIONS_CSV = ROOT / "data" / "raw" / "mywildalberta_descriptions.csv"
 OUT_OF_SCOPE_CSV = ROOT / "data" / "out_of_scope.csv"
+WEIGHTS_CSV = ROOT / "data" / "raw" / "mywildalberta_weights.csv"
 ACA_ROSTER = ROOT / "data" / "aca_aeration_roster.csv"
 
 # The header sits on row 5 of every data sheet; rows 1-4 are the title block.
@@ -347,14 +348,15 @@ TROUT_ON_THE_MAP = {"RAINBOW TROUT", "BROOK TROUT", "BROWN TROUT", "TIGER TROUT"
 def out_of_scope_rows(waterbodies, details, by_id):
     """Waters Alberta stocks that this map deliberately does not show.
 
-    Every one is stocked with walleye or pike and no trout. Adding them is not
-    an import but a change of what the project is: sixteen years of reports
-    would need re-reading with a wider species set, and the pin palette is
-    already at the limit of what stays distinguishable under protanopia with
-    six categories.
+    This used to list 31 lakes — every one stocked with walleye or pike and no
+    trout — on the grounds that adding them was not an import but a change of
+    what the project is. That change has since been made: sources.py now carries
+    walleye, pike and grayling, so the reports are read with the wider species
+    set and those lakes are on the map with the rest.
 
-    So the decision is recorded, with the species that drove it, and anyone who
-    wants to revisit it can see exactly what they would be adding.
+    The file stays, and now writes no rows. It is the record of a decision and
+    of its reversal, and if Alberta stocks something genuinely outside the map's
+    scope one day, this is where it will say so.
     """
     species = defaultdict(set)
     records = defaultdict(int)
@@ -378,6 +380,71 @@ def out_of_scope_rows(waterbodies, details, by_id):
             "records": str(records.get(wid, 0)),
             "zone": published(row.get("Zone")),
             "why": "stocked with no trout; this is a trout map",
+        })
+    return rows
+
+
+# The four-letter codes the reports use, for the full names the workbook writes.
+SPECIES_CODE = {
+    "RAINBOW TROUT": "RNTR", "BROOK TROUT": "BKTR", "BROWN TROUT": "BNTR",
+    "TIGER TROUT": "TGTR", "CUTTHROAT TROUT": "CTTR",
+    "WESTSLOPE CUTTHROAT TROUT": "WSCT", "WALLEYE": "WALL",
+    "NORTHERN PIKE": "NRPK", "ARCTIC GRAYLING": "ARGR",
+}
+
+# A weight averaged over records that disagree by more than this fraction of
+# itself is not one batch described twice. Police Lake's 2023 rainbows are
+# published at 1400 g and 2600 g for the same 45 cm, which is two different
+# fish; one number for both would be a number that is true of neither.
+WEIGHT_SPREAD_LIMIT = 0.20
+
+
+def weight_rows(details):
+    """How heavy the fish were, which only the stocking map publishes.
+
+    The annual reports give a length and never a weight, so 'a 20 cm rainbow'
+    has always been as much as this map could say. The workbook gives both.
+
+    The two publications do not agree row for row — dates and quantities differ
+    between them often enough that matching on those lands only a third of the
+    time. They do agree on what was put in: one lake, one season, one species,
+    one size. That is a hatchery batch, and a batch has one weight. Keyed that
+    way, 3,218 of the 3,289 rows from 2021 on find their weight.
+
+    Where several records share a key they almost always agree exactly; the
+    median disagreement is zero grams. Where they disagree by more than
+    WEIGHT_SPREAD_LIMIT, nothing is written rather than an average of two
+    different fish. A published 0.0 is dropped for the same reason "Unknown"
+    is: it means below the scale, not weightless.
+    """
+    groups = defaultdict(list)
+    for row in details:
+        weight = row.get("Avg weight (g)")
+        length = row.get("Avg length (cm)")
+        if not isinstance(weight, (int, float)) or not isinstance(length, (int, float)):
+            continue                        # "Unknown" is not a weight
+        if weight <= 0:
+            # Alberta writes 0.0 for walleye fry too small to weigh at the
+            # precision it publishes — Lake Newell's 2022 stocking among them.
+            # That is a fish below the scale, not a fish weighing nothing, and
+            # carrying it forward would put a 0 g fish on the map as a fact.
+            continue
+        code = SPECIES_CODE.get(cell_text(row.get("Species")).upper())
+        if not code:
+            continue
+        key = (cell_text(row.get("Lake ID")), cell_text(row.get("Year")),
+               code, f"{float(length):.1f}")
+        groups[key].append(float(weight))
+
+    rows = []
+    for (wid, year, code, length), weights in groups.items():
+        mean = sum(weights) / len(weights)
+        if mean > 0 and (max(weights) - min(weights)) / mean > WEIGHT_SPREAD_LIMIT:
+            continue
+        rows.append({
+            "waterbody_id": wid, "year": year, "species": code,
+            "length_cm": length, "weight_g": f"{mean:.1f}",
+            "records": str(len(weights)),
         })
     return rows
 
@@ -467,6 +534,9 @@ def build():
                                  description_rows(waterbodies, by_id), by_waterbody),
         OUT_OF_SCOPE_CSV: render(["waterbody_id", "name", "species", "records", "zone", "why"],
                                  out_of_scope_rows(waterbodies, details, by_id), by_waterbody),
+        WEIGHTS_CSV: render(["waterbody_id", "year", "species", "length_cm", "weight_g", "records"],
+                            weight_rows(details),
+                            lambda r: (by_waterbody(r), r["year"], r["species"], float(r["length_cm"]))),
     }, {"waterbodies": len(waterbodies), "details": len(details),
         "photos": len(photos), "issues": len(issues), "refused_positions": len(refused)}
 

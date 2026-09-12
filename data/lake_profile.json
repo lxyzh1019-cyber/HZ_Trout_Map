@@ -1,64 +1,76 @@
 {
  "facets": [
   {
-   "lakes": 62,
+   "lakes": 69,
    "name": "Boat Launch"
   },
   {
-   "lakes": 33,
+   "lakes": 39,
    "name": "Dock/Pier"
   },
   {
-   "lakes": 33,
+   "lakes": 36,
    "name": "Fish Cleaning"
   },
   {
-   "lakes": 98,
+   "lakes": 109,
    "name": "Toilets"
   },
   {
-   "lakes": 63,
+   "lakes": 79,
    "name": "Camping"
   },
   {
-   "lakes": 116,
+   "lakes": 123,
    "name": "Day Use"
   },
   {
-   "lakes": 64,
+   "lakes": 70,
    "name": "Picnic"
   },
   {
-   "lakes": 53,
+   "lakes": 58,
    "name": "Water"
   },
   {
-   "lakes": 43,
-   "name": "Fire Pits"
-  },
-  {
-   "lakes": 42,
+   "lakes": 46,
    "name": "Firewood"
   },
   {
-   "lakes": 35,
+   "lakes": 45,
+   "name": "Fire Pits"
+  },
+  {
+   "lakes": 38,
    "name": "Playground"
   },
   {
-   "lakes": 32,
+   "lakes": 34,
    "name": "Trails"
   },
   {
-   "lakes": 28,
+   "lakes": 30,
    "name": "Shelter"
   },
   {
-   "lakes": 18,
+   "lakes": 21,
    "name": "Paddling"
   },
   {
-   "lakes": 16,
+   "lakes": 19,
+   "name": "Fishing Access"
+  },
+  {
+   "lakes": 18,
+   "name": "Swimming"
+  },
+  {
+   "lakes": 17,
    "name": "Sports"
+  },
+  {
+   "lakes": 15,
+   "name": "Boating"
   }
  ],
  "joined_on": "Alberta waterbody id",
@@ -85,6 +97,16 @@
     "Day Use"
    ],
    "photo_count": 1
+  },
+  "wb18014": {
+   "amenities": [
+    "Toilets"
+   ],
+   "description": "This little riverside campground is in Heart River Provincial Recreation Area, 20 km north of High Prairie on Hwy. 749, 8 km west on Hwy. 679 and 12 km north on an access road. Here you can go canoeing or boating from a hand launch. Fish in the many small bays and coves, or explore the adjacent Winagami Wildland Provincial Park, as well as Winagami Lake Provincial Park located about 18 km to the south and east. | Amenities notes: Firepits; handlauch",
+   "district": "High Prairie",
+   "facets": [
+    "Toilets"
+   ]
   },
   "wb18019": {
    "amenities": [
@@ -259,6 +281,12 @@
    "district": "High Level",
    "facets": null
   },
+  "wb23094": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Edmonton",
+   "facets": null
+  },
   "wb23292": {
    "amenities": [
     "Day Use",
@@ -280,6 +308,12 @@
    "district": "Cochrane",
    "facets": null,
    "photo_count": 1
+  },
+  "wb23327": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Vulcan",
+   "facets": null
   },
   "wb23789": {
    "amenities": [
@@ -318,6 +352,12 @@
    "district": "Bonnyville",
    "facets": null,
    "photo_count": 3
+  },
+  "wb24236": {
+   "amenities": null,
+   "description": "Brazeau Canal is a small pond located along the Brazeau Canal, approximately 50 minutes west of Drayton Valley. The pond has been stocked with walleye fry, offering anglers a unique fishing opportunity in a scenic setting. Fishing access is available at the West Canal Campground, which also provides convenient amenities for visitors. In addition to fishing, the area offers a variety of recreational activities, including powerboating, canoeing, and birdwatching. While Off-Highway Vehicle (OHV) trails are available nearby, OHV use is strictly prohibited within the campground to maintain a safe and peaceful environment. The site is adjacent to Brazeau Reservoir Provincial Recreation Area, making it an excellent destination for outdoor enthusiasts.",
+   "district": "Rocky Mountain House",
+   "facets": null
   },
   "wb24312": {
    "amenities": [
@@ -461,6 +501,12 @@
     "Day Use",
     "Toilets"
    ]
+  },
+  "wb317177": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "High River",
+   "facets": null
   },
   "wb318138": {
    "amenities": [
@@ -624,6 +670,26 @@
    ],
    "photo_count": 4
   },
+  "wb3515": {
+   "amenities": [
+    "Boating",
+    "Camping",
+    "Paddling",
+    "Paddling Canoe",
+    "Swimming",
+    "Water"
+   ],
+   "description": "This waterfront campground is in Little Bow Reservoir Provincial Recreation Area. This prairie campground is all about the water. Many of the sites back on to the reservoir, and trees provide some shade to fish , canoe, water ski, or swim.",
+   "district": "Vulcan",
+   "facets": [
+    "Boating",
+    "Camping",
+    "Paddling",
+    "Paddling Canoe",
+    "Swimming",
+    "Water"
+   ]
+  },
   "wb3522": {
    "amenities": [
     "Day Use",
@@ -686,6 +752,20 @@
    ],
    "photo_count": 16
   },
+  "wb3526": {
+   "amenities": [
+    "Boating",
+    "Camping",
+    "Wildlife Viewing"
+   ],
+   "description": "It's a great spot to enjoy boating, paddling, windsurfing, fishing, birdwatching, or camping.",
+   "district": "Lethbridge",
+   "facets": [
+    "Boating",
+    "Camping",
+    "Wildlife Viewing"
+   ]
+  },
   "wb3534": {
    "amenities": [
     "Boat Launch",
@@ -712,6 +792,39 @@
     "Water"
    ],
    "photo_count": 3
+  },
+  "wb3536": {
+   "amenities": [
+    "Camping",
+    "Day Use",
+    "Picnic",
+    "Swimming"
+   ],
+   "description": "Stafford Reservoir is a reservoir located just 45 miles from Chin; whether you’re spinning, fly fishing or bait casting your chances of getting a bite here. | Amenities notes: walk paths",
+   "district": "Lethbridge",
+   "facets": [
+    "Camping",
+    "Day Use",
+    "Picnic",
+    "Swimming"
+   ]
+  },
+  "wb3537": {
+   "amenities": [
+    "Boating",
+    "Camping",
+    "Paddling",
+    "Paddling Canoe"
+   ],
+   "description": "Travers Dam campground is in Travers Reservoir Provincial Recreation Area.",
+   "district": "Lethbridge",
+   "facets": [
+    "Boating",
+    "Camping",
+    "Paddling",
+    "Paddling Canoe"
+   ],
+   "photo_count": 1
   },
   "wb3899": {
    "amenities": null,
@@ -758,6 +871,12 @@
    "facets": [
     "Day Use"
    ]
+  },
+  "wb3959": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Vulcan",
+   "facets": null
   },
   "wb4005": {
    "amenities": null,
@@ -848,6 +967,24 @@
    ],
    "photo_count": 1
   },
+  "wb4027": {
+   "amenities": [
+    "Beach",
+    "Camping",
+    "Day Use",
+    "Playground",
+    "Shelter"
+   ],
+   "description": "Use the day use area or beach to swim or fish for stocked trout.",
+   "district": "St Paul",
+   "facets": [
+    "Beach",
+    "Camping",
+    "Day Use",
+    "Playground",
+    "Shelter"
+   ]
+  },
   "wb4061": {
    "amenities": [
     "Boat Launch",
@@ -869,6 +1006,26 @@
    "district": "High River",
    "facets": null,
    "photo_count": 2
+  },
+  "wb4161": {
+   "amenities": [
+    "Boating",
+    "Camping",
+    "Picnic",
+    "Playground",
+    "Sports",
+    "Water"
+   ],
+   "description": "The lake is about 3 km long and has an abundance of pike, perch and walleye Burnstick Lake offers something for everyone, including boating, fishing, water skiing, camping and a picnic area. A small store is available for your convenience.",
+   "district": "Sundre",
+   "facets": [
+    "Boating",
+    "Camping",
+    "Picnic",
+    "Playground",
+    "Sports",
+    "Water"
+   ]
   },
   "wb4167": {
    "amenities": null,
@@ -905,6 +1062,19 @@
     "Day Use"
    ],
    "photo_count": 5
+  },
+  "wb417505": {
+   "amenities": null,
+   "description": "Day use area. Come and try your luck catching one of the stocked trout.",
+   "district": "Elk Point",
+   "facets": null
+  },
+  "wb417506": {
+   "amenities": null,
+   "description": "This newly stocked pond near Red Deer is managed by the Alberta Conservation Association (ACA) and offers convenient access for recreational users. While amenities are currently limited, site development is ongoing and improvements will be added over time. The pond provides a great opportunity for anglers to enjoy trout fishing in a peaceful setting.",
+   "district": "Red Deer",
+   "facets": null,
+   "photo_count": 4
   },
   "wb4208": {
    "amenities": [
@@ -1015,6 +1185,20 @@
     "Trails Hiking"
    ]
   },
+  "wb4265": {
+   "amenities": [
+    "Boat Launch",
+    "Swimming",
+    "Toilets"
+   ],
+   "description": "Chin Reservoir is a large, long reservoir where boating, water skiing and fishing are popular. There are only amenities at the camping area which include a boat launch, swimming area and outhouses.",
+   "district": "Lethbridge",
+   "facets": [
+    "Boat Launch",
+    "Swimming",
+    "Toilets"
+   ]
+  },
   "wb4318": {
    "amenities": null,
    "description": "Formerly called Jeanette, then Lost and now, officially, Commonwealth. Trail Start: Hwy 742 (Smith-Dorrien/Spray Trail) Turn west onto Mt Shark Road In 1 km turn left onto a side road and park a little way in.",
@@ -1052,6 +1236,26 @@
     "Water"
    ],
    "photo_count": 10
+  },
+  "wb4351": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Dock/Pier",
+    "Firewood",
+    "Fishing Access",
+    "Fishing Access Dock"
+   ],
+   "description": "This a popular winter fishing destination. There is a public boat launch available, with a day use area. This waterbody has been recently stocked with walleye fry.",
+   "district": "Cold Lake",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Dock/Pier",
+    "Firewood",
+    "Fishing Access",
+    "Fishing Access Dock"
+   ]
   },
   "wb4374": {
    "amenities": [
@@ -1264,12 +1468,38 @@
    "district": "Nordegg",
    "facets": null
   },
+  "wb4571": {
+   "amenities": [
+    "Camping",
+    "Dock/Pier",
+    "Firewood",
+    "Fish Cleaning",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Fickle Lake Campground has 36 sites for both RVs and tents, including lovely campsites with lakeside views. The lots are surrounded by natural spruce forest and allow easy access to the lake, boat launch, dock and shoreline. Although the campground is closed during the winter, the road to the lake and parking lot is still maintained allowing easy access for ice fishing.",
+   "district": "Hinton",
+   "facets": [
+    "Camping",
+    "Dock/Pier",
+    "Firewood",
+    "Fish Cleaning",
+    "Toilets",
+    "Water"
+   ]
+  },
   "wb4614": {
    "amenities": null,
    "description": "It is encourage to hike or bike up to Fortress Lake up the road access to the trail head. Moterized vehicles access is restricted at this time. Ths is a low intensity hike. The estimated time is 3.4 to 4 hours with a total length of 8.9km with an elevation gain of 559m. To access the hiking trails, you can start from the trailhead located at the Sunwapta Falls parking lot. This is situated along the Icefields Parkway (Highway 93) in Jasper National Park. From there, follow the signs and directions to reach the trail leading to your destination.",
    "district": "Canmore",
    "facets": null,
    "photo_count": 2
+  },
+  "wb4635": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "St. Paul",
+   "facets": null
   },
   "wb4642": {
    "amenities": null,
@@ -1326,6 +1556,20 @@
     "Water"
    ],
    "photo_count": 2
+  },
+  "wb4708": {
+   "amenities": [
+    "Camping",
+    "Fishing Access",
+    "Toilets"
+   ],
+   "description": "Goose Lake offers camping and fishing. This waterbody has been recently stocked with walleye fry.",
+   "district": "Swan Hills",
+   "facets": [
+    "Camping",
+    "Fishing Access",
+    "Toilets"
+   ]
   },
   "wb4725": {
    "amenities": [
@@ -1453,6 +1697,36 @@
    "district": "Slave Lake",
    "facets": null
   },
+  "wb4977": {
+   "amenities": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fish Cleaning",
+    "Toilets"
+   ],
+   "description": "Kehiwin Cree Nation is operating the Kehiwin Provincial Recreation Area, 28 km east of St. Paul on Hwy. 29, and 7 km north on Hwy. 41. Cozy little campground that offers basic facilities and access with canoe or boat on Kehiwin Lake. | Amenities notes: firepits",
+   "district": "Bonnyville",
+   "facets": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Fish Cleaning",
+    "Toilets"
+   ]
+  },
+  "wb4978": {
+   "amenities": [
+    "Camping",
+    "Day Use",
+    "Fishing Access"
+   ],
+   "description": "This waterbody has been recently stocked with walleye fry.",
+   "district": "Lethbridge",
+   "facets": [
+    "Camping",
+    "Day Use",
+    "Fishing Access"
+   ]
+  },
   "wb5002": {
    "amenities": [
     "Beach",
@@ -1539,6 +1813,12 @@
    "facets": null,
    "photo_count": 2
   },
+  "wb5099": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Hanna",
+   "facets": null
+  },
   "wb5149": {
    "amenities": [
     "Camping"
@@ -1588,6 +1868,22 @@
    "district": "Canmore",
    "facets": null
   },
+  "wb5275": {
+   "amenities": [
+    "Boating",
+    "Paddling",
+    "Paddling Canoe",
+    "Water"
+   ],
+   "description": "There are about 100 sites suitable for RVs and tents. Camp on the prairies near the lakeside where you can escape the summer heat. Sailing, wind surfing, water skiing, canoeing and fishing are popular activities in and around the waterbody. | Amenities notes: wind surfing",
+   "district": "Vulcan",
+   "facets": [
+    "Boating",
+    "Paddling",
+    "Paddling Canoe",
+    "Water"
+   ]
+  },
   "wb5286": {
    "amenities": [
     "Boat Launch",
@@ -1625,6 +1921,22 @@
     "Day Use"
    ],
    "photo_count": 1
+  },
+  "wb5336": {
+   "amenities": [
+    "Camping",
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "This waterbody has been recently stocked with walleye fry. | Amenities notes: group use",
+   "district": "Edson",
+   "facets": [
+    "Camping",
+    "Day Use",
+    "Picnic",
+    "Toilets"
+   ]
   },
   "wb5348": {
    "amenities": [
@@ -1687,6 +1999,24 @@
    "district": "Edson",
    "facets": null,
    "photo_count": 2
+  },
+  "wb5434": {
+   "amenities": [
+    "Boating",
+    "Camping",
+    "Fishing Access",
+    "Swimming",
+    "Trails"
+   ],
+   "description": "This waterbody has been recently stocked with walleye fry.",
+   "district": "Brooks",
+   "facets": [
+    "Boating",
+    "Camping",
+    "Fishing Access",
+    "Swimming",
+    "Trails"
+   ]
   },
   "wb5466": {
    "amenities": [
@@ -1932,6 +2262,52 @@
     "Water"
    ]
   },
+  "wb5581": {
+   "amenities": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Firewood",
+    "Fish Cleaning",
+    "Picnic",
+    "Shelter",
+    "Toilets",
+    "Water"
+   ],
+   "description": "Pinehurst Lake and campground is located in Lakeland Provincial Recreation Area, 17 km south of Lac La Biche on Hwy. 36, 5km east on Hwy. 55, 3km north on Range Rd. 132, 19 km east on Township Rd. 652, and 7km north on access road. Pinehurst is a favourite destination for local anglers, and has a staging area outside of the campsite for OHV use for the trail network throughout Lakeland PRA. | Amenities notes: firepits; lifejacket loaner station",
+   "district": "Lac La Biche",
+   "facets": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Firewood",
+    "Fish Cleaning",
+    "Picnic",
+    "Shelter",
+    "Toilets",
+    "Water"
+   ]
+  },
+  "wb5646": {
+   "amenities": [
+    "Camping",
+    "Fire Pits",
+    "Picnic",
+    "Toilets"
+   ],
+   "description": "Camping area with serviced sites and a newly build boat launch.",
+   "district": "Medicine Hat",
+   "facets": [
+    "Camping",
+    "Fire Pits",
+    "Picnic",
+    "Toilets"
+   ]
+  },
+  "wb5649": {
+   "amenities": null,
+   "description": "This is a monderate trail difficulty, with a distance of 7.8km round trip, with an elevation gain of 300m. The trailhead is conveniently located adjacent to the Upper Kananaskis Lake parking lot. The route offers scenic views of Upper Kananaskis Lake, a picturesque waterfall, and sections of old-growth forest. Rawson Lake provides an excellent opportunity for hikers seeking a moderate challenge combined with stunning natural landscapes.",
+   "district": "Canmore",
+   "facets": null
+  },
   "wb5661": {
    "amenities": [
     "Boat Launch",
@@ -2016,12 +2392,28 @@
    ],
    "photo_count": 1
   },
+  "wb5743": {
+   "amenities": [
+    "Boat Launch"
+   ],
+   "description": "The lake is accessable by a pavement road. There is one public boat launch for larger sized watercraft.",
+   "district": "Athabasca",
+   "facets": [
+    "Boat Launch"
+   ]
+  },
   "wb5753": {
    "amenities": null,
    "description": "Sauer is a charming, tiny lake set among the rolling hills west of the city of Edmonton. It is a quiet spot for canoeing or fishing for rainbow trout.",
    "district": "Stony Plain",
    "facets": null,
    "photo_count": 3
+  },
+  "wb5758": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Red Earth",
+   "facets": null
   },
   "wb5766": {
    "amenities": [
@@ -2046,6 +2438,12 @@
    "amenities": null,
    "description": "Shark Lake, also known as Marushka Lake, is a scenic hike suitable for both beginner and experienced hikers. The trail is well-compacted by frequent users, making it accessible year-round and an excellent option for snowshoeing during the winter months. The hike covers a 7.6-kilometer round trip with an elevation gain of approximately 170 meters and typically takes 2 to 2.5 hours one way. The trailhead is located at the end of Mount Shark Road in Spray Valley Provincial Park. Hikers should follow the white trail flags to reach the lake, where a faint path circles the shoreline, offering serene views and a peaceful natural setting.",
    "district": "Canmore",
+   "facets": null
+  },
+  "wb5790": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Lethbridge",
    "facets": null
   },
   "wb5804": {
@@ -2112,6 +2510,24 @@
     "Toilets"
    ],
    "photo_count": 1
+  },
+  "wb5820": {
+   "amenities": [
+    "Camping",
+    "Day Use",
+    "Laundry",
+    "Retail/Services",
+    "Showers"
+   ],
+   "description": "There are public boat launches, and a private camping area.",
+   "district": "Barrhead",
+   "facets": [
+    "Camping",
+    "Day Use",
+    "Laundry",
+    "Retail/Services",
+    "Showers"
+   ]
   },
   "wb5858": {
    "amenities": null,
@@ -2201,6 +2617,21 @@
     "Toilets"
    ],
    "photo_count": 4
+  },
+  "wb5952": {
+   "amenities": [
+    "Beach",
+    "Picnic",
+    "Swimming"
+   ],
+   "description": "Sylvan Lake offers swimming motorized and non motorized water activities and recreational fishing.",
+   "district": "Edmonton",
+   "facets": [
+    "Beach",
+    "Picnic",
+    "Swimming"
+   ],
+   "photo_count": 1
   },
   "wb5968": {
    "amenities": null,
@@ -2372,6 +2803,36 @@
    ],
    "photo_count": 2
   },
+  "wb6097": {
+   "amenities": [
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Playground",
+    "Toilets"
+   ],
+   "description": "This is an ideal destination for tenting or in your RV. Open and wooded sites are available. There is a playground, groupcamping, swimming and a beach for lounging. There is limited reception at the camping area and no WiFi available.",
+   "district": "Peace River",
+   "facets": [
+    "Boat Launch",
+    "Camping",
+    "Day Use",
+    "Dock/Pier",
+    "Fire Pits",
+    "Firewood",
+    "Playground",
+    "Toilets"
+   ]
+  },
+  "wb6120": {
+   "amenities": null,
+   "description": "No description available.",
+   "district": "Canmore",
+   "facets": null
+  },
   "wb6160": {
    "amenities": [
     "Boat Launch",
@@ -2394,6 +2855,24 @@
     "Fishing Access",
     "Fishing Access Pier",
     "Toilets"
+   ]
+  },
+  "wb6169": {
+   "amenities": [
+    "Boating",
+    "Day Use",
+    "Fishing Access",
+    "Trails",
+    "Trails Hiking"
+   ],
+   "description": "The lake provides opportunities for fishing, ice fishing, boating, windsurfing, paddling, and birdwatching. A wading pool in the day use area allows your little ones to cool down on a hot summer day. Approximately 2km of trail provide opportunities for hiking and cycling in the warmer months, and skiing and snowshoeing in the winter. Just a 15-minute drive away, the O’Mahony Conservation Area adds over 8 additional kilometres of trail for you to explore.",
+   "district": "Valleyview",
+   "facets": [
+    "Boating",
+    "Day Use",
+    "Fishing Access",
+    "Trails",
+    "Trails Hiking"
    ]
   },
   "wb6173": {
@@ -2830,6 +3309,13 @@
     "Toilets",
     "Water"
    ]
+  },
+  "wb6654": {
+   "amenities": null,
+   "description": "This lake is a hike in lake.",
+   "district": "Nordegg",
+   "facets": null,
+   "photo_count": 1
   },
   "wb6655": {
    "amenities": null,
@@ -3722,6 +4208,22 @@
     "Day Use"
    ]
   },
+  "wb6813": {
+   "amenities": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Parking",
+    "Toilets"
+   ],
+   "description": "Spend your day fishing, hanging on the beach and boating.",
+   "district": "Foremost",
+   "facets": [
+    "Boat Launch",
+    "Dock/Pier",
+    "Parking",
+    "Toilets"
+   ]
+  },
   "wb6815": {
    "amenities": [
     "Dock/Pier",
@@ -4047,6 +4549,18 @@
    "district": "Blairmore",
    "facets": null,
    "photo_count": 2
+  },
+  "wb6859": {
+   "amenities": [
+    "Camping",
+    "Toilets"
+   ],
+   "description": "Corner Lake, located on the southeast corner of Raymond beside Perrett Park Campground, is a newly stocked fishing site featuring rainbow trout. Anglers are encouraged to report any catches of large pike (greater than 20 cm) to the town for record-keeping purposes. This initiative supports local fisheries management and monitoring efforts, ensuring sustainable recreational fishing opportunities for residents and visitors.",
+   "district": "Lethbridge",
+   "facets": [
+    "Camping",
+    "Toilets"
+   ]
   },
   "wb6860": {
    "amenities": [

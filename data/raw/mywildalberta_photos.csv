@@ -66,7 +66,7 @@ waterbody_id,lake_id,caption,url
 3534,wb3534,Spruce Coulee,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Spruce%20Coulee%20Reservoir/Spruce%20Coulee.jpg
 3534,wb3534,Spruce Coulee boat and fishing dock,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Spruce%20Coulee%20Reservoir/Spruce%20Coulee%20boat%20and%20fishing%20dock.JPG
 3534,wb3534,Spruce Coulee view from the boat dock,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Spruce%20Coulee%20Reservoir/Spruce%20Coulee%20view%20from%20the%20boat%20dock.jpg
-3537,,Travers Reservoir,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Travers%20Reservoir/Travers%20Reservoir.jpg
+3537,wb3537,Travers Reservoir,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Travers%20Reservoir/Travers%20Reservoir.jpg
 3899,wb3899,Alford Lake,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Alford%20Lake/Alford%20Lake.JPG
 3899,wb3899,Alford Lake senic,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Alford%20Lake/Alford%20Lake%20senic.JPG
 3948,wb3948,Aster Lake (1),https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Aster%20Lake/Aster%20Lake%20(1).jpg
@@ -300,7 +300,7 @@ waterbody_id,lake_id,caption,url
 5944,wb5944,Swan Lake information sign,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Swan%20Lake/Swan%20Lake%20information%20sign.JPG
 5944,wb5944,Swan Lake on a cloudy day,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Swan%20Lake/Swan%20Lake%20on%20a%20cloudy%20day.JPG
 5944,wb5944,Swan Lake parking area and facilities,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Swan%20Lake/Swan%20Lake%20parking%20area%20and%20facilities.JPG
-5952,,Sylvan Lake peir,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Sylvan%20Lake/Sylvan%20Lake%20peir.jpg
+5952,wb5952,Sylvan Lake peir,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Sylvan%20Lake/Sylvan%20Lake%20peir.jpg
 5968,wb5968,Tay Lake (1),https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Tay%20Lake/Tay%20Lake%20(1).jpg
 5990,wb5990,Three isle lake fom a distance,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Three%20Isle%20Lake/Three%20isle%20lake%20fom%20a%20distance.jpg
 6039,wb6039,Twin Lakes boat dock and fishing peir,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Twin%20Lakes/Twin%20Lakes%20boat%20dock%20and%20fishing%20peir.jpg
@@ -365,7 +365,7 @@ waterbody_id,lake_id,caption,url
 6647,wb6647,Ninton Pond (1),https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Niton%20Lake/Ninton%20Pond%20(1).jpg
 6651,wb6651,Silkstone pond blue sky,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Silkstone%20Lake/Silkstone%20pond%20blue%20sky.JPG
 6651,wb6651,Silkstone pond shore and lake view,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Silkstone%20Lake/Silkstone%20pond%20shore%20and%20lake%20view.JPG
-6654,,Kinglet Lake ariel view,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Kinglet%20Lake/Kinglet%20Lake%20ariel%20view.jpg
+6654,wb6654,Kinglet Lake ariel view,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Kinglet%20Lake/Kinglet%20Lake%20ariel%20view.jpg
 6658,wb6658,Lovette Lake,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Lovett%20Lake/Lovette%20Lake.JPG
 6658,wb6658,Lovette shore view,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Lovett%20Lake/Lovette%20shore%20view.JPG
 6659,wb6659,Dandurant opposite shore view,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Dandurand%20Lake/Dandurant%20opposite%20shore%20view.JPG
@@ -664,7 +664,7 @@ waterbody_id,lake_id,caption,url
 417477,wb417477,Entire Pond,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/County%20Sportplex%20Pond/Entire%20Pond.jpg
 417477,wb417477,Soccer Field (2),https://mywildalberta.ca/fishing/fish-stocking/fsm-images/County%20Sportplex%20Pond/Soccer%20Field%20(2).jpg
 417477,wb417477,Sportplex Building,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/County%20Sportplex%20Pond/Sportplex%20Building.jpg
-417506,,Boulder Lake looking east,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Boulder%20Lake/Boulder%20Lake%20looking%20east.jpg
-417506,,Boulder Lake looking east with shore line,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Boulder%20Lake/Boulder%20Lake%20looking%20east%20with%20shore%20line.jpg
-417506,,Boulder Lake looking west on draw,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Boulder%20Lake/Boulder%20Lake%20looking%20west%20on%20draw.jpg
-417506,,Boulder Lake west shoreline,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Boulder%20Lake/Boulder%20Lake%20west%20shoreline.jpg
+417506,wb417506,Boulder Lake looking east,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Boulder%20Lake/Boulder%20Lake%20looking%20east.jpg
+417506,wb417506,Boulder Lake looking east with shore line,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Boulder%20Lake/Boulder%20Lake%20looking%20east%20with%20shore%20line.jpg
+417506,wb417506,Boulder Lake looking west on draw,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Boulder%20Lake/Boulder%20Lake%20looking%20west%20on%20draw.jpg
+417506,wb417506,Boulder Lake west shoreline,https://mywildalberta.ca/fishing/fish-stocking/fsm-images/Boulder%20Lake/Boulder%20Lake%20west%20shoreline.jpg

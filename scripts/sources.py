@@ -50,7 +50,23 @@ from pathlib import Path
 
 RAW_DIR = Path(__file__).parent.parent / "data" / "raw"
 
-TROUT_SPECIES = {"RNTR", "BKTR", "BNTR", "TGTR", "CTTR", "WSCT"}
+# Every species Alberta stocks into these waters, not only the trout.
+#
+# This was six trout codes, and the 146 walleye, pike and grayling rows in the
+# reports were dropped on the way in — which also dropped 31 lakes entirely,
+# because a lake stocked only with walleye had nothing left to link. Alberta
+# restarted the walleye programme in 2021 and it is now the second-largest
+# thing in these reports; Sylvan Lake, Lake Newell, Travers and McGregor
+# Reservoir were missing from the map for no better reason than that.
+#
+# GRCR is deliberately not here. It appears once, for 50 fish in a private
+# estate pond, and reads as grass carp stocked for weed control rather than as
+# anything anyone fishes for. One unexplained row is not worth guessing at.
+STOCKED_SPECIES = {"RNTR", "BKTR", "BNTR", "TGTR", "CTTR", "WSCT",
+                   "WALL", "NRPK", "ARGR"}
+
+# The old name, kept because it says what most of these still are.
+TROUT_SPECIES = STOCKED_SPECIES
 
 # Full names used by the 2015-2019 spreadsheets, and a few one-off spellings.
 SPECIES_BY_NAME = {
@@ -65,6 +81,7 @@ SPECIES_BY_NAME = {
     "LAKE TROUT": "LKTR",
     "SPLAKE": "SPLK",
     "GOLDEN TROUT": "GLTR",
+    "NORTHERN PIKE": "NRPK",
 }
 
 MONTHS = {m: i for i, m in enumerate(
