@@ -305,7 +305,22 @@
           + ' title="' + esc(title) + '" tabindex="0" role="img" aria-label="' + esc(title) + '">'
           + '<span class="cx-n">' + pct + '</span></div>';
       }).join("");
-      return '<div class="cx-gcell cx-glabel">' + part.label + '</div>' + cells;
+
+      /* The labels say Dawn and Morning and never say when either one is, so
+       * the boundary between them — ninety minutes after sunrise, which moves
+       * by hours across the year — was invisible. Today's window, in the
+       * lake's own clock, printed under the name. */
+      var todayAstro = astroFor(place, days[0]);
+      var todayNext = astroFor(place, new Date(days[0].getTime() + 86400000));
+      var span = partWindow(part.id, days[0], todayAstro.sun, todayNext.sun);
+      var spanText = span[0].getTime() <= span[1].getTime()
+        ? hhmm(span[0]) + "\u2013" + hhmm(span[1]) : "";
+      var labelTitle = part.label + (spanText
+        ? " today runs " + spanText + ", anchored to the sun rather than the clock"
+        : "");
+      return '<div class="cx-gcell cx-glabel" title="' + esc(labelTitle) + '">' + part.label
+        + (spanText ? '<span class="cx-gspan">' + esc(spanText) + '</span>' : "")
+        + '</div>' + cells;
     }).join("");
 
     return '<div class="cx-grid">' + head + rows + '</div>'
@@ -338,7 +353,39 @@
       + ' value="' + esc(value) + '" placeholder="°C">'
       + (measured ? '<button type="button" class="cx-clear" title="Go back to the estimate">clear</button>'
                   : '<span class="cx-measure-note">beats the estimate</span>')
+      + '</div>'
+      /* Where to hold the thermometer changes the number more than which
+       * thermometer it is — except in summer, when only something on a line
+       * reaches the layer the fish are actually in. */
+      + '<div class="cx-measure-hint" title="An infrared gun reads the skin of '
+      + 'the water and is thrown off by glare and ripple. A thermometer on a '
+      + 'marked line, or a sounder with a temperature transducer, is the only '
+      + 'kind that reads below the surface — which is exactly what matters once '
+      + 'a lake has stratified in July.">'
+      + 'Surface reading, taken in shade. A probe on a line beats an infrared gun.'
       + '</div>';
+  }
+
+  /* The pills read strong, moderate, weak, and every one of them was read as a
+   * description of the conditions. They are not. They say how good the evidence
+   * behind that factor is — how much this app is willing to let it move the
+   * number — which is why rain and the moon are permanently weak and why water
+   * turns strong the moment you type in a thermometer reading. */
+  var TIER_WHY = {
+    strong: "Strong evidence: this factor is well supported and carries real "
+      + "weight in the score.",
+    moderate: "Moderate evidence: real, but thinner — it moves the score only "
+      + "a little.",
+    weak: "Weak evidence: barely moves the score on purpose. The moon is capped "
+      + "at five per cent either way.",
+    none: "Not available right now, so it is left out and the other factors "
+      + "are reweighted.",
+  };
+
+  function tierPill(tier) {
+    var key = tier || "none";
+    return '<span class="cx-tier ' + key + '" title="' + esc(TIER_WHY[key] || "")
+      + '">' + (tier || "n/a") + '</span>';
   }
 
   function factorsHtml(result) {
@@ -351,7 +398,7 @@
       var absent = f.s === null;
       return '<div class="cx-factor' + (absent ? " absent" : "") + '">'
         + '<span class="cx-fname">' + names[id] + '</span>'
-        + '<span class="cx-tier ' + (f.tier || "none") + '">' + (f.tier || "n/a") + '</span>'
+        + tierPill(f.tier)
         + '<span class="cx-fval">' + esc(f.note || "—") + '</span>'
         + '<span class="cx-fbar"><i style="width:' + (absent ? 0 : Math.round(f.s * 100))
         + '%;background:' + colourFor(absent ? null : f.s) + '"></i></span>'
@@ -359,11 +406,15 @@
     }).join("");
     var moon = '<div class="cx-factor">'
       + '<span class="cx-fname">Moon</span>'
-      + '<span class="cx-tier weak">weak</span>'
+      + tierPill("weak")
       + '<span class="cx-fval">' + esc(result.moonNote || "no lunar period")
       + " · " + (result.moonMult >= 1 ? "+" : "") + Math.round((result.moonMult - 1) * 100) + "%</span>"
       + '<span class="cx-fbar"></span></div>';
-    return rows + moon;
+    var legend = '<div class="cx-tierkey">strong / moderate / weak is how good the '
+      + 'evidence is, not how good the conditions are. '
+      + '<a href="evidence.html' + esc(location.search) + '" target="_blank" rel="noopener">'
+      + 'What each is worth ↗</a></div>';
+    return rows + moon + legend;
   }
 
   // ============================================================

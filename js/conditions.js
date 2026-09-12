@@ -49,6 +49,12 @@
     moon: "weak",
   };
 
+  /* Environment Canada issues a wind warning at 70 km/h sustained or 90 gusting,
+   * which is a warning about property. This is lower on purpose: it is the
+   * point where a small boat and a light presentation stop working, not the
+   * point where something blows over. */
+  var GUST_WARN_KPH = 40;
+
   var MOON_CAP = 0.05;   // Vinson & Angradi 2014. Not a tuning knob.
 
   // ============================================================
@@ -128,7 +134,9 @@
 
   /* Pressure is scored on its trend, never its level: Alberta lakes sit between
    * roughly 600 and 1500 m, so an absolute reading says more about elevation
-   * than about weather. Falling means a front is on the way. */
+   * than about weather. Falling means a front is on the way. The level is still
+   * printed beside the trend — it is what you can check against your own
+   * barometer — but nothing below ever reads it. */
   function pressureScore(dP3h, dP12h) {
     var d3 = num(dP3h);
     if (d3 === null) return null;
@@ -143,6 +151,39 @@
     }
     if (d3 < 2.0) return 0.40;            // post-frontal bluebird
     return 0.30;
+  }
+
+  /* Open-Meteo answers in hectopascals, which is what a meteorologist reads.
+   * Environment Canada publishes kilopascals, which is what an Alberta angler
+   * reads and what the barometer in a truck shows. Ten hectopascals to the
+   * kilopascal, applied here at the edge and nowhere else — every score above
+   * still runs on the hPa the API sent, so no threshold moves. */
+  function kPa(hPa) {
+    var v = num(hPa);
+    return v === null ? null : v / 10;
+  }
+
+  /* The trend is what predicts the bite, so it leads. The level is shown beside
+   * it because it is the number you can check against your own barometer, and
+   * because a trend with nothing to hang it on is hard to trust. */
+  function pressureNote(dP3h, hPa) {
+    var trend = kPa(dP3h);
+    var text = (trend > 0 ? "+" : "") + trend.toFixed(2) + " kPa/3h — front proxy";
+    var level = kPa(hPa);
+    return level === null ? text : level.toFixed(1) + " kPa, " + text;
+  }
+
+  /* Gusts are shown and never scored. What a gust decides is whether you can
+   * hold a drift or turn over a light float — a question about the boat and the
+   * cast. What the feeding evidence is actually about is the mean wind that
+   * puts a ripple on the surface. Folding gusts into the score would be tuning
+   * on a hunch, which is the one thing this file will not do. */
+  function windNote(kph, gustKph) {
+    var text = Math.round(kph) + " km/h";
+    var g = num(gustKph);
+    // Only when the gust is meaningfully above the mean; otherwise it is noise.
+    if (g !== null && g >= kph + 8) text += " · gusting " + Math.round(g);
+    return text;
   }
 
   /** A ripple beats a mirror; a gale is a safety problem before a fishing one. */
@@ -414,15 +455,24 @@
       tier: TIERS.pressure,
       value: num(weather && weather.dP3h),
       note: !weather || num(weather.dP3h) === null ? null
-        : (weather.dP3h > 0 ? "+" : "") + weather.dP3h.toFixed(1) + " hPa/3h — front proxy",
+        : pressureNote(weather.dP3h, weather.pressureMslHpa),
     };
     factors.wind = {
       s: weather ? windScore(weather.windKph) : null,
       tier: TIERS.wind,
       value: num(weather && weather.windKph),
       note: !weather || num(weather.windKph) === null ? null
-        : Math.round(weather.windKph) + " km/h",
+        : windNote(weather.windKph, weather.gustKph),
     };
+    /* A gust that pulls the score down would be double-counting the mean wind
+     * it comes with. A gust that flips a boat is a different kind of fact, and
+     * it belongs where the ice warning goes, not in the arithmetic. */
+    if (weather && num(weather.gustKph) !== null && weather.gustKph >= GUST_WARN_KPH) {
+      advisories.push("Gusting to " + Math.round(weather.gustKph) + " km/h \u2014 hard to hold a "
+        + "drift or turn over a light float, and a small boat's problem before "
+        + "it is a fishing one.");
+    }
+
     factors.precip = {
       s: weather ? precipScore(weather.precipMm) : null,
       tier: TIERS.precip,

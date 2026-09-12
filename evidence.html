@@ -140,6 +140,21 @@ light and a change in temperature &mdash; all things that do affect feeding. Gui
 logbooks that report better fishing on a falling barometer are, on this reading,
 correct about the pattern and wrong about the cause. We score the front and label
 it as such. Nowhere in this app does a swim-bladder explanation appear.</p>
+<p><strong>The unit.</strong> The forecast arrives in hectopascals, which is what a
+meteorologist reads. The panel prints kilopascals, which is what Environment Canada
+publishes and what the barometer in a truck shows. The conversion happens on the way
+to the screen and nowhere else: every threshold above still runs on the hectopascals
+the API sent, so changing the label moved no number. The reading itself is printed
+beside the trend because it is the one figure you can check against your own
+barometer &mdash; but only the trend is scored, because an absolute reading in a
+province spanning 600 to 1500 m says more about elevation than about weather.</p>
+<p><strong>Gusts are shown and never scored.</strong> The forecast carries them, and
+the panel prints them beside the mean wind, with a warning past 40 km/h. They stay
+out of the arithmetic on purpose. What a gust decides is whether you can hold a
+drift or turn over a light float &mdash; a question about the boat and the cast. What
+the feeding evidence is about is the mean wind that puts a ripple on the surface,
+and that is already scored. Adding gusts on top would count the same weather twice,
+on a hunch.</p>
 
 <h2>The moon, and why a major can land at three in the afternoon</h2>
 <p>Solunar tables mark <strong>major periods</strong> (about two hours) centred on the
@@ -252,6 +267,17 @@ and is less likely to <em>because</em> it is.</p>
 <p>With no depth, no depth advice appears. Sending someone to eight metres in
 three metres of water is a real harm, and "probably deep enough" is not a
 defence.</p>
+<p><strong>What "Summer layer about 3&ndash;7 m" is telling you.</strong> It is the
+depth to put your bait in July and August: the band between water too warm on top
+and water too short of oxygen underneath, where the fish are squeezed. It appears
+only from June to September, only when the surface is above the species' optimum,
+and only for a lake of five metres or more. The figure is derived from the maximum
+depth &mdash; a quarter of it to a half &mdash; so it is a rule of thumb and the popup
+says so on hover. Nobody has run a temperature profile on these lakes; if one day
+somebody does, that measurement should replace this arithmetic outright. When the
+band is showing, the score is recomputed at the temperature the fish can actually
+reach rather than the surface they are avoiding, and the water factor drops to
+<span class="tier weak">weak</span> to pay for the assumption.</p>
 
 <h2>What this cannot know</h2>
 <ul>
