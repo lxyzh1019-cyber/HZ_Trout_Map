@@ -32,10 +32,23 @@ import re
 import sys
 from pathlib import Path
 
+from registry import name_similarity
+
 ROOT = Path(__file__).parent.parent
 SITE_CSV = ROOT / "data" / "raw" / "mywildalberta_lakes.csv"
 REGISTRY = ROOT / "data" / "lake_registry.json"
 REVIEW = ROOT / "data" / "lake_facts_review.csv"
+FACTS = ROOT / "data" / "lake_facts.csv"
+
+# Fields the registry actually carries. Depth and the stocking years are read
+# straight from the collected CSV by depth.py, so recording them here would
+# copy a value the pipeline already has from its own source.
+APPLICABLE = {"position", "legal_land_description", "zone", "surface_area_ha",
+              "published_waterbody_id"}
+
+# How alike two names must be before a land description is allowed to join a
+# lake to a published waterbody. The eight that qualify score 0.95 and above.
+PUBLISHED_ID_NAME_FLOOR = 0.6
 
 # What to compare, and how close counts as agreement. A field with no repo
 # counterpart is fill-only: there is nothing to disagree with.
@@ -188,6 +201,140 @@ def sample(rows, n=6):
     return rows[:n]
 
 
+def propose_published_ids(lakes, site):
+    """Alberta's own id for lakes the repo minted from a land description.
+
+    Thirteen lakes were minted from reports that print no waterbody id, so the
+    id join every other part of this pipeline relies on cannot see them — which
+    is also why they get no depth. The stocking map publishes ids for eight of
+    them.
+
+    The join is the land description, and it is only allowed when the code
+    identifies exactly one lake on EACH side. Seven of the registry's codes are
+    shared by two lakes and five of the map's are, so a code that is not unique
+    both ways proves nothing. A name check on top of that is what makes it
+    evidence rather than a coincidence of geometry: all eight score 0.95 or
+    better against the name the map itself uses.
+
+    Watridge Lake is the reason the name check is not optional. Its published
+    position is 140 km from this very land description, and the importer
+    already refuses it; the land description and the name still agree.
+    """
+    ours, theirs = {}, {}
+    for lake in lakes:
+        for code in lake.get("ats_codes") or []:
+            ours.setdefault(normalise_ats(code), []).append(lake)
+    for row in site.values():
+        code = row.get("legal_land_description")
+        if code:
+            theirs.setdefault(normalise_ats(code), []).append(row)
+    taken = {str(l.get("waterbody_id") or "") for l in lakes if l.get("waterbody_id")}
+
+    proposals = []
+    for lake in lakes:
+        if lake.get("waterbody_id"):
+            continue
+        for code in lake.get("ats_codes") or []:
+            key = normalise_ats(code)
+            if len(ours.get(key, [])) != 1 or len(theirs.get(key, [])) != 1:
+                continue
+            row = theirs[key][0]
+            if row["waterbody_id"] in taken:
+                continue
+            published = row.get("page_name") or ""
+            score = name_similarity(lake["name"], published)
+            if score < PUBLISHED_ID_NAME_FLOOR:
+                continue
+            proposals.append({
+                "lake": lake["name"], "lake_id": lake["lake_id"],
+                "waterbody_id": row["waterbody_id"],
+                "field": "published_waterbody_id",
+                "repo_value": "", "alberta_value": row["waterbody_id"],
+                "note": f"{key} identifies one lake on each side; "
+                        f"the map calls it {published!r} ({score:.2f})"})
+            break
+    return proposals
+
+
+def existing_facts():
+    if not FACTS.exists():
+        return []
+    with FACTS.open(newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle))
+    for row in rows:
+        row.setdefault("decision", "fill")
+    return rows
+
+
+def answered_already():
+    """Questions a person has already settled, so they are not asked again.
+
+    A disagreement is not a bug to be fixed once and forgotten; it is a
+    question, and once someone has looked at both values and chosen, raising it
+    every run trains people to ignore the file.
+    """
+    return {(row["lake_id"], row["field"]) for row in existing_facts()
+            if (row.get("decision") or "fill") in ("settled", "keep")}
+
+
+def write_facts(lakes, fills):
+    """Record the answers where a rebuild will find them.
+
+    They used to be written straight into data/lake_registry.json, and the
+    rebuild this prints on the next line regenerates that file from the reports
+    and overwrites every one of them. Nothing noticed, because reconcile.py had
+    no input until the stocking map was imported, so --apply had never run.
+
+    The registry is a build artefact. The durable inputs are data/raw/, the
+    profiles CSV and data/lake_aliases.csv, and this is the fourth: the same
+    shape as lake_aliases.csv, which holds your answers to past linking
+    questions, for your answers to past attribute questions.
+    """
+    by_waterbody = {str(l.get("waterbody_id") or ""): l for l in lakes if l.get("waterbody_id")}
+    by_lake_id = {l["lake_id"]: l for l in lakes}
+    rows = existing_facts()
+    seen = {(r["lake_id"], r["field"]) for r in rows}
+    added = 0
+    for row in fills:
+        # A published-id proposal names the lake it is for, because the lake it
+        # is for is precisely the one with no waterbody id to look it up by.
+        lake = by_lake_id.get(row.get("lake_id") or "") or by_waterbody.get(row["waterbody_id"])
+        field = row["field"]
+        if not lake or field not in APPLICABLE:
+            continue
+        # Blanks only. A value the repo already holds is a disagreement for a
+        # person to settle, never something this fills in silently.
+        if field == "position":
+            if lake.get("lat") is not None:
+                continue
+        elif field == "legal_land_description":
+            if lake.get("ats_codes"):
+                continue
+        elif field == "published_waterbody_id":
+            if lake.get("waterbody_id") or lake.get("published_waterbody_id"):
+                continue
+        elif lake.get(field) not in (None, "", "None"):
+            continue
+        if (lake["lake_id"], field) in seen:
+            continue
+        rows.append({"lake_id": lake["lake_id"], "field": field,
+                     "value": row["alberta_value"],
+                     # Never anything but a fill. Settling a disagreement is a
+                     # judgement between two sources, and this has not made one.
+                     "decision": "fill",
+                     "note": f"{row['lake']} — {row['note'] or 'Alberta publishes it, the repo had nothing'}"})
+        seen.add((lake["lake_id"], field))
+        added += 1
+    with FACTS.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(
+            handle, fieldnames=["lake_id", "field", "value", "decision", "note"],
+            lineterminator="\n", extrasaction="ignore")
+        writer.writeheader()
+        for row in sorted(rows, key=lambda r: (r["lake_id"], r["field"])):
+            writer.writerow(row)
+    return added
+
+
 def main():
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -205,6 +352,16 @@ def main():
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
     lakes = registry["lakes"] if isinstance(registry, dict) and "lakes" in registry else registry
     fills, confirms, disagreements = compare(lakes, site)
+    # Lakes minted from a land description carry no waterbody id, so
+    # compare() cannot see them at all. These are proposals, not facts.
+    fills.extend(propose_published_ids(lakes, site))
+    settled = answered_already()
+    by_waterbody = {str(l.get("waterbody_id") or ""): l["lake_id"] for l in lakes}
+    def is_open(row):
+        lake_id = row.get("lake_id") or by_waterbody.get(row["waterbody_id"], "")
+        return (lake_id, row["field"]) not in settled
+    disagreements = [r for r in disagreements if is_open(r)]
+    fills = [r for r in fills if is_open(r)]
 
     print(f"{len(site)} lake(s) collected from Alberta, {len(lakes)} in the registry\n")
     print(f"  FILL      {len(fills):>4}  the repo has nothing and Alberta publishes a value")
@@ -242,35 +399,9 @@ def main():
           f"({len(disagreements)} to settle, {len(fills)} fillable)")
 
     if args.apply:
-        index = {str(l.get("waterbody_id") or ""): l for l in lakes}
-        applied = 0
-        for row in fills:
-            lake = index.get(row["waterbody_id"])
-            field = row["field"]
-            if not lake:
-                continue
-            if field == "position":
-                # Only for a lake that has no position at all. A coordinate the
-                # repo already holds is never moved from here, however far off
-                # the published pair says it is — that is a disagreement, and
-                # disagreements go to a person.
-                if lake.get("lat") is None or lake.get("lon") is None:
-                    lat, lon = row["alberta_value"].split(",")
-                    lake["lat"], lake["lon"] = float(lat), float(lon)
-                    lake["coord_source"] = "mywildalberta"
-                    applied += 1
-            elif field == "legal_land_description":
-                if not lake.get("ats_codes"):
-                    lake["ats_codes"] = [normalise_ats(row["alberta_value"])]
-                    applied += 1
-            elif field in ("zone", "surface_area_ha"):
-                if lake.get(field) in (None, "", "None"):
-                    lake[field] = (number(row["alberta_value"])
-                                   if field.endswith("_ha") else row["alberta_value"])
-                    applied += 1
-        REGISTRY.write_text(json.dumps(registry, indent=1, ensure_ascii=False,
-                                       sort_keys=True) + "\n", encoding="utf-8")
-        print(f"filled {applied} blank field(s) in the registry — nothing was overwritten")
+        applied = write_facts(lakes, fills)
+        print(f"\nrecorded {applied} answer(s) in {FACTS.relative_to(ROOT)} "
+              f"— blanks only, nothing was overwritten")
         print("Now rebuild:  python3 build_history.py")
     return 0
 

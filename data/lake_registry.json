@@ -20,7 +20,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Jarvis Creek"
   },
   {
@@ -43,7 +42,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Sibbald Creek"
   },
   {
@@ -66,7 +64,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Smuts Creek"
   },
   {
@@ -89,7 +86,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Highwood River"
   },
   {
@@ -112,7 +108,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Kananaskis River"
   },
   {
@@ -136,7 +131,6 @@
     "zone": "NB1",
     "surface_area_ha": null,
     "amenities": "Basic amenities at the beach area including:, parking lot, waste receptacles, pit toilets.",
-    "years": [],
     "base_name": "Medley River"
   },
   {
@@ -160,7 +154,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Allen Bill Pond"
   },
   {
@@ -184,7 +177,6 @@
     "zone": "ES1",
     "surface_area_ha": 2.5,
     "amenities": "Day use area, picnic tables, pit toilets.",
-    "years": [],
     "base_name": "Grotto Mountain Pond"
   },
   {
@@ -208,7 +200,6 @@
     "zone": "ES3",
     "surface_area_ha": 3.3,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Lambert Pond"
   },
   {
@@ -232,7 +223,6 @@
     "zone": "ES1",
     "surface_area_ha": 1.6,
     "amenities": "Day use area, picnic sites, walking trails, park benches, handicap accessible.",
-    "years": [],
     "base_name": "Mount Lorette Ponds"
   },
   {
@@ -259,7 +249,6 @@
     "zone": "ES2",
     "surface_area_ha": 1.4,
     "amenities": "Walking trails, pier, benches, pit toilet, group, fire pit.",
-    "years": [],
     "base_name": "Rocky Children's Pond"
   },
   {
@@ -283,7 +272,6 @@
     "zone": "ES1",
     "surface_area_ha": 3.6,
     "amenities": "Pit toilets, day use area.",
-    "years": [],
     "base_name": "Sibbald Meadows Pond"
   },
   {
@@ -307,7 +295,6 @@
     "zone": "PP2",
     "surface_area_ha": 90.1,
     "amenities": "Camping on site, fish cleaning station, outhouses, dock and boat launch, day use picnic area, rave sewer drainage, coin-operated showers, laundromat, Wi-Fi.",
-    "years": [],
     "base_name": "Blood Indian Creek Reservoir"
   },
   {
@@ -331,7 +318,6 @@
     "zone": "ES1",
     "surface_area_ha": 643.4,
     "amenities": "Water, restrooms, power camping sites, firewood available, community kitchens, playground, boat launch, beach, concession store, sani dump.",
-    "years": [],
     "base_name": "Chain Lakes Reservoir"
   },
   {
@@ -355,7 +341,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Fyten Reservoir"
   },
   {
@@ -379,7 +364,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Heningers Reservoir"
   },
   {
@@ -404,7 +388,6 @@
     "zone": "ES1",
     "surface_area_ha": 1.9,
     "amenities": "Picnic sites, fire pits, pit toilets, playground, sewage disposal, water pump, day use area.",
-    "years": [],
     "base_name": "McLean Pond"
   },
   {
@@ -435,7 +418,6 @@
     "zone": "PP1",
     "surface_area_ha": 23.1,
     "amenities": "Day use area at the Mitchel reservoir provincial recreation area with pit toilets.",
-    "years": [],
     "base_name": "Michel Reservoir"
   },
   {
@@ -459,7 +441,6 @@
     "zone": "PP2",
     "surface_area_ha": 15.6,
     "amenities": "Camping on site, group camping areas, potable water, camp kitchen, firewood, showers, sewage disposal, playground, picnic areas.",
-    "years": [],
     "base_name": "Michichi Reservoir"
   },
   {
@@ -485,7 +466,6 @@
     "zone": "PP1",
     "surface_area_ha": 19.7,
     "amenities": "Year round camping, fishing dock, pit toilets, picnic tables, cook shelters, hand launch, water pump.",
-    "years": [],
     "base_name": "Spruce Coulee Reservoir"
   },
   {
@@ -509,7 +489,6 @@
     "zone": "ES2",
     "surface_area_ha": 4.9,
     "amenities": "There is a small picnic area but this waterbody has no amenities.",
-    "years": [],
     "base_name": "Alford Lake"
   },
   {
@@ -532,7 +511,6 @@
     "zone": "ES2",
     "surface_area_ha": 3.5,
     "amenities": "Pit toilet, backcountry camping.",
-    "years": [],
     "base_name": "Allstones Lake"
   },
   {
@@ -555,7 +533,6 @@
     "zone": "ES1",
     "surface_area_ha": 1.8,
     "amenities": "Vault toilets, bear boxes for security.",
-    "years": [],
     "base_name": "Aster Lake"
   },
   {
@@ -578,7 +555,6 @@
     "zone": "ES1",
     "surface_area_ha": 3.3,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Bear Pond"
   },
   {
@@ -602,7 +578,6 @@
     "zone": "ES1",
     "surface_area_ha": 82.8,
     "amenities": "Camping on site, fire pits, firewood, picnic tables, playground, boat launch, fish cleaning station, day use areas, horseshoe pit, sewage dumping station, hiking trails.",
-    "years": [],
     "base_name": "Beauvais Lake"
   },
   {
@@ -626,7 +601,6 @@
     "zone": "ES2",
     "surface_area_ha": 31.1,
     "amenities": "Lots of parking, day use area with tables for picnicking and outhouses, no overnight camping permitted.",
-    "years": [],
     "base_name": "Beaver Lake"
   },
   {
@@ -650,7 +624,6 @@
     "zone": "ES1",
     "surface_area_ha": 67.9,
     "amenities": "Boat launch, water pump, ice fishing, canoeing/kayaking, swimming, hiking.",
-    "years": [],
     "base_name": "Beaver Mines Lake"
   },
   {
@@ -675,7 +648,6 @@
     "zone": "ES2",
     "surface_area_ha": 28.8,
     "amenities": "Small parking area with outhouses, hand launch.",
-    "years": [],
     "base_name": "Birch Lake"
   },
   {
@@ -700,7 +672,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Blue Lake"
   },
   {
@@ -720,10 +691,9 @@
       "BURNS LAKE",
       "Burns Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 1.7,
     "amenities": null,
-    "years": [],
     "base_name": "Burns Lake"
   },
   {
@@ -749,7 +719,6 @@
     "zone": "ES1",
     "surface_area_ha": 9.3,
     "amenities": "The upper and lower lakes helicopter stocked. These lakes have recently been stocked in the fall of 2025.",
-    "years": [],
     "base_name": "Burstall Lake (Upper)"
   },
   {
@@ -776,7 +745,6 @@
     "zone": "ES1",
     "surface_area_ha": 3.4,
     "amenities": "The lake features a designated day-use area with basic amenities, making it accessible for families while maintaining its wild character. Pit vault toilets are available at the day-use location.",
-    "years": [],
     "base_name": "Butcher's Lake"
   },
   {
@@ -805,7 +773,6 @@
     "zone": "PP2",
     "surface_area_ha": 20.2,
     "amenities": "Laundry facilities, playground, picnic shelter, day use area, horseshoe pits, group camping , boat launch, golf course nearby, baseball diamond.",
-    "years": [],
     "base_name": "Captain Eyre (Ayre) Lake"
   },
   {
@@ -828,7 +795,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Carnarvon Lake"
   },
   {
@@ -852,7 +818,6 @@
     "zone": "PP1",
     "surface_area_ha": 31.6,
     "amenities": "Camping (including group camping), fire pits, free firewood, playground, horseshoe pits, pit toilets (no sani dump), non-potable water, day use area, picnic shelter.",
-    "years": [],
     "base_name": "Cavan Lake"
   },
   {
@@ -875,7 +840,6 @@
     "zone": "NB1",
     "surface_area_ha": 78.9,
     "amenities": "Gravel parking area with a crude boat launch",
-    "years": [],
     "base_name": "Chatwin Lake"
   },
   {
@@ -898,10 +862,9 @@
       "CHICKAKOO LAKE (CHICKAKO LAKE)",
       "Chickakoo Lake (Chickako Lake)"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 18.4,
     "amenities": null,
-    "years": [],
     "base_name": "Chickakoo Lake (Chickako Lake)"
   },
   {
@@ -925,7 +888,6 @@
     "zone": "ES1",
     "surface_area_ha": 1.8,
     "amenities": "There are no amenities at this waterbody",
-    "years": [],
     "base_name": "Commonwealth Lake (Birdwood Lake)"
   },
   {
@@ -949,7 +911,6 @@
     "zone": "ES2",
     "surface_area_ha": 844.7,
     "amenities": "Serviced and un-serviced sites, group camping, shelter kitchen, beach, playgrounds, boat launch, boating and fishing, coin showers and laundromat, water fill station.",
-    "years": [],
     "base_name": "Cow Lake"
   },
   {
@@ -973,7 +934,6 @@
     "zone": "ES1",
     "surface_area_ha": 126.6,
     "amenities": "Large parking area",
-    "years": [],
     "base_name": "Crowsnest Lake"
   },
   {
@@ -996,10 +956,9 @@
       "Lac DELORME",
       "Lac Delorme (George'S Lake)"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "NB1",
+    "surface_area_ha": 15.0,
     "amenities": null,
-    "years": [],
     "base_name": "Lac Delorme (George'S Lake)"
   },
   {
@@ -1023,7 +982,6 @@
     "zone": "PP2",
     "surface_area_ha": 70.1,
     "amenities": "Boat launch, cook shelters, firewood available for purchase, fish cleaning stations, life jacket loaner station, pier, pit/vault toilets, playground, sewage disposal, showers, water, beach.",
-    "years": [],
     "base_name": "Dillberry Lake"
   },
   {
@@ -1047,7 +1005,6 @@
     "zone": "NB2",
     "surface_area_ha": 34.7,
     "amenities": "Water well, fish cleaning station, boat launch, dock, walking trails to natural springs, canoeing.",
-    "years": [],
     "base_name": "Dolberg Lake"
   },
   {
@@ -1076,7 +1033,6 @@
     "zone": "ES4",
     "surface_area_ha": 5.9,
     "amenities": "Day use area.",
-    "years": [],
     "base_name": "East Dollar Lake"
   },
   {
@@ -1100,7 +1056,6 @@
     "zone": "ES3",
     "surface_area_ha": 13.8,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Dunn Lake"
   },
   {
@@ -1123,7 +1078,6 @@
     "zone": "ES2",
     "surface_area_ha": 15.2,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Eagle Lake"
   },
   {
@@ -1147,7 +1101,6 @@
     "zone": "NB2",
     "surface_area_ha": 22.8,
     "amenities": "Dock, day use only, sheltered picnic site.",
-    "years": [],
     "base_name": "Edith Lake"
   },
   {
@@ -1167,10 +1120,9 @@
       "EMERALD LAKE (HART LAKE)",
       "Emerald Lake (Hart Lake)"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES3",
+    "surface_area_ha": 3.5,
     "amenities": null,
-    "years": [],
     "base_name": "Emerald Lake (Hart Lake)"
   },
   {
@@ -1191,10 +1143,9 @@
       "EMERSON LAKES",
       "Emerson Lakes"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES3",
+    "surface_area_ha": 17.0,
     "amenities": null,
-    "years": [],
     "base_name": "Emerson Lakes"
   },
   {
@@ -1219,7 +1170,6 @@
     "zone": "NB4",
     "surface_area_ha": 79.3,
     "amenities": "Canoeing/kayaking, hiking (front country), ice fishing, power boating, pit toilets.",
-    "years": [],
     "base_name": "Engstrom Lake"
   },
   {
@@ -1243,7 +1193,6 @@
     "zone": "ES3",
     "surface_area_ha": 32.3,
     "amenities": "Boat launch, fire pits, firewood available, fish cleaning stations, pier, pit/vault toilets, water available, canoeing/kayaking.",
-    "years": [],
     "base_name": "Fairfax Lake"
   },
   {
@@ -1266,7 +1215,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Lake Of Falls"
   },
   {
@@ -1286,10 +1234,9 @@
       "FORTRESS LAKE",
       "Fortress Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 3.1,
     "amenities": null,
-    "years": [],
     "base_name": "Fortress Lake"
   },
   {
@@ -1309,10 +1256,9 @@
       "GALATEA LAKES (LOWER GALATEA LAKE)",
       "Galatea Lakes (Lower Galatea Lake)"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 5.7,
     "amenities": null,
-    "years": [],
     "base_name": "Galatea Lakes (Lower Galatea Lake)"
   },
   {
@@ -1336,7 +1282,6 @@
     "zone": "ES2",
     "surface_area_ha": 12.2,
     "amenities": "Day use area, boat launch, pit toilets",
-    "years": [],
     "base_name": "Gap Lake"
   },
   {
@@ -1360,7 +1305,6 @@
     "zone": "ES2",
     "surface_area_ha": 18.8,
     "amenities": "Fish cleaning stations, boat launch, hand launch, pit toilets, pier, day use area, camping on site, firewood available, water pumps, canoeing/kayaking, boating, swimming.",
-    "years": [],
     "base_name": "Goldeye Lake"
   },
   {
@@ -1384,7 +1328,6 @@
     "zone": "ES2",
     "surface_area_ha": 163.6,
     "amenities": "Day use picnic area, fire pits, picnic tables, boat launch, natural beach, playground, beach, dock for small motors.",
-    "years": [],
     "base_name": "Grande Cache Lake"
   },
   {
@@ -1409,7 +1352,6 @@
     "zone": "PP2",
     "surface_area_ha": 90.0,
     "amenities": "Walking trails, boat launch, fishing, picnic areas, pit toilets, fire pits.",
-    "years": [],
     "base_name": "Hasse Lake"
   },
   {
@@ -1432,7 +1374,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Headwall Lakes (Upper Headwall Lake)"
   },
   {
@@ -1454,9 +1395,8 @@
       "Hogarth Lakes Upper Hogarth Lake"
     ],
     "zone": "ES1",
-    "surface_area_ha": 0.8,
+    "surface_area_ha": 2.9,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Hogarth Lakes (Upper Hogarth Lake)"
   },
   {
@@ -1477,10 +1417,9 @@
       "LAKE OF THE HORNS",
       "Lake Of The Horns"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 6.2,
     "amenities": null,
-    "years": [],
     "base_name": "Lake Of The Horns"
   },
   {
@@ -1501,10 +1440,9 @@
       "ICE LAKE",
       "Ice Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES2",
+    "surface_area_ha": 5.1,
     "amenities": null,
-    "years": [],
     "base_name": "Ice Lake"
   },
   {
@@ -1527,7 +1465,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Invincible Lake"
   },
   {
@@ -1552,7 +1489,6 @@
     "zone": "ES1",
     "surface_area_ha": 49.5,
     "amenities": "Camping available, no potable water, bathrooms, firewood available.",
-    "years": [],
     "base_name": "Island Lake"
   },
   {
@@ -1576,7 +1512,6 @@
     "zone": "PP2",
     "surface_area_ha": 69.0,
     "amenities": "Picnicking, water skiing, boating, picnic tables, fire pits.",
-    "years": [],
     "base_name": "Jack Fish Lake"
   },
   {
@@ -1597,9 +1532,8 @@
       "Jane Lake"
     ],
     "zone": "NB2",
-    "surface_area_ha": null,
+    "surface_area_ha": 7.4,
     "amenities": "Site Description:, Return to map, Return to list, Updated: Jul 22, 2025, Fish Stocking, Stocking Maps, Recovery Trout Stocking, Recreational Trout Stocking, Walleye Stocking, Report-A-Poacher, RAP Incident Form, 1-800-642-3800, Footer, Quick Links, Alberta Fire Bans, Campground Closures, Parks Advisories & Public Safety, Parks Reservations, Follow My Wild Alberta, MWA Facebook, F&W Enforcement Facebook, Alberta Wildfire App, About This Site, Accessibility, Contact Us, Disclaimer, GoA, Privacy",
-    "years": [],
     "base_name": "Jane Lake"
   },
   {
@@ -1619,10 +1553,9 @@
       "JESSIE LAKE",
       "Jessie Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "NB2",
+    "surface_area_ha": 71.8,
     "amenities": null,
-    "years": [],
     "base_name": "Jessie Lake"
   },
   {
@@ -1645,7 +1578,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Job Lake"
   },
   {
@@ -1669,7 +1601,6 @@
     "zone": "ES4",
     "surface_area_ha": 2.9,
     "amenities": "Camping on site, camp kitchen, canoeing, playground, baseball diamond, community hall.",
-    "years": [],
     "base_name": "Kakut Lake"
   },
   {
@@ -1693,7 +1624,6 @@
     "zone": "ES3",
     "surface_area_ha": 15.5,
     "amenities": "Boat launch, canoe/hand launch, fish cleaning station, firewood available, pit toilets, non-potable water, beach.",
-    "years": [],
     "base_name": "Kinky Lake"
   },
   {
@@ -1716,7 +1646,6 @@
     "zone": "ES2",
     "surface_area_ha": 50.9,
     "amenities": "There are no defined campsites, swimming and fishing is great at the waterbody",
-    "years": [],
     "base_name": "Landslide Lake"
   },
   {
@@ -1740,7 +1669,6 @@
     "zone": "ES1",
     "surface_area_ha": 37.9,
     "amenities": "Day use only, no open fires, parking area, garbage cans, sanitary receptacles.",
-    "years": [],
     "base_name": "Lees Lake"
   },
   {
@@ -1760,10 +1688,9 @@
       "LILLIAN LAKE",
       "Lillian Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 3.5,
     "amenities": null,
-    "years": [],
     "base_name": "Lillian Lake"
   },
   {
@@ -1789,7 +1716,6 @@
     "zone": "NB2",
     "surface_area_ha": null,
     "amenities": "Day use area.",
-    "years": [],
     "base_name": "Lilly Lake"
   },
   {
@@ -1814,7 +1740,6 @@
     "zone": "NB1",
     "surface_area_ha": 47.1,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Little Bear Lake (Hasse Lake)"
   },
   {
@@ -1834,10 +1759,9 @@
       "LOOMIS LAKE",
       "Loomis Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 3.3,
     "amenities": null,
-    "years": [],
     "base_name": "Loomis Lake"
   },
   {
@@ -1857,10 +1781,9 @@
       "LOST GUIDE LAKE",
       "Lost Guide Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES2",
+    "surface_area_ha": 5.2,
     "amenities": null,
-    "years": [],
     "base_name": "Lost Guide Lake"
   },
   {
@@ -1885,7 +1808,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Lower Kananaskis Lake"
   },
   {
@@ -1909,7 +1831,6 @@
     "zone": "ES1",
     "surface_area_ha": 6.1,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Margaret Lake"
   },
   {
@@ -1933,7 +1854,6 @@
     "zone": "NB2",
     "surface_area_ha": 32.1,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Marigold Lake"
   },
   {
@@ -1957,7 +1877,6 @@
     "zone": "ES3",
     "surface_area_ha": 11.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Mary Gregg Lake"
   },
   {
@@ -1980,7 +1899,6 @@
     "zone": "ES1",
     "surface_area_ha": 125.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Maude Lake"
   },
   {
@@ -2010,7 +1928,6 @@
     "zone": "ES3",
     "surface_area_ha": null,
     "amenities": "Boat launch, boat rentals, fish cleaning stations, tackle shop, pier, small boat/hand launch, life jacket loaner station, horse shoe pits, laundry, payphones, playground, potable water.",
-    "years": [],
     "base_name": "McLeod (Carson) Lake"
   },
   {
@@ -2034,7 +1951,6 @@
     "zone": "ES3",
     "surface_area_ha": 37.1,
     "amenities": "Day use, boat launch.",
-    "years": [],
     "base_name": "Millers Lake"
   },
   {
@@ -2058,7 +1974,6 @@
     "zone": "ES2",
     "surface_area_ha": 15.0,
     "amenities": "Fire pits, hand launch, pier, pit toilets.",
-    "years": [],
     "base_name": "Mitchell Lake"
   },
   {
@@ -2087,7 +2002,6 @@
     "zone": "NB3",
     "surface_area_ha": 30.5,
     "amenities": "Camping on site, group camping areas, sewage disposal facilities, tap water, concession stand, hand boat launch, boat launch for trailers, day use areas, change house, baseball diamond, playground.",
-    "years": [],
     "base_name": "Moonshine (Mirage) Lake"
   },
   {
@@ -2111,7 +2025,6 @@
     "zone": "PP2",
     "surface_area_ha": 29.9,
     "amenities": "Basic amenities.",
-    "years": [],
     "base_name": "Muir Lake"
   },
   {
@@ -2135,7 +2048,6 @@
     "zone": "ES2",
     "surface_area_ha": 34.8,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Muskiki Lake"
   },
   {
@@ -2160,7 +2072,6 @@
     "zone": "ES3",
     "surface_area_ha": null,
     "amenities": "Camping on site, fire pits, firewood available, fish cleaning stations, hand launch, pit toilets, water pump, power boating, canoeing/kayaking.",
-    "years": [],
     "base_name": "Obed Lake"
   },
   {
@@ -2183,7 +2094,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Obstruction Lakes"
   },
   {
@@ -2209,7 +2119,6 @@
     "zone": "NB3",
     "surface_area_ha": 18.6,
     "amenities": "Camping on site, fire pits, firewood available, fish cleaning station, hand launch, pit toilets, playground, water pump, swimming.",
-    "years": [],
     "base_name": "Ole Lake"
   },
   {
@@ -2236,7 +2145,6 @@
     "zone": "PP1",
     "surface_area_ha": 97.8,
     "amenities": "Camping on site, boat launch, fire pits, firewood available, fish cleaning stations, hand launch, viewpoints, payphones, picnic shelter, pier, pit toilets, playground, sewage disposal, water pump, water taps",
-    "years": [],
     "base_name": "Outpost Lake (Police Lake)"
   },
   {
@@ -2265,7 +2173,6 @@
     "zone": "ES1",
     "surface_area_ha": 219.2,
     "amenities": "Day use, camping on site, boat launch, fire pits, firewood available, hand launch, pier, pit toilets, water pump.",
-    "years": [],
     "base_name": "Payne (Mami) Lake"
   },
   {
@@ -2289,7 +2196,6 @@
     "zone": "NB2",
     "surface_area_ha": 27.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Parker Lake"
   },
   {
@@ -2313,7 +2219,6 @@
     "zone": "NB2",
     "surface_area_ha": 13.2,
     "amenities": "Camping on site, boat launch, boat launch (for smaller boats), canoeing, pit toilets, walking, trails, bird watching, day use areas, fish cleaning station.",
-    "years": [],
     "base_name": "Peanut Lake"
   },
   {
@@ -2337,7 +2242,6 @@
     "zone": "ES2",
     "surface_area_ha": 11.6,
     "amenities": "Camping on site, fire pits, fish cleaning station, hand launch, pit toilets, water pump, firewood available at staging area.",
-    "years": [],
     "base_name": "Peppers Lake"
   },
   {
@@ -2361,7 +2265,6 @@
     "zone": "ES3",
     "surface_area_ha": 11.2,
     "amenities": "Located in the glacial cascades natural area - camping adjacent to waterbody.",
-    "years": [],
     "base_name": "Petite Lake"
   },
   {
@@ -2382,10 +2285,9 @@
       "PHILLIPPS LAKE (SUMMIT)",
       "Phillipps Lake (Summit)"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 2.5,
     "amenities": null,
-    "years": [],
     "base_name": "Phillipps Lake (Summit)"
   },
   {
@@ -2410,7 +2312,6 @@
     "zone": "ES2",
     "surface_area_ha": 16.0,
     "amenities": "Picnic tables, fire pits, hand water pump, dry toilets, boat launch, dock, refuse containers, fish cleaning stations, firewood available.",
-    "years": [],
     "base_name": "Phyllis Lake"
   },
   {
@@ -2441,7 +2342,6 @@
     "zone": "ES4",
     "surface_area_ha": 53.4,
     "amenities": "Pierre grey?€?s waterbody provincial park, boat launch, cook shelters, fire pits, firewood sales, fish cleaning stations, hand launch, pit toilets, warm-up shelter, water pump.",
-    "years": [],
     "base_name": "Pierre Greys Lakes (Upper) #3"
   },
   {
@@ -2465,7 +2365,6 @@
     "zone": "PP1",
     "surface_area_ha": 52.4,
     "amenities": "Fishing pier, dock, boat launch, camping on site, pit toilets",
-    "years": [],
     "base_name": "Reesor Lake"
   },
   {
@@ -2485,10 +2384,9 @@
       "RIBBON LAKE",
       "Ribbon Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 7.0,
     "amenities": null,
-    "years": [],
     "base_name": "Ribbon Lake"
   },
   {
@@ -2512,7 +2410,6 @@
     "zone": "NB3",
     "surface_area_ha": 29.7,
     "amenities": "Fish cleaning station, pit toilets, fire pits, picnic tables, picnic shelter, boat launch, fishing pier.",
-    "years": [],
     "base_name": "Running Lake"
   },
   {
@@ -2535,7 +2432,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Running Rain Lake (Storm Lake)"
   },
   {
@@ -2560,7 +2456,6 @@
     "zone": "PP2",
     "surface_area_ha": 13.6,
     "amenities": "Outhouses, picnic table, floating dock.",
-    "years": [],
     "base_name": "Salter's Lake"
   },
   {
@@ -2584,7 +2479,6 @@
     "zone": "PP2",
     "surface_area_ha": 42.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Sauer Lake"
   },
   {
@@ -2608,7 +2502,6 @@
     "zone": "NB2",
     "surface_area_ha": 9.3,
     "amenities": "6 campsites, fire pits, picnic sites, barbeque sites, pit toilets, day use area.",
-    "years": [],
     "base_name": "Schuman Lake"
   },
   {
@@ -2632,7 +2525,6 @@
     "zone": "ES1",
     "surface_area_ha": 2.9,
     "amenities": "There are no amenities at this waterbody.",
-    "years": [],
     "base_name": "Shark Lake"
   },
   {
@@ -2659,7 +2551,6 @@
     "zone": "ES2",
     "surface_area_ha": 51.4,
     "amenities": "Fish cleaning stations, fire pits, pit toilets, cook shelters, boat launch (hand launching), hiking, swimming, canoeing/kayaking",
-    "years": [],
     "base_name": "Shunda Lake (Fish Lake)"
   },
   {
@@ -2685,7 +2576,6 @@
     "zone": "ES1",
     "surface_area_ha": 2.2,
     "amenities": "Cook shelters, fire pits, hand launch, pit/vault toilets, playground.",
-    "years": [],
     "base_name": "Sibbald Lake"
   },
   {
@@ -2713,7 +2603,6 @@
     "zone": "ES1",
     "surface_area_ha": 6.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Sparrows Egg Lake"
   },
   {
@@ -2740,7 +2629,6 @@
     "zone": "PP2",
     "surface_area_ha": 69.2,
     "amenities": "Private campground, cottages for rent, potable water, boat launch, swimming area, day use area.",
-    "years": [],
     "base_name": "Spring (Cottage) Lake"
   },
   {
@@ -2764,7 +2652,6 @@
     "zone": "PP2",
     "surface_area_ha": 27.0,
     "amenities": "Boat launch, picnic space.",
-    "years": [],
     "base_name": "Star Lake"
   },
   {
@@ -2787,7 +2674,6 @@
     "zone": "ES1",
     "surface_area_ha": 2.9,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Stenton Lake"
   },
   {
@@ -2811,7 +2697,6 @@
     "zone": "ES2",
     "surface_area_ha": 297.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Strubel Lake"
   },
   {
@@ -2835,7 +2720,6 @@
     "zone": "NB3",
     "surface_area_ha": 53.0,
     "amenities": "Boat launch, fire pits, fish cleaning stations, pier, pit toilets, water pump.",
-    "years": [],
     "base_name": "Sulphur Lake"
   },
   {
@@ -2859,7 +2743,6 @@
     "zone": "ES4",
     "surface_area_ha": 162.7,
     "amenities": "Pit toilets, picnic area, fire pits.",
-    "years": [],
     "base_name": "Swan Lake"
   },
   {
@@ -2882,7 +2765,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Talus Lake"
   },
   {
@@ -2906,7 +2788,6 @@
     "zone": "ES2",
     "surface_area_ha": 4.9,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Tay Lake"
   },
   {
@@ -2931,7 +2812,6 @@
     "zone": "NB2",
     "surface_area_ha": 114.4,
     "amenities": "Tea Lakes is one of our helicopter-stocked lakes and was freshly stocked in 2025, ensuring excellent fishing opportunities for visitors.",
-    "years": [],
     "base_name": "Tea Lake"
   },
   {
@@ -2954,7 +2834,6 @@
     "zone": "ES1",
     "surface_area_ha": 33.2,
     "amenities": "Pit toilets, bear proof containers, camping.",
-    "years": [],
     "base_name": "Three Isle Lake"
   },
   {
@@ -2980,7 +2859,6 @@
     "zone": "ES2",
     "surface_area_ha": 27.5,
     "amenities": "Hand water pump, dry toilets, firewood, playground, boat launch, fish cleaning station, wildlife viewing areas, handicap accessible.",
-    "years": [],
     "base_name": "Twin Lakes"
   },
   {
@@ -3008,7 +2886,6 @@
     "zone": "NB3",
     "surface_area_ha": 23.2,
     "amenities": "Campground, water pump, pit toilets, firewood available for purchase, playground, boat launch, fish cleaning station, canoeing/kayaking, wildlife viewing docks.",
-    "years": [],
     "base_name": "East Twin Lake"
   },
   {
@@ -3034,7 +2911,6 @@
     "zone": "ES4",
     "surface_area_ha": 3.6,
     "amenities": "Boat launch, fire pits, firewood for purchase, fish cleaning stations, hand launch, vault toilets, water pump, camping, canoeing, kayaking, front country hiking, ice fishing, mountain biking, cycling, power boating, wildlife viewing.",
-    "years": [],
     "base_name": "South Two Lake"
   },
   {
@@ -3058,7 +2934,6 @@
     "zone": "ES1",
     "surface_area_ha": 846.4,
     "amenities": "Boat launch, hand launch, well groomed hiking/mountain bike trail surrounding waterbody, pit toilets.",
-    "years": [],
     "base_name": "Upper Kananaskis Lake"
   },
   {
@@ -3092,7 +2967,6 @@
     "zone": "PP2",
     "surface_area_ha": 1.9,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Claude N Bernnan Memorial Pond (Vermillion Park Pond)"
   },
   {
@@ -3116,7 +2990,6 @@
     "zone": "NB1",
     "surface_area_ha": 72.4,
     "amenities": "Kayaking, canoeing, fishing.",
-    "years": [],
     "base_name": "Victor Lake"
   },
   {
@@ -3140,9 +3013,8 @@
       "Wildhorse Lakes Upper Wildhorse Lake"
     ],
     "zone": "ES3",
-    "surface_area_ha": 25.4,
+    "surface_area_ha": 2.6,
     "amenities": "Boat launch, fire pit, firewood available for purchase, fish cleaning stations, hand launch, pier, pit/vault toilets, water pump.",
-    "years": [],
     "base_name": "Wildhorse Lakes (Upper Wildhorse Lake)"
   },
   {
@@ -3168,7 +3040,6 @@
     "zone": "PP2",
     "surface_area_ha": 1.6,
     "amenities": "Day use only, no open fires, foot access only.",
-    "years": [],
     "base_name": "Windsor Lake"
   },
   {
@@ -3191,7 +3062,6 @@
     "zone": "ES4",
     "surface_area_ha": 7.3,
     "amenities": "Day use only, no open fires, foot access only.",
-    "years": [],
     "base_name": "West Dollar Lake"
   },
   {
@@ -3217,7 +3087,6 @@
     "zone": "ES1",
     "surface_area_ha": 8.3,
     "amenities": "The upper and lower lakes helicopter stocked. These lakes have recently been stocked in the fall of 2025.",
-    "years": [],
     "base_name": "Burstall Lake (Lower)"
   },
   {
@@ -3244,7 +3113,6 @@
     "zone": "NB2",
     "surface_area_ha": 84.8,
     "amenities": "Camping, boat launch, pit toilets, firepits, fish cleaning station, water pump.",
-    "years": [],
     "base_name": "Chain Lakes (Lower Chain Lake)"
   },
   {
@@ -3267,7 +3135,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Headwall Lakes (Lower Headwall Lake)"
   },
   {
@@ -3296,7 +3163,6 @@
     "zone": "ES4",
     "surface_area_ha": 29.6,
     "amenities": "Pierre grey?€?s waterbody provincial park, boat launch, cook shelters, fire pits, firewood sales, fish cleaning stations, hand launch, pit toilets, warm-up shelter, water pump.",
-    "years": [],
     "base_name": "Pierre Greys Lakes (Middle) #2"
   },
   {
@@ -3325,7 +3191,6 @@
     "zone": "ES4",
     "surface_area_ha": 15.8,
     "amenities": "Pierre grey?€?s waterbody provincial park, boat launch, cook shelters, fire pits, firewood sales, fish cleaning stations, hand launch, pit toilets, warm-up shelter, water pump.",
-    "years": [],
     "base_name": "Pierre Greys Lakes (Lower) #1"
   },
   {
@@ -3356,7 +3221,6 @@
     "zone": "ES4",
     "surface_area_ha": 3.6,
     "amenities": "Boat launch, fire pits, firewood for purchase, fish cleaning stations, hand launch, vault toilets, water pump, camping, canoeing, kayaking, front country hiking, ice fishing, mountain biking, cycling, power boating, wildlife viewing.",
-    "years": [],
     "base_name": "North Two Lake"
   },
   {
@@ -3385,7 +3249,6 @@
     "zone": "ES3",
     "surface_area_ha": 25.4,
     "amenities": "Boat launch, fire pit, firewood available for purchase, fish cleaning stations, hand launch, pier, pit/vault toilets, water pump.",
-    "years": [],
     "base_name": "Lower Wildhorse Lakes"
   },
   {
@@ -3412,7 +3275,6 @@
     "zone": "ES1",
     "surface_area_ha": 0.8,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Hogarth Lakes (Lower)"
   },
   {
@@ -3441,7 +3303,6 @@
     "zone": "NB3",
     "surface_area_ha": null,
     "amenities": "Swimming pond, camping, day use area.",
-    "years": [],
     "base_name": "Zamma Community Pond"
   },
   {
@@ -3467,7 +3328,6 @@
     "zone": "ES2",
     "surface_area_ha": 24.5,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Yellowhead Lake"
   },
   {
@@ -3492,7 +3352,6 @@
     "zone": "ES1",
     "surface_area_ha": 2.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Lower Smuts Lake"
   },
   {
@@ -3515,9 +3374,8 @@
       "Upper Smuts Lake"
     ],
     "zone": "ES1",
-    "surface_area_ha": 2.0,
+    "surface_area_ha": 2.2,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Upper Smuts Lake"
   },
   {
@@ -3531,23 +3389,18 @@
       "NW26-21-5-W5"
     ],
     "aliases": [
-      "champion lakes lower champion lake",
       "champion lakes upper champion lake",
       "upper champion lake"
     ],
     "name_variants": [
-      "CHAMPION LAKES (LOWER CHAMPION LAKE)",
       "CHAMPION LAKES (UPPER CHAMPION LAKE)",
-      "Champion Lakes (Lower Champion Lake)",
       "Champion Lakes (Upper Champion Lake)",
-      "Champion Lakes Lower Champion Lake",
       "Champion Lakes Upper Champion Lake",
       "UPPER CHAMPION LAKE"
     ],
     "zone": "ES1",
-    "surface_area_ha": 8.0,
+    "surface_area_ha": 0.4,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Champion Lakes (Upper Champion Lake)"
   },
   {
@@ -3572,12 +3425,12 @@
       "CHAMPION LAKES (UPPER CHAMPION LAKE)",
       "Champion Lakes (Lower Champion Lake)",
       "Champion Lakes (Lower)",
+      "Champion Lakes Lower Champion Lake",
       "LOWER CHAMPION LAKE"
     ],
     "zone": "ES1",
-    "surface_area_ha": 8.0,
+    "surface_area_ha": 4.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Champion Lakes (Lower)"
   },
   {
@@ -3603,7 +3456,6 @@
     "zone": "NB3",
     "surface_area_ha": 1.3,
     "amenities": "Day use only, picnic sites, garbage receptacles, pit toilets.",
-    "years": [],
     "base_name": "Weberville Pond"
   },
   {
@@ -3626,7 +3478,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Memorial Lakes (West Memorial Lake)"
   },
   {
@@ -3654,7 +3505,6 @@
     "zone": "NB2",
     "surface_area_ha": 1.1,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Rainbow Park Pond (Westlock Recreation Pond)"
   },
   {
@@ -3681,7 +3531,6 @@
     "zone": "PP2",
     "surface_area_ha": 11.2,
     "amenities": "Picnic area, day use area, winter activities, cross country skiing, ice skating and ice fishing.",
-    "years": [],
     "base_name": "By the Lake Park"
   },
   {
@@ -3707,7 +3556,6 @@
     "zone": "ES2",
     "surface_area_ha": 4.7,
     "amenities": "Day use only, no open fires, foot access only.",
-    "years": [],
     "base_name": "Winchell Lake"
   },
   {
@@ -3737,7 +3585,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Valleyview Children's Pond"
   },
   {
@@ -3765,7 +3612,6 @@
     "zone": "PP2",
     "surface_area_ha": 1.3,
     "amenities": "Day use only, no open fires, foot access only.",
-    "years": [],
     "base_name": "Vegreville Children's Pond"
   },
   {
@@ -3792,7 +3638,6 @@
     "zone": "PP2",
     "surface_area_ha": 1.3,
     "amenities": "Day use only, no open fires, foot access only, pit toilets.",
-    "years": [],
     "base_name": "Vegreville Trout Pond"
   },
   {
@@ -3819,7 +3664,6 @@
     "zone": "PP2",
     "surface_area_ha": 5.0,
     "amenities": "Day use only, no open fires, foot access only.",
-    "years": [],
     "base_name": "Wallace Park Pond"
   },
   {
@@ -3848,7 +3692,6 @@
     "zone": "PP2",
     "surface_area_ha": 2.2,
     "amenities": "Day use area, foot access only, hiking trails.",
-    "years": [],
     "base_name": "Mitchell Pond (Waskasoo Park Pond)"
   },
   {
@@ -3876,7 +3719,6 @@
     "zone": "ES3",
     "surface_area_ha": 1.5,
     "amenities": "Day use only, no open fires, foot access only.",
-    "years": [],
     "base_name": "Wildwood Pond (Stones Pond)"
   },
   {
@@ -3903,7 +3745,6 @@
     "zone": "ES3",
     "surface_area_ha": 0.9,
     "amenities": "Day use only, no open fires, foot access only.",
-    "years": [],
     "base_name": "Wolf Creek Pond"
   },
   {
@@ -3929,7 +3770,6 @@
     "zone": "NB2",
     "surface_area_ha": 19.6,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Tamarack Lake"
   },
   {
@@ -3956,7 +3796,6 @@
     "zone": "NB4",
     "surface_area_ha": 3.4,
     "amenities": "Day use only, no open fires, foot access only.",
-    "years": [],
     "base_name": "Texaco East Pond"
   },
   {
@@ -3982,7 +3821,6 @@
     "zone": "NB4",
     "surface_area_ha": 2.7,
     "amenities": "Day use only, no open fires, foot access only.",
-    "years": [],
     "base_name": "Texaco Pond"
   },
   {
@@ -4002,10 +3840,9 @@
       "TRAPPER LAKE",
       "Trapper Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES3",
+    "surface_area_ha": 2.4,
     "amenities": null,
-    "years": [],
     "base_name": "Trapper Lake"
   },
   {
@@ -4033,7 +3870,6 @@
     "zone": "NB1",
     "surface_area_ha": 26.2,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Mile 07 Lake"
   },
   {
@@ -4060,7 +3896,6 @@
     "zone": "ES3",
     "surface_area_ha": 2.5,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Niton Lake"
   },
   {
@@ -4086,7 +3921,6 @@
     "zone": "ES3",
     "surface_area_ha": 5.1,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Silkstone Lake"
   },
   {
@@ -4106,10 +3940,9 @@
       "SOUTH SUNDANCE LAKE",
       "South Sundance Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES3",
+    "surface_area_ha": 149.0,
     "amenities": null,
-    "years": [],
     "base_name": "South Sundance Lake"
   },
   {
@@ -4133,7 +3966,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Lamont Pond"
   },
   {
@@ -4159,7 +3991,6 @@
     "zone": "ES2",
     "surface_area_ha": 2.6,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Lovett Lake"
   },
   {
@@ -4186,7 +4017,6 @@
     "zone": "ES3",
     "surface_area_ha": 2.1,
     "amenities": "Day use only, no open fires, foot access only.",
-    "years": [],
     "base_name": "Dandurand Lake"
   },
   {
@@ -4209,7 +4039,6 @@
     "zone": "ES2",
     "surface_area_ha": 4.1,
     "amenities": "This site has no amenities.",
-    "years": [],
     "base_name": "Entry Lake"
   },
   {
@@ -4238,7 +4067,6 @@
     "zone": "NB4",
     "surface_area_ha": 1.8,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Highway 63 Pond"
   },
   {
@@ -4258,10 +4086,9 @@
       "HORSESHOE LAKE",
       "Horseshoe Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "NB2",
+    "surface_area_ha": 13.2,
     "amenities": null,
-    "years": [],
     "base_name": "Horseshoe Lake"
   },
   {
@@ -4282,10 +4109,9 @@
       "TWO HILLS POND",
       "Two Hills Pond"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 1.4,
     "amenities": null,
-    "years": [],
     "base_name": "Two Hills Pond"
   },
   {
@@ -4315,7 +4141,6 @@
     "zone": "ES1",
     "surface_area_ha": 5.4,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Nose Creek Pond"
   },
   {
@@ -4338,7 +4163,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Avalanche Lake"
   },
   {
@@ -4365,7 +4189,6 @@
     "zone": "PP2",
     "surface_area_ha": 2.4,
     "amenities": "Camping on site, group camping, picnic shelter, day use area, hiking trail, horseshoe pit(s), interpretive trails, playgrounds.",
-    "years": [],
     "base_name": "Telegraph Park Pond"
   },
   {
@@ -4391,7 +4214,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Tim Horton Children's Pond"
   },
   {
@@ -4418,7 +4240,6 @@
     "zone": "PP1",
     "surface_area_ha": 1.9,
     "amenities": "Day use only, no open fires, foot access only.",
-    "years": [],
     "base_name": "Stirling Children's Pond"
   },
   {
@@ -4447,7 +4268,6 @@
     "zone": "ES4",
     "surface_area_ha": 39.5,
     "amenities": "Camping, firepits, picnic table, pit vault toilets",
-    "years": [],
     "base_name": "Montagneuse (Stony) Lake"
   },
   {
@@ -4474,7 +4294,6 @@
     "zone": "PP1",
     "surface_area_ha": 1.9,
     "amenities": "Day use only, no open fires, foot access only.",
-    "years": [],
     "base_name": "Strathmore Children's Pond"
   },
   {
@@ -4500,7 +4319,6 @@
     "zone": "PP2",
     "surface_area_ha": 10.6,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Shuster Lake"
   },
   {
@@ -4527,7 +4345,6 @@
     "zone": "PP1",
     "surface_area_ha": 49.0,
     "amenities": "Pit toilets, garbage receptacles, camping on site.",
-    "years": [],
     "base_name": "Spring Coulee Park Pond"
   },
   {
@@ -4554,7 +4371,6 @@
     "zone": "ES4",
     "surface_area_ha": 40.1,
     "amenities": "Campground, ski hill, hiking, dock, boat launch, day use area, picnic tables, pit toilets, swimming area.",
-    "years": [],
     "base_name": "Spring Lake (Spirit River)"
   },
   {
@@ -4578,7 +4394,6 @@
     "zone": "PP2",
     "surface_area_ha": 2.3,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Sardine Lake"
   },
   {
@@ -4604,7 +4419,6 @@
     "zone": "PP2",
     "surface_area_ha": 22.1,
     "amenities": "Free camp sites, picnic tables, trash cans, fire ring, pit toilet, limited fire pits.",
-    "years": [],
     "base_name": "Severn Creek Reservoir"
   },
   {
@@ -4630,7 +4444,6 @@
     "zone": "NB1",
     "surface_area_ha": 11.0,
     "amenities": "Day use area, pit toilets, picnic tables, boat launch.",
-    "years": [],
     "base_name": "Shemeluk Lake"
   },
   {
@@ -4653,7 +4466,6 @@
     "zone": "ES2",
     "surface_area_ha": 2.5,
     "amenities": "Boat dock, day use area.",
-    "years": [],
     "base_name": "Rat Lake"
   },
   {
@@ -4679,7 +4491,6 @@
     "zone": "NB3",
     "surface_area_ha": 1.5,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Rainbow Lake Pond"
   },
   {
@@ -4708,7 +4519,6 @@
     "zone": "PP2",
     "surface_area_ha": 10.0,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Pleasure Island (Twomey) Reservoir"
   },
   {
@@ -4733,7 +4543,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Pro Alta Pond"
   },
   {
@@ -4756,7 +4565,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Rainbow Lake"
   },
   {
@@ -4778,10 +4586,9 @@
       "OYEN RESERVOIR",
       "Oyen Reservoir"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 13.2,
     "amenities": null,
-    "years": [],
     "base_name": "Oyen Reservoir"
   },
   {
@@ -4805,7 +4612,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Paddle River Dam Pond"
   },
   {
@@ -4833,7 +4639,6 @@
     "zone": "PP2",
     "surface_area_ha": 7.0,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Parlby Reservoir (Tees Fish Pond)"
   },
   {
@@ -4850,19 +4655,20 @@
     "aliases": [
       "md peace pond 1",
       "peace pond 1",
-      "peace pond 2"
+      "peace pond 2",
+      "unnamed md peace pond 1"
     ],
     "name_variants": [
       "MD PEACE POND #1",
       "MD Peace Pond #1",
       "Md Peace Pond #1",
       "PEACE POND #1",
-      "PEACE POND #2"
+      "PEACE POND #2",
+      "Unnamed Md Peace Pond #1"
     ],
     "zone": "NB3",
     "surface_area_ha": 1.1,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "MD Peace Pond #1"
   },
   {
@@ -4889,7 +4695,6 @@
     "zone": "PP2",
     "surface_area_ha": 4.0,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Nuggent Pond"
   },
   {
@@ -4915,7 +4720,6 @@
     "zone": "PP2",
     "surface_area_ha": 19.8,
     "amenities": "Camping on site, group camping, picnic shelter, water-pump, spring water, wheelchair access, outdoor boat launch, day use area, horseshoe pits, playgrounds, basic camping/no hookups, fire pits, firewood available for purchase, picnic tables, Sani dump.",
-    "years": [],
     "base_name": "Open Creek Reservoir"
   },
   {
@@ -4942,7 +4746,6 @@
     "zone": "ES4",
     "surface_area_ha": 14.3,
     "amenities": "Interactive programs, information, food services, restrooms, amphitheatre.",
-    "years": [],
     "base_name": "Muskoseepi Pond"
   },
   {
@@ -4968,7 +4771,6 @@
     "zone": "NB3",
     "surface_area_ha": 1.1,
     "amenities": "Camping on site, firewood, full hookup, sewage dump site, boat dock, recreation hall, picnic tables, horseshoe pits, hiking and biking trails, playground, fire pits.",
-    "years": [],
     "base_name": "Nardam Lake"
   },
   {
@@ -4994,7 +4796,6 @@
     "zone": "PP1",
     "surface_area_ha": 6.1,
     "amenities": "Playground area, picnic facility, baseball diamonds, soccer field, basketball hoops.",
-    "years": [],
     "base_name": "Nicholas Sheran Park Pond"
   },
   {
@@ -5023,7 +4824,6 @@
     "zone": "PP2",
     "surface_area_ha": 1.5,
     "amenities": "Day use, no open fires, foot access only",
-    "years": [],
     "base_name": "Niemela Reservoir (Ray's Pond)"
   },
   {
@@ -5051,7 +4851,6 @@
     "zone": "PP2",
     "surface_area_ha": 1.8,
     "amenities": "Hiking trail, park benches.",
-    "years": [],
     "base_name": "Morinville Fish and Game Pond"
   },
   {
@@ -5077,7 +4876,6 @@
     "zone": "PP2",
     "surface_area_ha": 7.2,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Mound Red Reservoir"
   },
   {
@@ -5103,7 +4901,6 @@
     "zone": "PP2",
     "surface_area_ha": 23.1,
     "amenities": "Picnic area, pit toilets, day use area.",
-    "years": [],
     "base_name": "Midway Reservoir"
   },
   {
@@ -5124,10 +4921,9 @@
       "MIRROR RESERVOIR",
       "Mirror Reservoir"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 4.1,
     "amenities": null,
-    "years": [],
     "base_name": "Mirror Reservoir"
   },
   {
@@ -5153,7 +4949,6 @@
     "zone": "NB3",
     "surface_area_ha": 24.1,
     "amenities": "Camping on site, pier, firewood available, fish cleaning station, pit toilets, boat launch.",
-    "years": [],
     "base_name": "Machesis Lake"
   },
   {
@@ -5184,7 +4979,6 @@
     "zone": "PP1",
     "surface_area_ha": 3.7,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Magrath Children's Pond"
   },
   {
@@ -5213,7 +5007,6 @@
     "zone": "NB2",
     "surface_area_ha": 1.2,
     "amenities": "Power sites, washrooms, showers, sewage disposal station, playground, free firewood on site, shelter with cook stove, day use picnic, potable water.",
-    "years": [],
     "base_name": "McClennan Reservoir"
   },
   {
@@ -5241,7 +5034,6 @@
     "zone": "PP2",
     "surface_area_ha": 22.2,
     "amenities": "McLaren Dam Recreation Area features 27 sites (15 with power), outhouse toilets, fire pits, free firewood, potable water, camp kitchen.",
-    "years": [],
     "base_name": "McLaren's Reservoir"
   },
   {
@@ -5268,7 +5060,6 @@
     "zone": "PP1",
     "surface_area_ha": 1.9,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "McQuillan Reservoir"
   },
   {
@@ -5295,16 +5086,15 @@
     "zone": "PP1",
     "surface_area_ha": 4.0,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "McVinnie Reservoir"
   },
   {
     "lake_id": "wb6760",
     "name": "Lloydminster Trout Pond",
     "waterbody_id": "6760",
-    "lat": 53.25943,
-    "lon": -110.04075,
-    "coord_source": "profile",
+    "lat": 53.279,
+    "lon": -110.1391,
+    "coord_source": "mywildalberta",
     "ats_codes": [
       "SE6-50-1-W4"
     ],
@@ -5322,7 +5112,6 @@
     "zone": "PP2",
     "surface_area_ha": 6.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Lloydminster Trout Pond"
   },
   {
@@ -5349,7 +5138,6 @@
     "zone": "PP2",
     "surface_area_ha": 8.0,
     "amenities": "Camping, picnic area, outhouses.",
-    "years": [],
     "base_name": "Lougheed Trout Pond"
   },
   {
@@ -5375,7 +5163,6 @@
     "zone": "PP2",
     "surface_area_ha": 103.0,
     "amenities": "Outhouses, walking paths, playground, garbage receptacles.",
-    "years": [],
     "base_name": "Leduc Reservoir"
   },
   {
@@ -5402,7 +5189,6 @@
     "zone": "PP2",
     "surface_area_ha": 1.5,
     "amenities": "Day use only, no open fires, foot access only.",
-    "years": [],
     "base_name": "Legal Reservoir"
   },
   {
@@ -5431,7 +5217,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Little Beaverdam Lake"
   },
   {
@@ -5455,7 +5240,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Keenex Coulee Reservoir"
   },
   {
@@ -5482,7 +5266,6 @@
     "zone": "PP2",
     "surface_area_ha": 3.7,
     "amenities": "Day use only, no open fires, foot access only.",
-    "years": [],
     "base_name": "Kerbe's Pond"
   },
   {
@@ -5514,7 +5297,6 @@
     "zone": "PP2",
     "surface_area_ha": 6.0,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Kraft Winborne Pond"
   },
   {
@@ -5540,7 +5322,6 @@
     "zone": "PP2",
     "surface_area_ha": 6.7,
     "amenities": "This site has no amenities.",
-    "years": [],
     "base_name": "Kramer Pond"
   },
   {
@@ -5566,7 +5347,6 @@
     "zone": "PP2",
     "surface_area_ha": 1.4,
     "amenities": "Trail system, fenced dog park, picnic area, swimming area for dogs, skating, change building, restrooms.",
-    "years": [],
     "base_name": "Lacombe Park Pond"
   },
   {
@@ -5593,7 +5373,6 @@
     "zone": "NB3",
     "surface_area_ha": 1.1,
     "amenities": "Picnic tables in campsites, free firewood, pump water available, pit toilets, playground, day use area.",
-    "years": [],
     "base_name": "Cecil Thompson Pond"
   },
   {
@@ -5619,7 +5398,6 @@
     "zone": "PP2",
     "surface_area_ha": 14.9,
     "amenities": "Picnic tables, free firewood available, pit toilets, playground, picnic shelter, day use area, horseshoe pits, group camping areas available, boat launch, power sites available",
-    "years": [],
     "base_name": "Huber Reservoir"
   },
   {
@@ -5646,7 +5424,6 @@
     "zone": "PP2",
     "surface_area_ha": 1.2,
     "amenities": "Day use, no open fires, foot access .",
-    "years": [],
     "base_name": "Innisfree Trout Pond"
   },
   {
@@ -5674,7 +5451,6 @@
     "zone": "PP2",
     "surface_area_ha": 4.0,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Irma Fish and Game Pond"
   },
   {
@@ -5698,7 +5474,6 @@
     "zone": "ES2",
     "surface_area_ha": 33.0,
     "amenities": "Day use only, hand launch boats only.",
-    "years": [],
     "base_name": "Ironside Pond"
   },
   {
@@ -5725,7 +5500,6 @@
     "zone": "ES3",
     "surface_area_ha": 1.5,
     "amenities": "Campground amenities include:, dry toilets, water available at cache campground, firewood, picnic tables, hiking, nearby canoeing & kayaking, mountain biking, wildlife watching, guided tours, fish cleaning station.",
-    "years": [],
     "base_name": "Jarvis Creek Pond"
   },
   {
@@ -5753,7 +5527,6 @@
     "zone": "PP2",
     "surface_area_ha": 1.3,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Heritage Pond"
   },
   {
@@ -5781,7 +5554,6 @@
     "zone": "PP2",
     "surface_area_ha": 5.2,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Hermitage Lake"
   },
   {
@@ -5807,7 +5579,6 @@
     "zone": "ES4",
     "surface_area_ha": 1.4,
     "amenities": "Pit toilets, fire pits, dock, handicap accessible, fish cleaning station, day use.",
-    "years": [],
     "base_name": "Highway 40 Pond"
   },
   {
@@ -5832,7 +5603,6 @@
     "zone": "NB3",
     "surface_area_ha": 5.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Highway 686 Pond"
   },
   {
@@ -5861,7 +5631,6 @@
     "zone": "PP2",
     "surface_area_ha": 8.9,
     "amenities": "Day use area, picnic area, walking trails.",
-    "years": [],
     "base_name": "Hiller's (Dam) Reservoir"
   },
   {
@@ -5887,7 +5656,6 @@
     "zone": "PP2",
     "surface_area_ha": 2.0,
     "amenities": "Helmer reservoir is located right beside fox waterbody, fox waterbody park offers:, beach access, firewood, potable water, power sites, sewer disposal.",
-    "years": [],
     "base_name": "Helmer Reservoir"
   },
   {
@@ -5915,7 +5683,6 @@
     "zone": "PP2",
     "surface_area_ha": 2.9,
     "amenities": "Day use only, no open fires, foot access only.",
-    "years": [],
     "base_name": "Hansen's Reservoir"
   },
   {
@@ -5941,7 +5708,6 @@
     "zone": "ES2",
     "surface_area_ha": 0.8,
     "amenities": "Pit toilets, day use area beside waterbody.",
-    "years": [],
     "base_name": "Harleck Pond"
   },
   {
@@ -5967,7 +5733,6 @@
     "zone": "PP2",
     "surface_area_ha": 8.8,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Gooseberry Park Pond"
   },
   {
@@ -5994,7 +5759,6 @@
     "zone": "PP1",
     "surface_area_ha": 1.4,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Granum Pond"
   },
   {
@@ -6022,7 +5786,6 @@
     "zone": "ES3",
     "surface_area_ha": 2.5,
     "amenities": "Fishing dock",
-    "years": [],
     "base_name": "Fox Creek Trout Pond"
   },
   {
@@ -6051,7 +5814,6 @@
     "zone": "PP2",
     "surface_area_ha": 1.2,
     "amenities": "Day use only, no open fires, foot access only.",
-    "years": [],
     "base_name": "Gibbons Park Pond"
   },
   {
@@ -6072,10 +5834,9 @@
       "GOLDSPRING PARK POND",
       "Goldspring Park Pond"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP1",
+    "surface_area_ha": 5.8,
     "amenities": null,
-    "years": [],
     "base_name": "Goldspring Park Pond"
   },
   {
@@ -6101,7 +5862,6 @@
     "zone": "ES2",
     "surface_area_ha": 5.0,
     "amenities": "Fire pits, pit toilets.",
-    "years": [],
     "base_name": "Elk Creek Pond"
   },
   {
@@ -6125,7 +5885,6 @@
     "zone": "ES3",
     "surface_area_ha": 3.5,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Emerald Lake"
   },
   {
@@ -6151,7 +5910,6 @@
     "zone": "ES3",
     "surface_area_ha": 17.0,
     "amenities": "Camping, hiking trails, interpretive trails, picnic tables, fire pits, day use area.",
-    "years": [],
     "base_name": "Emerson Lakes"
   },
   {
@@ -6180,7 +5938,6 @@
     "zone": "PP1",
     "surface_area_ha": 2.8,
     "amenities": "Baseball diamonds, swimming, beach, day use area, camping.",
-    "years": [],
     "base_name": "Enchant Park Pond"
   },
   {
@@ -6207,7 +5964,6 @@
     "zone": "NB3",
     "surface_area_ha": 3.8,
     "amenities": "The waterbody is at Fairview college, and amenities such as fuel, lodging, and food establishments are near the waterbody.",
-    "years": [],
     "base_name": "Fairview College Pond"
   },
   {
@@ -6233,7 +5989,6 @@
     "zone": "NB3",
     "surface_area_ha": 37.0,
     "amenities": "Fish cleaning stations, fire pits, pit toilets, cook shelters, boat launch (hand launching), hiking, swimming, canoeing/kayaking.",
-    "years": [],
     "base_name": "Figure Eight Lake"
   },
   {
@@ -6258,7 +6013,6 @@
     "zone": "NB3",
     "surface_area_ha": 6.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Footner Pond"
   },
   {
@@ -6284,7 +6038,6 @@
     "zone": "PP1",
     "surface_area_ha": 5.6,
     "amenities": "Day use only, foot access, no open fires.",
-    "years": [],
     "base_name": "Foremost Reservoir"
   },
   {
@@ -6310,7 +6063,6 @@
     "zone": "PP2",
     "surface_area_ha": 5.0,
     "amenities": "Fish cleaning station, pit toilets, picnic sites.",
-    "years": [],
     "base_name": "Diplomat Mine Pond"
   },
   {
@@ -6330,10 +6082,9 @@
       "DORMER LAKE",
       "Dormer Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 6.5,
     "amenities": null,
-    "years": [],
     "base_name": "Dormer Lake"
   },
   {
@@ -6360,7 +6111,6 @@
     "zone": "PP2",
     "surface_area_ha": 18.8,
     "amenities": "Hiking trails.",
-    "years": [],
     "base_name": "East Pit Lake"
   },
   {
@@ -6382,10 +6132,9 @@
       "Echo Dale\nRegional Park Pond",
       "Echo Dale Regional Park Pond"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP1",
+    "surface_area_ha": 2.5,
     "amenities": null,
-    "years": [],
     "base_name": "Echo Dale Regional Park Pond"
   },
   {
@@ -6411,7 +6160,6 @@
     "zone": "ES2",
     "surface_area_ha": 64.8,
     "amenities": "Hiking, boat dock, day use area, outhouses.",
-    "years": [],
     "base_name": "Dickson Trout Pond"
   },
   {
@@ -6437,7 +6185,6 @@
     "zone": "PP2",
     "surface_area_ha": 10.4,
     "amenities": "Newly built washroom, shower facilities, dumping station, group camping, camp kitchen, playground, boat launch.",
-    "years": [],
     "base_name": "Coronation Reservoir"
   },
   {
@@ -6459,10 +6206,9 @@
       "COTTONWOOD LAKE",
       "Cottonwood Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 8.0,
     "amenities": null,
-    "years": [],
     "base_name": "Cottonwood Lake"
   },
   {
@@ -6482,10 +6228,9 @@
       "CUMMINGS LAKE",
       "Cummings Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "NB3",
+    "surface_area_ha": 2.0,
     "amenities": null,
-    "years": [],
     "base_name": "Cummings Lake"
   },
   {
@@ -6511,7 +6256,6 @@
     "zone": "PP2",
     "surface_area_ha": 1.6,
     "amenities": "Day use, no open fire, foot access only.",
-    "years": [],
     "base_name": "Daysland Pond"
   },
   {
@@ -6538,7 +6282,6 @@
     "zone": "ES1",
     "surface_area_ha": 3.0,
     "amenities": "Foot access only, no open fires, day use only",
-    "years": [],
     "base_name": "Dewitt's Pond"
   },
   {
@@ -6566,7 +6309,6 @@
     "zone": "ES1",
     "surface_area_ha": 3.2,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Coleman Fish and Game Pond (McGillivray)"
   },
   {
@@ -6592,7 +6334,6 @@
     "zone": "NB2",
     "surface_area_ha": 41.7,
     "amenities": "Firewood, picnic tables, dry toilets, small watercraft boat launch, canoeing/kayaking.",
-    "years": [],
     "base_name": "Chrystina (Windy) Lake"
   },
   {
@@ -6615,10 +6356,9 @@
       "Cipperley'S Reservoir",
       "Cipperley's Reservoir"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 6.0,
     "amenities": null,
-    "years": [],
     "base_name": "Cipperley'S Reservoir"
   },
   {
@@ -6644,7 +6384,6 @@
     "zone": "PP2",
     "surface_area_ha": 11.3,
     "amenities": "Day use, picnic shelters, BBQ and fire pits, playground, horseshoe pits, volleyball courts, walking, biking and cross country skiing trails.",
-    "years": [],
     "base_name": "Cardiff Park Pond"
   },
   {
@@ -6672,7 +6411,6 @@
     "zone": "PP2",
     "surface_area_ha": 6.5,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Ponoka Centennial Park Pond"
   },
   {
@@ -6698,7 +6436,6 @@
     "zone": "ES2",
     "surface_area_ha": 13.9,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Brooks Aquaduct Pond"
   },
   {
@@ -6724,7 +6461,6 @@
     "zone": "PP2",
     "surface_area_ha": 3.7,
     "amenities": "Picnic sites, baseball diamonds, spray park, tennis courts, disc golf, mini golf, lawn bowling, playground",
-    "years": [],
     "base_name": "Bud Miller Park Pond"
   },
   {
@@ -6748,7 +6484,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Buller Pond"
   },
   {
@@ -6774,7 +6509,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Bullshead Reservoir (Bullshead Creek Reservoir)"
   },
   {
@@ -6800,7 +6534,6 @@
     "zone": "ES1",
     "surface_area_ha": 7.0,
     "amenities": "Pit toilets, garbage receptacles.",
-    "years": [],
     "base_name": "Burmis Lake"
   },
   {
@@ -6828,7 +6561,6 @@
     "zone": "ES1",
     "surface_area_ha": 3.9,
     "amenities": "Picnic tables, benches, pit toilets, camp kitchen.",
-    "years": [],
     "base_name": "Burn's Reservoir"
   },
   {
@@ -6855,7 +6587,6 @@
     "zone": "PP2",
     "surface_area_ha": 4.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Bow City East Ponds"
   },
   {
@@ -6881,7 +6612,6 @@
     "zone": "NB2",
     "surface_area_ha": 2.8,
     "amenities": "Day use, fires in designated pits only.",
-    "years": [],
     "base_name": "Boyle Pond"
   },
   {
@@ -6905,7 +6635,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Boehlke'S Pond"
   },
   {
@@ -6926,10 +6655,9 @@
       "BONNYVILLE TOWN POND (SLAWUTA LAKE)",
       "Bonnyville Town Pond (Slawuta Lake)"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "NB1",
+    "surface_area_ha": 6.0,
     "amenities": null,
-    "years": [],
     "base_name": "Bonnyville Town Pond (Slawuta Lake)"
   },
   {
@@ -6955,7 +6683,6 @@
     "zone": "ES1",
     "surface_area_ha": 5.6,
     "amenities": "Parking lot, pit toilets.",
-    "years": [],
     "base_name": "Bathing Lake"
   },
   {
@@ -6982,7 +6709,6 @@
     "zone": "PP2",
     "surface_area_ha": 5.8,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Beaumont Pond"
   },
   {
@@ -7008,7 +6734,6 @@
     "zone": "NB1",
     "surface_area_ha": 19.6,
     "amenities": "Picnic sites, firewood available, pump water available, pit toilets.",
-    "years": [],
     "base_name": "Bellis Beach Lake"
   },
   {
@@ -7031,7 +6756,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Bennett'S Pond"
   },
   {
@@ -7056,7 +6780,6 @@
     "zone": "ES1",
     "surface_area_ha": 1.8,
     "amenities": "Day use only no open fires foot access only.",
-    "years": [],
     "base_name": "Big Iron Lake"
   },
   {
@@ -7083,7 +6806,6 @@
     "zone": "PP2",
     "surface_area_ha": 13.2,
     "amenities": "Camping on site, picnic tables, playground, boat launch, outhouses.",
-    "years": [],
     "base_name": "Acadia Valley Reservoir"
   },
   {
@@ -7111,7 +6833,6 @@
     "zone": "ES1",
     "surface_area_ha": 2.7,
     "amenities": "Camping on site, beached area, boat launch (non-propeller), water pump available, firewood available on or near campground, picnic shelter, day use area",
-    "years": [],
     "base_name": "Allison Lake (Chinook Lake)"
   },
   {
@@ -7137,7 +6858,6 @@
     "zone": "PP2",
     "surface_area_ha": 11.2,
     "amenities": "Camping on site, fire pits, firewood available, picnic tables, playground.",
-    "years": [],
     "base_name": "Ashland Reservoir"
   },
   {
@@ -7163,7 +6883,6 @@
     "zone": "NB2",
     "surface_area_ha": 5.3,
     "amenities": "This waterbody has no amenities..",
-    "years": [],
     "base_name": "Atlantic Richfield Reservoir"
   },
   {
@@ -7189,7 +6908,6 @@
     "zone": "PP2",
     "surface_area_ha": 12.0,
     "amenities": "Day use only no open fires foot access only.",
-    "years": [],
     "base_name": "Bashaw Pond"
   },
   {
@@ -7212,10 +6930,9 @@
       "PINE POINT BURROW PIT",
       "Pine Point Borrow Pit"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES4",
+    "surface_area_ha": 3.0,
     "amenities": null,
-    "years": [],
     "base_name": "Pine Point Borrow Pit"
   },
   {
@@ -7245,7 +6962,6 @@
     "zone": "ES2",
     "surface_area_ha": 2.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Nordegg Borrow Pit (East)"
   },
   {
@@ -7272,7 +6988,6 @@
     "zone": "ES2",
     "surface_area_ha": 7.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Nordegg Borrow Pit (West)"
   },
   {
@@ -7301,7 +7016,6 @@
     "zone": "ES3",
     "surface_area_ha": 5.0,
     "amenities": "Parking area, day use area.",
-    "years": [],
     "base_name": "Hinton Fish and Game Pond (Cold Creek Trout Pond)"
   },
   {
@@ -7324,10 +7038,9 @@
       "BRAZEAU BURROW PIT",
       "Brazeau Borrow Pit #1"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES2",
+    "surface_area_ha": 3.1,
     "amenities": null,
-    "years": [],
     "base_name": "Brazeau Borrow Pit #1"
   },
   {
@@ -7347,10 +7060,9 @@
       "BRAZEAU BORROW PIT #2",
       "Brazeau Borrow Pit #2"
     ],
-    "zone": null,
+    "zone": "ES2",
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Brazeau Borrow Pit #2"
   },
   {
@@ -7378,7 +7090,6 @@
     "zone": "PP2",
     "surface_area_ha": 2.1,
     "amenities": "Camping on site, firewood available, tap water available, sewage dumping station, playground, picnic shelter, day use area, group camping, boat launch.",
-    "years": [],
     "base_name": "Black Nugget Mine Pit"
   },
   {
@@ -7401,7 +7112,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Four Mile Creek"
   },
   {
@@ -7427,7 +7137,6 @@
     "zone": "PP2",
     "surface_area_ha": 2.0,
     "amenities": "Day use, no open fires, foot access only",
-    "years": [],
     "base_name": "Anderson Dam"
   },
   {
@@ -7452,7 +7161,6 @@
     "zone": "PP2",
     "surface_area_ha": 503.2,
     "amenities": "Camping area, day use area.",
-    "years": [],
     "base_name": "Pine Coulee Reservoir"
   },
   {
@@ -7479,7 +7187,6 @@
     "zone": "PP2",
     "surface_area_ha": 3.0,
     "amenities": "Day use only, picnic sites, garbage receptacles, pit toilets.",
-    "years": [],
     "base_name": "Wetaskiwin Pond"
   },
   {
@@ -7506,7 +7213,6 @@
     "zone": "PP2",
     "surface_area_ha": 5.0,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Oyen (Concrete Plant) Pond"
   },
   {
@@ -7533,7 +7239,6 @@
     "zone": "PP2",
     "surface_area_ha": 1.0,
     "amenities": "Day use park, picnic area",
-    "years": [],
     "base_name": "Castor Eastside Trout Pond"
   },
   {
@@ -7553,10 +7258,9 @@
       "ODLUM LAKE",
       "Odlum Lake"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 7.0,
     "amenities": null,
-    "years": [],
     "base_name": "Odlum Lake"
   },
   {
@@ -7582,7 +7286,6 @@
     "zone": "ES3",
     "surface_area_ha": 6.7,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Mayan Lake"
   },
   {
@@ -7611,7 +7314,6 @@
     "zone": "NB1",
     "surface_area_ha": 1.9,
     "amenities": "This waterbody is located in Lac La Biche, amenities such as food and fuel are closely available",
-    "years": [],
     "base_name": "Lac La Biche Trout Pond"
   },
   {
@@ -7637,7 +7339,6 @@
     "zone": "PP2",
     "surface_area_ha": 1.4,
     "amenities": "Picnic area, day use area, pit toilets.",
-    "years": [],
     "base_name": "Castaway Trout Pond"
   },
   {
@@ -7665,7 +7366,6 @@
     "zone": "NB3",
     "surface_area_ha": 9.0,
     "amenities": "This site has no amenities.",
-    "years": [],
     "base_name": "La Crete Pond"
   },
   {
@@ -7691,7 +7391,6 @@
     "zone": "ES3",
     "surface_area_ha": 5.0,
     "amenities": "Trails, sports fields, playgrounds, picnic areas, off-leash dog park, river slide attraction, splash park.",
-    "years": [],
     "base_name": "Whitecourt Town Pond"
   },
   {
@@ -7714,10 +7413,9 @@
       "CAMP 9 TROUT POND",
       "Camp 9 Trout Pond"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES2",
+    "surface_area_ha": 7.0,
     "amenities": null,
-    "years": [],
     "base_name": "Camp 9 Trout Pond"
   },
   {
@@ -7743,7 +7441,6 @@
     "zone": "NB1",
     "surface_area_ha": 4.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Ardmore Community Pond"
   },
   {
@@ -7770,7 +7467,6 @@
     "zone": "PP1",
     "surface_area_ha": 7.0,
     "amenities": "Picnic area, day use.",
-    "years": [],
     "base_name": "Riverstone Pond"
   },
   {
@@ -7796,9 +7492,8 @@
       "Unnamed East Stormwater Pond"
     ],
     "zone": "PP2",
-    "surface_area_ha": 2.0,
+    "surface_area_ha": 1.3,
     "amenities": "Public parking.",
-    "years": [],
     "base_name": "East Stormwater Pond"
   },
   {
@@ -7812,28 +7507,21 @@
       "SW27-83-23-W5"
     ],
     "aliases": [
-      "md peace pond 1",
       "md peace pond 2",
       "peace pond 2",
-      "unnamed md peace pond 1",
       "unnamed md peace pond 2"
     ],
     "name_variants": [
-      "MD PEACE POND #1",
       "MD PEACE POND #2",
-      "MD Peace Pond #1",
       "MD Peace Pond #2",
-      "Md Peace Pond #1",
       "Md Peace Pond #2",
       "PEACE POND #2",
       "Peace Pond #2",
-      "Unnamed Md Peace Pond #1",
       "Unnamed Md Peace Pond #2"
     ],
     "zone": "NB3",
-    "surface_area_ha": 1.1,
+    "surface_area_ha": 9.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Md Peace Pond #2"
   },
   {
@@ -7856,7 +7544,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "High Level Pond"
   },
   {
@@ -7884,7 +7571,6 @@
     "zone": "PP2",
     "surface_area_ha": 1.6,
     "amenities": "Pit toilets, day use, picnic tables.",
-    "years": [],
     "base_name": "Genesee Trout Pond"
   },
   {
@@ -7910,7 +7596,6 @@
     "zone": "ES1",
     "surface_area_ha": 1.3,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Crossfield Trout Pond"
   },
   {
@@ -7938,7 +7623,6 @@
     "zone": "ES3",
     "surface_area_ha": 4.9,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Pit 24 Lake"
   },
   {
@@ -7966,7 +7650,6 @@
     "zone": "ES3",
     "surface_area_ha": 2.6,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Pit 35 Lake"
   },
   {
@@ -7994,7 +7677,6 @@
     "zone": "ES3",
     "surface_area_ha": 7.5,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Pit 45 Lake"
   },
   {
@@ -8020,7 +7702,6 @@
     "zone": "NB1",
     "surface_area_ha": 1.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Lara Fish Pond"
   },
   {
@@ -8044,7 +7725,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "New Dayton Fish And Game Pond"
   },
   {
@@ -8072,7 +7752,6 @@
     "zone": "ES3",
     "surface_area_ha": 7.1,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Pit 44 Lake"
   },
   {
@@ -8098,7 +7777,6 @@
     "zone": "ES2",
     "surface_area_ha": 7.1,
     "amenities": "Pit toilets, maintained parking area, floating dock, boat launch.",
-    "years": [],
     "base_name": "Fiesta Lake"
   },
   {
@@ -8125,7 +7803,6 @@
     "zone": "NB1",
     "surface_area_ha": 0.3,
     "amenities": "Campground has power, also amenities can be located within the town, such as food and fuel.",
-    "years": [],
     "base_name": "St. Paul Fish Pond"
   },
   {
@@ -8155,7 +7832,6 @@
     "zone": "ES3",
     "surface_area_ha": 5.8,
     "amenities": "Trail surrounding the waterbody, picnic tables, fire pits, bench, floating dock, pit toilets.",
-    "years": [],
     "base_name": "Whiteridge Recreational Area Pond (Blueridge Pit)"
   },
   {
@@ -8181,7 +7857,6 @@
     "zone": "NB1",
     "surface_area_ha": null,
     "amenities": "Wheelchair accessible, day use.",
-    "years": [],
     "base_name": "Radway Fish Pond"
   },
   {
@@ -8206,7 +7881,6 @@
     "zone": "PP2",
     "surface_area_ha": 2.0,
     "amenities": "Public parking.",
-    "years": [],
     "base_name": "Len Thompson Pond"
   },
   {
@@ -8231,7 +7905,6 @@
     "zone": "NB3",
     "surface_area_ha": 3.0,
     "amenities": "Baseball diamonds, off leash dog park, disc golf course.",
-    "years": [],
     "base_name": "High Level Community Park Pond (High Level Town Pond)"
   },
   {
@@ -8254,7 +7927,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "West Highlands Stormwater Pond"
   },
   {
@@ -8277,7 +7949,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Fairmont Pond"
   },
   {
@@ -8300,7 +7971,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Walmart Pond"
   },
   {
@@ -8325,7 +7995,6 @@
     "zone": "PP2",
     "surface_area_ha": 1.0,
     "amenities": "Bow habitat station has amenities.",
-    "years": [],
     "base_name": "Kids Can Catch Pond"
   },
   {
@@ -8345,10 +8014,9 @@
       "KAKUT POND",
       "Kakut Pond"
     ],
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES4",
+    "surface_area_ha": 2.9,
     "amenities": null,
-    "years": [],
     "base_name": "Kakut Pond"
   },
   {
@@ -8378,7 +8046,6 @@
     "zone": "PP2",
     "surface_area_ha": 4.8,
     "amenities": "Handicap accessible, washrooms, day use.",
-    "years": [],
     "base_name": "West Rivers Edge Pond (Fort Lions Park Pond)"
   },
   {
@@ -8403,7 +8070,6 @@
     "zone": "PP2",
     "surface_area_ha": 53.0,
     "amenities": "Camping, day use, picnic sites, pit toilets.",
-    "years": [],
     "base_name": "Taber Trout Pond"
   },
   {
@@ -8428,7 +8094,6 @@
     "zone": "ES4",
     "surface_area_ha": 8.0,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Shell True North Pond"
   },
   {
@@ -8453,7 +8118,6 @@
     "zone": "ES3",
     "surface_area_ha": 5.0,
     "amenities": "This waterbody has no amenities.",
-    "years": [],
     "base_name": "Lodgepole Pond"
   },
   {
@@ -8480,7 +8144,6 @@
     "zone": "ES1",
     "surface_area_ha": 4.0,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "Mitford Pond"
   },
   {
@@ -8503,7 +8166,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": [],
     "base_name": "Keenex Trout Pond"
   },
   {
@@ -8530,7 +8192,6 @@
     "zone": "ES4",
     "surface_area_ha": 2.7,
     "amenities": "Day use, no open fires, foot access only.",
-    "years": [],
     "base_name": "County Sportsplex Pond"
   },
   {
@@ -8552,8 +8213,7 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null,
-    "years": []
+    "amenities": null
   },
   {
     "lake_id": "lk0002",
@@ -8574,8 +8234,7 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null,
-    "years": []
+    "amenities": null
   },
   {
     "lake_id": "lk0003",
@@ -8596,8 +8255,7 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null,
-    "years": []
+    "amenities": null
   },
   {
     "lake_id": "lk0004",
@@ -8616,8 +8274,7 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null,
-    "years": []
+    "amenities": null
   },
   {
     "lake_id": "lk0005",
@@ -8636,8 +8293,7 @@
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null,
-    "years": []
+    "amenities": null
   },
   {
     "lake_id": "lk0006",
@@ -8660,7 +8316,7 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": []
+    "published_waterbody_id": "417506"
   },
   {
     "lake_id": "lk0007",
@@ -8683,7 +8339,7 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": []
+    "published_waterbody_id": "6859"
   },
   {
     "lake_id": "lk0008",
@@ -8706,7 +8362,7 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": []
+    "published_waterbody_id": "417505"
   },
   {
     "lake_id": "lk0009",
@@ -8727,7 +8383,7 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": []
+    "published_waterbody_id": "5649"
   },
   {
     "lake_id": "lk0010",
@@ -8748,7 +8404,7 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": []
+    "published_waterbody_id": "317177"
   },
   {
     "lake_id": "lk0011",
@@ -8769,7 +8425,7 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": []
+    "published_waterbody_id": "6654"
   },
   {
     "lake_id": "lk0012",
@@ -8790,7 +8446,7 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": []
+    "published_waterbody_id": "6120"
   },
   {
     "lake_id": "lk0013",
@@ -8811,6 +8467,6 @@
     "zone": null,
     "surface_area_ha": null,
     "amenities": null,
-    "years": []
+    "published_waterbody_id": "23094"
   }
 ]

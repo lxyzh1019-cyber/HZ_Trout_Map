@@ -1322,8 +1322,8 @@
     "lat": 53.618628,
     "lon": -114.074339,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 18.4,
     "amenities": null,
     "stockings": [
       {
@@ -1386,8 +1386,8 @@
     "lat": 54.489439,
     "lon": -113.783183,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "NB2",
+    "surface_area_ha": 13.2,
     "amenities": null,
     "stockings": [
       {
@@ -2414,7 +2414,7 @@
     "lon": -117.80152,
     "coord_source": "alberta",
     "zone": "ES3",
-    "surface_area_ha": 25.4,
+    "surface_area_ha": 2.6,
     "amenities": "Boat launch, fire pit, firewood available for purchase, fish cleaning stations, hand launch, pier, pit/vault toilets, water pump.",
     "stockings": [
       {
@@ -3289,8 +3289,8 @@
     "lat": 53.722144,
     "lon": -116.979844,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES3",
+    "surface_area_ha": 149.0,
     "amenities": null,
     "stockings": [
       {
@@ -3481,8 +3481,8 @@
     "lat": 53.896214,
     "lon": -111.1509,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "NB1",
+    "surface_area_ha": 15.0,
     "amenities": null,
     "stockings": [
       {
@@ -4116,8 +4116,8 @@
     "lat": 49.626771,
     "lon": -114.641917,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES3",
+    "surface_area_ha": 3.5,
     "amenities": null,
     "stockings": [
       {
@@ -4251,8 +4251,8 @@
     "lat": 53.726034,
     "lon": -117.117962,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES3",
+    "surface_area_ha": 17.0,
     "amenities": null,
     "stockings": [
       {
@@ -4396,8 +4396,8 @@
     "lat": 50.049958,
     "lon": -110.780527,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP1",
+    "surface_area_ha": 2.5,
     "amenities": null,
     "stockings": [
       {
@@ -4498,43 +4498,6 @@
     ]
   },
   {
-    "lake_id": "wb22995",
-    "ats": "SW27-83-23-W5",
-    "name": "Md Peace Pond #2",
-    "lat": 56.224205,
-    "lon": -117.553092,
-    "coord_source": "alberta",
-    "zone": "NB3",
-    "surface_area_ha": 1.1,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "Diploid",
-        "length_cm": 20.7,
-        "number": 1000,
-        "date": "2014-05-19",
-        "year": 2014,
-        "date_precision": "day"
-      },
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "Diploid",
-        "length_cm": 20.7,
-        "number": 1000,
-        "date": "2014-05-19",
-        "year": 2014,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 2000,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
     "lake_id": "wb5565",
     "ats": "12-54-26-W5",
     "name": "Petite Lake",
@@ -4622,8 +4585,8 @@
     "lat": 50.886413,
     "lon": -115.243069,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 7.0,
     "amenities": null,
     "stockings": [
       {
@@ -4848,8 +4811,8 @@
     "lat": 52.916194,
     "lon": -115.414317,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES2",
+    "surface_area_ha": 3.1,
     "amenities": null,
     "stockings": [
       {
@@ -5064,8 +5027,8 @@
     "lat": 50.413889,
     "lon": -114.855278,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 6.2,
     "amenities": null,
     "stockings": [
       {
@@ -5091,8 +5054,8 @@
     "lat": 50.863852,
     "lon": -115.249942,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 3.5,
     "amenities": null,
     "stockings": [
       {
@@ -5192,8 +5155,8 @@
     "lat": 50.865879,
     "lon": -115.265111,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 5.7,
     "amenities": null,
     "stockings": [
       {
@@ -5256,8 +5219,8 @@
     "lat": 51.904668,
     "lon": -115.933169,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES2",
+    "surface_area_ha": 5.2,
     "amenities": null,
     "stockings": [
       {
@@ -5364,8 +5327,8 @@
     "lat": 54.022698,
     "lon": -116.362574,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES3",
+    "surface_area_ha": 2.4,
     "amenities": null,
     "stockings": [
       {
@@ -5621,6 +5584,60 @@
         "length_cm": 15.0,
         "number": 1000,
         "date": "2014-05-26",
+        "year": 2014,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6721",
+    "ats": "27-83-23-W5",
+    "name": "MD Peace Pond #1",
+    "lat": 56.222511,
+    "lon": -117.556197,
+    "coord_source": "profile",
+    "zone": "NB3",
+    "surface_area_ha": 1.1,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "Diploid",
+        "length_cm": 20.7,
+        "number": 1000,
+        "date": "2014-05-19",
+        "year": 2014,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb22995",
+    "ats": "SW27-83-23-W5",
+    "name": "Md Peace Pond #2",
+    "lat": 56.224205,
+    "lon": -117.553092,
+    "coord_source": "alberta",
+    "zone": "NB3",
+    "surface_area_ha": 9.0,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "Diploid",
+        "length_cm": 20.7,
+        "number": 1000,
+        "date": "2014-05-19",
         "year": 2014,
         "date_precision": "day"
       }
@@ -5988,51 +6005,14 @@
     ]
   },
   {
-    "lake_id": "wb6607",
-    "ats": "NW26-21-5-W5",
-    "name": "Champion Lakes (Upper Champion Lake)",
-    "lat": 50.815306,
-    "lon": -114.599941,
-    "coord_source": "alberta",
-    "zone": "ES1",
-    "surface_area_ha": 8.0,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "Triploid",
-        "length_cm": 19.4,
-        "number": 304,
-        "date": "2014-06-23",
-        "year": 2014,
-        "date_precision": "day"
-      },
-      {
-        "species": "RNTR",
-        "strain": null,
-        "genotype": "Triploid",
-        "length_cm": 19.4,
-        "number": 305,
-        "date": "2014-06-23",
-        "year": 2014,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 609,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
     "lake_id": "wb4614",
     "ats": "SE6-22-9-W5",
     "name": "Fortress Lake",
     "lat": 50.834761,
     "lon": -115.235806,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 3.1,
     "amenities": null,
     "stockings": [
       {
@@ -6095,8 +6075,8 @@
     "lat": 52.84209,
     "lon": -115.125149,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES2",
+    "surface_area_ha": 7.0,
     "amenities": null,
     "stockings": [
       {
@@ -6284,8 +6264,8 @@
     "lat": 51.655556,
     "lon": -115.584444,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES2",
+    "surface_area_ha": 5.1,
     "amenities": null,
     "stockings": [
       {
@@ -6419,8 +6399,8 @@
     "lat": 49.641667,
     "lon": -114.662222,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 2.5,
     "amenities": null,
     "stockings": [
       {
@@ -6608,8 +6588,8 @@
     "lat": 50.473279,
     "lon": -114.912787,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 7.0,
     "amenities": null,
     "stockings": [
       {
@@ -6726,8 +6706,8 @@
     "lat": 50.453153,
     "lon": -114.90368,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 3.3,
     "amenities": null,
     "stockings": [
       {
@@ -6747,14 +6727,68 @@
     ]
   },
   {
+    "lake_id": "wb6607",
+    "ats": "NW26-21-5-W5",
+    "name": "Champion Lakes (Upper Champion Lake)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "alberta",
+    "zone": "ES1",
+    "surface_area_ha": 0.4,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "Triploid",
+        "length_cm": 19.4,
+        "number": 305,
+        "date": "2014-06-23",
+        "year": 2014,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 305,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6608",
+    "ats": "26-21-5-W5",
+    "name": "Champion Lakes (Lower)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "profile",
+    "zone": "ES1",
+    "surface_area_ha": 4.0,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": null,
+        "genotype": "Triploid",
+        "length_cm": 19.4,
+        "number": 304,
+        "date": "2014-06-23",
+        "year": 2014,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 304,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb4159",
     "ats": "SW17-19-7-W5",
     "name": "Burns Lake",
     "lat": 50.604055,
     "lon": -114.943209,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 1.7,
     "amenities": null,
     "stockings": [
       {
@@ -6834,8 +6868,8 @@
     "lat": 54.465241,
     "lon": -116.937675,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES4",
+    "surface_area_ha": 3.0,
     "amenities": null,
     "stockings": [
       {
@@ -6889,7 +6923,7 @@
     "lon": -115.318769,
     "coord_source": "alberta",
     "zone": "ES1",
-    "surface_area_ha": 0.8,
+    "surface_area_ha": 2.9,
     "amenities": "This waterbody has no amenities.",
     "stockings": [
       {

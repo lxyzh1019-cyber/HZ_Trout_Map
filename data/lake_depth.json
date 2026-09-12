@@ -1,0 +1,5584 @@
+{
+ "joined_on": "Alberta waterbody id",
+ "lakes": {
+  "lk0006": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.2,
+   "winterkill": null
+  },
+  "lk0007": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 6.7,
+   "winterkill": null
+  },
+  "lk0008": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "lk0009": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "lk0010": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "lk0011": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "lk0012": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "lk0013": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb17894": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.0,
+   "winterkill": null
+  },
+  "wb18007": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 503.2,
+   "winterkill": null
+  },
+  "wb18019": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 3.0,
+   "winterkill": null
+  },
+  "wb18020": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.0,
+   "winterkill": null
+  },
+  "wb18022": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.0,
+   "mean_depth": {
+    "source": "contradicted",
+    "why": "the published mean of 22 m is deeper than the published maximum of 7 m"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 7.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 1.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7 m deep"
+    ]
+   }
+  },
+  "wb18997": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 7.0,
+   "winterkill": null
+  },
+  "wb19525": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 65.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 65.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     25.4,
+     63.0
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 65.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 6.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "65 m deep"
+    ]
+   }
+  },
+  "wb19760": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.9,
+   "winterkill": null
+  },
+  "wb20258": {
+   "aeration_photo_only": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.4,
+   "winterkill": null
+  },
+  "wb20267": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.1,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.1,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.4,
+     5.9
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.1,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 9.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6.1 m deep"
+    ]
+   }
+  },
+  "wb21137": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 5.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6 m deep"
+    ]
+   }
+  },
+  "wb2129": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb21332": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 7.0,
+   "winterkill": null
+  },
+  "wb21353": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 4.0,
+   "winterkill": null
+  },
+  "wb22504": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 7.0,
+   "winterkill": null
+  },
+  "wb22993": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.3,
+   "winterkill": null
+  },
+  "wb22995": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 4.0,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 9.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "4 m at its deepest"
+    ]
+   }
+  },
+  "wb22996": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb23292": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.5,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.5,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.1,
+     5.3
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     4
+    ],
+    "max_depth_m": 5.5,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 1.6,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5.5 m deep"
+    ]
+   }
+  },
+  "wb23293": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.3,
+   "winterkill": null
+  },
+  "wb23789": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 4.0,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 4.9,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "4 m at its deepest"
+    ]
+   }
+  },
+  "wb23790": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 4.0,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 2.6,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "4 m at its deepest"
+    ]
+   }
+  },
+  "wb23791": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 7.5,
+   "winterkill": null
+  },
+  "wb24053": {
+   "aeration_photo_only": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.0,
+   "winterkill": null
+  },
+  "wb24312": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 4.0,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 7.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "4 m at its deepest"
+    ]
+   }
+  },
+  "wb24364": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 7.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.7,
+     6.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 7.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 7.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": true,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
+    ]
+   }
+  },
+  "wb24702": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 8.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 8.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     3.1,
+     7.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 8.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 0.3,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "8 m deep"
+    ]
+   }
+  },
+  "wb26033": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.8,
+   "winterkill": null
+  },
+  "wb26047": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb26322": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.0,
+   "winterkill": null
+  },
+  "wb26431": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 4.4,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 4.4,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 3.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "4.4 m at its deepest"
+    ]
+   }
+  },
+  "wb26447": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     4
+    ],
+    "max_depth_m": 5.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 1.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5 m deep"
+    ]
+   }
+  },
+  "wb26729": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 4.0,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 2.9,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "4 m at its deepest"
+    ]
+   }
+  },
+  "wb26854": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 4.8,
+   "winterkill": null
+  },
+  "wb318138": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 53.0,
+   "winterkill": null
+  },
+  "wb328085": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 8.0,
+   "winterkill": null
+  },
+  "wb3476": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.5,
+   "winterkill": null
+  },
+  "wb3479": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 3.3,
+   "winterkill": null
+  },
+  "wb3482": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.6,
+   "winterkill": null
+  },
+  "wb3485": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 2.7,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 2.7,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.1,
+     2.6
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 2.7,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 1.4,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "high",
+    "reasons": [
+     "only 2.7 m at its deepest"
+    ]
+   }
+  },
+  "wb3486": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 3.6,
+   "winterkill": null
+  },
+  "wb3494": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 13.3,
+   "mean_depth": {
+    "m": 6.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 13.3,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 90.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "13.3 m deep"
+    ]
+   }
+  },
+  "wb3499": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 9.1,
+   "mean_depth": {
+    "m": 9.1,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     6,
+     8
+    ],
+    "max_depth_m": 9.1,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 643.4,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "9.1 m deep"
+    ]
+   }
+  },
+  "wb3522": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.9,
+   "winterkill": null
+  },
+  "wb3523": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 4.0,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 23.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "4 m at its deepest"
+    ]
+   }
+  },
+  "wb3524": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 15.6,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6 m deep"
+    ]
+   }
+  },
+  "wb3534": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 2.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     4
+    ],
+    "max_depth_m": 5.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 19.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5 m deep"
+    ]
+   }
+  },
+  "wb3899": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 4.9,
+   "winterkill": null
+  },
+  "wb3909": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 3.5,
+   "winterkill": null
+  },
+  "wb3948": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.8,
+   "winterkill": null
+  },
+  "wb395186": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.0,
+   "winterkill": null
+  },
+  "wb395196": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 4.0,
+   "winterkill": null
+  },
+  "wb4005": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 10.3,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 10.3,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     4.0,
+     10.0
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 10.3,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 3.3,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "10.3 m deep"
+    ]
+   }
+  },
+  "wb4011": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 10.7,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 10.7,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     4.2,
+     10.4
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 10.7,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 82.8,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "10.7 m deep"
+    ]
+   }
+  },
+  "wb4014": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": 9.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 9.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     3.5,
+     8.7
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 9.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 31.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": true,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "9 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
+    ]
+   }
+  },
+  "wb4018": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.5,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.5,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.1,
+     5.3
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 5.5,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": 67.9,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5.5 m deep"
+    ]
+   }
+  },
+  "wb4061": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": 10.3,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 10.3,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     4.0,
+     10.0
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 10.3,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 28.8,
+   "winterkill": {
+    "inputs": {
+     "aeration": true,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "10.3 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
+    ]
+   }
+  },
+  "wb4159": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.7,
+   "winterkill": null
+  },
+  "wb4167": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 9.3,
+   "winterkill": null
+  },
+  "wb4171": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 3.4,
+   "winterkill": null
+  },
+  "wb417476": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb417477": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.7,
+   "winterkill": null
+  },
+  "wb4208": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.2,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 7.2,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 20.2,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7.2 m deep"
+    ]
+   }
+  },
+  "wb4221": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb4231": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 31.6,
+   "winterkill": null
+  },
+  "wb4252": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 5.0,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": 78.9,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5 m deep"
+    ]
+   }
+  },
+  "wb4261": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     4
+    ],
+    "max_depth_m": 5.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 18.4,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5 m deep"
+    ]
+   }
+  },
+  "wb4318": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.8,
+   "winterkill": null
+  },
+  "wb4340": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 3.0,
+   "mean_depth": {
+    "m": 2.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 3.0,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 844.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "3 m at its deepest"
+    ]
+   }
+  },
+  "wb4374": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 126.6,
+   "winterkill": null
+  },
+  "wb4426": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 7.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.7,
+     6.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 7.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 15.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7 m deep"
+    ]
+   }
+  },
+  "wb4446": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 10.7,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 10.7,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     4.2,
+     10.4
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 10.7,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 70.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "10.7 m deep"
+    ]
+   }
+  },
+  "wb4458": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 9.0,
+   "mean_depth": {
+    "m": 9.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 9.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 34.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "9 m deep"
+    ]
+   }
+  },
+  "wb4460": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.9,
+   "winterkill": null
+  },
+  "wb4488": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 13.8,
+   "winterkill": null
+  },
+  "wb4495": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 15.2,
+   "winterkill": null
+  },
+  "wb4505": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.6,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.6,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.2,
+     5.4
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 5.6,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 22.8,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5.6 m deep"
+    ]
+   }
+  },
+  "wb4532": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 3.5,
+   "winterkill": null
+  },
+  "wb4535": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 17.0,
+   "winterkill": null
+  },
+  "wb4539": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.8,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.8,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.7,
+     6.6
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     4,
+     6
+    ],
+    "max_depth_m": 6.8,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 79.3,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6.8 m deep"
+    ]
+   }
+  },
+  "wb4562": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.6,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 7.6,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     3.0,
+     7.4
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 7.6,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 32.3,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7.6 m deep"
+    ]
+   }
+  },
+  "wb4564": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb4614": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 3.1,
+   "winterkill": null
+  },
+  "wb4642": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.7,
+   "winterkill": null
+  },
+  "wb4647": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 12.2,
+   "winterkill": null
+  },
+  "wb4697": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 18.8,
+   "winterkill": null
+  },
+  "wb4725": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 10.8,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 10.8,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 163.6,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "10.8 m deep"
+    ]
+   }
+  },
+  "wb4794": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": 14.0,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 14.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 90.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": true,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "14 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
+    ]
+   }
+  },
+  "wb4806": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb4837": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.9,
+   "winterkill": null
+  },
+  "wb4854": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 6.2,
+   "winterkill": null
+  },
+  "wb4888": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.1,
+   "winterkill": null
+  },
+  "wb4897": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb4909": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 49.5,
+   "winterkill": null
+  },
+  "wb4920": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 4.5,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 4.5,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 69.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "4.5 m at its deepest"
+    ]
+   }
+  },
+  "wb4935": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 21.3,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 21.3,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     8.3,
+     20.7
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 21.3,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 7.4,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "21.3 m deep"
+    ]
+   }
+  },
+  "wb4944": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 71.8,
+   "winterkill": null
+  },
+  "wb5002": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.0,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 15.5,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6 m deep"
+    ]
+   }
+  },
+  "wb5029": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 50.9,
+   "winterkill": null
+  },
+  "wb5050": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.0,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 7.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 37.9,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7 m deep"
+    ]
+   }
+  },
+  "wb5074": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 3.5,
+   "winterkill": null
+  },
+  "wb5078": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb5093": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": 10.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 10.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 47.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": true,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "10 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
+    ]
+   }
+  },
+  "wb5149": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 3.3,
+   "winterkill": null
+  },
+  "wb5158": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.2,
+   "winterkill": null
+  },
+  "wb5179": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb5223": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 6.1,
+   "winterkill": null
+  },
+  "wb5232": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 32.1,
+   "winterkill": null
+  },
+  "wb5245": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 13.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 13.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     5.1,
+     12.6
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 13.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 11.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "13 m deep"
+    ]
+   }
+  },
+  "wb5253": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 125.0,
+   "winterkill": null
+  },
+  "wb5286": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb5324": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 37.1,
+   "winterkill": null
+  },
+  "wb5348": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.3,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 7.3,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 15.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": true,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7.3 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
+    ]
+   }
+  },
+  "wb5360": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 3.0,
+   "mean_depth": {
+    "m": 2.8,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 3.0,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 30.5,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "3 m at its deepest"
+    ]
+   }
+  },
+  "wb5387": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.0,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 29.9,
+   "winterkill": {
+    "inputs": {
+     "aeration": true,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
+    ]
+   }
+  },
+  "wb5407": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 34.8,
+   "winterkill": null
+  },
+  "wb5466": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.0,
+   "mean_depth": {
+    "m": 3.6,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     4,
+     6
+    ],
+    "max_depth_m": 7.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7 m deep"
+    ]
+   }
+  },
+  "wb5467": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb5476": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 18.6,
+   "winterkill": null
+  },
+  "wb5504": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 4.0,
+   "mean_depth": {
+    "m": 3.5,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 4.0,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 97.8,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "4 m at its deepest"
+    ]
+   }
+  },
+  "wb5513": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 219.2,
+   "winterkill": null
+  },
+  "wb5521": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 27.0,
+   "winterkill": null
+  },
+  "wb5538": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": 10.5,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 10.5,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 13.2,
+   "winterkill": {
+    "inputs": {
+     "aeration": true,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "10.5 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
+    ]
+   }
+  },
+  "wb5555": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 11.6,
+   "winterkill": null
+  },
+  "wb5565": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 4.0,
+   "mean_depth": {
+    "m": 3.3,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 4.0,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 11.2,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "4 m at its deepest"
+    ]
+   }
+  },
+  "wb5568": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 13.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 13.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     5.1,
+     12.6
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 13.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 2.5,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "13 m deep"
+    ]
+   }
+  },
+  "wb5569": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.9,
+   "mean_depth": {
+    "m": 4.8,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.9,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 16.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6.9 m deep"
+    ]
+   }
+  },
+  "wb5572": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 53.4,
+   "winterkill": null
+  },
+  "wb5661": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 5.0,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": 52.4,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5 m deep"
+    ]
+   }
+  },
+  "wb5667": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 7.0,
+   "winterkill": null
+  },
+  "wb5714": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 29.7,
+   "winterkill": null
+  },
+  "wb5729": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     4
+    ],
+    "max_depth_m": 5.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 13.6,
+   "winterkill": {
+    "inputs": {
+     "aeration": true,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
+    ]
+   }
+  },
+  "wb5753": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 42.0,
+   "winterkill": null
+  },
+  "wb5766": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 9.3,
+   "winterkill": null
+  },
+  "wb5788": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.9,
+   "winterkill": null
+  },
+  "wb5804": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 51.4,
+   "winterkill": null
+  },
+  "wb5805": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.2,
+   "winterkill": null
+  },
+  "wb5858": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 6.0,
+   "winterkill": null
+  },
+  "wb5874": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 9.1,
+   "mean_depth": {
+    "m": 1.9,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 9.1,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 69.2,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "9.1 m deep"
+    ]
+   }
+  },
+  "wb5895": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.6,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 7.6,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 27.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7.6 m deep"
+    ]
+   }
+  },
+  "wb5901": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.9,
+   "winterkill": null
+  },
+  "wb5919": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 297.0,
+   "winterkill": null
+  },
+  "wb5929": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 53.0,
+   "winterkill": null
+  },
+  "wb5944": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 162.7,
+   "winterkill": null
+  },
+  "wb5968": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 4.9,
+   "winterkill": null
+  },
+  "wb5971": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 114.4,
+   "winterkill": null
+  },
+  "wb5990": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 33.2,
+   "winterkill": null
+  },
+  "wb6039": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 27.5,
+   "winterkill": null
+  },
+  "wb6044": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 9.9,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 9.9,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     3.9,
+     9.6
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 9.9,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 23.2,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "9.9 m deep"
+    ]
+   }
+  },
+  "wb6051": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb6061": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 846.4,
+   "winterkill": null
+  },
+  "wb6082": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.9,
+   "winterkill": null
+  },
+  "wb6086": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 72.4,
+   "winterkill": null
+  },
+  "wb6160": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 3.2,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     4
+    ],
+    "max_depth_m": 5.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 2.6,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5 m deep"
+    ]
+   }
+  },
+  "wb6173": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.6,
+   "winterkill": null
+  },
+  "wb6524": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 7.3,
+   "winterkill": null
+  },
+  "wb6525": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 8.3,
+   "winterkill": null
+  },
+  "wb6528": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 8.0,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 8.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 84.8,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "8 m deep"
+    ]
+   }
+  },
+  "wb6530": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb6533": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 29.6,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6 m deep"
+    ]
+   }
+  },
+  "wb6534": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 15.8,
+   "winterkill": null
+  },
+  "wb6535": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.3,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.3,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.1,
+     5.1
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     4
+    ],
+    "max_depth_m": 5.3,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 3.6,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5.3 m deep"
+    ]
+   }
+  },
+  "wb6537": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 25.4,
+   "winterkill": null
+  },
+  "wb6541": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 0.8,
+   "winterkill": null
+  },
+  "wb6598": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb6601": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 24.5,
+   "winterkill": null
+  },
+  "wb6605": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.0,
+   "winterkill": null
+  },
+  "wb6606": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.2,
+   "winterkill": null
+  },
+  "wb6607": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 0.4,
+   "winterkill": null
+  },
+  "wb6608": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 4.0,
+   "winterkill": null
+  },
+  "wb6609": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 4.0,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 1.3,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "4 m at its deepest"
+    ]
+   }
+  },
+  "wb6610": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb6613": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 4.9,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.9,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.9,
+     4.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 4.9,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 1.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "4.9 m at its deepest"
+    ]
+   }
+  },
+  "wb6614": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 11.2,
+   "winterkill": null
+  },
+  "wb6617": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 4.7,
+   "winterkill": null
+  },
+  "wb6618": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb6619": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.3,
+   "winterkill": null
+  },
+  "wb6620": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 3.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 3.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.2,
+     2.9
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 3.0,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 1.3,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "3 m at its deepest"
+    ]
+   }
+  },
+  "wb6622": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.0,
+   "winterkill": null
+  },
+  "wb6623": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.2,
+   "winterkill": null
+  },
+  "wb6625": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 1.5,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6 m deep"
+    ]
+   }
+  },
+  "wb6626": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 0.9,
+   "winterkill": null
+  },
+  "wb6635": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 19.6,
+   "winterkill": null
+  },
+  "wb6636": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.0,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 3.4,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6 m deep"
+    ]
+   }
+  },
+  "wb6637": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.7,
+   "winterkill": null
+  },
+  "wb6638": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 12.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 12.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     4.7,
+     11.6
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 12.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 2.4,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "12 m deep"
+    ]
+   }
+  },
+  "wb6642": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 10.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 10.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     3.9,
+     9.7
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 10.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 26.2,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "10 m deep"
+    ]
+   }
+  },
+  "wb6647": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.5,
+   "winterkill": null
+  },
+  "wb6651": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.1,
+   "winterkill": null
+  },
+  "wb6652": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 149.0,
+   "winterkill": null
+  },
+  "wb6655": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb6658": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.6,
+   "winterkill": null
+  },
+  "wb6659": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.1,
+   "winterkill": null
+  },
+  "wb6662": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.3,
+   "mean_depth": {
+    "m": 2.1,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 7.3,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 4.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7.3 m deep"
+    ]
+   }
+  },
+  "wb6668": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.8,
+   "winterkill": null
+  },
+  "wb6669": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 8.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 8.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     3.1,
+     7.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 8.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 13.2,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "8 m deep"
+    ]
+   }
+  },
+  "wb6670": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.4,
+   "winterkill": null
+  },
+  "wb6671": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.4,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.4,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.1,
+     5.2
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     4
+    ],
+    "max_depth_m": 5.4,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 5.4,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5.4 m deep"
+    ]
+   }
+  },
+  "wb6674": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.4,
+   "winterkill": null
+  },
+  "wb6677": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb6682": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.9,
+   "winterkill": null
+  },
+  "wb6684": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.3,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.3,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.5,
+     6.1
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.3,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 39.5,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6.3 m deep"
+    ]
+   }
+  },
+  "wb6686": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.9,
+   "winterkill": null
+  },
+  "wb6688": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 10.6,
+   "winterkill": null
+  },
+  "wb6692": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 49.0,
+   "winterkill": null
+  },
+  "wb6693": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 40.1,
+   "winterkill": null
+  },
+  "wb6695": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.6,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 7.6,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     3.0,
+     7.4
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 7.6,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 2.3,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7.6 m deep"
+    ]
+   }
+  },
+  "wb6697": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 7.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.7,
+     6.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 7.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 22.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7 m deep"
+    ]
+   }
+  },
+  "wb6699": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.6,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 7.6,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 11.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7.6 m deep"
+    ]
+   }
+  },
+  "wb6702": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.5,
+   "winterkill": null
+  },
+  "wb6705": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 1.5,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6 m deep"
+    ]
+   }
+  },
+  "wb6706": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 10.0,
+   "winterkill": null
+  },
+  "wb6714": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 13.2,
+   "winterkill": null
+  },
+  "wb6718": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 7.0,
+   "winterkill": null
+  },
+  "wb6721": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.0,
+     4.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     4
+    ],
+    "max_depth_m": 5.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 1.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5 m deep"
+    ]
+   }
+  },
+  "wb6724": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 4.0,
+   "winterkill": null
+  },
+  "wb6726": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 11.0,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 11.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 19.8,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "11 m deep"
+    ]
+   }
+  },
+  "wb6730": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 14.3,
+   "winterkill": null
+  },
+  "wb6732": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.1,
+   "winterkill": null
+  },
+  "wb6734": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 6.1,
+   "winterkill": null
+  },
+  "wb6735": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 13.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 13.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     5.1,
+     12.6
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 13.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 1.5,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "13 m deep"
+    ]
+   }
+  },
+  "wb6736": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.8,
+   "winterkill": null
+  },
+  "wb6737": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 15.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 15.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     5.9,
+     14.5
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 15.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 7.2,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "15 m deep"
+    ]
+   }
+  },
+  "wb6741": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 23.1,
+   "winterkill": null
+  },
+  "wb6746": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 4.1,
+   "winterkill": null
+  },
+  "wb6750": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 24.1,
+   "winterkill": null
+  },
+  "wb6753": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 7.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.7,
+     6.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 7.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 1.2,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7 m deep"
+    ]
+   }
+  },
+  "wb6755": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 7.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 22.2,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7 m deep"
+    ]
+   }
+  },
+  "wb6757": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.9,
+   "winterkill": null
+  },
+  "wb6758": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 4.0,
+   "winterkill": null
+  },
+  "wb6760": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 6.0,
+   "winterkill": null
+  },
+  "wb6761": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": {
+    "m": 3.6,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 8.0,
+   "winterkill": null
+  },
+  "wb6764": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.2,
+   "mean_depth": {
+    "m": 3.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 5.2,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": 103.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5.2 m deep"
+    ]
+   }
+  },
+  "wb6765": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.5,
+   "winterkill": null
+  },
+  "wb6767": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb6770": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": 3.9,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 3.9,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.5,
+     3.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 3.9,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 3.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": true,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "3.9 m at its deepest",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
+    ]
+   }
+  },
+  "wb6773": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 6.0,
+   "winterkill": null
+  },
+  "wb6774": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     4
+    ],
+    "max_depth_m": 5.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 6.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5 m deep"
+    ]
+   }
+  },
+  "wb6776": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": {
+    "m": 2.5,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.4,
+   "winterkill": null
+  },
+  "wb6778": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.1,
+   "winterkill": null
+  },
+  "wb6780": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 9.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 9.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 14.9,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "9 m deep"
+    ]
+   }
+  },
+  "wb6784": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.2,
+   "winterkill": null
+  },
+  "wb6785": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": {
+    "m": 2.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 4.0,
+   "winterkill": null
+  },
+  "wb6786": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": 13.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 13.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     5.1,
+     12.6
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 13.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 33.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": true,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "13 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
+    ]
+   }
+  },
+  "wb6788": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.5,
+   "winterkill": null
+  },
+  "wb6790": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 12.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 12.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     4.7,
+     11.6
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 12.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 1.3,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "12 m deep"
+    ]
+   }
+  },
+  "wb6791": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.2,
+   "winterkill": null
+  },
+  "wb6794": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 1.4,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6 m deep"
+    ]
+   }
+  },
+  "wb6795": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.0,
+   "winterkill": null
+  },
+  "wb6796": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.8,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.8,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.6
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 5.8,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 8.9,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5.8 m deep"
+    ]
+   }
+  },
+  "wb6803": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 4.5,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 4.5,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 2.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "4.5 m at its deepest"
+    ]
+   }
+  },
+  "wb6806": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.9,
+   "winterkill": null
+  },
+  "wb6808": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 0.8,
+   "winterkill": null
+  },
+  "wb6809": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 8.8,
+   "winterkill": null
+  },
+  "wb6810": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.4,
+   "winterkill": null
+  },
+  "wb6815": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.5,
+   "winterkill": null
+  },
+  "wb6816": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.2,
+   "winterkill": null
+  },
+  "wb6818": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.8,
+   "winterkill": null
+  },
+  "wb6820": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.0,
+   "winterkill": null
+  },
+  "wb6821": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb6822": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb6823": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.8,
+   "winterkill": null
+  },
+  "wb6825": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 3.8,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6 m deep"
+    ]
+   }
+  },
+  "wb6827": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.3,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.3,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 37.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": true,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6.3 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
+    ]
+   }
+  },
+  "wb6830": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 6.0,
+   "winterkill": null
+  },
+  "wb6831": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.6,
+   "winterkill": null
+  },
+  "wb6833": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.3,
+   "mean_depth": {
+    "m": 5.5,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.3,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 5.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6.3 m deep"
+    ]
+   }
+  },
+  "wb6836": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 6.5,
+   "winterkill": null
+  },
+  "wb6840": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 8.3,
+   "mean_depth": {
+    "m": 7.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 8.3,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 18.8,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "8.3 m deep"
+    ]
+   }
+  },
+  "wb6842": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.5,
+   "winterkill": null
+  },
+  "wb6844": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     4,
+     5
+    ],
+    "max_depth_m": 6.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 64.8,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6 m deep"
+    ]
+   }
+  },
+  "wb6845": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 4.5,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.5,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.8,
+     4.4
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 4.5,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 10.4,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "4.5 m at its deepest"
+    ]
+   }
+  },
+  "wb6846": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 8.0,
+   "winterkill": null
+  },
+  "wb6850": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.0,
+   "winterkill": null
+  },
+  "wb6852": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.6,
+   "winterkill": null
+  },
+  "wb6853": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 3.0,
+   "winterkill": null
+  },
+  "wb6858": {
+   "aerated": true,
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.2,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.2,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.0,
+     5.0
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     4
+    ],
+    "max_depth_m": 5.2,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 3.2,
+   "winterkill": {
+    "inputs": {
+     "aeration": true,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5.2 m deep",
+     "aerated by the province, which both marks it as a lake expected to winterkill and makes it less likely to"
+    ]
+   }
+  },
+  "wb6860": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 41.7,
+   "winterkill": null
+  },
+  "wb6861": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 6.0,
+   "winterkill": null
+  },
+  "wb6868": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 11.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 11.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     4.3,
+     10.7
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 11.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 11.3,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "11 m deep"
+    ]
+   }
+  },
+  "wb6871": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 6.5,
+   "winterkill": null
+  },
+  "wb6873": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 13.9,
+   "winterkill": null
+  },
+  "wb6876": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.0,
+   "mean_depth": {
+    "m": 5.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     4
+    ],
+    "max_depth_m": 5.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 3.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5 m deep"
+    ]
+   }
+  },
+  "wb6878": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": null,
+   "winterkill": null
+  },
+  "wb6879": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 7.0,
+   "winterkill": null
+  },
+  "wb6880": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 3.9,
+   "winterkill": null
+  },
+  "wb6882": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 4.0,
+   "winterkill": null
+  },
+  "wb6884": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.2,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 5.2,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.0,
+     5.0
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     4
+    ],
+    "max_depth_m": 5.2,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 2.8,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5.2 m deep"
+    ]
+   }
+  },
+  "wb6890": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 4.0,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 6.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "4 m at its deepest"
+    ]
+   }
+  },
+  "wb6892": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 21.0,
+   "mean_depth": {
+    "m": 6.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 21.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 5.6,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "21 m deep"
+    ]
+   }
+  },
+  "wb6893": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.8,
+   "winterkill": null
+  },
+  "wb6894": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 19.6,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6 m deep"
+    ]
+   }
+  },
+  "wb6897": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 1.8,
+   "winterkill": null
+  },
+  "wb6900": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 13.2,
+   "winterkill": null
+  },
+  "wb6902": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 4.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 4.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     1.6,
+     3.9
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 4.0,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 2.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "4 m at its deepest"
+    ]
+   }
+  },
+  "wb6903": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.0,
+   "mean_depth": {
+    "basis": "55 lakes publishing both depths, MyWildAlberta stocking map 2026-09-11",
+    "covers": 0.78,
+    "from_max_depth_m": 6.0,
+    "method": "the maximum depth times the range of mean-to-maximum ratios Alberta's own published pairs show",
+    "range_m": [
+     2.3,
+     5.8
+    ],
+    "source": "estimated"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 11.2,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6 m deep"
+    ]
+   }
+  },
+  "wb6904": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.3,
+   "winterkill": null
+  },
+  "wb6905": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 12.0,
+   "winterkill": null
+  },
+  "wb6910": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 3.0,
+   "winterkill": null
+  },
+  "wb6914": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 2.0,
+   "winterkill": null
+  },
+  "wb6915": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 7.0,
+   "winterkill": null
+  },
+  "wb6917": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": null,
+   "mean_depth": null,
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": null,
+   "surface_area_ha": 5.0,
+   "winterkill": null
+  },
+  "wb6921": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.7,
+   "mean_depth": {
+    "m": 5.7,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 5.7,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 3.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5.7 m deep"
+    ]
+   }
+  },
+  "wb6922": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 2.5,
+   "mean_depth": {
+    "m": 2.5,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "max_depth_m": 2.5,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "high",
+    "reasons": [
+     "only 2.5 m at its deepest"
+    ]
+   }
+  },
+  "wb6923": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.0,
+   "mean_depth": {
+    "m": 4.0,
+    "source": "mywildalberta"
+   },
+   "source": "mywildalberta stocking map export 2026-09-11",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 6.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 2.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6 m deep"
+    ]
+   }
+  }
+ },
+ "source": "MyWildAlberta stocking map, exported 2026-09-11"
+}

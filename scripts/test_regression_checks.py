@@ -1,8 +1,10 @@
+import collections
 import csv
 import json
 import re
 import statistics
 import unittest
+import unittest.mock
 from pathlib import Path
 
 import ats
@@ -339,7 +341,12 @@ class PublishedDataTests(unittest.TestCase):
             for lk in lakes:
                 self.assertTrue(lk.get("lake_id"), f"{year} {lk['name']}")
                 self.assertIn(lk.get("coord_source"),
-                              ("profile", "alberta", "ats", "unknown"), lk["name"])
+                              # mywildalberta: taken from the stocking map,
+                              # either to fill a lake that had no position or
+                              # because a person settled a disagreement in the
+                              # map's favour.
+                              ("profile", "alberta", "ats", "mywildalberta", "unknown"),
+                              lk["name"])
                 # A missing position is allowed only when it is declared as
                 # such, never as a silent null that would drop a pin.
                 if lk.get("lat") is None or lk.get("lon") is None:
@@ -433,6 +440,33 @@ class OfflineAssetTests(unittest.TestCase):
         start = text.index("const SHELL_FILES = [")
         end = text.index("]", start)
         return set(re.findall(r'"([^"]+)"', text[start:end]))
+
+    def test_every_data_file_the_page_fetches_is_precached(self):
+        """A forgotten cache entry is noticed only by someone offline at a lake.
+
+        sw.js already says that about scripts. The same hazard applies to data
+        files and nothing checked it, so a new one could ship uncached and the
+        app would work perfectly until it was needed.
+
+        One file is exempt and named here rather than skipped silently: the
+        photo index points at images on Alberta's server, this worker does not
+        handle other origins, and an index of pictures that cannot load is not
+        worth the bytes. The photo COUNT lives in the profile file, which is
+        cached, so a lake still says how many there are.
+        """
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        worker = (ROOT / "sw.js").read_text(encoding="utf-8")
+        lazy_on_purpose = {"data/lake_photos.json"}
+
+        fetched = set(re.findall(r'fetch\("((?:data|live)/[^"]+)"\)', page))
+        self.assertTrue(fetched, "no data fetches found; has the loader moved?")
+        for url in sorted(fetched):
+            if url in lazy_on_purpose:
+                self.assertNotIn('"' + url + '"', worker,
+                                 url + " is meant to stay out of the cache")
+                continue
+            self.assertIn('"' + url + '"', worker,
+                          "index.html fetches " + url + " but sw.js never caches it")
 
     def test_every_js_file_is_precached(self):
         shell = self.shell_files()
@@ -912,3 +946,1103 @@ class DepthTests(unittest.TestCase):
         fills, _, disagreements = reconcile.compare(lakes, site)
         self.assertEqual(fills, [], "an existing coordinate is not a blank")
         self.assertEqual(len(disagreements), 1)
+
+
+class ImportedSourceTests(unittest.TestCase):
+    """The stocking-map export, and the CSVs built from it.
+
+    The build never re-derives these, so nothing in the ordinary pipeline would
+    notice them drifting away from the workbook they came from. That is what
+    these tests are for.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        import import_stocking_map
+        cls.mod = import_stocking_map
+        if not cls.mod.WORKBOOK.exists():
+            raise unittest.SkipTest("the stocking-map workbook is not present")
+        cls.built, cls.stats = cls.mod.build()
+        cls.rows = list(csv.DictReader(cls.built[cls.mod.LAKES_CSV].splitlines()))
+
+    def test_the_committed_csvs_match_the_workbook(self):
+        """What is committed is what the workbook says, still.
+
+        The importer is deliberately outside the build, so this stands in for
+        the byte-exact check that covers everything else under data/.
+        """
+        for path, text in self.built.items():
+            name = path.relative_to(ROOT)
+            self.assertTrue(path.exists(), f"{name} has not been built")
+            self.assertEqual(path.read_text(encoding="utf-8"), text,
+                             f"{name} no longer matches the workbook; "
+                             f"re-run import_stocking_map.py")
+
+    def test_the_import_is_idempotent(self):
+        again, _ = self.mod.build()
+        for path, text in self.built.items():
+            self.assertEqual(again[path], text, f"{path.name} changed between runs")
+
+    def test_the_schema_is_exactly_what_the_collector_writes(self):
+        """depth.py and reconcile.py read the collector's columns by name.
+
+        If fetch_lake_pages.py ever changes its fields, this fails rather than
+        letting the two quietly diverge and the readers find nothing.
+        """
+        import fetch_lake_pages
+        expected = (["waterbody_id", "lake_id", "registry_name", "page_name"]
+                    + list(fetch_lake_pages.INTERESTING) + ["depth_stated_unavailable"])
+        header = self.built[self.mod.LAKES_CSV].splitlines()[0].split(",")
+        self.assertEqual(header, expected)
+
+    def test_unknown_never_becomes_zero(self):
+        """A lake with no published depth is not a lake that is 0 m deep."""
+        for column in ("max_depth_m", "mean_depth_m", "surface_area_ha"):
+            for row in self.rows:
+                value = row[column]
+                self.assertNotEqual(value, "0", f"{row['waterbody_id']} {column}")
+                if value:
+                    self.assertGreater(float(value), 0,
+                                       f"{row['waterbody_id']} {column} is {value}")
+
+    def test_alberta_is_never_made_to_say_it_has_no_depth(self):
+        """The collector sets this only when a page says so in words.
+
+        The workbook's "Unknown" means its author found none, which is a
+        weaker claim, and passing it through would put words in Alberta's mouth.
+        """
+        self.assertEqual([r for r in self.rows if r["depth_stated_unavailable"]], [])
+
+    def test_a_position_that_contradicts_its_own_land_description_is_not_published(self):
+        """Watridge Lake publishes a point 140 km from its own quarter section.
+
+        The land description and the district agree with each other and with the
+        repo; one digit of the longitude does not. The row is refused rather
+        than passed on, and the refusal is written down.
+        """
+        watridge = [r for r in self.rows if r["waterbody_id"] == "6120"]
+        self.assertEqual(len(watridge), 1)
+        self.assertEqual(watridge[0]["latitude"], "")
+        self.assertEqual(watridge[0]["longitude"], "")
+        self.assertEqual(watridge[0]["legal_land_description"], "SW11-22-11-W5")
+        issues = list(csv.DictReader(self.built[self.mod.ISSUES_CSV].splitlines()))
+        self.assertIn("6120", [i["waterbody_id"] for i in issues
+                               if i["check"] == "position_vs_ats"])
+
+    def test_only_one_position_is_ever_refused(self):
+        """The threshold sits in measured empty space, not on a round number.
+
+        Every other lake is within 2.2 km of its own land description, which is
+        what the geometry predicts. A tighter rule throws away good positions.
+        """
+        issues = list(csv.DictReader(self.built[self.mod.ISSUES_CSV].splitlines()))
+        refused = [i for i in issues if i["check"] == "position_vs_ats"]
+        self.assertEqual(len(refused), 1, [i["name"] for i in refused])
+
+    def test_aeration_not_stated_is_not_recorded_as_no(self):
+        """Alberta names the aerated lakes and says nothing about the others."""
+        aerated = list(csv.DictReader(self.built[self.mod.AERATED_CSV].splitlines()))
+        self.assertTrue(aerated)
+        for row in aerated:
+            self.assertIn(row["confidence"], {"stated", "published_list", "photo_caption"})
+            self.assertTrue(row["evidence"], f"{row['name']} is on the list with no reason")
+        stated = [r for r in aerated if r["confidence"] == "stated"]
+        self.assertEqual(len(stated), 12)
+
+    def test_a_photograph_is_never_enough_to_call_a_lake_aerated(self):
+        """Castaway and Lara show a windmill in a picture and nothing in prose.
+
+        A photograph shows that equipment existed when it was taken, not that
+        the programme runs now. Marking a lake aerated makes it read as safer
+        than it is, so that evidence is carried and not applied.
+        """
+        import depth
+        aerated = list(csv.DictReader(self.built[self.mod.AERATED_CSV].splitlines()))
+        caption_only = {r["waterbody_id"] for r in aerated
+                        if r["confidence"] == "photo_caption"}
+        self.assertEqual(caption_only, {"20258", "24053"})
+        self.assertFalse(caption_only & depth.load_aerated()[0],
+                         "photo evidence reached the applied list")
+
+    def test_photo_evidence_never_lowers_a_winterkill_band(self):
+        import depth
+        applied, noted = depth.load_aerated()
+        for wid in noted:
+            self.assertNotIn(wid, applied)
+        shallow = 2.0
+        self.assertEqual(depth.winterkill(shallow, False, False)["level"], "high")
+        self.assertEqual(depth.winterkill(shallow, True, True)["level"], "moderate")
+
+
+class AerationIsKnownPerLakeTests(unittest.TestCase):
+    """Absence from the aerated list is not a statement that a lake is not aerated.
+
+    The flag used to be set once for the whole run, so the moment any aerated
+    list existed every lake missing from it was told "not on the aerated list".
+    """
+
+    def test_a_lake_off_the_list_is_not_told_it_is_unaerated(self):
+        import depth
+        found = depth.winterkill(2.0, False, False)
+        self.assertFalse(found["inputs"]["aeration"])
+        self.assertNotIn("not on the aerated list", found["reasons"])
+
+    def test_the_published_file_never_asserts_the_negative(self):
+        path = DATA_DIR / "lake_depth.json"
+        if not path.exists():
+            self.skipTest("depth has not been built")
+        lakes = json.loads(path.read_text(encoding="utf-8"))["lakes"]
+        wrong = [k for k, v in lakes.items()
+                 if not v.get("aerated") and v.get("winterkill")
+                 and any("not on the aerated list" in r for r in v["winterkill"]["reasons"])]
+        self.assertEqual(wrong, [], "lakes told they are not aerated")
+
+    def test_an_aerated_lake_still_says_it_cuts_both_ways(self):
+        path = DATA_DIR / "lake_depth.json"
+        if not path.exists():
+            self.skipTest("depth has not been built")
+        lakes = json.loads(path.read_text(encoding="utf-8"))["lakes"]
+        aerated = [v for v in lakes.values() if v.get("aerated") and v.get("winterkill")]
+        self.assertTrue(aerated, "no aerated lake carries a winterkill band")
+        for entry in aerated:
+            self.assertTrue(entry["winterkill"]["inputs"]["aeration"])
+            self.assertTrue(any("aerated by the province" in r
+                                for r in entry["winterkill"]["reasons"]))
+
+
+class SharedLandDescriptionTests(unittest.TestCase):
+    """Two lakes on one quarter section must keep their own fish.
+
+    Seven of the registry's land descriptions are shared, and every one is a
+    pair the survey grid cannot separate: Upper and Lower Champion, Upper and
+    Lower Smuts, Pit 35 and Pit 45, MD Peace Pond #1 and #2. For those the land
+    description is the WEAKEST evidence, not the strongest, because it is the
+    one field that is identical for both — and the name is all that is left.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.registry = json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))
+        cls.by_id = {e["lake_id"]: e for e in cls.registry}
+
+    def totals(self, lake_id):
+        """Every year's fish for one lake, out of the published year files."""
+        out = {}
+        for year in json.loads((DATA_DIR / "manifest.json").read_text(encoding="utf-8"))["years"]:
+            for lake in json.loads((DATA_DIR / f"lakes_{year}.json").read_text(encoding="utf-8")):
+                if lake["lake_id"] == lake_id:
+                    out[year] = sum(s["number"] for s in lake["stockings"])
+        return out
+
+    def test_both_halves_of_a_pair_are_published(self):
+        """Alberta stocks both ponds every year and names them apart every year.
+
+        A land-description rule written from an answer about one of them used
+        to send the other's rows to it too, so one lake carried double and the
+        other vanished from the map entirely.
+        """
+        for first, second in (("wb6721", "wb22995"), ("wb6607", "wb6608")):
+            for lake_id in (first, second):
+                self.assertIn(lake_id, self.by_id)
+                totals = self.totals(lake_id)
+                self.assertTrue(totals, f"{self.by_id[lake_id]['name']} has no stocking at all")
+                recent = {y: n for y, n in totals.items() if y >= 2021}
+                self.assertTrue(recent, f"{self.by_id[lake_id]['name']} disappears after 2020")
+
+    def test_neither_half_carries_the_others_fish(self):
+        """The pairs are stocked in equal measure, so a doubled total is visible."""
+        for first, second in (("wb6721", "wb22995"), ("wb6607", "wb6608")):
+            a, b = self.totals(first), self.totals(second)
+            for year in sorted(set(a) & set(b)):
+                if year < 2021:
+                    continue
+                self.assertEqual(
+                    a[year], b[year],
+                    f"{year}: {self.by_id[first]['name']} has {a[year]} and "
+                    f"{self.by_id[second]['name']} has {b[year]}; Alberta stocks them equally")
+
+    def test_a_shared_profile_row_gives_its_area_to_one_lake_only(self):
+        """Surface area measures one body of water, so it cannot be copied.
+
+        Eight profile rows are claimed by two lakes each. The area on such a
+        row belongs to the lake the row is named after — Alberta's stocking map
+        confirms it for seven of the eight — so the neighbour gets nothing and
+        says so, rather than reporting hectares that are not its own.
+        """
+        from registry import load_profiles, name_similarity
+        profiles = load_profiles()
+        claimants = collections.defaultdict(list)
+        for lake in self.registry:
+            for code in lake["ats_codes"]:
+                if code in profiles:
+                    claimants[code].append(lake)
+                    break
+        shared = {c: ls for c, ls in claimants.items() if len(ls) > 1}
+        self.assertTrue(shared, "expected some profile rows claimed by two lakes")
+        for code, lakes in shared.items():
+            prof = profiles[code]
+            if prof["surface_area_ha"] is None:
+                continue
+            carrying = [l for l in lakes if l["surface_area_ha"] == prof["surface_area_ha"]]
+            self.assertLessEqual(
+                len(carrying), 1,
+                f"{code}: {[l['name'] for l in carrying]} all report "
+                f"{prof['surface_area_ha']} ha from one profile row")
+            if carrying:
+                best = max(lakes, key=lambda l: name_similarity(prof["name"] or "", l["name"]))
+                self.assertIs(carrying[0], best,
+                              f"{code}: the area went to a lake the row does not name")
+
+    def test_no_two_lakes_report_the_same_area_on_the_same_quarter_section(self):
+        by_code = collections.defaultdict(list)
+        for lake in self.registry:
+            for code in lake["ats_codes"]:
+                by_code[code].append(lake)
+        for code, lakes in by_code.items():
+            areas = [l["surface_area_ha"] for l in lakes if l["surface_area_ha"] is not None]
+            self.assertEqual(len(areas), len(set(areas)),
+                             f"{code}: {[(l['name'], l['surface_area_ha']) for l in lakes]}")
+
+    def test_every_shared_land_description_rule_is_guarded(self):
+        """These rules are kept, because for the 2011-2013 reports they are the
+        answer: those years print a quarter section and no waterbody id, and
+        without the recorded rule 58 rows go back to the review queue.
+
+        What makes them safe is that link_all re-checks the row's own name
+        before honouring one. This asserts the guard covers every shared code
+        that actually appears as a rule, so a new one cannot arrive unprotected.
+        """
+        import registry as registry_module
+        shared = registry_module.shared_land_descriptions(registry_module.load_registry())
+        self.assertTrue(shared, "no shared land descriptions found to guard against")
+        with (DATA_DIR / "lake_aliases.csv").open(newline="", encoding="utf-8") as handle:
+            contested = [r for r in csv.DictReader(handle) if r["kind"] == "ats"
+                         and registry_module.normalise_code(r["value"]) in shared]
+        self.assertTrue(contested, "expected some rules on shared quarter sections")
+        for row in contested:
+            target = self.by_id.get(row["lake_id"])
+            self.assertIsNotNone(target, f"{row['lake_id']} is not a lake")
+            # The neighbour's name must be refused by the guard, or the rule
+            # would take its rows too.
+            neighbours = [e for e in self.registry
+                          if e["lake_id"] != row["lake_id"]
+                          and any(registry_module.normalise_code(c)
+                                  == registry_module.normalise_code(row["value"])
+                                  for c in e.get("ats_codes") or [])]
+            for other in neighbours:
+                self.assertTrue(
+                    registry_module.discriminating_conflict(
+                        other["name"],
+                        registry_module.best_matching_name(target, other["name"])),
+                    f"{row['value']} -> {target['name']} would also swallow "
+                    f"{other['name']}")
+
+    def test_a_land_description_rule_never_outranks_a_name_that_disagrees(self):
+        """The second guard, in case such a rule is ever written by hand."""
+        import registry as registry_module
+        pond = {"lake_id": "wb22995", "name": "Md Peace Pond #2",
+                "name_variants": ["Md Peace Pond #2", "Peace Pond #2"]}
+        self.assertTrue(registry_module.discriminating_conflict(
+            "Md Peace Pond #1", registry_module.best_matching_name(pond, "Md Peace Pond #1")))
+        self.assertFalse(registry_module.discriminating_conflict(
+            "Md Peace Pond #2", registry_module.best_matching_name(pond, "Md Peace Pond #2")))
+
+
+class StockingMapAgreementTests(unittest.TestCase):
+    """The published totals, against Alberta's other publication of the same years.
+
+    The stocking map and the annual reports are two separate publications by the
+    same agency, and this repo reads the reports. Comparing the two is how the
+    doubled ponds were found, so it stays as a standing check rather than a
+    one-off audit.
+
+    Dates are deliberately not compared: 64% of the map's events sit one day
+    earlier than the report's, which is a rendering difference and not a
+    disagreement about what happened.
+    """
+
+    SPECIES = {"RAINBOW TROUT": "RNTR", "BROOK TROUT": "BKTR", "BROWN TROUT": "BNTR",
+               "TIGER TROUT": "TGTR", "CUTTHROAT TROUT": "CTTR",
+               "WESTSLOPE CUTTHROAT TROUT": "WSCT"}
+
+    # Where the two publications genuinely disagree about individual events.
+    # Neither is this repo getting it wrong, so they are named rather than
+    # silently tolerated, and the count is asserted so a new one cannot hide.
+    KNOWN_DISAGREEMENTS = {
+        ("6818", 2023, "RNTR"),      # Goldspring Park Pond: the reports carry a
+                                     # 19 May pair (2,528 fish) the map does not
+        ("3524", 2021, "RNTR"),      # Michichi Reservoir: the map carries three
+                                     # 55 cm September events the reports do not,
+                                     # and the reports a 70-fish one the map lacks
+    }
+
+    @classmethod
+    def setUpClass(cls):
+        import import_stocking_map
+        if not import_stocking_map.WORKBOOK.exists():
+            raise unittest.SkipTest("the stocking-map workbook is not present")
+        import openpyxl
+        book = openpyxl.load_workbook(import_stocking_map.WORKBOOK, data_only=True)
+        rows = list(book["Stocking details"].iter_rows(min_row=5, values_only=True))
+        header = [str(h) for h in rows[0]]
+        col = {name: header.index(name) for name in header}
+        cls.export = collections.Counter()
+        for row in rows[1:]:
+            if not row or row[0] is None:
+                continue
+            species = cls.SPECIES.get(row[col["Species"]])
+            if species:
+                cls.export[(str(row[col["Lake ID"]]).strip(),
+                            row[col["Year"]], species)] += row[col["Fish stocked"]]
+        registry = json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))
+        cls.waterbody = {e["lake_id"]: str(e.get("waterbody_id") or "") for e in registry}
+        cls.published = collections.Counter()
+        for year in range(2021, 2027):
+            for lake in json.loads((DATA_DIR / f"lakes_{year}.json").read_text(encoding="utf-8")):
+                wid = cls.waterbody.get(lake["lake_id"], "")
+                for row in lake["stockings"]:
+                    cls.published[(wid, row["year"], row["species"])] += row["number"]
+
+    def test_the_two_publications_agree_on_almost_every_lake_year(self):
+        both = [k for k in set(self.export) | set(self.published)
+                if self.export[k] and self.published[k]]
+        differ = [k for k in both if self.export[k] != self.published[k]]
+        unexplained = [k for k in differ if k not in self.KNOWN_DISAGREEMENTS]
+        self.assertEqual(
+            unexplained, [],
+            "\n".join(f"{k}: map {self.export[k]}, reports {self.published[k]}"
+                      for k in unexplained))
+        self.assertGreater(len(both), 2000, "the comparison covered too little to mean anything")
+
+    def test_no_lake_carries_exactly_twice_what_the_map_says(self):
+        """The signature of one lake absorbing its neighbour's rows."""
+        doubled = [k for k in self.export
+                   if self.export[k] and self.published[k] == self.export[k] * 2]
+        self.assertEqual(doubled, [], f"{len(doubled)} lake-year(s) at exactly double")
+
+
+class ConfirmedFactsSurviveTests(unittest.TestCase):
+    """An answer you give must outlive the next rebuild.
+
+    reconcile.py --apply used to write straight into data/lake_registry.json,
+    and build_history.py — the command --apply prints on its very next line —
+    rebuilds that file from the reports and overwrites every field in it. So
+    every answer was erased by the step you were told to run next, and CI, which
+    runs exactly that sequence and then diffs, would have failed on the first
+    such commit. Nothing caught it because reconcile.py had no input at all
+    until the stocking map was imported.
+    """
+
+    def test_apply_never_writes_to_the_registry(self):
+        """The registry is a build artefact. Answers belong in an input."""
+        source = (Path(__file__).parent / "reconcile.py").read_text(encoding="utf-8")
+        self.assertNotIn("REGISTRY.write_text", source,
+                         "reconcile.py writes the registry, which the next build overwrites")
+
+    def test_a_confirmed_fact_survives_a_rebuild(self):
+        """Every row in lake_facts.csv is present in the built registry."""
+        facts = DATA_DIR / "lake_facts.csv"
+        if not facts.exists():
+            self.skipTest("no confirmed facts recorded yet")
+        registry = {e["lake_id"]: e
+                    for e in json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))}
+        checked = 0
+        with facts.open(newline="", encoding="utf-8") as handle:
+            for row in csv.DictReader(handle):
+                lake = registry.get(row["lake_id"])
+                self.assertIsNotNone(lake, f"{row['lake_id']} is not in the registry")
+                if row["field"] == "zone":
+                    self.assertEqual(lake["zone"], row["value"], row["note"])
+                    checked += 1
+                elif row["field"] == "surface_area_ha":
+                    self.assertEqual(lake["surface_area_ha"], float(row["value"]), row["note"])
+                    checked += 1
+        self.assertGreater(checked, 0, "nothing checkable was recorded")
+
+    def test_a_confirmed_fact_never_overwrites_what_the_pipeline_found(self):
+        """Blanks only, in both directions.
+
+        reconcile.py records a row only where the repo had nothing, and
+        apply_facts fills only where the repo still has nothing. A value the
+        pipeline derived for itself is a disagreement for a person to settle,
+        never something replaced from a file.
+        """
+        import build_history, registry as registry_module
+
+        class Fake:
+            lakes = [{"lake_id": "wb1", "zone": "ES1", "surface_area_ha": 3.0,
+                      "ats_codes": ["SW1-2-3-W4"], "lat": 50.0, "lon": -114.0,
+                      "coord_source": "profile"}]
+            def reindex(self):
+                pass
+
+        lake = Fake.lakes[0]
+        original = dict(lake)
+        facts = registry_module.FACTS_PATH
+        backup = facts.read_text(encoding="utf-8") if facts.exists() else None
+        try:
+            facts.write_text(
+                "lake_id,field,value,note\n"
+                "wb1,zone,PP2,trying to overwrite\n"
+                "wb1,surface_area_ha,999,trying to overwrite\n"
+                "wb1,position,1.0,2.0,trying to overwrite\n",
+                encoding="utf-8")
+            build_history.apply_facts(Fake())
+        finally:
+            if backup is not None:
+                facts.write_text(backup, encoding="utf-8")
+            else:
+                facts.unlink()
+        self.assertEqual(lake["zone"], original["zone"])
+        self.assertEqual(lake["surface_area_ha"], original["surface_area_ha"])
+        self.assertEqual(lake["lat"], original["lat"])
+
+    def test_reconcile_reaches_a_fixed_point(self):
+        """Running --apply twice records nothing the second time."""
+        facts = DATA_DIR / "lake_facts.csv"
+        if not facts.exists():
+            self.skipTest("no confirmed facts recorded yet")
+        import reconcile
+        lakes = json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))
+        site = reconcile.load_site()
+        if site is None:
+            self.skipTest("the collected CSV is not present")
+        fills, _, _ = reconcile.compare(lakes, site)
+        applicable = [f for f in fills if f["field"] in reconcile.APPLICABLE]
+        self.assertEqual(
+            applicable, [],
+            f"{len(applicable)} answer(s) still unrecorded after a build; "
+            f"run reconcile.py --apply and rebuild")
+
+
+class PublishedWaterbodyIdTests(unittest.TestCase):
+    """Alberta's id for lakes this repo minted from a land description.
+
+    Thirteen lakes come from reports that print no waterbody id, so the exact
+    id join the rest of the pipeline relies on cannot see them — which is why
+    they got no depth even where Alberta publishes one. Eight are recoverable
+    from the stocking map.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.registry = json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))
+
+    def test_a_published_id_is_never_mistaken_for_the_reports_own(self):
+        """They are different claims and live in different fields.
+
+        lake_id is minted as "wb" + the waterbody id wherever the reports give
+        one. Writing a recovered id into waterbody_id would either contradict
+        the lake_id or force a rename that breaks every ?lake= link and every
+        answer already recorded against the old id.
+        """
+        for lake in self.registry:
+            if lake.get("published_waterbody_id"):
+                self.assertIsNone(lake.get("waterbody_id"),
+                                  f"{lake['name']} carries both kinds of id")
+                self.assertFalse(lake["lake_id"].startswith("wb"),
+                                 f"{lake['name']} has a minted id and a wb lake_id")
+
+    def test_no_published_id_collides_with_a_real_one(self):
+        reported = {str(l["waterbody_id"]) for l in self.registry if l.get("waterbody_id")}
+        for lake in self.registry:
+            recovered = lake.get("published_waterbody_id")
+            if recovered:
+                self.assertNotIn(str(recovered), reported,
+                                 f"{lake['name']} claims an id another lake already holds")
+
+    def test_every_published_id_rests_on_two_agreeing_fields(self):
+        """A land description unique on BOTH sides, and a name that matches.
+
+        Seven registry codes are shared by two lakes and five of the map's are,
+        so a code that is not unique both ways proves nothing. Watridge Lake is
+        why the name check is not optional: its published position is 140 km
+        from this very land description.
+        """
+        import reconcile
+        site = reconcile.load_site()
+        if site is None:
+            self.skipTest("the collected CSV is not present")
+        proposals = {p["lake_id"]: p for p in
+                     reconcile.propose_published_ids(self.registry, site)}
+        recovered = [l for l in self.registry if l.get("published_waterbody_id")]
+        self.assertTrue(recovered, "no published ids were recovered")
+        for lake in recovered:
+            # Already applied, so it no longer proposes; re-derive it against a
+            # copy with the field cleared.
+            blank = dict(lake)
+            blank.pop("published_waterbody_id")
+            others = [l for l in self.registry if l["lake_id"] != lake["lake_id"]]
+            again = reconcile.propose_published_ids(others + [blank], site)
+            match = [p for p in again if p["lake_id"] == lake["lake_id"]]
+            self.assertEqual(len(match), 1,
+                             f"{lake['name']}'s id no longer follows from the evidence")
+            self.assertEqual(match[0]["alberta_value"],
+                             str(lake["published_waterbody_id"]))
+
+    def test_a_name_that_disagrees_blocks_the_join(self):
+        """The land description alone happens to be enough for today's eight.
+
+        It is not enough in general — seven registry codes are shared and five
+        of the map's are — so the name has to agree too. This tests the guard
+        rather than the current data, which would pass without it.
+        """
+        import reconcile
+        lake = {"lake_id": "lk9999", "name": "Somewhere Entirely Else",
+                "ats_codes": ["NW1-2-3-W4"], "waterbody_id": None}
+        site = {"999999": {"waterbody_id": "999999",
+                           "legal_land_description": "NW1-2-3-W4",
+                           "page_name": "Not The Same Lake At All"}}
+        self.assertEqual(reconcile.propose_published_ids([lake], site), [],
+                         "a land description matched two lakes with unrelated names")
+
+        agreeing = dict(lake, name="Not The Same Lake At All")
+        self.assertEqual(len(reconcile.propose_published_ids([agreeing], site)), 1,
+                         "an agreeing name was refused")
+
+    def test_a_shared_land_description_blocks_the_join(self):
+        """A code held by two lakes on either side proves nothing."""
+        import reconcile
+        shared = [{"lake_id": "lk9998", "name": "Twin Lake", "waterbody_id": None,
+                   "ats_codes": ["NW1-2-3-W4"]},
+                  {"lake_id": "lk9997", "name": "Twin Lake", "waterbody_id": None,
+                   "ats_codes": ["NW1-2-3-W4"]}]
+        site = {"999999": {"waterbody_id": "999999",
+                           "legal_land_description": "NW1-2-3-W4",
+                           "page_name": "Twin Lake"}}
+        self.assertEqual(reconcile.propose_published_ids(shared, site), [],
+                         "a land description two lakes share was used as evidence")
+
+    def test_the_recovered_lakes_reach_the_depth_file(self):
+        """The whole point: they were invisible to the join before."""
+        path = DATA_DIR / "lake_depth.json"
+        if not path.exists():
+            self.skipTest("depth has not been built")
+        depths = json.loads(path.read_text(encoding="utf-8"))["lakes"]
+        recovered = [l for l in self.registry if l.get("published_waterbody_id")]
+        self.assertTrue(recovered)
+        for lake in recovered:
+            self.assertIn(lake["lake_id"], depths,
+                          f"{lake['name']} still has no entry despite a published id")
+
+    def test_a_watridge_style_position_is_still_refused(self):
+        """The id is recovered; the bad coordinate is not adopted with it."""
+        watridge = [l for l in self.registry if l["name"] == "Watridge Lake"]
+        self.assertEqual(len(watridge), 1)
+        lake = watridge[0]
+        self.assertEqual(str(lake.get("published_waterbody_id")), "6120")
+        self.assertLess(abs(lake["lon"] - (-115.43)), 0.1,
+                        "Watridge moved to the map's published longitude")
+
+
+class MeanDepthTests(unittest.TestCase):
+    """A mean depth Alberta published, and one nobody did.
+
+    The second kind is the first derived quantity this repo publishes, so the
+    rules around it are the point of these tests: it is never stored where a
+    measurement is stored, and it can never change a word of the advice.
+    """
+
+    def test_a_published_mean_is_carried_through_unchanged(self):
+        import depth
+        self.assertEqual(depth.mean_depth(7.0, 4.0),
+                         {"m": 4.0, "source": "mywildalberta"})
+
+    def test_a_mean_deeper_than_the_max_is_refused_not_repaired(self):
+        """Castor Eastside Trout Pond: 22 m mean against a 7 m max, on 1 ha.
+
+        One of the two numbers is wrong and there is no way to tell which, so
+        the implausible one is dropped and the other kept. Swapping them would
+        not be a repair, only a different guess, and a one-hectare pond is
+        neither 22 m deep nor 7 m deep on average.
+        """
+        import depth
+        found = depth.mean_depth(7.0, 22.0)
+        self.assertEqual(found["source"], "contradicted")
+        self.assertNotIn("m", found)
+        self.assertNotIn("range_m", found)
+        # and no estimate is substituted for it either
+        self.assertIsNone(found.get("range_m"))
+
+    def test_an_estimate_is_never_stored_as_a_measurement(self):
+        """Reading one field must be enough to know which kind it is."""
+        import depth
+        found = depth.mean_depth(7.0, None)
+        self.assertIn("range_m", found)
+        self.assertNotIn("m", found)
+        self.assertEqual(found["source"], "estimated")
+        self.assertIn("from_max_depth_m", found)
+        self.assertIn("method", found)
+
+    def test_the_published_file_keeps_the_two_kinds_apart(self):
+        path = DATA_DIR / "lake_depth.json"
+        if not path.exists():
+            self.skipTest("depth has not been built")
+        lakes = json.loads(path.read_text(encoding="utf-8"))["lakes"]
+        estimated = 0
+        for key, entry in lakes.items():
+            mean = entry.get("mean_depth")
+            if not mean:
+                continue
+            if mean.get("source") == "estimated":
+                estimated += 1
+                self.assertNotIn("m", mean, f"{key} stores an estimate as a measurement")
+                self.assertIn("from_max_depth_m", mean, key)
+            elif mean.get("source") == "mywildalberta":
+                self.assertIn("m", mean, key)
+                self.assertNotIn("range_m", mean, key)
+        self.assertGreater(estimated, 40, "almost nothing was estimated")
+
+    def test_an_estimate_never_changes_the_advice(self):
+        """The decisive rule.
+
+        Every lake an estimate could serve already has a measured maximum, so
+        an estimate can only ever alter advice that already exists — it can
+        never extend it to a lake that had none. Zero upside, in the one place
+        where being wrong puts someone in eight metres of water.
+        """
+        import depth, inspect
+
+        # Neither advice function can even see a mean depth.
+        for fn in (depth.stratification, depth.winterkill):
+            names = list(inspect.signature(fn).parameters)
+            self.assertNotIn("mean_depth_m", names, f"{fn.__name__} takes a mean depth")
+
+        # And end to end: the same lake built with a published mean, with none
+        # (so it is estimated), and with a contradictory one, must produce
+        # byte-identical stratification and winterkill all three times.
+        lakes = [{"lake_id": "wbtest", "waterbody_id": "999001"}]
+        rows = {"999001": {"max_depth_m": 7.0, "surface_area_ha": 40.0,
+                           "stated_unavailable": False}}
+        advice = []
+        for mean in (4.0, None, 22.0):
+            rows["999001"]["mean_depth_m"] = mean
+            with unittest.mock.patch.object(depth, "load_depths", lambda: rows), \
+                 unittest.mock.patch.object(depth, "load_aerated", lambda: (set(), set())):
+                built, _ = depth.build(lakes)
+            entry = built["wbtest"]
+            advice.append((entry["stratification"], entry["winterkill"]))
+            # the mean itself does differ, which is the point of storing it apart
+            self.assertIsNotNone(entry["mean_depth"])
+        self.assertEqual(advice[0], advice[1], "an estimate changed the advice")
+        self.assertEqual(advice[0], advice[2], "a contradiction changed the advice")
+
+    def test_a_band_never_reaches_the_bottom(self):
+        """A lake whose average depth equals its maximum has vertical sides."""
+        import depth
+        for max_depth in (2.0, 5.0, 7.0, 12.0, 65.0):
+            found = depth.mean_depth(max_depth, None)
+            if not found:
+                continue
+            low, high = found["range_m"]
+            self.assertLess(low, high, max_depth)
+            self.assertLess(high, max_depth, f"{max_depth} m band reaches the bottom")
+            self.assertGreater(low, 0, max_depth)
+
+    def test_a_pond_too_shallow_to_say_anything_about_gets_no_band(self):
+        import depth
+        self.assertIsNone(depth.mean_depth(1.0, None))
+
+    def test_the_estimator_is_still_as_good_as_it_claims(self):
+        """Leave one lake out, predict it from the rest, and measure the miss.
+
+        Re-derived from the committed CSV rather than trusted from a comment,
+        the same way the coordinate test re-measures the survey-grid error. The
+        README quotes 25%; this fails if it drifts past 30%.
+        """
+        import statistics
+        csv_path = ROOT / "data" / "raw" / "mywildalberta_lakes.csv"
+        if not csv_path.exists():
+            self.skipTest("the collected CSV is not present")
+        pairs = []
+        with csv_path.open(newline="", encoding="utf-8") as handle:
+            for row in csv.DictReader(handle):
+                try:
+                    mx, mn = float(row["max_depth_m"]), float(row["mean_depth_m"])
+                except ValueError:
+                    continue
+                if mn <= mx:
+                    pairs.append((mx, mn))
+        self.assertGreater(len(pairs), 40, "too few pairs to measure anything")
+        errors = []
+        for i, (mx, mn) in enumerate(pairs):
+            others = [b / a for j, (a, b) in enumerate(pairs) if j != i]
+            errors.append(abs(mx * statistics.median(others) - mn) / mn)
+        self.assertLess(statistics.median(errors), 0.30,
+                        f"median relative error is now {statistics.median(errors):.0%}")
+
+    def test_the_published_band_matches_the_ratios_it_claims_to_come_from(self):
+        """The constants are hard-coded; this checks they still describe the data."""
+        import depth, statistics
+        csv_path = ROOT / "data" / "raw" / "mywildalberta_lakes.csv"
+        if not csv_path.exists():
+            self.skipTest("the collected CSV is not present")
+        ratios = []
+        with csv_path.open(newline="", encoding="utf-8") as handle:
+            for row in csv.DictReader(handle):
+                try:
+                    mx, mn = float(row["max_depth_m"]), float(row["mean_depth_m"])
+                except ValueError:
+                    continue
+                if mn <= mx:
+                    ratios.append(mn / mx)
+        ratios.sort()
+        def percentile(p):
+            i = p * (len(ratios) - 1)
+            lo = int(i)
+            hi = min(lo + 1, len(ratios) - 1)
+            return ratios[lo] + (i - lo) * (ratios[hi] - ratios[lo])
+        self.assertAlmostEqual(depth.MEAN_MAX_RATIO_LOW, percentile(0.10), places=1)
+        self.assertAlmostEqual(depth.MEAN_MAX_RATIO_HIGH, percentile(0.90), places=1)
+        inside = sum(1 for r in ratios
+                     if depth.MEAN_MAX_RATIO_LOW <= r <= depth.MEAN_MAX_RATIO_HIGH)
+        self.assertAlmostEqual(inside / len(ratios), depth.MEAN_ESTIMATE_COVERS, places=1)
+
+
+class LakeProfileTests(unittest.TestCase):
+    """Facilities, the province's prose, and the photo index."""
+
+    @classmethod
+    def setUpClass(cls):
+        path = DATA_DIR / "lake_profile.json"
+        if not path.exists():
+            raise unittest.SkipTest("profiles have not been built")
+        cls.doc = json.loads(path.read_text(encoding="utf-8"))
+        cls.lakes = cls.doc["lakes"]
+        cls.registry = json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))
+
+    def test_it_is_keyed_the_way_the_app_keys_lakes(self):
+        known = {e["lake_id"] for e in self.registry}
+        for key in self.lakes:
+            self.assertIn(key, known, f"{key} is not a lake")
+
+    def test_a_blank_amenities_cell_is_null_and_not_an_empty_list(self):
+        """Alberta not saying is not a lake with no toilet.
+
+        An empty list would let the app report "has no facilities", which is a
+        claim nobody made. null is the absence of a statement, and the filter
+        panel says how many lakes are in that position.
+        """
+        nulls = 0
+        for key, entry in self.lakes.items():
+            if entry.get("amenities") is None:
+                nulls += 1
+                self.assertIsNone(entry.get("facets"), key)
+            else:
+                self.assertNotEqual(entry["amenities"], [], f"{key} has an empty list")
+                self.assertTrue(entry.get("facets"), key)
+        self.assertGreater(nulls, 0, "expected some lakes to state nothing")
+
+    def test_every_child_facet_carries_its_parent(self):
+        """A filter for Trails must match a lake that only says Trails Hiking."""
+        import profile
+        for key, entry in self.lakes.items():
+            facets = entry.get("facets") or []
+            for facet in facets:
+                parent = profile.parent_of(facet)
+                if parent:
+                    self.assertIn(parent, facets,
+                                  f"{key} has {facet} without {parent}")
+
+    def test_no_facet_offered_as_a_filter_is_a_child(self):
+        """After the rollup a child is the same filter under another name.
+
+        Every lake with Paddling Canoe also has Paddling, so the two have
+        identical counts and offering both is offering one filter twice.
+        """
+        import profile
+        for facet in self.doc["facets"]:
+            self.assertIsNone(profile.parent_of(facet["name"]),
+                              f"{facet['name']} is a narrower kind of something else")
+
+    def test_every_offered_facet_is_worth_filtering_by(self):
+        import profile
+        self.assertTrue(self.doc["facets"])
+        for facet in self.doc["facets"]:
+            self.assertGreaterEqual(facet["lakes"], profile.FILTER_FLOOR, facet["name"])
+
+    def test_the_counts_match_the_lakes(self):
+        counted = collections.Counter()
+        for entry in self.lakes.values():
+            for facet in entry.get("facets") or []:
+                counted[facet] += 1
+        for facet in self.doc["facets"]:
+            self.assertEqual(facet["lakes"], counted[facet["name"]], facet["name"])
+
+    def test_no_photo_leaves_the_published_host(self):
+        """These are Alberta's photographs and they stay on Alberta's server."""
+        path = DATA_DIR / "lake_photos.json"
+        if not path.exists():
+            self.skipTest("photos have not been built")
+        gallery = json.loads(path.read_text(encoding="utf-8"))["lakes"]
+        total = 0
+        for key, shots in gallery.items():
+            for shot in shots:
+                total += 1
+                self.assertTrue(shot["url"].startswith("https://mywildalberta.ca/"),
+                                f"{key}: {shot['url']}")
+        self.assertGreater(total, 500)
+
+    def test_a_photo_count_is_never_published_without_the_photos(self):
+        path = DATA_DIR / "lake_photos.json"
+        if not path.exists():
+            self.skipTest("photos have not been built")
+        gallery = json.loads(path.read_text(encoding="utf-8"))["lakes"]
+        for key, entry in self.lakes.items():
+            if entry.get("photo_count"):
+                self.assertEqual(entry["photo_count"], len(gallery.get(key, [])), key)
+
+    def test_the_year_files_did_not_grow(self):
+        """None of this changes year to year, so none of it belongs in a year file.
+
+        index.html merges lakes across the selected years and lets a later year
+        overwrite a scalar, so a description stored there would be written into
+        sixteen files and which copy you saw would depend on which years happen
+        to be selected.
+        """
+        sample = json.loads((DATA_DIR / "lakes_2026.json").read_text(encoding="utf-8"))
+        for lake in sample:
+            for field in ("description", "facets", "photo_count", "photos"):
+                self.assertNotIn(field, lake, f"{field} leaked into a year file")
+
+
+class OutOfScopeTests(unittest.TestCase):
+    """Waters Alberta stocks that this map deliberately does not show."""
+
+    @classmethod
+    def setUpClass(cls):
+        path = DATA_DIR / "out_of_scope.csv"
+        if not path.exists():
+            raise unittest.SkipTest("the out-of-scope list has not been built")
+        with path.open(newline="", encoding="utf-8") as handle:
+            cls.rows = list(csv.DictReader(handle))
+
+    def test_nothing_trout_bearing_was_quietly_dropped(self):
+        import sources
+        names = {"RAINBOW TROUT", "BROOK TROUT", "BROWN TROUT", "TIGER TROUT",
+                 "CUTTHROAT TROUT", "WESTSLOPE CUTTHROAT TROUT"}
+        self.assertEqual(len(names), len(sources.TROUT_SPECIES),
+                         "the species this map covers changed; revisit the list")
+        for row in self.rows:
+            published = {s.strip() for s in row["species"].split(";")}
+            self.assertFalse(published & names,
+                             f"{row['name']} is stocked with trout and is not out of scope")
+
+    def test_every_row_names_a_reason(self):
+        self.assertTrue(self.rows)
+        for row in self.rows:
+            self.assertTrue(row["why"], row["name"])
+            self.assertTrue(row["species"], row["name"])
+
+    def test_none_of_them_is_on_the_map(self):
+        registry = json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))
+        mapped = {str(e.get("waterbody_id") or "") for e in registry}
+        mapped |= {str(e.get("published_waterbody_id") or "") for e in registry}
+        for row in self.rows:
+            self.assertNotIn(row["waterbody_id"], mapped,
+                             f"{row['name']} is both mapped and listed as out of scope")
+
+    def test_no_waterbody_was_minted_from_the_stocking_map(self):
+        """The failure mode the README spends a page on: an invented lake.
+
+        The importer reads Alberta's map and writes CSVs. It never adds a lake;
+        only the stocking reports do that, through build_history.
+        """
+        source = (Path(__file__).parent / "import_stocking_map.py").read_text(encoding="utf-8")
+        for forbidden in ("reg.mint", ".mint(", "add_lake"):
+            self.assertNotIn(forbidden, source,
+                             f"the importer calls {forbidden}")
+
+
+class AcaRosterTests(unittest.TestCase):
+    """ACA's published Lake Aeration Program roster, transcribed by hand.
+
+    Alberta's lake pages name twelve aerated lakes. ACA's roster names
+    twenty-two, and the two only partly overlap — Camp 9 Trout Pond and
+    Salter's Lake are stated by Alberta and absent from ACA's, which is what a
+    fish-and-game club windmill outside the province's programme looks like.
+    Both are kept; neither list is treated as the whole truth.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.roster_path = DATA_DIR / "aca_aeration_roster.csv"
+        if not cls.roster_path.exists():
+            raise unittest.SkipTest("the roster has not been transcribed")
+        with cls.roster_path.open(newline="", encoding="utf-8") as handle:
+            cls.roster = list(csv.DictReader(handle))
+        cls.registry = {e["lake_id"]: e for e in
+                        json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))}
+
+    def test_every_roster_row_names_a_lake_on_the_map(self):
+        for row in self.roster:
+            self.assertIn(row["lake_id"], self.registry,
+                          f"{row['name']} is not a lake this map holds")
+
+    def test_the_roster_is_keyed_on_an_id_and_not_a_name(self):
+        """Swan, Spring and Birch Lake are each one of several in Alberta.
+
+        Matching ACA's roster on name alone would aerate the wrong water. Swan
+        Lake is the case that proves it: the roster says only "Swan Lake", and
+        ACA's own page places it 42 km west of Valleyview, which is wb5944 and
+        not the Red Earth one.
+        """
+        header = self.roster_path.read_text(encoding="utf-8").splitlines()[0]
+        self.assertTrue(header.startswith("lake_id,"), header)
+        swan = [r for r in self.roster if r["lake_id"] == "wb5944"]
+        self.assertEqual(len(swan), 1)
+        self.assertIn("Valleyview", swan[0]["note"])
+
+    def test_the_roster_reaches_the_aerated_list(self):
+        import depth
+        applied, _ = depth.load_aerated()
+        self.assertTrue(applied)
+        for row in self.roster:
+            lake = self.registry[row["lake_id"]]
+            wid = str(lake.get("waterbody_id") or lake.get("published_waterbody_id") or "")
+            self.assertIn(wid, applied, f"{row['name']} is on the roster but not applied")
+
+    def test_both_sources_survive_each_other(self):
+        """Alberta states two lakes ACA does not list. They stay aerated."""
+        path = ROOT / "data" / "raw" / "aca_aerated_lakes.csv"
+        with path.open(newline="", encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+        tiers = collections.Counter(r["confidence"] for r in rows)
+        self.assertGreaterEqual(tiers["stated"], 12)
+        self.assertGreaterEqual(tiers["published_list"], 10)
+        stated_names = {r["name"] for r in rows if r["confidence"] == "stated"}
+        self.assertIn("Camp 9 Trout Pond", stated_names)
+        self.assertIn("Salter's Lake", stated_names)
+
+    def test_aeration_still_only_lowers_a_band_on_a_measured_depth(self):
+        path = DATA_DIR / "lake_depth.json"
+        if not path.exists():
+            self.skipTest("depth has not been built")
+        lakes = json.loads(path.read_text(encoding="utf-8"))["lakes"]
+        for key, entry in lakes.items():
+            if entry.get("aerated"):
+                if entry["max_depth_m"] is None:
+                    self.assertIsNone(entry["winterkill"], key)
+                else:
+                    self.assertTrue(entry["winterkill"]["inputs"]["aeration"], key)
+
+
+class SettledDisagreementTests(unittest.TestCase):
+    """A disagreement is a question, and a question can be answered.
+
+    reconcile.py compares the repo against Alberta and files anything where
+    both have a value and they differ. Those are the cases a blanks-only rule
+    cannot resolve, so they wait for a person — and once a person has looked at
+    both values and chosen, the answer has to stick and the question has to
+    stop being asked. Raising a settled question every run trains people to
+    ignore the file.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        path = DATA_DIR / "lake_facts.csv"
+        if not path.exists():
+            raise unittest.SkipTest("no answers recorded yet")
+        with path.open(newline="", encoding="utf-8") as handle:
+            cls.rows = list(csv.DictReader(handle))
+        cls.registry = {e["lake_id"]: e for e in
+                        json.loads((DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))}
+
+    def test_every_row_declares_which_kind_of_answer_it_is(self):
+        for row in self.rows:
+            self.assertIn(row.get("decision"), {"fill", "settled", "keep"}, row)
+
+    def test_apply_only_ever_records_a_fill(self):
+        """Settling a disagreement is a judgement between two sources.
+
+        reconcile.py has not made one and must never write as though it had.
+        """
+        source = (Path(__file__).parent / "reconcile.py").read_text(encoding="utf-8")
+        self.assertIn('"decision": "fill"', source)
+        for verb in ('"decision": "settled"', '"decision": "keep"'):
+            self.assertNotIn(verb, source, f"reconcile.py writes {verb} on its own")
+
+    def test_a_settled_answer_wins_over_what_the_pipeline_derived(self):
+        settled = [r for r in self.rows if r["decision"] == "settled"]
+        self.assertTrue(settled, "no disagreement has been settled")
+        for row in settled:
+            lake = self.registry[row["lake_id"]]
+            if row["field"] == "surface_area_ha":
+                self.assertEqual(lake["surface_area_ha"], float(row["value"]), row["note"][:60])
+            elif row["field"] == "position":
+                lat, lon = (float(v) for v in row["value"].split(","))
+                self.assertAlmostEqual(lake["lat"], lat, places=4)
+                self.assertAlmostEqual(lake["lon"], lon, places=4)
+
+    def test_a_kept_answer_writes_nothing(self):
+        """"Checked, keeping ours" must not quietly become a value."""
+        import build_history
+
+        # zone is deliberately blank. A "keep" row and a "fill" row behave the
+        # same way on a field that already has a value — both fall through the
+        # blanks-only check — so the only case that tells them apart is a field
+        # the repo has nothing in, where "fill" would write and "keep" must not.
+        class Fake:
+            lakes = [{"lake_id": "wbkeep", "zone": None, "surface_area_ha": 3.0,
+                      "ats_codes": ["SW1-2-3-W4"], "lat": 50.0, "lon": -114.0,
+                      "coord_source": "profile"}]
+            def reindex(self):
+                pass
+
+        lake = Fake.lakes[0]
+        before = dict(lake)
+        facts = DATA_DIR / "lake_facts.csv"
+        backup = facts.read_text(encoding="utf-8")
+        try:
+            # Written with the csv module: a position is a pair, and the comma
+            # inside it is not a column break.
+            with facts.open("w", newline="", encoding="utf-8") as handle:
+                writer = csv.writer(handle)
+                writer.writerow(["lake_id", "field", "value", "decision", "note"])
+                writer.writerow(["wbkeep", "position", "1.0,2.0", "keep", "checked"])
+                writer.writerow(["wbkeep", "surface_area_ha", "999", "keep", "checked"])
+                writer.writerow(["wbkeep", "zone", "PP9", "keep", "checked"])
+            build_history.apply_facts(Fake())
+        finally:
+            facts.write_text(backup, encoding="utf-8")
+        self.assertEqual(lake["lat"], before["lat"], "a kept row moved the lake")
+        self.assertEqual(lake["lon"], before["lon"], "a kept row moved the lake")
+        self.assertEqual(lake["surface_area_ha"], before["surface_area_ha"],
+                         "a kept row rewrote the area")
+        self.assertIsNone(lake["zone"],
+                          "a kept row filled a blank; keep must write nothing at all")
+
+    def test_an_answered_question_is_not_asked_again(self):
+        answered = {(r["lake_id"], r["field"]) for r in self.rows
+                    if r["decision"] in ("settled", "keep")}
+        self.assertTrue(answered)
+        review = DATA_DIR / "lake_facts_review.csv"
+        if not review.exists():
+            self.skipTest("no review file")
+        with review.open(newline="", encoding="utf-8") as handle:
+            for row in csv.DictReader(handle):
+                self.assertNotIn((row["lake_id"], row["field"]), answered,
+                                 f"{row['lake']} {row['field']} was already settled")
+
+    def test_a_position_taken_from_the_map_says_so(self):
+        """settle_coordinates used to relabel it "alberta" on the next line.
+
+        The report coordinates and the stocking map are different sources with
+        different accuracy, and the app shows coord_source to the reader.
+        """
+        settled = [r for r in self.rows
+                   if r["field"] == "position" and r["decision"] == "settled"]
+        for row in settled:
+            self.assertEqual(self.registry[row["lake_id"]]["coord_source"], "mywildalberta",
+                             row["note"][:60])
+
+    def test_a_pair_on_one_quarter_section_comes_from_one_source(self):
+        """Champion Lakes carried Lower from the profile and Upper from the map.
+
+        The two sources disagree about this pair, so no source anywhere said
+        (8.0, 0.4) — whichever was right, the published pair was wrong.
+        """
+        lower = self.registry["wb6608"]["surface_area_ha"]
+        upper = self.registry["wb6607"]["surface_area_ha"]
+        self.assertEqual((lower, upper), (4.0, 0.4),
+                         "the pair is not the map's pair")

@@ -1322,8 +1322,8 @@
     "lat": 54.489439,
     "lon": -113.783183,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "NB2",
+    "surface_area_ha": 13.2,
     "amenities": null,
     "stockings": [
       {
@@ -2316,8 +2316,8 @@
     "lat": 53.618628,
     "lon": -114.074339,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 18.4,
     "amenities": null,
     "stockings": [
       {
@@ -4032,8 +4032,8 @@
     "lat": 53.722144,
     "lon": -116.979844,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES3",
+    "surface_area_ha": 149.0,
     "amenities": null,
     "stockings": [
       {
@@ -4399,8 +4399,8 @@
     "lat": 53.896214,
     "lon": -111.1509,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "NB1",
+    "surface_area_ha": 15.0,
     "amenities": null,
     "stockings": [
       {
@@ -5018,8 +5018,8 @@
     "lat": 49.095497,
     "lon": -111.995479,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP1",
+    "surface_area_ha": 5.8,
     "amenities": null,
     "stockings": [
       {
@@ -5521,7 +5521,7 @@
     "lon": -117.80152,
     "coord_source": "alberta",
     "zone": "ES3",
-    "surface_area_ha": 25.4,
+    "surface_area_ha": 2.6,
     "amenities": "Boat launch, fire pit, firewood available for purchase, fish cleaning stations, hand launch, pier, pit/vault toilets, water pump.",
     "stockings": [
       {
@@ -5686,8 +5686,8 @@
     "lat": 53.726034,
     "lon": -117.117962,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES3",
+    "surface_area_ha": 17.0,
     "amenities": null,
     "stockings": [
       {
@@ -6044,43 +6044,6 @@
     ]
   },
   {
-    "lake_id": "wb22995",
-    "ats": "SW27-83-23-W5",
-    "name": "Md Peace Pond #2",
-    "lat": 56.224205,
-    "lon": -117.553092,
-    "coord_source": "alberta",
-    "zone": "NB3",
-    "surface_area_ha": 1.1,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": "Trout Lodge/Jumpers",
-        "genotype": "AF2N",
-        "length_cm": 19.8,
-        "number": 1000,
-        "date": "2020-05-20",
-        "year": 2020,
-        "date_precision": "day"
-      },
-      {
-        "species": "RNTR",
-        "strain": "Trout Lodge/Jumpers",
-        "genotype": "AF2N",
-        "length_cm": 19.8,
-        "number": 1000,
-        "date": "2020-05-20",
-        "year": 2020,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 2000,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
     "lake_id": "wb4909",
     "ats": "12-8-6-W5",
     "name": "Island Lake",
@@ -6249,8 +6212,8 @@
     "lat": 51.7253,
     "lon": -114.111399,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 6.0,
     "amenities": null,
     "stockings": [
       {
@@ -6367,8 +6330,8 @@
     "lat": 52.916194,
     "lon": -115.414317,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES2",
+    "surface_area_ha": 3.1,
     "amenities": null,
     "stockings": [
       {
@@ -6816,7 +6779,7 @@
     "lon": -113.709921,
     "coord_source": "alberta",
     "zone": "PP2",
-    "surface_area_ha": 2.0,
+    "surface_area_ha": 1.3,
     "amenities": "Public parking.",
     "stockings": [
       {
@@ -6842,8 +6805,8 @@
     "lat": 50.049958,
     "lon": -110.780527,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP1",
+    "surface_area_ha": 2.5,
     "amenities": null,
     "stockings": [
       {
@@ -7053,8 +7016,8 @@
     "lat": 54.022698,
     "lon": -116.362574,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES3",
+    "surface_area_ha": 2.4,
     "amenities": null,
     "stockings": [
       {
@@ -7456,6 +7419,60 @@
     ]
   },
   {
+    "lake_id": "wb6721",
+    "ats": "27-83-23-W5",
+    "name": "MD Peace Pond #1",
+    "lat": 56.222511,
+    "lon": -117.556197,
+    "coord_source": "profile",
+    "zone": "NB3",
+    "surface_area_ha": 1.1,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Jumpers",
+        "genotype": "AF2N",
+        "length_cm": 19.8,
+        "number": 1000,
+        "date": "2020-05-20",
+        "year": 2020,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb22995",
+    "ats": "SW27-83-23-W5",
+    "name": "Md Peace Pond #2",
+    "lat": 56.224205,
+    "lon": -117.553092,
+    "coord_source": "alberta",
+    "zone": "NB3",
+    "surface_area_ha": 9.0,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Jumpers",
+        "genotype": "AF2N",
+        "length_cm": 19.8,
+        "number": 1000,
+        "date": "2020-05-20",
+        "year": 2020,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 1000,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb23789",
     "ats": "4-47-19-W5",
     "name": "Pit 24 Lake",
@@ -7700,8 +7717,8 @@
     "lat": 49.5588,
     "lon": -113.8722,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES1",
+    "surface_area_ha": 8.0,
     "amenities": null,
     "stockings": [
       {
@@ -7727,8 +7744,8 @@
     "lat": 53.703308,
     "lon": -111.744946,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 1.4,
     "amenities": null,
     "stockings": [
       {
@@ -7931,43 +7948,6 @@
     ]
   },
   {
-    "lake_id": "wb6607",
-    "ats": "NW26-21-5-W5",
-    "name": "Champion Lakes (Upper Champion Lake)",
-    "lat": 50.815306,
-    "lon": -114.599941,
-    "coord_source": "alberta",
-    "zone": "ES1",
-    "surface_area_ha": 8.0,
-    "amenities": "This waterbody has no amenities.",
-    "stockings": [
-      {
-        "species": "RNTR",
-        "strain": "Trout Lodge/Jumpers",
-        "genotype": "AF3N",
-        "length_cm": 19.8,
-        "number": 300,
-        "date": "2020-06-22",
-        "year": 2020,
-        "date_precision": "day"
-      },
-      {
-        "species": "RNTR",
-        "strain": "Trout Lodge/Jumpers",
-        "genotype": "AF3N",
-        "length_cm": 19.8,
-        "number": 300,
-        "date": "2020-06-22",
-        "year": 2020,
-        "date_precision": "day"
-      }
-    ],
-    "total_fish": 600,
-    "species_set": [
-      "RNTR"
-    ]
-  },
-  {
     "lake_id": "wb21353",
     "ats": "1-62-3-W4",
     "name": "Ardmore Community Pond",
@@ -8112,8 +8092,8 @@
     "lat": 52.84209,
     "lon": -115.125149,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "ES2",
+    "surface_area_ha": 7.0,
     "amenities": null,
     "stockings": [
       {
@@ -8258,8 +8238,8 @@
     "lat": 54.265723,
     "lon": -110.745372,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "NB1",
+    "surface_area_ha": 6.0,
     "amenities": null,
     "stockings": [
       {
@@ -8536,9 +8516,9 @@
     "lake_id": "wb6760",
     "ats": "SE6-50-1-W4",
     "name": "Lloydminster Trout Pond",
-    "lat": 53.25943,
-    "lon": -110.04075,
-    "coord_source": "profile",
+    "lat": 53.279,
+    "lon": -110.1391,
+    "coord_source": "mywildalberta",
     "zone": "PP2",
     "surface_area_ha": 6.0,
     "amenities": "This waterbody has no amenities.",
@@ -8922,6 +8902,60 @@
     ]
   },
   {
+    "lake_id": "wb6608",
+    "ats": "26-21-5-W5",
+    "name": "Champion Lakes (Lower)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "profile",
+    "zone": "ES1",
+    "surface_area_ha": 4.0,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Jumpers",
+        "genotype": "AF3N",
+        "length_cm": 19.8,
+        "number": 300,
+        "date": "2020-06-22",
+        "year": 2020,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 300,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
+    "lake_id": "wb6607",
+    "ats": "NW26-21-5-W5",
+    "name": "Champion Lakes (Upper Champion Lake)",
+    "lat": 50.815306,
+    "lon": -114.599941,
+    "coord_source": "alberta",
+    "zone": "ES1",
+    "surface_area_ha": 0.4,
+    "amenities": "This waterbody has no amenities.",
+    "stockings": [
+      {
+        "species": "RNTR",
+        "strain": "Trout Lodge/Jumpers",
+        "genotype": "AF3N",
+        "length_cm": 19.8,
+        "number": 300,
+        "date": "2020-06-22",
+        "year": 2020,
+        "date_precision": "day"
+      }
+    ],
+    "total_fish": 300,
+    "species_set": [
+      "RNTR"
+    ]
+  },
+  {
     "lake_id": "wb6917",
     "ats": "28-50-25-W5",
     "name": "Hinton Fish and Game Pond (Cold Creek Trout Pond)",
@@ -9063,8 +9097,8 @@
     "lat": 52.464155,
     "lon": -113.138878,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 4.1,
     "amenities": null,
     "stockings": [
       {
@@ -9165,8 +9199,8 @@
     "lat": 51.6135,
     "lon": -110.497677,
     "coord_source": "alberta",
-    "zone": null,
-    "surface_area_ha": null,
+    "zone": "PP2",
+    "surface_area_ha": 13.2,
     "amenities": null,
     "stockings": [
       {

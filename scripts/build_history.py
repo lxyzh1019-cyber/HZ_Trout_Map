@@ -33,8 +33,10 @@ from collections import defaultdict
 
 import sources
 from ats import ats_to_latlng, haversine_km
-from registry import (ALIASES_PATH, DATA_DIR, REVIEW_PATH, Registry, display_name,
-                      load_aliases, load_profiles, name_similarity, normalize_name,
+from registry import (ALIASES_PATH, DATA_DIR, FACTS_PATH, REVIEW_PATH, Registry, display_name,
+                      best_matching_name, discriminating_conflict,
+                      load_aliases, load_profiles, name_similarity, normalise_code,
+                      normalize_name, shared_land_descriptions,
                       save_registry, _title)
 
 TROUT = sources.TROUT_SPECIES
@@ -70,6 +72,79 @@ def build_spine(rows_by_year):
     return reg
 
 
+def apply_facts(reg):
+    """Your answers to past attribute questions, from data/lake_facts.csv.
+
+    reconcile.py compares the repo against what Alberta publishes and writes
+    the answers here, because the registry is regenerated from the reports on
+    every build and anything written into it directly is gone by the next run.
+    This is the same arrangement as data/lake_aliases.csv, which holds the
+    answers to past linking questions.
+
+    Three kinds of answer, in the decision column:
+
+      fill     what reconcile.py --apply records: Alberta publishes a value and
+               the repo had none. Applied only while the repo still has none, so
+               a value the pipeline later derives for itself is never replaced.
+
+      settled  a person compared two sources that disagreed and picked one.
+               This wins, because a disagreement is exactly the case a blanks-
+               only rule cannot resolve and a person just did.
+
+      keep     a person compared them and kept what the repo already had. No
+               value is written; the row exists so reconcile.py stops raising a
+               question that has been answered.
+
+    Only a person writes settled or keep. --apply emits fill and nothing else,
+    so nothing here can start overriding the pipeline on its own.
+    """
+    if not FACTS_PATH.exists():
+        return 0
+    by_id = {lake["lake_id"]: lake for lake in reg.lakes}
+    applied = 0
+    with FACTS_PATH.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            lake = by_id.get(row["lake_id"])
+            field, value = row["field"], row["value"]
+            decision = (row.get("decision") or "fill").strip()
+            if not lake or decision == "keep":
+                continue
+            if not value:
+                continue
+            settled = decision == "settled"
+            if field == "position":
+                if settled or lake.get("lat") is None:
+                    lat, lon = value.split(",")
+                    lake["lat"], lake["lon"] = float(lat), float(lon)
+                    lake["coord_source"] = "mywildalberta"
+                    applied += 1
+            elif field == "legal_land_description":
+                if settled or not lake["ats_codes"]:
+                    lake["ats_codes"] = [normalise_code(value)]
+                    applied += 1
+            elif field == "surface_area_ha":
+                if settled or lake.get(field) is None:
+                    lake[field] = float(value)
+                    applied += 1
+            elif field == "zone":
+                if settled or lake.get(field) is None:
+                    lake[field] = value
+                    applied += 1
+            elif field == "published_waterbody_id":
+                # Deliberately NOT waterbody_id, and not a rename. lake_id is
+                # minted as "wb" + the waterbody id where one exists, so
+                # setting the field would either contradict the id or force
+                # lk0006 to become wb417506 — which breaks the ?lake= links
+                # people have bookmarked and every answer already recorded
+                # against the old id. This is a join key and nothing more.
+                if not lake.get("waterbody_id") and not lake.get("published_waterbody_id"):
+                    lake["published_waterbody_id"] = value
+                    applied += 1
+    if applied:
+        reg.reindex()
+    return applied
+
+
 def attach_profiles(reg):
     """Add zone, amenities and the hand-verified coordinates from the profiles CSV."""
     profiles = load_profiles()
@@ -90,9 +165,23 @@ def attach_profiles(reg):
         best = max(lakes, key=lambda l: name_similarity(prof["name"] or "", l["name"]))
         for lake in lakes:
             matched += 1
+            # A fish management zone covers both halves of a pair, and the
+            # amenities describe the site they share, so those are safe to
+            # copy. Surface area is not: it measures one body of water.
+            #
+            # The profile row's area belongs to the lake the row is NAMED
+            # after — Alberta's stocking map confirms it for seven of the
+            # eight shared rows, matching Hogarth Lower at 0.8 ha, Lower
+            # Smuts at 2.0, MD Peace Pond #1 at 1.1 and Lower Wildhorse at
+            # 25.4 while their neighbours measure something else entirely.
+            # Copying it to both put the same hectares on two lakes and made
+            # Upper Wildhorse ten times its real size.
+            #
+            # The neighbour gets nothing instead, and says so.
             lake["zone"] = prof["zone"]
-            lake["surface_area_ha"] = prof["surface_area_ha"]
             lake["amenities"] = prof["amenities"]
+            if lake is best:
+                lake["surface_area_ha"] = prof["surface_area_ha"]
             if prof["lat"] is not None and prof["lon"] is not None and lake is best:
                 lake["lat"], lake["lon"] = prof["lat"], prof["lon"]
                 lake["coord_source"] = "profile"
@@ -166,8 +255,14 @@ def settle_coordinates(reg):
     """Every lake needs a position. Prefer verified, then Alberta's, then the grid."""
     counts = defaultdict(int)
     for lake in reg.lakes:
-        if lake["coord_source"] == "profile":
-            counts["profile"] += 1
+        # A position that already names where it came from keeps that name.
+        # Everything else with a position came from the report rows, which is
+        # what "alberta" means. Without this, a coordinate taken from the
+        # stocking map or settled by hand in data/lake_facts.csv was relabelled
+        # "alberta" on the very next line and the map claimed a provenance the
+        # value does not have.
+        if lake["coord_source"] in ("profile", "mywildalberta"):
+            counts[lake["coord_source"]] += 1
             continue
         if lake["lat"] is not None:
             lake["coord_source"] = "alberta"
@@ -224,6 +319,7 @@ def link_all(reg, rows_by_year, aliases, verbose=True):
     linked = defaultdict(list)
     review = []
     stats = defaultdict(int)
+    shared_codes = shared_land_descriptions(reg)
 
     for year in sorted(rows_by_year):
         for row in rows_by_year[year]:
@@ -231,7 +327,8 @@ def link_all(reg, rows_by_year, aliases, verbose=True):
                 stats["not_trout"] += 1
                 continue
 
-            key = normalize_name(display_name(row["official_name"], row["common_name"]))
+            row_name = display_name(row["official_name"], row["common_name"])
+            key = normalize_name(row_name)
             if key in aliases["skip"]:
                 stats["skipped_by_you"] += 1
                 continue
@@ -242,9 +339,30 @@ def link_all(reg, rows_by_year, aliases, verbose=True):
                 continue
 
             # A decision you already made in a past review always wins.
+            #
+            # A land description is consulted before a name because it is
+            # usually the stronger key, and for 633 of the registry's 640
+            # quarter sections it is. For the other seven it is the WEAKEST
+            # evidence there is, because it is the one field that is identical
+            # for both lakes on it, and the name is all that can separate them.
+            #
+            # apply_review.py records a confirmed answer as a land-description
+            # rule as well as a name, which is right for the 633 and turns an
+            # answer about one row into a rule about its neighbour for the
+            # seven. So on a shared quarter section the rule is only honoured
+            # when the row's own name does not contradict it; otherwise the row
+            # falls through to resolve(), where the name is weighed properly.
+            #
+            # Without this, MD Peace Pond #1's fish were credited to #2 and
+            # Lower Champion Lake's to Upper, for six years each.
             forced = None
             if row.get("ats") and row["ats"].upper() in aliases["ats"]:
-                forced = aliases["ats"][row["ats"].upper()]
+                candidate = aliases["ats"][row["ats"].upper()]
+                target = reg.by_id.get(candidate)
+                contested = normalise_code(row["ats"]) in shared_codes
+                if not contested or target is None or not discriminating_conflict(
+                        row_name, best_matching_name(target, row_name)):
+                    forced = candidate
             if not forced and key in aliases["name"]:
                 forced = aliases["name"][key]
             if forced and forced in reg.by_id:
@@ -430,13 +548,43 @@ def write_depths(reg):
     stats = depth.write(reg.lakes, DATA_DIR)
     if not stats:
         print("\nNo data/raw/mywildalberta_lakes.csv; skipping depth and winterkill.")
-        print("  Collect it once with: cd scripts && python3 fetch_lake_pages.py")
+        print("  Build it once with: cd scripts && python3 import_stocking_map.py")
         return None
     print("\nReading lake depth...")
     print(f"  {stats['with_depth']} lake(s) with a depth, "
           f"{stats['stated_unavailable']} where Alberta states none is available")
-    if not stats["aeration_known"]:
+    if stats["aerated"]:
+        print(f"  {stats['aerated']} aerated; Alberta states nothing either way "
+              f"for the rest")
+    else:
         print("  no aerated-lake list present; winterkill uses depth alone")
+    print(f"  mean depth: {stats['mean_published']} published, "
+          f"{stats['mean_estimated']} estimated as a range"
+          + (f", {stats['mean_contradicted']} refused for contradicting the maximum"
+             if stats["mean_contradicted"] else ""))
+    if stats["aeration_photo_only"]:
+        print(f"  {stats['aeration_photo_only']} with aeration seen only in a photo, "
+              f"shown but not counted")
+    return stats
+
+
+def write_profiles(reg):
+    """Amenities, the province's own prose, and the photo index.
+
+    Skipped quietly when the collection has not been run, like the depth step:
+    a missing profile file should cost the map its facilities filter, not its
+    data.
+    """
+    import profile
+    stats = profile.write(reg.lakes, DATA_DIR)
+    if not stats:
+        return None
+    print("\nReading what Alberta says about each lake...")
+    print(f"  {stats['with_amenities']} with amenities, "
+          f"{stats['with_description']} with a description")
+    print(f"  {stats['photos']} photo(s) across {stats['with_photos']} lake(s), "
+          f"linked and not copied")
+    print(f"  {stats['facets']} facet(s) worth filtering by")
     return stats
 
 
@@ -455,9 +603,9 @@ def write_regulations(reg=None):
     regs = regulations.load(source)
     year = regs["guide_year"]
     rows = sum(len(z["lakes"]) + len(z["rivers"]) for z in regs["zones"].values())
-    (DATA_DIR / f"regulations_{year}.json").write_text(
-        json.dumps(regs, indent=1, ensure_ascii=False, sort_keys=True) + "\n",
-        encoding="utf-8")
+    # The full parse is deliberately not written out. Only the per-lake
+    # resolution below is read by anything; a second copy of the guide in
+    # data/ was 404 KB that every build rewrote and nothing ever opened.
     print(f"  {rows} site-specific rows, {len(regs['defaults'])} watershed defaults, "
           f"{len(regs['stocked'])} put-and-take waters")
 
@@ -503,12 +651,14 @@ def main():
     print(f"  {drift} of them carry more than one land description across years")
 
     matched = attach_profiles(reg)
+    confirmed = apply_facts(reg)
     print(f"  {matched} matched to a profile entry (zone, amenities, verified position)")
     demoted = resolve_duplicate_coordinates(reg)
     for name, gap in demoted:
         print(f"  shared coordinate: {name} moved to its own land description ({gap} km away)")
     counts = settle_coordinates(reg)
     print(f"  positions: {counts['profile']} verified, {counts['alberta']} from Alberta, "
+          f"{counts['mywildalberta']} from the stocking map, "
           f"{counts['ats']} from the land description, {counts['none']} unknown")
     renamed = disambiguate_names(reg)
     if renamed:
@@ -532,6 +682,13 @@ def main():
                 reg.absorb(lake, item["row"])
                 linked[item["row"]["year"]].append((lake["lake_id"], item["row"]))
 
+    # Again, now that the lakes minted from a land description exist: those are
+    # precisely the ones with no waterbody id, so they are the ones a published
+    # id is recorded for, and they are not in the registry during the first pass.
+    confirmed += apply_facts(reg)
+    if confirmed:
+        print(f"\n  {confirmed} field(s) from data/lake_facts.csv, your past answers")
+
     dropped = drop_empty_lakes(reg, linked)
     if dropped:
         print(f"\n  {len(dropped)} registry entr(ies) held no rows and were dropped: "
@@ -554,13 +711,18 @@ def main():
     years_written = write_year_files(reg, linked, sources.PROVISIONAL_YEARS)
     write_quality_summary(reg, len(still), linked_rows, trout_rows)
     n_depth = write_depths(reg)
+    n_profile = write_profiles(reg)
     n_regs = write_regulations(reg)
     print(f"\nWrote data/lake_registry.json ({len(reg.lakes)} lakes)")
     if n_depth:
         print(f"Wrote data/lake_depth.json ({n_depth['with_depth']} lakes with a depth)")
+    if n_profile:
+        print(f"Wrote data/lake_profile.json and data/lake_photos.json "
+              f"({n_profile['with_amenities']} with amenities, "
+              f"{n_profile['photos']} photos)")
     if n_regs:
-        print(f"Wrote data/regulations_{n_regs[0]}.json "
-              f"({n_regs[1]} site-specific rows, {n_regs[2]} put-and-take waters)")
+        print(f"Wrote data/lake_regulations.json (guide {n_regs[0]}: "
+              f"{n_regs[1]} site-specific rows, {n_regs[2]} put-and-take waters)")
     print(f"Wrote {len(years_written)} year file(s): {years_written[0]}-{years_written[-1]}")
     print(f"Wrote data/link_review.csv ({n_review} question(s) for you)")
     if n_review:

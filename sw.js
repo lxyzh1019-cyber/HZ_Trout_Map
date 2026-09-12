@@ -47,6 +47,7 @@ const SHELL_FILES = [
   "js/conditions.js",
   "js/weather.js",
   "js/conditions-ui.js",
+  "js/lake-panel.js",
   "evidence.html",
   "vendor/images/marker-icon.png",
   "vendor/images/marker-icon-2x.png",
@@ -62,6 +63,12 @@ async function precacheData() {
   const cache = await caches.open(DATA_CACHE);
   const fixed = ["data/manifest.json", "data/quality_summary.json",
                  "data/lake_regulations.json", "data/lake_depth.json",
+                 // Not lake_photos.json: the pictures it points at live on
+                 // Alberta's server, this worker does not handle other
+                 // origins, and an index of images that cannot load offline
+                 // is not worth the bytes. The photo COUNT is in the profile
+                 // file, so a lake still says how many there are.
+                 "data/lake_profile.json",
                  "live/advisories.json"];
   await Promise.all(fixed.map(u => cache.add(u).catch(() => {})));
 
