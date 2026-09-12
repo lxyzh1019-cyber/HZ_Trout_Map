@@ -127,8 +127,9 @@
     M79 Alberta's own description of the lake, and its photographs, in a panel
         rather than a popup: what you read after deciding, not what decides
     M80 photographs stay on Alberta's server — linked, never copied, loaded only
-        when asked for, with no referrer, and replaced by their captions when
-        they cannot load
+        when asked for, with no referrer, at the address Alberta published and
+        never re-encoded, keeping their frame and saying so when one fails, and
+        offered as links where the format is one the browser cannot decode
 -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2b2e2a">
@@ -508,7 +509,14 @@
   .lp-shot img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
   .lp-cap { display: block; padding: 3px 5px; line-height: 1.3; }
   .lp-shot:hover { border-color: var(--accent); }
+  /* A photograph that will not load keeps its frame and says so. Removing the
+     image outright, as this once did, made a broken link look like a lake
+     Alberta had simply never photographed. */
+  .lp-shot.failed { border-style: dashed; border-color: var(--TGTR); }
+  .lp-shot.failed img { display: none; }
+  .lp-shot.failed .lp-cap::after { content: " \2014 could not load"; color: var(--TGTR); }
   .lp-offline { color: var(--ink-dim); font-style: italic; }
+  .lp-offline a { color: var(--accent); }
 
   /* ---- the verdict line ------------------------------------------------- */
   /* One line, at the top, answering whether the drive is worth it. */
