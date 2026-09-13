@@ -2240,19 +2240,80 @@ class SpeciesBeyondTroutTests(unittest.TestCase):
                           f"{code} is in the data with no entry in SPECIES_META")
             self.assertIn(f'"{code}"', index, f"{code} is missing from SPECIES_ORDER")
 
-    def test_no_warmwater_species_is_scored_on_a_trout_curve(self):
-        """conditions.js has no published band for these three, and says so.
+    # Every species the map carries, and the band it is scored on. Held here
+    # rather than parsed out of the JS so that a change to either side has to
+    # be made on both, deliberately.
+    EXPECTED_BANDS = {
+        "RNTR": (4, 12, 18, 24), "BKTR": (3, 11, 16, 21), "BNTR": (4, 12, 19, 25),
+        "TGTR": (3, 11, 17, 22), "CTTR": (3, 9, 16, 22), "WSCT": (2, 8, 15, 20),
+        "WALL": (2, 20, 24, 29), "NRPK": (1, 19, 21, 29), "ARGR": (1, 10, 17, 22),
+    }
 
-        Handing a walleye a rainbow's band is not an approximation: 22 C is
-        close to where a walleye grows best and near the top of a rainbow's
-        tolerance, so the same water would score prime and nearly lethal.
-        """
+    def bands(self):
+        """The BANDS literal from conditions.js, parsed."""
         source = (ROOT / "js" / "conditions.js").read_text(encoding="utf-8")
-        self.assertIn("var UNBANDED = { WALL: 1, NRPK: 1, ARGR: 1 };", source)
-        bands = source[source.index("var BANDS = {"):source.index("var UNBANDED")]
+        start = source.index("var BANDS = {")
+        block = source[start:source.index("var FALLBACK_BAND", start)]
+        out = {}
+        for code, lo, opt_lo, opt_hi, hi in re.findall(
+                r"(\w{4}):\s*\{\s*lo:\s*(-?\d+),\s*optLo:\s*(-?\d+),"
+                r"\s*optHi:\s*(-?\d+),\s*hi:\s*(-?\d+)", block):
+            out[code] = (int(lo), int(opt_lo), int(opt_hi), int(hi))
+        return out
+
+    def test_every_species_on_the_map_has_a_band(self):
+        """A species with no band falls back to the rainbow's, which is wrong.
+
+        Walleye, pike and grayling were carried unbanded for a while precisely
+        to avoid that: 22 C is near the top of a rainbow's tolerance and close
+        to where a walleye grows best, so one curve cannot serve both. They are
+        banded now, from the same USFWS HSI series the salmonids rest on.
+        """
+        bands = self.bands()
+        self.assertEqual(bands, self.EXPECTED_BANDS,
+                         "conditions.js BANDS changed; check evidence.html agrees")
+        codes = set()
+        for path in DATA_DIR.glob("lakes_*.json"):
+            for lake in json.loads(path.read_text(encoding="utf-8")):
+                codes.update(s["species"] for s in lake["stockings"])
+        for code in sorted(codes):
+            self.assertIn(code, bands, f"{code} is stocked but has no thermal band")
+
+    def test_no_warmwater_species_was_given_a_salmonid_curve(self):
+        """The point of banding them separately, asserted rather than trusted."""
+        bands = self.bands()
+        salmonid = {c: bands[c] for c in ("RNTR", "BKTR", "BNTR", "TGTR", "CTTR", "WSCT")}
         for code in ("WALL", "NRPK", "ARGR"):
-            self.assertNotIn(f"{code}:", bands,
-                             f"{code} was given a band; it needs a cited source first")
+            self.assertNotIn(bands[code], salmonid.values(),
+                             f"{code}'s band is a copy of a trout's")
+        # Overlap at the edges is real — pike's optimum starts at 19 C, exactly
+        # where a brown trout's ends. What must hold is that both warmwater fish
+        # are still in their best band above the temperature at which every
+        # salmonid has left its own, which is the whole reason they are banded
+        # apart. And that grayling, the coldwater one, peaks below a walleye.
+        warm_top = min(bands["WALL"][2], bands["NRPK"][2])
+        self.assertGreater(warm_top, max(b[2] for b in salmonid.values()),
+                           "a warmwater optimum ends no higher than a trout's")
+        self.assertLess(bands["ARGR"][2], bands["WALL"][1],
+                        "grayling's optimum reaches into a walleye's")
+
+    def test_the_fact_sheet_prints_the_same_numbers(self):
+        """evidence.html once pointed at a band table that did not exist.
+
+        It said walleye and pike had no band "in the table above" when the page
+        had never printed one. Now it does, and this fails if the two drift.
+        """
+        page = (ROOT / "evidence.html").read_text(encoding="utf-8")
+        table = re.search(r'<table class="bands">(.*?)</table>', page, re.S)
+        self.assertIsNotNone(table, "the fact sheet has no band table")
+        rows = re.findall(
+            r'<tr data-band="(\w{4})">\s*<td>[^<]*</td>\s*<td>(-?\d+)\*?</td>\s*'
+            r'<td>(-?\d+)&ndash;(-?\d+)</td>\s*<td>(-?\d+)</td>',
+            table.group(1))
+        self.assertTrue(rows, "the band table rows did not parse")
+        printed = {c: (int(lo), int(a), int(b), int(hi)) for c, lo, a, b, hi in rows}
+        self.assertEqual(printed, self.bands(),
+                         "the fact sheet and conditions.js disagree about a band")
 
 
 class ReportedSpeciesTests(unittest.TestCase):

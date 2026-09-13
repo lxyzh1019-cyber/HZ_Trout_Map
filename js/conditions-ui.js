@@ -421,6 +421,150 @@
   // RENDER
   // ============================================================
 
+  /* WMO weather codes, in the words a person would use. Open-Meteo has sent
+   * this on every request since the file was written and nothing has ever read
+   * it — the panel could tell you the fish were feeding and not that it was
+   * snowing. Grouped rather than enumerated: the difference between "slight"
+   * and "moderate" drizzle is not a difference you pack differently for. */
+  function skyText(code) {
+    var c = Number(code);
+    if (!isFinite(c)) return null;
+    if (c === 0) return "clear";
+    if (c <= 2) return "partly cloudy";
+    if (c === 3) return "overcast";
+    if (c <= 49) return "fog";
+    if (c <= 59) return "drizzle";
+    if (c <= 69) return "rain";
+    if (c <= 79) return "snow";
+    if (c <= 82) return "showers";
+    if (c <= 86) return "snow showers";
+    return "thunderstorms";
+  }
+
+  /* The weather itself, before any judgement about it.
+   *
+   * The panel used to open on a score. That asks you to trust a verdict before
+   * showing you what it is a verdict about — and the raw readings were only
+   * reachable by reading the factor rows underneath, which exist to explain the
+   * score rather than to report the day. Observation first, then judgement. */
+  function weatherNowHtml(wx, when) {
+    var w = wx.data ? Weather.at(wx.data, when) : null;
+    if (!w) {
+      return '<div class="cx-weather cx-weather-none">'
+        + 'No forecast in hand for this lake yet.</div>';
+    }
+    var bits = [];
+    var num = function (v) { return typeof v === "number" && isFinite(v) ? v : null; };
+
+    var t = num(w.airTempC);
+    var sky = skyText(w.weatherCode);
+    if (t !== null) {
+      bits.push('<span class="cx-wx-air">' + Math.round(t) + "\u00b0C</span>"
+        + (sky ? '<span class="cx-wx-sky">' + esc(sky) + "</span>" : ""));
+    } else if (sky) {
+      bits.push('<span class="cx-wx-sky">' + esc(sky) + "</span>");
+    }
+
+    var cloud = num(w.cloudCoverPct);
+    if (cloud !== null) bits.push("cloud " + Math.round(cloud) + "%");
+
+    var wind = num(w.windKph);
+    if (wind !== null) {
+      var g = num(w.gustKph);
+      bits.push("wind " + Math.round(wind) + " km/h"
+        + (g !== null && g >= wind + 8 ? ", gusting " + Math.round(g) : ""));
+    }
+
+    var rain = num(w.precipMm);
+    if (rain !== null && rain > 0) bits.push(rain.toFixed(1) + " mm");
+
+    /* Kilopascals, as Environment Canada publishes them. The trend is what the
+     * score reads; the level is what you can check against your own barometer. */
+    var hPa = num(w.pressureMslHpa), d3 = num(w.dP3h);
+    if (hPa !== null) {
+      bits.push((hPa / 10).toFixed(1) + " kPa"
+        + (d3 === null ? "" : " " + (d3 > 0 ? "\u2197" : d3 < 0 ? "\u2198" : "\u2192")));
+    }
+
+    return '<div class="cx-weather">' + bits.join('<span class="cx-wx-sep">\u00b7</span>') + "</div>";
+  }
+
+  /* Whether to go, in one line, before the detail of when.
+   *
+   * The band and the number already existed; the only way to reach them was to
+   * read the tallest bar in the strip. */
+  function verdictHtml(now) {
+    return '<div class="cx-verdict cx-band-' + esc(String(now.band).toLowerCase()) + '">'
+      + '<span class="cx-verdict-band">' + esc(now.band) + "</span>"
+      + '<span class="cx-verdict-n">' + Math.round(now.score * 100) + "</span>"
+      + '<span class="cx-verdict-of">right now</span>'
+      + '<span class="cx-conf" title="How much of the score rests on a forecast '
+      + 'rather than on the sun and moon alone.">' + esc(now.confidence) + "</span>"
+      + "</div>";
+  }
+
+  /* The fishing calendar, at the foot of the panel and nowhere near the score.
+   *
+   * Majors are the moon overhead or underfoot and run two hours; minors are
+   * moonrise and moonset and run one. That is the solunar convention and this
+   * reports it faithfully. What it does NOT do is rank anything by it: the moon
+   * is worth about five per cent here, clamped, and evidence.html?selfcheck=1
+   * asserts it cannot lift a midday hour above a dusk one. Reference, beside
+   * the score, never as it. */
+  function periodLine(p) {
+    return '<span class="cx-per ' + esc(p.kind) + '">'
+      + "<b>" + (p.kind === "major" ? "Major" : "Minor") + "</b> "
+      + esc(hhmm(p.start)) + "\u2013" + esc(hhmm(p.end))
+      + '<i>' + esc(p.label) + "</i></span>";
+  }
+
+  var MOON_GLYPHS = ["\u25cf", "\u25d2", "\u25d1", "\u25d1",
+                     "\u25cb", "\u25d0", "\u25d0", "\u25d3"];
+  function moonGlyph(phase) {
+    return MOON_GLYPHS[Math.round(phase * 8) % 8];
+  }
+
+  function solunarHtml(place) {
+    var today = startOfDay(new Date());
+    var head = '<div class="cx-cal-head">'
+      + '<span class="cx-cal-title" title="Solunar periods: the moon overhead or '
+      + 'underfoot (major, two hours) and rising or setting (minor, one hour). '
+      + 'Shown so you can see where they fall. They do not drive the score — the '
+      + 'moon is worth about five per cent here and cannot turn a poor hour into '
+      + 'a good one.">Fishing calendar</span>'
+      + '<span class="cx-cal-note">reference only</span></div>';
+
+    // Follows the horizon above it, so the panel is talking about one span.
+    if (state.conditions.horizon === "week") {
+      var rows = "";
+      for (var d = 0; d < 7; d++) {
+        var day = new Date(today.getTime() + d * 86400000);
+        var a = astroFor(place, day);
+        var per = (a.periods || []).map(periodLine).join("");
+        rows += '<div class="cx-cal-row">'
+          + '<span class="cx-cal-day">' + esc(lakeDayName(day, d)) + " "
+          + lakeDayNumber(day) + "</span>"
+          + '<span class="cx-cal-moon" title="' + esc(a.moon ? a.moon.name : "") + '">'
+          + moonGlyph(a.moon ? a.moon.phase : 0) + "</span>"
+          + '<span class="cx-cal-pers">' + (per || '<span class="cx-cal-none">none</span>')
+          + "</span></div>";
+      }
+      return '<div class="cx-cal">' + head + rows + "</div>";
+    }
+
+    var a = astroFor(place, today);
+    var per = (a.periods || []).map(periodLine).join("");
+    return '<div class="cx-cal">' + head
+      + '<div class="cx-cal-row">'
+      + '<span class="cx-cal-day">Today</span>'
+      + '<span class="cx-cal-moon">' + moonGlyph(a.moon ? a.moon.phase : 0) + "</span>"
+      + '<span class="cx-cal-pers">' + esc(a.moon ? a.moon.name : "")
+      + ", " + Math.round((a.moon ? a.moon.illumination : 0) * 100) + "% lit</span>"
+      + "</div>"
+      + '<div class="cx-cal-today">' + (per || '<span class="cx-cal-none">no lunar period today</span>')
+      + "</div></div>";
+  }
+
   function render() {
     var host = document.getElementById("conditions-panel");
     if (!host || !state.conditions.open) return;
@@ -451,28 +595,39 @@
         + waterInputHtml(place, water);
     }
 
+    /* Weather, then whether to go, then when, then why, then the calendar.
+     *
+     * The panel used to lead with the score and put the horizon chips above
+     * everything, which read as: trust this number, and here is a control. The
+     * order below is observation, judgement, detail, reference — and the
+     * weather line is the first time this app has ever shown an air
+     * temperature, though it has been fetching one all along. */
     host.innerHTML =
       '<div class="cx-head">'
       + '<div class="cx-title">Conditions<span class="cx-place">' + esc(place.name) + '</span></div>'
       + '<button class="cx-close" type="button" aria-label="Close conditions">×</button>'
       + '</div>'
+      + weatherNowHtml(wx, new Date())
+      // A shut lake gets no verdict: the closed block below says why.
+      + (closed ? "" : verdictHtml(now))
       + '<div class="cx-row">'
       + '<div class="chips cx-horizon">'
       + '<button class="chip' + (state.conditions.horizon === "now" ? " active" : "") + '" data-horizon="now">Next 6 h</button>'
       + '<button class="chip' + (state.conditions.horizon === "week" ? " active" : "") + '" data-horizon="week">7 days</button>'
       + '</div>'
-      + '<span class="cx-conf">' + esc(now.confidence) + '</span>'
       + '</div>'
       + '<div class="cx-src-row">' + source
       + '<span class="cx-tz">' + (tzOffsetSec === null
           ? "times on this device's clock"
           : "times at the lake" + (wx.data.timezone ? " (" + esc(wx.data.timezone) + ")" : ""))
       + '</span></div>'
+      + (closed ? "" : '<div class="cx-secheading">Fish activity forecast</div>')
       + body
       + (now.advisories.length
           ? '<div class="cx-advisory">' + now.advisories.map(esc).join("<br>") + "</div>" : "")
       + '<div class="cx-foot"><a href="evidence.html' + esc(location.search) + '" target="_blank" rel="noopener">'
-      + 'What this score is built on ↗</a></div>';
+      + 'What this score is built on ↗</a></div>'
+      + solunarHtml(place);
 
     host.querySelector(".cx-close").addEventListener("click", function () { toggle(false); });
 

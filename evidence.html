@@ -52,6 +52,16 @@
   ul { padding-left: 20px; }
   li { margin: 5px 0; }
   .scroller { overflow-x: auto; }
+  table.bands { border-collapse: collapse; width: 100%; font-size: 13.5px; margin: 10px 0; }
+  table.bands th, table.bands td { padding: 5px 10px 5px 0; text-align: left;
+    border-bottom: 1px solid var(--panel-edge); }
+  table.bands th { font-size: 11.5px; text-transform: uppercase; letter-spacing: .04em;
+    color: var(--ink-dim); }
+  table.bands td:nth-child(2), table.bands td:nth-child(3), table.bands td:nth-child(4) {
+    font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table.bands td:nth-child(3) { color: var(--accent); font-weight: 600; }
+  table.bands td:last-child { color: var(--ink-dim); font-size: 12.5px; }
+  .bandnote { font-size: 12.5px; color: var(--ink-dim); }
   #selfcheck { margin-top: 40px; }
   #selfcheck table { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; }
   .ok { color: var(--strong); font-weight: 700; }
@@ -156,20 +166,43 @@ the feeding evidence is about is the mean wind that puts a ripple on the surface
 and that is already scored. Adding gusts on top would count the same weather twice,
 on a hunch.</p>
 
-<h2>Walleye, pike and grayling have no band here</h2>
-<p>Alberta stocks all three, and this map now carries them. None of them has a
-thermal band in the table above, and that is a refusal rather than an omission.</p>
-<p>Every band above is a published preference for a salmonid. Walleye and pike are
-warmwater fish whose optima sit well above any of them; grayling is colder than all
-of them. Lending a walleye a rainbow's curve would not be an approximation &mdash; at
-22&nbsp;&deg;C a rainbow is near the top of its tolerance and a walleye is close to
-where it grows best, so the same water would score nearly lethal and prime
-depending only on which fish you asked about.</p>
-<p>So the water factor drops out for a lake that holds only these three, the
-remaining factors are renormalised the way they already are whenever anything is
-missing, and the panel says the water is not being scored. A lake that holds both
-walleye and rainbow still scores on the rainbow. Filling these in means finding the
-same quality of source the salmonid bands rest on, and citing it here.</p>
+<h2>The thermal bands, in full</h2>
+<p>Water temperature carries the second-largest weight in the score, and until now
+this page described where the numbers come from without ever printing them. Here
+they are. <strong>A band is about feeding and growth, not survival</strong> &mdash; the
+outer columns are where feeding effectively stops, not where a fish dies.</p>
+<div class="scroller">
+<table class="bands">
+  <thead><tr><th>Species</th><th>Feeding stops below</th><th>Best</th><th>Feeding stops above</th><th>Source</th></tr></thead>
+  <tbody>
+  <tr data-band="RNTR"><td>Rainbow Trout</td><td>4</td><td>12&ndash;18</td><td>24</td><td>Raleigh et al., HSI series</td></tr>
+  <tr data-band="BKTR"><td>Brook Trout</td><td>3</td><td>11&ndash;16</td><td>21</td><td>Raleigh et al., HSI series</td></tr>
+  <tr data-band="BNTR"><td>Brown Trout</td><td>4</td><td>12&ndash;19</td><td>25</td><td>Raleigh et al., HSI series</td></tr>
+  <tr data-band="TGTR"><td>Tiger Trout</td><td>3</td><td>11&ndash;17</td><td>22</td><td><em>Interpolated between its parents &mdash; an inference, not a source</em></td></tr>
+  <tr data-band="CTTR"><td>Cutthroat Trout</td><td>3</td><td>9&ndash;16</td><td>22</td><td>Bear et al. 2007</td></tr>
+  <tr data-band="WSCT"><td>Westslope Cutthroat</td><td>2</td><td>8&ndash;15</td><td>20</td><td>Bear et al. 2007</td></tr>
+  <tr data-band="WALL"><td>Walleye</td><td>2*</td><td>20&ndash;24</td><td>29</td><td>McMahon, Terrell &amp; Nelson 1984, HSI series</td></tr>
+  <tr data-band="NRPK"><td>Northern Pike</td><td>1*</td><td>19&ndash;21</td><td>29</td><td>Inskip 1982, HSI series</td></tr>
+  <tr data-band="ARGR"><td>Arctic Grayling</td><td>1*</td><td>10&ndash;17</td><td>22</td><td>Thermal performance work, Trans. Am. Fish. Soc. 153(1) 2024</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="bandnote">* <strong>The cold bound on these three is an inference, not a quoted
+figure.</strong> The published work bounds <em>growth</em>, and all three feed under the
+ice in Alberta &mdash; a pike taken through a hole in February has not stopped feeding.
+So the cold end is set where feeding plausibly ceases rather than where growth does,
+which is the softer claim and the one this band is about.</p>
+<p>Walleye, pike and grayling went deliberately unbanded when they first came onto
+this map, because lending any of them a trout curve would not have been an
+approximation. At 22&nbsp;&deg;C a rainbow is near the top of its tolerance and a
+walleye is close to where it grows best: the same water reads nearly lethal or prime
+depending only on which fish you ask about. Scoring nothing was better than scoring
+it backwards. They are banded now from the same U.S. Fish and Wildlife Habitat
+Suitability Index series the salmonid rows already rest on, so this is the existing
+kind of evidence extended rather than a new kind admitted.</p>
+<p>A lake holding several species is scored on whichever is happiest, and the panel
+names it &mdash; averaging would report "mediocre for everything" on a day when one
+species is squarely on.</p>
 
 <h2>The moon, and why a major can land at three in the afternoon</h2>
 <p>Solunar tables mark <strong>major periods</strong> (about two hours) centred on the
@@ -326,6 +359,15 @@ reach rather than the surface they are avoiding, and the water factor drops to
       photopic, mesopic and scotopic feeding in brown trout and Arctic charr.</li>
   <li>Rainbow trout thermal performance literature; Raleigh et al. habitat suitability
       index series; Bear et al. (2007) for cutthroat thermal limits.</li>
+  <li>McMahon, T. E., Terrell, J. W. &amp; Nelson, P. C. (1984). <em>Habitat suitability
+      information: walleye.</em> U.S. Fish and Wildlife Service, FWS/OBS-82/10.56 &mdash;
+      optimum temperatures for growth of adults, 20 to 24 &deg;C.</li>
+  <li>Inskip, P. D. (1982). <em>Habitat suitability index models: northern pike.</em>
+      U.S. Fish and Wildlife Service, FWS/OBS-82/10.17 &mdash; growth highest between
+      19 &deg;C by biomass and 21 &deg;C by length; upper lethal 29.4 &deg;C.</li>
+  <li>Arctic grayling juvenile thermal performance, <em>Transactions of the American
+      Fisheries Society</em> 153(1):3 (2024) &mdash; growth rising to 18 &deg;C, survival
+      reduced beyond it and none above 22 &deg;C.</li>
   <li>Mohseni, Stefan &amp; Erickson (1998), for the S-shaped relation between air
       and water temperature &mdash; it saturates at both ends, which a straight line
       does not. A linear fit puts an Alberta lake at 26 &deg;C in a hot week, which

@@ -72,26 +72,30 @@
     TGTR: { lo: 3, optLo: 11, optHi: 17, hi: 22 },
     CTTR: { lo: 3, optLo: 9,  optHi: 16, hi: 22 },
     WSCT: { lo: 2, optLo: 8,  optHi: 15, hi: 20 },
-  };
 
-  /* Walleye, northern pike and arctic grayling are now on this map, and none
-   * of them has a band here.
-   *
-   * That is deliberate, not an oversight. Every band above is a published
-   * thermal preference for a salmonid, cited on evidence.html. Walleye and pike
-   * are warmwater fish whose optima sit well above any of these, and grayling
-   * is colder than all of them. Handing any of the three a trout curve would
-   * not be an approximation — it would score a 22 °C walleye lake as nearly
-   * lethal when 22 °C is close to where a walleye does its best growing.
-   *
-   * So they are named here as known-unbanded. The water factor drops out for a
-   * lake that holds only these, the remaining factors are renormalised the way
-   * they already are for any missing factor, and the panel says the water is
-   * not being scored. A mixed lake still scores on the salmonid it also holds.
-   *
-   * Filling these in means finding the same quality of source the salmonid
-   * bands rest on and citing it on the evidence page. Until then, silence. */
-  var UNBANDED = { WALL: 1, NRPK: 1, ARGR: 1 };
+    /* The three warmwater and coldwater species that are not salmonids.
+     *
+     * These went unbanded when walleye, pike and grayling first came onto the
+     * map, because handing any of them a trout curve would not have been an
+     * approximation: at 22 °C a rainbow is near the top of its tolerance and a
+     * walleye is close to where it grows best, so the same water would have
+     * read nearly lethal and prime depending only on which fish you asked
+     * about. Better to score nothing than to score it backwards.
+     *
+     * The numbers come from the same USFWS Habitat Suitability Index series the
+     * salmonid bands above rest on, so this is the existing kind of evidence
+     * extended rather than a new kind admitted. Cited on evidence.html.
+     *
+     * The COLD bound on all three is an inference, not a quoted figure, and is
+     * marked with an asterisk on that page. The published work bounds growth,
+     * and all three of these feed under the ice in Alberta — a pike taken
+     * through a hole in February is not a pike that has stopped feeding. So
+     * `lo` is set where feeding plausibly ceases rather than where growth does,
+     * which is the softer claim and the one this band is about. */
+    WALL: { lo: 2, optLo: 20, optHi: 24, hi: 29 },
+    NRPK: { lo: 1, optLo: 19, optHi: 21, hi: 29 },
+    ARGR: { lo: 1, optLo: 10, optHi: 17, hi: 22 },
+  };
   var FALLBACK_BAND = BANDS.RNTR;
 
   // ============================================================
@@ -143,15 +147,12 @@
    * the opposite of useful. */
   function waterScore(tempC, speciesCodes) {
     var codes = (speciesCodes && speciesCodes.length) ? speciesCodes : ["RNTR"];
-    var best = null, bestCode = null, skipped = 0;
+    var best = null, bestCode = null;
     codes.forEach(function (c) {
-      if (UNBANDED[c]) { skipped++; return; }
       var s = waterScoreFor(tempC, BANDS[c] || FALLBACK_BAND);
       if (s !== null && (best === null || s > best)) { best = s; bestCode = c; }
     });
-    // Every species here is one we have no published band for. Score nothing.
-    return { score: best, species: bestCode,
-             unbanded: best === null && skipped > 0 };
+    return { score: best, species: bestCode };
   }
 
   /* Pressure is scored on its trend, never its level: Alberta lakes sit between
@@ -439,19 +440,7 @@
     var waterTier = num(water && water.tempC) === null ? null
       : water.source === "measured" ? "strong" : "moderate";
 
-    /* Nothing downstream may quietly reach for a trout band on a lake that
-     * holds no trout. Stratification is decided against a band, and the depth
-     * advice it produces is about where THIS species sits in the water column,
-     * so with no band there is no advice either. */
-    if (w.unbanded) {
-      waterTier = null;
-      advisories.push("Water temperature is not scored here: this map has no "
-        + "published thermal band for walleye, pike or grayling, and a trout "
-        + "curve would be wrong rather than approximate. The other factors "
-        + "carry the score.");
-    }
-
-    var strat = w.unbanded ? { advisory: null } : stratification({
+    var strat = stratification({
       surfaceC: water ? water.tempC : null,
       band: species && species.length ? (BANDS[w.species] || FALLBACK_BAND) : FALLBACK_BAND,
       month: o.when ? o.when.getMonth() + 1 : null,
@@ -466,7 +455,7 @@
       if (strat.stratified) {
         var band = BANDS[w.species] || FALLBACK_BAND;
         w = { score: waterScoreFor(Math.min(water.tempC, band.optHi), band),
-              species: w.species, unbanded: w.unbanded };
+              species: w.species };
       }
     }
     if (water && water.likelyIce) {
@@ -479,8 +468,7 @@
       species: w.species,
       source: water ? water.source : null,
       sigmaC: num(water && water.sigmaC),
-      note: w.unbanded ? "no band published for these species"
-        : num(water && water.tempC) === null ? null
+      note: num(water && water.tempC) === null ? null
         : (water.source === "measured"
             ? water.tempC.toFixed(1) + "°C measured"
             : "~" + Math.round(water.tempC) + "°C ±" + Math.round(num(water.sigmaC) || 2) + " modeled"),

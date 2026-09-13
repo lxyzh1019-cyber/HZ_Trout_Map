@@ -172,11 +172,10 @@
         guide names carry the same pike-walleye-perch triplet
     M100 limits say whose rule they are — written for this lake, or the zone's
         default, or the province's — in colour and in words
-    M101 a month at a time for one lake: the best half-hour of each day, the
-         moon's phase, first and last light, and the solunar periods shown as
-         reference beside the score and never as the score
-    M102 the calendar fades past the seventh day rather than looking as certain
-         as tomorrow, because past there it is sun and moon alone
+    M101 the solunar periods, with their clock times, at the foot of the
+         conditions panel: reference beside the score and never the score
+    M102 the panel reads weather, then whether to go, then the activity
+         forecast, then why, then the calendar — observation before judgement
 -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2b2e2a">
@@ -429,64 +428,6 @@
   .chart-body { flex: 1; padding: 10px 14px 12px; min-height: 0; position: relative; }
   .chart-body canvas { max-height: 100%; }
 
-  /* ---------- Calendar view ---------- */
-  /* A month for one lake: which day in June, rather than whether to go now. */
-  #calendar-view { flex: 1; overflow: auto; display: none; background: var(--bg); padding: 12px 14px 20px; }
-  #map-wrap.calendar-mode #map,
-  #map-wrap.calendar-mode #chart-toggle,
-  #map-wrap.calendar-mode .map-btns { display: none; }
-  #map-wrap.calendar-mode #calendar-view { display: block; }
-  .cal-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-  .cal-bar .btn { flex: 0 0 auto; min-width: 34px; }
-  .cal-title { margin-right: auto; }
-  .cal-title { font-size: 15px; font-weight: 600; color: var(--ink); }
-  .cal-place { color: var(--ink-dim); font-weight: 400; font-size: 12px; margin-left: 8px; }
-  .cal-dow, .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-  .cal-dow { margin-bottom: 4px; }
-  .cal-dow span { font-size: 9.5px; text-transform: uppercase; letter-spacing: .05em;
-    color: var(--ink-dim); text-align: center; }
-  .cal-blank { min-height: 54px; }
-  .cal-day {
-    position: relative; min-height: 54px; padding: 3px 4px; cursor: pointer;
-    display: flex; flex-direction: column; align-items: flex-start; gap: 1px;
-    background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 3px;
-    color: var(--ink); font: inherit; text-align: left; overflow: hidden;
-  }
-  /* The day's colour is the score, laid on thin so the numbers stay readable. */
-  .cal-day[style*="--cal-tint"]::before {
-    content: ""; position: absolute; inset: 0; background: var(--cal-tint); opacity: .30;
-  }
-  .cal-day > * { position: relative; }
-  .cal-day:hover { border-color: var(--accent); }
-  .cal-day.today { border-color: var(--accent); }
-  .cal-day.picked { outline: 2px solid var(--accent); outline-offset: -2px; }
-  /* Beyond the forecast, and behind us. Both are drawn, neither pretends. */
-  .cal-day.far::before { opacity: .13; }
-  .cal-day.far .cal-score { opacity: .65; }
-  .cal-day.past { opacity: .45; }
-  .cal-n { font-size: 11px; font-weight: 600; }
-  .cal-moon { position: absolute; top: 2px; right: 4px; font-size: 10px; color: var(--ink-dim); }
-  .cal-score { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; }
-  .cal-score.cal-none { color: var(--ink-dim); font-weight: 400; }
-  .cal-sun { font-size: 8.5px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
-  .cal-detail { margin-top: 12px; padding: 9px 11px; background: var(--panel-2);
-    border-left: 3px solid var(--accent); border-radius: 3px; font-size: 12px; }
-  .cal-dhead { font-weight: 600; margin-bottom: 5px; }
-  .cal-dbest { color: var(--ink-dim); font-weight: 400; font-size: 11px; margin-left: 8px; }
-  .cal-drow { display: flex; gap: 8px; margin: 3px 0; line-height: 1.5; }
-  .cal-dk { flex: 0 0 58px; color: var(--ink-dim); }
-  .cal-periods { display: flex; flex-wrap: wrap; gap: 6px; }
-  .cal-period { font-size: 11px; padding: 1px 6px; border-radius: 2px;
-    background: var(--panel); border: 1px solid var(--panel-edge); }
-  .cal-period.major { border-left: 3px solid var(--accent); }
-  .cal-period.minor { border-left: 3px solid var(--ink-dim); }
-  .cal-period i { color: var(--ink-dim); font-size: 10px; margin-left: 5px; }
-  .cal-foot { margin-top: 10px; font-size: 10.5px; color: var(--ink-dim); line-height: 1.5; }
-  @media (max-width: 560px) {
-    .cal-sun { display: none; }
-    .cal-day { min-height: 44px; }
-  }
-
   /* ---------- List view ---------- */
   #list-view { flex: 1; overflow: auto; display: none; background: var(--bg); }
   #map-wrap.list-mode #map, #map-wrap.list-mode #chart-toggle, #map-wrap.list-mode .map-btns { display: none; }
@@ -697,6 +638,55 @@
     display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
   .cx-tz { font-style: italic; }
   .cx-warn { color: var(--TGTR); }
+
+  /* ---- what the weather is, before what it is worth --------------------- */
+  /* The first thing in the panel, because a verdict you cannot see the inputs
+     to is a verdict you have to take on faith. */
+  .cx-weather { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px;
+    margin: 8px 0 6px; font-size: 11px; color: var(--ink-dim);
+    font-variant-numeric: tabular-nums; }
+  .cx-wx-air { color: var(--ink); font-size: 15px; font-weight: 600; margin-right: 4px; }
+  .cx-wx-sky { color: var(--ink); text-transform: capitalize; }
+  .cx-wx-sep { color: var(--panel-edge); margin: 0 1px; }
+  .cx-weather-none { font-style: italic; }
+
+  /* ---- whether to go -------------------------------------------------- */
+  .cx-verdict { display: flex; align-items: baseline; gap: 6px; margin: 0 0 8px;
+    padding: 6px 9px; background: var(--panel-2); border-left: 3px solid var(--ink-dim);
+    border-radius: 3px; }
+  .cx-verdict-band { font-size: 13px; font-weight: 700; color: var(--ink);
+    text-transform: uppercase; letter-spacing: .03em; }
+  .cx-verdict-n { font-size: 16px; font-weight: 700; color: var(--ink);
+    font-variant-numeric: tabular-nums; }
+  .cx-verdict-of { font-size: 10.5px; color: var(--ink-dim); margin-right: auto; }
+  /* The four bands the score reports, in the ramp's own top and bottom. */
+  .cx-verdict.cx-band-prime { border-left-color: #f2d183; }
+  .cx-verdict.cx-band-good  { border-left-color: var(--good); }
+  .cx-verdict.cx-band-fair  { border-left-color: var(--TGTR); }
+  .cx-verdict.cx-band-poor  { border-left-color: var(--BKTR); }
+
+  /* A heading over the strip or grid, so the score above it and the detail
+     below it are visibly two different claims. */
+  .cx-secheading { font-size: 9.5px; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--ink-dim); margin: 2px 0 5px; }
+
+  /* ---- the fishing calendar, at the foot and out of the way ------------- */
+  .cx-cal { margin-top: 9px; padding-top: 8px; border-top: 1px solid var(--panel-edge); }
+  .cx-cal-head { display: flex; align-items: baseline; gap: 6px; margin-bottom: 4px; }
+  .cx-cal-title { font-size: 9.5px; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--ink-dim); border-bottom: 1px dotted var(--panel-edge); cursor: help; }
+  .cx-cal-note { font-size: 9.5px; color: var(--ink-dim); font-style: italic; }
+  .cx-cal-row { display: flex; align-items: baseline; gap: 6px; margin: 2px 0;
+    font-size: 10px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+  .cx-cal-day { flex: 0 0 46px; color: var(--ink); }
+  .cx-cal-moon { flex: 0 0 12px; text-align: center; }
+  .cx-cal-pers { flex: 1; display: flex; flex-wrap: wrap; gap: 4px; }
+  .cx-cal-today { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 3px; }
+  .cx-cal-none { font-style: italic; }
+  .cx-per { font-size: 9.5px; padding: 0 4px; border-radius: 2px;
+    background: var(--panel-2); border-left: 2px solid var(--ink-dim); }
+  .cx-per.major { border-left-color: var(--accent); }
+  .cx-per i { color: var(--ink-dim); margin-left: 4px; font-size: 9px; }
 
   /* The six-hour strip. */
   .cx-strip { display: flex; gap: 2px; align-items: flex-end; height: 92px; }
@@ -1014,7 +1004,6 @@
         <button class="btn active" data-view="map">Map</button>
         <button class="btn" data-view="list">List</button>
         <button class="btn" data-view="zones">Zones</button>
-        <button class="btn" data-view="calendar">Calendar</button>
       </div>
     </div>
 
@@ -1059,8 +1048,6 @@
       <button type="button" id="update-reload">Reload</button>
     </div>
     <div id="zone-panel"></div>
-
-    <div id="calendar-view"></div>
 
     <div id="list-view">
       <div class="list-bar">
@@ -1115,7 +1102,6 @@
 <script src="js/weather.js"></script>
 <script src="js/conditions-ui.js"></script>
 <script src="js/lake-panel.js"></script>
-<script src="js/calendar.js"></script>
 <script>
 // ============================================================
 // CONFIG
@@ -3117,7 +3103,6 @@ function setView(view) {
   const wrap = document.getElementById("map-wrap");
   wrap.classList.toggle("list-mode", view === "list");
   wrap.classList.toggle("zone-mode", view === "zones");
-  wrap.classList.toggle("calendar-mode", view === "calendar");
   document.querySelectorAll("[data-view]").forEach(b => b.classList.toggle("active", b.dataset.view === view));
 
   if (view === "zones") {
@@ -3130,7 +3115,6 @@ function setView(view) {
   }
 
   if (view === "list") renderList();
-  else if (view === "calendar") FishingCalendar.open();
   else setTimeout(() => map.invalidateSize(), 60);
   updateLegend();
   writeUrl();
@@ -3408,7 +3392,7 @@ function readUrl() {
   if (p.has("sz")) state.sizes = new Set(p.get("sz").split(",").filter(c => SIZE_IDS.includes(c)));
   if (p.has("d")) state.maxDistanceKm = Math.max(0, Math.min(1000, Number(p.get("d")) || 1000));
   if (p.has("rc") && RECENCY_OPTIONS.some(o => o.id === p.get("rc"))) state.recency = p.get("rc");
-  if (p.has("v") && ["map", "list", "zones", "calendar"].includes(p.get("v"))) state.view = p.get("v");
+  if (p.has("v") && ["map", "list", "zones"].includes(p.get("v"))) state.view = p.get("v");
   if (p.has("cm") && COLOR_MODES.some(m => m.id === p.get("cm"))) state.colorMode = p.get("cm");
   if (p.has("c")) state.chartType = p.get("c");
   if (p.get("open") === "1") state.openNow = true;
