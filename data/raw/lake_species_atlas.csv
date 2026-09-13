@@ -1,0 +1,282 @@
+waterbody_id,species,kind,listing,agree,disagree,confirmed_on,additional,source_url
+3476,BNTR,sport,Community-listed,2,0,2021-08-20,yes,https://www.anglersatlas.com/place/137026/grotto-mountain-pond
+3476,RNTR,sport,Community-listed,7,0,2017-08-24,no,https://www.anglersatlas.com/place/137026/grotto-mountain-pond
+3479,RNTR,sport,Community-listed,2,0,2017-08-03,no,https://www.anglersatlas.com/place/137029/lambert-pond
+3482,BKTR,sport,Community-listed,1,0,2025-06-21,yes,https://www.anglersatlas.com/place/724129/mount-lorette-ponds
+3482,RNTR,sport,Community-listed,6,0,2018-08-28,no,https://www.anglersatlas.com/place/724129/mount-lorette-ponds
+3486,BKTR,sport,Community-listed,3,0,2016-08-09,yes,https://www.anglersatlas.com/place/130667/sibbald-meadows-pond
+3486,CTTR,sport,Listed with disagreement votes,1,1,2016-08-08,yes,https://www.anglersatlas.com/place/130667/sibbald-meadows-pond
+3486,RNTR,sport,Community-listed,7,0,2016-08-08,no,https://www.anglersatlas.com/place/130667/sibbald-meadows-pond
+3499,BKTR,sport,Listed with disagreement votes,3,2,2018-01-11,yes,https://www.anglersatlas.com/place/101834/chain-lakes-reservoir
+3499,BLTR,sport,Listed with disagreement votes,5,1,2018-03-07,yes,https://www.anglersatlas.com/place/101834/chain-lakes-reservoir
+3499,CTTR,sport,Community-listed,2,0,2025-03-06,no,https://www.anglersatlas.com/place/101834/chain-lakes-reservoir
+3499,GLTR,sport,Community-listed,1,0,2023-05-14,yes,https://www.anglersatlas.com/place/101834/chain-lakes-reservoir
+3499,MNWH,sport,Community-listed,3,0,2021-04-28,yes,https://www.anglersatlas.com/place/101834/chain-lakes-reservoir
+3499,RNTR,sport,Community-listed,46,0,2016-07-15,no,https://www.anglersatlas.com/place/101834/chain-lakes-reservoir
+3499,WHSC,rough,Listed with disagreement votes,7,1,2017-02-21,yes,https://www.anglersatlas.com/place/101834/chain-lakes-reservoir
+3515,BURB,sport,Community-listed,3,0,2017-06-13,yes,https://www.anglersatlas.com/place/101963/little-bow-reservoir
+3515,LKWH,sport,Community-listed,5,0,2016-07-29,yes,https://www.anglersatlas.com/place/101963/little-bow-reservoir
+3515,NRPK,sport,Community-listed,6,0,2016-07-29,yes,https://www.anglersatlas.com/place/101963/little-bow-reservoir
+3515,WALL,sport,Community-listed,5,0,2016-07-29,no,https://www.anglersatlas.com/place/101963/little-bow-reservoir
+3515,YLPR,sport,Community-listed,5,0,2016-07-29,yes,https://www.anglersatlas.com/place/101963/little-bow-reservoir
+3524,RNTR,sport,Community-listed,2,0,2018-05-09,no,https://www.anglersatlas.com/place/130054/michichi-reservoir
+3534,ARGR,sport,Listed with disagreement votes,3,2,2017-07-31,yes,https://www.anglersatlas.com/place/102052/spruce-coulee-reservoir
+3534,BKTR,sport,Community-listed,7,0,2017-07-31,no,https://www.anglersatlas.com/place/102052/spruce-coulee-reservoir
+3534,BNTR,sport,Listed with disagreement votes,1,1,2017-08-22,no,https://www.anglersatlas.com/place/102052/spruce-coulee-reservoir
+3534,WALL,sport,Community-listed,6,0,2017-07-31,yes,https://www.anglersatlas.com/place/102052/spruce-coulee-reservoir
+3537,BURB,sport,Community-listed,7,0,2016-07-29,yes,https://www.anglersatlas.com/place/102072/travers-reservoir
+3537,LKWH,sport,Community-listed,7,0,2016-07-29,yes,https://www.anglersatlas.com/place/102072/travers-reservoir
+3537,NRPK,sport,Community-listed,19,0,2016-07-29,yes,https://www.anglersatlas.com/place/102072/travers-reservoir
+3537,RNTR,sport,Community-listed,7,0,2016-11-02,yes,https://www.anglersatlas.com/place/102072/travers-reservoir
+3537,WALL,sport,Listed with disagreement votes,23,1,2016-07-29,no,https://www.anglersatlas.com/place/102072/travers-reservoir
+3537,YLPR,sport,Community-listed,6,0,2016-07-29,yes,https://www.anglersatlas.com/place/102072/travers-reservoir
+4011,BNTR,sport,Community-listed,9,0,2016-08-08,yes,https://www.anglersatlas.com/place/129635/beauvais-lake
+4011,RNTR,sport,Community-listed,12,0,2016-08-08,no,https://www.anglersatlas.com/place/129635/beauvais-lake
+4011,WHSC,rough,Community-listed,6,0,2017-08-15,yes,https://www.anglersatlas.com/place/129635/beauvais-lake
+4014,BKTR,sport,Listed with disagreement votes,2,2,2021-01-28,yes,https://www.anglersatlas.com/place/129637/beaver-lake
+4014,RNTR,sport,Community-listed,8,0,2016-08-08,no,https://www.anglersatlas.com/place/129637/beaver-lake
+4014,TGTR,sport,Community-listed,2,0,2024-08-18,no,https://www.anglersatlas.com/place/129637/beaver-lake
+4018,BLTR,sport,Listed with disagreement votes,4,1,2016-12-22,yes,https://www.anglersatlas.com/place/101807/beaver-mines-lake
+4018,BNTR,sport,Listed with disagreement votes,3,3,2016-12-18,yes,https://www.anglersatlas.com/place/101807/beaver-mines-lake
+4018,CTTR,sport,Listed with disagreement votes,3,2,2016-12-18,no,https://www.anglersatlas.com/place/101807/beaver-mines-lake
+4018,RNTR,sport,Community-listed,9,0,2016-12-16,no,https://www.anglersatlas.com/place/101807/beaver-mines-lake
+4027,NRPK,sport,Community-listed,8,0,2022-01-12,no,https://www.anglersatlas.com/place/101943/lac-bellevue
+4027,WALL,sport,Community-listed,11,0,2022-01-12,no,https://www.anglersatlas.com/place/101943/lac-bellevue
+4027,YLPR,sport,Community-listed,7,0,2023-01-16,yes,https://www.anglersatlas.com/place/101943/lac-bellevue
+4061,BKTR,sport,Community-listed,19,0,2016-08-08,no,https://www.anglersatlas.com/place/101813/birch-lake
+4061,BNTR,sport,Listed with disagreement votes,17,1,2016-08-08,no,https://www.anglersatlas.com/place/101813/birch-lake
+4061,RNTR,sport,Community-listed,18,0,2019-05-03,no,https://www.anglersatlas.com/place/101813/birch-lake
+4161,LKWH,sport,Community-listed,1,0,2022-01-15,yes,https://www.anglersatlas.com/place/723940/burnstick-lake
+4161,NRPK,sport,Community-listed,13,0,2016-09-01,yes,https://www.anglersatlas.com/place/723940/burnstick-lake
+4161,WALL,sport,Listed with disagreement votes,11,1,2016-09-01,no,https://www.anglersatlas.com/place/723940/burnstick-lake
+4161,YLPR,sport,Community-listed,15,0,2016-06-17,yes,https://www.anglersatlas.com/place/723940/burnstick-lake
+4252,BRST,rough,Community-listed,2,0,2025-04-25,yes,https://www.anglersatlas.com/place/101838/chatwin-lake
+4252,EMSH,rough,Community-listed,2,0,2025-04-25,yes,https://www.anglersatlas.com/place/101838/chatwin-lake
+4252,FHMN,rough,Community-listed,2,0,2025-04-25,yes,https://www.anglersatlas.com/place/101838/chatwin-lake
+4252,NSST,rough,Community-listed,2,0,2025-04-25,yes,https://www.anglersatlas.com/place/101838/chatwin-lake
+4252,RNTR,sport,Community-listed,3,0,2024-04-18,no,https://www.anglersatlas.com/place/101838/chatwin-lake
+4252,YLPR,sport,Community-listed,2,0,2025-04-25,yes,https://www.anglersatlas.com/place/101838/chatwin-lake
+4261,BKTR,sport,Listed with disagreement votes,6,1,2017-07-30,yes,https://www.anglersatlas.com/place/101840/chickakoo-lake
+4261,RNTR,sport,Community-listed,11,0,2016-08-15,no,https://www.anglersatlas.com/place/101840/chickakoo-lake
+4265,LKWH,sport,Community-listed,3,0,2018-12-10,yes,https://www.anglersatlas.com/place/102603/chin-lake
+4265,NRPK,sport,Community-listed,4,0,2018-12-10,yes,https://www.anglersatlas.com/place/102603/chin-lake
+4265,WALL,sport,Community-listed,4,0,2018-12-10,no,https://www.anglersatlas.com/place/102603/chin-lake
+4340,BNTR,sport,Listed with disagreement votes,4,2,2016-07-08,no,https://www.anglersatlas.com/place/101853/cow-lake
+4340,NRPK,sport,Community-listed,9,0,2017-01-18,yes,https://www.anglersatlas.com/place/101853/cow-lake
+4340,RNTR,sport,Listed with disagreement votes,10,2,2016-07-08,no,https://www.anglersatlas.com/place/101853/cow-lake
+4340,YLPR,sport,Community-listed,2,0,2018-01-15,yes,https://www.anglersatlas.com/place/101853/cow-lake
+4374,BNTR,sport,Community-listed,1,0,2021-12-31,yes,https://www.anglersatlas.com/place/101858/crowsnest-lake
+4374,CTTR,sport,Community-listed,3,0,2020-04-06,no,https://www.anglersatlas.com/place/101858/crowsnest-lake
+4374,LKTR,sport,Community-listed,3,0,2017-02-08,yes,https://www.anglersatlas.com/place/101858/crowsnest-lake
+4374,LKWH,sport,Listed with disagreement votes,1,1,2022-01-25,yes,https://www.anglersatlas.com/place/101858/crowsnest-lake
+4374,MNWH,sport,Community-listed,2,0,2022-01-25,yes,https://www.anglersatlas.com/place/101858/crowsnest-lake
+4374,RNTR,sport,Community-listed,4,0,2016-12-18,no,https://www.anglersatlas.com/place/101858/crowsnest-lake
+4446,RNTR,sport,Community-listed,8,0,2016-12-28,no,https://www.anglersatlas.com/place/154692/dillberry-lake
+4446,TGTR,sport,Community-listed,1,0,2022-10-24,no,https://www.anglersatlas.com/place/154692/dillberry-lake
+4446,YLPR,sport,Community-listed,2,0,2017-01-04,yes,https://www.anglersatlas.com/place/154692/dillberry-lake
+4458,BNTR,sport,Community-listed,5,0,2022-10-02,no,https://www.anglersatlas.com/place/101867/dolberg-lake
+4458,RNTR,sport,Community-listed,18,0,2016-08-05,no,https://www.anglersatlas.com/place/101867/dolberg-lake
+4458,TGTR,sport,Community-listed,9,0,2018-09-30,no,https://www.anglersatlas.com/place/101867/dolberg-lake
+4458,YLPR,sport,Listed with disagreement votes,4,3,2023-10-09,yes,https://www.anglersatlas.com/place/101867/dolberg-lake
+4495,CTTR,sport,Community-listed,4,0,2017-06-21,no,https://www.anglersatlas.com/place/129482/eagle-lake
+4505,BKTR,sport,Community-listed,2,0,2019-01-29,no,https://www.anglersatlas.com/place/101874/edith-lake
+4505,YLPR,sport,Community-listed,2,0,2016-11-21,yes,https://www.anglersatlas.com/place/101874/edith-lake
+4532,BKTR,sport,Community-listed,3,0,2016-07-15,yes,https://www.anglersatlas.com/place/726188/emerald-lake
+4532,LKCH,rough,Community-listed,1,0,2016-07-15,yes,https://www.anglersatlas.com/place/726188/emerald-lake
+4532,RNTR,sport,Listed with disagreement votes,1,1,2016-07-15,yes,https://www.anglersatlas.com/place/726188/emerald-lake
+4535,BRMN,rough,Community-listed,1,0,2023-03-02,yes,https://www.anglersatlas.com/place/726132/emerson-lakes
+4535,RNTR,sport,Community-listed,1,0,2023-03-02,no,https://www.anglersatlas.com/place/726132/emerson-lakes
+4539,RNTR,sport,Community-listed,2,0,2023-11-29,no,https://www.anglersatlas.com/place/726299/engstrom-lake
+4539,WHSC,rough,Community-listed,1,0,2023-11-29,yes,https://www.anglersatlas.com/place/726299/engstrom-lake
+4562,BKTR,sport,Community-listed,3,0,2024-05-09,yes,https://www.anglersatlas.com/place/101880/fairfax-lake
+4562,RNTR,sport,Community-listed,7,0,2016-07-14,no,https://www.anglersatlas.com/place/101880/fairfax-lake
+4571,LKWH,sport,Community-listed,3,0,2016-07-05,yes,https://www.anglersatlas.com/place/101883/fickle-lake
+4571,NRPK,sport,Community-listed,8,0,2016-07-05,yes,https://www.anglersatlas.com/place/101883/fickle-lake
+4571,WALL,sport,Community-listed,5,0,2016-07-05,no,https://www.anglersatlas.com/place/101883/fickle-lake
+4571,YLPR,sport,Community-listed,3,0,2016-07-05,yes,https://www.anglersatlas.com/place/101883/fickle-lake
+4635,BURB,sport,Community-listed,1,0,2022-01-29,yes,https://www.anglersatlas.com/place/101895/frog-lake
+4635,LKWH,sport,Community-listed,1,0,2022-01-29,yes,https://www.anglersatlas.com/place/101895/frog-lake
+4635,NRPK,sport,Community-listed,1,0,2022-01-29,yes,https://www.anglersatlas.com/place/101895/frog-lake
+4635,YLPR,sport,Community-listed,1,0,2022-01-29,yes,https://www.anglersatlas.com/place/101895/frog-lake
+4647,BKTR,sport,Community-listed,4,0,2016-12-17,yes,https://www.anglersatlas.com/place/129793/gap-lake
+4708,NRPK,sport,Listed with disagreement votes,8,1,2016-07-19,yes,https://www.anglersatlas.com/place/102574/goose-lake
+4708,YLPR,sport,Listed with disagreement votes,7,1,2016-07-19,yes,https://www.anglersatlas.com/place/102574/goose-lake
+4725,BLTR,sport,Community-listed,3,0,2017-01-09,yes,https://www.anglersatlas.com/place/101909/grande-cache-lake
+4725,BURB,sport,Community-listed,2,0,2021-01-21,yes,https://www.anglersatlas.com/place/101909/grande-cache-lake
+4725,RNTR,sport,Community-listed,4,0,2020-01-24,no,https://www.anglersatlas.com/place/101909/grande-cache-lake
+4794,RNTR,sport,Community-listed,14,0,2020-08-23,no,https://www.anglersatlas.com/place/101919/hasse-lake
+4794,TGTR,sport,Community-listed,9,0,2021-07-16,no,https://www.anglersatlas.com/place/101919/hasse-lake
+4978,BURB,sport,Community-listed,2,0,2017-06-16,yes,https://www.anglersatlas.com/place/101941/keho-lake
+4978,LKWH,sport,Community-listed,4,0,2017-06-15,yes,https://www.anglersatlas.com/place/101941/keho-lake
+4978,NRPK,sport,Community-listed,16,0,2016-08-09,yes,https://www.anglersatlas.com/place/101941/keho-lake
+4978,WALL,sport,Community-listed,11,0,2017-06-16,no,https://www.anglersatlas.com/place/101941/keho-lake
+5002,BKTR,sport,Community-listed,6,0,2016-07-21,no,https://www.anglersatlas.com/place/102106/kinky-lake
+5002,NRPK,sport,Listed with disagreement votes,2,1,2021-12-28,yes,https://www.anglersatlas.com/place/102106/kinky-lake
+5002,RNTR,sport,Community-listed,1,0,2016-07-21,yes,https://www.anglersatlas.com/place/102106/kinky-lake
+5029,CTTR,sport,Community-listed,4,0,2017-04-29,no,https://www.anglersatlas.com/place/129606/landslide-lake
+5093,BKTR,sport,Community-listed,4,0,2018-12-17,no,https://www.anglersatlas.com/place/136994/little-bear-lake
+5093,BURB,sport,Community-listed,2,0,2017-08-06,yes,https://www.anglersatlas.com/place/136994/little-bear-lake
+5093,RNTR,sport,Community-listed,2,0,2024-01-29,no,https://www.anglersatlas.com/place/136994/little-bear-lake
+5093,TGTR,sport,Community-listed,2,0,2019-01-02,no,https://www.anglersatlas.com/place/136994/little-bear-lake
+5179,BLTR,sport,Community-listed,11,0,2016-11-24,yes,https://www.anglersatlas.com/place/129746/lower-kananaskis-lake
+5179,CTTR,sport,Community-listed,8,0,2016-08-02,no,https://www.anglersatlas.com/place/129746/lower-kananaskis-lake
+5179,RNTR,sport,Community-listed,4,0,2016-11-24,yes,https://www.anglersatlas.com/place/129746/lower-kananaskis-lake
+5232,BKTR,sport,Community-listed,2,0,2016-12-03,no,https://www.anglersatlas.com/place/129878/marigold-lake
+5275,BURB,sport,Community-listed,2,0,2022-11-30,yes,https://www.anglersatlas.com/place/990893/mcgregor-lake
+5275,LKWH,sport,Community-listed,2,0,2023-08-07,yes,https://www.anglersatlas.com/place/990893/mcgregor-lake
+5275,NRPK,sport,Community-listed,5,0,2020-02-10,yes,https://www.anglersatlas.com/place/990893/mcgregor-lake
+5275,WALL,sport,Community-listed,5,0,2020-02-10,no,https://www.anglersatlas.com/place/990893/mcgregor-lake
+5324,BNTR,sport,Community-listed,5,0,2016-11-21,no,https://www.anglersatlas.com/place/101994/millers-lake
+5324,RNTR,sport,Community-listed,10,0,2016-11-21,no,https://www.anglersatlas.com/place/101994/millers-lake
+5324,TGTR,sport,Community-listed,3,0,2023-10-15,no,https://www.anglersatlas.com/place/101994/millers-lake
+5336,WALL,sport,Community-listed,2,0,2024-01-01,no,https://www.anglersatlas.com/place/130141/minnow-lake
+5336,YLPR,sport,Community-listed,4,0,2016-07-17,yes,https://www.anglersatlas.com/place/130141/minnow-lake
+5348,BNTR,sport,Listed with disagreement votes,4,1,2016-12-15,no,https://www.anglersatlas.com/place/101997/mitchell-lake
+5348,RNTR,sport,Community-listed,6,0,2017-01-07,no,https://www.anglersatlas.com/place/101997/mitchell-lake
+5348,TGTR,sport,Community-listed,5,0,2019-12-24,no,https://www.anglersatlas.com/place/101997/mitchell-lake
+5387,BNTR,sport,Community-listed,10,0,2016-08-05,no,https://www.anglersatlas.com/place/102000/muir-lake
+5387,RNTR,sport,Community-listed,10,0,2017-06-28,no,https://www.anglersatlas.com/place/102000/muir-lake
+5407,BKTR,sport,Community-listed,2,0,2016-07-08,yes,https://www.anglersatlas.com/place/130318/muskiki-lake
+5407,CTTR,sport,Community-listed,4,0,2016-07-08,no,https://www.anglersatlas.com/place/130318/muskiki-lake
+5407,RNTR,sport,Community-listed,1,0,2024-12-29,yes,https://www.anglersatlas.com/place/130318/muskiki-lake
+5434,BURB,sport,Community-listed,4,0,2017-01-06,yes,https://www.anglersatlas.com/place/137018/lake-newell
+5434,LKWH,sport,Listed with disagreement votes,5,1,2017-01-06,yes,https://www.anglersatlas.com/place/137018/lake-newell
+5434,MNWH,sport,Listed with disagreement votes,2,2,2018-03-13,yes,https://www.anglersatlas.com/place/137018/lake-newell
+5434,NRPK,sport,Community-listed,16,0,,yes,https://www.anglersatlas.com/place/137018/lake-newell
+5434,RNTR,sport,Community-listed,2,0,,yes,https://www.anglersatlas.com/place/137018/lake-newell
+5434,WALL,sport,Community-listed,9,0,2017-01-06,no,https://www.anglersatlas.com/place/137018/lake-newell
+5434,YLPR,sport,Community-listed,4,0,2017-01-06,yes,https://www.anglersatlas.com/place/137018/lake-newell
+5466,BNTR,sport,Listed with disagreement votes,19,2,2016-06-09,no,https://www.anglersatlas.com/place/102577/obed-lake
+5466,EMSH,rough,Community-listed,1,0,2025-05-12,yes,https://www.anglersatlas.com/place/102577/obed-lake
+5466,LKCH,rough,Community-listed,1,0,2024-12-12,yes,https://www.anglersatlas.com/place/102577/obed-lake
+5466,RNTR,sport,Listed with disagreement votes,2,1,2023-08-19,yes,https://www.anglersatlas.com/place/102577/obed-lake
+5466,WHSC,rough,Listed with disagreement votes,5,1,2016-07-14,yes,https://www.anglersatlas.com/place/102577/obed-lake
+5466,YLPR,sport,Community-listed,12,0,2016-07-14,yes,https://www.anglersatlas.com/place/102577/obed-lake
+5476,RNTR,sport,Community-listed,3,0,2016-11-20,no,https://www.anglersatlas.com/place/102008/ole-lake
+5538,RNTR,sport,Community-listed,8,0,2016-12-26,no,https://www.anglersatlas.com/place/102015/peanut-lake
+5555,BKTR,sport,Community-listed,10,0,2016-11-21,no,https://www.anglersatlas.com/place/130659/peppers-lake
+5555,RNTR,sport,Community-listed,4,0,2020-07-22,no,https://www.anglersatlas.com/place/130659/peppers-lake
+5565,RNTR,sport,Community-listed,5,0,2016-07-07,no,https://www.anglersatlas.com/place/102016/petite-lake
+5569,RNTR,sport,Community-listed,7,0,2016-11-29,no,https://www.anglersatlas.com/place/136982/phyllis-lake
+5569,WHSC,rough,Community-listed,2,0,2022-08-01,yes,https://www.anglersatlas.com/place/136982/phyllis-lake
+5569,YLPR,sport,Listed with disagreement votes,5,1,2016-11-29,yes,https://www.anglersatlas.com/place/136982/phyllis-lake
+5581,BURB,sport,Community-listed,4,0,2017-02-22,yes,https://www.anglersatlas.com/place/102022/pinehurst-lake
+5581,LKWH,sport,Community-listed,4,0,2017-02-22,yes,https://www.anglersatlas.com/place/102022/pinehurst-lake
+5581,NRPK,sport,Community-listed,11,0,2016-09-01,yes,https://www.anglersatlas.com/place/102022/pinehurst-lake
+5581,WALL,sport,Community-listed,9,0,2017-02-08,no,https://www.anglersatlas.com/place/102022/pinehurst-lake
+5581,YLPR,sport,Community-listed,4,0,2017-02-22,yes,https://www.anglersatlas.com/place/102022/pinehurst-lake
+5649,CTTR,sport,Community-listed,2,0,2017-07-21,no,https://www.anglersatlas.com/place/129665/rawson-lake
+5661,RNTR,sport,Listed with disagreement votes,7,1,2017-01-18,no,https://www.anglersatlas.com/place/102026/reesor-lake
+5661,TGTR,sport,Community-listed,5,0,2022-02-08,no,https://www.anglersatlas.com/place/102026/reesor-lake
+5661,WHSC,rough,Community-listed,4,0,2017-07-31,yes,https://www.anglersatlas.com/place/102026/reesor-lake
+5714,BKTR,sport,Community-listed,2,0,2016-07-16,no,https://www.anglersatlas.com/place/154073/running-lake
+5714,RNTR,sport,Community-listed,4,0,2016-07-16,no,https://www.anglersatlas.com/place/154073/running-lake
+5729,RNTR,sport,Community-listed,10,0,2017-06-23,no,https://www.anglersatlas.com/place/137030/salters-lake
+5729,TGTR,sport,Community-listed,2,0,2022-05-10,no,https://www.anglersatlas.com/place/137030/salters-lake
+5743,NRPK,sport,Community-listed,2,0,2022-01-20,yes,https://www.anglersatlas.com/place/129841/sandy-lake
+5753,RNTR,sport,Community-listed,2,0,2016-09-03,no,https://www.anglersatlas.com/place/102578/sauer-lake
+5766,RNTR,sport,Community-listed,9,0,2017-07-28,no,https://www.anglersatlas.com/place/129921/schuman-lake
+5766,TGTR,sport,Community-listed,4,0,2023-11-27,no,https://www.anglersatlas.com/place/129921/schuman-lake
+5790,BURB,sport,Community-listed,5,0,2020-05-26,yes,https://www.anglersatlas.com/place/102044/sherburne-lake
+5790,LKWH,sport,Community-listed,4,0,2020-05-26,yes,https://www.anglersatlas.com/place/102044/sherburne-lake
+5790,NRPK,sport,Community-listed,5,0,2020-05-26,yes,https://www.anglersatlas.com/place/102044/sherburne-lake
+5790,WALL,sport,Community-listed,6,0,2020-05-26,no,https://www.anglersatlas.com/place/102044/sherburne-lake
+5790,YLPR,sport,Community-listed,5,0,2020-05-26,yes,https://www.anglersatlas.com/place/102044/sherburne-lake
+5820,BURB,sport,Community-listed,5,0,2018-01-16,yes,https://www.anglersatlas.com/place/102046/skeleton-lake
+5820,LKWH,sport,Community-listed,6,0,2016-12-22,yes,https://www.anglersatlas.com/place/102046/skeleton-lake
+5820,NRPK,sport,Listed with disagreement votes,12,1,2016-11-25,yes,https://www.anglersatlas.com/place/102046/skeleton-lake
+5820,WALL,sport,Community-listed,9,0,2016-12-22,no,https://www.anglersatlas.com/place/102046/skeleton-lake
+5820,YLPR,sport,Community-listed,10,0,2016-12-22,yes,https://www.anglersatlas.com/place/102046/skeleton-lake
+5858,CTTR,sport,Community-listed,1,0,2016-08-17,no,https://www.anglersatlas.com/place/174451/sparrows-egg-lake
+5858,RNTR,sport,Community-listed,2,0,2016-08-17,no,https://www.anglersatlas.com/place/174451/sparrows-egg-lake
+5895,BNTR,sport,Community-listed,3,0,2022-05-10,no,https://www.anglersatlas.com/place/102057/star-lake
+5895,NRPK,sport,Listed with disagreement votes,2,1,2025-06-02,yes,https://www.anglersatlas.com/place/102057/star-lake
+5895,RNTR,sport,Listed with disagreement votes,15,1,2016-12-08,no,https://www.anglersatlas.com/place/102057/star-lake
+5895,TGTR,sport,Community-listed,2,0,2022-05-10,no,https://www.anglersatlas.com/place/102057/star-lake
+5895,YLPR,sport,Community-listed,17,0,2020-07-04,yes,https://www.anglersatlas.com/place/102057/star-lake
+5919,RNTR,sport,Community-listed,7,0,2016-07-17,no,https://www.anglersatlas.com/place/102060/strubel-lake
+5919,YLPR,sport,Listed with disagreement votes,5,1,2017-01-04,yes,https://www.anglersatlas.com/place/102060/strubel-lake
+5929,BKTR,sport,Community-listed,4,0,2020-03-24,no,https://www.anglersatlas.com/place/130278/sulphur-lake
+5929,RNTR,sport,Community-listed,4,0,2018-01-05,no,https://www.anglersatlas.com/place/130278/sulphur-lake
+5944,RNTR,sport,Listed with disagreement votes,11,2,2016-07-16,no,https://www.anglersatlas.com/place/130354/swan-lake
+5952,BURB,sport,Community-listed,16,0,2016-11-21,yes,https://www.anglersatlas.com/place/102064/sylvan-lake
+5952,LKWH,sport,Community-listed,20,0,2016-07-20,yes,https://www.anglersatlas.com/place/102064/sylvan-lake
+5952,NRPK,sport,Community-listed,30,0,2016-07-20,yes,https://www.anglersatlas.com/place/102064/sylvan-lake
+5952,WALL,sport,Community-listed,31,0,2016-07-20,no,https://www.anglersatlas.com/place/102064/sylvan-lake
+5952,WHSC,rough,Listed with disagreement votes,1,1,2016-09-08,yes,https://www.anglersatlas.com/place/102064/sylvan-lake
+5952,YLPR,sport,Community-listed,18,0,2016-08-28,yes,https://www.anglersatlas.com/place/102064/sylvan-lake
+5968,RNTR,sport,Community-listed,4,0,2018-01-03,no,https://www.anglersatlas.com/place/130228/tay-lake
+6061,BLTR,sport,Community-listed,6,0,2017-12-29,yes,https://www.anglersatlas.com/place/102078/upper-kananaskis-lake
+6061,CTTR,sport,Community-listed,3,0,2019-05-03,no,https://www.anglersatlas.com/place/102078/upper-kananaskis-lake
+6061,RNTR,sport,Community-listed,2,0,2018-03-22,yes,https://www.anglersatlas.com/place/102078/upper-kananaskis-lake
+6097,BURB,sport,Community-listed,2,0,2018-08-19,yes,https://www.anglersatlas.com/place/102085/wadlin-lake
+6097,LKWH,sport,Community-listed,2,0,2018-08-19,yes,https://www.anglersatlas.com/place/102085/wadlin-lake
+6097,NRPK,sport,Community-listed,2,0,2018-08-19,yes,https://www.anglersatlas.com/place/102085/wadlin-lake
+6097,WALL,sport,Community-listed,2,0,2018-08-19,no,https://www.anglersatlas.com/place/102085/wadlin-lake
+6097,YLPR,sport,Community-listed,2,0,2018-08-19,yes,https://www.anglersatlas.com/place/102085/wadlin-lake
+6169,LKWH,sport,Community-listed,4,0,2017-07-10,yes,https://www.anglersatlas.com/place/130576/winagami-lake
+6169,NRPK,sport,Community-listed,6,0,2017-07-10,yes,https://www.anglersatlas.com/place/130576/winagami-lake
+6169,WALL,sport,Community-listed,6,0,2017-07-10,no,https://www.anglersatlas.com/place/130576/winagami-lake
+6169,WHSC,rough,Community-listed,2,0,2017-07-10,yes,https://www.anglersatlas.com/place/130576/winagami-lake
+6169,YLPR,sport,Community-listed,4,0,2017-07-10,yes,https://www.anglersatlas.com/place/130576/winagami-lake
+6528,BNTR,sport,Community-listed,1,0,2025-01-07,no,https://www.anglersatlas.com/place/893399/lower-chain-lake
+6528,RNTR,sport,Community-listed,3,0,2022-10-13,no,https://www.anglersatlas.com/place/893399/lower-chain-lake
+6528,TGTR,sport,Community-listed,5,0,2021-09-14,no,https://www.anglersatlas.com/place/893399/lower-chain-lake
+6617,RNTR,sport,Community-listed,4,0,2016-11-21,no,https://www.anglersatlas.com/place/726221/winchell-lake
+6693,BNTR,sport,Community-listed,1,0,2025-07-07,yes,https://www.anglersatlas.com/place/2061595/spring-lake
+6693,PRCP,invasive,Community-listed,1,0,2025-08-31,yes,https://www.anglersatlas.com/place/2061595/spring-lake
+6693,RNTR,sport,Community-listed,2,0,2025-07-07,no,https://www.anglersatlas.com/place/2061595/spring-lake
+6693,TGTR,sport,Community-listed,2,0,2025-07-07,yes,https://www.anglersatlas.com/place/2061595/spring-lake
+6699,RNTR,sport,Community-listed,1,0,2026-02-03,no,https://www.anglersatlas.com/place/2211091/shemeluk-lake
+6734,BKTR,sport,Listed with disagreement votes,2,1,2021-12-28,no,https://www.anglersatlas.com/place/726273/nicholas-sheran-lake
+6734,BNTR,sport,Community-listed,3,0,2019-11-12,no,https://www.anglersatlas.com/place/726273/nicholas-sheran-lake
+6734,NRPK,sport,Community-listed,7,0,2019-11-12,yes,https://www.anglersatlas.com/place/726273/nicholas-sheran-lake
+6734,RNTR,sport,Community-listed,6,0,2019-11-12,no,https://www.anglersatlas.com/place/726273/nicholas-sheran-lake
+6734,YLPR,sport,Community-listed,4,0,2019-11-12,yes,https://www.anglersatlas.com/place/726273/nicholas-sheran-lake
+6736,RNTR,sport,Community-listed,1,0,2025-02-04,no,https://www.anglersatlas.com/place/2049967/morinville-fish-and-game-pond
+6751,RNTR,sport,Community-listed,1,0,2020-01-12,no,https://www.anglersatlas.com/place/102589/magrath-childrens-pond
+6757,RNTR,sport,Community-listed,5,0,2016-12-31,no,https://www.anglersatlas.com/place/102590/mcquillan-reservoir
+6764,RNTR,sport,Community-listed,3,0,2024-08-02,no,https://www.anglersatlas.com/place/965722/leduc-reservoir
+6767,TGTR,sport,Community-listed,1,0,2025-09-12,no,https://www.anglersatlas.com/place/102591/little-beaverdam-lake
+6770,TGTR,sport,Community-listed,2,0,2022-09-10,no,https://www.anglersatlas.com/place/102592/kerbes-pond
+6786,RNTR,sport,Community-listed,3,0,2022-06-13,no,https://www.anglersatlas.com/place/1107853/ironside-pond
+6786,TGTR,sport,Community-listed,1,0,2025-10-31,no,https://www.anglersatlas.com/place/1107853/ironside-pond
+6790,BNTR,sport,Community-listed,2,0,2026-02-26,no,https://www.anglersatlas.com/place/2207558/heritage-lake
+6818,RNTR,sport,Community-listed,3,0,2020-08-28,no,https://www.anglersatlas.com/place/102593/goldspring-park-pond
+6821,BKTR,sport,Community-listed,3,0,2016-07-15,no,https://www.anglersatlas.com/place/726188/emerald-lake
+6821,LKCH,rough,Community-listed,1,0,2016-07-15,yes,https://www.anglersatlas.com/place/726188/emerald-lake
+6821,RNTR,sport,Listed with disagreement votes,1,1,2016-07-15,yes,https://www.anglersatlas.com/place/726188/emerald-lake
+6823,RNTR,sport,Community-listed,2,0,2024-09-22,no,https://www.anglersatlas.com/place/875896/enchant-pond
+6823,TGTR,sport,Community-listed,1,0,2025-06-21,no,https://www.anglersatlas.com/place/875896/enchant-pond
+6823,YLPR,sport,Listed with disagreement votes,2,1,2021-12-29,yes,https://www.anglersatlas.com/place/875896/enchant-pond
+6827,RNTR,sport,Community-listed,12,0,2016-11-20,no,https://www.anglersatlas.com/place/102594/figure-eight-lake
+6831,RNTR,sport,Community-listed,3,0,2017-09-30,no,https://www.anglersatlas.com/place/102595/foremost-reservoir
+6840,RNTR,sport,Community-listed,15,0,2016-07-09,no,https://www.anglersatlas.com/place/726224/east-pit-lake
+6844,NRPK,sport,Community-listed,4,0,2017-05-09,yes,https://www.anglersatlas.com/place/709164/dickson-trout-pond
+6844,RNTR,sport,Community-listed,7,0,2017-05-03,no,https://www.anglersatlas.com/place/709164/dickson-trout-pond
+6844,TGTR,sport,Community-listed,3,0,2020-10-01,no,https://www.anglersatlas.com/place/709164/dickson-trout-pond
+6868,BNTR,sport,Community-listed,3,0,2023-09-27,no,https://www.anglersatlas.com/place/875900/cardiff-pond
+6868,PRCP,invasive,Community-listed,7,0,2023-09-27,yes,https://www.anglersatlas.com/place/875900/cardiff-pond
+6868,RNTR,sport,Community-listed,13,0,2020-05-29,no,https://www.anglersatlas.com/place/875900/cardiff-pond
+6868,TGTR,sport,Community-listed,3,0,2023-09-27,no,https://www.anglersatlas.com/place/875900/cardiff-pond
+6893,RNTR,sport,Community-listed,4,0,2022-04-24,no,https://www.anglersatlas.com/place/990888/beaumont-fish-pond
+6894,RNTR,sport,Community-listed,5,0,2016-07-19,no,https://www.anglersatlas.com/place/102601/bellis-beach-lake
+6902,BKTR,sport,Community-listed,1,0,2016-12-20,yes,https://www.anglersatlas.com/place/102602/allison-lake
+6902,CTTR,sport,Community-listed,2,0,2016-08-02,no,https://www.anglersatlas.com/place/102602/allison-lake
+6902,MTSC,rough,Community-listed,1,0,2022-04-26,yes,https://www.anglersatlas.com/place/102602/allison-lake
+6902,RNTR,sport,Community-listed,3,0,2016-12-20,no,https://www.anglersatlas.com/place/102602/allison-lake
+6902,WSCT,sport,Community-listed,1,0,2021-06-28,no,https://www.anglersatlas.com/place/102602/allison-lake
+6923,RNTR,sport,Community-listed,10,0,2016-07-19,no,https://www.anglersatlas.com/place/712623/black-nugget-mine-pit
+6923,TGTR,sport,Community-listed,6,0,2016-07-19,no,https://www.anglersatlas.com/place/712623/black-nugget-mine-pit
+17894,RNTR,sport,Community-listed,3,0,2022-05-05,no,https://www.anglersatlas.com/place/916170/anderson-dam
+18007,NRPK,sport,Community-listed,8,0,2019-05-03,yes,https://www.anglersatlas.com/place/873848/pine-coulee-reservoir
+18007,RNTR,sport,Community-listed,6,0,2019-05-03,no,https://www.anglersatlas.com/place/873848/pine-coulee-reservoir
+18007,WALL,sport,Listed with disagreement votes,9,1,2019-05-03,yes,https://www.anglersatlas.com/place/873848/pine-coulee-reservoir
+22504,NRPK,sport,Community-listed,1,0,,yes,https://www.anglersatlas.com/place/2574272/riverstone-pond
+22504,RNTR,sport,Community-listed,1,0,,no,https://www.anglersatlas.com/place/2574272/riverstone-pond
+23292,RNTR,sport,Community-listed,1,0,2024-01-03,no,https://www.anglersatlas.com/place/965708/genesee-fish-pond
+23327,NRPK,sport,Community-listed,7,0,2021-01-19,yes,https://www.anglersatlas.com/place/1067336/twin-valley-reservoir
+24364,RNTR,sport,Community-listed,2,0,2019-07-17,no,https://www.anglersatlas.com/place/884946/fiesta-lake
+318138,RNTR,sport,Community-listed,2,0,2021-09-07,no,https://www.anglersatlas.com/place/102584/taber-fish-and-game-pond
+395196,BNTR,sport,Community-listed,2,0,2022-08-31,no,https://www.anglersatlas.com/place/990885/mitford-pond
+395196,RNTR,sport,Community-listed,1,0,2022-08-31,no,https://www.anglersatlas.com/place/990885/mitford-pond

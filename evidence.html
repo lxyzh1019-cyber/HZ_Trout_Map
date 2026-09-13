@@ -38,10 +38,30 @@
   .note { background: var(--panel-2); border-left: 3px solid var(--accent);
           padding: 10px 14px; margin: 14px 0; font-size: 14px; }
   .note strong { color: var(--accent); }
-  .back { display: inline-block; margin-bottom: 18px; font-size: 13px; }
+  /* This is the only way back, and it used to be a 13px text link that dropped
+     every filter and the lake you were looking at. It is a control now, on its
+     own row, and it carries the map's state home with it. */
+  .back {
+    display: block; width: 100%; box-sizing: border-box; margin: 0 0 24px;
+    padding: 13px 16px; font-size: 15px; font-weight: 600; text-align: center;
+    text-decoration: none; color: var(--ink); background: var(--panel-2);
+    border: 1px solid var(--panel-edge); border-left: 3px solid var(--accent);
+    border-radius: 4px;
+  }
+  .back:hover { border-color: var(--accent); color: var(--accent); }
   ul { padding-left: 20px; }
   li { margin: 5px 0; }
   .scroller { overflow-x: auto; }
+  table.bands { border-collapse: collapse; width: 100%; font-size: 13.5px; margin: 10px 0; }
+  table.bands th, table.bands td { padding: 5px 10px 5px 0; text-align: left;
+    border-bottom: 1px solid var(--panel-edge); }
+  table.bands th { font-size: 11.5px; text-transform: uppercase; letter-spacing: .04em;
+    color: var(--ink-dim); }
+  table.bands td:nth-child(2), table.bands td:nth-child(3), table.bands td:nth-child(4) {
+    font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table.bands td:nth-child(3) { color: var(--accent); font-weight: 600; }
+  table.bands td:last-child { color: var(--ink-dim); font-size: 12.5px; }
+  .bandnote { font-size: 12.5px; color: var(--ink-dim); }
   #selfcheck { margin-top: 40px; }
   #selfcheck table { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; }
   .ok { color: var(--strong); font-weight: 700; }
@@ -55,7 +75,17 @@
 </head>
 <body>
 <main>
-<a class="back" href="./">&larr; Back to the map</a>
+<a class="back" id="back" href="./">&larr; Back to the map</a>
+<script>
+  /* The map serialises its filters, its view and the lake you had open into
+     the query string, and the panel hands that string to this page. Giving it
+     straight back is the whole trick: you return to the map you left, not to
+     a fresh one. */
+  (function () {
+    var back = document.getElementById("back");
+    if (back && location.search) back.href = "./" + location.search;
+  })();
+</script>
 
 <h1>What the conditions score is built on</h1>
 <p class="lede">And, just as much, what it is not built on.</p>
@@ -120,6 +150,59 @@ light and a change in temperature &mdash; all things that do affect feeding. Gui
 logbooks that report better fishing on a falling barometer are, on this reading,
 correct about the pattern and wrong about the cause. We score the front and label
 it as such. Nowhere in this app does a swim-bladder explanation appear.</p>
+<p><strong>The unit.</strong> The forecast arrives in hectopascals, which is what a
+meteorologist reads. The panel prints kilopascals, which is what Environment Canada
+publishes and what the barometer in a truck shows. The conversion happens on the way
+to the screen and nowhere else: every threshold above still runs on the hectopascals
+the API sent, so changing the label moved no number. The reading itself is printed
+beside the trend because it is the one figure you can check against your own
+barometer &mdash; but only the trend is scored, because an absolute reading in a
+province spanning 600 to 1500 m says more about elevation than about weather.</p>
+<p><strong>Gusts are shown and never scored.</strong> The forecast carries them, and
+the panel prints them beside the mean wind, with a warning past 40 km/h. They stay
+out of the arithmetic on purpose. What a gust decides is whether you can hold a
+drift or turn over a light float &mdash; a question about the boat and the cast. What
+the feeding evidence is about is the mean wind that puts a ripple on the surface,
+and that is already scored. Adding gusts on top would count the same weather twice,
+on a hunch.</p>
+
+<h2>The thermal bands, in full</h2>
+<p>Water temperature carries the second-largest weight in the score, and until now
+this page described where the numbers come from without ever printing them. Here
+they are. <strong>A band is about feeding and growth, not survival</strong> &mdash; the
+outer columns are where feeding effectively stops, not where a fish dies.</p>
+<div class="scroller">
+<table class="bands">
+  <thead><tr><th>Species</th><th>Feeding stops below</th><th>Best</th><th>Feeding stops above</th><th>Source</th></tr></thead>
+  <tbody>
+  <tr data-band="RNTR"><td>Rainbow Trout</td><td>4</td><td>12&ndash;18</td><td>24</td><td>Raleigh et al., HSI series</td></tr>
+  <tr data-band="BKTR"><td>Brook Trout</td><td>3</td><td>11&ndash;16</td><td>21</td><td>Raleigh et al., HSI series</td></tr>
+  <tr data-band="BNTR"><td>Brown Trout</td><td>4</td><td>12&ndash;19</td><td>25</td><td>Raleigh et al., HSI series</td></tr>
+  <tr data-band="TGTR"><td>Tiger Trout</td><td>3</td><td>11&ndash;17</td><td>22</td><td><em>Interpolated between its parents &mdash; an inference, not a source</em></td></tr>
+  <tr data-band="CTTR"><td>Cutthroat Trout</td><td>3</td><td>9&ndash;16</td><td>22</td><td>Bear et al. 2007</td></tr>
+  <tr data-band="WSCT"><td>Westslope Cutthroat</td><td>2</td><td>8&ndash;15</td><td>20</td><td>Bear et al. 2007</td></tr>
+  <tr data-band="WALL"><td>Walleye</td><td>2*</td><td>20&ndash;24</td><td>29</td><td>McMahon, Terrell &amp; Nelson 1984, HSI series</td></tr>
+  <tr data-band="NRPK"><td>Northern Pike</td><td>1*</td><td>19&ndash;21</td><td>29</td><td>Inskip 1982, HSI series</td></tr>
+  <tr data-band="ARGR"><td>Arctic Grayling</td><td>1*</td><td>10&ndash;17</td><td>22</td><td>Thermal performance work, Trans. Am. Fish. Soc. 153(1) 2024</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="bandnote">* <strong>The cold bound on these three is an inference, not a quoted
+figure.</strong> The published work bounds <em>growth</em>, and all three feed under the
+ice in Alberta &mdash; a pike taken through a hole in February has not stopped feeding.
+So the cold end is set where feeding plausibly ceases rather than where growth does,
+which is the softer claim and the one this band is about.</p>
+<p>Walleye, pike and grayling went deliberately unbanded when they first came onto
+this map, because lending any of them a trout curve would not have been an
+approximation. At 22&nbsp;&deg;C a rainbow is near the top of its tolerance and a
+walleye is close to where it grows best: the same water reads nearly lethal or prime
+depending only on which fish you ask about. Scoring nothing was better than scoring
+it backwards. They are banded now from the same U.S. Fish and Wildlife Habitat
+Suitability Index series the salmonid rows already rest on, so this is the existing
+kind of evidence extended rather than a new kind admitted.</p>
+<p>A lake holding several species is scored on whichever is happiest, and the panel
+names it &mdash; averaging would report "mediocre for everything" on a day when one
+species is squarely on.</p>
 
 <h2>The moon, and why a major can land at three in the afternoon</h2>
 <p>Solunar tables mark <strong>major periods</strong> (about two hours) centred on the
@@ -232,6 +315,17 @@ and is less likely to <em>because</em> it is.</p>
 <p>With no depth, no depth advice appears. Sending someone to eight metres in
 three metres of water is a real harm, and "probably deep enough" is not a
 defence.</p>
+<p><strong>What "Summer layer about 3&ndash;7 m" is telling you.</strong> It is the
+depth to put your bait in July and August: the band between water too warm on top
+and water too short of oxygen underneath, where the fish are squeezed. It appears
+only from June to September, only when the surface is above the species' optimum,
+and only for a lake of five metres or more. The figure is derived from the maximum
+depth &mdash; a quarter of it to a half &mdash; so it is a rule of thumb and the popup
+says so on hover. Nobody has run a temperature profile on these lakes; if one day
+somebody does, that measurement should replace this arithmetic outright. When the
+band is showing, the score is recomputed at the temperature the fish can actually
+reach rather than the surface they are avoiding, and the water factor drops to
+<span class="tier weak">weak</span> to pay for the assumption.</p>
 
 <h2>What this cannot know</h2>
 <ul>
@@ -265,6 +359,15 @@ defence.</p>
       photopic, mesopic and scotopic feeding in brown trout and Arctic charr.</li>
   <li>Rainbow trout thermal performance literature; Raleigh et al. habitat suitability
       index series; Bear et al. (2007) for cutthroat thermal limits.</li>
+  <li>McMahon, T. E., Terrell, J. W. &amp; Nelson, P. C. (1984). <em>Habitat suitability
+      information: walleye.</em> U.S. Fish and Wildlife Service, FWS/OBS-82/10.56 &mdash;
+      optimum temperatures for growth of adults, 20 to 24 &deg;C.</li>
+  <li>Inskip, P. D. (1982). <em>Habitat suitability index models: northern pike.</em>
+      U.S. Fish and Wildlife Service, FWS/OBS-82/10.17 &mdash; growth highest between
+      19 &deg;C by biomass and 21 &deg;C by length; upper lethal 29.4 &deg;C.</li>
+  <li>Arctic grayling juvenile thermal performance, <em>Transactions of the American
+      Fisheries Society</em> 153(1):3 (2024) &mdash; growth rising to 18 &deg;C, survival
+      reduced beyond it and none above 22 &deg;C.</li>
   <li>Mohseni, Stefan &amp; Erickson (1998), for the S-shaped relation between air
       and water temperature &mdash; it saturates at both ends, which a straight line
       does not. A linear fit puts an Alberta lake at 26 &deg;C in a hot week, which
@@ -497,6 +600,89 @@ defence.</p>
       }
     });
     check("the light score never sees a lunar quantity", !lightMoved);
+
+  /* --- The astronomy, against an implementation nobody here wrote -----------
+   *
+   * Every time in the conditions panel and every cell in the calendar rests on
+   * js/astro.js: Meeus chapter 25 for the sun, chapter 47 truncated to ten
+   * terms for the moon. A quiet error there would move every score in the app
+   * by a plausible-looking amount and nothing would look wrong.
+   *
+   * So these twelve fixtures were generated from suncalc, a widely used
+   * ephemeris written by somebody else, at three Alberta latitudes across four
+   * seasons. They are stored as UTC epoch milliseconds so no timezone can creep
+   * into the comparison.
+   *
+   * The tolerances are what the comparison actually measured when it was first
+   * run, rounded out: sun within 5 minutes, moon within 10, illumination within
+   * a percentage point. Tightening them would be pretending to a precision two
+   * truncated series do not have; loosening them would stop catching anything.
+   */
+  var ASTRO_REF = [
+    {s:"Red Deer",lat:52.2681,lon:-113.8112,d:"2026-01-15",sunrise:1768491437119,sunset:1768521161974,dawn:1768489077900,dusk:1768523522023,moonrise:1768485628780,moonset:1768508554759,illum:0.1042},
+    {s:"Red Deer",lat:52.2681,lon:-113.8112,d:"2026-04-15",sunrise:1776256652571,sunset:1776306841654,dawn:1776254483538,dusk:1776309022378,moonrise:1776253677337,moonset:null,illum:0.054},
+    {s:"Red Deer",lat:52.2681,lon:-113.8112,d:"2026-07-15",sunrise:1784115131011,sunset:1784173779370,dawn:1784112364883,dusk:1784176529948,moonrise:1784120336090,moonset:1784089861557,illum:0.018},
+    {s:"Red Deer",lat:52.2681,lon:-113.8112,d:"2026-10-15",sunrise:1792072847677,sunset:1792111215169,dawn:1792070787923,dusk:1792113271156,moonrise:1792095207927,moonset:1792029304430,illum:0.2185},
+    {s:"Crowsnest",lat:49.6723,lon:-114.6041,d:"2026-01-15",sunrise:1768490971400,sunset:1768522006533,dawn:1768488777952,dusk:1768524200658,moonrise:1768484662433,moonset:1768509923000,illum:0.1042},
+    {s:"Crowsnest",lat:49.6723,lon:-114.6041,d:"2026-04-15",sunrise:1776257142888,sunset:1776306724718,dawn:1776255109726,dusk:1776308767542,moonrise:1776253897926,moonset:null,illum:0.054},
+    {s:"Crowsnest",lat:49.6723,lon:-114.6041,d:"2026-07-15",sunrise:1784116063994,sunset:1784173233495,dawn:1784113568906,dusk:1784175717200,moonrise:1784121206827,moonset:1784089334646,illum:0.018},
+    {s:"Crowsnest",lat:49.6723,lon:-114.6041,d:"2026-10-15",sunrise:1792072813437,sunset:1792111634174,dawn:1792070868319,dusk:1792113576063,moonrise:1792094260349,moonset:1792030582467,illum:0.2185},
+    {s:"Far north",lat:57,lon:-111.5,d:"2026-01-15",sunrise:1768492362709,sunset:1768519130514,dawn:1768489589256,dusk:1768521905141,moonrise:1768487979055,moonset:1768505039084,illum:0.1042},
+    {s:"Far north",lat:57,lon:-111.5,d:"2026-04-15",sunrise:1776255441126,sunset:1776306960346,dawn:1776252948582,dusk:1776309470347,moonrise:1776253060141,moonset:null,illum:0.054},
+    {s:"Far north",lat:57,lon:-111.5,d:"2026-07-15",sunrise:1784112867823,sunset:1784174915504,dawn:1784109282308,dusk:1784178466909,moonrise:1784118220718,moonset:1784090928983,illum:0.018},
+    {s:"Far north",lat:57,lon:-111.5,d:"2026-10-15",sunrise:1792072779064,sunset:1792110165657,dawn:1792070456783,dusk:1792112482891,moonrise:1792097492000,moonset:1792026091451,illum:0.2185},
+  ];
+  var SUN_TOL_MIN = 5, MOON_TOL_MIN = 10, ILLUM_TOL = 0.01;
+
+  (function astroAgainstAnother() {
+    var worstSun = 0, worstMoon = 0, worstIllum = 0, compared = 0, missing = 0;
+    var worstNote = "";
+    ASTRO_REF.forEach(function (f) {
+      var day = Astro.dayFor(f.lat, f.lon, new Date(f.d + "T00:00:00Z"));
+      var mins = function (a, b) { return Math.abs(a - b) / 60000; };
+      var note = f.s + " " + f.d;
+
+      [["sunrise", day.sun.sunrise], ["sunset", day.sun.sunset],
+       ["dawn", day.sun.civilDawn], ["dusk", day.sun.civilDusk]].forEach(function (pair) {
+        if (!pair[1] || f[pair[0]] == null) { missing++; return; }
+        var d = mins(+pair[1], f[pair[0]]);
+        compared++;
+        if (d > worstSun) { worstSun = d; worstNote = note + " " + pair[0]; }
+      });
+
+      /* suncalc reports one rise and one set per UTC day; astro.js returns every
+       * crossing, because some local days have two and some none. Compare each
+       * reference against the nearest crossing of the same kind. */
+      [["moonrise", day.moonTimes.rises], ["moonset", day.moonTimes.sets]].forEach(function (pair) {
+        if (f[pair[0]] == null) return;
+        var best = null;
+        (pair[1] || []).forEach(function (t) {
+          var d = mins(+t, f[pair[0]]);
+          if (best === null || d < best) best = d;
+        });
+        if (best === null) { missing++; return; }
+        compared++;
+        if (best > worstMoon) worstMoon = best;
+      });
+
+      var illum = Math.abs(day.moon.illumination - f.illum);
+      if (illum > worstIllum) worstIllum = illum;
+    });
+
+    check("sun times agree with an independent ephemeris",
+      worstSun <= SUN_TOL_MIN,
+      "worst " + worstSun.toFixed(1) + " min (tolerance " + SUN_TOL_MIN + ")"
+        + (worstNote ? ", at " + worstNote : ""));
+    check("moon times agree with an independent ephemeris",
+      worstMoon <= MOON_TOL_MIN,
+      "worst " + worstMoon.toFixed(1) + " min (tolerance " + MOON_TOL_MIN + ")");
+    check("moon illumination agrees with an independent ephemeris",
+      worstIllum <= ILLUM_TOL,
+      "worst " + (worstIllum * 100).toFixed(2) + " percentage points");
+    check("every fixture was actually compared", missing === 0 && compared >= 40,
+      compared + " comparison(s), " + missing + " unmatched");
+  })();
+
     check("the moon never moves the best window of the day", movedAt === null,
       movedAt || "stays at " + baseBest + " local");
     check("the moon never shifts a score by more than 5%",

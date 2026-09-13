@@ -275,6 +275,28 @@
     "base_name": "Sibbald Meadows Pond"
   },
   {
+    "lake_id": "wb3488",
+    "name": "Wedge Pond",
+    "waterbody_id": "3488",
+    "lat": 50.872201,
+    "lon": -115.148727,
+    "coord_source": "alberta",
+    "ats_codes": [
+      "NW14-22-9-W5"
+    ],
+    "aliases": [
+      "wedge pond"
+    ],
+    "name_variants": [
+      "WEDGE POND",
+      "Wedge Pond"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "base_name": "Wedge Pond"
+  },
+  {
     "lake_id": "wb3494",
     "name": "Blood Indian Creek Reservoir",
     "waterbody_id": "3494",
@@ -2993,6 +3015,29 @@
     "base_name": "Victor Lake"
   },
   {
+    "lake_id": "wb6095",
+    "name": "Wabamun Lake",
+    "waterbody_id": "6095",
+    "lat": 53.545513,
+    "lon": -114.589748,
+    "coord_source": "alberta",
+    "ats_codes": [
+      "6-53-4-W5",
+      "SW6-53-4-W5"
+    ],
+    "aliases": [
+      "wabamun lake"
+    ],
+    "name_variants": [
+      "WABAMUN LAKE",
+      "Wabamun Lake"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "base_name": "Wabamun Lake"
+  },
+  {
     "lake_id": "wb6160",
     "name": "Wildhorse Lakes (Upper Wildhorse Lake)",
     "waterbody_id": "6160",
@@ -4544,6 +4589,28 @@
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Pro Alta Pond"
+  },
+  {
+    "lake_id": "wb6712",
+    "name": "Quarry Lake",
+    "waterbody_id": "6712",
+    "lat": 51.074617,
+    "lon": -115.37285,
+    "coord_source": "alberta",
+    "ats_codes": [
+      "SW29-24-10-W5"
+    ],
+    "aliases": [
+      "quarry lake"
+    ],
+    "name_variants": [
+      "QUARRY LAKE",
+      "Quarry Lake"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "base_name": "Quarry Lake"
   },
   {
     "lake_id": "wb6713",
@@ -7296,15 +7363,18 @@
     "lon": -111.953265,
     "coord_source": "profile",
     "ats_codes": [
+      "3-68-14-W4",
       "5-67-13-W4",
       "NW5-67-13-W4"
     ],
     "aliases": [
+      "lac la biche",
       "lac la biche trout alexander pond hamilton pond",
       "lac la biche trout pond",
       "lac la biche trout pond alexander hamilton pond"
     ],
     "name_variants": [
+      "LAC LA BICHE",
       "LAC LA BICHE TROUT POND",
       "LAC LA BICHE TROUT POND (ALEXANDER HAMILTON POND)",
       "Lac La Biche Trout Alexander Pond Hamilton Pond",
@@ -8195,6 +8265,859 @@
     "base_name": "County Sportsplex Pond"
   },
   {
+    "lake_id": "wb3515",
+    "name": "Little Bow Lake Reservoir",
+    "waterbody_id": "3515",
+    "lat": 50.1944,
+    "lon": -112.6757,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "SE28-14-20-W4"
+    ],
+    "aliases": [
+      "little bow lake reservoir"
+    ],
+    "name_variants": [
+      "Little Bow Lake Reservoir"
+    ],
+    "zone": "PP1",
+    "surface_area_ha": 803.9,
+    "amenities": "Paddling; Paddling Canoe; Boating; Water; Swimming; Camping",
+    "base_name": "Little Bow Lake Reservoir"
+  },
+  {
+    "lake_id": "wb3526",
+    "name": "Milk River Ridge Reservoir",
+    "waterbody_id": "3526",
+    "lat": 49.3751,
+    "lon": -112.5874,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NE11-5-20-W4"
+    ],
+    "aliases": [
+      "milk river ridge reservoir"
+    ],
+    "name_variants": [
+      "Milk River Ridge Reservoir"
+    ],
+    "zone": "PP1",
+    "surface_area_ha": 125.4,
+    "amenities": "Boating; Wildlife Viewing; Camping",
+    "base_name": "Milk River Ridge Reservoir"
+  },
+  {
+    "lake_id": "wb3536",
+    "name": "Stafford Lake",
+    "waterbody_id": "3536",
+    "lat": 49.6831,
+    "lon": -112.3562,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NE27-8-18-W4"
+    ],
+    "aliases": [
+      "stafford lake",
+      "stafford reservoir stafford lake"
+    ],
+    "name_variants": [
+      "Stafford Lake",
+      "Stafford Reservoir (Stafford Lake)"
+    ],
+    "zone": "PP1",
+    "surface_area_ha": 488.2,
+    "amenities": "Swimming; Picnic; Day Use; Camping",
+    "base_name": "Stafford Lake"
+  },
+  {
+    "lake_id": "wb3537",
+    "name": "Travers Reservoir",
+    "waterbody_id": "3537",
+    "lat": 50.2084,
+    "lon": -112.8157,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "SW33-14-21-W4"
+    ],
+    "aliases": [
+      "travers reservoir"
+    ],
+    "name_variants": [
+      "Travers Reservoir"
+    ],
+    "zone": "PP1",
+    "surface_area_ha": 2239.2,
+    "amenities": "Paddling; Paddling Canoe; Boating; Camping",
+    "base_name": "Travers Reservoir"
+  },
+  {
+    "lake_id": "wb3959",
+    "name": "Badger Lake Reservoir",
+    "waterbody_id": "3959",
+    "lat": 50.3887,
+    "lon": -112.4591,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "SE31-16-18-W4"
+    ],
+    "aliases": [
+      "badger lake badger lake reservior",
+      "badger lake reservoir"
+    ],
+    "name_variants": [
+      "Badger Lake (Badger Lake Reservior)",
+      "Badger Lake Reservoir"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "base_name": "Badger Lake Reservoir"
+  },
+  {
+    "lake_id": "wb4027",
+    "name": "Lac Bellevue",
+    "waterbody_id": "4027",
+    "lat": 53.8105,
+    "lon": -111.3369,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NW6-56-9-W4"
+    ],
+    "aliases": [
+      "lac bellevue"
+    ],
+    "name_variants": [
+      "Lac Bellevue"
+    ],
+    "zone": "NB1",
+    "surface_area_ha": 461.2,
+    "amenities": "Camping; Day Use; Playground; Beach; Shelter",
+    "base_name": "Lac Bellevue"
+  },
+  {
+    "lake_id": "wb4161",
+    "name": "Burnstick Lake",
+    "waterbody_id": "4161",
+    "lat": 51.98,
+    "lon": -114.902,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "SE11-35-7-W5"
+    ],
+    "aliases": [
+      "burnstick lake"
+    ],
+    "name_variants": [
+      "Burnstick Lake"
+    ],
+    "zone": "ES2",
+    "surface_area_ha": 366.5,
+    "amenities": "Boating; Water; Camping; Picnic; Playground; Sports",
+    "base_name": "Burnstick Lake"
+  },
+  {
+    "lake_id": "wb4265",
+    "name": "Chin Reservoir",
+    "waterbody_id": "4265",
+    "lat": 49.6364,
+    "lon": -112.2523,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NW9-8-17-W4"
+    ],
+    "aliases": [
+      "chin lake chin reservoir",
+      "chin reservoir"
+    ],
+    "name_variants": [
+      "Chin Lake (Chin Reservoir)",
+      "Chin Reservoir"
+    ],
+    "zone": "PP1",
+    "surface_area_ha": 164.4,
+    "amenities": "Boat Launch; Swimming; Toilets",
+    "base_name": "Chin Reservoir"
+  },
+  {
+    "lake_id": "wb4351",
+    "name": "Moore Lake",
+    "waterbody_id": "4351",
+    "lat": 54.5143,
+    "lon": -110.5222,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NE3-64-4-W4"
+    ],
+    "aliases": [
+      "crane lake moore lake",
+      "moore lake"
+    ],
+    "name_variants": [
+      "Crane Lake (Moore Lake)",
+      "Moore Lake"
+    ],
+    "zone": "NB1",
+    "surface_area_ha": null,
+    "amenities": "Camping; Firewood; Boat Launch; Dock/Pier; Fishing Access; Fishing Access Dock",
+    "base_name": "Moore Lake"
+  },
+  {
+    "lake_id": "wb4571",
+    "name": "Fickle Lake",
+    "waterbody_id": "4571",
+    "lat": 53.45,
+    "lon": -116.7667,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NW32-51-19-W5"
+    ],
+    "aliases": [
+      "fickle lake"
+    ],
+    "name_variants": [
+      "Fickle Lake"
+    ],
+    "zone": "ES3",
+    "surface_area_ha": 382.2,
+    "amenities": "Firewood; Camping; Fish Cleaning; Dock/Pier; Toilets; Water",
+    "base_name": "Fickle Lake"
+  },
+  {
+    "lake_id": "wb4635",
+    "name": "Frog Lake",
+    "waterbody_id": "4635",
+    "lat": 53.9258,
+    "lon": -110.34,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NE14-57-3-W4"
+    ],
+    "aliases": [
+      "frog lake"
+    ],
+    "name_variants": [
+      "Frog Lake"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "base_name": "Frog Lake"
+  },
+  {
+    "lake_id": "wb4708",
+    "name": "Goose Lake",
+    "waterbody_id": "4708",
+    "lat": 54.3167,
+    "lon": -115.1333,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NW33-61-8-W5"
+    ],
+    "aliases": [
+      "goose lake"
+    ],
+    "name_variants": [
+      "Goose Lake"
+    ],
+    "zone": "NB2",
+    "surface_area_ha": null,
+    "amenities": "Camping; Fishing Access; Toilets",
+    "base_name": "Goose Lake"
+  },
+  {
+    "lake_id": "wb4977",
+    "name": "Kehewin Lake",
+    "waterbody_id": "4977",
+    "lat": 54.0586,
+    "lon": -110.8973,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NE36-58-7-W4"
+    ],
+    "aliases": [
+      "kehewin lake",
+      "kehiwin lake kehewin lake"
+    ],
+    "name_variants": [
+      "Kehewin Lake",
+      "Kehiwin Lake Kehewin Lake"
+    ],
+    "zone": "NB1",
+    "surface_area_ha": 663.2,
+    "amenities": "Boat Launch; Fish Cleaning; Toilets; Dock/Pier",
+    "base_name": "Kehewin Lake"
+  },
+  {
+    "lake_id": "wb4978",
+    "name": "Keho Lake",
+    "waterbody_id": "4978",
+    "lat": 49.9346,
+    "lon": -112.9916,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "SW31-11-22-W4"
+    ],
+    "aliases": [
+      "keho lake"
+    ],
+    "name_variants": [
+      "Keho Lake"
+    ],
+    "zone": "PP1",
+    "surface_area_ha": 2266.3,
+    "amenities": "Day Use; Fishing Access; Camping",
+    "base_name": "Keho Lake"
+  },
+  {
+    "lake_id": "wb5099",
+    "name": "Little Fish Lake",
+    "waterbody_id": "5099",
+    "lat": 51.3696,
+    "lon": -112.1995,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "SW8-28-16-W4"
+    ],
+    "aliases": [
+      "little fish lake"
+    ],
+    "name_variants": [
+      "Little Fish Lake"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "base_name": "Little Fish Lake"
+  },
+  {
+    "lake_id": "wb5275",
+    "name": "Mcgregor Reservoir",
+    "waterbody_id": "5275",
+    "lat": 50.4752,
+    "lon": -112.8638,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "SW32-17-21-W4"
+    ],
+    "aliases": [
+      "mcgregor lake mcgregor reservoir",
+      "mcgregor reservoir"
+    ],
+    "name_variants": [
+      "McGregor Lake (McGregor Reservoir)",
+      "Mcgregor Lake (McGregor Reservoir)",
+      "Mcgregor Reservoir"
+    ],
+    "zone": "PP1",
+    "surface_area_ha": 4730.9,
+    "amenities": "Boating; Water; Paddling; Paddling Canoe",
+    "base_name": "Mcgregor Reservoir"
+  },
+  {
+    "lake_id": "wb5336",
+    "name": "Minnow Lake",
+    "waterbody_id": "5336",
+    "lat": 53.3583,
+    "lon": -116.0344,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NW31-50-14-W5"
+    ],
+    "aliases": [
+      "minnow lake"
+    ],
+    "name_variants": [
+      "Minnow Lake"
+    ],
+    "zone": "ES3",
+    "surface_area_ha": null,
+    "amenities": "Camping; Day Use; Picnic; Toilets",
+    "base_name": "Minnow Lake"
+  },
+  {
+    "lake_id": "wb5434",
+    "name": "Lake Newell",
+    "waterbody_id": "5434",
+    "lat": 50.4362,
+    "lon": -111.9405,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NW13-17-15-W4"
+    ],
+    "aliases": [
+      "lake newell"
+    ],
+    "name_variants": [
+      "Lake Newell"
+    ],
+    "zone": "PP2",
+    "surface_area_ha": 6218.3,
+    "amenities": "Camping; Trails; Fishing Access; Boating; Swimming",
+    "base_name": "Lake Newell"
+  },
+  {
+    "lake_id": "wb5581",
+    "name": "Pinehurst Lake",
+    "waterbody_id": "5581",
+    "lat": 54.6535,
+    "lon": -111.4282,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NE27-65-10-W4"
+    ],
+    "aliases": [
+      "pinehurst lake"
+    ],
+    "name_variants": [
+      "Pinehurst Lake"
+    ],
+    "zone": "NB1",
+    "surface_area_ha": 3956.3,
+    "amenities": "Boat Launch; Fish Cleaning; Water; Picnic; Shelter; Toilets; Dock/Pier; Firewood",
+    "base_name": "Pinehurst Lake"
+  },
+  {
+    "lake_id": "wb5646",
+    "name": "Sauder (Rattlesnake) Reservoir",
+    "waterbody_id": "5646",
+    "lat": 49.9789,
+    "lon": -111.0606,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "SE8-12-8-W4"
+    ],
+    "aliases": [
+      "rattlesnake lake sauder rattlesnake reservoir",
+      "sauder rattlesnake reservoir"
+    ],
+    "name_variants": [
+      "Rattlesnake Lake (Sauder (Rattlesnake) Reservoir)",
+      "Rattlesnake Lake Sauder (Rattlesnake) Reservoir",
+      "Sauder (Rattlesnake) Reservoir"
+    ],
+    "zone": "PP1",
+    "surface_area_ha": 987.8,
+    "amenities": "Camping; Toilets; Picnic; Fire Pits",
+    "base_name": "Sauder (Rattlesnake) Reservoir"
+  },
+  {
+    "lake_id": "wb5649",
+    "name": "Rawson Lake",
+    "waterbody_id": "5649",
+    "lat": 50.5913,
+    "lon": -115.1537,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "SW11-19-9-W5"
+    ],
+    "aliases": [
+      "rawson lake"
+    ],
+    "name_variants": [
+      "Rawson Lake"
+    ],
+    "zone": "ES1",
+    "surface_area_ha": null,
+    "amenities": null,
+    "base_name": "Rawson Lake"
+  },
+  {
+    "lake_id": "wb5743",
+    "name": "Sandy Lake",
+    "waterbody_id": "5743",
+    "lat": 55.8336,
+    "lon": -113.3848,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NE9-79-22-W4"
+    ],
+    "aliases": [
+      "sandy lake"
+    ],
+    "name_variants": [
+      "Sandy Lake"
+    ],
+    "zone": "NB3",
+    "surface_area_ha": 2793.1,
+    "amenities": "Boat Launch",
+    "base_name": "Sandy Lake"
+  },
+  {
+    "lake_id": "wb5758",
+    "name": "Swan Lake",
+    "waterbody_id": "5758",
+    "lat": 56.9788,
+    "lon": -115.9155,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "SE18-92-12-W5"
+    ],
+    "aliases": [
+      "sawn lake",
+      "swan lake"
+    ],
+    "name_variants": [
+      "Sawn Lake",
+      "Swan Lake"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "base_name": "Swan Lake"
+  },
+  {
+    "lake_id": "wb5790",
+    "name": "Sherburne Reservoir",
+    "waterbody_id": "5790",
+    "lat": 49.7555,
+    "lon": -111.7732,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NE24-9-14-W4"
+    ],
+    "aliases": [
+      "sherburne lake sherburne reservoir",
+      "sherburne reservoir"
+    ],
+    "name_variants": [
+      "Sherburne Lake (Sherburne Reservoir)",
+      "Sherburne Reservoir"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "base_name": "Sherburne Reservoir"
+  },
+  {
+    "lake_id": "wb5820",
+    "name": "Skeleton Lake",
+    "waterbody_id": "5820",
+    "lat": 54.614,
+    "lon": -112.7265,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NW7-65-18-W4"
+    ],
+    "aliases": [
+      "skeleton lake"
+    ],
+    "name_variants": [
+      "Skeleton Lake"
+    ],
+    "zone": "NB1",
+    "surface_area_ha": 877.9,
+    "amenities": "Day Use; Camping; Laundry; Showers; Retail/Services",
+    "base_name": "Skeleton Lake"
+  },
+  {
+    "lake_id": "wb5952",
+    "name": "Sylvan Lake",
+    "waterbody_id": "5952",
+    "lat": 52.3741,
+    "lon": -114.1877,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NW23-39-2-W5"
+    ],
+    "aliases": [
+      "sylvan lake"
+    ],
+    "name_variants": [
+      "Sylvan Lake"
+    ],
+    "zone": "PP2",
+    "surface_area_ha": 5.3,
+    "amenities": "Swimming; Beach; Picnic",
+    "base_name": "Sylvan Lake"
+  },
+  {
+    "lake_id": "wb6097",
+    "name": "Wadlin Lake",
+    "waterbody_id": "6097",
+    "lat": 57.7371,
+    "lon": -115.5847,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "SW4-101-10-W5"
+    ],
+    "aliases": [
+      "wadlin lake"
+    ],
+    "name_variants": [
+      "Wadlin Lake"
+    ],
+    "zone": "NB3",
+    "surface_area_ha": 1924.3,
+    "amenities": "Day Use; Camping; Fire Pits; Firewood; Toilets; Playground; Boat Launch; Dock/Pier",
+    "base_name": "Wadlin Lake"
+  },
+  {
+    "lake_id": "wb6120",
+    "name": "Watridge Lake",
+    "waterbody_id": "6120",
+    "lat": 50.85314,
+    "lon": -115.43005,
+    "coord_source": "alberta",
+    "ats_codes": [
+      "SW11-22-11-W5"
+    ],
+    "aliases": [
+      "watridge lake"
+    ],
+    "name_variants": [
+      "Watridge Lake"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "base_name": "Watridge Lake"
+  },
+  {
+    "lake_id": "wb6169",
+    "name": "Winagami Lake",
+    "waterbody_id": "6169",
+    "lat": 55.6253,
+    "lon": -116.7353,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "SW33-76-18-W5"
+    ],
+    "aliases": [
+      "winagami lake",
+      "winagami lake sw33 76 18 w5"
+    ],
+    "name_variants": [
+      "Winagami Lake",
+      "Winagami Lake (SW33-76-18-W5)"
+    ],
+    "zone": "NB2",
+    "surface_area_ha": 4586.3,
+    "amenities": "Day Use; Fishing Access; Boating; Trails; Trails Hiking",
+    "base_name": "Winagami Lake"
+  },
+  {
+    "lake_id": "wb6654",
+    "name": "Kinglet Lake",
+    "waterbody_id": "6654",
+    "lat": 52.0498,
+    "lon": -116.4732,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NW35-35-18-W5"
+    ],
+    "aliases": [
+      "kinglet lake"
+    ],
+    "name_variants": [
+      "Kinglet Lake"
+    ],
+    "zone": "ES2",
+    "surface_area_ha": null,
+    "amenities": null,
+    "base_name": "Kinglet Lake"
+  },
+  {
+    "lake_id": "wb6813",
+    "name": "Forty Mile Coulee Reservoir",
+    "waterbody_id": "6813",
+    "lat": 49.6436,
+    "lon": -111.3937,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "SW14-8-11-W4"
+    ],
+    "aliases": [
+      "forty mile coulee reservoir"
+    ],
+    "name_variants": [
+      "Forty Mile Coulee Reservoir"
+    ],
+    "zone": "PP1",
+    "surface_area_ha": 671.6,
+    "amenities": "Toilets; Parking; Dock/Pier; Boat Launch",
+    "base_name": "Forty Mile Coulee Reservoir"
+  },
+  {
+    "lake_id": "wb6859",
+    "name": "Corner Lake",
+    "waterbody_id": "6859",
+    "lat": 49.446821,
+    "lon": -112.648546,
+    "coord_source": "profile",
+    "ats_codes": [
+      "NW4-6-20-W4"
+    ],
+    "aliases": [
+      "corner lake",
+      "unnamed corner lake"
+    ],
+    "name_variants": [
+      "Corner Lake",
+      "Unnamed Corner Lake"
+    ],
+    "zone": "PP1",
+    "surface_area_ha": 6.7,
+    "amenities": "Camping, pit toilets",
+    "base_name": "Corner Lake"
+  },
+  {
+    "lake_id": "wb18014",
+    "name": "South Heart Reservoir",
+    "waterbody_id": "18014",
+    "lat": 55.6888,
+    "lon": -116.6027,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NW20-77-17-W5"
+    ],
+    "aliases": [
+      "south heart reservoir",
+      "unnamed south heart reservoir"
+    ],
+    "name_variants": [
+      "South Heart Reservoir",
+      "Unnamed South Heart Reservoir"
+    ],
+    "zone": "NB2",
+    "surface_area_ha": null,
+    "amenities": "Toilets",
+    "base_name": "South Heart Reservoir"
+  },
+  {
+    "lake_id": "wb23094",
+    "name": "Fort Saskatchewan Fish & Game Pond",
+    "waterbody_id": "23094",
+    "lat": 53.6401,
+    "lon": -112.9304,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NE6-54-20-W4"
+    ],
+    "aliases": [
+      "fort saskatchewan fish game pond",
+      "unnamed fort saskatchewan fish game pond"
+    ],
+    "name_variants": [
+      "Fort Saskatchewan Fish & Game Pond",
+      "Unnamed Fort Saskatchewan Fish & Game Pond"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "base_name": "Fort Saskatchewan Fish & Game Pond"
+  },
+  {
+    "lake_id": "wb23327",
+    "name": "Twin Valley Reservoir",
+    "waterbody_id": "23327",
+    "lat": 50.247,
+    "lon": -113.4226,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NE7-15-25-W4"
+    ],
+    "aliases": [
+      "twin valley reservoir",
+      "unnamed twin valley reservoir"
+    ],
+    "name_variants": [
+      "Twin Valley Reservoir",
+      "Unnamed Twin Valley Reservoir"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "base_name": "Twin Valley Reservoir"
+  },
+  {
+    "lake_id": "wb24236",
+    "name": "Brazeau Canal",
+    "waterbody_id": "24236",
+    "lat": 52.93,
+    "lon": -115.51,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "SE3-46-11-W5"
+    ],
+    "aliases": [
+      "brazeau canal"
+    ],
+    "name_variants": [
+      "Brazeau Canal"
+    ],
+    "zone": "ES2",
+    "surface_area_ha": null,
+    "amenities": null,
+    "base_name": "Brazeau Canal"
+  },
+  {
+    "lake_id": "wb317177",
+    "name": "Goodwin Reservoir",
+    "waterbody_id": "317177",
+    "lat": 50.8455,
+    "lon": -114.2455,
+    "coord_source": "mywildalberta",
+    "ats_codes": [
+      "NW5-22-2-W5"
+    ],
+    "aliases": [
+      "goodwin reservoir"
+    ],
+    "name_variants": [
+      "Goodwin Reservoir"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null,
+    "base_name": "Goodwin Reservoir"
+  },
+  {
+    "lake_id": "wb417505",
+    "name": "Elk Point Pond",
+    "waterbody_id": "417505",
+    "lat": 53.888476,
+    "lon": -110.910587,
+    "coord_source": "profile",
+    "ats_codes": [
+      "NW36-56-7-W4"
+    ],
+    "aliases": [
+      "elk point pond",
+      "unnamed elk point pond"
+    ],
+    "name_variants": [
+      "Elk Point Pond",
+      "Unnamed Elk Point Pond"
+    ],
+    "zone": "NB1",
+    "surface_area_ha": null,
+    "amenities": "This site has no amenities.",
+    "base_name": "Elk Point Pond"
+  },
+  {
+    "lake_id": "wb417506",
+    "name": "Boulder Lake",
+    "waterbody_id": "417506",
+    "lat": 52.355924,
+    "lon": -113.871506,
+    "coord_source": "profile",
+    "ats_codes": [
+      "NE18-39-27-W4"
+    ],
+    "aliases": [
+      "boulder lake",
+      "unnamed boulder lake"
+    ],
+    "name_variants": [
+      "Boulder Lake",
+      "Unnamed Boulder Lake"
+    ],
+    "zone": "PP2",
+    "surface_area_ha": 2.2,
+    "amenities": "This waterbody has no amenities.",
+    "base_name": "Boulder Lake"
+  },
+  {
     "lake_id": "lk0001",
     "name": "Mountain Vista Estates Pond",
     "waterbody_id": null,
@@ -8217,6 +9140,27 @@
   },
   {
     "lake_id": "lk0002",
+    "name": "Primrose Lake",
+    "waterbody_id": null,
+    "lat": 54.80334,
+    "lon": -110.01276,
+    "coord_source": "alberta",
+    "ats_codes": [
+      "13-67-1-W4"
+    ],
+    "aliases": [
+      "primrose lake"
+    ],
+    "name_variants": [
+      "PRIMROSE LAKE",
+      "Primrose Lake"
+    ],
+    "zone": null,
+    "surface_area_ha": null,
+    "amenities": null
+  },
+  {
+    "lake_id": "lk0003",
     "name": "Braconnier Reservoir",
     "waterbody_id": null,
     "lat": 51.67231,
@@ -8237,7 +9181,7 @@
     "amenities": null
   },
   {
-    "lake_id": "lk0003",
+    "lake_id": "lk0004",
     "name": "Consort Reservoir",
     "waterbody_id": null,
     "lat": 52.00725,
@@ -8258,7 +9202,7 @@
     "amenities": null
   },
   {
-    "lake_id": "lk0004",
+    "lake_id": "lk0005",
     "name": "Niton Pond",
     "waterbody_id": null,
     "lat": null,
@@ -8277,7 +9221,7 @@
     "amenities": null
   },
   {
-    "lake_id": "lk0005",
+    "lake_id": "lk0006",
     "name": "Morinville Lake",
     "waterbody_id": null,
     "lat": null,
@@ -8296,177 +9240,43 @@
     "amenities": null
   },
   {
-    "lake_id": "lk0006",
-    "name": "Boulder Lake",
-    "waterbody_id": null,
-    "lat": 52.36041,
-    "lon": -113.881,
-    "coord_source": "alberta",
-    "ats_codes": [
-      "NE18-39-27-W4"
-    ],
-    "aliases": [
-      "boulder lake",
-      "unnamed boulder lake"
-    ],
-    "name_variants": [
-      "Boulder Lake",
-      "Unnamed Boulder Lake"
-    ],
-    "zone": null,
-    "surface_area_ha": null,
-    "amenities": null,
-    "published_waterbody_id": "417506"
-  },
-  {
     "lake_id": "lk0007",
-    "name": "Corner Lake",
+    "name": "St. Mary reservoir",
     "waterbody_id": null,
-    "lat": 49.44781,
-    "lon": -112.64864,
+    "lat": 49.32403,
+    "lon": -113.19974,
     "coord_source": "alberta",
     "ats_codes": [
-      "NW4-6-20-W4"
+      "SE29-4-24-W4"
     ],
     "aliases": [
-      "corner lake",
-      "unnamed corner lake"
+      "st mary reservoir"
     ],
     "name_variants": [
-      "Corner Lake",
-      "Unnamed Corner Lake"
+      "St. Mary reservoir"
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null,
-    "published_waterbody_id": "6859"
+    "amenities": null
   },
   {
     "lake_id": "lk0008",
-    "name": "Elk Point Pond",
+    "name": "Jackfish Lake",
     "waterbody_id": null,
-    "lat": 53.88952,
-    "lon": -110.91383,
+    "lat": 52.49875,
+    "lon": -115.58248,
     "coord_source": "alberta",
     "ats_codes": [
-      "NW36-56-7-W4"
+      "SW6-41-11-W5"
     ],
     "aliases": [
-      "elk point pond",
-      "unnamed elk point pond"
+      "jackfish lake"
     ],
     "name_variants": [
-      "Elk Point Pond",
-      "Unnamed Elk Point Pond"
+      "Jackfish Lake"
     ],
     "zone": null,
     "surface_area_ha": null,
-    "amenities": null,
-    "published_waterbody_id": "417505"
-  },
-  {
-    "lake_id": "lk0009",
-    "name": "Rawson Lake",
-    "waterbody_id": null,
-    "lat": 50.591,
-    "lon": -115.15215,
-    "coord_source": "alberta",
-    "ats_codes": [
-      "SW11-19-9-W5"
-    ],
-    "aliases": [
-      "rawson lake"
-    ],
-    "name_variants": [
-      "Rawson Lake"
-    ],
-    "zone": null,
-    "surface_area_ha": null,
-    "amenities": null,
-    "published_waterbody_id": "5649"
-  },
-  {
-    "lake_id": "lk0010",
-    "name": "Goodwin Reservoir",
-    "waterbody_id": null,
-    "lat": 50.84586,
-    "lon": -114.24896,
-    "coord_source": "alberta",
-    "ats_codes": [
-      "NW5-22-2-W5"
-    ],
-    "aliases": [
-      "goodwin reservoir"
-    ],
-    "name_variants": [
-      "Goodwin Reservoir"
-    ],
-    "zone": null,
-    "surface_area_ha": null,
-    "amenities": null,
-    "published_waterbody_id": "317177"
-  },
-  {
-    "lake_id": "lk0011",
-    "name": "Kinglet Lake",
-    "waterbody_id": null,
-    "lat": 52.05458,
-    "lon": -116.47743,
-    "coord_source": "alberta",
-    "ats_codes": [
-      "NW35-35-18-W5"
-    ],
-    "aliases": [
-      "kinglet lake"
-    ],
-    "name_variants": [
-      "Kinglet Lake"
-    ],
-    "zone": null,
-    "surface_area_ha": null,
-    "amenities": null,
-    "published_waterbody_id": "6654"
-  },
-  {
-    "lake_id": "lk0012",
-    "name": "Watridge Lake",
-    "waterbody_id": null,
-    "lat": 50.85314,
-    "lon": -115.43005,
-    "coord_source": "alberta",
-    "ats_codes": [
-      "SW11-22-11-W5"
-    ],
-    "aliases": [
-      "watridge lake"
-    ],
-    "name_variants": [
-      "Watridge Lake"
-    ],
-    "zone": null,
-    "surface_area_ha": null,
-    "amenities": null,
-    "published_waterbody_id": "6120"
-  },
-  {
-    "lake_id": "lk0013",
-    "name": "Unnamed Fort Saskatchewan Fish & Game Pond",
-    "waterbody_id": null,
-    "lat": 53.64195,
-    "lon": -112.94075,
-    "coord_source": "alberta",
-    "ats_codes": [
-      "NE6-54-20-W4"
-    ],
-    "aliases": [
-      "unnamed fort saskatchewan fish game pond"
-    ],
-    "name_variants": [
-      "Unnamed Fort Saskatchewan Fish & Game Pond"
-    ],
-    "zone": null,
-    "surface_area_ha": null,
-    "amenities": null,
-    "published_waterbody_id": "23094"
+    "amenities": null
   }
 ]

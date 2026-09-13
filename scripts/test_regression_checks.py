@@ -1416,12 +1416,20 @@ class ConfirmedFactsSurviveTests(unittest.TestCase):
 
 
 class PublishedWaterbodyIdTests(unittest.TestCase):
-    """Alberta's id for lakes this repo minted from a land description.
+    """Alberta's id for lakes the reports print no waterbody id for.
 
-    Thirteen lakes come from reports that print no waterbody id, so the exact
-    id join the rest of the pipeline relies on cannot see them — which is why
-    they got no depth even where Alberta publishes one. Eight are recoverable
-    from the stocking map.
+    Thirteen lakes came from reports with no waterbody id, so the exact id join
+    the rest of the pipeline relies on could not see them, and they got no
+    depth even where Alberta publishes one. Eight were recoverable from the
+    stocking map and were recorded as published_waterbody_id — a join key held
+    apart from the reports' own id.
+
+    build_history.py now seeds the registry from the stocking map directly, so
+    those eight arrive holding Alberta's id as their own and there is nothing
+    left for the recovery to recover. The mechanism stays, because the next
+    report Alberta publishes without an id will need it, and so do these tests:
+    what they guard is that a recovered id can never contradict a real one, and
+    that recovering an id never drags a bad coordinate along with it.
     """
 
     @classmethod
@@ -1465,8 +1473,10 @@ class PublishedWaterbodyIdTests(unittest.TestCase):
             self.skipTest("the collected CSV is not present")
         proposals = {p["lake_id"]: p for p in
                      reconcile.propose_published_ids(self.registry, site)}
+        # May legitimately be empty: every lake this once recovered an id for
+        # now carries Alberta's id outright. What matters is that any id still
+        # recovered still follows from the evidence.
         recovered = [l for l in self.registry if l.get("published_waterbody_id")]
-        self.assertTrue(recovered, "no published ids were recovered")
         for lake in recovered:
             # Already applied, so it no longer proposes; re-derive it against a
             # copy with the field cleared.
@@ -1513,26 +1523,60 @@ class PublishedWaterbodyIdTests(unittest.TestCase):
         self.assertEqual(reconcile.propose_published_ids(shared, site), [],
                          "a land description two lakes share was used as evidence")
 
+    # The eight lakes the recovery was built for. They hold Alberta's id
+    # outright now; the depth join that was the whole point must still reach
+    # every one of them, by whichever route.
+    ONCE_RECOVERED = {
+        "417506": "Boulder Lake", "6859": "Corner Lake",
+        "417505": "Elk Point Pond", "5649": "Rawson Lake",
+        "317177": "Goodwin Reservoir", "6654": "Kinglet Lake",
+        "6120": "Watridge Lake",
+        "23094": "Fort Saskatchewan Fish & Game Pond",
+    }
+
     def test_the_recovered_lakes_reach_the_depth_file(self):
         """The whole point: they were invisible to the join before."""
         path = DATA_DIR / "lake_depth.json"
         if not path.exists():
             self.skipTest("depth has not been built")
         depths = json.loads(path.read_text(encoding="utf-8"))["lakes"]
-        recovered = [l for l in self.registry if l.get("published_waterbody_id")]
-        self.assertTrue(recovered)
-        for lake in recovered:
+        by_wid = {str(l.get("waterbody_id") or ""): l for l in self.registry}
+        by_pub = {str(l.get("published_waterbody_id") or ""): l for l in self.registry}
+        for wid, name in self.ONCE_RECOVERED.items():
+            lake = by_wid.get(wid) or by_pub.get(wid)
+            self.assertIsNotNone(lake, f"{name} is not on the map at all")
             self.assertIn(lake["lake_id"], depths,
-                          f"{lake['name']} still has no entry despite a published id")
+                          f"{name} still has no depth entry despite a published id")
 
     def test_a_watridge_style_position_is_still_refused(self):
-        """The id is recovered; the bad coordinate is not adopted with it."""
+        """The id is joined; the bad coordinate is not adopted with it.
+
+        Watridge publishes a longitude 140 km from its own land description and
+        its own district — one digit wrong. Whether its id arrives by recovery
+        or by seeding, the position must not come with it.
+        """
         watridge = [l for l in self.registry if l["name"] == "Watridge Lake"]
         self.assertEqual(len(watridge), 1)
         lake = watridge[0]
-        self.assertEqual(str(lake.get("published_waterbody_id")), "6120")
+        self.assertEqual(
+            str(lake.get("waterbody_id") or lake.get("published_waterbody_id")), "6120")
         self.assertLess(abs(lake["lon"] - (-115.43)), 0.1,
                         "Watridge moved to the map's published longitude")
+
+    def test_a_recovered_id_is_never_one_a_real_lake_holds(self):
+        """These rows are keyed by lake_id, and a minted lk00NN is not stable.
+
+        The numbering follows the order lakes are minted in, so adding lakes
+        upstream shifts it. Eight rows recorded against lk0006-lk0013 came to
+        name different lakes than they were written for, and would have handed
+        Boulder Lake's id to Morinville Lake. apply_facts refuses that now.
+        """
+        real = {str(l["waterbody_id"]) for l in self.registry if l.get("waterbody_id")}
+        for lake in self.registry:
+            recovered = lake.get("published_waterbody_id")
+            if recovered:
+                self.assertNotIn(str(recovered), real,
+                                 f"{lake['name']} claims an id another lake holds")
 
 
 class MeanDepthTests(unittest.TestCase):
@@ -1817,19 +1861,27 @@ class OutOfScopeTests(unittest.TestCase):
         with path.open(newline="", encoding="utf-8") as handle:
             cls.rows = list(csv.DictReader(handle))
 
-    def test_nothing_trout_bearing_was_quietly_dropped(self):
+    def test_nothing_alberta_stocks_is_quietly_dropped(self):
+        """The list is empty now, and it is empty for a reason.
+
+        It once held 31 lakes stocked with walleye or pike and no trout. The
+        map carries those species now, so there is nothing Alberta stocks that
+        it declines to show, and every row here would be a lake going missing.
+        """
         import sources
         names = {"RAINBOW TROUT", "BROOK TROUT", "BROWN TROUT", "TIGER TROUT",
-                 "CUTTHROAT TROUT", "WESTSLOPE CUTTHROAT TROUT"}
-        self.assertEqual(len(names), len(sources.TROUT_SPECIES),
+                 "CUTTHROAT TROUT", "WESTSLOPE CUTTHROAT TROUT",
+                 "WALLEYE", "NORTHERN PIKE", "ARCTIC GRAYLING"}
+        self.assertEqual(len(names), len(sources.STOCKED_SPECIES),
                          "the species this map covers changed; revisit the list")
         for row in self.rows:
             published = {s.strip() for s in row["species"].split(";")}
             self.assertFalse(published & names,
-                             f"{row['name']} is stocked with trout and is not out of scope")
+                             f"{row['name']} is stocked with a species this map "
+                             f"carries and is not out of scope")
 
     def test_every_row_names_a_reason(self):
-        self.assertTrue(self.rows)
+        """No assertion that rows exist: none should, and none do."""
         for row in self.rows:
             self.assertTrue(row["why"], row["name"])
             self.assertTrue(row["species"], row["name"])
@@ -2046,3 +2098,345 @@ class SettledDisagreementTests(unittest.TestCase):
         upper = self.registry["wb6607"]["surface_area_ha"]
         self.assertEqual((lower, upper), (4.0, 0.4),
                          "the pair is not the map's pair")
+
+
+class StockedWeightTests(unittest.TestCase):
+    """How heavy the fish were, which the annual reports never said.
+
+    Every stocking on this map has been described by a length and by nothing
+    else, because AVG. LENGTH is the only size column the reports carry.
+    Alberta's stocking map publishes a weight as well, and it is joined on the
+    hatchery batch — one lake, one season, one species, one size — because the
+    two publications disagree row for row on dates and quantities often enough
+    that a literal join lands only a third of the time.
+
+    It reaches back to 2021 and no further, which is as far as the stocking map
+    goes. The rule these tests exist for: an older row has no weight, and no
+    weight must never render as a fish that weighs nothing.
+    """
+
+    FIRST_YEAR = 2021
+
+    @classmethod
+    def setUpClass(cls):
+        cls.years = {}
+        for path in sorted(DATA_DIR.glob("lakes_*.json")):
+            year = int(path.stem.split("_")[1])
+            cls.years[year] = json.loads(path.read_text(encoding="utf-8"))
+
+    def rows(self, year):
+        for lake in self.years[year]:
+            for row in lake["stockings"]:
+                yield lake, row
+
+    def test_no_weight_before_the_stocking_map_begins(self):
+        for year in (y for y in self.years if y < self.FIRST_YEAR):
+            for lake, row in self.rows(year):
+                self.assertIsNone(row.get("weight_g"),
+                                  f"{lake['name']} {year} has a weight from nowhere")
+
+    def test_nothing_is_recorded_as_weighing_zero(self):
+        """A fish with no published weight is not a fish weighing 0 g.
+
+        The workbook writes "Unknown" in that cell and its own notes insist the
+        distinction is preserved. Zero would survive every other check here and
+        would read, on the map, as a fact.
+        """
+        for year in self.years:
+            for lake, row in self.rows(year):
+                weight = row.get("weight_g")
+                if weight is not None:
+                    self.assertGreater(weight, 0, f"{lake['name']} {year}")
+
+    def test_the_recent_years_are_almost_all_covered(self):
+        """3,209 of 3,289 rows from 2021 on. A drop means the join broke."""
+        have = total = 0
+        for year in (y for y in self.years if y >= self.FIRST_YEAR):
+            for _, row in self.rows(year):
+                total += 1
+                have += row.get("weight_g") is not None
+        self.assertGreater(total, 3000, "the recent years lost rows")
+        self.assertGreater(have / total, 0.90,
+                           f"only {have} of {total} recent rows carry a weight")
+
+    def test_a_known_row_carries_its_published_weight(self):
+        """Acadia Valley's 2025 brook trout, 19.5 cm, published at 80 g."""
+        rows = [r for lake, r in self.rows(2025)
+                if lake["lake_id"] == "wb6900" and r["species"] == "BKTR"]
+        self.assertTrue(rows, "the row this pins to is gone")
+        for row in rows:
+            self.assertAlmostEqual(row["weight_g"], 80.0, places=1)
+
+    def test_the_committed_weights_are_what_the_workbook_produces(self):
+        """The CSV is committed rather than rebuilt, so a test re-derives it."""
+        path = DATA_DIR / "raw" / "mywildalberta_weights.csv"
+        if not path.exists():
+            self.skipTest("the weights CSV has not been built")
+        try:
+            import openpyxl  # noqa: F401
+        except ImportError:
+            self.skipTest("openpyxl is not installed")
+        import import_stocking_map as imp
+        if not imp.WORKBOOK.exists():
+            self.skipTest("the workbook is not present")
+        workbook = openpyxl.load_workbook(imp.WORKBOOK, data_only=True)
+        details = imp.read_sheet(workbook, "Stocking details")
+        rebuilt = imp.render(
+            ["waterbody_id", "year", "species", "length_cm", "weight_g", "records"],
+            imp.weight_rows(details),
+            lambda r: (imp.by_waterbody(r), r["year"], r["species"], float(r["length_cm"])))
+        self.assertEqual(rebuilt, path.read_text(encoding="utf-8"),
+                         "data/raw/mywildalberta_weights.csv is not what the "
+                         "workbook produces; re-run import_stocking_map.py")
+
+
+class SpeciesBeyondTroutTests(unittest.TestCase):
+    """Walleye, pike and grayling, and the 31 lakes that came with them.
+
+    The pipeline used to drop every non-trout row on the way in, which also
+    dropped every lake that held nothing else — Sylvan Lake, Lake Newell,
+    Travers and McGregor Reservoir among them. The reversal is recorded in
+    data/out_of_scope.csv, which is now empty.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.registry = json.loads(
+            (DATA_DIR / "lake_registry.json").read_text(encoding="utf-8"))
+        cls.recent = json.loads(
+            (DATA_DIR / "lakes_2025.json").read_text(encoding="utf-8"))
+
+    def test_the_reports_are_read_with_the_wider_set(self):
+        import sources
+        for code in ("WALL", "NRPK", "ARGR"):
+            self.assertIn(code, sources.STOCKED_SPECIES)
+
+    def test_the_walleye_lakes_arrived(self):
+        names = {l["name"] for l in self.registry}
+        for name in ("Sylvan Lake", "Lake Newell", "Travers Reservoir",
+                     "Mcgregor Reservoir", "Pinehurst Lake", "Burnstick Lake"):
+            self.assertIn(name, names, f"{name} is missing from the map")
+
+    def test_every_walleye_row_in_the_reports_is_linked(self):
+        import sources
+        published = sum(1 for y in sorted(sources.YEAR_SOURCES)
+                        for r in sources.read_year(y) if r["species"] == "WALL")
+        linked = 0
+        for path in DATA_DIR.glob("lakes_*.json"):
+            for lake in json.loads(path.read_text(encoding="utf-8")):
+                linked += sum(1 for s in lake["stockings"] if s["species"] == "WALL")
+        self.assertEqual(linked, published,
+                         f"{published - linked} walleye row(s) reached no lake")
+
+    def test_the_app_can_draw_every_species_it_holds(self):
+        """A code with no entry in SPECIES_META draws a grey pin and no label."""
+        index = (ROOT / "index.html").read_text(encoding="utf-8")
+        codes = set()
+        for path in DATA_DIR.glob("lakes_*.json"):
+            for lake in json.loads(path.read_text(encoding="utf-8")):
+                codes.update(s["species"] for s in lake["stockings"])
+        for code in sorted(codes):
+            self.assertIn(f"  {code}: {{ label:", index,
+                          f"{code} is in the data with no entry in SPECIES_META")
+            self.assertIn(f'"{code}"', index, f"{code} is missing from SPECIES_ORDER")
+
+    # Every species the map carries, and the band it is scored on. Held here
+    # rather than parsed out of the JS so that a change to either side has to
+    # be made on both, deliberately.
+    EXPECTED_BANDS = {
+        "RNTR": (4, 12, 18, 24), "BKTR": (3, 11, 16, 21), "BNTR": (4, 12, 19, 25),
+        "TGTR": (3, 11, 17, 22), "CTTR": (3, 9, 16, 22), "WSCT": (2, 8, 15, 20),
+        "WALL": (2, 20, 24, 29), "NRPK": (1, 19, 21, 29), "ARGR": (1, 10, 17, 22),
+    }
+
+    def bands(self):
+        """The BANDS literal from conditions.js, parsed."""
+        source = (ROOT / "js" / "conditions.js").read_text(encoding="utf-8")
+        start = source.index("var BANDS = {")
+        block = source[start:source.index("var FALLBACK_BAND", start)]
+        out = {}
+        for code, lo, opt_lo, opt_hi, hi in re.findall(
+                r"(\w{4}):\s*\{\s*lo:\s*(-?\d+),\s*optLo:\s*(-?\d+),"
+                r"\s*optHi:\s*(-?\d+),\s*hi:\s*(-?\d+)", block):
+            out[code] = (int(lo), int(opt_lo), int(opt_hi), int(hi))
+        return out
+
+    def test_every_species_on_the_map_has_a_band(self):
+        """A species with no band falls back to the rainbow's, which is wrong.
+
+        Walleye, pike and grayling were carried unbanded for a while precisely
+        to avoid that: 22 C is near the top of a rainbow's tolerance and close
+        to where a walleye grows best, so one curve cannot serve both. They are
+        banded now, from the same USFWS HSI series the salmonids rest on.
+        """
+        bands = self.bands()
+        self.assertEqual(bands, self.EXPECTED_BANDS,
+                         "conditions.js BANDS changed; check evidence.html agrees")
+        codes = set()
+        for path in DATA_DIR.glob("lakes_*.json"):
+            for lake in json.loads(path.read_text(encoding="utf-8")):
+                codes.update(s["species"] for s in lake["stockings"])
+        for code in sorted(codes):
+            self.assertIn(code, bands, f"{code} is stocked but has no thermal band")
+
+    def test_no_warmwater_species_was_given_a_salmonid_curve(self):
+        """The point of banding them separately, asserted rather than trusted."""
+        bands = self.bands()
+        salmonid = {c: bands[c] for c in ("RNTR", "BKTR", "BNTR", "TGTR", "CTTR", "WSCT")}
+        for code in ("WALL", "NRPK", "ARGR"):
+            self.assertNotIn(bands[code], salmonid.values(),
+                             f"{code}'s band is a copy of a trout's")
+        # Overlap at the edges is real — pike's optimum starts at 19 C, exactly
+        # where a brown trout's ends. What must hold is that both warmwater fish
+        # are still in their best band above the temperature at which every
+        # salmonid has left its own, which is the whole reason they are banded
+        # apart. And that grayling, the coldwater one, peaks below a walleye.
+        warm_top = min(bands["WALL"][2], bands["NRPK"][2])
+        self.assertGreater(warm_top, max(b[2] for b in salmonid.values()),
+                           "a warmwater optimum ends no higher than a trout's")
+        self.assertLess(bands["ARGR"][2], bands["WALL"][1],
+                        "grayling's optimum reaches into a walleye's")
+
+    def test_the_fact_sheet_prints_the_same_numbers(self):
+        """evidence.html once pointed at a band table that did not exist.
+
+        It said walleye and pike had no band "in the table above" when the page
+        had never printed one. Now it does, and this fails if the two drift.
+        """
+        page = (ROOT / "evidence.html").read_text(encoding="utf-8")
+        table = re.search(r'<table class="bands">(.*?)</table>', page, re.S)
+        self.assertIsNotNone(table, "the fact sheet has no band table")
+        rows = re.findall(
+            r'<tr data-band="(\w{4})">\s*<td>[^<]*</td>\s*<td>(-?\d+)\*?</td>\s*'
+            r'<td>(-?\d+)&ndash;(-?\d+)</td>\s*<td>(-?\d+)</td>',
+            table.group(1))
+        self.assertTrue(rows, "the band table rows did not parse")
+        printed = {c: (int(lo), int(a), int(b), int(hi)) for c, lo, a, b, hi in rows}
+        self.assertEqual(printed, self.bands(),
+                         "the fact sheet and conditions.js disagree about a band")
+
+
+class ReportedSpeciesTests(unittest.TestCase):
+    """What is reported to swim in a lake, as against what was put in.
+
+    Stocking records answer only the second question. The catch limits do not
+    answer the first one either, and reading them as though they did is the
+    mistake this data exists to prevent: 64 of the 65 lakes the guide lists by
+    name carry the identical pike-walleye-perch triplet, which is boilerplate
+    covering what might be there. Cow Lake's row lists a walleye limit and Cow
+    Lake is reported to hold rainbow, brown, pike and perch, and no walleye.
+
+    The source is Angler's Atlas, by way of a hand-checked export that grades
+    every one of the 346 lakes for match quality. Only the 106 it calls a
+    verified match reach the app.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.profiles = json.loads(
+            (DATA_DIR / "lake_profile.json").read_text(encoding="utf-8"))["lakes"]
+        cls.confirmed = {k: v["confirmed"] for k, v in cls.profiles.items()
+                         if v.get("confirmed")}
+
+    def test_every_entry_cites_a_checkable_source(self):
+        """A presence claim nobody can check is worth less than none."""
+        for key, entry in self.confirmed.items():
+            self.assertTrue(entry.get("species"), key)
+            self.assertTrue((entry.get("url") or "").startswith("https://"),
+                            f"{key} has no source URL")
+            self.assertEqual(entry.get("source"), "anglersatlas", key)
+
+    def test_an_absent_lake_is_unchecked_and_not_empty(self):
+        """Coverage is partial on purpose, so the absence must stay meaningful.
+
+        Nothing may store an empty species list: a lake nobody has looked up
+        and a lake with no fish in it are different claims, and only one of
+        them is ever true.
+        """
+        for key, entry in self.confirmed.items():
+            self.assertNotEqual(entry["species"], [], f"{key} stores an empty list")
+        self.assertLess(len(self.confirmed), len(self.profiles),
+                        "every lake is covered; the unchecked case needs a new test")
+
+    def test_only_verified_matches_are_carried(self):
+        """The export grades four ways and only one of them is good enough.
+
+        "Uncertain lake match" means the exporter could not tell which lake the
+        page was about. Twenty-eight lakes are in that position, and putting
+        their species on the map would be asserting what the source declined to.
+        """
+        try:
+            import openpyxl  # noqa: F401
+        except ImportError:
+            self.skipTest("openpyxl is not installed")
+        import import_stocking_map as imp
+        if not imp.WORKBOOK.exists():
+            self.skipTest("the workbook is not present")
+        book = openpyxl.load_workbook(imp.WORKBOOK, data_only=True)
+        overview = imp.read_sheet(book, "Species overview")
+        verified = {imp.cell_text(r.get("Lake ID")) for r in overview
+                    if imp.cell_text(r.get("Match status")) == imp.VERIFIED_MATCH}
+        self.assertEqual(len(verified), 106, "the export's verified count moved")
+        self.assertEqual(len(self.confirmed), len(verified),
+                         "a verified lake was dropped, or an unverified one admitted")
+
+    def test_a_listing_the_site_disputes_is_never_carried(self):
+        """The export excludes those from its own species columns.
+
+        Sylvan Lake's Prussian Carp is listed and disputed; re-admitting it here
+        would quietly overturn a judgement someone already made.
+        """
+        path = DATA_DIR / "raw" / "lake_species_atlas.csv"
+        if not path.exists():
+            self.skipTest("the atlas CSV has not been built")
+        with path.open(newline="", encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+        for row in rows:
+            self.assertNotEqual(row["listing"], "Disputed by site", row)
+        sylvan = self.confirmed.get("wb5952")
+        if sylvan:
+            self.assertNotIn("PRCP", [s["code"] for s in sylvan["species"]],
+                             "Sylvan Lake's disputed Prussian Carp came back")
+
+    def test_the_community_vote_travels_with_the_claim(self):
+        """+9/-0 and +3/-3 are not the same claim and must not look alike."""
+        for key, entry in self.confirmed.items():
+            for sp in entry["species"]:
+                self.assertIsInstance(sp["agree"], int, key)
+                self.assertIsInstance(sp["disagree"], int, key)
+                self.assertGreaterEqual(sp["agree"] + sp["disagree"], 1,
+                                        f"{key} {sp['code']} carries no votes at all")
+                self.assertIn(sp["kind"], ("sport", "rough", "invasive"), key)
+
+    def test_cow_lake_holds_no_walleye(self):
+        """The case the whole distinction rests on.
+
+        Its regulation row lists a walleye limit. Its reported species list
+        does not include walleye. If these two ever agree by accident, the
+        block that keeps them apart has stopped being exercised.
+        """
+        cow = self.confirmed.get("wb4340")
+        if cow is None:
+            self.skipTest("Cow Lake has not been checked")
+        codes = {s["code"] for s in cow["species"]}
+        self.assertNotIn("WALL", codes)
+        for code in ("RNTR", "BNTR", "NRPK", "YLPR"):
+            self.assertIn(code, codes)
+        # Pike and perch are in the lake and not in its stocking history, which
+        # is exactly the information this source exists to add.
+        new = {s["code"] for s in cow["species"] if s["new"]}
+        self.assertEqual(new, {"NRPK", "YLPR"})
+
+        regs = json.loads(
+            (DATA_DIR / "lake_regulations.json").read_text(encoding="utf-8"))["lakes"]
+        self.assertIn("WALL", regs["wb4340"]["species"],
+                      "the guide no longer lists a walleye limit for Cow Lake")
+
+    def test_the_app_can_name_every_species_reported(self):
+        """A code with no label renders as four letters nobody reads as a fish."""
+        index = (ROOT / "index.html").read_text(encoding="utf-8")
+        for key, entry in self.confirmed.items():
+            for sp in entry["species"]:
+                code = sp["code"]
+                named = f"  {code}: {{ label:" in index or f"{code}: \"" in index
+                self.assertTrue(named, f"{code} (in {key}) has no name in the app")

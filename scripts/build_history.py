@@ -39,7 +39,7 @@ from registry import (ALIASES_PATH, DATA_DIR, FACTS_PATH, REVIEW_PATH, Registry,
                       normalize_name, shared_land_descriptions,
                       save_registry, _title)
 
-TROUT = sources.TROUT_SPECIES
+STOCKED = sources.STOCKED_SPECIES
 
 
 def build_spine(rows_by_year):
@@ -70,6 +70,73 @@ def build_spine(rows_by_year):
         lake["name_variants"] = sorted({_title(n) for n in names})
     reg.reindex()
     return reg
+
+
+STOCKING_MAP_CSV = DATA_DIR / "raw" / "mywildalberta_lakes.csv"
+
+
+def seed_from_stocking_map(reg):
+    """Give every lake Alberta's own identifier, not just the ones it printed.
+
+    The spine above comes from the waterbody id in the 2012-2019 reports. From
+    2020 the reports stopped carrying it, so a lake first stocked after that
+    reaches the linker with nothing but a name and a land description — and
+    gets minted an lk00NN of our own invention, or worse, matched to a
+    neighbour. Burnstick Lake was one similarity point away from becoming
+    Birch Lake, 3.5 km down the road; Chin Reservoir was being offered
+    McQuillan Reservoir, 14 km away.
+
+    Alberta's stocking map lists all of them with the id, the position and the
+    land description. Seeding from it first means those lakes arrive already
+    identified, so the linker has a real lake to find rather than a decision to
+    guess at. Only waterbody ids the spine does not already hold are added; the
+    reports stay the authority wherever they said anything.
+    """
+    if not STOCKING_MAP_CSV.exists():
+        return 0
+    known = {str(l.get("waterbody_id") or "") for l in reg.lakes}
+    # Alberta sometimes carries one water under two ids — the stocking map calls
+    # Talus Lake 6632 where the reports call it 5960, and Magrath Children's
+    # Pond 317719 against the reports' 6751 — same land description, same
+    # coordinates, same lake. Seeding those would split one lake in two, so a
+    # row whose quarter section is already held under a name this close is
+    # taken to be the lake we already have.
+    by_code = defaultdict(list)
+    for lake in reg.lakes:
+        for code in lake["ats_codes"]:
+            by_code[code].append(lake)
+    added = 0
+    with STOCKING_MAP_CSV.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            wid = (row.get("waterbody_id") or "").strip()
+            name = (row.get("page_name") or row.get("registry_name") or "").strip()
+            if not wid or not name or wid in known:
+                continue
+
+            def num(key):
+                try:
+                    return float((row.get(key) or "").strip())
+                except (TypeError, ValueError):
+                    return None
+
+            lat, lon = num("latitude"), num("longitude")
+            code = normalise_code((row.get("legal_land_description") or "").strip())
+            if code and any(name_similarity(name, l["name"]) >= 0.85 for l in by_code.get(code, ())):
+                continue
+            lake = reg.add_lake(
+                lake_id=f"wb{wid}", name=name, lat=lat, lon=lon, waterbody_id=wid,
+                ats_codes={code} if code else set(), aliases={name})
+            if lat is not None and lon is not None:
+                lake["coord_source"] = "mywildalberta"
+            lake["zone"] = (row.get("zone") or "").strip() or None
+            lake["surface_area_ha"] = num("surface_area_ha")
+            lake["amenities"] = (row.get("amenities") or "").strip() or None
+            known.add(wid)
+            if code:
+                by_code[code].append(lake)
+            added += 1
+    reg.reindex()
+    return added
 
 
 def apply_facts(reg):
@@ -137,7 +204,18 @@ def apply_facts(reg):
                 # lk0006 to become wb417506 — which breaks the ?lake= links
                 # people have bookmarked and every answer already recorded
                 # against the old id. This is a join key and nothing more.
-                if not lake.get("waterbody_id") and not lake.get("published_waterbody_id"):
+                #
+                # And never an id some other lake already holds. These rows are
+                # keyed by lake_id, and a minted lk00NN is not stable: the
+                # numbering follows the order lakes are minted in, so adding
+                # lakes upstream shifts it. Eight rows recorded against
+                # lk0006-lk0013 would otherwise have handed Boulder Lake's id
+                # to Morinville Lake and Corner Lake's to St. Mary Reservoir.
+                # A recovered id that belongs to a real lake is not a recovery.
+                taken = any(str(l.get("waterbody_id") or "") == str(value)
+                            for l in reg.lakes)
+                if (not lake.get("waterbody_id") and not lake.get("published_waterbody_id")
+                        and not taken):
                     lake["published_waterbody_id"] = value
                     applied += 1
     if applied:
@@ -323,8 +401,8 @@ def link_all(reg, rows_by_year, aliases, verbose=True):
 
     for year in sorted(rows_by_year):
         for row in rows_by_year[year]:
-            if row["species"] not in TROUT:
-                stats["not_trout"] += 1
+            if row["species"] not in STOCKED:
+                stats["not_stocked"] += 1
                 continue
 
             row_name = display_name(row["official_name"], row["common_name"])
@@ -474,8 +552,35 @@ def write_review(review, reg):
     return len(unique)
 
 
+WEIGHTS_CSV = DATA_DIR / "raw" / "mywildalberta_weights.csv"
+
+
+def load_weights():
+    """How heavy a stocked fish was, keyed by the batch it came from.
+
+    The annual reports publish a length and never a weight, so every fish on
+    this map has been described by how long it is and by nothing else. Alberta's
+    stocking map publishes both, and import_stocking_map.py reduces it to one
+    weight per lake, season, species and size — a hatchery batch.
+
+    It covers 2021 on, because that is as far back as the stocking map goes. An
+    older row gets nothing, and nothing means nothing: a row with no published
+    weight must not read as a fish weighing zero grams.
+    """
+    if not WEIGHTS_CSV.exists():
+        return {}
+    weights = {}
+    with WEIGHTS_CSV.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            key = (f"wb{row['waterbody_id']}", int(row["year"]),
+                   row["species"], row["length_cm"])
+            weights[key] = float(row["weight_g"])
+    return weights
+
+
 def write_year_files(reg, linked, provisional):
     """Emit one file per year in the shape the map already reads."""
+    weights = load_weights()
     manifest_years = []
     for year in sorted(linked):
         by_lake = defaultdict(list)
@@ -486,9 +591,14 @@ def write_year_files(reg, linked, provisional):
             lake = reg.by_id[lake_id]
             stockings = []
             for r in sorted(rows, key=lambda r: (r["date"] or "", r["species"])):
+                weight = None
+                if r["length_cm"] is not None:
+                    weight = weights.get(
+                        (lake_id, year, r["species"], f"{float(r['length_cm']):.1f}"))
                 stockings.append(dict(
                     species=r["species"], strain=r["strain"] or None,
                     genotype=r["genotype"] or None, length_cm=r["length_cm"],
+                    weight_g=weight,
                     number=r["number"], date=r["date"], year=year,
                     date_precision=r["date_precision"]))
             out.append(dict(
@@ -585,6 +695,8 @@ def write_profiles(reg):
     print(f"  {stats['photos']} photo(s) across {stats['with_photos']} lake(s), "
           f"linked and not copied")
     print(f"  {stats['facets']} facet(s) worth filtering by")
+    print(f"  {stats.get('with_confirmed', 0)} lake(s) with a reported species list; "
+          f"the rest are unchecked, which is not the same as empty")
     return stats
 
 
@@ -647,6 +759,9 @@ def main():
     print("\nBuilding the registry from Alberta's waterbody identifiers...")
     reg = build_spine(rows_by_year)
     print(f"  {len(reg.lakes)} lakes with an Alberta identifier")
+    seeded = seed_from_stocking_map(reg)
+    if seeded:
+        print(f"  {seeded} more from Alberta's stocking map, which still publishes the id")
     drift = sum(1 for l in reg.lakes if len(l["ats_codes"]) > 1)
     print(f"  {drift} of them carry more than one land description across years")
 
@@ -696,7 +811,7 @@ def main():
     disambiguate_names(reg)
 
     linked_rows = sum(len(v) for v in linked.values())
-    trout_rows = sum(1 for y in rows_by_year.values() for r in y if r["species"] in TROUT)
+    trout_rows = sum(1 for y in rows_by_year.values() for r in y if r["species"] in STOCKED)
     print(f"\n  {linked_rows:,} of {trout_rows:,} trout rows linked "
           f"({linked_rows / trout_rows * 100:.1f}%)")
     print(f"  {len(still)} row(s) need a human decision")

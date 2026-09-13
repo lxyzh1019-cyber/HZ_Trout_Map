@@ -37,9 +37,9 @@ name,east stormwater pond,wb22993,2020 EAST STORMWATER POND
 ats,SE29-40-26-W4,wb22993,2020 EAST STORMWATER POND
 name,magrath childrens pond,wb6751,2020 MAGRATH CHILDRENS POND
 ats,SW26-5-22-W4,wb6751,2020 MAGRATH CHILDRENS POND
-new,rawson lake,,2023 Rawson Lake
-new,kinglet lake,,2023 Kinglet Lake
-new,watridge lake,,2023 Watridge Lake
+name,rawson lake,wb5649,2023 Rawson Lake; Alberta's stocking map publishes the id
+name,kinglet lake,wb6654,2023 Kinglet Lake; Alberta's stocking map publishes the id
+name,watridge lake,wb6120,2023 Watridge Lake; Alberta's stocking map publishes the id
 name,unnamed east stormwater pond,wb22993,2025 Unnamed East Stormwater Pond
 name,west rivers edge fort lions park pond pond,wb26854,2025 West Rivers Edge Fort Lions Park Pond Pond
 ats,NE23-54-23-W4,wb26854,2025 West Rivers Edge Fort Lions Park Pond Pond
@@ -53,3 +53,4 @@ ats,NW26-21-5-W5,wb6607,2020 CHAMPION LAKES (UPPER CHAMPION LAKE)
 name,two lakes north,wb6535,2014 TWO LAKES (NORTH) — Alberta id 6052; confirmed North Two Lake
 wrong_ats,NW1-73-25-W5,,land description Alberta filed under id 6052; 166 km from Two Lakes PP
 name,two lakes,wb6535,2015 TWO LAKES — unqualified; confirmed North Two Lake
+name,swan lake,wb5944,"2015 SWAN LAKE, no land description; Alberta has two, and 5944 is the one its own reports carry an id for"

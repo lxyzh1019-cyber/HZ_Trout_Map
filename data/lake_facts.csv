@@ -1,12 +1,4 @@
 lake_id,field,value,decision,note
-lk0006,published_waterbody_id,417506,fill,Boulder Lake — NE18-39-27-W4 identifies one lake on each side; the map calls it 'Boulder Lake' (1.00)
-lk0007,published_waterbody_id,6859,fill,Corner Lake — NW4-6-20-W4 identifies one lake on each side; the map calls it 'Corner Lake' (1.00)
-lk0008,published_waterbody_id,417505,fill,Elk Point Pond — NW36-56-7-W4 identifies one lake on each side; the map calls it 'Elk Point Pond' (1.00)
-lk0009,published_waterbody_id,5649,fill,Rawson Lake — SW11-19-9-W5 identifies one lake on each side; the map calls it 'Rawson Lake' (1.00)
-lk0010,published_waterbody_id,317177,fill,Goodwin Reservoir — NW5-22-2-W5 identifies one lake on each side; the map calls it 'Goodwin Reservoir' (1.00)
-lk0011,published_waterbody_id,6654,fill,Kinglet Lake — NW35-35-18-W5 identifies one lake on each side; the map calls it 'Kinglet Lake' (1.00)
-lk0012,published_waterbody_id,6120,fill,Watridge Lake — SW11-22-11-W5 identifies one lake on each side; the map calls it 'Watridge Lake' (1.00)
-lk0013,published_waterbody_id,23094,fill,Unnamed Fort Saskatchewan Fish & Game Pond — NE6-54-20-W4 identifies one lake on each side; the map calls it 'Fort Saskatchewan Fish & Game Pond' (0.95)
 wb18997,surface_area_ha,7,fill,"Odlum Lake — Alberta publishes it, the repo had nothing"
 wb18997,zone,ES1,fill,"Odlum Lake — Alberta publishes it, the repo had nothing"
 wb21332,surface_area_ha,7,fill,"Camp 9 Trout Pond — Alberta publishes it, the repo had nothing"

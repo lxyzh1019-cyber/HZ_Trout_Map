@@ -48,7 +48,7 @@
 
   Charts
     M32 panel toggles, map resizes, button stays clear of the panel
-    M33 stacked by species, by season, per-species trend, stocking calendar
+    M33 stacked by species, by season, per-species trend, stocking year
     M34 helper text per chart, summary stats
     M35 planning summary with year-over-year, trend, risers and decliners
     M36 provisional year labelled in the year-over-year line
@@ -127,8 +127,62 @@
     M79 Alberta's own description of the lake, and its photographs, in a panel
         rather than a popup: what you read after deciding, not what decides
     M80 photographs stay on Alberta's server — linked, never copied, loaded only
-        when asked for, with no referrer, and replaced by their captions when
-        they cannot load
+        when asked for, with no referrer, at the address Alberta published and
+        never re-encoded, keeping their frame and saying so when one fails, and
+        offered as links where the format is one the browser cannot decode
+    M81 the conditions panel scores a lake and never a town: with none chosen it
+        takes the nearest one and names it, so the water-temperature input and
+        the species bands always have a lake to mean something about
+    M82 five years selected on arrival rather than sixteen, with the count
+        saying what is hidden and All one click away
+    M83 year chips follow the focused lake — no chip for a year that lake was
+        never stocked, because it could only ever empty the view
+    M84 the popup lists the years a lake was stocked as runs, so a skipped year
+        shows as a gap instead of hiding inside a span
+    M85 the filters collapse on a desktop and stay collapsed, and the map is
+        told it grew
+    M86 lake names on the pins close in, where the basemap names the big water
+        and leaves the stocked ponds blank
+    M87 the evidence page is reached with the map's state and hands it back, so
+        the way out returns to the lake and the filters you left
+    M88 pressure in kilopascals, as Environment Canada publishes it, converted
+        on the way to the screen so no threshold moves, and the level printed
+        beside the trend although only the trend is scored
+    M89 gusts shown beside the mean wind and warned about past 40 km/h, and
+        never scored: the mean wind they come with is already counted
+    M90 each day part says when it is, in the lake's own clock, because the
+        boundary between dawn and morning moves by hours across the year
+    M91 the evidence pills say what strong, moderate and weak mean — the
+        strength of the evidence, not the strength of the conditions
+    M92 the summer layer says what it is and that it is a rule of thumb
+    M93 the water input says where to hold a thermometer, and what kind
+    M94 walleye, pike and grayling are carried like any other stocked species,
+        and the 31 lakes that hold nothing else are on the map with the rest
+    M95 no thermal band is invented for them: the water factor drops out and
+        says so, rather than scoring a walleye on a rainbow's curve
+    M96 how heavy a stocked fish was, joined on the hatchery batch, from 2021
+        where Alberta publishes it and blank before that — never zero
+    M97 a lake Alberta names on its stocking map takes Alberta's own id, so a
+        lake first stocked after the reports stopped printing one is no longer
+        minted an id of ours, nor mistaken for a neighbour 3 km away
+    M98 what is reported to swim in a lake, kept apart from what was stocked
+        and from what the guide sets a limit for, each lake citing its source;
+        a lake nobody has looked up says nothing rather than saying none
+    M99 a catch limit is never read as a species list: 64 of the 65 lakes the
+        guide names carry the same pike-walleye-perch triplet
+    M100 limits say whose rule they are — written for this lake, or the zone's
+        default, or the province's — in colour and in words
+    M103 and each limit says whether that fish is reported in this lake at all:
+         the guide sets a pike limit on 303 of 382 lakes, most of them trout
+         ponds, and a limit for a fish that is not there is not about you
+    M104 a lake nobody has checked is never drawn as a lake with no fish
+    M105 reported species carry the community's own agree and disagree counts,
+         a mark for what is not in the stocking history, and their own line
+         for rough fish and for a prohibited invasive
+    M101 the solunar periods, with their clock times, at the foot of the
+         conditions panel: reference beside the score and never the score
+    M102 the panel reads weather, then whether to go, then the activity
+         forecast, then why, then the calendar — observation before judgement
 -->
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#2b2e2a">
@@ -325,6 +379,14 @@
     font-size: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.4);
   }
   .leaflet-tooltip.lake-tip::before { border-top-color: var(--panel-edge); }
+  /* A name, not a card: no box, no arrow, and never in the way of a click. */
+  .leaflet-tooltip.lake-label {
+    background: none; border: 0; box-shadow: none; padding: 0;
+    color: var(--ink); font-size: 10.5px; font-weight: 600; white-space: nowrap;
+    text-shadow: 0 0 3px var(--bg), 0 0 3px var(--bg), 0 0 5px var(--bg);
+    pointer-events: none;
+  }
+  .leaflet-tooltip.lake-label::before { display: none; }
   .lake-tip b { color: var(--ink); }
   .lake-tip .tip-sub { color: var(--ink-dim); font-size: 11px; }
 
@@ -434,6 +496,21 @@
     border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; color: #1f211e; }
   .reg-open.yes { background: var(--good); }
   .reg-open.no { background: var(--WSCT); }
+  /* Green where the guide names this lake, grey where it does not. The pill
+     beside it carries the same fact in words, because a border colour is not
+     something anyone should have to rely on to know whose rule they are
+     reading. */
+  .reg-block[data-basis="site-specific"] { border-left-color: var(--good); }
+  .reg-block[data-basis="put-and-take"],
+  .reg-block[data-basis="watershed-default"] { border-left-color: var(--ink-dim); }
+  .reg-block[data-basis="cross-reference"] { border-left-color: var(--TGTR); }
+  .reg-basis {
+    display: inline-block; font-size: 9.5px; font-weight: 700; padding: 1px 6px;
+    border-radius: 999px; text-transform: uppercase; letter-spacing: .04em;
+    background: var(--ink-dim); color: #1f211e;
+  }
+  .reg-block[data-basis="site-specific"] .reg-basis { background: var(--good); }
+  .reg-default { color: var(--ink-dim); font-size: 10px; font-style: italic; }
   .reg-row { display: flex; gap: 8px; margin: 2px 0; line-height: 1.4; }
   .reg-k { flex: 0 0 52px; color: var(--ink-dim); }
   .reg-v { flex: 1; }
@@ -456,6 +533,44 @@
   .lake-popup td.date-cell { font-variant-numeric: tabular-nums; white-space: nowrap; }
   .lake-popup .profile-row { font-size: 11px; color: var(--ink-dim); margin-bottom: 6px; }
   .lake-popup .profile-amenities { font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; line-height: 1.45; }
+  /* Reported present, which is not the same claim as stocked, and is not a
+     catch limit. Styled as a quieter row than the stocking table for that
+     reason — it is somebody's report, not Alberta's record. */
+  .seen-row { margin: 4px 0 2px; line-height: 1.9; }
+  .seen-chip {
+    display: inline-block; margin-right: 4px; padding: 1px 6px;
+    background: var(--panel-2); border: 1px solid var(--panel-edge);
+    border-left: 3px solid var(--ink-dim); border-radius: 2px;
+    font-size: 10px; color: var(--ink-dim);
+  }
+  .seen-chip.stocked { color: var(--ink); }
+  /* The community's own confidence, shown rather than averaged away. */
+  .seen-chip.shaky { opacity: .62; }
+  .seen-chip i { font-style: normal; font-size: 8.5px; color: var(--ink-dim);
+    margin-left: 4px; font-variant-numeric: tabular-nums; }
+  .seen-chip b { color: var(--accent); font-size: 11px; margin-left: 2px; }
+  .seen-chip.kind-invasive { border-left-color: var(--WSCT) !important; color: var(--WSCT); }
+  .seen-rough .seen-chip { font-size: 9.5px; opacity: .8; }
+  .seen-cite { font-size: 9.5px; color: var(--ink-dim); font-style: italic; }
+  .seen-foot { font-size: 9px; color: var(--ink-dim); font-style: italic;
+    line-height: 1.5; margin: 1px 0 3px; }
+  .seen-foot b { font-style: normal; color: var(--accent); }
+
+  /* ---- a limit, coloured by whether the fish is actually here ----------- */
+  /* The guide sets a pike limit on 303 of 382 lakes and a perch limit on 298,
+     and most of them are trout ponds. A limit for a fish that is not there is
+     not wrong, it is just not about you — and it should not read as loudly as
+     one you could actually reach. Never phrased as proof of absence: a
+     community list is not a survey. */
+  .reg-lim { display: inline-block; padding: 0 3px; border-radius: 2px; cursor: help; }
+  .reg-lim-confirmed { color: var(--good); }
+  .reg-lim-stocked { color: var(--accent); }
+  .reg-lim-absent { color: var(--ink-dim); opacity: .6; }
+  .reg-lim-unknown { color: var(--ink-dim); }
+  .reg-legend { display: flex; flex-wrap: wrap; gap: 7px; margin: 5px 0 0;
+    font-size: 9px; text-transform: uppercase; letter-spacing: .04em; }
+  .reg-legend .reg-lim { padding: 0; cursor: default; }
+
   .lake-popup .profile-label { color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; font-size: 10px; margin-right: 3px; }
   .lake-popup a.zone-link { color: var(--ink); border-bottom: 1px dotted var(--accent); text-decoration: none; }
   .lake-popup a.zone-link:hover { color: var(--accent); }
@@ -508,7 +623,14 @@
   .lp-shot img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
   .lp-cap { display: block; padding: 3px 5px; line-height: 1.3; }
   .lp-shot:hover { border-color: var(--accent); }
+  /* A photograph that will not load keeps its frame and says so. Removing the
+     image outright, as this once did, made a broken link look like a lake
+     Alberta had simply never photographed. */
+  .lp-shot.failed { border-style: dashed; border-color: var(--TGTR); }
+  .lp-shot.failed img { display: none; }
+  .lp-shot.failed .lp-cap::after { content: " \2014 could not load"; color: var(--TGTR); }
   .lp-offline { color: var(--ink-dim); font-style: italic; }
+  .lp-offline a { color: var(--accent); }
 
   /* ---- the verdict line ------------------------------------------------- */
   /* One line, at the top, answering whether the drive is worth it. */
@@ -549,6 +671,55 @@
   .cx-tz { font-style: italic; }
   .cx-warn { color: var(--TGTR); }
 
+  /* ---- what the weather is, before what it is worth --------------------- */
+  /* The first thing in the panel, because a verdict you cannot see the inputs
+     to is a verdict you have to take on faith. */
+  .cx-weather { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px;
+    margin: 8px 0 6px; font-size: 11px; color: var(--ink-dim);
+    font-variant-numeric: tabular-nums; }
+  .cx-wx-air { color: var(--ink); font-size: 15px; font-weight: 600; margin-right: 4px; }
+  .cx-wx-sky { color: var(--ink); text-transform: capitalize; }
+  .cx-wx-sep { color: var(--panel-edge); margin: 0 1px; }
+  .cx-weather-none { font-style: italic; }
+
+  /* ---- whether to go -------------------------------------------------- */
+  .cx-verdict { display: flex; align-items: baseline; gap: 6px; margin: 0 0 8px;
+    padding: 6px 9px; background: var(--panel-2); border-left: 3px solid var(--ink-dim);
+    border-radius: 3px; }
+  .cx-verdict-band { font-size: 13px; font-weight: 700; color: var(--ink);
+    text-transform: uppercase; letter-spacing: .03em; }
+  .cx-verdict-n { font-size: 16px; font-weight: 700; color: var(--ink);
+    font-variant-numeric: tabular-nums; }
+  .cx-verdict-of { font-size: 10.5px; color: var(--ink-dim); margin-right: auto; }
+  /* The four bands the score reports, in the ramp's own top and bottom. */
+  .cx-verdict.cx-band-prime { border-left-color: #f2d183; }
+  .cx-verdict.cx-band-good  { border-left-color: var(--good); }
+  .cx-verdict.cx-band-fair  { border-left-color: var(--TGTR); }
+  .cx-verdict.cx-band-poor  { border-left-color: var(--BKTR); }
+
+  /* A heading over the strip or grid, so the score above it and the detail
+     below it are visibly two different claims. */
+  .cx-secheading { font-size: 9.5px; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--ink-dim); margin: 2px 0 5px; }
+
+  /* ---- the fishing calendar, at the foot and out of the way ------------- */
+  .cx-cal { margin-top: 9px; padding-top: 8px; border-top: 1px solid var(--panel-edge); }
+  .cx-cal-head { display: flex; align-items: baseline; gap: 6px; margin-bottom: 4px; }
+  .cx-cal-title { font-size: 9.5px; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--ink-dim); border-bottom: 1px dotted var(--panel-edge); cursor: help; }
+  .cx-cal-note { font-size: 9.5px; color: var(--ink-dim); font-style: italic; }
+  .cx-cal-row { display: flex; align-items: baseline; gap: 6px; margin: 2px 0;
+    font-size: 10px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+  .cx-cal-day { flex: 0 0 46px; color: var(--ink); }
+  .cx-cal-moon { flex: 0 0 12px; text-align: center; }
+  .cx-cal-pers { flex: 1; display: flex; flex-wrap: wrap; gap: 4px; }
+  .cx-cal-today { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 3px; }
+  .cx-cal-none { font-style: italic; }
+  .cx-per { font-size: 9.5px; padding: 0 4px; border-radius: 2px;
+    background: var(--panel-2); border-left: 2px solid var(--ink-dim); }
+  .cx-per.major { border-left-color: var(--accent); }
+  .cx-per i { color: var(--ink-dim); margin-left: 4px; font-size: 9px; }
+
   /* The six-hour strip. */
   .cx-strip { display: flex; gap: 2px; align-items: flex-end; height: 92px; }
   .cx-slot { flex: 1; display: flex; flex-direction: column; justify-content: flex-end;
@@ -580,7 +751,18 @@
   .cx-ghead { flex-direction: column; gap: 0; color: var(--ink-dim); font-size: 9.5px;
     text-transform: uppercase; letter-spacing: .03em; }
   .cx-ghead span { color: var(--ink); font-size: 11px; font-variant-numeric: tabular-nums; }
-  .cx-glabel { justify-content: flex-start; color: var(--ink-dim); font-size: 10px; }
+  /* Both of these explain rather than report, so they read quieter than the
+     numbers they sit under. */
+  .cx-tierkey { margin-top: 6px; font-size: 9.5px; line-height: 1.45; color: var(--ink-dim); }
+  .cx-tierkey a { color: var(--accent); }
+  .cx-measure-hint { margin-top: 4px; font-size: 9.5px; line-height: 1.45;
+    color: var(--ink-dim); font-style: italic; }
+  .cx-glabel { justify-content: flex-start; align-items: flex-start; flex-direction: column;
+    gap: 1px; color: var(--ink-dim); font-size: 10px; }
+  /* When dawn is, not just that it is dawn. Hidden where the panel is too
+     narrow to carry it without crowding the scores. */
+  .cx-gspan { font-size: 8.5px; opacity: 0.72; font-variant-numeric: tabular-nums; }
+  @media (max-width: 420px) { .cx-gspan { display: none; } }
   .cx-score { color: #1f211e; font-weight: 700; font-variant-numeric: tabular-nums; }
   .cx-score:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
   .cx-n { pointer-events: none; }
@@ -712,6 +894,9 @@
     .chart-summary { gap: 12px; font-size: 11px; }
     .leaflet-popup-content { min-width: 200px; max-height: 46vh; }
     #sidebar-close { display: block; }
+    #app.sidebar-hidden #sidebar { display: block; }
+    #app.sidebar-hidden #sidebar-open { display: none; }
+    #app.sidebar-hidden .leaflet-top.leaflet-left { margin-top: 46px; }
     /* The zone table cannot float beside a phone-width map, so it sits under
        the map buttons across the full width, with its own scroll. */
     /* Two floating panels cannot share a phone-width map, so the conditions
@@ -731,10 +916,25 @@
        The badge comes first in the DOM, so it pushes the toast up. */
     #offline-badge:not([hidden]) ~ #update-toast { bottom: calc(48px + var(--panel-h)); }
   }
+  /* The filters are worth 320px of a laptop screen while you are choosing a
+     lake, and worth none of it once you have. The close control used to exist
+     only on a phone, so on a desktop there was no way to give the map the
+     space back. */
   #sidebar-close {
-    display: none; background: none; border: 0; color: var(--ink-dim);
+    display: block; background: none; border: 0; color: var(--ink-dim);
     font-size: 20px; line-height: 1; cursor: pointer; float: right; padding: 0 0 6px 10px;
   }
+  #app.sidebar-hidden #sidebar { display: none; }
+  #sidebar-open {
+    display: none; position: absolute; top: 10px; left: 10px; z-index: 900;
+    padding: 8px 11px; font-size: 12px; line-height: 1; background: var(--panel);
+    color: var(--ink); border: 1px solid var(--panel-edge); border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4); cursor: pointer;
+  }
+  #app.sidebar-hidden #sidebar-open { display: block; }
+  /* Leaflet's zoom control sits exactly where that tab goes, and wins the
+     click. Same remedy the phone layout already uses for the menu button. */
+  #app.sidebar-hidden .leaflet-top.leaflet-left { margin-top: 46px; }
   @media (prefers-reduced-motion: reduce) {
     #sidebar, #chart-panel, #chart-toggle { transition: none; }
   }
@@ -778,28 +978,6 @@
     </div>
 
     <div class="group">
-      <div class="group-label"><span>Stocked recently</span></div>
-      <div class="chips" id="recency-chips"></div>
-      <div class="hint" id="recency-note"></div>
-    </div>
-
-    <div class="group">
-      <div class="group-label"><span>Species</span><button type="button" class="linkish" data-all="species">all</button></div>
-      <div id="species-filters"></div>
-    </div>
-
-    <div class="group">
-      <div class="group-label"><span>Fish size</span><button type="button" class="linkish" data-all="size">all</button></div>
-      <div id="size-filters"></div>
-    </div>
-
-    <div class="group" id="facility-group" hidden>
-      <div class="group-label"><span>Facilities</span><button type="button" class="linkish" data-all="facility">none</button></div>
-      <div id="facility-chips" class="chips"></div>
-      <div class="hint" id="facility-note"></div>
-    </div>
-
-    <div class="group">
       <div class="group-label"><span>Distance from home</span></div>
       <div class="home-name" id="home-name"></div>
       <input type="range" id="dist-slider" min="0" max="1000" step="10" value="1000">
@@ -813,8 +991,31 @@
     </div>
 
     <div class="group">
-      <div class="group-label"><span>Years</span></div>
+      <div class="group-label"><span>Species</span><button type="button" class="linkish" data-all="species">all</button></div>
+      <div id="species-filters"></div>
+    </div>
+
+    <div class="group">
+      <div class="group-label"><span>Fish size</span><button type="button" class="linkish" data-all="size">all</button></div>
+      <div id="size-filters"></div>
+    </div>
+
+    <div class="group">
+      <div class="group-label"><span>Stocked recently</span></div>
+      <div class="chips" id="recency-chips"></div>
+      <div class="hint" id="recency-note"></div>
+    </div>
+
+    <div class="group" id="facility-group" hidden>
+      <div class="group-label"><span>Facilities</span><button type="button" class="linkish" data-all="facility">none</button></div>
+      <div id="facility-chips" class="chips"></div>
+      <div class="hint" id="facility-note"></div>
+    </div>
+
+    <div class="group">
+      <div class="group-label"><span>Years</span><span class="aside" id="year-count"></span></div>
       <div class="chips" id="year-chips"></div>
+      <div class="hint" id="year-scope" hidden></div>
       <div class="shortcuts">
         <button class="shortcut" data-range="all">All</button>
         <button class="shortcut" data-range="none">None</button>
@@ -864,6 +1065,7 @@
 
   <div id="map-wrap">
     <button id="menu-btn" type="button" aria-label="Filters">☰</button>
+    <button id="sidebar-open" type="button" aria-label="Show filters">☰ Filters</button>
     <div id="map"></div>
     <div class="map-btns">
       <button class="map-btn" id="zoom-results" type="button">Zoom to results</button>
@@ -910,7 +1112,7 @@
           <button class="chart-type-btn active" data-chart="stacked-species">By species</button>
           <button class="chart-type-btn" data-chart="grouped-season">By season</button>
           <button class="chart-type-btn" data-chart="line-trend">Trend</button>
-          <button class="chart-type-btn" data-chart="calendar">Calendar</button>
+          <button class="chart-type-btn" data-chart="calendar">Stocking year</button>
         </div>
       </div>
       <div class="chart-helper" id="chart-helper"></div>
@@ -945,8 +1147,39 @@ const SPECIES_META = {
   TGTR: { label: "Tiger Trout",         short: "Tiger",      initial: "T", color: "#c98500" },
   CTTR: { label: "Cutthroat Trout",     short: "Cutthroat",  initial: "C", color: "#9085e9" },
   WSCT: { label: "Westslope Cutthroat", short: "Westslope",  initial: "W", color: "#e66767" },
+  /* Not trout, and on this map because Alberta stocks them and used to be
+     filtered out on the way in. The colours were picked by measuring: each is
+     at least 14 ΔE from all six above under normal vision and under simulated
+     protanopia, deuteranopia and tritanopia — roughly four times the
+     separation of the closest existing pair, Brown against Westslope at 3.7.
+     The letter on the pin is what actually carries it either way. */
+  WALL: { label: "Walleye",             short: "Walleye",    initial: "E", color: "#c9c24e" },
+  NRPK: { label: "Northern Pike",       short: "Pike",       initial: "P", color: "#3f5a22" },
+  ARGR: { label: "Arctic Grayling",     short: "Grayling",   initial: "G", color: "#5a6fa8" },
 };
-const SPECIES_ORDER = ["RNTR", "BKTR", "BNTR", "TGTR", "CTTR", "WSCT"];
+const SPECIES_ORDER = ["RNTR", "BKTR", "BNTR", "TGTR", "CTTR", "WSCT",
+                       "WALL", "NRPK", "ARGR"];
+
+/** Fish this map can name but does not stock, so that a reported species list
+ *  reads as fish rather than as four-letter codes. Alberta's own abbreviations,
+ *  the same ones the regulations tables use. */
+const OTHER_FISH = {
+  YLPR: "Yellow Perch", LKWH: "Lake Whitefish", MNWH: "Mountain Whitefish",
+  BURB: "Burbot", LKTR: "Lake Trout", BLTR: "Bull Trout", SPLK: "Splake",
+  GLTR: "Golden Trout", SAUG: "Sauger", GOLD: "Goldeye",
+  LKST: "Lake Sturgeon", WHPR: "White Perch",
+  // Not sport fish. They appear only because anglers list them, and they are
+  // shown on their own line for that reason.
+  WHSC: "White Sucker", MTSC: "Mountain Sucker", LKCH: "Lake Chub",
+  EMSH: "Emerald Shiner", FHMN: "Fathead Minnow", BRMN: "Brassy Minnow",
+  BRST: "Brook Stickleback", NSST: "Nine Spine Stickleback",
+  // Prohibited in Alberta.
+  PRCP: "Prussian Carp",
+};
+
+function fishName(code) {
+  return (SPECIES_META[code] && SPECIES_META[code].label) || OTHER_FISH[code] || code;
+}
 
 /** Size classes an angler actually cares about. A lake given 60,000 fry is
  *  not the same prospect as one given 3,000 catchable trout. */
@@ -1075,7 +1308,8 @@ const state = {
   conditions: {
     open: false,
     horizon: "now",          // "now" | "week"
-    anchorKey: null,         // a lake, or null for home
+    anchorKey: null,         // the lake being scored
+    anchorAuto: false,       // true when we picked it, not the user
     waterOverrides: {},      // lakeKey -> { tempC, atISO }
   },
 };
@@ -1100,6 +1334,7 @@ const DATA_ISSUES = { invalidStockings: 0, examples: [] };
 const STORE_HOME = "troutmap.home";
 const STORE_FAVS = "troutmap.favourites";
 const STORE_WATER = "troutmap.watertemp";
+const STORE_SIDEBAR = "troutmap.sidebar";
 
 // ============================================================
 // UTILITIES
@@ -1476,12 +1711,150 @@ function profileBlock(lake) {
   if (lake.surface_area_ha != null) {
     parts.push(`<span><span class="profile-label">Area</span> ${esc(lake.surface_area_ha)} ha</span>`);
   }
-  if (!parts.length && !lake.amenities) return "";
+  const seen = speciesBlock(lake);
+  if (!parts.length && !lake.amenities && !seen) return "";
   let html = parts.length ? `<div class="profile-row">${parts.join(" &nbsp;·&nbsp; ")}</div>` : "";
+  html += seen;
   if (lake.amenities) {
-    html += `<div class="profile-amenities"><span class="profile-label">Facilities</span> ${esc(lake.amenities)}</div>`;
+    html += `<div class="profile-amenities"><span class="profile-label" title="Alberta's own description of the site, in its words. The chips below are the same ground, reduced to the categories the filter uses.">On site</span> ${esc(lake.amenities)}</div>`;
   }
   return html;
+}
+
+/* What is reported to swim here, as against what was put in.
+ *
+ * Stocking records answer the second question only. They say nothing about the
+ * pike that arrived on their own, and nothing about whether a decade of trout
+ * is still there. The catch limits are not an answer either, and reading them
+ * as one is the trap this block exists to avoid: Cow Lake's row lists a walleye
+ * limit, and 64 of the 65 site-specific rows in the guide carry the identical
+ * pike-walleye-perch triplet. That is boilerplate covering species that may or
+ * may not be present, and Cow Lake is independently reported to hold rainbow,
+ * brown, pike and perch, with no walleye at all.
+ *
+ * These come from Angler's Atlas: community reports, not a fish survey and not
+ * proof of current presence. So the block says whose claim it is and carries
+ * the community's own agree and disagree counts — "+9 / −0" and "+3 / −3" are
+ * not the same claim and must not look alike.
+ *
+ * Coverage is 106 of 346 lakes, and a lake with no entry is UNCHECKED. Nothing
+ * here may render as "this lake has no fish". */
+function speciesChip(entry, stocked) {
+  const meta = SPECIES_META[entry.code];
+  const here = stocked.has(entry.code);
+  const strength = entry.disagree === 0 && entry.agree >= 3 ? " sure"
+    : entry.disagree >= entry.agree ? " shaky" : "";
+  const title = [
+    `${fishName(entry.code)} — reported by ${entry.agree} angler${entry.agree === 1 ? "" : "s"}`
+      + (entry.disagree ? `, disputed by ${entry.disagree}` : ""),
+    entry.on ? `First confirmed ${entry.on}.` : null,
+    here ? "Stocked here too." : "This map has no record of it being stocked here.",
+    entry.kind === "invasive"
+      ? "Prohibited invasive in Alberta — never move fish or water between lakes."
+      : null,
+  ].filter(Boolean).join(" ");
+  return `<span class="seen-chip${here ? " stocked" : ""}${strength} kind-${esc(entry.kind)}"`
+    + ` title="${esc(title)}"${meta ? ` style="border-left-color:${meta.color}"` : ""}>`
+    + `${esc(fishName(entry.code))}`
+    + (entry.new ? `<b title="Not in this lake&#39;s stocking history">+</b>` : "")
+    + `<i>+${entry.agree} / −${entry.disagree}</i></span>`;
+}
+
+function speciesBlock(lake) {
+  const profile = profileFor(lake);
+  const seen = profile && profile.confirmed;
+  if (!seen || !seen.species || !seen.species.length) return "";
+  const stocked = new Set(lake.stockings.map(s => s.species));
+  const of = kind => seen.species.filter(e => e.kind === kind)
+    .map(e => speciesChip(e, stocked)).join("");
+
+  const sport = of("sport"), rough = of("rough"), invasive = of("invasive");
+  const cite = seen.url
+    ? `<a class="zone-link" href="${esc(seen.url)}" target="_blank" rel="noopener">Angler's Atlas ↗</a>`
+    : "an angling report";
+
+  let html = `<div class="seen-row">
+    <span class="profile-label" title="Reported present by anglers — a different question from what Alberta has stocked, and from what the guide sets a limit for. A community list, not a survey.">Reported here</span>
+    ${sport || '<span class="seen-cite">no sport fish listed</span>'}
+  </div>`;
+  if (invasive) {
+    html += `<div class="seen-row seen-invasive"><span class="profile-label" title="Prohibited in Alberta. Never move fish, water or weeds between waterbodies.">Invasive</span>${invasive}</div>`;
+  }
+  if (rough) {
+    html += `<div class="seen-row seen-rough"><span class="profile-label" title="Not sport fish, and here only because the Atlas lists them.">Also present</span>${rough}</div>`;
+  }
+  html += `<div class="seen-foot">per ${cite} · community reports, not a survey
+    · <b>+</b> marks a fish not in this lake’s stocking history</div>`;
+  return html;
+}
+
+/** Which of the four states a limit is in, for this lake.
+ *
+ *  The guide sets a Northern Pike limit on 303 of the 382 lakes here and a
+ *  Yellow Perch limit on 298 — nearly all of them — and most are trout ponds
+ *  where neither fish lives. A limit is what you may keep IF you catch one, so
+ *  a row for a fish that is not there is not wrong, it is just not about you.
+ *
+ *  "absent" is never phrased as "not present": a community list is not a
+ *  survey. And a lake nobody has checked gets "unknown", never "absent" — 240
+ *  lakes are in that position and none of them may look empty. */
+function limitState(code, lake) {
+  const seen = (profileFor(lake) || {}).confirmed;
+  const stocked = new Set(lake.stockings.map(s => s.species));
+  if (seen && seen.species.some(s => s.code === code)) return "confirmed";
+  if (stocked.has(code)) return "stocked";
+  return seen ? "absent" : "unknown";
+}
+
+const LIMIT_WHY = {
+  confirmed: "Anglers report this fish in this lake, so this limit is one you could reach.",
+  stocked: "Stocked here, though no angler report lists it. The limit applies if you catch one.",
+  absent: "No angler report lists this fish in this lake, so this limit probably never comes up. Not proof it is absent — a community list is not a survey.",
+  unknown: "Nobody has checked which fish this lake holds, so there is nothing to say about whether this limit applies.",
+};
+
+/** The guide writes limits under common names; the map thinks in codes. */
+const LIMIT_CODES = {
+  "Trout": null, "Northern Pike": "NRPK", "Pike": "NRPK", "Yellow Perch": "YLPR",
+  "Perch": "YLPR", "Walleye": "WALL", "Burbot": "BURB", "Lake Whitefish": "LKWH",
+  "Mountain Whitefish": "MNWH", "Arctic Grayling": "ARGR", "Bull Trout": "BLTR",
+  "Lake Trout": "LKTR", "Goldeye": "GOLD", "Sauger": "SAUG",
+};
+
+/* Trout is a group, not a species, so it takes the best state any trout in the
+ * lake can claim. A rainbow lake's "5 trout" is a live limit even though no row
+ * anywhere says "Trout". */
+const TROUT_CODES = ["RNTR", "BKTR", "BNTR", "TGTR", "CTTR", "WSCT", "BLTR", "LKTR", "GLTR", "SPLK"];
+const STATE_RANK = { confirmed: 3, stocked: 2, unknown: 1, absent: 0 };
+
+function limitStateFor(name, lake) {
+  if (name === "Trout") {
+    let best = "unknown";
+    for (const code of TROUT_CODES) {
+      const s = limitState(code, lake);
+      if (STATE_RANK[s] > STATE_RANK[best]) best = s;
+    }
+    return best;
+  }
+  const code = LIMIT_CODES[name];
+  return code ? limitState(code, lake) : "unknown";
+}
+
+function limitPart(name, text, lake) {
+  const state = limitStateFor(name, lake);
+  return `<span class="reg-lim reg-lim-${state}" title="${esc(LIMIT_WHY[state])}">${esc(text)}</span>`;
+}
+
+/** Named once, under the block, because colour alone is not a signal. */
+function limitLegend(lake) {
+  const seen = (profileFor(lake) || {}).confirmed;
+  return `<div class="reg-legend">`
+    + `<span class="reg-lim reg-lim-confirmed">reported here</span>`
+    + `<span class="reg-lim reg-lim-stocked">stocked here</span>`
+    + (seen
+        ? `<span class="reg-lim reg-lim-absent">not reported here</span>`
+        : `<span class="reg-lim reg-lim-unknown">nobody has checked this lake</span>`)
+    + `</div>`;
 }
 
 /* One line at the top of the popup answering the only question the popup is
@@ -1586,7 +1959,15 @@ function depthBlock(lake) {
   }
   const strat = d.stratification;
   if (strat && strat.stratifies) {
-    parts.push(`<span><span class="profile-label">Summer layer</span> about ${strat.band_m[0]}–${strat.band_m[1]} m</span>`);
+    /* "Summer layer about 3–7 m" is the depth to fish in July, and said that
+     * baldly it looks like a measurement. It is a quarter to a half of the
+     * lake's maximum depth — a rule of thumb, and the tooltip says so. */
+    const stratWhy = "In summer a lake splits into warm water on top and cold "
+      + "water below. Trout are pushed out of the warm surface but cannot go "
+      + "deep, where the oxygen runs out by late summer — so they stack in the "
+      + "band between. This is an estimate from the lake's maximum depth, "
+      + "a quarter to a half of it: a rule of thumb, not a measured thermocline.";
+    parts.push(`<span title="${esc(stratWhy)}"><span class="profile-label">Summer layer</span> about ${strat.band_m[0]}–${strat.band_m[1]} m</span>`);
   } else if (strat) {
     parts.push(`<span class="dim">${esc(strat.why)}</span>`);
   }
@@ -1655,6 +2036,23 @@ function regulationBlock(lake) {
     : "https://albertaregulations.ca/fishingregs/";
   const link = `<a class="zone-link" href="${official}" target="_blank" rel="noopener">`
     + `official ${esc(zone || "Alberta")} tables ↗</a>`;
+  /* Which of the guide's three kinds of row this lake's limits come from was
+   * only ever said in an italic sentence at the bottom of the block. It is the
+   * difference between a rule written for this water and a rule that happens to
+   * cover it, so it gets a colour and, because colour alone is not a signal
+   * anyone can rely on, the same thing in words. */
+  const BASIS_PILL = {
+    "site-specific": { text: "This lake", why: `Listed by name in the ${zone || "zone"} table.` },
+    "put-and-take": { text: "Stocked-lake default",
+      why: "The province's blanket rule for stocked put-and-take waters. Nothing here is written about this lake in particular." },
+    "watershed-default": { text: `${zone || "Zone"} default`,
+      why: `Not listed individually, so the ${zone || "zone"} default applies. Nothing here is written about this lake in particular.` },
+    "cross-reference": { text: "See elsewhere", why: "The guide regulates this water under another entry." },
+  };
+  const pillFor = basis => {
+    const p = BASIS_PILL[basis];
+    return p ? `<span class="reg-basis" title="${esc(p.why)}">${esc(p.text)}</span>` : "";
+  };
   const head = `<div class="reg-head"><span class="profile-label">Catch limits</span>`
     + `<span class="reg-year">${esc(year)} guide</span></div>`;
 
@@ -1681,16 +2079,21 @@ function regulationBlock(lake) {
   if (reg.basis === "site-specific") {
     if (reg.trout_total && reg.trout_total.text) {
       rows.push(`<div class="reg-row"><span class="reg-k">Trout</span>
-        <span class="reg-v">${esc(reg.trout_total.text)}</span></div>`);
+        <span class="reg-v">${limitPart("Trout", reg.trout_total.text, lake)}</span></div>`);
     }
     if (reg.bait) {
       rows.push(`<div class="reg-row"><span class="reg-k">Bait</span>
         <span class="reg-v">${esc(reg.bait)}</span></div>`);
     }
     const others = Object.entries(reg.species || {})
-      .map(([code, v]) => `${esc(code)} ${esc(v.text)}`).join(" &nbsp;·&nbsp; ");
+      .map(([code, v]) => limitPart(fishName(code), `${fishName(code)} ${v.text}`, lake))
+      .join(" &nbsp;·&nbsp; ");
     if (others) {
-      rows.push(`<div class="reg-row"><span class="reg-k">Other</span>
+      /* A limit is not a fish. Sixty-four of the sixty-five lakes listed by
+       * name in the guide carry the same pike-walleye-perch triplet, which is
+       * boilerplate covering what might be there rather than a survey of what
+       * is. Cow Lake's row lists walleye; Cow Lake is not reported to hold any. */
+      rows.push(`<div class="reg-row"><span class="reg-k" title="What you may keep IF you catch one. A species listed here is not a species this lake is known to hold — most of these rows carry the same three names.">Other</span>
         <span class="reg-v">${others}</span></div>`);
     }
     if ((reg.also || []).length) {
@@ -1701,14 +2104,16 @@ function regulationBlock(lake) {
   } else {
     const limits = reg.limits || {};
     const listed = Object.entries(limits)
-      .map(([k, v]) => `${esc(k)} ${esc(v)}`).join(" &nbsp;·&nbsp; ");
+      .map(([k, v]) => limitPart(k, `${k} ${v}`, lake)).join(" &nbsp;·&nbsp; ");
+    const defaultNote = reg.basis === "watershed-default"
+      ? `the ${esc(zone || "zone")} default` : "the provincial stocked-lake default";
     if (reg.bait) {
       rows.push(`<div class="reg-row"><span class="reg-k">Bait</span>
         <span class="reg-v">${esc(reg.bait)}</span></div>`);
     }
     if (listed) {
-      rows.push(`<div class="reg-row"><span class="reg-k">Limits</span>
-        <span class="reg-v">${listed}</span></div>`);
+      rows.push(`<div class="reg-row"><span class="reg-k" title="These are ${esc(defaultNote)}, not limits written for this lake. A species listed here is not a species this lake is known to hold.">Limits</span>
+        <span class="reg-v">${listed} <span class="reg-default">(${esc(defaultNote)})</span></span></div>`);
     }
   }
 
@@ -1720,8 +2125,9 @@ function regulationBlock(lake) {
   const matched = reg.matched_name && reg.matched_name !== lake.name
     ? ` (matched to “${esc(reg.matched_name)}”)` : "";
 
-  return `<div class="reg-block">${head}${badge}
+  return `<div class="reg-block" data-basis="${esc(reg.basis)}">${head}${pillFor(reg.basis)}${badge}
     ${rows.join("")}
+    ${limitLegend(lake)}
     <div class="reg-why">${because}${matched}</div>
     <div class="reg-warn">Confirm before you fish — regulations change. ${link}</div>
   </div>`;
@@ -1741,6 +2147,22 @@ function dateCell(dateStr, precision) {
   return `<td class="date-cell"${title}>${day} ${esc(monthYear)}</td>`;
 }
 
+/** Years as runs, not as a span. "2011–2026" reads as sixteen years of stocking
+ *  even when the lake was skipped for six of them; "2019–2021, 2023, 2025–2026"
+ *  says what actually happened. Expects a sorted, de-duplicated list. */
+function yearRuns(years) {
+  if (!years.length) return "none";
+  const runs = [];
+  let start = years[0], prev = years[0];
+  for (const y of years.slice(1)) {
+    if (y === prev + 1) { prev = y; continue; }
+    runs.push([start, prev]);
+    start = prev = y;
+  }
+  runs.push([start, prev]);
+  return runs.map(([a, b]) => a === b ? String(a) : `${a}–${b}`).join(", ");
+}
+
 function popupHtml(lake) {
   const key = lakeKey(lake);
   const filteredTotal = filteredFishTotal(lake);
@@ -1750,9 +2172,7 @@ function popupHtml(lake) {
     .sort((a, b) => stockingSortKey(b).localeCompare(stockingSortKey(a)));
   const activeYears = [...new Set(rows.map(s => s.year))].sort((a, b) => a - b);
   const activeSpecies = filteredDominantOrder(lake);
-  const yearRangeText = activeYears.length
-    ? (activeYears.length === 1 ? String(activeYears[0]) : `${activeYears[0]}–${activeYears[activeYears.length - 1]}`)
-    : "none";
+  const yearRangeText = yearRuns(activeYears);
   const speciesText = activeSpecies.length
     ? activeSpecies.map(c => SPECIES_META[c]?.short || c).join(", ") : "none";
 
@@ -1769,6 +2189,8 @@ function popupHtml(lake) {
       <td><span class="sp-tag" style="background:${color}">${esc(s.species)}</span></td>
       <td>${esc(s.strain) || "—"}</td>
       <td>${s.length_cm ? Number(s.length_cm).toFixed(1) : "—"}</td>
+      <td${s.weight_g == null ? ' title="Alberta published no weight for this stocking. The weights come from its stocking map, which only goes back to 2021."' : ""}>${
+        s.weight_g == null ? "—" : fmtNum(Math.round(Number(s.weight_g)))}</td>
       <td>${fmtNum(s.number)}</td>
     </tr>`;
   }).join("");
@@ -1808,7 +2230,7 @@ function popupHtml(lake) {
       <button type="button" class="gmaps as-btn" data-lakelink="${esc(key)}" title="Copies a web address that reopens the map on this lake, with your filters, ready to paste into a message">Copy link to this lake</button>
     </div>
     <table>
-      <thead><tr><th>Date</th><th>Sp.</th><th>Strain</th><th>cm</th><th>Number</th></tr></thead>
+      <thead><tr><th>Date</th><th>Sp.</th><th>Strain</th><th>cm</th><th title="Average weight of a fish in this stocking, from Alberta's stocking map. Published from 2021 on; earlier years give a length and no weight.">g</th><th>Number</th></tr></thead>
       <tbody>${tableRows}</tbody>
     </table>
   </div>`;
@@ -1832,7 +2254,7 @@ function lakeLinkUrl(key) {
 // ============================================================
 // MAP
 // ============================================================
-let map, pinLayer, zoneLayer, homeMarker, currentBasemap = "topo";
+let map, pinLayer, zoneLayer, labelLayer, homeMarker, currentBasemap = "topo";
 let rerenderingPins = false;
 const basemaps = {};
 
@@ -1893,6 +2315,11 @@ function initMap() {
       });
     },
   }).addTo(map);
+
+  /* Names sit in their own layer rather than in the pins, because a marker can
+     carry only one tooltip and the pins already use theirs for the hover card. */
+  labelLayer = L.layerGroup().addTo(map);
+  map.on("zoomend moveend", renderLabels);
 
   /* Zone bubbles are a separate layer, added only in zone view, so switching
      back to pins cannot leave a stale bubble behind. */
@@ -1956,6 +2383,39 @@ function placeHomeMarker() {
   });
 }
 
+/* Alberta's basemap names the big lakes and leaves the ponds blank, which is
+ * exactly backwards for this map: the ponds are the stocked ones. So the pins
+ * carry their own names.
+ *
+ * Only close in, and only for what is on screen. Two reasons, both about
+ * staying readable: clustering switches off at CLUSTER_OFF_ZOOM, so that is the
+ * first zoom at which every pin is its own marker and a label belongs to
+ * exactly one lake; and a province-wide view would be a wall of text. Past
+ * LABEL_MAX in view the labels would overlap into noise, so none are drawn. */
+const LABEL_MAX = 60;
+
+function renderLabels() {
+  if (!labelLayer || !map) return;
+  labelLayer.clearLayers();
+  if (state.view !== "map" || map.getZoom() < CLUSTER_OFF_ZOOM) return;
+
+  const bounds = map.getBounds();
+  const visible = [];
+  for (const lake of LAKES) {
+    if (lake.lat == null || lake.lon == null) continue;
+    if (!bounds.contains([lake.lat, lake.lon])) continue;
+    if (!lakePassesFilters(lake)) continue;
+    visible.push(lake);
+    if (visible.length > LABEL_MAX) return;
+  }
+  for (const lake of visible) {
+    L.tooltip({
+      permanent: true, direction: "bottom", offset: [0, 9],
+      className: "lake-label", interactive: false,
+    }).setLatLng([lake.lat, lake.lon]).setContent(esc(lake.name)).addTo(labelLayer);
+  }
+}
+
 function renderPins() {
   rerenderingPins = true;
   pinLayer.clearLayers();
@@ -1992,6 +2452,8 @@ function renderPins() {
     if (target) pinLayer.zoomToShowLayer(target, () => target.openPopup());
     else state.openPopupAts = null;
   }
+
+  renderLabels();
 
   document.getElementById("result-count").textContent =
     `Showing ${shown} of ${LAKES.length} lakes`;
@@ -2105,6 +2567,12 @@ function setHome(next, opts = {}) {
   if (!opts.skipMarker) placeHomeMarker();
   else homeMarker.setLatLng([state.home.lat, state.home.lon]);
   recomputeDistances();
+  // An anchor we chose was chosen as "nearest to home", so a new home has to
+  // re-choose it. One the user picked is theirs and stays put.
+  if (state.conditions.anchorAuto) {
+    state.conditions.anchorKey = null;
+    state.conditions.anchorAuto = false;
+  }
   updateHomeUI();
   onFilterChange();
 }
@@ -2392,19 +2860,51 @@ function updateRecencyCounts() {
   }
 }
 
-function buildYearChips() {
+/** The years worth offering: every year, or — when the charts are scoped to one
+ *  lake — only the years that lake was actually stocked. A chip for 2011 on a
+ *  lake first stocked in 2019 is a button that can only ever empty the view. */
+function yearsForChips() {
+  if (!state.focusedLakeAts) return ALL_YEARS;
+  const lake = LAKES.find(l => lakeKey(l) === state.focusedLakeAts);
+  if (!lake) return ALL_YEARS;
+  const stocked = new Set(lake.stockings.map(s => s.year));
+  const years = ALL_YEARS.filter(y => stocked.has(y));
+  return years.length ? years : ALL_YEARS;
+}
+
+function renderYearChips() {
   const host = document.getElementById("year-chips");
-  host.innerHTML = ALL_YEARS.map(y => {
+  if (!host) return;
+  const years = yearsForChips();
+  host.innerHTML = years.map(y => {
     const partial = PROVISIONAL_YEARS.has(y);
     const title = partial ? ` title="${y} is still under way; Alberta updates this report later in the season"` : "";
     return `<button class="chip ${state.years.has(y) ? "active" : ""}" data-year="${y}"${title}>${y}${partial ? "*" : ""}</button>`;
   }).join("");
+
+  const count = document.getElementById("year-count");
+  if (count) count.textContent = `${state.years.size} of ${ALL_YEARS.length}`;
+
+  const scope = document.getElementById("year-scope");
+  if (scope) {
+    const narrowed = years.length < ALL_YEARS.length;
+    scope.hidden = !narrowed;
+    if (narrowed) {
+      const lake = LAKES.find(l => lakeKey(l) === state.focusedLakeAts);
+      scope.textContent = `Only the years ${lake ? lake.name : "this lake"} was stocked.`;
+    }
+  }
+}
+
+function buildYearChips() {
+  const host = document.getElementById("year-chips");
+  renderYearChips();
   host.addEventListener("click", e => {
     const chip = e.target.closest("[data-year]");
     if (!chip) return;
     const y = Number(chip.dataset.year);
-    if (state.years.has(y)) { state.years.delete(y); chip.classList.remove("active"); }
-    else { state.years.add(y); chip.classList.add("active"); }
+    if (state.years.has(y)) state.years.delete(y); else state.years.add(y);
+    syncYearChips();
     onFilterChange();
   });
   document.querySelectorAll(".shortcut").forEach(btn => {
@@ -2422,6 +2922,8 @@ function buildYearChips() {
 function syncYearChips() {
   document.querySelectorAll("[data-year]").forEach(chip =>
     chip.classList.toggle("active", state.years.has(Number(chip.dataset.year))));
+  const count = document.getElementById("year-count");
+  if (count) count.textContent = `${state.years.size} of ${ALL_YEARS.length}`;
 }
 
 function buildDistanceSlider() {
@@ -2766,6 +3268,8 @@ let chart = null;
 function chart_ref() { return chart; }
 
 function updateChartScopeUI() {
+  // The year chips are scoped to the focused lake, so they move with it.
+  renderYearChips();
   const row = document.getElementById("chart-scope-row");
   if (!state.focusedLakeAts) { row.hidden = true; return; }
   const lk = LAKES.find(l => lakeKey(l) === state.focusedLakeAts);
@@ -3103,11 +3607,31 @@ function watchConnection() {
 // PHONE MENU
 // ============================================================
 function closeMenu() { document.getElementById("app").classList.remove("menu-open"); }
+
+/** Hide or show the filters on a desktop, and give Leaflet the news.
+ *  The map is sized by flexbox, so it only learns it grew if it is told; a
+ *  map that is not told draws grey where the sidebar used to be. */
+function setSidebarHidden(hidden) {
+  document.getElementById("app").classList.toggle("sidebar-hidden", hidden);
+  writeStore(STORE_SIDEBAR, { hidden: hidden });
+  // After the layout settles, not during it.
+  requestAnimationFrame(() => { if (typeof map !== "undefined" && map) map.invalidateSize(); });
+}
+
 function buildMenu() {
+  const app = document.getElementById("app");
   document.getElementById("menu-btn").addEventListener("click", () =>
-    document.getElementById("app").classList.toggle("menu-open"));
-  document.getElementById("sidebar-close").addEventListener("click", closeMenu);
+    app.classList.toggle("menu-open"));
+  // One control, two jobs: on a phone the sidebar is a slide-over and this
+  // closes it; on a desktop it is a column and this collapses it.
+  document.getElementById("sidebar-close").addEventListener("click", () => {
+    if (app.classList.contains("menu-open")) closeMenu();
+    else setSidebarHidden(true);
+  });
+  document.getElementById("sidebar-open").addEventListener("click", () => setSidebarHidden(false));
   document.getElementById("scrim").addEventListener("click", closeMenu);
+  const stored = readStore(STORE_SIDEBAR, null);
+  if (stored && stored.hidden) document.getElementById("app").classList.add("sidebar-hidden");
 }
 
 // ============================================================
@@ -3173,9 +3697,12 @@ async function init() {
     ADVISORIES = await loadAdvisories();
     LAKES = lakes;
     ALL_YEARS = years;
+    /* Sixteen years of everything is a poor first view: it buries this season
+     * under a decade of history. Five years is enough to see whether a lake is
+     * kept up, and "All" is one click away with the count saying what is hidden. */
     state.years = params.has("yr")
       ? new Set(params.get("yr").split(",").map(Number).filter(y => years.includes(y)))
-      : new Set(years);
+      : new Set(years.slice(-5));
 
     document.getElementById("subtitle").textContent = years.length === 1
       ? `Stocking data · ${years[0]}`
