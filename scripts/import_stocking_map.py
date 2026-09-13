@@ -55,6 +55,7 @@ from collections import defaultdict
 from pathlib import Path
 
 import ats
+import registry
 
 ROOT = Path(__file__).parent.parent
 WORKBOOK = ROOT / "data" / "raw" / "mywildalberta" / "Alberta_Stocked_Waterbodies_20260911.xlsx"
@@ -66,6 +67,7 @@ ISSUES_CSV = ROOT / "data" / "raw" / "mywildalberta_issues.csv"
 DESCRIPTIONS_CSV = ROOT / "data" / "raw" / "mywildalberta_descriptions.csv"
 OUT_OF_SCOPE_CSV = ROOT / "data" / "out_of_scope.csv"
 WEIGHTS_CSV = ROOT / "data" / "raw" / "mywildalberta_weights.csv"
+ATLAS_CSV = ROOT / "data" / "raw" / "lake_species_atlas.csv"
 ACA_ROSTER = ROOT / "data" / "aca_aeration_roster.csv"
 
 # The header sits on row 5 of every data sheet; rows 1-4 are the title block.
@@ -449,6 +451,132 @@ def weight_rows(details):
     return rows
 
 
+# Every fish name the Species evidence sheet uses, in Alberta's four-letter
+# codes where the province has one. The rough fish have no code in the
+# regulations, so they keep their names and are marked as what they are.
+ATLAS_SPECIES = {
+    "Rainbow Trout": ("RNTR", "sport"),
+    "Brook Trout": ("BKTR", "sport"),
+    "Brown Trout": ("BNTR", "sport"),
+    "Tiger Trout": ("TGTR", "sport"),
+    "Cutthroat Trout": ("CTTR", "sport"),
+    "Westslope Cutthroat": ("WSCT", "sport"),
+    "Bull Trout": ("BLTR", "sport"),
+    "Lake Trout": ("LKTR", "sport"),
+    "Golden Trout": ("GLTR", "sport"),
+    "Arctic Grayling": ("ARGR", "sport"),
+    "Walleye": ("WALL", "sport"),
+    "Northern Pike": ("NRPK", "sport"),
+    "Yellow Perch": ("YLPR", "sport"),
+    "Lake Whitefish": ("LKWH", "sport"),
+    "Mountain Whitefish": ("MNWH", "sport"),
+    "Burbot": ("BURB", "sport"),
+    "White Perch": ("WHPR", "sport"),
+    "White Sucker": ("WHSC", "rough"),
+    "Mountain Sucker": ("MTSC", "rough"),
+    "Lake Chub": ("LKCH", "rough"),
+    "Emerald Shiner": ("EMSH", "rough"),
+    "Fathead Minnow": ("FHMN", "rough"),
+    "Brassy Minnow": ("BRMN", "rough"),
+    "Brook Stickleback": ("BRST", "rough"),
+    "Nine Spine Stickleback": ("NSST", "rough"),
+    # Prohibited in Alberta, and the one listing here worth going out of its
+    # way to show: an invasive in a lake is a fact about the lake.
+    "Prussian Carp": ("PRCP", "invasive"),
+}
+
+# The only match grade whose species reach the map. The export distinguishes
+# four, and the other three all mean the same thing for our purposes: we do not
+# know which lake the page is about, or the page says nothing.
+VERIFIED_MATCH = "Matched — species listed"
+
+# Listings the site itself disputes. The export excludes them from its species
+# columns and so does this — re-admitting them here would quietly overturn a
+# judgement someone already made.
+DISPUTED = "Disputed by site"
+
+
+def registry_id_for(wid, waterbodies, by_id, by_ats):
+    """The id this repo actually files a lake under.
+
+    Alberta carries two of these waters under two waterbody ids at once — the
+    stocking map calls Magrath Children's Pond 317719 where the annual reports
+    call it 6751, same quarter section and same coordinates. build_history.py
+    keeps the reports' id and drops the duplicate, so a row keyed on the other
+    one would find no lake and vanish silently.
+
+    So: the id if we hold it, otherwise the lake on the same quarter section
+    whose name agrees. Anything else returns None and is left out rather than
+    guessed at.
+    """
+    if wid in by_id:
+        return wid
+    row = waterbodies.get(wid)
+    if not row:
+        return None
+    code = normalise_ats(cell_text(row.get("ATS")))
+    name = cell_text(row.get("Waterbody name"))
+    for lake in by_ats.get(code, ()):
+        if registry.name_similarity(name, lake["name"]) >= 0.85:
+            return str(lake.get("waterbody_id") or "")
+    return None
+
+
+def species_rows(overview, evidence, waterbodies, by_id, by_ats):
+    """What is reported to swim in a lake, as against what was put in it.
+
+    Stocking records answer only the second question. They say nothing about
+    the pike that arrived on their own, and nothing about whether a decade of
+    trout is still there. The catch limits answer neither: 64 of the 65 lakes
+    the guide lists by name carry the identical pike-walleye-perch triplet,
+    which is boilerplate covering what might be present.
+
+    These rows come from Angler's Atlas, which is an angling site and not the
+    province — community reports, not a fish survey, and not proof of current
+    presence. Everything downstream has to say so. What makes them worth
+    carrying anyway is that they are per-lake, cited, and carry the community's
+    own agreement and disagreement counts, so a reader can weigh them.
+
+    Only lakes the export graded as a verified match, and never a listing the
+    site disputes.
+    """
+    sites = {cell_text(r.get("Lake ID")): r for r in waterbodies}
+    verified = {}
+    for row in overview:
+        if cell_text(row.get("Match status")) == VERIFIED_MATCH:
+            verified[cell_text(row.get("Lake ID"))] = row
+
+    rows = []
+    for row in evidence:
+        wid = cell_text(row.get("Lake ID"))
+        if wid not in verified:
+            continue
+        wid = registry_id_for(wid, sites, by_id, by_ats)
+        if not wid:
+            continue
+        listing = cell_text(row.get("Listing status"))
+        if listing == DISPUTED:
+            continue
+        mapped = ATLAS_SPECIES.get(cell_text(row.get("Species")))
+        if not mapped:
+            continue
+        code, kind = mapped
+        seen = row.get("Visible confirmation date")
+        rows.append({
+            "waterbody_id": wid,
+            "species": code,
+            "kind": kind,
+            "listing": listing,
+            "agree": cell_text(row.get("Agree votes")),
+            "disagree": cell_text(row.get("Disagree votes")),
+            "confirmed_on": seen.date().isoformat() if hasattr(seen, "date") else "",
+            "additional": "yes" if cell_text(
+                row.get("Additional to stocking history")).lower() == "yes" else "no",
+            "source_url": cell_text(row.get("Source lake page")),
+        })
+    return rows
+
+
 def description_rows(waterbodies, by_id):
     """The paragraph Alberta writes about each lake.
 
@@ -509,7 +637,9 @@ def build():
     waterbodies = read_sheet(workbook, "Waterbodies")
     details = read_sheet(workbook, "Stocking details")
     photos = read_sheet(workbook, "Pictures")
-    by_id, _ = load_registry()
+    overview = read_sheet(workbook, "Species overview")
+    evidence = read_sheet(workbook, "Species evidence")
+    by_id, by_ats = load_registry()
 
     issues, refused, captioned = self_consistency(waterbodies, photos)
 
@@ -537,6 +667,10 @@ def build():
         WEIGHTS_CSV: render(["waterbody_id", "year", "species", "length_cm", "weight_g", "records"],
                             weight_rows(details),
                             lambda r: (by_waterbody(r), r["year"], r["species"], float(r["length_cm"]))),
+        ATLAS_CSV: render(["waterbody_id", "species", "kind", "listing", "agree",
+                           "disagree", "confirmed_on", "additional", "source_url"],
+                          species_rows(overview, evidence, waterbodies, by_id, by_ats),
+                          lambda r: (by_waterbody(r), r["species"])),
     }, {"waterbodies": len(waterbodies), "details": len(details),
         "photos": len(photos), "issues": len(issues), "refused_positions": len(refused)}
 

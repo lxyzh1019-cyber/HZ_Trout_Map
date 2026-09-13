@@ -2325,6 +2325,10 @@ class ReportedSpeciesTests(unittest.TestCase):
     name carry the identical pike-walleye-perch triplet, which is boilerplate
     covering what might be there. Cow Lake's row lists a walleye limit and Cow
     Lake is reported to hold rainbow, brown, pike and perch, and no walleye.
+
+    The source is Angler's Atlas, by way of a hand-checked export that grades
+    every one of the 346 lakes for match quality. Only the 106 it calls a
+    verified match reach the app.
     """
 
     @classmethod
@@ -2338,9 +2342,9 @@ class ReportedSpeciesTests(unittest.TestCase):
         """A presence claim nobody can check is worth less than none."""
         for key, entry in self.confirmed.items():
             self.assertTrue(entry.get("species"), key)
-            self.assertTrue(entry.get("url", "").startswith("https://"),
+            self.assertTrue((entry.get("url") or "").startswith("https://"),
                             f"{key} has no source URL")
-            self.assertTrue(entry.get("retrieved"), f"{key} has no retrieval date")
+            self.assertEqual(entry.get("source"), "anglersatlas", key)
 
     def test_an_absent_lake_is_unchecked_and_not_empty(self):
         """Coverage is partial on purpose, so the absence must stay meaningful.
@@ -2354,6 +2358,56 @@ class ReportedSpeciesTests(unittest.TestCase):
         self.assertLess(len(self.confirmed), len(self.profiles),
                         "every lake is covered; the unchecked case needs a new test")
 
+    def test_only_verified_matches_are_carried(self):
+        """The export grades four ways and only one of them is good enough.
+
+        "Uncertain lake match" means the exporter could not tell which lake the
+        page was about. Twenty-eight lakes are in that position, and putting
+        their species on the map would be asserting what the source declined to.
+        """
+        try:
+            import openpyxl  # noqa: F401
+        except ImportError:
+            self.skipTest("openpyxl is not installed")
+        import import_stocking_map as imp
+        if not imp.WORKBOOK.exists():
+            self.skipTest("the workbook is not present")
+        book = openpyxl.load_workbook(imp.WORKBOOK, data_only=True)
+        overview = imp.read_sheet(book, "Species overview")
+        verified = {imp.cell_text(r.get("Lake ID")) for r in overview
+                    if imp.cell_text(r.get("Match status")) == imp.VERIFIED_MATCH}
+        self.assertEqual(len(verified), 106, "the export's verified count moved")
+        self.assertEqual(len(self.confirmed), len(verified),
+                         "a verified lake was dropped, or an unverified one admitted")
+
+    def test_a_listing_the_site_disputes_is_never_carried(self):
+        """The export excludes those from its own species columns.
+
+        Sylvan Lake's Prussian Carp is listed and disputed; re-admitting it here
+        would quietly overturn a judgement someone already made.
+        """
+        path = DATA_DIR / "raw" / "lake_species_atlas.csv"
+        if not path.exists():
+            self.skipTest("the atlas CSV has not been built")
+        with path.open(newline="", encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+        for row in rows:
+            self.assertNotEqual(row["listing"], "Disputed by site", row)
+        sylvan = self.confirmed.get("wb5952")
+        if sylvan:
+            self.assertNotIn("PRCP", [s["code"] for s in sylvan["species"]],
+                             "Sylvan Lake's disputed Prussian Carp came back")
+
+    def test_the_community_vote_travels_with_the_claim(self):
+        """+9/-0 and +3/-3 are not the same claim and must not look alike."""
+        for key, entry in self.confirmed.items():
+            for sp in entry["species"]:
+                self.assertIsInstance(sp["agree"], int, key)
+                self.assertIsInstance(sp["disagree"], int, key)
+                self.assertGreaterEqual(sp["agree"] + sp["disagree"], 1,
+                                        f"{key} {sp['code']} carries no votes at all")
+                self.assertIn(sp["kind"], ("sport", "rough", "invasive"), key)
+
     def test_cow_lake_holds_no_walleye(self):
         """The case the whole distinction rests on.
 
@@ -2364,9 +2418,14 @@ class ReportedSpeciesTests(unittest.TestCase):
         cow = self.confirmed.get("wb4340")
         if cow is None:
             self.skipTest("Cow Lake has not been checked")
-        self.assertNotIn("WALL", cow["species"])
+        codes = {s["code"] for s in cow["species"]}
+        self.assertNotIn("WALL", codes)
         for code in ("RNTR", "BNTR", "NRPK", "YLPR"):
-            self.assertIn(code, cow["species"])
+            self.assertIn(code, codes)
+        # Pike and perch are in the lake and not in its stocking history, which
+        # is exactly the information this source exists to add.
+        new = {s["code"] for s in cow["species"] if s["new"]}
+        self.assertEqual(new, {"NRPK", "YLPR"})
 
         regs = json.loads(
             (DATA_DIR / "lake_regulations.json").read_text(encoding="utf-8"))["lakes"]
@@ -2377,6 +2436,7 @@ class ReportedSpeciesTests(unittest.TestCase):
         """A code with no label renders as four letters nobody reads as a fish."""
         index = (ROOT / "index.html").read_text(encoding="utf-8")
         for key, entry in self.confirmed.items():
-            for code in entry["species"]:
+            for sp in entry["species"]:
+                code = sp["code"]
                 named = f"  {code}: {{ label:" in index or f"{code}: \"" in index
                 self.assertTrue(named, f"{code} (in {key}) has no name in the app")

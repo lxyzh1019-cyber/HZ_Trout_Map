@@ -41,7 +41,7 @@ ROOT = Path(__file__).parent.parent
 LAKES_CSV = ROOT / "data" / "raw" / "mywildalberta_lakes.csv"
 DESCRIPTIONS_CSV = ROOT / "data" / "raw" / "mywildalberta_descriptions.csv"
 PHOTOS_CSV = ROOT / "data" / "raw" / "mywildalberta_photos.csv"
-CONFIRMED_CSV = ROOT / "data" / "raw" / "lake_species_confirmed.csv"
+ATLAS_CSV = ROOT / "data" / "raw" / "lake_species_atlas.csv"
 
 # A token that begins with one of these and a space is a narrower kind of it.
 PARENT_FACETS = ("Trails", "Paddling", "Camping", "Day Use", "Boating",
@@ -86,41 +86,56 @@ def load_rows(path, key="lake_id"):
 
 
 def load_confirmed():
-    """What is reported to actually swim in a lake, as opposed to what was put in.
+    """What is reported to swim in a lake, as against what was put in.
 
-    The two are not the same question and this map could only answer the second
-    one. Stocking records say what a hatchery delivered; they say nothing about
-    the pike that got in on their own, and nothing about whether last decade's
-    trout are still there.
+    The two are not the same question and this map could only answer the
+    second. Stocking records say what a hatchery delivered; they say nothing
+    about the pike that got in on their own, and nothing about whether last
+    decade's trout are still there.
 
     Catch limits are not an answer either, and reading them as one is the trap.
     Cow Lake's regulation row lists a walleye limit, and 64 of the 65
     site-specific rows in the guide carry the identical pike-walleye-perch
-    triplet: that is boilerplate covering species that may or may not be
-    present, not a survey. Independent reports of Cow Lake list rainbow, brown,
-    pike and perch, and no walleye at all.
+    triplet: boilerplate covering species that may or may not be present. Cow
+    Lake is reported to hold rainbow, brown, pike and perch, and no walleye.
 
-    So presence gets its own source, with a URL per lake so any row can be
-    checked. Angler's Atlas is an angling site rather than the province, and
-    the app says so rather than passing it off as a government fact.
+    So presence gets its own source, per lake, with the URL it came from and
+    the community's own agreement and disagreement counts, because "+9 / -0"
+    and "+3 / -3" are not the same claim. Angler's Atlas is an angling site
+    rather than the province, and the app says so rather than passing a
+    community report off as a government fact.
 
-    Coverage is partial and a missing lake means NOT CHECKED. It must never
-    render as a lake with no fish in it.
+    Coverage is 106 of 346 lakes and a missing lake means NOT CHECKED. It must
+    never render as a lake with no fish in it.
     """
-    if not CONFIRMED_CSV.exists():
+    if not ATLAS_CSV.exists():
         return {}
-    out = {}
-    with CONFIRMED_CSV.open(newline="", encoding="utf-8") as handle:
+    by_lake = defaultdict(lambda: {"species": [], "source": "anglersatlas",
+                                   "url": None})
+    with ATLAS_CSV.open(newline="", encoding="utf-8") as handle:
         for row in csv.DictReader(handle):
-            codes = [c.strip() for c in (row.get("species") or "").split(";") if c.strip()]
-            if not row.get("lake_id") or not codes:
-                continue
-            out[row["lake_id"]] = {
-                "species": sorted(set(codes)),
-                "source": row.get("source") or None,
-                "url": row.get("source_url") or None,
-                "retrieved": row.get("retrieved") or None,
-            }
+            key = "wb" + row["waterbody_id"]
+            entry = by_lake[key]
+            entry["url"] = entry["url"] or (row.get("source_url") or None)
+            def count(name):
+                try:
+                    return int(row.get(name) or 0)
+                except ValueError:
+                    return 0
+            entry["species"].append({
+                "code": row["species"],
+                "kind": row["kind"],
+                "agree": count("agree"),
+                "disagree": count("disagree"),
+                "on": row.get("confirmed_on") or None,
+                # Not in this lake's 2021-2026 stocking history, which is the
+                # genuinely new information and the reason to carry any of it.
+                "new": row.get("additional") == "yes",
+            })
+    out = {}
+    for key, entry in by_lake.items():
+        entry["species"].sort(key=lambda s: (s["kind"] != "sport", s["code"]))
+        out[key] = entry
     return out
 
 

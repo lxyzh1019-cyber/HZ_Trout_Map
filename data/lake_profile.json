@@ -79,6 +79,20 @@
    "amenities": [
     "Day Use"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2022-05-05"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/916170/anderson-dam"
+   },
    "description": "Anderson Dam is a popular destination for a relaxing afternoon of fishing and nature enjoyment. The pond is annually stocked with trout by the Alberta Conservation Association (ACA), enhancing angling opportunities for visitors. The shoreline is lined with willows and Saskatoon shrubs, which offer seasonal berry picking for those exploring the area. | Amenities notes: no open fires; foot access only.",
    "district": "Drumheller",
    "facets": [
@@ -90,6 +104,36 @@
     "Camping",
     "Day Use"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 8,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2019-05-03"
+     },
+     {
+      "agree": 6,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2019-05-03"
+     },
+     {
+      "agree": 9,
+      "code": "WALL",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2019-05-03"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/873848/pine-coulee-reservoir"
+   },
    "description": "This waterbody has been recently designated as a quality fishery and stocked with rainbow trout.",
    "district": "Claresholm",
    "facets": [
@@ -250,6 +294,28 @@
     "Day Use",
     "Picnic"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 1,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": null
+     },
+     {
+      "agree": 1,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": null
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/2574272/riverstone-pond"
+   },
    "description": "Riverstone pond located in William Pearce Park.",
    "district": "Lethbridge",
    "facets": [
@@ -293,6 +359,20 @@
     "Picnic",
     "Toilets"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 1,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2024-01-03"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/965708/genesee-fish-pond"
+   },
    "description": "Genesee Heritage Park offers visitors a great spot to have a picnic or spend the day fishing in other fully-stocked fish pond.",
    "district": "Wetaskiwin",
    "facets": [
@@ -311,6 +391,20 @@
   },
   "wb23327": {
    "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 7,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2021-01-19"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/1067336/twin-valley-reservoir"
+   },
    "description": "No description available.",
    "district": "Vulcan",
    "facets": null
@@ -355,14 +449,6 @@
   },
   "wb24236": {
    "amenities": null,
-   "confirmed": {
-    "retrieved": "2026-09-12",
-    "source": "anglersatlas",
-    "species": [
-     "NRPK"
-    ],
-    "url": "https://www.anglersatlas.com/place/726192/brazeau-canal"
-   },
    "description": "Brazeau Canal is a small pond located along the Brazeau Canal, approximately 50 minutes west of Drayton Valley. The pond has been stocked with walleye fry, offering anglers a unique fishing opportunity in a scenic setting. Fishing access is available at the West Canal Campground, which also provides convenient amenities for visitors. In addition to fishing, the area offers a variety of recreational activities, including powerboating, canoeing, and birdwatching. While Off-Highway Vehicle (OHV) trails are available nearby, OHV use is strictly prohibited within the campground to maintain a safe and peaceful environment. The site is adjacent to Brazeau Reservoir Provincial Recreation Area, making it an excellent destination for outdoor enthusiasts.",
    "district": "Rocky Mountain House",
    "facets": null
@@ -384,6 +470,20 @@
     "Parking",
     "Toilets"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2019-07-17"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/884946/fiesta-lake"
+   },
    "description": "The lake is stocked annually by AEP with trout and is aerated (October - April) through ACA's Lake Aeration Program.",
    "district": "Sundre",
    "facets": [
@@ -483,14 +583,6 @@
     "Sports",
     "Sports Baseball"
    ],
-   "confirmed": {
-    "retrieved": "2026-09-12",
-    "source": "anglersatlas",
-    "species": [
-     "RNTR"
-    ],
-    "url": "https://www.anglersatlas.com/place/130602/kakut-lake"
-   },
    "description": "Kakut Lake is located in northern Alberta and offers a great camping experience. Fish the stocked pond for trout with the possibility of perch being caught. | Amenities notes: community hall.",
    "district": "Spirit River",
    "facets": [
@@ -531,6 +623,20 @@
     "Picnic",
     "Toilets"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2021-09-07"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102584/taber-fish-and-game-pond"
+   },
    "description": "Camp at the pond in one of the nine sites, and throw your line into the stocked pond.",
    "district": "Medicine Hat",
    "facets": [
@@ -557,6 +663,28 @@
     "Picnic",
     "Toilets"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "BNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2021-08-20"
+     },
+     {
+      "agree": 7,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-08-24"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/137026/grotto-mountain-pond"
+   },
    "description": "Pond is usually stocked at least three-four times a year due to its popularity.",
    "district": "Canmore",
    "facets": [
@@ -568,6 +696,20 @@
   },
   "wb3479": {
    "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-08-03"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/137029/lambert-pond"
+   },
    "description": "This lake is south of highway 16, and has an elevation of 912m.",
    "district": "Edson",
    "facets": null,
@@ -582,10 +724,24 @@
     "Trails Hiking"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "RNTR"
+     {
+      "agree": 1,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2025-06-21"
+     },
+     {
+      "agree": 6,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2018-08-28"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/724129/mount-lorette-ponds"
    },
@@ -624,6 +780,36 @@
     "Day Use",
     "Toilets"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-08-09"
+     },
+     {
+      "agree": 1,
+      "code": "CTTR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-08-08"
+     },
+     {
+      "agree": 7,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-08-08"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/130667/sibbald-meadows-pond"
+   },
    "description": "This small pond surrounded by aspen groves is named after Frank Sibbald, a long time rancher who settled in the area in 1875. It is a perfect place to stop, relax and enjoy the foothills environment. You can walk the easy trail along the shore to cast a line and try a little fishing, or simply sit and enjoy a snack at the picnic area.",
    "district": "Canmore",
    "facets": [
@@ -646,15 +832,6 @@
     "Showers",
     "Toilets"
    ],
-   "confirmed": {
-    "retrieved": "2026-09-12",
-    "source": "anglersatlas",
-    "species": [
-     "BKTR",
-     "BNTR"
-    ],
-    "url": "https://www.anglersatlas.com/place/160987/blood-indian-creek-reservoir"
-   },
    "description": "Blood Indian Park Campground operates on a first-come, first-served basis and is open seasonally from April 1 to November 1, with winter camping available outside of these dates. The campground features 300 campsites, including 29 serviced sites, making it suitable for a wide range of camping preferences. During the summer months, guests have access to coin-operated showers and a laundromat. Wi-Fi is available in the main camping area for added convenience. Families can also enjoy the Splash Park, which is open daily from 12:00 PM to 5:00 PM throughout the summer season. | Amenities notes: rave sewer drainage",
    "district": "Hanna",
    "facets": [
@@ -686,6 +863,68 @@
     "Washrooms",
     "Water"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "BKTR",
+      "disagree": 2,
+      "kind": "sport",
+      "new": true,
+      "on": "2018-01-11"
+     },
+     {
+      "agree": 5,
+      "code": "BLTR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2018-03-07"
+     },
+     {
+      "agree": 2,
+      "code": "CTTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2025-03-06"
+     },
+     {
+      "agree": 1,
+      "code": "GLTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2023-05-14"
+     },
+     {
+      "agree": 3,
+      "code": "MNWH",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2021-04-28"
+     },
+     {
+      "agree": 46,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-15"
+     },
+     {
+      "agree": 7,
+      "code": "WHSC",
+      "disagree": 1,
+      "kind": "rough",
+      "new": true,
+      "on": "2017-02-21"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/101834/chain-lakes-reservoir"
+   },
    "description": "Chain Lakes Reservoir Campground offers more than 90 serviced and unserviced campsites, providing a comfortable and scenic setting for outdoor enthusiasts. Visitors can enjoy a variety of recreational activities, including swimming, beach relaxation, canoeing, fishing, windsurfing, and sailing, making this lakeside destination ideal for both adventure and leisure.",
    "district": "Claresholm",
    "facets": [
@@ -712,6 +951,52 @@
     "Swimming",
     "Water"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "BURB",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-06-13"
+     },
+     {
+      "agree": 5,
+      "code": "LKWH",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-29"
+     },
+     {
+      "agree": 6,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-29"
+     },
+     {
+      "agree": 5,
+      "code": "WALL",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-29"
+     },
+     {
+      "agree": 5,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-29"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/101963/little-bow-reservoir"
+   },
    "description": "This waterfront campground is in Little Bow Reservoir Provincial Recreation Area. This prairie campground is all about the water. Many of the sites back on to the reservoir, and trees provide some shade to fish , canoe, water ski, or swim.",
    "district": "Vulcan",
    "facets": [
@@ -770,6 +1055,20 @@
     "Showers",
     "Water"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2018-05-09"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/130054/michichi-reservoir"
+   },
    "description": "Michichi Dam Recreation Area has 18 formal power campsites complete with fire pits and picnic tables. There are also 20 overflow campsites, group camping areas, and camp kitchen facilities. There are coin-operated shower facilities with handicap access. There is an RV water and sewer station available for your convenience. Ice fishing is accessible in the winter, but beware of drifting snow when traveling down to the boat launch.",
    "district": "Drumheller",
    "facets": [
@@ -791,15 +1090,6 @@
     "Camping",
     "Wildlife Viewing"
    ],
-   "confirmed": {
-    "retrieved": "2026-09-12",
-    "source": "anglersatlas",
-    "species": [
-     "BURB",
-     "WALL"
-    ],
-    "url": "https://www.anglersatlas.com/place/101993/milk-river-ridge-reservoir"
-   },
    "description": "It's a great spot to enjoy boating, paddling, windsurfing, fishing, birdwatching, or camping.",
    "district": "Lethbridge",
    "facets": [
@@ -820,6 +1110,44 @@
     "Toilets",
     "Water"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "ARGR",
+      "disagree": 2,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-07-31"
+     },
+     {
+      "agree": 7,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-07-31"
+     },
+     {
+      "agree": 1,
+      "code": "BNTR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-08-22"
+     },
+     {
+      "agree": 6,
+      "code": "WALL",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-07-31"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102052/spruce-coulee-reservoir"
+   },
    "description": "Foot access only all year around (weather permitting). After the September long weekend, the services offered at the campsite are reduced.",
    "district": "Medicine Hat",
    "facets": [
@@ -859,14 +1187,56 @@
     "Paddling Canoe"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "BURB",
-     "LKWH",
-     "NRPK",
-     "WALL",
-     "YLPR"
+     {
+      "agree": 7,
+      "code": "BURB",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-29"
+     },
+     {
+      "agree": 7,
+      "code": "LKWH",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-29"
+     },
+     {
+      "agree": 19,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-29"
+     },
+     {
+      "agree": 7,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-11-02"
+     },
+     {
+      "agree": 23,
+      "code": "WALL",
+      "disagree": 1,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-29"
+     },
+     {
+      "agree": 6,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-29"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/102072/travers-reservoir"
    },
@@ -920,6 +1290,28 @@
    "amenities": [
     "Day Use"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "BNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2022-08-31"
+     },
+     {
+      "agree": 1,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2022-08-31"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/990885/mitford-pond"
+   },
    "description": "ACA annually stocks these ponds with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
    "district": "Cochrane",
    "facets": [
@@ -954,10 +1346,32 @@
     "Trails Hiking"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "BNTR"
+     {
+      "agree": 9,
+      "code": "BNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-08-08"
+     },
+     {
+      "agree": 12,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-08-08"
+     },
+     {
+      "agree": 6,
+      "code": "WHSC",
+      "disagree": 0,
+      "kind": "rough",
+      "new": true,
+      "on": "2017-08-15"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/129635/beauvais-lake"
    },
@@ -989,10 +1403,32 @@
     "Toilets"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "RNTR"
+     {
+      "agree": 2,
+      "code": "BKTR",
+      "disagree": 2,
+      "kind": "sport",
+      "new": true,
+      "on": "2021-01-28"
+     },
+     {
+      "agree": 8,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-08-08"
+     },
+     {
+      "agree": 2,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2024-08-18"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/129637/beaver-lake"
    },
@@ -1022,11 +1458,40 @@
     "Winter Recreation"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "BNTR",
-     "RNTR"
+     {
+      "agree": 4,
+      "code": "BLTR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-12-22"
+     },
+     {
+      "agree": 3,
+      "code": "BNTR",
+      "disagree": 3,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-12-18"
+     },
+     {
+      "agree": 3,
+      "code": "CTTR",
+      "disagree": 2,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-12-18"
+     },
+     {
+      "agree": 9,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-12-16"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/101807/beaver-mines-lake"
    },
@@ -1054,6 +1519,36 @@
     "Playground",
     "Shelter"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 8,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2022-01-12"
+     },
+     {
+      "agree": 11,
+      "code": "WALL",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2022-01-12"
+     },
+     {
+      "agree": 7,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2023-01-16"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/101943/lac-bellevue"
+   },
    "description": "Use the day use area or beach to swim or fish for stocked trout.",
    "district": "St Paul",
    "facets": [
@@ -1071,12 +1566,32 @@
     "Toilets"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "BKTR",
-     "BNTR",
-     "RNTR"
+     {
+      "agree": 19,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-08-08"
+     },
+     {
+      "agree": 17,
+      "code": "BNTR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-08-08"
+     },
+     {
+      "agree": 18,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2019-05-03"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/101813/birch-lake"
    },
@@ -1105,6 +1620,44 @@
     "Sports",
     "Water"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 1,
+      "code": "LKWH",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2022-01-15"
+     },
+     {
+      "agree": 13,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-09-01"
+     },
+     {
+      "agree": 11,
+      "code": "WALL",
+      "disagree": 1,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-09-01"
+     },
+     {
+      "agree": 15,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-06-17"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/723940/burnstick-lake"
+   },
    "description": "The lake is about 3 km long and has an abundance of pike, perch and walleye Burnstick Lake offers something for everyone, including boating, fishing, water skiing, camping and a picnic area. A small store is available for your convenience.",
    "district": "Sundre",
    "facets": [
@@ -1238,6 +1791,60 @@
     "Boat Launch",
     "Parking"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2024-04-18"
+     },
+     {
+      "agree": 2,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2025-04-25"
+     },
+     {
+      "agree": 2,
+      "code": "BRST",
+      "disagree": 0,
+      "kind": "rough",
+      "new": true,
+      "on": "2025-04-25"
+     },
+     {
+      "agree": 2,
+      "code": "EMSH",
+      "disagree": 0,
+      "kind": "rough",
+      "new": true,
+      "on": "2025-04-25"
+     },
+     {
+      "agree": 2,
+      "code": "FHMN",
+      "disagree": 0,
+      "kind": "rough",
+      "new": true,
+      "on": "2025-04-25"
+     },
+     {
+      "agree": 2,
+      "code": "NSST",
+      "disagree": 0,
+      "kind": "rough",
+      "new": true,
+      "on": "2025-04-25"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/101838/chatwin-lake"
+   },
    "description": "Chatwin Lake was stocked with trout in the spring of 2020 after many years without fish. The lake boarders the Bonnyville golf course and private residences. The staging area is gravel, with a crude boat launch and smaller boats are recommended.",
    "district": "Bonnyville",
    "facets": [
@@ -1259,6 +1866,28 @@
     "Trails Hiking",
     "Washrooms"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 6,
+      "code": "BKTR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-07-30"
+     },
+     {
+      "agree": 11,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-08-15"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/101840/chickakoo-lake"
+   },
    "description": "Chickakoo Lake Recreation Area is a scenic mix of woods and lakes that attracts a diversity of birds and other wildlife such as moose, dear, beavers and more. The 480 acres of woodland and over 14 km of trails are a popular destination for hikers, cyclists and horseback riders in summer and are groomed for cross country skiers in winter.",
    "district": "Stony Plain",
    "facets": [
@@ -1280,6 +1909,36 @@
     "Swimming",
     "Toilets"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "LKWH",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2018-12-10"
+     },
+     {
+      "agree": 4,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2018-12-10"
+     },
+     {
+      "agree": 4,
+      "code": "WALL",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2018-12-10"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102603/chin-lake"
+   },
    "description": "Chin Reservoir is a large, long reservoir where boating, water skiing and fishing are popular. There are only amenities at the camping area which include a boat launch, swimming area and outhouses.",
    "district": "Lethbridge",
    "facets": [
@@ -1310,13 +1969,40 @@
     "Water"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "BNTR",
-     "NRPK",
-     "RNTR",
-     "YLPR"
+     {
+      "agree": 4,
+      "code": "BNTR",
+      "disagree": 2,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-08"
+     },
+     {
+      "agree": 9,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-01-18"
+     },
+     {
+      "agree": 10,
+      "code": "RNTR",
+      "disagree": 2,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-08"
+     },
+     {
+      "agree": 2,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2018-01-15"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/101853/cow-lake"
    },
@@ -1362,12 +2048,56 @@
     "Parking"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "CTTR",
-     "LKTR",
-     "RNTR"
+     {
+      "agree": 1,
+      "code": "BNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2021-12-31"
+     },
+     {
+      "agree": 3,
+      "code": "CTTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2020-04-06"
+     },
+     {
+      "agree": 3,
+      "code": "LKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-02-08"
+     },
+     {
+      "agree": 1,
+      "code": "LKWH",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2022-01-25"
+     },
+     {
+      "agree": 2,
+      "code": "MNWH",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2022-01-25"
+     },
+     {
+      "agree": 4,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-12-18"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/101858/crowsnest-lake"
    },
@@ -1403,12 +2133,32 @@
     "Water"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "RNTR",
-     "TGTR",
-     "YLPR"
+     {
+      "agree": 8,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-12-28"
+     },
+     {
+      "agree": 1,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2022-10-24"
+     },
+     {
+      "agree": 2,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-01-04"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/154692/dillberry-lake"
    },
@@ -1441,11 +2191,40 @@
     "Water"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "RNTR",
-     "TGTR"
+     {
+      "agree": 5,
+      "code": "BNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2022-10-02"
+     },
+     {
+      "agree": 18,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-08-05"
+     },
+     {
+      "agree": 9,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2018-09-30"
+     },
+     {
+      "agree": 4,
+      "code": "YLPR",
+      "disagree": 3,
+      "kind": "sport",
+      "new": true,
+      "on": "2023-10-09"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/101867/dolberg-lake"
    },
@@ -1482,6 +2261,20 @@
   },
   "wb4495": {
    "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 4,
+      "code": "CTTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-06-21"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/129482/eagle-lake"
+   },
    "description": "Access found on the Ya Ha Tinda Road or the forestry trunk road through James Pass. Both routes provide direct access to the lake and accommodate horseback and foot travel, with limited ATV/UTV access permitted. Seasonal timing restrictions apply to ATV and UTV use on certain trail segments.",
    "district": "Sundre",
    "facets": null,
@@ -1494,6 +2287,28 @@
     "Picnic",
     "Shelter"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2019-01-29"
+     },
+     {
+      "agree": 2,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-11-21"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/101874/edith-lake"
+   },
    "description": "Electric motors only. There are rocks around the shore making it easy to access the reservoir, fly fishing is preferable.",
    "district": "High Prairie",
    "facets": [
@@ -1506,6 +2321,36 @@
   },
   "wb4532": {
    "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-15"
+     },
+     {
+      "agree": 1,
+      "code": "RNTR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-15"
+     },
+     {
+      "agree": 1,
+      "code": "LKCH",
+      "disagree": 0,
+      "kind": "rough",
+      "new": true,
+      "on": "2016-07-15"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/726188/emerald-lake"
+   },
    "description": "A great brook trout destination located 32km north of McLeod Lake.",
    "district": "Whitecourt",
    "facets": null,
@@ -1521,6 +2366,28 @@
     "Trails Hiking",
     "Trails Interpretive"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 1,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2023-03-02"
+     },
+     {
+      "agree": 1,
+      "code": "BRMN",
+      "disagree": 0,
+      "kind": "rough",
+      "new": true,
+      "on": "2023-03-02"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/726132/emerson-lakes"
+   },
    "description": "The park is off the beaten path, but once you find it, you'll be rewarded with a chain of 5 small lakes and about 7 km of trails to explore. You can fish for stocked trout, canoe, or take an electric powered boat on the lakes and view the hoodoos on the Wild Sculpture Trail.",
    "district": "Edson",
    "facets": [
@@ -1547,6 +2414,28 @@
     "Trails Hiking",
     "Winter Recreation"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2023-11-29"
+     },
+     {
+      "agree": 1,
+      "code": "WHSC",
+      "disagree": 0,
+      "kind": "rough",
+      "new": true,
+      "on": "2023-11-29"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/726299/engstrom-lake"
+   },
    "description": "A boat launch and day use area are available for day users. Overnight camping and campfires are prohibited.",
    "district": "Fort McMurray",
    "facets": [
@@ -1576,6 +2465,28 @@
     "Toilets",
     "Water"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2024-05-09"
+     },
+     {
+      "agree": 7,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-14"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/101880/fairfax-lake"
+   },
    "description": "Fairfax Lake Provincial Recreation Area has 27 spacious and private sites near the shores of Fairfax Lake. It is ideal for fishing, canoeing , and hiking trails are available in the surrounding area.",
    "district": "Edson",
    "facets": [
@@ -1607,10 +2518,40 @@
     "Water"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "LKWH"
+     {
+      "agree": 3,
+      "code": "LKWH",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-05"
+     },
+     {
+      "agree": 8,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-05"
+     },
+     {
+      "agree": 5,
+      "code": "WALL",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-05"
+     },
+     {
+      "agree": 3,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-05"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/101883/fickle-lake"
    },
@@ -1634,6 +2575,44 @@
   },
   "wb4635": {
    "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 1,
+      "code": "BURB",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2022-01-29"
+     },
+     {
+      "agree": 1,
+      "code": "LKWH",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2022-01-29"
+     },
+     {
+      "agree": 1,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2022-01-29"
+     },
+     {
+      "agree": 1,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2022-01-29"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/101895/frog-lake"
+   },
    "description": "No description available.",
    "district": "St. Paul",
    "facets": null
@@ -1651,6 +2630,20 @@
     "Day Use",
     "Toilets"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 4,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-12-17"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/129793/gap-lake"
+   },
    "description": "Open all year round.",
    "district": "Nordegg",
    "facets": [
@@ -1700,6 +2693,28 @@
     "Fishing Access",
     "Toilets"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 8,
+      "code": "NRPK",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-19"
+     },
+     {
+      "agree": 7,
+      "code": "YLPR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-19"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102574/goose-lake"
+   },
    "description": "Goose Lake offers camping and fishing. This waterbody has been recently stocked with walleye fry.",
    "district": "Swan Hills",
    "facets": [
@@ -1719,6 +2734,36 @@
     "Picnic",
     "Playground"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "BLTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-01-09"
+     },
+     {
+      "agree": 2,
+      "code": "BURB",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2021-01-21"
+     },
+     {
+      "agree": 4,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2020-01-24"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/101909/grande-cache-lake"
+   },
    "description": "Grande Cache Lake has 8 day use sites that include picnic tables and fire pits. Fire wood is available and has one handicap accessible outhouse facility. Grande Cache Lake has a developed beach area with a playground. For the fishing enthusiasts, there is a boat dock, boat launch, and a fish cleaning station.",
    "district": "Grande Cache",
    "facets": [
@@ -1744,13 +2789,24 @@
     "Trails Hiking"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "NRPK",
-     "RNTR",
-     "TGTR",
-     "YLPR"
+     {
+      "agree": 14,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2020-08-23"
+     },
+     {
+      "agree": 9,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2021-07-16"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/101919/hasse-lake"
    },
@@ -1852,14 +2908,6 @@
     "Fish Cleaning",
     "Toilets"
    ],
-   "confirmed": {
-    "retrieved": "2026-09-12",
-    "source": "anglersatlas",
-    "species": [
-     "NRPK"
-    ],
-    "url": "https://www.anglersatlas.com/place/101940/kehiwin-lake"
-   },
    "description": "Kehiwin Cree Nation is operating the Kehiwin Provincial Recreation Area, 28 km east of St. Paul on Hwy. 29, and 7 km north on Hwy. 41. Cozy little campground that offers basic facilities and access with canoe or boat on Kehiwin Lake. | Amenities notes: firepits",
    "district": "Bonnyville",
    "facets": [
@@ -1876,13 +2924,40 @@
     "Fishing Access"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "BURB",
-     "LKWH",
-     "NRPK",
-     "WALL"
+     {
+      "agree": 2,
+      "code": "BURB",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-06-16"
+     },
+     {
+      "agree": 4,
+      "code": "LKWH",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-06-15"
+     },
+     {
+      "agree": 16,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-08-09"
+     },
+     {
+      "agree": 11,
+      "code": "WALL",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-06-16"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/101941/keho-lake"
    },
@@ -1905,6 +2980,36 @@
     "Toilets",
     "Water"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 6,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-21"
+     },
+     {
+      "agree": 2,
+      "code": "NRPK",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2021-12-28"
+     },
+     {
+      "agree": 1,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-21"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102106/kinky-lake"
+   },
    "description": "Kinky Lake Campground is found in Wildhorse Lake Provincial Recreation Area, with close lake access. Enjoy the scenic mountain views while fishing for trout. Non-motorized or electric-powered boats only.",
    "district": "Hinton",
    "facets": [
@@ -1926,6 +3031,20 @@
     "Swimming",
     "Water"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 4,
+      "code": "CTTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-04-29"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/129606/landslide-lake"
+   },
    "description": "Landslide Lake is a 290km lightly trafficked out and back trail located near Improvement District No 9, Alberta, Canada that offers the chance to see wildlife and is only recommended for very experienced adventurers The trail offers a number of activity options and is best used from July until October.",
    "district": "Nordegg",
    "facets": [
@@ -1975,6 +3094,44 @@
   },
   "wb5093": {
    "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 4,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2018-12-17"
+     },
+     {
+      "agree": 2,
+      "code": "BURB",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-08-06"
+     },
+     {
+      "agree": 2,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2024-01-29"
+     },
+     {
+      "agree": 2,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2019-01-02"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/136994/little-bear-lake"
+   },
    "description": "Access is very poor for launching larger watercrafts. Parking is close to lake so you may carry your hand launch type watercraft to the waters edge.",
    "district": "Cold Lake",
    "facets": null,
@@ -2007,12 +3164,32 @@
   "wb5179": {
    "amenities": null,
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "BLTR",
-     "CTTR",
-     "RNTR"
+     {
+      "agree": 11,
+      "code": "BLTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-11-24"
+     },
+     {
+      "agree": 8,
+      "code": "CTTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-08-02"
+     },
+     {
+      "agree": 4,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-11-24"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/129746/lower-kananaskis-lake"
    },
@@ -2029,6 +3206,20 @@
   },
   "wb5232": {
    "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-12-03"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/129878/marigold-lake"
+   },
    "description": "This lake is helicopter stocked and is more accessible with ATV's.",
    "district": "Swan Hills",
    "facets": null
@@ -2052,6 +3243,44 @@
     "Paddling Canoe",
     "Water"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "BURB",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2022-11-30"
+     },
+     {
+      "agree": 2,
+      "code": "LKWH",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2023-08-07"
+     },
+     {
+      "agree": 5,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2020-02-10"
+     },
+     {
+      "agree": 5,
+      "code": "WALL",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2020-02-10"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/990893/mcgregor-lake"
+   },
    "description": "There are about 100 sites suitable for RVs and tents. Camp on the prairies near the lakeside where you can escape the summer heat. Sailing, wind surfing, water skiing, canoeing and fishing are popular activities in and around the waterbody. | Amenities notes: wind surfing",
    "district": "Vulcan",
    "facets": [
@@ -2092,10 +3321,32 @@
     "Day Use"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "TGTR"
+     {
+      "agree": 5,
+      "code": "BNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-11-21"
+     },
+     {
+      "agree": 10,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-11-21"
+     },
+     {
+      "agree": 3,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2023-10-15"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/101994/millers-lake"
    },
@@ -2115,10 +3366,24 @@
     "Toilets"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "YLPR"
+     {
+      "agree": 2,
+      "code": "WALL",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2024-01-01"
+     },
+     {
+      "agree": 4,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-17"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/130141/minnow-lake"
    },
@@ -2138,6 +3403,36 @@
     "Fire Pits",
     "Toilets"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 4,
+      "code": "BNTR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-12-15"
+     },
+     {
+      "agree": 6,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-01-07"
+     },
+     {
+      "agree": 5,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2019-12-24"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/101997/mitchell-lake"
+   },
    "description": "There is a small campground at the waterbody with walk-in tent sites. There is a pier where you can hand launch a canoe or electric powered boat.",
    "district": "Rocky Mountain House",
    "facets": [
@@ -2182,11 +3477,24 @@
   "wb5387": {
    "amenities": null,
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "BNTR",
-     "RNTR"
+     {
+      "agree": 10,
+      "code": "BNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-08-05"
+     },
+     {
+      "agree": 10,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-06-28"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/102000/muir-lake"
    },
@@ -2198,11 +3506,32 @@
   "wb5407": {
    "amenities": null,
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "BKTR",
-     "CTTR"
+     {
+      "agree": 2,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-08"
+     },
+     {
+      "agree": 4,
+      "code": "CTTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-08"
+     },
+     {
+      "agree": 1,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2024-12-29"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/130318/muskiki-lake"
    },
@@ -2219,6 +3548,68 @@
     "Swimming",
     "Trails"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 4,
+      "code": "BURB",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-01-06"
+     },
+     {
+      "agree": 5,
+      "code": "LKWH",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-01-06"
+     },
+     {
+      "agree": 2,
+      "code": "MNWH",
+      "disagree": 2,
+      "kind": "sport",
+      "new": true,
+      "on": "2018-03-13"
+     },
+     {
+      "agree": 16,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": null
+     },
+     {
+      "agree": 2,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": null
+     },
+     {
+      "agree": 9,
+      "code": "WALL",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-01-06"
+     },
+     {
+      "agree": 4,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-01-06"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/137018/lake-newell"
+   },
    "description": "This waterbody has been recently stocked with walleye fry.",
    "district": "Brooks",
    "facets": [
@@ -2244,6 +3635,60 @@
     "Toilets",
     "Water"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 19,
+      "code": "BNTR",
+      "disagree": 2,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-06-09"
+     },
+     {
+      "agree": 2,
+      "code": "RNTR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2023-08-19"
+     },
+     {
+      "agree": 12,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-14"
+     },
+     {
+      "agree": 1,
+      "code": "EMSH",
+      "disagree": 0,
+      "kind": "rough",
+      "new": true,
+      "on": "2025-05-12"
+     },
+     {
+      "agree": 1,
+      "code": "LKCH",
+      "disagree": 0,
+      "kind": "rough",
+      "new": true,
+      "on": "2024-12-12"
+     },
+     {
+      "agree": 5,
+      "code": "WHSC",
+      "disagree": 1,
+      "kind": "rough",
+      "new": true,
+      "on": "2016-07-14"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102577/obed-lake"
+   },
    "description": "A small campground found in Obed Lake Provincial Park. A great spot to launch a boat and fish for trout.",
    "district": "Hinton",
    "facets": [
@@ -2280,6 +3725,20 @@
     "Toilets",
     "Water"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-11-20"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102008/ole-lake"
+   },
    "description": "Wildlife viewing and canoeing are popular activities at this provincial recreation area.",
    "district": "Fairview",
    "facets": [
@@ -2374,10 +3833,16 @@
     "Wildlife Viewing"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "RNTR"
+     {
+      "agree": 8,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-12-26"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/102015/peanut-lake"
    },
@@ -2407,6 +3872,28 @@
     "Toilets",
     "Water"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 10,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-11-21"
+     },
+     {
+      "agree": 4,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2020-07-22"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/130659/peppers-lake"
+   },
    "description": "Peppers Lake Campground is located in Peppers Lake Provincial Recreation Area. Go fishing or tour the shoreline by canoe or electric powered boat.",
    "district": "Rocky Mountain House",
    "facets": [
@@ -2422,6 +3909,20 @@
   },
   "wb5565": {
    "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 5,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-07"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102016/petite-lake"
+   },
    "description": "The Petite Lake Campground is a small campground located adjacent to Petite Lake There are ATV trails in the area, and it is popular for base camping during the hunting season. Electric motors only. | Amenities notes: Located in the glacial cascades natural area - camping adjacent to waterbody.",
    "district": "Hinton",
    "facets": null
@@ -2444,11 +3945,32 @@
     "Water"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "RNTR",
-     "YLPR"
+     {
+      "agree": 7,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-11-29"
+     },
+     {
+      "agree": 5,
+      "code": "YLPR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-11-29"
+     },
+     {
+      "agree": 2,
+      "code": "WHSC",
+      "disagree": 0,
+      "kind": "rough",
+      "new": true,
+      "on": "2022-08-01"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/136982/phyllis-lake"
    },
@@ -2502,14 +4024,48 @@
     "Water"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "BURB",
-     "LKWH",
-     "NRPK",
-     "WALL",
-     "YLPR"
+     {
+      "agree": 4,
+      "code": "BURB",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-02-22"
+     },
+     {
+      "agree": 4,
+      "code": "LKWH",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-02-22"
+     },
+     {
+      "agree": 11,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-09-01"
+     },
+     {
+      "agree": 9,
+      "code": "WALL",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-02-08"
+     },
+     {
+      "agree": 4,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-02-22"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/102022/pinehurst-lake"
    },
@@ -2544,6 +4100,20 @@
   },
   "wb5649": {
    "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "CTTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-07-21"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/129665/rawson-lake"
+   },
    "description": "This is a monderate trail difficulty, with a distance of 7.8km round trip, with an elevation gain of 300m. The trailhead is conveniently located adjacent to the Upper Kananaskis Lake parking lot. The route offers scenic views of Upper Kananaskis Lake, a picturesque waterfall, and sections of old-growth forest. Rawson Lake provides an excellent opportunity for hikers seeking a moderate challenge combined with stunning natural landscapes.",
    "district": "Canmore",
    "facets": null
@@ -2558,10 +4128,32 @@
     "Toilets"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "RNTR"
+     {
+      "agree": 7,
+      "code": "RNTR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-01-18"
+     },
+     {
+      "agree": 5,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2022-02-08"
+     },
+     {
+      "agree": 4,
+      "code": "WHSC",
+      "disagree": 0,
+      "kind": "rough",
+      "new": true,
+      "on": "2017-07-31"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/102026/reesor-lake"
    },
@@ -2610,6 +4202,28 @@
     "Shelter",
     "Toilets"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-16"
+     },
+     {
+      "agree": 4,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-16"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/154073/running-lake"
+   },
    "description": "There is a quiet little campground near the lake with treed sites.",
    "district": "Fairview",
    "facets": [
@@ -2631,6 +4245,28 @@
     "Picnic",
     "Toilets"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 10,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-06-23"
+     },
+     {
+      "agree": 2,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2022-05-10"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/137030/salters-lake"
+   },
    "description": "Open to the public all year round, the lake is aerated in order to support the fish population. There is a boat launch and pier available for public use, electric motors only.",
    "district": "Barrhead",
    "facets": [
@@ -2644,6 +4280,20 @@
    "amenities": [
     "Boat Launch"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2022-01-20"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/129841/sandy-lake"
+   },
    "description": "The lake is accessable by a pavement road. There is one public boat launch for larger sized watercraft.",
    "district": "Athabasca",
    "facets": [
@@ -2652,6 +4302,20 @@
   },
   "wb5753": {
    "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-09-03"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102578/sauer-lake"
+   },
    "description": "Sauer is a charming, tiny lake set among the rolling hills west of the city of Edmonton. It is a quiet spot for canoeing or fishing for rainbow trout.",
    "district": "Stony Plain",
    "facets": null,
@@ -2671,6 +4335,28 @@
     "Picnic",
     "Toilets"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 9,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-07-28"
+     },
+     {
+      "agree": 4,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2023-11-27"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/129921/schuman-lake"
+   },
    "description": "Only electric or non-motorized water crafts are permitted on lake. | Amenities notes: barbeque sites",
    "district": "Swan Hills",
    "facets": [
@@ -2690,6 +4376,52 @@
   },
   "wb5790": {
    "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 5,
+      "code": "BURB",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2020-05-26"
+     },
+     {
+      "agree": 4,
+      "code": "LKWH",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2020-05-26"
+     },
+     {
+      "agree": 5,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2020-05-26"
+     },
+     {
+      "agree": 6,
+      "code": "WALL",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2020-05-26"
+     },
+     {
+      "agree": 5,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2020-05-26"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102044/sherburne-lake"
+   },
    "description": "No description available.",
    "district": "Lethbridge",
    "facets": null
@@ -2767,6 +4499,52 @@
     "Retail/Services",
     "Showers"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 5,
+      "code": "BURB",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2018-01-16"
+     },
+     {
+      "agree": 6,
+      "code": "LKWH",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-12-22"
+     },
+     {
+      "agree": 12,
+      "code": "NRPK",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-11-25"
+     },
+     {
+      "agree": 9,
+      "code": "WALL",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-12-22"
+     },
+     {
+      "agree": 10,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-12-22"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102046/skeleton-lake"
+   },
    "description": "There are public boat launches, and a private camping area.",
    "district": "Barrhead",
    "facets": [
@@ -2779,6 +4557,28 @@
   },
   "wb5858": {
    "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 1,
+      "code": "CTTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-08-17"
+     },
+     {
+      "agree": 2,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-08-17"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/174451/sparrows-egg-lake"
+   },
    "description": "Sparrows Egg Lake was stocked in fall 2025 with 900 cutthroat trout. This remote lake, located west of Calgary in Kananaskis Country, is stocked by helicopter every two years. It’s a hike-in destination, offering anglers a pristine backcountry experience.",
    "district": "Canmore",
    "facets": null,
@@ -2809,10 +4609,48 @@
     "Picnic"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "RNTR"
+     {
+      "agree": 3,
+      "code": "BNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2022-05-10"
+     },
+     {
+      "agree": 2,
+      "code": "NRPK",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2025-06-02"
+     },
+     {
+      "agree": 15,
+      "code": "RNTR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-12-08"
+     },
+     {
+      "agree": 2,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2022-05-10"
+     },
+     {
+      "agree": 17,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2020-07-04"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/102057/star-lake"
    },
@@ -2834,11 +4672,24 @@
   "wb5919": {
    "amenities": null,
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "RNTR",
-     "YLPR"
+     {
+      "agree": 7,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-17"
+     },
+     {
+      "agree": 5,
+      "code": "YLPR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-01-04"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/102060/strubel-lake"
    },
@@ -2856,6 +4707,28 @@
     "Toilets",
     "Water"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 4,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2020-03-24"
+     },
+     {
+      "agree": 4,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2018-01-05"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/130278/sulphur-lake"
+   },
    "description": "Sulphur Lake Provincial Recreation area is located about an hour drive north of Peace River. There's a hand launch and a boat launch, as well as a fishing pier and fish cleaning station.",
    "district": "Fairview",
    "facets": [
@@ -2875,10 +4748,16 @@
     "Toilets"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "RNTR"
+     {
+      "agree": 11,
+      "code": "RNTR",
+      "disagree": 2,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-16"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/130354/swan-lake"
    },
@@ -2898,14 +4777,56 @@
     "Swimming"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "BURB",
-     "LKWH",
-     "NRPK",
-     "WALL",
-     "YLPR"
+     {
+      "agree": 16,
+      "code": "BURB",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-11-21"
+     },
+     {
+      "agree": 20,
+      "code": "LKWH",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-20"
+     },
+     {
+      "agree": 30,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-20"
+     },
+     {
+      "agree": 31,
+      "code": "WALL",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-20"
+     },
+     {
+      "agree": 18,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-08-28"
+     },
+     {
+      "agree": 1,
+      "code": "WHSC",
+      "disagree": 1,
+      "kind": "rough",
+      "new": true,
+      "on": "2016-09-08"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/102064/sylvan-lake"
    },
@@ -2920,6 +4841,20 @@
   },
   "wb5968": {
    "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 4,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2018-01-03"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/130228/tay-lake"
+   },
    "description": "The lake can only be accessed by foot or off road vehicle.",
    "district": "Rocky Mountain House",
    "facets": null,
@@ -3054,6 +4989,36 @@
     "Trails Hiking",
     "Water"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 6,
+      "code": "BLTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-12-29"
+     },
+     {
+      "agree": 3,
+      "code": "CTTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2019-05-03"
+     },
+     {
+      "agree": 2,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2018-03-22"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102078/upper-kananaskis-lake"
+   },
    "description": "Upper Kananaskis Lake is located within Peter Lougheed Provincial Park and offers stunning mountain scenery and recreational opportunities. Visitors can access the lake by parking at the Upper Kananaskis Lake Day Use Area; please note that a Kananaskis Conservation Pass is required for parking. The main hiking loop around the lake is approximately 15.8 kilometers in length, with an elevation gain of 296 meters. This route typically takes 4 to 6 hours to complete and is considered an easy to moderate hike, providing panoramic views of the lake and surrounding peaks.",
    "district": "Canmore",
    "facets": [
@@ -3099,6 +5064,52 @@
     "Playground",
     "Toilets"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "BURB",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2018-08-19"
+     },
+     {
+      "agree": 2,
+      "code": "LKWH",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2018-08-19"
+     },
+     {
+      "agree": 2,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2018-08-19"
+     },
+     {
+      "agree": 2,
+      "code": "WALL",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2018-08-19"
+     },
+     {
+      "agree": 2,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2018-08-19"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102085/wadlin-lake"
+   },
    "description": "This is an ideal destination for tenting or in your RV. Open and wooded sites are available. There is a playground, groupcamping, swimming and a beach for lounging. There is limited reception at the camping area and no WiFi available.",
    "district": "Peace River",
    "facets": [
@@ -3150,6 +5161,52 @@
     "Trails",
     "Trails Hiking"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 4,
+      "code": "LKWH",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-07-10"
+     },
+     {
+      "agree": 6,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-07-10"
+     },
+     {
+      "agree": 6,
+      "code": "WALL",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-07-10"
+     },
+     {
+      "agree": 4,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-07-10"
+     },
+     {
+      "agree": 2,
+      "code": "WHSC",
+      "disagree": 0,
+      "kind": "rough",
+      "new": true,
+      "on": "2017-07-10"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/130576/winagami-lake"
+   },
    "description": "The lake provides opportunities for fishing, ice fishing, boating, windsurfing, paddling, and birdwatching. A wading pool in the day use area allows your little ones to cool down on a hot summer day. Approximately 2km of trail provide opportunities for hiking and cycling in the warmer months, and skiing and snowshoeing in the winter. Just a 15-minute drive away, the O’Mahony Conservation Area adds over 8 additional kilometres of trail for you to explore.",
    "district": "Valleyview",
    "facets": [
@@ -3195,6 +5252,36 @@
     "Toilets",
     "Water"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 1,
+      "code": "BNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2025-01-07"
+     },
+     {
+      "agree": 3,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2022-10-13"
+     },
+     {
+      "agree": 5,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2021-09-14"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/893399/lower-chain-lake"
+   },
    "description": "Chain Lakes Campground is located in Chain Lakes Provincial Recreation Area. This small lake is stocked annually, providing a great opportunity to fish from shore, canoe, or electric powered boat. Check your local regulations before you go. | Amenities notes: firepits",
    "district": "Athabasca",
    "facets": [
@@ -3441,6 +5528,20 @@
    "amenities": [
     "Day Use"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 4,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-11-21"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/726221/winchell-lake"
+   },
    "description": "This 12-acre lake is approximately 30 km north west of Cochrane. Consists of a small day-use area that provides access to good sport fishing opportunities. A boat launch is available for public use. The lake is stocked annually by EPA with trout and aerated in the winter through ACA’s Lake Aeration Program. | Amenities notes: no open fires; foot access only.",
    "district": "Sundre",
    "facets": [
@@ -3768,6 +5869,44 @@
     "Trails Hiking",
     "Winter Recreation"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 1,
+      "code": "BNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2025-07-07"
+     },
+     {
+      "agree": 2,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2025-07-07"
+     },
+     {
+      "agree": 2,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2025-07-07"
+     },
+     {
+      "agree": 1,
+      "code": "PRCP",
+      "disagree": 0,
+      "kind": "invasive",
+      "new": true,
+      "on": "2025-08-31"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/2061595/spring-lake"
+   },
    "description": "Spring Lake is a fairly small lake stocked with rainbow trout. No gas powered motors are permitted on the lake.",
    "district": "Spirit River",
    "facets": [
@@ -3814,6 +5953,20 @@
     "Picnic",
     "Toilets"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 1,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2026-02-03"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/2211091/shemeluk-lake"
+   },
    "description": "This calm clearwater lake offers some of the best rainbow trout fishing in the area.",
    "district": "Smoky Lake",
    "facets": [
@@ -3982,6 +6135,52 @@
     "Sports Baseball",
     "Sports Soccer"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "BKTR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": false,
+      "on": "2021-12-28"
+     },
+     {
+      "agree": 3,
+      "code": "BNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2019-11-12"
+     },
+     {
+      "agree": 7,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2019-11-12"
+     },
+     {
+      "agree": 6,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2019-11-12"
+     },
+     {
+      "agree": 4,
+      "code": "YLPR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2019-11-12"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/726273/nicholas-sheran-lake"
+   },
    "description": "Nicholas Sheran Park is the premier west side park featuring a man-made lake, pathway system, large open spaces, disk golf, a large playground, fitness equipment, and a large picnic shelter. Ice fishing is accessible in the winter.",
    "district": "Lethbridge",
    "facets": [
@@ -4009,10 +6208,16 @@
     "Trails Hiking"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "RNTR"
+     {
+      "agree": 1,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2025-02-04"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/2049967/morinville-fish-and-game-pond"
    },
@@ -4079,6 +6284,24 @@
    ],
    "photo_count": 1
   },
+  "wb6751": {
+   "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 1,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2020-01-12"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102589/magrath-childrens-pond"
+   },
+   "facets": null
+  },
   "wb6753": {
    "amenities": [
     "Day Use",
@@ -4132,6 +6355,20 @@
    "amenities": [
     "Day Use"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 5,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-12-31"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102590/mcquillan-reservoir"
+   },
    "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
    "district": "Lethbridge",
    "facets": [
@@ -4180,6 +6417,20 @@
     "Trails",
     "Trails Hiking"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2024-08-02"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/965722/leduc-reservoir"
+   },
    "description": "Leduc Reservoir borders Fred Johns Park. The park is connected to the Multiway Trail and offers a playground, ball diamonds, picnic area, and summer fishing for stocked trout. | Amenities notes: garbage receptacles.",
    "district": "Wetaskiwin",
    "facets": [
@@ -4202,6 +6453,20 @@
   },
   "wb6767": {
    "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 1,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2025-09-12"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102591/little-beaverdam-lake"
+   },
    "description": "No description available.",
    "district": "Cardston",
    "facets": null
@@ -4210,6 +6475,20 @@
    "amenities": [
     "Day Use"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2022-09-10"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102592/kerbes-pond"
+   },
    "description": "It offers good sport fishing opportunities. This waterbody is part of the ACA's Lake Aeration Program. | Amenities notes: no open fires; foot access only.",
    "district": "Stettler",
    "facets": [
@@ -4331,6 +6610,28 @@
     "Boat Launch",
     "Day Use"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2022-06-13"
+     },
+     {
+      "agree": 1,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2025-10-31"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/1107853/ironside-pond"
+   },
    "description": "Foot access only with a primitive boat launch available. This pond is aerated October - April through the ACA Lake Aeration Program.",
    "district": "Rocky Mountain House",
    "facets": [
@@ -4378,6 +6679,20 @@
    "amenities": [
     "Day Use"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 2,
+      "code": "BNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2026-02-26"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/2207558/heritage-lake"
+   },
    "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: no open fires; foot access only.",
    "district": "Stony Plain",
    "facets": [
@@ -4551,6 +6866,20 @@
     "Sports Volleyball",
     "Swimming"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2020-08-28"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102593/goldspring-park-pond"
+   },
    "description": "Located 10 km north of the Canada/US border this beautiful, well cared for campground has 70 sites, most with power, and other amazing amenities to make your fishing experience memorable.",
    "district": "Lethbridge",
    "facets": [
@@ -4577,6 +6906,36 @@
   },
   "wb6821": {
    "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-15"
+     },
+     {
+      "agree": 1,
+      "code": "RNTR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-07-15"
+     },
+     {
+      "agree": 1,
+      "code": "LKCH",
+      "disagree": 0,
+      "kind": "rough",
+      "new": true,
+      "on": "2016-07-15"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/726188/emerald-lake"
+   },
    "description": "No description available.",
    "district": "Whitecourt",
    "facets": null
@@ -4598,10 +6957,32 @@
     "Swimming"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "YLPR"
+     {
+      "agree": 2,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2024-09-22"
+     },
+     {
+      "agree": 1,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2025-06-21"
+     },
+     {
+      "agree": 2,
+      "code": "YLPR",
+      "disagree": 1,
+      "kind": "sport",
+      "new": true,
+      "on": "2021-12-29"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/875896/enchant-pond"
    },
@@ -4644,6 +7025,20 @@
     "Trails",
     "Trails Hiking"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 12,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-11-20"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102594/figure-eight-lake"
+   },
    "description": "This lakeside campground is at Figure Eight Lake Provincial Recreation Area and can accommodate both RVs and tents. There are lots of activities, including hiking, canoeing, wind surfing, boating, fishing, and bird watching OHV trails can be accessed nearby.",
    "district": "Peace River",
    "facets": [
@@ -4672,6 +7067,20 @@
    "amenities": [
     "Day Use"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-09-30"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102595/foremost-reservoir"
+   },
    "description": "ACA annually stocks this pond with trout, typically before the May long weekend. | Amenities notes: foot access; no open fires.",
    "district": "Foremost",
    "facets": [
@@ -4706,6 +7115,20 @@
     "Trails",
     "Trails Hiking"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 15,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-09"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/726224/east-pit-lake"
+   },
    "description": "Designated a day-use area. There is a small 20 car parking lot is the entrance to a footpath that leads to the lake. No power boats are allowed; canoes and inflatables must be carried and hand-launched.",
    "district": "Stony Plain",
    "facets": [
@@ -4736,6 +7159,36 @@
     "Trails",
     "Trails Hiking"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 4,
+      "code": "NRPK",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2017-05-09"
+     },
+     {
+      "agree": 7,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2017-05-03"
+     },
+     {
+      "agree": 3,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2020-10-01"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/709164/dickson-trout-pond"
+   },
    "description": "There are 18 campsites at Dickson Camping area, adjacent to the trout pond. Please note that amenities in the campsites are very limited. These are un-serviced sites with no potable water.",
    "district": "Red Deer",
    "facets": [
@@ -4915,6 +7368,44 @@
     "Trails Cross-Country Ski",
     "Trails Hiking"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 3,
+      "code": "BNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2023-09-27"
+     },
+     {
+      "agree": 13,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2020-05-29"
+     },
+     {
+      "agree": 3,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2023-09-27"
+     },
+     {
+      "agree": 7,
+      "code": "PRCP",
+      "disagree": 0,
+      "kind": "invasive",
+      "new": true,
+      "on": "2023-09-27"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/875900/cardiff-pond"
+   },
    "description": "Cardiff Park is a day-use park with single-family and group picnic sites, picnic shelters, stand-up BBQs and fire pits. Cardiff Lake is situated within the park, and is a local fishing hole for trout.",
    "district": "Stony Plain",
    "facets": [
@@ -5044,6 +7535,20 @@
   },
   "wb6893": {
    "amenities": null,
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 4,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2022-04-24"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/990888/beaumont-fish-pond"
+   },
    "description": "This small, local pond offers a quiet setting for recreational fishing, with the possibility of catching perch and stocked trout. Its accessible location and peaceful atmosphere make it a great spot for anglers of all experience levels.",
    "district": "Wetaskiwin",
    "facets": null
@@ -5055,6 +7560,20 @@
     "Toilets",
     "Water"
    ],
+   "confirmed": {
+    "source": "anglersatlas",
+    "species": [
+     {
+      "agree": 5,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-19"
+     }
+    ],
+    "url": "https://www.anglersatlas.com/place/102601/bellis-beach-lake"
+   },
    "description": "Bellis Beach Lake offers a serene and inviting atmosphere, making it an excellent destination for a relaxing day outdoors. The site features a small sandy beach and a modern playground, providing an ideal setting for families with children to enjoy both leisure and recreation.",
    "district": "Smoky Lake",
    "facets": [
@@ -5105,10 +7624,48 @@
     "Water"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "WSCT"
+     {
+      "agree": 1,
+      "code": "BKTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": true,
+      "on": "2016-12-20"
+     },
+     {
+      "agree": 2,
+      "code": "CTTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-08-02"
+     },
+     {
+      "agree": 3,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-12-20"
+     },
+     {
+      "agree": 1,
+      "code": "WSCT",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2021-06-28"
+     },
+     {
+      "agree": 1,
+      "code": "MTSC",
+      "disagree": 0,
+      "kind": "rough",
+      "new": true,
+      "on": "2022-04-26"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/102602/allison-lake"
    },
@@ -5224,11 +7781,24 @@
     "Water"
    ],
    "confirmed": {
-    "retrieved": "2026-09-12",
     "source": "anglersatlas",
     "species": [
-     "RNTR",
-     "TGTR"
+     {
+      "agree": 10,
+      "code": "RNTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-19"
+     },
+     {
+      "agree": 6,
+      "code": "TGTR",
+      "disagree": 0,
+      "kind": "sport",
+      "new": false,
+      "on": "2016-07-19"
+     }
     ],
     "url": "https://www.anglersatlas.com/place/712623/black-nugget-mine-pit"
    },

@@ -13,18 +13,22 @@
   "Retrieved": "September 11, 2026",
   "Source": "https://mywildalberta.ca/fishing/fish-stocking/stocking-map.aspx",
   "Source discrepancies": "Source entries are retained without deduplication or corrections. Similar records on different dates remain separate and contribute to annual totals.",
+  "Species enrichment": "Angler's Atlas was searched for all 346 names. 176 waterbodies matched; 106 of those have community-listed species, 70 matched pages list none, 28 matches remain uncertain.",
   "Use": "Use table header filters for lake, year, species or aeration. Rows with long descriptions can be expanded in Excel. Photo URLs open the original site.",
+  "What confirmed means": "Atlas listings are community reports, not an official fish survey and not proof of current presence. Disagreement counts are retained and listings the site disputes are excluded from the species columns.",
   "Year grouping": "Annual stocking has one row per lake ID, calendar year and species. Totals and event counts are formulas linked to Stocking details."
  },
  "retrieved": "2026-09-11",
  "rows_per_sheet": {
   "Annual stocking": 2164,
   "Pictures": 669,
-  "Read me": 14,
+  "Read me": 22,
+  "Species evidence": 290,
+  "Species overview": 346,
   "Stocking details": 3302,
   "Waterbodies": 346
  },
  "source_file": "Alberta_Stocked_Waterbodies_20260911.xlsx",
- "source_sha256": "ce69e44e59ba98fd88a273dd45c9d1648a446e5c44b8e5b83eee0ecb06c87751",
+ "source_sha256": "41254a43c8816848a659c3fff28a8481c8c0ecef54b36bc497b031280f3edcd5",
  "source_url": "https://mywildalberta.ca/fishing/fish-stocking/stocking-map.aspx"
 }
