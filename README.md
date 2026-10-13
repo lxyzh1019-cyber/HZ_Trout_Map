@@ -600,6 +600,18 @@ there lately.
   between visits.
 - **Years** — 2011 to 2026, with All / None / Last 5 / Latest. A year marked
   `*` is still in progress.
+- **Season and ice** — *Open today*; *Open for ice fishing*, which keeps lakes
+  whose season is open on every day from Dec. 15 to Mar. 1 (open all year, and
+  seasons like "May 15 to Mar. 31"); and *Aerated*. A lake not matched to the
+  regulations is never hidden by a season filter.
+
+**Aeration and thin ice**
+- Every lake stated as aerated — ACA's roster or Alberta's own lake page — shows
+  an *Aerated* badge, with or without a known depth.
+- From October to April the badge carries ACA's warning: thin ice and open
+  water near the aerators; stay behind the fence and the danger signs.
+- `data/aca_aeration_roster.csv` records ACA's *Winter Angling* Yes/No. The map
+  uses the regulations, and a test fails if ACA's column ever disagrees.
 
 **Reading the history**
 - Charts: by species, by season, per-species trend, and a stocking calendar

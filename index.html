@@ -488,6 +488,12 @@
   .wk-badge.low { background: var(--good); }
   .wk-badge.moderate { background: var(--TGTR); }
   .wk-badge.high { background: var(--WSCT); }
+  .lake-popup .aer-row { font-size: 11px; margin-bottom: 7px; display: flex;
+    align-items: baseline; gap: 6px; flex-wrap: wrap; }
+  .aer-badge { font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .04em; padding: 1px 6px; border-radius: 999px; color: #1f211e;
+    background: #7fb8d8; white-space: nowrap; }
+  .lake-popup .ice-warn { flex-basis: 100%; font-weight: 700; color: var(--WSCT); }
   .reg-block { margin: 8px 0 4px; padding: 8px 10px; background: var(--panel-2);
     border-left: 3px solid var(--accent); border-radius: 3px; font-size: 12px; }
   .reg-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 5px; }
@@ -970,9 +976,11 @@
     </div>
 
     <div class="group" id="season-group" hidden>
-      <div class="group-label"><span>Season</span></div>
+      <div class="group-label"><span>Season and ice</span></div>
       <div class="chips">
         <button class="chip" id="open-now-chip" type="button" aria-pressed="false">Open today</button>
+        <button class="chip" id="ice-chip" type="button" aria-pressed="false">Open for ice fishing</button>
+        <button class="chip" id="aerated-chip" type="button" aria-pressed="false">Aerated</button>
       </div>
       <div class="hint" id="open-now-note"></div>
     </div>
@@ -1300,6 +1308,10 @@ const state = {
   /** Hide lakes whose season is shut today. Off by default: a closed lake is
    *  still worth seeing on a map you are using to plan next month. */
   openNow: false,
+  /** Keep only lakes whose season is open through the whole winter. */
+  iceFishing: false,
+  /** Keep only lakes the province or ACA states are aerated. */
+  aeratedOnly: false,
   /** Facilities a lake must be KNOWN to have. Empty means no facility filter.
    *  Never inverted into "known not to have": 95 mapped lakes state no
    *  amenities at all, and that is Alberta not saying, not a lake with no
@@ -1556,6 +1568,8 @@ function lakePassesFilters(lake) {
   // is not the same as "closed", and hiding it would quietly shorten the list
   // without saying why.
   if (state.openNow && lakeOpenNow(lake) === false) return false;
+  if (state.iceFishing && lakeOpenAllWinter(lake) === false) return false;
+  if (state.aeratedOnly && !lakeAerated(lake)) return false;
   if (!facilitiesPass(lake)) return false;
   return recencyPasses(lake, recencyOption());
 }
@@ -2019,6 +2033,37 @@ function lakeOpenNow(lake, when) {
   return seasonOpenOn(reg.season.text, when || new Date());
 }
 
+/** True when the season is open all winter, false when it is not, null when
+ *  we cannot tell. Like "open today", null is kept on the map, never hidden. */
+function lakeOpenAllWinter(lake) {
+  const reg = regulationFor(lake);
+  if (!reg || !reg.season || !Conditions.seasonOpenAllWinter) return null;
+  return Conditions.seasonOpenAllWinter(reg.season.text);
+}
+
+/** Stated aerated: on ACA's roster or on Alberta's own lake page. A windmill
+ *  seen only in a photo does not count, for the reason the README gives. */
+function lakeAerated(lake) {
+  const d = depthFor(lake);
+  return !!(d && d.aerated);
+}
+
+/* Aeration, shown on every aerated lake whether or not its depth is known.
+ * Aerators keep thin ice and open water all winter, so from October to April
+ * the badge carries the warning ACA posts at the lake. */
+function aerationBlock(lake) {
+  if (!lakeAerated(lake)) return "";
+  const month = new Date().getMonth();
+  const iceMonths = month >= 9 || month <= 3;
+  const why = "Stated by ACA's Lake Aeration Program or on Alberta's own lake page.";
+  return `<div class="aer-row"><span class="aer-badge" title="${esc(why)}">Aerated</span>`
+    + `<span class="dim">kept aerated so trout survive the winter</span>`
+    + (iceMonths
+      ? `<span class="ice-warn">Thin ice and open water near the aerators. Stay behind the fence and the danger signs.</span>`
+      : "")
+    + `</div>`;
+}
+
 /* The limits block in a lake popup.
  *
  * This is the one place in the app that reports something with a legal
@@ -2220,6 +2265,7 @@ function popupHtml(lake) {
     ${approx}
     ${profileBlock(lake)}
     ${facilityBlock(lake)}
+    ${aerationBlock(lake)}
     ${depthBlock(lake)}
     ${regulationBlock(lake)}
     ${photoBlock(lake)}
@@ -2767,6 +2813,24 @@ function buildSeasonFilter() {
     onFilterChange();
   });
   sync();
+
+  const toggles = [
+    ["ice-chip", "iceFishing"],
+    ["aerated-chip", "aeratedOnly"],
+  ];
+  toggles.forEach(([id, key]) => {
+    const el = document.getElementById(id);
+    const syncOne = () => {
+      el.classList.toggle("active", state[key]);
+      el.setAttribute("aria-pressed", state[key] ? "true" : "false");
+    };
+    el.addEventListener("click", () => {
+      state[key] = !state[key];
+      syncOne();
+      onFilterChange();
+    });
+    syncOne();
+  });
 }
 
 /* Facilities Alberta has stated a lake has.
@@ -3514,6 +3578,8 @@ function writeUrl() {
   if (state.maxDistanceKm !== 1000) p.set("d", state.maxDistanceKm);
   if (state.recency !== "any") p.set("rc", state.recency);
   if (state.openNow) p.set("open", "1");
+  if (state.iceFishing) p.set("ice", "1");
+  if (state.aeratedOnly) p.set("aer", "1");
   if (state.facilities.size) p.set("fac", [...state.facilities].join("|"));
   if (state.conditions.open) p.set("cx", state.conditions.horizon);
   if (state.view !== "map") p.set("v", state.view);
@@ -3537,6 +3603,8 @@ function readUrl() {
   if (p.has("cm") && COLOR_MODES.some(m => m.id === p.get("cm"))) state.colorMode = p.get("cm");
   if (p.has("c")) state.chartType = p.get("c");
   if (p.get("open") === "1") state.openNow = true;
+  if (p.get("ice") === "1") state.iceFishing = true;
+  if (p.get("aer") === "1") state.aeratedOnly = true;
   // Validated against what was actually collected, so a stale or hand-typed
   // link cannot leave a filter switched on that nothing can satisfy.
   if (p.has("fac")) pendingFacilities = p.get("fac").split("|").filter(Boolean);
