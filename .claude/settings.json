@@ -54,7 +54,7 @@
     ],
     "PreToolUse": [
       {
-        "matcher": "Edit|Write|MultiEdit|NotebookEdit|Bash|Agent|Task|Workflow|WebFetch|ExitPlanMode|AskUserQuestion|SubagentHandback|mcp__.*",
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit|Bash|Agent|Task|Workflow|WebFetch|ExitPlanMode|AskUserQuestion|ScheduleWakeup|SubagentHandback|mcp__.*",
         "hooks": [
           {
             "type": "command",
