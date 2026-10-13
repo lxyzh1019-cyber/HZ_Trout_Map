@@ -585,22 +585,45 @@
     if (!t) return null;
     if (/CLOSED\s+ALL\s+YEAR/i.test(t)) return false;
     if (/OPEN\s+ALL\s+YEAR/i.test(t)) return true;
-    var m = t.match(/OPEN\s+([A-Za-z]+)\.?\s+(\d{1,2})\s+TO\s+([A-Za-z]+)\.?\s+(\d{1,2})/i);
-    if (!m) return null;
-    var from = MONTHS.indexOf(m[1].slice(0, 3).toLowerCase());
-    var to = MONTHS.indexOf(m[3].slice(0, 3).toLowerCase());
-    if (from < 0 || to < 0) return null;
+    /* A season can name more than one range: "OPEN MAY 15 TO OCT. 31 AND
+     * DEC. 11 TO MAR. 31". Reading only the first range shut that lake all
+     * winter, so every range is read and any one of them opens the day. */
+    var re = /([A-Za-z]+)\.?\s+(\d{1,2})\s+TO\s+([A-Za-z]+)\.?\s+(\d{1,2})/gi;
+    if (!/^\s*OPEN\b/i.test(t)) return null;
     var at = function (mo, d) { return mo * 100 + d; };
     var day = when instanceof Date ? when : new Date();
     var now = at(day.getMonth(), day.getDate());
-    var start = at(from, Number(m[2])), end = at(to, Number(m[4]));
-    return start <= end ? (now >= start && now <= end)
-                        : (now >= start || now <= end);
+    var m, found = false;
+    while ((m = re.exec(t)) !== null) {
+      var from = MONTHS.indexOf(m[1].slice(0, 3).toLowerCase());
+      var to = MONTHS.indexOf(m[3].slice(0, 3).toLowerCase());
+      if (from < 0 || to < 0) return null;
+      found = true;
+      var start = at(from, Number(m[2])), end = at(to, Number(m[4]));
+      var open = start <= end ? (now >= start && now <= end)
+                              : (now >= start || now <= end);
+      if (open) return true;
+    }
+    return found ? false : null;
+  }
+
+  /* Whether a season is open for ice fishing: open on every day from
+   * Dec. 15 to Mar. 1, the part of the winter that has fishable ice across
+   * Alberta. Open all year passes, and so does "May 15 to Mar. 31", which is
+   * shut in April and open all winter. Null when the wording is not read. */
+  function seasonOpenAllWinter(text) {
+    var day = new Date(2026, 11, 15), last = new Date(2027, 2, 1);
+    for (; day <= last; day.setDate(day.getDate() + 1)) {
+      var open = seasonOpenOn(text, new Date(day.getTime()));
+      if (open !== true) return open;
+    }
+    return true;
   }
 
   window.Conditions = {
     scoreSlot: scoreSlot,
     seasonOpenOn: seasonOpenOn,
+    seasonOpenAllWinter: seasonOpenAllWinter,
     bestOf: bestOf,
     waterFromAir: waterFromAir,
     stratification: stratification,

@@ -1979,6 +1979,95 @@ class AcaRosterTests(unittest.TestCase):
                     self.assertTrue(entry["winterkill"]["inputs"]["aeration"], key)
 
 
+    def test_aca_winter_angling_agrees_with_the_regulations(self):
+        """ACA's page says Yes or No to winter angling for each aerated lake.
+
+        The regulations are the legal source and the map uses them. ACA's
+        column is kept only so that a disagreement shows up here, the day one
+        of the two changes, instead of on the ice.
+        """
+        regs = json.loads((DATA_DIR / "lake_regulations.json")
+                          .read_text(encoding="utf-8"))["lakes"]
+        for row in self.roster:
+            self.assertIn(row["winter_angling"], ("Yes", "No"), row["name"])
+            season = (regs.get(row["lake_id"]) or {}).get("season") or {}
+            open_all_winter = season_open_all_winter(season.get("text"))
+            self.assertIsNotNone(open_all_winter, f"{row['name']}: season not read")
+            self.assertEqual(open_all_winter, row["winter_angling"] == "Yes",
+                             f"{row['name']}: ACA says winter angling "
+                             f"{row['winter_angling']}, the guide says "
+                             f"{season.get('text')!r}")
+
+    def test_aeration_shows_without_a_depth(self):
+        """Ten roster lakes have no depth. Aeration must not hide with it."""
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn("${aerationBlock(lake)}", page)
+        body = page[page.index("function aerationBlock(lake)"):]
+        body = body[:body.index("\n}\n")]
+        self.assertNotIn("max_depth_m", body)
+        self.assertNotIn("winterkill", body)
+
+
+_MONTHS = ["jan", "feb", "mar", "apr", "may", "jun",
+           "jul", "aug", "sep", "oct", "nov", "dec"]
+
+
+def season_open_on(text, month, day):
+    """The same reading as seasonOpenOn in js/conditions.js, for the tests."""
+    t = str(text or "")
+    if not t:
+        return None
+    if re.search(r"CLOSED\s+ALL\s+YEAR", t, re.I):
+        return False
+    if re.search(r"OPEN\s+ALL\s+YEAR", t, re.I):
+        return True
+    if not re.match(r"\s*OPEN\b", t, re.I):
+        return None
+    now = month * 100 + day
+    found = False
+    for m in re.finditer(r"([A-Za-z]+)\.?\s+(\d{1,2})\s+TO\s+([A-Za-z]+)\.?\s+(\d{1,2})", t, re.I):
+        try:
+            a = _MONTHS.index(m.group(1)[:3].lower())
+            b = _MONTHS.index(m.group(3)[:3].lower())
+        except ValueError:
+            return None
+        found = True
+        start, end = a * 100 + int(m.group(2)), b * 100 + int(m.group(4))
+        if (start <= now <= end) if start <= end else (now >= start or now <= end):
+            return True
+    return False if found else None
+
+
+def season_open_all_winter(text):
+    """Open on every day from Dec. 15 to Mar. 1, as js/conditions.js reads it."""
+    import datetime
+    day, last = datetime.date(2026, 12, 15), datetime.date(2027, 3, 1)
+    while day <= last:
+        is_open = season_open_on(text, day.month - 1, day.day)
+        if is_open is not True:
+            return is_open
+        day += datetime.timedelta(days=1)
+    return True
+
+
+class WinterSeasonTests(unittest.TestCase):
+    """The ice-fishing filter, and the split season that once read as shut."""
+
+    def test_a_split_season_is_open_in_january(self):
+        text = "OPEN MAY 15 TO OCT. 31 AND DEC. 11 TO MAR. 31"
+        self.assertTrue(season_open_on(text, 0, 15))
+        self.assertFalse(season_open_on(text, 10, 20))
+        self.assertTrue(season_open_all_winter(text))
+
+    def test_open_through_winter_but_shut_in_april_counts(self):
+        self.assertTrue(season_open_all_winter("OPEN MAY 15 TO MAR. 31"))
+        self.assertFalse(season_open_all_winter("OPEN APR. 1 TO NOV. 30"))
+
+    def test_the_js_parser_reads_every_range(self):
+        source = (ROOT / "js" / "conditions.js").read_text(encoding="utf-8")
+        self.assertIn("seasonOpenAllWinter: seasonOpenAllWinter", source)
+        self.assertIn("while ((m = re.exec(t)) !== null)", source)
+
 class SettledDisagreementTests(unittest.TestCase):
     """A disagreement is a question, and a question can be answered.
 
