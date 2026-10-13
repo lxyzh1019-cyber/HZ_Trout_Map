@@ -13,6 +13,7 @@ import os
 import shutil
 import subprocess
 import sys
+import urllib.error
 import urllib.request
 
 SOURCE = os.environ.get("HZ_CENTRAL_URL",
@@ -21,9 +22,18 @@ CACHE = os.environ.get("HZ_CACHE_DIR") or os.path.join(os.path.expanduser("~"), 
 KEEP_VERSIONS = 3
 
 
+class Incomplete(Exception):
+    """A file listed in MANIFEST.txt is missing on GitHub: hz-claude-config is incomplete, not unreachable."""
+
+
 def fetch(rel):
-    with urllib.request.urlopen(SOURCE + rel, timeout=10) as r:
-        return r.read()
+    try:
+        with urllib.request.urlopen(SOURCE + rel, timeout=10) as r:
+            return r.read()
+    except urllib.error.HTTPError as e:
+        if e.code == 404 and rel != "MANIFEST.txt":
+            raise Incomplete(f"hz-claude-config is incomplete on GitHub: {rel} is listed but missing") from e
+        raise
 
 
 def safe(rel):
@@ -94,7 +104,9 @@ def main():
                     f"({type(e).__name__}: {e}) and nothing is cached. Stop before any work and tell the user: "
                     "\"Central rules not loaded in this session.\""}}))
                 return 0
-            note = f"offline: using cached v{version} ({type(e).__name__})"
+            note = (f"hz-claude-config is incomplete on GitHub ({e}); using cached v{version} — tell the user in the "
+                    "'I need from you' line that the rules repository needs repair" if isinstance(e, Incomplete)
+                    else f"offline: using cached v{version} ({type(e).__name__})")
     else:
         version = cached_version()
         if not version:
@@ -102,8 +114,11 @@ def main():
     path = os.path.join(CACHE, version, "hooks", script)
     if not safe(script) or not os.path.isfile(path):
         return 0
-    env = dict(os.environ, HZ_LOADER_NOTE=note, PYTHONDONTWRITEBYTECODE="1")
-    r = subprocess.run([sys.executable, "-B", path], input=stdin, capture_output=True, env=env)
+    # v3.2.7: the loader keeps compiled checks (no -B): the checks' compiled form stays in the rules cache, so a hook
+    # call no longer compiles the large shared module again (a Read or Grep call took 1.2 s in the real sessions).
+    env = dict(os.environ, HZ_LOADER_NOTE=note)
+    env.pop("PYTHONDONTWRITEBYTECODE", None)
+    r = subprocess.run([sys.executable, path], input=stdin, capture_output=True, env=env)
     sys.stdout.buffer.write(r.stdout)
     sys.stderr.buffer.write(r.stderr)
     return r.returncode
