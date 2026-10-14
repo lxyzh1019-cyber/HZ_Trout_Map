@@ -2068,6 +2068,131 @@ class WinterSeasonTests(unittest.TestCase):
         self.assertIn("seasonOpenAllWinter: seasonOpenAllWinter", source)
         self.assertIn("while ((m = re.exec(t)) !== null)", source)
 
+def season_ice_window(text):
+    """The same reading as seasonIceWindow in js/conditions.js, for the tests."""
+    whole = season_open_all_winter(text)
+    if whole is None:
+        return None
+    if whole:
+        return "all"
+    early = season_open_on(text, 10, 30)
+    late = season_open_on(text, 3, 1)
+    if early and late:
+        return "both"
+    if early:
+        return "early"
+    if late:
+        return "late"
+    return "closed"
+
+
+class IceSeasonTests(unittest.TestCase):
+    """Early and late ice count as ice fishing; every popup says which."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.page = (ROOT / "index.html").read_text(encoding="utf-8")
+        cls.regs = json.loads((DATA_DIR / "lake_regulations.json")
+                              .read_text(encoding="utf-8"))["lakes"]
+
+    def test_each_wording_lands_in_the_right_part_of_the_ice(self):
+        cases = {
+            "OPEN all year": "all",
+            "OPEN MAY 15 TO MAR. 31": "all",
+            "OPEN JULY 16 TO MAY 31": "all",
+            "OPEN MAY 15 TO OCT. 31 AND DEC. 11 TO MAR. 31": "all",
+            "OPEN MAY 8 TO NOV. 30 between sunrise and sunset": "early",
+            "OPEN APR. 1 TO OCT. 31": "late",
+            "OPEN APR. 1 TO NOV. 30": "both",
+            "OPEN APR. 16 TO OCT. 31": "closed",
+            "OPEN JULY 1 TO OCT. 31": "closed",
+            "CLOSED ALL YEAR": "closed",
+        }
+        for text, want in cases.items():
+            self.assertEqual(season_ice_window(text), want, text)
+
+    def test_every_season_in_the_guide_is_read(self):
+        for key, reg in self.regs.items():
+            text = (reg.get("season") or {}).get("text")
+            if text:
+                self.assertIsNotNone(season_ice_window(text), f"{key}: {text!r}")
+
+    def test_the_ice_chip_keeps_early_and_late_ice(self):
+        self.assertIn('state.iceFishing && lakeIceWindow(lake) === "closed"', self.page)
+        self.assertIn("seasonIceWindow: seasonIceWindow",
+                      (ROOT / "js" / "conditions.js").read_text(encoding="utf-8"))
+
+    def test_every_popup_has_the_ice_line_and_the_safety_words(self):
+        self.assertIn("${iceSeasonBlock(lake)}", self.page)
+        self.assertIn("Legal is not safe. Ice thickness is never forecast.", self.page)
+        for word in ("all", "early", "late", "both", "closed"):
+            self.assertRegex(self.page, rf"\n  {word}: \"")
+
+
+class BaitBanTests(unittest.TestCase):
+    """A bait ban is shown at the top of the popup and can be filtered on."""
+
+    def test_the_line_and_the_chip(self):
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn('id="bait-ban-chip"', page)
+        self.assertIn('["bait-ban-chip", "baitBan"]', page)
+        self.assertIn('<div class="bait-ban">Bait ban</div>', page)
+        self.assertIn('reg.bait === "Bait ban"', page)
+
+    def test_the_guide_still_says_it_that_way(self):
+        regs = json.loads((DATA_DIR / "lake_regulations.json")
+                          .read_text(encoding="utf-8"))["lakes"]
+        bans = [k for k, r in regs.items() if r.get("bait") == "Bait ban"]
+        self.assertGreater(len(bans), 0, "no lake reads 'Bait ban' any more")
+
+
+class AccessAndLayoutTests(unittest.TestCase):
+    """The slider has a name, and the corner buttons keep off the popup."""
+
+    def setUp(self):
+        self.page = (ROOT / "index.html").read_text(encoding="utf-8")
+
+    def test_the_distance_slider_has_a_label(self):
+        self.assertIn('<label for="dist-slider"', self.page)
+        self.assertIn('"aria-valuetext"', self.page)
+
+    def test_lake_popups_pan_clear_of_the_buttons(self):
+        self.assertIn("autoPanPaddingTopLeft", self.page)
+        self.assertIn("{ maxWidth: 380, ...padding }", self.page)
+
+
+class WinterGuardTests(unittest.TestCase):
+    """A week below freezing hides the open-water score."""
+
+    def test_the_panel_asks_and_hides_the_score(self):
+        ui = (ROOT / "js" / "conditions-ui.js").read_text(encoding="utf-8")
+        self.assertIn("Conditions.iceLikely(", ui)
+        self.assertIn("Ice likely", ui)
+        self.assertIn('closed || iced ? "" : verdictHtml(now)', ui)
+        self.assertIn("iceLikely: iceLikely",
+                      (ROOT / "js" / "conditions.js").read_text(encoding="utf-8"))
+
+
+class ReadmeCountTests(unittest.TestCase):
+    """The README states what the data holds, so a rebuild cannot outrun it."""
+
+    def test_walleye_and_pike_count(self):
+        species = collections.defaultdict(set)
+        for path in DATA_DIR.glob("lakes_20*.json"):
+            for lake in json.loads(path.read_text(encoding="utf-8")):
+                for s in lake["stockings"]:
+                    species[lake["lake_id"]].add(s["species"])
+        count = sum(1 for v in species.values() if v and v <= {"WALL", "NRPK"})
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn(f"data holds {count} of them", readme)
+
+    def test_nine_species(self):
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        order = re.search(r"const SPECIES_ORDER = \[([^\]]*)\]", page).group(1)
+        self.assertEqual(len(re.findall(r'"[A-Z]{4}"', order)), 9)
+        self.assertIn("**Species** — nine", (ROOT / "README.md").read_text(encoding="utf-8"))
+
+
 class SettledDisagreementTests(unittest.TestCase):
     """A disagreement is a question, and a question can be answered.
 

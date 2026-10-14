@@ -620,10 +620,46 @@
     return true;
   }
 
+  /* The ice season, in one word, for the popup line and the ice filter.
+   * "all" is open all winter, as above. Otherwise the two ends of the ice:
+   * "early" when the season still runs on Nov. 30, "late" when it is
+   * already open on Apr. 1, "both" when it is, and "closed" when neither.
+   * Null when the wording is not read. */
+  function seasonIceWindow(text) {
+    var all = seasonOpenAllWinter(text);
+    if (all === null) return null;
+    if (all) return "all";
+    var early = seasonOpenOn(text, new Date(2026, 10, 30));
+    var late = seasonOpenOn(text, new Date(2027, 3, 1));
+    if (early && late) return "both";
+    if (early) return "early";
+    if (late) return "late";
+    return "closed";
+  }
+
+  /* Whether the lake is most likely frozen over this week: every forecast
+   * day from today has a mean air temperature below 0 C. Day starts are in
+   * Unix seconds, as the weather is fetched; the past days the water model
+   * asks for do not count. False with fewer than five days, so a short or
+   * missing forecast never hides the score. */
+  function iceLikely(dailyT, dailyMeanC, nowSec) {
+    var days = 0;
+    for (var i = 0; i < (dailyT || []).length; i++) {
+      if (dailyT[i] + 86400 <= nowSec) continue;
+      var c = dailyMeanC[i];
+      if (typeof c !== "number" || !isFinite(c)) continue;
+      if (c >= 0) return false;
+      days++;
+    }
+    return days >= 5;
+  }
+
   window.Conditions = {
     scoreSlot: scoreSlot,
     seasonOpenOn: seasonOpenOn,
     seasonOpenAllWinter: seasonOpenAllWinter,
+    seasonIceWindow: seasonIceWindow,
+    iceLikely: iceLikely,
     bestOf: bestOf,
     waterFromAir: waterFromAir,
     stratification: stratification,
