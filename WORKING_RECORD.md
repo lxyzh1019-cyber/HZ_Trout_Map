@@ -55,13 +55,14 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 ## Deliverable ledger
 | Deliverable | State | Evidence |
 |---|---|---|
-| Stage 2 — picture tool and 18 baseline pictures | NOT STARTED | |
+| Stage 2 — picture tool and 18 baseline pictures | DONE | tests/pictures.py before then after + compare: 0 of 18 differ; Proof: pictures 6 screens × 3 sizes × 1 looks, 0 changed; popup deep link ?lake=wb6770 (Kerbe's Pond, bait ban, aerated) |
 | Stage 3 — ice season logic and winter guard | NOT STARTED | |
 | Stage 4 — README counts, counting test, cache name | NOT STARTED | |
 | Stage 5 — bait ban, popup close, slider label, pictures | NOT STARTED | |
 | Stage 6 — review, full tests, one pull request ready | NOT STARTED | |
 
 ## Checks and evidence
+- 2026-10-14 stage 2 picture tool: two runs (before, after) compared, 0 of 18 pictures differ; python3 scripts/test_regression_checks.py passed (47 tests)
 - 2026-10-14 stage 1 records written (FEATURES.md, WORKING_RECORD.md); no code changed → python3 scripts/test_regression_checks.py passed (47 tests)
 
 ## Open questions / blockers

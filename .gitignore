@@ -3,3 +3,4 @@ __pycache__/
 .DS_Store
 consistency_report.csv
 .claude/state/
+tests/out/
