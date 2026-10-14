@@ -606,7 +606,8 @@
     } else if (iceLikely) {
       body = '<div class="cx-closed"><strong>Ice likely</strong>'
         + '<div>Every daily mean in the past 7 days is below 0 °C.</div>'
-        + '<div class="cx-why">Open-water score hidden. Legal is not safe. Ice thickness is never forecast.</div></div>';
+        + '<div class="cx-why">Open-water score hidden. Legal is not safe. Ice thickness is never forecast.</div></div>'
+        + (state.conditions.horizon === "week" ? gridHtml(place, wx, water) : "");
     } else {
       body = (state.conditions.horizon === "week"
         ? gridHtml(place, wx, water)

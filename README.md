@@ -596,10 +596,20 @@ there lately.
   between visits.
 - **Years** — 2011 to 2026, with All / None / Last 5 / Latest. A year marked
   `*` is still in progress.
-- **Season and ice** — *Open today*; *Open for ice fishing*, which keeps lakes
-  whose season is open on every day from Dec. 15 to Mar. 1 (open all year, and
-  seasons like "May 15 to Mar. 31"); and *Aerated*. A lake not matched to the
+- **Season and ice** — *Open today*; *Open for ice fishing*, which keeps every
+  lake except those closed all winter (open all winter, early ice, late ice, or
+  early and late ice); *Aerated*; and *Bait ban*, which keeps lakes whose
+  regulations name a bait ban. A lake not matched to the
   regulations is never hidden by a season filter.
+
+**Bait ban and ice**
+- A *Bait ban* chip in the filters, and a red *Bait ban* line in the popup of
+  every lake whose regulations name one.
+- Every popup has an *Ice* row: which part of the ice season the lake is open
+  for, or "Not known — check the regulations". From October to April it adds
+  "Legal is not safe. Ice thickness is never forecast."
+- *Ice likely* winter guard: when every daily mean of the past seven days is
+  below 0 °C the open-water score is hidden, in the 7-day grid day by day.
 
 **Aeration and thin ice**
 - Every lake stated as aerated — ACA's roster or Alberta's own lake page — shows

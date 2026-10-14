@@ -1313,7 +1313,8 @@ const state = {
   /** Hide lakes whose season is shut today. Off by default: a closed lake is
    *  still worth seeing on a map you are using to plan next month. */
   openNow: false,
-  /** Keep only lakes whose season is open through the whole winter. */
+  /** Keep every lake except those closed all winter (open all winter, early
+   *  ice, late ice, or early and late ice). */
   iceFishing: false,
   /** Keep only lakes the province or ACA states are aerated. */
   aeratedOnly: false,
@@ -2062,7 +2063,10 @@ const ICE_SEASON_TEXT = {
 };
 function iceRow(lake) {
   const ice = lakeIceSeason(lake);
-  if (!ice || !ICE_SEASON_TEXT[ice]) return "";
+  if (!ice || !ICE_SEASON_TEXT[ice]) {
+    return `<div class="reg-row"><span class="reg-k">Ice</span>
+    <span class="reg-v">Not known — check the regulations</span></div>`;
+  }
   const month = new Date().getMonth();
   const iceMonths = month >= 9 || month <= 3;
   const warn = ice !== "closed" && iceMonths
@@ -2079,16 +2083,14 @@ function lakeAerated(lake) {
   return !!(d && d.aerated);
 }
 
-/** The lake's regulations name a bait ban. */
 /** Width of the map buttons in the top-right corner, so a popup pans clear of them. */
 function mapBtnsWidth() {
   const el = document.querySelector(".map-btns");
   return (el && el.offsetWidth) || 150;
 }
 
-/** Leaflet reads no "top right" pan padding, only top-left and bottom-right, so
- *  autoPanPaddingTopRight alone does nothing. This gives Leaflet the padding it
- *  does read: room on the right for the map buttons when the map is wide enough
+/** Leaflet reads no "top right" pan padding, only top-left and bottom-right.
+ *  This gives Leaflet the padding it does read, applied when a popup opens: room on the right for the map buttons when the map is wide enough
  *  to leave a whole popup beside them, otherwise room above, so the popup (and
  *  its close button) opens below the buttons. */
 function popupPanOptions() {
@@ -2099,6 +2101,7 @@ function popupPanOptions() {
   return { autoPanPaddingTopLeft: L.point(5, below) };
 }
 
+/** The lake's regulations name a bait ban. */
 function lakeBaitBan(lake) {
   return /bait ban/i.test((regulationFor(lake) || {}).bait || "");
 }
@@ -2160,12 +2163,12 @@ function regulationBlock(lake) {
   if (!reg) {
     return `<div class="reg-block">${head}
       <div class="reg-none">This lake could not be matched to the regulations with
-      confidence, so none are shown. Check the ${link}</div></div>`;
+      confidence, so none are shown. Check the ${link}</div>${iceRow(lake)}</div>`;
   }
   if (reg.basis === "cross-reference") {
     return `<div class="reg-block">${head}
       <div class="reg-none">The guide does not regulate this water on its own:
-      ${esc(reg.see)}. Check the ${link}</div></div>`;
+      ${esc(reg.see)}. Check the ${link}</div>${iceRow(lake)}</div>`;
   }
 
   const open = seasonOpenOn(reg.season && reg.season.text, new Date());
@@ -2443,6 +2446,10 @@ function initMap() {
   });
   map.on("popupclose", () => { if (!rerenderingPins) state.openPopupAts = null; });
   map.on("popupopen", e => {
+    // Pan padding is read when the popup opens, so a resize or rotation since
+    // the pins were drawn cannot leave it stale. update() pans again with it.
+    Object.assign(e.popup.options, popupPanOptions());
+    e.popup.update();
     const el = e.popup.getElement();
     const btn = el?.querySelector("[data-fav]");
     if (btn) btn.addEventListener("click", () => toggleFavourite(btn.dataset.fav));
@@ -2537,7 +2544,7 @@ function renderPins() {
       riseOnHover: true,
     });
     marker.bindTooltip(() => tooltipHtml(lake), { className: "lake-tip", direction: "top", offset: [0, -6] });
-    marker.bindPopup(() => popupHtml(lake), { maxWidth: 380, autoPanPaddingTopRight: L.point(mapBtnsWidth() + 18, 10), ...popupPanOptions() });
+    marker.bindPopup(() => popupHtml(lake), { maxWidth: 380 });
     marker.on("click", () => {
       lastPinClickAt = Date.now();
       state.openPopupAts = lakeKey(lake);
@@ -2609,7 +2616,7 @@ function renderZones() {
     });
     marker.bindTooltip(`<b>${esc(z.zone)}</b> ${esc(z.region)}<br><span class="tip-sub">${z.lakes.length} lakes · ${fmtNum(z.fish)} fish</span>`,
       { className: "lake-tip", direction: "top", offset: [0, -6] });
-    marker.bindPopup(() => zonePopupHtml(z), { maxWidth: 320, autoPanPaddingTopRight: L.point(mapBtnsWidth() + 18, 10), ...popupPanOptions() });
+    marker.bindPopup(() => zonePopupHtml(z), { maxWidth: 320 });
     zoneLayer.addLayer(marker);
   });
 

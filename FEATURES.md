@@ -16,9 +16,11 @@ Locked features of the current version, one section per screen. Each line says w
 - Stocked recently (30, 60, 90 days, this season), species, fish size, distance from home, years — Proof: picture tests/reference/filters-phone.png
 - Years 2011 to 2026 with All / None / Last 5 / Latest; a year marked `*` is in progress — Proof: test_the_current_season_is_marked_provisional
 - Group "Season and ice" (design file, kept): Open today, Open for ice fishing, Aerated, Bait ban — Proof: picture tests/reference/filters-ipad.png
-- Open for ice fishing keeps lakes open on every day from Dec 15 to Mar 1, including split seasons (design file, kept) — Proof: test_a_split_season_is_open_in_january
+- Open for ice fishing keeps every lake except those closed all winter (all winter, early ice, late ice, early and late ice) (design file, changed in Build 1a stage 3) — Proof: test_a_split_season_is_open_in_january
 - Open through winter but shut in April still counts as ice-open (design file, kept: split-season fix) — Proof: test_open_through_winter_but_shut_in_april_counts
 - Open for ice fishing also shows early-ice and late-ice lakes; only "closed" ice-season lakes are hidden (Build 1a stage 3) — Proof: test_the_ice_season_reaches_the_page
+- Every popup has an Ice row; unmatched, cross-reference and unreadable seasons show "Not known — check the regulations" (Build 1a stage 6) — Proof: test_every_popup_has_an_ice_line
+- Ice likely block keeps the 7-day grid under it; grid marks frozen days itself, no score on iced days (Build 1a stage 6) — Proof: test_the_ice_season_reaches_the_page
 - Bait ban chip, built like the Aerated chip: shows only bait-ban lakes; kept in the URL as `bait=1` (Build 1a stage 5) — Proof: test_the_bait_ban_chip_and_line_reach_the_page, picture tests/reference/filters-phone.png
 - A lake not matched to the regulations is never hidden by a season filter — Proof: picture tests/reference/filters-pc.png
 - Distance slider has a screen-reader label and spoken value ("≤ 300 km") (Build 1a stage 5) — Proof: test_the_distance_slider_has_a_label
@@ -90,7 +92,7 @@ Locked features of the current version, one section per screen. Each line says w
 ## Regression table (paste at the end of every edit)
 | Regression table | Result |
 |---|---|
-| Kept | 58 features before this edit · Proof: pictures 6 screens × 3 sizes, 16 changed before refresh (all planned: Bait ban chip row shifts the sidebar, Bait ban line, popup pan, Ice row, Ice likely), 0 changed after refresh · tests 181/181 |
+| Kept | 58 features before this edit · Proof: pictures 6 screens × 3 sizes, 16 changed before refresh (planned: popup-*, filters-*, conditions-freeze-*; outside the plan list: the chip wraps to a second row and shifts the sidebar in map-ipad, map-pc, conditions-ipad, conditions-pc, and lake-panel-* shows the popup with the new rows behind the panel), 0 changed after refresh · tests 181/181 |
 | Added | Bait ban line, Bait ban chip, popup close padding, slider label (4 lines) · Proof: tests/pictures.py compare — pictures 6 screens × 3 sizes × 1 looks, 0 changed |
 | Intentionally removed | lakeOpenAllWinter (no callers since stage 3) |
 | Missing | none |

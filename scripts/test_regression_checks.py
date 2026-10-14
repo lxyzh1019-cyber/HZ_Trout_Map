@@ -2132,6 +2132,7 @@ class WinterSeasonTests(unittest.TestCase):
         ui = (ROOT / "js" / "conditions-ui.js").read_text(encoding="utf-8")
         self.assertIn("Ice likely", ui)
         self.assertIn("Conditions.iceLikely(", ui)
+        self.assertRegex(ui, r"Ice thickness is never forecast\.</div></div>'\s*\+ \(state\.conditions\.horizon === \"week\" \? gridHtml\(")
         self.assertIn("Legal is not safe. Ice thickness is never forecast.", ui)
 
 
@@ -2154,7 +2155,19 @@ class BaitBanAndPopupTests(unittest.TestCase):
         calls = re.findall(r"\.bindPopup\([^\n]*", self.page)
         self.assertEqual(len(calls), 2)
         for call in calls:
-            self.assertIn("autoPanPaddingTopRight", call)
+            self.assertNotIn("autoPanPaddingTopRight", call)
+        fn = self.page[self.page.index("function popupPanOptions("):]
+        fn = fn[:fn.index("\n}\n")]
+        self.assertIn("autoPanPaddingTopLeft", fn)
+        self.assertIn("autoPanPaddingBottomRight", fn)
+        self.assertIn("Object.assign(e.popup.options, popupPanOptions())", self.page)
+
+    def test_every_popup_has_an_ice_line(self):
+        self.assertIn("Not known — check the regulations", self.page)
+        block = self.page[self.page.index("function regulationBlock("):]
+        for marker in ("could not be matched", "does not regulate this water"):
+            i = block.index(marker)
+            self.assertIn("${iceRow(lake)}", block[i:i + 400])
 
     def test_the_distance_slider_has_a_label(self):
         self.assertIn('id="dist-label"', self.page)

@@ -41,10 +41,11 @@ class ReadmeCounts(unittest.TestCase):
         m = re.search(r"(\d+) waters stocked only with walleye or pike "
                       r"\((\d+) walleye, (\d+) pike, (\d+) both\)", text)
         self.assertIsNotNone(m, "README sentence with the 35 (33/1/1) split not found")
-        self.assertEqual((len(only), wall, pike, both), tuple(int(x) for x in m.groups()[:1]) + tuple(int(x) for x in m.groups()[1:]))
+        self.assertEqual((len(only), wall, pike, both), tuple(map(int, m.groups())))
 
     def test_species_count_word(self):
         m = re.search(r"const SPECIES_ORDER = \[(.*?)\]", read("index.html"), re.S)
+        self.assertIsNotNone(m)
         n = len(re.findall(r'"[A-Z]+"', m.group(1)))
         r = re.search(r"\*\*Species\*\* — (\w+)", read("README.md"))
         self.assertIsNotNone(r)
