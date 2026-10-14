@@ -56,7 +56,7 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 | Deliverable | State | Evidence |
 |---|---|---|
 | Stage 2 — picture tool and 18 baseline pictures | DONE | tests/pictures.py before then after + compare: 0 of 18 differ; Proof: pictures 6 screens × 3 sizes × 1 looks, 0 changed; popup deep link ?lake=wb6770 (Kerbe's Pond, bait ban, aerated) |
-| Stage 3 — ice season logic and winter guard | NOT STARTED | |
+| Stage 3 — ice season logic and winter guard | DONE | iceSeason/iceLikely in js/conditions.js, Ice row + chip predicate in index.html, Ice likely block and grid days in js/conditions-ui.js, 4 new tests; class counts read all-winter 297 / early 1 / late 2 / early-late 3 / closed 6 (plan said 298); unittest discover 175 passed; pictures 7 of 18 differ, all planned (Ice row in popup-ipad and lake-panel-* which show the open popup; Ice likely in conditions-freeze-*) |
 | Stage 4 — README counts, counting test, cache name | NOT STARTED | |
 | Stage 5 — bait ban, popup close, slider label, pictures | NOT STARTED | |
 | Stage 6 — review, full tests, one pull request ready | NOT STARTED | |

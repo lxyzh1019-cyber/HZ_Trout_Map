@@ -2050,6 +2050,26 @@ def season_open_all_winter(text):
     return True
 
 
+def ice_season(text):
+    """The same classes as iceSeason in js/conditions.js."""
+    all_winter = season_open_all_winter(text)
+    if all_winter is None:
+        return None
+    if all_winter:
+        return "all-winter"
+    early = season_open_on(text, 10, 30) is True
+    late = season_open_on(text, 3, 1) is True
+    if early and late:
+        return "early-late"
+    return "early" if early else "late" if late else "closed"
+
+
+def ice_likely(daily_means):
+    """The winter guard, as iceLikely in js/conditions.js reads it."""
+    series = [v for v in (daily_means or []) if isinstance(v, (int, float))]
+    return len(series) >= 7 and all(v < 0 for v in series[-7:])
+
+
 class WinterSeasonTests(unittest.TestCase):
     """The ice-fishing filter, and the split season that once read as shut."""
 
@@ -2067,6 +2087,52 @@ class WinterSeasonTests(unittest.TestCase):
         source = (ROOT / "js" / "conditions.js").read_text(encoding="utf-8")
         self.assertIn("seasonOpenAllWinter: seasonOpenAllWinter", source)
         self.assertIn("while ((m = re.exec(t)) !== null)", source)
+
+    def test_each_ice_class(self):
+        self.assertEqual(ice_season("OPEN MAY 15 TO MAR. 31"), "all-winter")
+        self.assertEqual(ice_season("OPEN ALL YEAR"), "all-winter")
+        self.assertEqual(ice_season("OPEN MAY 8 TO NOV. 30 between sunrise and sunset"), "early")
+        self.assertEqual(ice_season("OPEN APR. 1 TO OCT. 31"), "late")
+        self.assertEqual(ice_season("OPEN APR. 1 TO NOV. 30"), "early-late")
+        self.assertEqual(ice_season("OPEN MAY 1 TO OCT. 31"), "closed")
+        self.assertEqual(ice_season("CLOSED ALL YEAR"), "closed")
+        self.assertIsNone(ice_season(""))
+        self.assertIsNone(ice_season("see the zone table"))
+
+    def test_the_data_ice_class_counts(self):
+        """Read 2026-10-14: 309 regulation entries. The plan expected 298
+        all-winter; the data has 297, and the read is what is pinned."""
+        regs = json.loads((DATA_DIR / "lake_regulations.json")
+                          .read_text(encoding="utf-8"))["lakes"]
+        counts = collections.Counter(
+            ice_season(((v or {}).get("season") or {}).get("text"))
+            for v in regs.values())
+        self.assertEqual(counts["all-winter"], 297)
+        self.assertEqual(counts["early"], 1)
+        self.assertEqual(counts["late"], 2)
+        self.assertEqual(counts["early-late"], 3)
+        self.assertEqual(counts["closed"], 6)
+
+    def test_ice_likely_needs_seven_days_below_zero(self):
+        self.assertTrue(ice_likely([-1, -2, -3, -4, -5, -6, -0.5]))
+        self.assertTrue(ice_likely([5, -1, -2, -3, -4, -5, -6, -7]))
+        self.assertFalse(ice_likely([-1, -2, -3, -4, -5, -6, 0]))
+        self.assertFalse(ice_likely([-1, -2, -3, -4, -5, -6]))
+        self.assertFalse(ice_likely([]))
+
+    def test_the_ice_season_reaches_the_page(self):
+        source = (ROOT / "js" / "conditions.js").read_text(encoding="utf-8")
+        self.assertIn("iceSeason: iceSeason", source)
+        self.assertIn("iceLikely: iceLikely", source)
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn('<span class="reg-k">Ice</span>', page)
+        self.assertIn("Legal is not safe. Ice thickness is never forecast.", page)
+        self.assertIn("Early and late ice — closed Dec 1 to Mar 31", page)
+        self.assertIn('lakeIceSeason(lake) === "closed"', page)
+        ui = (ROOT / "js" / "conditions-ui.js").read_text(encoding="utf-8")
+        self.assertIn("Ice likely", ui)
+        self.assertIn("Conditions.iceLikely(", ui)
+        self.assertIn("Legal is not safe. Ice thickness is never forecast.", ui)
 
 class SettledDisagreementTests(unittest.TestCase):
     """A disagreement is a question, and a question can be answered.

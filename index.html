@@ -520,6 +520,7 @@
   .reg-row { display: flex; gap: 8px; margin: 2px 0; line-height: 1.4; }
   .reg-k { flex: 0 0 52px; color: var(--ink-dim); }
   .reg-v { flex: 1; }
+  .reg-v .ice-warn { display: block; }
   .reg-why { margin-top: 5px; font-size: 11px; color: var(--ink-dim); font-style: italic; }
   .reg-warn { margin-top: 4px; font-size: 11px; color: var(--ink-dim); }
   .reg-none { font-size: 11.5px; color: var(--ink-dim); line-height: 1.45; }
@@ -773,6 +774,8 @@
   .cx-score:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
   .cx-n { pointer-events: none; }
   .cx-gempty { background: #33362f; color: var(--ink-dim); }
+  .cx-gice { background: #33362f; color: var(--ink-dim); font-size: 8.5px; line-height: 1.1;
+    text-align: center; }
   /* Further out the weather half is guesswork, and the cell should not look as
      certain as tomorrow. Hatching survives colour blindness and print, which a
      lighter shade alone would not. */
@@ -979,7 +982,7 @@
       <div class="group-label"><span>Season and ice</span></div>
       <div class="chips">
         <button class="chip" id="open-now-chip" type="button" aria-pressed="false">Open today</button>
-        <button class="chip" id="ice-chip" type="button" aria-pressed="false">Open for ice fishing</button>
+        <button class="chip" id="ice-chip" type="button" aria-pressed="false" title="All winter, early ice or late ice">Open for ice fishing</button>
         <button class="chip" id="aerated-chip" type="button" aria-pressed="false">Aerated</button>
       </div>
       <div class="hint" id="open-now-note"></div>
@@ -1568,7 +1571,7 @@ function lakePassesFilters(lake) {
   // is not the same as "closed", and hiding it would quietly shorten the list
   // without saying why.
   if (state.openNow && lakeOpenNow(lake) === false) return false;
-  if (state.iceFishing && lakeOpenAllWinter(lake) === false) return false;
+  if (state.iceFishing && lakeIceSeason(lake) === "closed") return false;
   if (state.aeratedOnly && !lakeAerated(lake)) return false;
   if (!facilitiesPass(lake)) return false;
   return recencyPasses(lake, recencyOption());
@@ -2041,6 +2044,37 @@ function lakeOpenAllWinter(lake) {
   return Conditions.seasonOpenAllWinter(reg.season.text);
 }
 
+/** The part of the ice season a lake is open for: "all-winter", "early",
+ *  "late", "early-late" or "closed"; null when we cannot tell (kept on the
+ *  map, never hidden). */
+function lakeIceSeason(lake) {
+  const reg = regulationFor(lake);
+  if (!reg || !reg.season || !Conditions.iceSeason) return null;
+  return Conditions.iceSeason(reg.season.text);
+}
+
+/* The Ice row in the regulation block. Every class but closed carries the ice
+ * wording from October to April: the season says what is legal, not what is
+ * safe. */
+const ICE_SEASON_TEXT = {
+  "all-winter": "Open all winter",
+  "early": "Early ice only — open to Nov 30",
+  "late": "Late ice only — open from Apr 1",
+  "early-late": "Early and late ice — closed Dec 1 to Mar 31",
+  "closed": "Closed — no ice fishing",
+};
+function iceRow(lake) {
+  const ice = lakeIceSeason(lake);
+  if (!ice || !ICE_SEASON_TEXT[ice]) return "";
+  const month = new Date().getMonth();
+  const iceMonths = month >= 9 || month <= 3;
+  const warn = ice !== "closed" && iceMonths
+    ? `<span class="ice-warn">Legal is not safe. Ice thickness is never forecast.</span>`
+    : "";
+  return `<div class="reg-row"><span class="reg-k">Ice</span>
+    <span class="reg-v">${esc(ICE_SEASON_TEXT[ice])}${warn}</span></div>`;
+}
+
 /** Stated aerated: on ACA's roster or on Alberta's own lake page. A windmill
  *  seen only in a photo does not count, for the reason the README gives. */
 function lakeAerated(lake) {
@@ -2120,6 +2154,8 @@ function regulationBlock(lake) {
   const season = (reg.season && reg.season.text) || "";
   rows.push(`<div class="reg-row"><span class="reg-k">Season</span>
     <span class="reg-v">${esc(season || "not listed — treated as closed")}</span></div>`);
+  const ice = iceRow(lake);
+  if (ice) rows.push(ice);
 
   if (reg.basis === "site-specific") {
     if (reg.trout_total && reg.trout_total.text) {

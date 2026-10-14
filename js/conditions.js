@@ -620,10 +620,37 @@
     return true;
   }
 
+  /* Which part of the ice season a lake is open for. All winter when it is
+   * open Dec. 15 to Mar. 1; otherwise early ice when it is still open on
+   * Nov. 30, late ice when it is already open on Apr. 1, both when both, and
+   * closed when neither. Null when the wording is not read. */
+  function iceSeason(text) {
+    var all = seasonOpenAllWinter(text);
+    if (all === null) return null;
+    if (all) return "all-winter";
+    var early = seasonOpenOn(text, new Date(2026, 10, 30)) === true;
+    var late = seasonOpenOn(text, new Date(2027, 3, 1)) === true;
+    if (early && late) return "early-late";
+    if (early) return "early";
+    if (late) return "late";
+    return "closed";
+  }
+
+  /* The winter guard: true only when there are at least seven daily means and
+   * the last seven are all below 0 °C. Then the open-water score means
+   * nothing, and the panel says "Ice likely" instead. */
+  function iceLikely(dailyMeans) {
+    var series = (dailyMeans || []).map(num).filter(function (v) { return v !== null; });
+    if (series.length < 7) return false;
+    return series.slice(-7).every(function (v) { return v < 0; });
+  }
+
   window.Conditions = {
     scoreSlot: scoreSlot,
     seasonOpenOn: seasonOpenOn,
     seasonOpenAllWinter: seasonOpenAllWinter,
+    iceSeason: iceSeason,
+    iceLikely: iceLikely,
     bestOf: bestOf,
     waterFromAir: waterFromAir,
     stratification: stratification,

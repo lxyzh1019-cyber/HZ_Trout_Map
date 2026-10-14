@@ -18,6 +18,7 @@ Locked features of the current version, one section per screen. Each line says w
 - Group "Season and ice" (design file, kept): Open today, Open for ice fishing, Aerated — Proof: picture tests/reference/filters-ipad.png
 - Open for ice fishing keeps lakes open on every day from Dec 15 to Mar 1, including split seasons (design file, kept) — Proof: test_a_split_season_is_open_in_january
 - Open through winter but shut in April still counts as ice-open (design file, kept: split-season fix) — Proof: test_open_through_winter_but_shut_in_april_counts
+- Open for ice fishing also shows early-ice and late-ice lakes; only "closed" ice-season lakes are hidden (Build 1a stage 3) — Proof: test_the_ice_season_reaches_the_page
 - A lake not matched to the regulations is never hidden by a season filter — Proof: picture tests/reference/filters-pc.png
 - Filters and home location live in the URL; `?lake=wb6051` opens one lake — Proof: picture tests/reference/popup-phone.png
 - Filter panel is a slide-over at phone width — Proof: picture tests/reference/filters-phone.png
@@ -29,6 +30,7 @@ Locked features of the current version, one section per screen. Each line says w
 - A lake off the aeration list is never told it is unaerated — Proof: test_a_lake_off_the_list_is_not_told_it_is_unaerated
 - Depth line; unknown depth produces no advice at all — Proof: test_unknown_depth_produces_no_advice_at_all
 - Regulation block with Season row and Bait row — Proof: picture tests/reference/popup-pc.png
+- Ice row under the Season row: Open all winter · Early ice only — open to Nov 30 · Late ice only — open from Apr 1 · Early and late ice — closed Dec 1 to Mar 31 · Closed — no ice fishing; Oct–Apr every class but closed adds "Legal is not safe. Ice thickness is never forecast." (Build 1a stage 3) — Proof: test_each_ice_class, picture tests/reference/popup-ipad.png
 - Season and limits come from the regulations; unlisted lakes take the zone default — Proof: test_unlisted_waterbody_takes_the_zone_default
 - Position is marked as estimated when taken from the land description — Proof: test_a_position_taken_from_the_map_says_so
 - Photos and long description go to the lake panel, not the popup — Proof: picture tests/reference/lake-panel-phone.png
@@ -44,6 +46,7 @@ Locked features of the current version, one section per screen. Each line says w
 - Next 6 hours strip — Proof: picture tests/reference/conditions-phone.png
 - 7-day grid of daily scores — Proof: picture tests/reference/conditions-ipad.png
 - CLOSED today block when the season is shut — Proof: test_blank_season_on_a_listed_waterbody_means_closed
+- Winter guard: when every daily mean in the past 7 days is below 0 °C, the score is hidden and an "Ice likely" block shows; in the 7-day grid a day whose own past 7 means are all below 0 shows "Ice likely" (Build 1a stage 3) — Proof: test_ice_likely_needs_seven_days_below_zero, picture tests/reference/conditions-freeze-phone.png
 - Water temperature input — Proof: picture tests/reference/conditions-pc.png
 - Solunar times — Proof: picture tests/reference/conditions-phone.png
 - Weather is fetched from Open-Meteo with 7 past and 7 forecast days — Proof: picture tests/reference/conditions-freeze-phone.png
@@ -57,6 +60,7 @@ Locked features of the current version, one section per screen. Each line says w
 
 ## Data and rules
 - Season parsing reads every range, including a split season (design file, kept) — Proof: test_the_js_parser_reads_every_range
+- Ice-season classes from the season text: all-winter 297, early 1, late 2, early-late 3, closed 6 of 309 regulation entries (Build 1a stage 3) — Proof: test_the_data_ice_class_counts
 - ACA winter angling column agrees with the regulations (design file, kept) — Proof: test_aca_winter_angling_agrees_with_the_regulations
 - Aerated roster is keyed on an id and reaches the aerated list — Proof: test_the_roster_reaches_the_aerated_list
 - Spring Lake note (design file, kept) — Proof: test_every_roster_row_names_a_lake_on_the_map

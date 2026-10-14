@@ -273,8 +273,20 @@
         + '<span>' + lakeDayNumber(day) + '</span></div>';
     }).join("");
 
+    /* The winter guard, day by day: a day whose own past seven daily means
+     * are all below 0 °C shows "Ice likely" instead of open-water scores. */
+    var iced = days.map(function (day) {
+      return !!(wx.data && Conditions.iceLikely(Weather.dailyMeansUpTo(wx.data, day)));
+    });
+
     var rows = DAY_PARTS.map(function (part) {
       var cells = days.map(function (day, dayIndex) {
+        if (iced[dayIndex]) {
+          var iceTitle = lakeDayName(day, dayIndex) + " " + lakeDayNumber(day) + " " + part.label
+            + " — Ice likely: every daily mean in the past 7 days is below 0 °C";
+          return '<div class="cx-gcell cx-gice" title="' + esc(iceTitle) + '" role="img"'
+            + ' aria-label="' + esc(iceTitle) + '">Ice likely</div>';
+        }
         var astro = astroFor(place, day);
         var next = astroFor(place, new Date(day.getTime() + 86400000));
         var window = partWindow(part.id, day, astro.sun, next.sun);
@@ -575,6 +587,10 @@
     var now = scoreAt(place, new Date(), wx, water);
 
     var closed = place.lake ? lakeOpenNow(place.lake) === false : false;
+    // The winter guard: seven daily means below 0 °C and the open-water score
+    // is hidden. A closed lake keeps its CLOSED block instead.
+    var iceLikely = !closed && !!wx.data
+      && Conditions.iceLikely(Weather.dailyMeansUpTo(wx.data, new Date()));
     var source = wx.source === "none"
       ? '<span class="cx-warn">No weather — sun and moon only</span>'
       : '<span class="cx-src">weather ' + esc(Weather.ageText(wx.fetchedAt))
@@ -587,6 +603,10 @@
       body = '<div class="cx-closed"><strong>CLOSED today</strong>'
         + '<div>' + esc((reg && reg.season && reg.season.text) || "season not listed")
         + '</div><div class="cx-why">No score is shown for a lake whose season is shut.</div></div>';
+    } else if (iceLikely) {
+      body = '<div class="cx-closed"><strong>Ice likely</strong>'
+        + '<div>Every daily mean in the past 7 days is below 0 °C.</div>'
+        + '<div class="cx-why">Open-water score hidden. Legal is not safe. Ice thickness is never forecast.</div></div>';
     } else {
       body = (state.conditions.horizon === "week"
         ? gridHtml(place, wx, water)
@@ -609,7 +629,7 @@
       + '</div>'
       + weatherNowHtml(wx, new Date())
       // A shut lake gets no verdict: the closed block below says why.
-      + (closed ? "" : verdictHtml(now))
+      + (closed || iceLikely ? "" : verdictHtml(now))
       + '<div class="cx-row">'
       + '<div class="chips cx-horizon">'
       + '<button class="chip' + (state.conditions.horizon === "now" ? " active" : "") + '" data-horizon="now">Next 6 h</button>'
@@ -621,7 +641,7 @@
           ? "times on this device's clock"
           : "times at the lake" + (wx.data.timezone ? " (" + esc(wx.data.timezone) + ")" : ""))
       + '</span></div>'
-      + (closed ? "" : '<div class="cx-secheading">Fish activity forecast</div>')
+      + (closed || iceLikely ? "" : '<div class="cx-secheading">Fish activity forecast</div>')
       + body
       + (now.advisories.length
           ? '<div class="cx-advisory">' + now.advisories.map(esc).join("<br>") + "</div>" : "")
