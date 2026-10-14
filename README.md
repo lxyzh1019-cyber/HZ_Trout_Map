@@ -28,7 +28,7 @@ alberta-trout-map/
 │   ├── lake_depth.json             ← depth, summer layer and winterkill, generated
 │   ├── lake_profile.json           ← facilities, description, photo count, generated
 │   ├── lake_photos.json            ← photo links, generated, fetched on demand
-│   ├── out_of_scope.csv            ← waters stocked with no trout, generated
+│   ├── out_of_scope.csv            ← retired, header only
 │   ├── lake_regulations.json       ← seasons and catch limits per lake, generated
 │   ├── lake_aliases.csv            ← your answers to past linking questions
 │   ├── lake_facts.csv              ← your answers to past attribute questions
@@ -527,17 +527,12 @@ The description and the photographs go in a panel instead. They are long,
 neither changes a decision, and the popup is capped at 60% of the window height
 — putting them there would push the catch limits off the bottom.
 
-## Waters this map does not show
+## Walleye and pike waters
 
-Alberta stocks 31 further waterbodies with walleye or pike and no trout —
-Sylvan, Lake Newell, McGregor, Travers, Pinehurst, Winagami and 25 more. They
-are listed in `data/out_of_scope.csv` with the species that drove the decision.
-
-Adding them is not an import but a change of what the project is: sixteen years
-of reports would need re-reading with a wider species set, and the pin palette
-is already at the limit of what stays distinguishable under protanopia with six
-categories. The decision is recorded so the gap between 346 published
-waterbodies and the number mapped is accountable rather than unexplained.
+The map also shows the waters Alberta stocks with walleye or pike and no trout:
+35 waters stocked only with walleye or pike (33 walleye, 1 pike, 1 both),
+among them Sylvan, Lake Newell, McGregor, Travers, Pinehurst and Winagami. They
+have their own pins and their own species filters, like every other water.
 
 
 ## Tests
@@ -590,8 +585,9 @@ there lately.
 - **Stocked recently** — 30, 60, 90 days, or this season. Each option shows how
   many lakes it would find, and the panel states the newest stocking on record,
   so an empty window is never a mystery.
-- **Species** — six, including westslope cutthroat, which Alberta began
-  reporting separately in 2023.
+- **Species** — nine: rainbow, brook, brown, tiger and cutthroat trout,
+  westslope cutthroat (which Alberta began reporting separately in 2023),
+  walleye, northern pike and Arctic grayling.
 - **Fish size** — fry under 15 cm, 15 to 20 cm, and catchable 20 cm and over.
   A lake given 60,000 fry is not the same prospect as one given 3,000 catchable
   trout.
