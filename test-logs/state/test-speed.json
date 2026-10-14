@@ -1,0 +1,1 @@
+{"slowest_full_minutes": 1.9, "command": "cd /home/user/HZ_Trout_Map/scripts && python3 -m unittest discover -p \"test_*.py\" 2>&1 | tail -4; cd .. && python3 tests/pictures.py after 2>&1 | tail -2; python3 tests/pictures.py compare 2>&1 | tail", "latest_full_minutes": 1.0, "stopped_by_limit": false}

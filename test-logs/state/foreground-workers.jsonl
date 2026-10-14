@@ -1,0 +1,5 @@
+{"tool": "Agent", "type": "opus-worker"}
+{"tool": "Agent", "type": "sonnet-worker"}
+{"tool": "Agent", "type": "sonnet-worker"}
+{"tool": "Agent", "type": "reviewer"}
+{"tool": "Agent", "type": "sonnet-worker"}

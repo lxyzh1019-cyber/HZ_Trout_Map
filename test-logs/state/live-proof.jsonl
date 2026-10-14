@@ -1,0 +1,22 @@
+{"ts": "2026-10-13T23:51:05", "check": "planner", "version": "3.3.1", "helper": "planner", "fallback": false}
+{"ts": "2026-10-13T23:56:27", "check": "ask-guard", "version": "3.3.1", "sent_back": 1}
+{"ts": "2026-10-13T23:58:22", "check": "plan-guard", "version": "3.3.1", "sent_back": ["html"]}
+{"ts": "2026-10-13T23:58:43", "check": "plan-guard", "version": "3.3.1", "shown": "Plan v1 Rev 1", "file": true}
+{"ts": "2026-10-14T00:00:16", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 0.0}
+{"ts": "2026-10-14T00:02:27", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 0.0}
+{"ts": "2026-10-14T00:02:38", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 0.1}
+{"ts": "2026-10-14T00:09:38", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 1.0}
+{"ts": "2026-10-14T00:10:03", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 0.4}
+{"ts": "2026-10-14T00:12:25", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 1.0}
+{"ts": "2026-10-14T00:12:36", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 0.0}
+{"ts": "2026-10-14T00:14:52", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 1.0}
+{"ts": "2026-10-14T00:15:58", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 1.0}
+{"ts": "2026-10-14T00:16:36", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 0.0}
+{"ts": "2026-10-14T00:16:54", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 0.2}
+{"ts": "2026-10-14T00:21:05", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 1.9}
+{"ts": "2026-10-14T00:23:19", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 0.0}
+{"ts": "2026-10-14T00:31:28", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 1.9}
+{"ts": "2026-10-14T00:31:38", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 0.0}
+{"ts": "2026-10-14T00:32:45", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 1.0}
+{"ts": "2026-10-14T00:33:57", "check": "test-speed", "version": "3.3.1", "full_run_minutes": 1.0}
+{"ts": "2026-10-14T00:35:29", "check": "notice-reminder", "version": "3.3.1", "tool": "mcp__github__create_pull_request"}
