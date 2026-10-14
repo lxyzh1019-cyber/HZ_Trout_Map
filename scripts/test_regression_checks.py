@@ -2134,6 +2134,39 @@ class WinterSeasonTests(unittest.TestCase):
         self.assertIn("Conditions.iceLikely(", ui)
         self.assertIn("Legal is not safe. Ice thickness is never forecast.", ui)
 
+
+class BaitBanAndPopupTests(unittest.TestCase):
+    """The Bait ban line and chip, the popup close button, the slider label."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.page = (ROOT / "index.html").read_text(encoding="utf-8")
+
+    def test_the_bait_ban_chip_and_line_reach_the_page(self):
+        self.assertIn('id="baitban-chip"', self.page)
+        self.assertIn('class="bait-ban"', self.page)
+        self.assertIn("baitBanOnly", self.page)
+        self.assertIn('p.set("bait", "1")', self.page)
+        self.assertIn('p.get("bait") === "1"', self.page)
+        self.assertIn("function lakeBaitBan(", self.page)
+
+    def test_both_popups_keep_clear_of_the_map_buttons(self):
+        calls = re.findall(r"\.bindPopup\([^\n]*", self.page)
+        self.assertEqual(len(calls), 2)
+        for call in calls:
+            self.assertIn("autoPanPaddingTopRight", call)
+
+    def test_the_distance_slider_has_a_label(self):
+        self.assertIn('id="dist-label"', self.page)
+        self.assertIn('aria-labelledby="dist-label"', self.page)
+        self.assertIn("aria-valuetext", self.page)
+
+    def test_25_lakes_have_a_bait_ban(self):
+        regs = json.loads(
+            (DATA_DIR / "lake_regulations.json").read_text(encoding="utf-8"))["lakes"]
+        self.assertEqual(sum(1 for v in regs.values() if v.get("bait") == "Bait ban"), 25)
+
+
 class SettledDisagreementTests(unittest.TestCase):
     """A disagreement is a question, and a question can be answered.
 

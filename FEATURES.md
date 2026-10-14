@@ -15,11 +15,13 @@ Locked features of the current version, one section per screen. Each line says w
 ## Filter panel
 - Stocked recently (30, 60, 90 days, this season), species, fish size, distance from home, years — Proof: picture tests/reference/filters-phone.png
 - Years 2011 to 2026 with All / None / Last 5 / Latest; a year marked `*` is in progress — Proof: test_the_current_season_is_marked_provisional
-- Group "Season and ice" (design file, kept): Open today, Open for ice fishing, Aerated — Proof: picture tests/reference/filters-ipad.png
+- Group "Season and ice" (design file, kept): Open today, Open for ice fishing, Aerated, Bait ban — Proof: picture tests/reference/filters-ipad.png
 - Open for ice fishing keeps lakes open on every day from Dec 15 to Mar 1, including split seasons (design file, kept) — Proof: test_a_split_season_is_open_in_january
 - Open through winter but shut in April still counts as ice-open (design file, kept: split-season fix) — Proof: test_open_through_winter_but_shut_in_april_counts
 - Open for ice fishing also shows early-ice and late-ice lakes; only "closed" ice-season lakes are hidden (Build 1a stage 3) — Proof: test_the_ice_season_reaches_the_page
+- Bait ban chip, built like the Aerated chip: shows only bait-ban lakes; kept in the URL as `bait=1` (Build 1a stage 5) — Proof: test_the_bait_ban_chip_and_line_reach_the_page, picture tests/reference/filters-phone.png
 - A lake not matched to the regulations is never hidden by a season filter — Proof: picture tests/reference/filters-pc.png
+- Distance slider has a screen-reader label and spoken value ("≤ 300 km") (Build 1a stage 5) — Proof: test_the_distance_slider_has_a_label
 - Filters and home location live in the URL; `?lake=wb6051` opens one lake — Proof: picture tests/reference/popup-phone.png
 - Filter panel is a slide-over at phone width — Proof: picture tests/reference/filters-phone.png
 
@@ -28,6 +30,8 @@ Locked features of the current version, one section per screen. Each line says w
 - Aerated badge for every lake stated as aerated, with or without a depth (design file, kept) — Proof: test_aeration_shows_without_a_depth
 - Aerated badge carries the thin-ice warning Oct to Apr (design file, kept) — Proof: picture tests/reference/popup-ipad.png
 - A lake off the aeration list is never told it is unaerated — Proof: test_a_lake_off_the_list_is_not_told_it_is_unaerated
+- Red "Bait ban" line right under the lake name and land description for the 25 bait-ban lakes; the Bait row stays (Build 1a stage 5) — Proof: test_25_lakes_have_a_bait_ban, picture tests/reference/popup-phone.png
+- Popup close button stays clear of the top-right map buttons: pans clear of them on a wide map, opens below them on a narrow one (Build 1a stage 5) — Proof: test_both_popups_keep_clear_of_the_map_buttons, picture tests/reference/popup-ipad.png
 - Depth line; unknown depth produces no advice at all — Proof: test_unknown_depth_produces_no_advice_at_all
 - Regulation block with Season row and Bait row — Proof: picture tests/reference/popup-pc.png
 - Ice row under the Season row: Open all winter · Early ice only — open to Nov 30 · Late ice only — open from Apr 1 · Early and late ice — closed Dec 1 to Mar 31 · Closed — no ice fishing; Oct–Apr every class but closed adds "Legal is not safe. Ice thickness is never forecast." (Build 1a stage 3) — Proof: test_each_ice_class, picture tests/reference/popup-ipad.png
@@ -86,7 +90,7 @@ Locked features of the current version, one section per screen. Each line says w
 ## Regression table (paste at the end of every edit)
 | Regression table | Result |
 |---|---|
-| Kept | <n> features · Proof: pictures <n> screens × <sizes> sizes, <k> changed (all planned) · tests <passed>/<total> |
-| Added | … |
-| Intentionally removed | … |
-| Missing | … |
+| Kept | 58 features before this edit · Proof: pictures 6 screens × 3 sizes, 16 changed before refresh (all planned: Bait ban chip row shifts the sidebar, Bait ban line, popup pan, Ice row, Ice likely), 0 changed after refresh · tests 181/181 |
+| Added | Bait ban line, Bait ban chip, popup close padding, slider label (4 lines) · Proof: tests/pictures.py compare — pictures 6 screens × 3 sizes × 1 looks, 0 changed |
+| Intentionally removed | lakeOpenAllWinter (no callers since stage 3) |
+| Missing | none |
