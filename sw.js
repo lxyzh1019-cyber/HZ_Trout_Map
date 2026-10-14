@@ -23,7 +23,9 @@
    deploy. That is survivable for a tweak and not for this release, which moves
    the conditions panel around and fixes the photo URLs in js/lake-panel.js.
    Bumping the name retires the old shell outright. */
-const SHELL_CACHE = "troutmap-shell-v2";
+/* v4 — index.html calls Conditions.iceSeason and Conditions.iceLikely, which an
+   older cached js/conditions.js does not have. */
+const SHELL_CACHE = "troutmap-shell-v4";
 const DATA_CACHE = "troutmap-data-v1";
 const TILE_CACHE = "troutmap-tiles-v1";
 const WX_CACHE = "troutmap-wx-v1";
