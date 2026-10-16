@@ -585,22 +585,70 @@
     if (!t) return null;
     if (/CLOSED\s+ALL\s+YEAR/i.test(t)) return false;
     if (/OPEN\s+ALL\s+YEAR/i.test(t)) return true;
-    var m = t.match(/OPEN\s+([A-Za-z]+)\.?\s+(\d{1,2})\s+TO\s+([A-Za-z]+)\.?\s+(\d{1,2})/i);
-    if (!m) return null;
-    var from = MONTHS.indexOf(m[1].slice(0, 3).toLowerCase());
-    var to = MONTHS.indexOf(m[3].slice(0, 3).toLowerCase());
-    if (from < 0 || to < 0) return null;
+    /* A season can name more than one range: "OPEN MAY 15 TO OCT. 31 AND
+     * DEC. 11 TO MAR. 31". Reading only the first range shut that lake all
+     * winter, so every range is read and any one of them opens the day. */
+    var re = /([A-Za-z]+)\.?\s+(\d{1,2})\s+TO\s+([A-Za-z]+)\.?\s+(\d{1,2})/gi;
+    if (!/^\s*OPEN\b/i.test(t)) return null;
     var at = function (mo, d) { return mo * 100 + d; };
     var day = when instanceof Date ? when : new Date();
     var now = at(day.getMonth(), day.getDate());
-    var start = at(from, Number(m[2])), end = at(to, Number(m[4]));
-    return start <= end ? (now >= start && now <= end)
-                        : (now >= start || now <= end);
+    var m, found = false;
+    while ((m = re.exec(t)) !== null) {
+      var from = MONTHS.indexOf(m[1].slice(0, 3).toLowerCase());
+      var to = MONTHS.indexOf(m[3].slice(0, 3).toLowerCase());
+      if (from < 0 || to < 0) return null;
+      found = true;
+      var start = at(from, Number(m[2])), end = at(to, Number(m[4]));
+      var open = start <= end ? (now >= start && now <= end)
+                              : (now >= start || now <= end);
+      if (open) return true;
+    }
+    return found ? false : null;
+  }
+
+  /* Whether a season is open for ice fishing: open on every day from
+   * Dec. 15 to Mar. 1, the part of the winter that has fishable ice across
+   * Alberta. Open all year passes, and so does "May 15 to Mar. 31", which is
+   * shut in April and open all winter. Null when the wording is not read. */
+  function seasonOpenAllWinter(text) {
+    var day = new Date(2026, 11, 15), last = new Date(2027, 2, 1);
+    for (; day <= last; day.setDate(day.getDate() + 1)) {
+      var open = seasonOpenOn(text, new Date(day.getTime()));
+      if (open !== true) return open;
+    }
+    return true;
+  }
+
+  /* Which part of the ice season the regulations allow. Early ice is the
+   * first ice of the year, so a season still open on Nov. 30 has it; late ice
+   * is the last, so a season open on Apr. 1 has it. A season can have both
+   * ("Apr. 1 to Nov. 30") and still be shut in midwinter. Null when the
+   * wording is not read. Legal is not the same as safe, and nothing here
+   * knows how thick the ice is. */
+  function seasonIceKind(text) {
+    var winter = seasonOpenAllWinter(text);
+    if (winter === null) return null;
+    if (winter) return "all-winter";
+    var early = seasonOpenOn(text, new Date(2026, 10, 30)) === true;
+    var late = seasonOpenOn(text, new Date(2027, 3, 1)) === true;
+    return early && late ? "early-late" : early ? "early" : late ? "late" : "closed";
+  }
+
+  /* Ice likely: every one of the last seven daily mean air temperatures was
+   * below freezing. Fewer than seven days is not enough to say so. */
+  function iceLikely(dailyMeanC) {
+    var days = (dailyMeanC || []).map(num).filter(function (v) { return v !== null; });
+    if (days.length < 7) return false;
+    return days.slice(-7).every(function (v) { return v < 0; });
   }
 
   window.Conditions = {
     scoreSlot: scoreSlot,
     seasonOpenOn: seasonOpenOn,
+    seasonOpenAllWinter: seasonOpenAllWinter,
+    seasonIceKind: seasonIceKind,
+    iceLikely: iceLikely,
     bestOf: bestOf,
     waterFromAir: waterFromAir,
     stratification: stratification,
