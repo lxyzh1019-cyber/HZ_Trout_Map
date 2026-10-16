@@ -303,12 +303,19 @@
     var belowFreezing = series.filter(function (v) { return v < 0; }).length;
     var likelyIce = series.length >= 5 &&
       belowFreezing >= Math.ceil(series.length * 0.8) && mean < -2;
+    /* Every day of the past week below freezing: the lake is ice, and an
+     * open-water score would be a number about water nobody can reach. The
+     * panel hides the score and says "Ice likely" instead. */
+    var week = series.slice(-7);
+    var frozenWeek = week.length >= 5 &&
+      week.every(function (v) { return v < 0; });
 
     return {
       tempC: likelyIce ? clamp(tempC, 0, 4) : tempC,
       sigmaC: sigma,
       source: "modeled",
       likelyIce: likelyIce,
+      frozenWeek: frozenWeek,
       airMeanC: mean,
     };
   }
@@ -620,10 +627,24 @@
     return true;
   }
 
+  /* Which part of the ice season the regulations open. "all-winter" when open
+   * Dec. 15 to Mar. 1; otherwise early ice means open on Nov. 30 and late ice
+   * means open on Apr. 1, the two ends of the ice season. "closed" when none of
+   * these, null when the wording is not read. */
+  function iceSeason(text) {
+    var all = seasonOpenAllWinter(text);
+    if (all === null) return null;
+    if (all) return "all-winter";
+    var early = seasonOpenOn(text, new Date(2026, 10, 30)) === true;
+    var late = seasonOpenOn(text, new Date(2027, 3, 1)) === true;
+    return early && late ? "early-and-late" : early ? "early" : late ? "late" : "closed";
+  }
+
   window.Conditions = {
     scoreSlot: scoreSlot,
     seasonOpenOn: seasonOpenOn,
     seasonOpenAllWinter: seasonOpenAllWinter,
+    iceSeason: iceSeason,
     bestOf: bestOf,
     waterFromAir: waterFromAir,
     stratification: stratification,

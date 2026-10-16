@@ -2068,6 +2068,104 @@ class WinterSeasonTests(unittest.TestCase):
         self.assertIn("seasonOpenAllWinter: seasonOpenAllWinter", source)
         self.assertIn("while ((m = re.exec(t)) !== null)", source)
 
+
+def ice_season(text):
+    """The same reading as iceSeason in js/conditions.js, for the tests."""
+    whole = season_open_all_winter(text)
+    if whole is None:
+        return None
+    if whole:
+        return "all-winter"
+    early = season_open_on(text, 10, 30) is True
+    late = season_open_on(text, 3, 1) is True
+    if early and late:
+        return "early-and-late"
+    return "early" if early else "late" if late else "closed"
+
+
+class IceSeasonTests(unittest.TestCase):
+    """Build 1a: ice season line, bait ban, frozen week, slider label."""
+
+    def regulations(self):
+        return json.loads((DATA_DIR / "lake_regulations.json").read_text(encoding="utf-8"))["lakes"]
+
+    def test_every_season_wording_has_an_ice_season(self):
+        seen = {}
+        for reg in self.regulations().values():
+            text = (reg.get("season") or {}).get("text")
+            if text:
+                seen[text] = ice_season(text)
+        self.assertNotIn(None, seen.values(), [t for t, k in seen.items() if k is None])
+        self.assertEqual(seen["OPEN APR. 1 TO NOV. 30"], "early-and-late")
+        self.assertEqual(seen["OPEN MAY 8 TO NOV. 30 between sunrise and sunset"], "early")
+        self.assertEqual(seen["OPEN APR. 1 TO OCT. 31"], "late")
+        self.assertEqual(seen["OPEN APR. 16 TO OCT. 31"], "closed")
+        self.assertEqual(seen["OPEN MAY 15 TO OCT. 31 AND DEC. 11 TO MAR. 31"], "all-winter")
+
+    def test_ice_filter_keeps_early_and_late_ice(self):
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn('state.iceFishing && lakeIceSeason(lake) === "closed"', page)
+        source = (ROOT / "js" / "conditions.js").read_text(encoding="utf-8")
+        self.assertIn("iceSeason: iceSeason", source)
+
+    def test_every_popup_has_the_ice_line_and_the_safety_words(self):
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn("${iceSeasonBlock(lake)}", page)
+        self.assertIn("Legal is not safe. Ice thickness is never forecast.", page)
+
+    def test_bait_ban_line_chip_and_link(self):
+        bans = [r for r in self.regulations().values()
+                if re.search(r"bait\s+ban", r.get("bait") or "", re.I)]
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn('id="bait-chip"', page)
+        self.assertEqual(len(bans), 25)
+        self.assertIn('["bait-chip", "baitBanOnly"]', page)
+        self.assertIn('p.set("bait", "1")', page)
+        self.assertIn('p.get("bait") === "1"', page)
+        # Top of the popup: straight after the name and land description.
+        self.assertIn('<div class="ats">${esc(lake.ats || key)}</div>\n    ${baitBanLine(lake)}', page)
+
+    def test_distance_slider_has_a_label(self):
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertRegex(page, r'<input type="range" id="dist-slider"[^>]*aria-label="[^"]+"')
+        self.assertIn('setAttribute("aria-valuetext"', page)
+
+    def test_frozen_week_rule(self):
+        """Every one of the last 7 daily means below 0, with at least 5 days."""
+        def frozen_week(series):
+            week = series[-7:]
+            return len(week) >= 5 and all(v < 0 for v in week)
+        self.assertTrue(frozen_week([-3, -5, -1, -8, -2, -4, -6]))
+        self.assertFalse(frozen_week([-3, -5, -1, -8, -2, -4, 0]))
+        self.assertFalse(frozen_week([-3, -5, -1, -8]))
+        self.assertTrue(frozen_week([9, -3, -5, -1, -8, -2, -4, -6]))
+        source = (ROOT / "js" / "conditions.js").read_text(encoding="utf-8")
+        self.assertIn("var week = series.slice(-7);", source)
+        self.assertIn("week.length >= 5 &&\n      week.every(function (v) { return v < 0; });", source)
+
+    def test_frozen_week_hides_the_score(self):
+        source = (ROOT / "js" / "conditions.js").read_text(encoding="utf-8")
+        self.assertIn("frozenWeek: frozenWeek", source)
+        ui = (ROOT / "js" / "conditions-ui.js").read_text(encoding="utf-8")
+        self.assertIn("Ice likely", ui)
+        self.assertIn('(closed || frozen ? "" : verdictHtml(now))', ui)
+
+    def test_popup_pans_below_the_map_buttons(self):
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn("autoPanPaddingTopLeft: POPUP_PAD_TOP_LEFT", page)
+
+    def test_readme_counts_walleye_and_pike_waters(self):
+        species = collections.defaultdict(set)
+        for f in sorted(DATA_DIR.glob("lakes_20*.json")):
+            for lake in json.loads(f.read_text(encoding="utf-8")):
+                for st in lake.get("stockings", []):
+                    species[lake.get("ats") or lake.get("name")].add(st.get("species"))
+        only = [k for k, v in species.items() if v and v <= {"WALL", "NRPK"}]
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn(f"{len(only)} in the data", readme)
+        self.assertIn("**Species** — nine", readme)
+
+
 class SettledDisagreementTests(unittest.TestCase):
     """A disagreement is a question, and a question can be answered.
 

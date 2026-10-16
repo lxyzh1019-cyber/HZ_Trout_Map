@@ -575,6 +575,7 @@
     var now = scoreAt(place, new Date(), wx, water);
 
     var closed = place.lake ? lakeOpenNow(place.lake) === false : false;
+    var frozen = !closed && !!(water && water.frozenWeek);
     var source = wx.source === "none"
       ? '<span class="cx-warn">No weather — sun and moon only</span>'
       : '<span class="cx-src">weather ' + esc(Weather.ageText(wx.fetchedAt))
@@ -587,6 +588,13 @@
       body = '<div class="cx-closed"><strong>CLOSED today</strong>'
         + '<div>' + esc((reg && reg.season && reg.season.text) || "season not listed")
         + '</div><div class="cx-why">No score is shown for a lake whose season is shut.</div></div>';
+    } else if (frozen) {
+      /* Every day of the past week below freezing. The score rates open
+       * water, and there is none to rate. */
+      body = '<div class="cx-closed"><strong>Ice likely</strong>'
+        + '<div>Every day of the past week was below freezing.</div>'
+        + '<div class="cx-why">No open-water score is shown. Legal is not safe. '
+        + 'Ice thickness is never forecast.</div></div>';
     } else {
       body = (state.conditions.horizon === "week"
         ? gridHtml(place, wx, water)
@@ -608,8 +616,8 @@
       + '<button class="cx-close" type="button" aria-label="Close conditions">×</button>'
       + '</div>'
       + weatherNowHtml(wx, new Date())
-      // A shut lake gets no verdict: the closed block below says why.
-      + (closed ? "" : verdictHtml(now))
+      // A shut or frozen lake gets no verdict: the block below says why.
+      + (closed || frozen ? "" : verdictHtml(now))
       + '<div class="cx-row">'
       + '<div class="chips cx-horizon">'
       + '<button class="chip' + (state.conditions.horizon === "now" ? " active" : "") + '" data-horizon="now">Next 6 h</button>'
@@ -621,7 +629,7 @@
           ? "times on this device's clock"
           : "times at the lake" + (wx.data.timezone ? " (" + esc(wx.data.timezone) + ")" : ""))
       + '</span></div>'
-      + (closed ? "" : '<div class="cx-secheading">Fish activity forecast</div>')
+      + (closed || frozen ? "" : '<div class="cx-secheading">Fish activity forecast</div>')
       + body
       + (now.advisories.length
           ? '<div class="cx-advisory">' + now.advisories.map(esc).join("<br>") + "</div>" : "")
