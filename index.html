@@ -494,7 +494,10 @@
     letter-spacing: .04em; padding: 1px 6px; border-radius: 999px; color: #1f211e;
     background: #7fb8d8; white-space: nowrap; }
   .lake-popup .ice-warn { flex-basis: 100%; font-weight: 700; color: var(--WSCT); }
-  .lake-popup .bait-ban { font-size: 12px; font-weight: 700; color: var(--WSCT); margin: -2px 0 6px; }
+  /* A filled red badge, not only red text, so a bait ban is picked up at a glance (owner, 16 Oct: the filled
+     look from an earlier build). White on #c62828 is 5.6:1 contrast. */
+  .lake-popup .bait-ban { font-size: 12px; font-weight: 700; color: #fff; background: #c62828;
+    border-radius: 3px; padding: 2px 8px; margin: -2px 0 6px; display: inline-block; }
   .reg-block { margin: 8px 0 4px; padding: 8px 10px; background: var(--panel-2);
     border-left: 3px solid var(--accent); border-radius: 3px; font-size: 12px; }
   .reg-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 5px; }
