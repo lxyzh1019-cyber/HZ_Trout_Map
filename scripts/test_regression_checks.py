@@ -2160,6 +2160,8 @@ class IceSeasonTests(unittest.TestCase):
     def test_popups_are_moved_clear_of_the_top_right_buttons(self):
         self.assertIn(".leaflet-popup-close-button", self.page)
         self.assertIn('document.querySelector(".map-btns")', self.page)
+        self.assertIn('map.on("autopanstart"', self.page)
+        self.assertIn("map.panBy(", self.page)
         self.assertIn("max-width: calc(100vw - 66px)", self.page)
 
     def test_distance_slider_is_labelled(self):
@@ -2168,7 +2170,7 @@ class IceSeasonTests(unittest.TestCase):
 
     def test_winter_guard_hides_the_score(self):
         self.assertIn("Conditions.iceLikely(pastWeek)", self.ui)
-        self.assertIn("closed || iced ? \"\" : verdictHtml(now)", self.ui)
+        self.assertRegex(self.ui, r"closed\s*\|\|\s*iced\s*\?\s*\"\"\s*:\s*verdictHtml\(now\)")
         self.assertIn("<strong>Ice likely</strong>", self.ui)
 
 

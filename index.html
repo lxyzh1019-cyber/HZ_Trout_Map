@@ -1577,7 +1577,9 @@ function lakePassesFilters(lake) {
   if (state.openNow && lakeOpenNow(lake) === false) return false;
   if (state.iceFishing && lakeIceKind(lake) === "closed") return false;
   if (state.aeratedOnly && !lakeAerated(lake)) return false;
-  if (state.baitBanOnly && !lakeBaitBan(lake)) return false;
+  // Without the regulations the chip is hidden, so a shared link must not
+  // leave an empty map with no way to switch the filter off.
+  if (state.baitBanOnly && REGULATIONS && !lakeBaitBan(lake)) return false;
   if (!facilitiesPass(lake)) return false;
   return recencyPasses(lake, recencyOption());
 }
@@ -2427,6 +2429,8 @@ function initMap() {
    * popup clear: left past the buttons if it fits, otherwise down below them. */
   let autopanPending = false;
   map.on("autopanstart", () => { autopanPending = true; });
+  // A pan that ended before the popup said it was open leaves nothing to wait for.
+  map.on("moveend", () => { autopanPending = false; });
   const clearPopupClose = popup => {
     const el = popup.getElement();
     const close = el?.querySelector(".leaflet-popup-close-button");

@@ -577,11 +577,21 @@
     var closed = place.lake ? lakeOpenNow(place.lake) === false : false;
     /* Winter guard. A week with every day's mean air below freezing means ice,
      * and an open-water score on ice is advice for a lake nobody can fish that
-     * way. The seven full days before today, never today's partial forecast. */
-    var pastWeek = wx.data
-      ? Weather.dailyMeansUpTo(wx.data, new Date(startOfDay(new Date()).getTime() - 1000))
-      : [];
+     * way. The seven full days before today, never today's partial forecast.
+     * "Today" is the lake's day: dailyT holds the lake's own midnights, so the
+     * latest one already passed is where today starts, whatever the device's
+     * time zone is. */
+    var pastWeek = [];
+    if (wx.data && wx.data.dailyT) {
+      var nowSec = Date.now() / 1000, todayT = null;
+      wx.data.dailyT.forEach(function (t) { if (t <= nowSec) todayT = t; });
+      if (todayT !== null) pastWeek = Weather.dailyMeansUpTo(wx.data, new Date((todayT - 1) * 1000));
+    }
     var iced = !closed && Conditions.iceLikely(pastWeek);
+    // The ice block already says it; the hardwater advisory would repeat it.
+    var advisories = iced
+      ? now.advisories.filter(function (a) { return !/expect ice/.test(a); })
+      : now.advisories;
     var source = wx.source === "none"
       ? '<span class="cx-warn">No weather — sun and moon only</span>'
       : '<span class="cx-src">weather ' + esc(Weather.ageText(wx.fetchedAt))
@@ -635,8 +645,8 @@
       + '</span></div>'
       + (closed || iced ? "" : '<div class="cx-secheading">Fish activity forecast</div>')
       + body
-      + (!iced && now.advisories.length
-          ? '<div class="cx-advisory">' + now.advisories.map(esc).join("<br>") + "</div>" : "")
+      + (advisories.length
+          ? '<div class="cx-advisory">' + advisories.map(esc).join("<br>") + "</div>" : "")
       + '<div class="cx-foot"><a href="evidence.html' + esc(location.search) + '" target="_blank" rel="noopener">'
       + 'What this score is built on ↗</a></div>'
       + solunarHtml(place);

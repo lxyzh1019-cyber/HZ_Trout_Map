@@ -556,7 +556,8 @@ It also checks that two lakes on one quarter section keep their own fish and
 their own surface area, that the published totals still agree with Alberta's
 stocking map, and that an answer you record survives the next rebuild.
 
-GitHub Actions runs the same suite on every push and additionally rebuilds
+GitHub Actions runs the same suite on every pull request, on every push to
+`main` and on a manual run, and additionally rebuilds
 `data/` from the raw reports, failing if the result differs from what is
 committed. Generated data can therefore never drift from its sources.
 
