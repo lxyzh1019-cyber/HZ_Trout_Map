@@ -527,17 +527,15 @@ The description and the photographs go in a panel instead. They are long,
 neither changes a decision, and the popup is capped at 60% of the window height
 — putting them there would push the catch limits off the bottom.
 
-## Waters this map does not show
+## Walleye and pike waters
 
-Alberta stocks 31 further waterbodies with walleye or pike and no trout —
-Sylvan, Lake Newell, McGregor, Travers, Pinehurst, Winagami and 25 more. They
-are listed in `data/out_of_scope.csv` with the species that drove the decision.
-
-Adding them is not an import but a change of what the project is: sixteen years
-of reports would need re-reading with a wider species set, and the pin palette
-is already at the limit of what stays distinguishable under protanopia with six
-categories. The decision is recorded so the gap between 346 published
-waterbodies and the number mapped is accountable rather than unexplained.
+Waters Alberta stocks with walleye or pike and no trout are shown on the map,
+not hidden: 35 of them in the data (Sylvan, Lake Newell, McGregor, Travers,
+Pinehurst, Winagami and more). Walleye, northern pike and Arctic grayling each
+have their own pin colour and letter, picked to stay apart from the six trout
+under normal vision and the three common colour-vision deficiencies.
+`data/out_of_scope.csv` is kept with its header only: no stocked water is left
+out for its species. A test fails if the number above and the data disagree.
 
 
 ## Tests
@@ -590,8 +588,9 @@ there lately.
 - **Stocked recently** — 30, 60, 90 days, or this season. Each option shows how
   many lakes it would find, and the panel states the newest stocking on record,
   so an empty window is never a mystery.
-- **Species** — six, including westslope cutthroat, which Alberta began
-  reporting separately in 2023.
+- **Species** — nine: rainbow, brook, brown, tiger and cutthroat trout,
+  westslope cutthroat (reported separately since 2023), walleye, northern pike
+  and Arctic grayling.
 - **Fish size** — fry under 15 cm, 15 to 20 cm, and catchable 20 cm and over.
   A lake given 60,000 fry is not the same prospect as one given 3,000 catchable
   trout.
@@ -601,9 +600,11 @@ there lately.
 - **Years** — 2011 to 2026, with All / None / Last 5 / Latest. A year marked
   `*` is still in progress.
 - **Season and ice** — *Open today*; *Open for ice fishing*, which keeps lakes
-  whose season is open on every day from Dec. 15 to Mar. 1 (open all year, and
-  seasons like "May 15 to Mar. 31"); and *Aerated*. A lake not matched to the
-  regulations is never hidden by a season filter.
+  with any legal ice season: open all winter (every day from Dec. 15 to Mar. 1,
+  such as open all year or "May 15 to Mar. 31"), early ice (open until Nov. 30)
+  or late ice (open from Apr. 1); *Aerated*; and *Bait ban*, which keeps only
+  lakes the regulations put under a bait ban. A lake not matched to the
+  regulations is never hidden by a season or ice filter.
 
 **Aeration and thin ice**
 - Every lake stated as aerated — ACA's roster or Alberta's own lake page — shows
@@ -612,6 +613,12 @@ there lately.
   water near the aerators; stay behind the fence and the danger signs.
 - `data/aca_aeration_roster.csv` records ACA's *Winter Angling* Yes/No. The map
   uses the regulations, and a test fails if ACA's column ever disagrees.
+- Every lake popup has an *Ice season* line — all winter, early ice only, late
+  ice only, early and late ice, or closed — with "Legal is not safe. Ice
+  thickness is never forecast."
+- A lake under a bait ban shows a red *Bait ban* line at the top of its popup.
+- When every day of the past 7 days had a mean air temperature below freezing,
+  the Conditions panel shows *Ice likely* and no open-water score.
 
 **Reading the history**
 - Charts: by species, by season, per-species trend, and a stocking calendar

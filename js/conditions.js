@@ -620,10 +620,35 @@
     return true;
   }
 
+  /* Which part of the ice season the regulations allow. Early ice is the
+   * first ice of the year, so a season still open on Nov. 30 has it; late ice
+   * is the last, so a season open on Apr. 1 has it. A season can have both
+   * ("Apr. 1 to Nov. 30") and still be shut in midwinter. Null when the
+   * wording is not read. Legal is not the same as safe, and nothing here
+   * knows how thick the ice is. */
+  function seasonIceKind(text) {
+    var winter = seasonOpenAllWinter(text);
+    if (winter === null) return null;
+    if (winter) return "all-winter";
+    var early = seasonOpenOn(text, new Date(2026, 10, 30)) === true;
+    var late = seasonOpenOn(text, new Date(2027, 3, 1)) === true;
+    return early && late ? "early-late" : early ? "early" : late ? "late" : "closed";
+  }
+
+  /* Ice likely: every one of the last seven daily mean air temperatures was
+   * below freezing. Fewer than seven days is not enough to say so. */
+  function iceLikely(dailyMeanC) {
+    var days = (dailyMeanC || []).map(num).filter(function (v) { return v !== null; });
+    if (days.length < 7) return false;
+    return days.slice(-7).every(function (v) { return v < 0; });
+  }
+
   window.Conditions = {
     scoreSlot: scoreSlot,
     seasonOpenOn: seasonOpenOn,
     seasonOpenAllWinter: seasonOpenAllWinter,
+    seasonIceKind: seasonIceKind,
+    iceLikely: iceLikely,
     bestOf: bestOf,
     waterFromAir: waterFromAir,
     stratification: stratification,

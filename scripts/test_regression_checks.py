@@ -2068,6 +2068,131 @@ class WinterSeasonTests(unittest.TestCase):
         self.assertIn("seasonOpenAllWinter: seasonOpenAllWinter", source)
         self.assertIn("while ((m = re.exec(t)) !== null)", source)
 
+
+def season_ice_kind(text):
+    """The same reading as seasonIceKind in js/conditions.js, for the tests."""
+    winter = season_open_all_winter(text)
+    if winter is None:
+        return None
+    if winter:
+        return "all-winter"
+    early = season_open_on(text, 10, 30) is True
+    late = season_open_on(text, 3, 1) is True
+    return ("early-late" if early and late else "early" if early
+            else "late" if late else "closed")
+
+
+def run_conditions_js(expr):
+    """Evaluate an expression against the real js/conditions.js in node."""
+    import shutil
+    import subprocess
+    node = shutil.which("node")
+    if not node:
+        raise unittest.SkipTest("node is not installed")
+    script = (
+        "const fs=require('fs'),vm=require('vm');"
+        "const ctx={window:{}};vm.createContext(ctx);"
+        "vm.runInContext(fs.readFileSync(process.argv[1],'utf8'),ctx);"
+        "ctx.C=ctx.window.Conditions;"
+        "process.stdout.write(JSON.stringify(vm.runInContext(process.argv[2],ctx)));"
+    )
+    out = subprocess.run([node, "-e", script, str(ROOT / "js" / "conditions.js"), expr],
+                         capture_output=True, text=True, check=True).stdout
+    return json.loads(out)
+
+
+class IceSeasonTests(unittest.TestCase):
+    """Build 1a: early and late ice, the ice line, bait ban, winter guard."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.regs = json.loads((DATA_DIR / "lake_regulations.json")
+                              .read_text(encoding="utf-8"))["lakes"]
+        cls.page = (ROOT / "index.html").read_text(encoding="utf-8")
+        cls.ui = (ROOT / "js" / "conditions-ui.js").read_text(encoding="utf-8")
+
+    def test_early_and_late_ice_are_read_from_the_guide(self):
+        self.assertEqual(season_ice_kind("OPEN ALL YEAR"), "all-winter")
+        self.assertEqual(season_ice_kind("OPEN MAY 15 TO MAR. 31"), "all-winter")
+        self.assertEqual(season_ice_kind("OPEN APR. 1 TO NOV. 30"), "early-late")
+        self.assertEqual(season_ice_kind("OPEN MAY 8 TO NOV. 30 between sunrise and sunset"), "early")
+        self.assertEqual(season_ice_kind("OPEN APR. 1 TO OCT. 31"), "late")
+        self.assertEqual(season_ice_kind("OPEN APR. 16 TO OCT. 31"), "closed")
+        self.assertEqual(season_ice_kind("CLOSED ALL YEAR"), "closed")
+        self.assertIsNone(season_ice_kind(""))
+
+    def test_every_season_in_the_guide_gets_an_ice_kind(self):
+        texts = {(r.get("season") or {}).get("text") for r in self.regs.values()}
+        texts.discard(None)
+        texts.discard("")
+        for text in texts:
+            self.assertIsNotNone(season_ice_kind(text), text)
+
+    def test_the_js_reads_the_ice_season_as_the_tests_do(self):
+        texts = sorted({(r.get("season") or {}).get("text") or "" for r in self.regs.values()})
+        got = run_conditions_js("%s.map(t => C.seasonIceKind(t))" % json.dumps(texts))
+        self.assertEqual(got, [season_ice_kind(t) for t in texts])
+
+    def test_ice_likely_needs_seven_days_all_below_freezing(self):
+        got = run_conditions_js(
+            "[C.iceLikely([-1,-2,-3,-4,-5,-6,-0.5]), C.iceLikely([-1,-2,-3,-4,-5,-6,0.2]),"
+            " C.iceLikely([-5,-5,-5,-5,-5,-5]), C.iceLikely([3,-1,-2,-3,-4,-5,-6,-7])]")
+        self.assertEqual(got, [True, False, False, True])
+
+    def test_the_ice_filter_keeps_early_and_late_ice(self):
+        self.assertIn('state.iceFishing && lakeIceKind(lake) === "closed"', self.page)
+
+    def test_every_lake_popup_has_the_ice_line(self):
+        self.assertIn("${iceSeasonBlock(lake)}", self.page)
+        body = self.page[self.page.index("function iceSeasonBlock(lake)"):]
+        body = body[:body.index("\n}\n")]
+        self.assertIn("Legal is not safe. Ice thickness is never forecast.", body)
+        self.assertNotIn("if (!", body, "the line must not be skipped for any lake")
+
+    def test_bait_ban_line_and_chip(self):
+        top = self.page[self.page.index('<div class="lake-popup">\n    <h3>'):]
+        self.assertLess(top.index("${baitBanLine(lake)}"), top.index("${verdictLine(lake)}"))
+        self.assertIn('id="bait-chip"', self.page)
+        self.assertIn('["bait-chip", "baitBanOnly"]', self.page)
+        bans = sum(1 for r in self.regs.values() if r.get("bait") == "Bait ban")
+        self.assertGreater(bans, 0)
+
+    def test_popups_are_moved_clear_of_the_top_right_buttons(self):
+        self.assertIn(".leaflet-popup-close-button", self.page)
+        self.assertIn('document.querySelector(".map-btns")', self.page)
+        self.assertIn("max-width: calc(100vw - 66px)", self.page)
+
+    def test_distance_slider_is_labelled(self):
+        self.assertRegex(self.page, r'id="dist-slider"[^>]*aria-label="Maximum distance from home"')
+        self.assertIn('setAttribute("aria-valuetext"', self.page)
+
+    def test_winter_guard_hides_the_score(self):
+        self.assertIn("Conditions.iceLikely(pastWeek)", self.ui)
+        self.assertIn("closed || iced ? \"\" : verdictHtml(now)", self.ui)
+        self.assertIn("<strong>Ice likely</strong>", self.ui)
+
+
+class ReadmeSpeciesTests(unittest.TestCase):
+    """The README's walleye and pike count and species list match the app."""
+
+    def test_walleye_and_pike_waters_are_counted_right(self):
+        species = collections.defaultdict(set)
+        for path in DATA_DIR.glob("lakes_20*.json"):
+            for lake in json.loads(path.read_text(encoding="utf-8")):
+                key = lake.get("lake_id") or lake["name"]
+                species[key].update(s["species"] for s in lake["stockings"])
+        count = sum(1 for v in species.values() if v and v <= {"WALL", "NRPK"})
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn(f"not hidden: {count} of them in the data", readme)
+        self.assertNotIn("Waters this map does not show", readme)
+
+    def test_the_species_filter_has_nine(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        order = re.search(r"const SPECIES_ORDER = \[([^\]]*)\]", page).group(1)
+        self.assertEqual(len(re.findall(r'"[A-Z]{4}"', order)), 9)
+        self.assertIn("**Species** — nine", readme)
+
 class SettledDisagreementTests(unittest.TestCase):
     """A disagreement is a question, and a question can be answered.
 
