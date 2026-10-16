@@ -2280,7 +2280,7 @@ class StockedWeightTests(unittest.TestCase):
 
 
 class SpeciesBeyondTroutTests(unittest.TestCase):
-    """Walleye, pike and grayling, and the 31 lakes that came with them.
+    """Walleye, pike and grayling, and the 35 lakes that hold nothing else.
 
     The pipeline used to drop every non-trout row on the way in, which also
     dropped every lake that held nothing else — Sylvan Lake, Lake Newell,
@@ -2571,6 +2571,7 @@ class IceSeasonTests(unittest.TestCase):
             "OPEN APR. 1 TO NOV. 30": "both",
             "OPEN MAY 8 TO NOV. 30 between sunrise and sunset": "early",
             "OPEN MAY 15 TO MAR. 31": "all",
+            "OPEN MAY 15 TO OCT. 31 AND DEC. 11 TO MAR. 31": "all",
             "OPEN APR. 16 TO OCT. 31": "closed",
             "CLOSED ALL YEAR": "closed",
             "OPEN ALL YEAR": "all",
