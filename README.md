@@ -28,7 +28,7 @@ alberta-trout-map/
 │   ├── lake_depth.json             ← depth, summer layer and winterkill, generated
 │   ├── lake_profile.json           ← facilities, description, photo count, generated
 │   ├── lake_photos.json            ← photo links, generated, fetched on demand
-│   ├── out_of_scope.csv            ← waters stocked with no trout, generated
+│   ├── out_of_scope.csv            ← waters the map declines to show (empty), generated
 │   ├── lake_regulations.json       ← seasons and catch limits per lake, generated
 │   ├── lake_aliases.csv            ← your answers to past linking questions
 │   ├── lake_facts.csv              ← your answers to past attribute questions
@@ -527,17 +527,17 @@ The description and the photographs go in a panel instead. They are long,
 neither changes a decision, and the popup is capped at 60% of the window height
 — putting them there would push the catch limits off the bottom.
 
-## Waters this map does not show
+## Walleye- and pike-only waters are on the map
 
-Alberta stocks 31 further waterbodies with walleye or pike and no trout —
-Sylvan, Lake Newell, McGregor, Travers, Pinehurst, Winagami and 25 more. They
-are listed in `data/out_of_scope.csv` with the species that drove the decision.
+Alberta stocks 35 waterbodies with walleye or pike and no trout — Sylvan, Lake
+Newell, McGregor, Travers, Pinehurst, Winagami and more. They are shown on the
+map like every other stocked lake, not hidden. `data/out_of_scope.csv` once
+listed them and is now empty: nothing Alberta stocks is left off.
 
-Adding them is not an import but a change of what the project is: sixteen years
-of reports would need re-reading with a wider species set, and the pin palette
-is already at the limit of what stays distinguishable under protanopia with six
-categories. The decision is recorded so the gap between 346 published
-waterbodies and the number mapped is accountable rather than unexplained.
+The species filter has 9 species: Rainbow, Brook, Brown, Tiger, Cutthroat,
+Westslope, Walleye, Pike and Grayling. The count of 35 is every lake whose
+stockings, across all years, are walleye or pike and nothing else; a test
+recomputes it from the data and fails if this paragraph drifts.
 
 
 ## Tests
@@ -590,8 +590,8 @@ there lately.
 - **Stocked recently** — 30, 60, 90 days, or this season. Each option shows how
   many lakes it would find, and the panel states the newest stocking on record,
   so an empty window is never a mystery.
-- **Species** — six, including westslope cutthroat, which Alberta began
-  reporting separately in 2023.
+- **Species** — 9: Rainbow, Brook, Brown, Tiger, Cutthroat, Westslope (which
+  Alberta began reporting separately in 2023), Walleye, Pike and Grayling.
 - **Fish size** — fry under 15 cm, 15 to 20 cm, and catchable 20 cm and over.
   A lake given 60,000 fry is not the same prospect as one given 3,000 catchable
   trout.
@@ -604,6 +604,16 @@ there lately.
   whose season is open on every day from Dec. 15 to Mar. 1 (open all year, and
   seasons like "May 15 to Mar. 31"); and *Aerated*. A lake not matched to the
   regulations is never hidden by a season filter.
+- *Open for ice fishing* also keeps lakes open only for early ice (open on
+  Nov. 30) or only for late ice (open on Apr. 1); it hides only lakes shut for
+  all of the ice season. *Bait ban* keeps only lakes whose regulations state a
+  bait ban.
+- Every popup has an *Ice season* line under the season: all winter, early ice
+  only, late ice only, early and late ice, closed, or not known. Where ice
+  fishing is legal it adds: "Legal is not safe. Ice thickness is never
+  forecast." A lake with a bait ban shows a red *Bait ban* line under its name.
+- When every day of the 7-day forecast stays below freezing, the conditions
+  panel shows *Ice likely* instead of the open-water score.
 
 **Aeration and thin ice**
 - Every lake stated as aerated — ACA's roster or Alberta's own lake page — shows
@@ -661,6 +671,6 @@ there lately.
 Species colours come from a validated categorical palette, ordered so every
 neighbouring pair stays separable for colour-blind readers. The previous
 naturalistic set put brown trout and brook trout 2.0 ΔE apart under
-protanopia, which is indistinguishable. Six categories still cannot be made
+protanopia, which is indistinguishable. Nine categories still cannot be made
 safe on colour alone, so each pin also carries the species initial and every
 popup names the species in words.

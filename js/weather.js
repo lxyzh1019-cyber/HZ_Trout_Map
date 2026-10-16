@@ -42,7 +42,7 @@
     return ENDPOINT
       + "?latitude=" + cell[0] + "&longitude=" + cell[1]
       + "&hourly=" + HOURLY.join(",")
-      + "&daily=temperature_2m_mean"
+      + "&daily=temperature_2m_mean,temperature_2m_max"
       + "&past_days=7&forecast_days=7"
       + "&timezone=auto&timeformat=unixtime"
       + "&temperature_unit=celsius&wind_speed_unit=kmh&precipitation_unit=mm";
@@ -120,6 +120,7 @@
       code: h.weather_code || [],
       dailyT: (json.daily || {}).time || [],
       dailyMeanC: (json.daily || {}).temperature_2m_mean || [],
+      dailyMaxC: (json.daily || {}).temperature_2m_max || [],
     };
   }
 

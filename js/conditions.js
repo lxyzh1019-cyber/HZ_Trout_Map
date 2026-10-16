@@ -620,10 +620,42 @@
     return true;
   }
 
+  /* Which part of the ice season a lake is open for. "all" when it is open
+   * every day of the winter (seasonOpenAllWinter). Otherwise early ice is
+   * Nov. 30 and late ice is Apr. 1: "early" when open only on the first,
+   * "late" only on the second, "both" when open on both but shut mid-winter
+   * ("Apr. 1 to Nov. 30"), and "closed" when open on neither. Null when the
+   * wording is not read, so an unread season never reads as open or shut. */
+  function iceSeason(text) {
+    var all = seasonOpenAllWinter(text);
+    if (all === null) return null;
+    if (all === true) return "all";
+    var early = seasonOpenOn(text, new Date(2026, 10, 30));
+    var late = seasonOpenOn(text, new Date(2027, 3, 1));
+    if (early === null || late === null) return null;
+    if (early && late) return "both";
+    if (early) return "early";
+    if (late) return "late";
+    return "closed";
+  }
+
+  /* Whether a run of daily temperatures (deg C) stays below freezing: at
+   * least 7 real values and every one of them under 0. Fewer than 7 is not a
+   * week, so it is false rather than a guess. */
+  function weekBelowFreezing(dailyC) {
+    var vals = (dailyC || []).filter(function (v) {
+      return typeof v === "number" && isFinite(v);
+    });
+    if (vals.length < 7) return false;
+    return vals.every(function (v) { return v < 0; });
+  }
+
   window.Conditions = {
     scoreSlot: scoreSlot,
     seasonOpenOn: seasonOpenOn,
     seasonOpenAllWinter: seasonOpenAllWinter,
+    iceSeason: iceSeason,
+    weekBelowFreezing: weekBelowFreezing,
     bestOf: bestOf,
     waterFromAir: waterFromAir,
     stratification: stratification,

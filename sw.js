@@ -25,7 +25,7 @@
    Bumping the name retires the old shell outright. */
 /* v3: index.html now calls Conditions.seasonOpenAllWinter, which an older
    cached js/conditions.js does not have. */
-const SHELL_CACHE = "troutmap-shell-v3";
+const SHELL_CACHE = "troutmap-shell-v4";
 const DATA_CACHE = "troutmap-data-v1";
 const TILE_CACHE = "troutmap-tiles-v1";
 const WX_CACHE = "troutmap-wx-v1";
