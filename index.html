@@ -2392,13 +2392,15 @@ window.addEventListener("resize", measurePopupPad);
 /* A popup opened while the map is still moving (a ?lake= link, a search)
  * misses Leaflet's own pan. Once the map settles, move it down if its top,
  * where the × is, still sits under the buttons. */
+let popupClearTimer = null;
 function keepPopupClear(popup) {
-  setTimeout(() => {
+  clearTimeout(popupClearTimer);
+  popupClearTimer = setTimeout(() => {
     const el = popup.getElement();
-    if (!el || !map.hasLayer(popup)) return;
+    if (!el || !map.hasLayer(popup) || !map.getSize().y || state.view === "list") return;
     const gap = map.getContainer().getBoundingClientRect().top + POPUP_PAD[1]
       - el.getBoundingClientRect().top;
-    if (gap > 1) map.panBy([0, -Math.ceil(gap)]);
+    if (gap > 1) map.panBy([0, -Math.ceil(gap)], { animate: false });
   }, 400);
 }
 /** On a phone a 380 px popup is wider than the map, and its × lands off the
