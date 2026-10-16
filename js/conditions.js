@@ -620,10 +620,35 @@
     return true;
   }
 
+  /* Which part of the ice season the law leaves open. "all" is open all
+   * winter; "early" is open on Nov. 30 (first ice); "late" is open on Apr. 1
+   * (last ice); "both" is early and late but shut mid-winter; "closed" is
+   * none of them. Null when the wording is not read. */
+  function seasonIceKind(text) {
+    var all = seasonOpenAllWinter(text);
+    if (all === null) return null;
+    if (all) return "all";
+    var early = seasonOpenOn(text, new Date(2026, 10, 30));
+    var late = seasonOpenOn(text, new Date(2027, 3, 1));
+    if (early === null || late === null) return null;
+    return early && late ? "both" : early ? "early" : late ? "late" : "closed";
+  }
+
+  /* A forecast week that never thaws: every daily mean below 0 °C. Open-water
+   * scoring means nothing on ice, so the panel stops showing it. Needs the
+   * whole week; a short or missing forecast is not a frozen one. */
+  function weekBelowFreezing(dailyMeansC) {
+    var s = (dailyMeansC || []).map(num).filter(function (v) { return v !== null; });
+    if (s.length < 7) return false;
+    return s.slice(0, 7).every(function (v) { return v < 0; });
+  }
+
   window.Conditions = {
     scoreSlot: scoreSlot,
     seasonOpenOn: seasonOpenOn,
     seasonOpenAllWinter: seasonOpenAllWinter,
+    seasonIceKind: seasonIceKind,
+    weekBelowFreezing: weekBelowFreezing,
     bestOf: bestOf,
     waterFromAir: waterFromAir,
     stratification: stratification,

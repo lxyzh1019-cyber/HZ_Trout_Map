@@ -575,6 +575,10 @@
     var now = scoreAt(place, new Date(), wx, water);
 
     var closed = place.lake ? lakeOpenNow(place.lake) === false : false;
+    /* A week that never thaws is a week on ice. The score is built for open
+     * water, so it is hidden rather than shown as a low number. */
+    var iced = !closed && !!wx.data
+      && Conditions.weekBelowFreezing(Weather.dailyMeansFrom(wx.data, new Date()));
     var source = wx.source === "none"
       ? '<span class="cx-warn">No weather — sun and moon only</span>'
       : '<span class="cx-src">weather ' + esc(Weather.ageText(wx.fetchedAt))
@@ -587,6 +591,10 @@
       body = '<div class="cx-closed"><strong>CLOSED today</strong>'
         + '<div>' + esc((reg && reg.season && reg.season.text) || "season not listed")
         + '</div><div class="cx-why">No score is shown for a lake whose season is shut.</div></div>';
+    } else if (iced) {
+      body = '<div class="cx-closed"><strong>Ice likely</strong>'
+        + '<div>Open-water score hidden.</div>'
+        + '<div class="cx-why">Legal is not safe. Ice thickness is never forecast.</div></div>';
     } else {
       body = (state.conditions.horizon === "week"
         ? gridHtml(place, wx, water)
@@ -609,7 +617,7 @@
       + '</div>'
       + weatherNowHtml(wx, new Date())
       // A shut lake gets no verdict: the closed block below says why.
-      + (closed ? "" : verdictHtml(now))
+      + (closed || iced ? "" : verdictHtml(now))
       + '<div class="cx-row">'
       + '<div class="chips cx-horizon">'
       + '<button class="chip' + (state.conditions.horizon === "now" ? " active" : "") + '" data-horizon="now">Next 6 h</button>'
@@ -621,7 +629,7 @@
           ? "times on this device's clock"
           : "times at the lake" + (wx.data.timezone ? " (" + esc(wx.data.timezone) + ")" : ""))
       + '</span></div>'
-      + (closed ? "" : '<div class="cx-secheading">Fish activity forecast</div>')
+      + (closed || iced ? "" : '<div class="cx-secheading">Fish activity forecast</div>')
       + body
       + (now.advisories.length
           ? '<div class="cx-advisory">' + now.advisories.map(esc).join("<br>") + "</div>" : "")

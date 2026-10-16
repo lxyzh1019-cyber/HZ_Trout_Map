@@ -233,6 +233,20 @@
     return out.slice(-7);
   }
 
+  /** Daily mean air temperature from the day holding a moment onward: the
+   *  forecast week, today first. */
+  function dailyMeansFrom(data, when) {
+    if (!data || !data.dailyT) return [];
+    var now = Math.round(when.getTime() / 1000);
+    var out = [];
+    for (var i = 0; i < data.dailyT.length; i++) {
+      if (data.dailyT[i] + 86400 <= now) continue;
+      var v = value(data.dailyMeanC, i);
+      if (v !== null) out.push(v);
+    }
+    return out.slice(0, 7);
+  }
+
   /** How far ahead of now a moment is, in days, for the forecast-decay term. */
   function leadDays(when) {
     return Math.max(0, (when.getTime() - Date.now()) / 86400000);
@@ -256,6 +270,7 @@
     peek: peek,
     at: at,
     dailyMeansUpTo: dailyMeansUpTo,
+    dailyMeansFrom: dailyMeansFrom,
     leadDays: leadDays,
     ageText: ageText,
     nearestIndex: nearestIndex,

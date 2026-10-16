@@ -494,6 +494,10 @@
     letter-spacing: .04em; padding: 1px 6px; border-radius: 999px; color: #1f211e;
     background: #7fb8d8; white-space: nowrap; }
   .lake-popup .ice-warn { flex-basis: 100%; font-weight: 700; color: var(--WSCT); }
+  .lake-popup .ice-row { font-size: 11px; margin-bottom: 7px; }
+  .lake-popup .ice-safe { display: block; font-weight: 700; color: #ff8a80; }
+  .lake-popup .bait-ban { font-size: 12px; font-weight: 700; color: #fff; background: #c62828;
+    border-radius: 3px; padding: 2px 8px; margin: 2px 0 7px; display: inline-block; }
   .reg-block { margin: 8px 0 4px; padding: 8px 10px; background: var(--panel-2);
     border-left: 3px solid var(--accent); border-radius: 3px; font-size: 12px; }
   .reg-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 5px; }
@@ -981,6 +985,7 @@
         <button class="chip" id="open-now-chip" type="button" aria-pressed="false">Open today</button>
         <button class="chip" id="ice-chip" type="button" aria-pressed="false">Open for ice fishing</button>
         <button class="chip" id="aerated-chip" type="button" aria-pressed="false">Aerated</button>
+        <button class="chip" id="bait-chip" type="button" aria-pressed="false">Bait ban</button>
       </div>
       <div class="hint" id="open-now-note"></div>
     </div>
@@ -988,7 +993,7 @@
     <div class="group">
       <div class="group-label"><span>Distance from home</span></div>
       <div class="home-name" id="home-name"></div>
-      <input type="range" id="dist-slider" min="0" max="1000" step="10" value="1000">
+      <input type="range" id="dist-slider" min="0" max="1000" step="10" value="1000" aria-label="Maximum distance from home">
       <div class="slider-row"><span>0 km</span><span class="slider-value" id="dist-value">≤ 1000 km</span></div>
       <div class="btn-row" style="margin-top:8px">
         <button class="btn" id="home-locate" type="button">Use my location</button>
@@ -1308,10 +1313,13 @@ const state = {
   /** Hide lakes whose season is shut today. Off by default: a closed lake is
    *  still worth seeing on a map you are using to plan next month. */
   openNow: false,
-  /** Keep only lakes whose season is open through the whole winter. */
+  /** Keep only lakes whose season is open on the ice: all winter, early ice
+   *  (to Nov. 30) or late ice (from Apr. 1). Unread seasons stay on the map. */
   iceFishing: false,
   /** Keep only lakes the province or ACA states are aerated. */
   aeratedOnly: false,
+  /** Keep only lakes the regulations list with a bait ban. */
+  baitBan: false,
   /** Facilities a lake must be KNOWN to have. Empty means no facility filter.
    *  Never inverted into "known not to have": 95 mapped lakes state no
    *  amenities at all, and that is Alberta not saying, not a lake with no
@@ -1568,8 +1576,9 @@ function lakePassesFilters(lake) {
   // is not the same as "closed", and hiding it would quietly shorten the list
   // without saying why.
   if (state.openNow && lakeOpenNow(lake) === false) return false;
-  if (state.iceFishing && lakeOpenAllWinter(lake) === false) return false;
+  if (state.iceFishing && lakeIceKind(lake) === "closed") return false;
   if (state.aeratedOnly && !lakeAerated(lake)) return false;
+  if (state.baitBan && !lakeBaitBan(lake)) return false;
   if (!facilitiesPass(lake)) return false;
   return recencyPasses(lake, recencyOption());
 }
@@ -2033,12 +2042,41 @@ function lakeOpenNow(lake, when) {
   return seasonOpenOn(reg.season.text, when || new Date());
 }
 
-/** True when the season is open all winter, false when it is not, null when
- *  we cannot tell. Like "open today", null is kept on the map, never hidden. */
-function lakeOpenAllWinter(lake) {
+/** Which part of the ice season is open: "all", "early", "late", "both",
+ *  "closed", or null when the season is not listed or not read. */
+function lakeIceKind(lake) {
   const reg = regulationFor(lake);
-  if (!reg || !reg.season || !Conditions.seasonOpenAllWinter) return null;
-  return Conditions.seasonOpenAllWinter(reg.season.text);
+  if (!reg || !reg.season || !Conditions.seasonIceKind) return null;
+  return Conditions.seasonIceKind(reg.season.text);
+}
+
+const ICE_SEASON_TEXT = {
+  all: "all winter",
+  early: "early ice only (to Nov 30)",
+  late: "late ice only (from Apr 1)",
+  both: "early and late ice (shut Dec 1 – Mar 31)",
+  closed: "closed",
+};
+
+/* The ice-season line, on every lake popup. Legal and safe are different
+ * questions, and the second one this map cannot answer. */
+function iceSeasonBlock(lake) {
+  const kind = lakeIceKind(lake);
+  const text = kind ? ICE_SEASON_TEXT[kind] : "not stated — check the Alberta guide";
+  return `<div class="ice-row"><strong>Ice season:</strong> ${esc(text)}`
+    + (kind === "closed" ? "" : `<span class="ice-safe">Legal is not safe. Ice thickness is never forecast.</span>`)
+    + `</div>`;
+}
+
+/** A bait ban, as the regulations state it for this lake. */
+function lakeBaitBan(lake) {
+  const reg = regulationFor(lake);
+  return !!(reg && /^\s*bait ban\b/i.test(reg.bait || ""));
+}
+
+/* Red, under the title: a bait ban changes what you pack. */
+function baitBanBlock(lake) {
+  return lakeBaitBan(lake) ? `<div class="bait-ban">Bait ban</div>` : "";
 }
 
 /** Stated aerated: on ACA's roster or on Alberta's own lake page. A windmill
@@ -2257,6 +2295,7 @@ function popupHtml(lake) {
   return `<div class="lake-popup">
     <h3><button class="star ${fav ? "on" : ""}" data-fav="${esc(key)}" title="${fav ? "Remove from favourites" : "Add to favourites"}" aria-label="${fav ? "Remove from favourites" : "Add to favourites"}">${fav ? "★" : "☆"}</button>${esc(lake.name)}</h3>
     <div class="ats">${esc(lake.ats || key)}</div>
+    ${baitBanBlock(lake)}
     ${verdictLine(lake)}
     <div class="meta"><strong>${distText}</strong> from ${esc(state.home.name)} &nbsp;·&nbsp; <strong>${fmtNum(filteredTotal)}</strong> fish shown</div>
     <div class="meta"><strong>Last stocked:</strong> ${esc(lastText)}</div>
@@ -2265,6 +2304,7 @@ function popupHtml(lake) {
     ${approx}
     ${profileBlock(lake)}
     ${facilityBlock(lake)}
+    ${iceSeasonBlock(lake)}
     ${aerationBlock(lake)}
     ${depthBlock(lake)}
     ${regulationBlock(lake)}
@@ -2337,8 +2377,39 @@ function tooltipHtml(lake) {
          (change ? `<br><span class="tip-sub">${esc(change)}</span>` : "");
 }
 
+/* Popups pan to sit below the top-right buttons, so the buttons never cover
+ * the popup's close ×. One shared array: Leaflet keeps the reference and reads
+ * it on every pan, so a re-measure reaches popups already bound. */
+const POPUP_PAD = [5, 5];
+function measurePopupPad() {
+  const btns = document.querySelector(".map-btns");
+  const host = document.getElementById("map");
+  if (!btns || !host) return;
+  const b = btns.getBoundingClientRect(), m = host.getBoundingClientRect();
+  POPUP_PAD[1] = b.height ? Math.max(5, Math.round(b.bottom - m.top + 10)) : 5;
+}
+window.addEventListener("resize", measurePopupPad);
+/* A popup opened while the map is still moving (a ?lake= link, a search)
+ * misses Leaflet's own pan. Once the map settles, move it down if its top,
+ * where the × is, still sits under the buttons. */
+function keepPopupClear(popup) {
+  setTimeout(() => {
+    const el = popup.getElement();
+    if (!el || !map.hasLayer(popup)) return;
+    const gap = map.getContainer().getBoundingClientRect().top + POPUP_PAD[1]
+      - el.getBoundingClientRect().top;
+    if (gap > 1) map.panBy([0, -Math.ceil(gap)]);
+  }, 400);
+}
+/** On a phone a 380 px popup is wider than the map, and its × lands off the
+ *  right edge. Keep it inside the screen with room for Leaflet's margins. */
+function popupMaxWidth(want) {
+  return Math.max(200, Math.min(want, window.innerWidth - 60));
+}
+
 function initMap() {
   map = L.map("map", { zoomControl: true }).setView([53.2, -114.5], 6);
+  requestAnimationFrame(measurePopupPad);
   basemaps.topo = L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
     maxZoom: 17, attribution: '© OpenTopoMap (CC-BY-SA) · © OpenStreetMap contributors'
   });
@@ -2385,6 +2456,8 @@ function initMap() {
   });
   map.on("popupclose", () => { if (!rerenderingPins) state.openPopupAts = null; });
   map.on("popupopen", e => {
+    measurePopupPad();
+    keepPopupClear(e.popup);
     const el = e.popup.getElement();
     const btn = el?.querySelector("[data-fav]");
     if (btn) btn.addEventListener("click", () => toggleFavourite(btn.dataset.fav));
@@ -2479,7 +2552,7 @@ function renderPins() {
       riseOnHover: true,
     });
     marker.bindTooltip(() => tooltipHtml(lake), { className: "lake-tip", direction: "top", offset: [0, -6] });
-    marker.bindPopup(() => popupHtml(lake), { maxWidth: 380 });
+    marker.bindPopup(() => popupHtml(lake), { maxWidth: popupMaxWidth(380), autoPanPaddingTopLeft: POPUP_PAD });
     marker.on("click", () => {
       lastPinClickAt = Date.now();
       state.openPopupAts = lakeKey(lake);
@@ -2551,7 +2624,7 @@ function renderZones() {
     });
     marker.bindTooltip(`<b>${esc(z.zone)}</b> ${esc(z.region)}<br><span class="tip-sub">${z.lakes.length} lakes · ${fmtNum(z.fish)} fish</span>`,
       { className: "lake-tip", direction: "top", offset: [0, -6] });
-    marker.bindPopup(() => zonePopupHtml(z), { maxWidth: 320 });
+    marker.bindPopup(() => zonePopupHtml(z), { maxWidth: popupMaxWidth(320), autoPanPaddingTopLeft: POPUP_PAD });
     zoneLayer.addLayer(marker);
   });
 
@@ -2817,6 +2890,7 @@ function buildSeasonFilter() {
   const toggles = [
     ["ice-chip", "iceFishing"],
     ["aerated-chip", "aeratedOnly"],
+    ["bait-chip", "baitBan"],
   ];
   toggles.forEach(([id, key]) => {
     const el = document.getElementById(id);
@@ -3001,8 +3075,10 @@ function buildDistanceSlider() {
   updateDistanceLabel();
 }
 function updateDistanceLabel() {
-  document.getElementById("dist-value").textContent =
-    state.maxDistanceKm >= 1000 ? "≤ 1000 km" : `≤ ${state.maxDistanceKm} km`;
+  const text = state.maxDistanceKm >= 1000 ? "≤ 1000 km" : `≤ ${state.maxDistanceKm} km`;
+  document.getElementById("dist-value").textContent = text;
+  document.getElementById("dist-slider").setAttribute("aria-valuetext",
+    state.maxDistanceKm >= 1000 ? "up to 1000 kilometres" : `up to ${state.maxDistanceKm} kilometres`);
 }
 
 function updateFilterSummary() {
@@ -3309,6 +3385,8 @@ function setView(view) {
   wrap.classList.toggle("list-mode", view === "list");
   wrap.classList.toggle("zone-mode", view === "zones");
   document.querySelectorAll("[data-view]").forEach(b => b.classList.toggle("active", b.dataset.view === view));
+  // The buttons are hidden in list mode, so measure again on the way back.
+  measurePopupPad();
 
   if (view === "zones") {
     if (map.hasLayer(pinLayer)) map.removeLayer(pinLayer);
@@ -3580,6 +3658,7 @@ function writeUrl() {
   if (state.openNow) p.set("open", "1");
   if (state.iceFishing) p.set("ice", "1");
   if (state.aeratedOnly) p.set("aer", "1");
+  if (state.baitBan) p.set("bb", "1");
   if (state.facilities.size) p.set("fac", [...state.facilities].join("|"));
   if (state.conditions.open) p.set("cx", state.conditions.horizon);
   if (state.view !== "map") p.set("v", state.view);
@@ -3605,6 +3684,7 @@ function readUrl() {
   if (p.get("open") === "1") state.openNow = true;
   if (p.get("ice") === "1") state.iceFishing = true;
   if (p.get("aer") === "1") state.aeratedOnly = true;
+  if (p.get("bb") === "1") state.baitBan = true;
   // Validated against what was actually collected, so a stale or hand-typed
   // link cannot leave a filter switched on that nothing can satisfy.
   if (p.has("fac")) pendingFacilities = p.get("fac").split("|").filter(Boolean);

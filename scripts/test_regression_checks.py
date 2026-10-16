@@ -2068,6 +2068,108 @@ class WinterSeasonTests(unittest.TestCase):
         self.assertIn("seasonOpenAllWinter: seasonOpenAllWinter", source)
         self.assertIn("while ((m = re.exec(t)) !== null)", source)
 
+
+def season_ice_kind(text):
+    """The same reading as seasonIceKind in js/conditions.js, for the tests."""
+    all_winter = season_open_all_winter(text)
+    if all_winter is None:
+        return None
+    if all_winter:
+        return "all"
+    early, late = season_open_on(text, 10, 30), season_open_on(text, 3, 1)
+    if early is None or late is None:
+        return None
+    return "both" if early and late else "early" if early else "late" if late else "closed"
+
+
+class IceSeasonTests(unittest.TestCase):
+    """Build 1a: the ice-season line, the wider ice filter, the bait ban."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.regs = json.loads((DATA_DIR / "lake_regulations.json")
+                              .read_text(encoding="utf-8"))["lakes"]
+        cls.page = (ROOT / "index.html").read_text(encoding="utf-8")
+
+    def test_each_season_wording_gets_its_ice_kind(self):
+        self.assertEqual(season_ice_kind("OPEN all year"), "all")
+        self.assertEqual(season_ice_kind("OPEN MAY 15 TO MAR. 31"), "all")
+        self.assertEqual(season_ice_kind("OPEN JULY 16 TO MAY 31"), "all")
+        self.assertEqual(season_ice_kind("OPEN MAY 8 TO NOV. 30 between sunrise and sunset"), "early")
+        self.assertEqual(season_ice_kind("OPEN APR. 1 TO OCT. 31"), "late")
+        self.assertEqual(season_ice_kind("OPEN APR. 1 TO NOV. 30"), "both")
+        self.assertEqual(season_ice_kind("OPEN JUNE 1 TO OCT. 31"), "closed")
+        self.assertEqual(season_ice_kind("OPEN APR. 16 TO OCT. 31"), "closed")
+        self.assertEqual(season_ice_kind("CLOSED ALL YEAR"), "closed")
+        self.assertIsNone(season_ice_kind(""))
+
+    def test_early_and_late_ice_lakes_join_the_ice_filter(self):
+        kinds = collections.Counter(
+            season_ice_kind((r.get("season") or {}).get("text"))
+            for r in self.regs.values())
+        self.assertEqual(kinds["early"], 1)
+        self.assertEqual(kinds["late"], 2)
+        self.assertEqual(kinds["both"], 3)
+        self.assertNotIn(None, kinds, "a season wording was not read")
+        self.assertIn('state.iceFishing && lakeIceKind(lake) === "closed"', self.page)
+
+    def test_every_popup_has_the_ice_line_and_the_safety_words(self):
+        self.assertIn("${iceSeasonBlock(lake)}", self.page)
+        body = self.page[self.page.index("function iceSeasonBlock(lake)"):]
+        body = body[:body.index("\n}\n")]
+        self.assertIn("Legal is not safe. Ice thickness is never forecast.", body)
+        self.assertIn("not stated", body)
+        for words in ("all winter", "early ice only", "late ice only", "closed"):
+            self.assertIn(words, self.page)
+
+    def test_bait_ban_line_and_chip(self):
+        # 25 lakes. The file has 28 "Bait ban" lines: the other 3 are part-of-
+        # lake rows under "also". wb6061 bans bait in the rest of the lake too.
+        # wb4374 (Crowsnest Lake) bans it only in the tributaries, twice; the
+        # lake allows bait, so it gets no red line, and the regulation block
+        # lists the tributary rows.
+        banned = {k for k, r in self.regs.items() if r.get("bait") == "Bait ban"}
+        in_parts = {k for k, r in self.regs.items()
+                    if any(a.get("bait") == "Bait ban" for a in r.get("also") or [])}
+        self.assertEqual(in_parts - banned, {"wb4374"})
+        self.assertEqual(len(banned), 25)
+        head = self.page[self.page.index('<div class="ats">${esc(lake.ats || key)}</div>'):]
+        self.assertTrue(head.split("\n")[1].strip() == "${baitBanBlock(lake)}",
+                        "the bait-ban line must sit at the top of the popup")
+        self.assertIn('id="bait-chip"', self.page)
+        self.assertIn('["bait-chip", "baitBan"]', self.page)
+        self.assertIn('if (p.get("bb") === "1") state.baitBan = true;', self.page)
+
+    def test_popups_pan_clear_of_the_top_right_buttons(self):
+        self.assertEqual(self.page.count("autoPanPaddingTopLeft: POPUP_PAD"), 2)
+        self.assertIn('document.querySelector(".map-btns")', self.page)
+        self.assertIn("keepPopupClear(e.popup);", self.page)
+
+    def test_distance_slider_has_a_label(self):
+        self.assertRegex(self.page, r'<input type="range" id="dist-slider"[^>]*aria-label="[^"]+"')
+
+    def test_winter_guard_hides_the_open_water_score(self):
+        ui = (ROOT / "js" / "conditions-ui.js").read_text(encoding="utf-8")
+        cx = (ROOT / "js" / "conditions.js").read_text(encoding="utf-8")
+        self.assertIn("weekBelowFreezing: weekBelowFreezing", cx)
+        self.assertIn("Conditions.weekBelowFreezing(Weather.dailyMeansFrom(", ui)
+        self.assertIn("Ice likely", ui)
+        self.assertIn("(closed || iced ? \"\" : verdictHtml(now))", ui)
+
+    def test_readme_counts_match_the_data(self):
+        species = collections.defaultdict(set)
+        for path in DATA_DIR.glob("lakes_20*.json"):
+            for lake in json.loads(path.read_text(encoding="utf-8")):
+                for row in lake["stockings"]:
+                    species[lake["lake_id"]].add(row["species"])
+        walleye_pike_only = sum(1 for v in species.values() if v and v <= {"WALL", "NRPK"})
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn(f"Alberta stocks {walleye_pike_only} waterbodies with walleye or pike", readme)
+        self.assertIn("The map shows them", readme)
+        self.assertIn("**Species** — nine", readme)
+        order = re.search(r"const SPECIES_ORDER = \[([^\]]*)\]", self.page).group(1)
+        self.assertEqual(len(re.findall(r'"[A-Z]{4}"', order)), 9)
+
 class SettledDisagreementTests(unittest.TestCase):
     """A disagreement is a question, and a question can be answered.
 
