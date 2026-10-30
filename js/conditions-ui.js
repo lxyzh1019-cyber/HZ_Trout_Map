@@ -1,5 +1,8 @@
 /* The conditions panel: the next six hours, and the next seven days.
  *
+ * Since Build 1b it is drawn inside the lake panel ("Bite by time of day")
+ * by renderInto; the floating panel and its Conditions button are gone.
+ *
  * Two horizons because there are two questions. "Should I go now, and when in
  * the window" is answered by a strip of half-hours. "Saturday or Sunday" is not
  * — six hours cannot see the weekend — so the same single weather call also
@@ -565,9 +568,15 @@
       + "</div></div>";
   }
 
-  function render() {
-    var host = document.getElementById("conditions-panel");
-    if (!host || !state.conditions.open) return;
+  /* Drawn inside the lake panel's "Bite by time of day" section. The panel
+   * already names the lake, closes itself and shows the solunar table, so the
+   * embedded copy leaves out its own heading, close button and calendar. */
+  var embedHost = null;
+
+  function render(target) {
+    var embedded = !!target;
+    var host = target || document.getElementById("conditions-panel");
+    if (!host || (!embedded && !state.conditions.open)) return;
     var place = anchor();
     var wx = Weather.peek(place.lat, place.lon);
     tzOffsetSec = wx.data && typeof wx.data.offset === "number" ? wx.data.offset : null;
@@ -625,10 +634,10 @@
      * weather line is the first time this app has ever shown an air
      * temperature, though it has been fetching one all along. */
     host.innerHTML =
-      '<div class="cx-head">'
+      (embedded ? "" : '<div class="cx-head">'
       + '<div class="cx-title">Conditions<span class="cx-place">' + esc(place.name) + '</span></div>'
       + '<button class="cx-close" type="button" aria-label="Close conditions">×</button>'
-      + '</div>'
+      + '</div>')
       + weatherNowHtml(wx, new Date())
       // A shut lake gets no verdict: the closed block below says why.
       + (closed || iced ? "" : verdictHtml(now))
@@ -649,9 +658,11 @@
           ? '<div class="cx-advisory">' + advisories.map(esc).join("<br>") + "</div>" : "")
       + '<div class="cx-foot"><a href="evidence.html' + esc(location.search) + '" target="_blank" rel="noopener">'
       + 'What this score is built on ↗</a></div>'
-      + solunarHtml(place);
+      + (embedded ? "" : solunarHtml(place));
 
-    host.querySelector(".cx-close").addEventListener("click", function () { toggle(false); });
+    var closeBtn = host.querySelector(".cx-close");
+    if (closeBtn) closeBtn.addEventListener("click", function () { toggle(false); });
+    var again = function () { render(embedded ? host : undefined); };
 
     var input = host.querySelector("#cx-water");
     if (input) {
@@ -665,7 +676,8 @@
           delete state.conditions.waterOverrides[key];
         }
         writeStore(STORE_WATER, state.conditions.waterOverrides);
-        render();
+        again();
+        if (window.DayUI) DayUI.refresh();
       };
       input.addEventListener("change", save);
       input.addEventListener("keydown", function (e) { if (e.key === "Enter") save(); });
@@ -675,48 +687,35 @@
       clear.addEventListener("click", function () {
         delete state.conditions.waterOverrides[lakeKey(place.lake)];
         writeStore(STORE_WATER, state.conditions.waterOverrides);
-        render();
+        again();
+        if (window.DayUI) DayUI.refresh();
       });
     }
     [...host.querySelectorAll("[data-horizon]")].forEach(function (b) {
       b.addEventListener("click", function () {
         state.conditions.horizon = b.dataset.horizon;
         writeUrl();
-        render();
+        again();
       });
     });
   }
 
-  /** Open or close the panel, fetching weather the first time it is opened. */
-  function toggle(open) {
-    state.conditions.open = open === undefined ? !state.conditions.open : open;
-    var host = document.getElementById("conditions-panel");
-    host.hidden = !state.conditions.open;
-    document.getElementById("conditions-btn")
-      .classList.toggle("active", state.conditions.open);
-    if (!state.conditions.open) { writeUrl(); return; }
-
-    // The two floating panels would collide at phone width.
-    // Both panels float in the same corner, so only one is up at a time.
-    if (window.LakePanel) LakePanel.close();
-    render();
-    var place = anchor();
-    Weather.load(place.lat, place.lon).then(function () { render(); });
-    writeUrl();
-  }
-
-  /** Point the panel at a lake, opening it if needed. */
-  function focusLake(key) {
+  /** Draw the panel for one lake inside a host element, and fetch its
+   *  forecast if none is saved yet. */
+  function renderInto(host, key) {
     state.conditions.anchorKey = key;
     state.conditions.anchorAuto = false;
-    astroCache = {};
-    toggle(true);
+    embedHost = host;
+    render(host);
+    var place = anchor();
+    if (Weather.peek(place.lat, place.lon).source === "none") {
+      Weather.load(place.lat, place.lon).then(function () { if (embedHost === host && host.isConnected) render(host); });
+    }
   }
 
   window.ConditionsUI = {
     render: render,
-    toggle: toggle,
-    focusLake: focusLake,
+    renderInto: renderInto,
     RAMP: RAMP,
     /* The calendar is the same engine over a different span, so it borrows
      * these rather than growing its own copy of the scoring, the day's

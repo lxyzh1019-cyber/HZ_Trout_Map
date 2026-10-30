@@ -34,7 +34,10 @@
 
   const HOST_ID = "lake-panel";
 
-  function host() { return document.getElementById(HOST_ID); }
+  /* Inside the lake panel since Build 1b: the "photos" button there hands in
+   * the element to fill. The floating host is still the fallback. */
+  var target = null;
+  function host() { return target || document.getElementById(HOST_ID); }
 
   function close() {
     const el = host();
@@ -101,7 +104,8 @@
       </div>${body}`;
   }
 
-  async function open(key) {
+  async function open(key, into) {
+    target = into || null;
     const el = host();
     if (!el) return;
     // Bare references, like the other modules: LAKES is a top-level `let`, so
@@ -127,10 +131,10 @@
 
     // Both panels float in the same corner of the map, so only one is up at a
     // time. The conditions panel already expects this of anything that opens.
-    if (window.ConditionsUI && state.conditions.open) ConditionsUI.toggle(false);
-    el.innerHTML = chrome(lake.name, body);
+    el.innerHTML = target ? body : chrome(lake.name, body);
     el.hidden = false;
-    el.querySelector(".cx-close").addEventListener("click", close);
+    const closeBtn = el.querySelector(".cx-close");
+    if (closeBtn) closeBtn.addEventListener("click", close);
 
     const slot = el.querySelector("[data-shots]");
     if (slot) {

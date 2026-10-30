@@ -2001,7 +2001,9 @@ class AcaRosterTests(unittest.TestCase):
     def test_aeration_shows_without_a_depth(self):
         """Ten roster lakes have no depth. Aeration must not hide with it."""
         page = (ROOT / "index.html").read_text(encoding="utf-8")
-        self.assertIn("${aerationBlock(lake)}", page)
+        # Since Build 1b the popup is the lake panel, built in js/lake-sheet.js.
+        sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        self.assertIn("+ aerationBlock(lake)", sheet)
         body = page[page.index("function aerationBlock(lake)"):]
         body = body[:body.index("\n}\n")]
         self.assertNotIn("max_depth_m", body)
@@ -2110,6 +2112,7 @@ class IceSeasonTests(unittest.TestCase):
                               .read_text(encoding="utf-8"))["lakes"]
         cls.page = (ROOT / "index.html").read_text(encoding="utf-8")
         cls.ui = (ROOT / "js" / "conditions-ui.js").read_text(encoding="utf-8")
+        cls.sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
 
     def test_early_and_late_ice_are_read_from_the_guide(self):
         self.assertEqual(season_ice_kind("OPEN ALL YEAR"), "all-winter")
@@ -2143,26 +2146,30 @@ class IceSeasonTests(unittest.TestCase):
         self.assertIn('state.iceFishing && lakeIceKind(lake) === "closed"', self.page)
 
     def test_every_lake_popup_has_the_ice_line(self):
-        self.assertIn("${iceSeasonBlock(lake)}", self.page)
+        # Since Build 1b the popup is the lake panel, built in js/lake-sheet.js.
+        self.assertIn("iceSeasonBlock(lake)", self.sheet)
         body = self.page[self.page.index("function iceSeasonBlock(lake)"):]
         body = body[:body.index("\n}\n")]
         self.assertIn("Legal is not safe. Ice thickness is never forecast.", body)
         self.assertNotIn("if (!", body, "the line must not be skipped for any lake")
 
     def test_bait_ban_line_and_chip(self):
-        top = self.page[self.page.index('<div class="lake-popup">\n    <h3>'):]
-        self.assertLess(top.index("${baitBanLine(lake)}"), top.index("${verdictLine(lake)}"))
+        top = self.sheet[self.sheet.index("function html(lake)"):]
+        self.assertLess(top.index("baitBanLine(lake)"), top.index("verdictLine(lake)"))
+        self.assertLess(top.index("baitBanLine(lake)"), top.index("bannerHtml(lake"))
         self.assertIn('id="bait-chip"', self.page)
         self.assertIn('["bait-chip", "baitBanOnly"]', self.page)
         bans = sum(1 for r in self.regs.values() if r.get("bait") == "Bait ban")
         self.assertGreater(bans, 0)
 
-    def test_popups_are_moved_clear_of_the_top_right_buttons(self):
-        self.assertIn(".leaflet-popup-close-button", self.page)
-        self.assertIn('document.querySelector(".map-btns")', self.page)
-        self.assertIn('map.on("autopanstart"', self.page)
-        self.assertIn("map.panBy(", self.page)
-        self.assertIn("max-width: calc(100vw - 66px)", self.page)
+    def test_the_lake_panel_replaces_the_popup_and_can_be_closed(self):
+        """Build 1b, decision 13: no pin popup, so nothing to move clear of the
+        buttons. The lake panel has its own close button, and Leaflet's panes
+        are kept inside the map so no pin can cover the week bar or buttons.
+        The layout check at 5 sizes tests that the close button can be hit."""
+        self.assertNotIn("popupHtml", self.page)  # zone bubbles keep their own small popup
+        self.assertIn("data-close-lake", self.sheet)
+        self.assertIn("isolation: isolate", self.page)
 
     def test_distance_slider_is_labelled(self):
         self.assertRegex(self.page, r'id="dist-slider"[^>]*aria-label="Maximum distance from home"')
@@ -2656,3 +2663,335 @@ class ReportedSpeciesTests(unittest.TestCase):
                 code = sp["code"]
                 named = f"  {code}: {{ label:" in index or f"{code}: \"" in index
                 self.assertTrue(named, f"{code} (in {key}) has no name in the app")
+
+
+def run_js(files, expr, prelude=""):
+    """Evaluate an expression (it may return a promise) against real js files
+    in node, with an empty window and whatever globals the prelude defines."""
+    import shutil
+    import subprocess
+    node = shutil.which("node")
+    if not node:
+        raise unittest.SkipTest("node is not installed")
+    script = (
+        "const fs=require('fs'),vm=require('vm');"
+        "const ctx={window:{},console,setTimeout,clearTimeout,URL};"
+        "vm.createContext(ctx);"
+        "const a=JSON.parse(fs.readFileSync(0,'utf8'));"
+        "vm.runInContext(a.prelude,ctx);"
+        "for(const f of a.files) vm.runInContext(fs.readFileSync(f,'utf8'),ctx);"
+        "Promise.resolve(vm.runInContext(a.expr,ctx)).then(r=>process.stdout.write(JSON.stringify(r)));"
+    )
+    arg = json.dumps({"files": [str(ROOT / "js" / f) for f in files], "expr": expr, "prelude": prelude})
+    # The arguments go in on stdin: a long prelude passes the Windows command-line limit.
+    out = subprocess.run([node, "-e", script], input=arg, capture_output=True, text=True,
+                         encoding="utf-8", check=True).stdout
+    return json.loads(out)
+
+
+def mapped_lakes():
+    """Every lake with a position, merged across the years as the page does."""
+    lakes = {}
+    for path in sorted(DATA_DIR.glob("lakes_20*.json")):
+        for lake in json.loads(path.read_text(encoding="utf-8")):
+            key = lake.get("lake_id") or lake.get("ats")
+            if lake.get("lat") is not None and lake.get("lon") is not None:
+                lakes[key] = lake
+    return lakes
+
+
+class Build1bScoreTests(unittest.TestCase):
+    """Build 1b: the Bite score is unchanged, Day out is new, and the best day
+    is a day you can be out."""
+
+    def test_bite_weights_are_unchanged(self):
+        got = run_js(["conditions.js"], "[window.Conditions.WEIGHTS, window.Conditions.MOON_CAP,"
+                     " window.Conditions.GUST_WARN_KPH]")
+        self.assertEqual(got[0], {"light": 0.40, "water": 0.35, "pressure": 0.15, "wind": 0.06, "precip": 0.04})
+        self.assertEqual(got[1], 0.05)
+        self.assertEqual(got[2], 40)
+
+    def test_lake_size_classes_and_size_unknown(self):
+        got = run_js(["conditions.js"], "[5, 10, 200, 201, null].map(a => window.Conditions.sizeClass(a))")
+        self.assertEqual([g["factor"] for g in got], [0.7, 1.0, 1.0, 1.3, 1.0])
+        self.assertTrue(got[4]["unknown"])
+        self.assertEqual(got[4]["label"], "size unknown")
+
+    def test_day_out_wind_is_wind_plus_half_the_gust_spread_by_size(self):
+        got = run_js(["conditions.js"], "[50, 300, 5, null].map(a => window.Conditions.dayOut("
+                     "{windKph: 10, gustKph: 30, areaHa: a}).parts.wind.value)")
+        self.assertEqual(got, [20, 26, 14, 20])
+
+    def test_day_out_counts_rain_amount_and_chance_and_air(self):
+        got = run_js(["conditions.js"], "(() => { const D = window.Conditions.dayOut; return ["
+                     "D({precipMm: 5}).parts.rain.s, D({precipMm: 0, precipChancePct: 80}).parts.rain.s,"
+                     "D({airTempC: 0}).parts.air.s, D({airTempC: 32}).parts.air.s, D({airTempC: 15}).parts.air.s,"
+                     "D({windKph: 5, gustKph: 45}).gustWarn]; })()")
+        self.assertEqual(got[0], 0.3)
+        self.assertLessEqual(got[1], 0.7)
+        self.assertAlmostEqual(got[2], 0.6)
+        self.assertAlmostEqual(got[3], 0.6)
+        self.assertEqual(got[4], 1)
+        self.assertTrue(got[5])
+
+    def test_best_day_skips_gusty_rough_and_frozen_days(self):
+        got = run_js(["conditions.js"], "(() => { const B = window.Conditions.bestDay; return ["
+                     "B([{bite: .9, gustMax: 45, dayOut: .9}, {bite: .7, gustMax: 20, dayOut: .8},"
+                     " {bite: .8, gustMax: 10, dayOut: .3}]),"
+                     "B([{bite: .7, gustMax: 10, dayOut: .5}, {bite: .7, gustMax: 10, dayOut: .9}]),"
+                     "B([{bite: .9, gustMax: 10, dayOut: .9, iced: true}]),"
+                     "B([{bite: null}])]; })()")
+        self.assertEqual(got, [1, 1, -1, -1])
+
+    def test_frozen_lakes_are_left_out_of_gold_pins_and_rankings(self):
+        """Winter guard: an iced lake has no rankable score on any day, so it
+        gets no gold pin, no place in Best near you and no Saved rank."""
+        got = run_js(["forecast.js"], "(() => { const R = window.Forecast.rankable;"
+                     " const day = {bite: .9, confidence: 'Measured'};"
+                     " return [R({iced: true, days: [day]}, 0), R({iced: false, days: [day]}, 0),"
+                     " R({iced: false, days: [Object.assign({closed: true}, day)]}, 0)]; })()")
+        self.assertEqual(got, [None, 0.9, None])
+        ui = (ROOT / "js" / "day-ui.js").read_text(encoding="utf-8")
+        best_week = ui[ui.index("function bestWeek(lake)"):]
+        self.assertIn("f.iced", best_week[:300])
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn("if (pinWinter || f.iced)", page)
+
+    def test_rain_lowers_day_out_only_past_the_agreed_limits(self):
+        """Decision 9: over 2 mm, or a chance over 60%, lowers Day out."""
+        got = run_js(["conditions.js"], "(() => { const D = window.Conditions.dayOut;"
+                     " const s = (mm, c) => D({windKph: 5, gustKph: 5, precipMm: mm, precipChancePct: c,"
+                     " airTempC: 15, areaHa: 50}).parts.rain.s;"
+                     " return [s(0, 10), s(1.5, 50), s(2.5, 10), s(0, 70)]; })()")
+        self.assertEqual(got[0], 1)
+        self.assertEqual(got[1], 1)
+        self.assertLess(got[2], 1)
+        self.assertLess(got[3], 1)
+
+    def test_why_parts_never_pass_their_most(self):
+        """The moon can lift a part above its weight; its most grows with it."""
+        got = run_js(["conditions.js"], "window.Conditions.whyParts({score: 1, scoreRaw: 1.05, moonMult: 1.05,"
+                     " factors: {light: {s: 1, weight: .4}, water: {s: 1, weight: .35},"
+                     " pressure: {s: 1, weight: .15}, wind: {s: 1, weight: .06}, precip: {s: 1, weight: .04}}})")
+        for part in got["parts"]:
+            self.assertLessEqual(part["points"], part["max"], part["id"])
+
+    def test_copy_link_keeps_every_colour_mode_but_the_default(self):
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn('if (state.colorMode !== "bite") p.set("cm", state.colorMode);', page)
+        self.assertIn("Home: ${esc(state.home.name)}", page)
+
+    def test_why_parts_add_up_to_the_shown_score(self):
+        cases = [
+            # ordinary, all five present
+            {"score": 0.734, "scoreRaw": 0.734, "moonMult": 1.02, "factors": {
+                "light": {"s": 0.9, "weight": 0.4}, "water": {"s": 0.6, "weight": 0.35},
+                "pressure": {"s": 0.65, "weight": 0.15}, "wind": {"s": 1, "weight": 0.06},
+                "precip": {"s": 0.85, "weight": 0.04}}},
+            # wind and rain missing
+            {"score": 0.61, "scoreRaw": 0.61, "moonMult": 0.97, "factors": {
+                "light": {"s": 0.7, "weight": 0.4}, "water": {"s": 0.55, "weight": 0.35},
+                "pressure": {"s": 0.4, "weight": 0.15}, "wind": {"s": None}, "precip": {"s": None}}},
+            # clamped at 100
+            {"score": 1, "scoreRaw": 1.04, "moonMult": 1.05, "factors": {
+                "light": {"s": 1, "weight": 0.4}, "water": {"s": 1, "weight": 0.35},
+                "pressure": {"s": 0.98, "weight": 0.15}, "wind": {"s": 1, "weight": 0.06},
+                "precip": {"s": 1, "weight": 0.04}}},
+            # day 7: pressure weight decayed to a fifth
+            {"score": 0.52, "scoreRaw": 0.52, "moonMult": 1.0, "factors": {
+                "light": {"s": 0.6, "weight": 0.4}, "water": {"s": 0.4, "weight": 0.35},
+                "pressure": {"s": 0.3, "weight": 0.03}, "wind": {"s": 0.8, "weight": 0.06},
+                "precip": {"s": 0.6, "weight": 0.04}}},
+        ]
+        got = run_js(["conditions.js"], "%s.map(r => window.Conditions.whyParts(r))" % json.dumps(cases))
+        for case, why in zip(cases, got):
+            self.assertEqual(why["total"], round(case["score"] * 100))
+            self.assertEqual(sum(p["points"] for p in why["parts"]), why["total"], why)
+            for p in why["parts"]:
+                self.assertLessEqual(p["points"], p["max"] + 1, p)
+        self.assertEqual([p["points"] for p in got[1]["parts"] if not p["present"]], [0, 0])
+
+    def test_why_parts_match_a_real_scored_slot(self):
+        got = run_js(["conditions.js"], "(() => { const C = window.Conditions;"
+                     " const r = C.scoreSlot({weather: {cloudCoverPct: 80, windKph: 12, gustKph: 30, precipMm: 0.4,"
+                     " dP3h: -1, dP12h: -2}, water: {tempC: 14, source: 'modeled', sigmaC: 2}, species: ['RNTR'],"
+                     " leadDays: 6});"
+                     " const w = C.whyParts(r); return [Math.round(r.score * 100), w.total,"
+                     " w.parts.reduce((a, p) => a + p.points, 0)]; })()")
+        self.assertEqual(got[0], got[1])
+        self.assertEqual(got[1], got[2])
+
+    def test_wind_chill_follows_environment_canada(self):
+        got = run_js(["conditions.js"], "[window.Conditions.windChill(-10, 20), window.Conditions.windChill(5, 3),"
+                     " window.Conditions.windChill(15, 30), window.Conditions.windChill(-20, 40)]")
+        self.assertAlmostEqual(got[0], -17.9, places=1)
+        self.assertEqual(got[1], 5)
+        self.assertEqual(got[2], 15)
+        self.assertAlmostEqual(got[3], -34.1, places=1)
+
+
+class Build1bWeatherTests(unittest.TestCase):
+    """Every lake's forecast, inside Open-Meteo's free limits."""
+
+    def test_a_request_never_counts_as_more_than_one_call_per_lake(self):
+        url = run_js(["weather.js"], "window.Weather.urlMany(['52.25,-113.75', '53.00,-114.00'])")
+        q = dict(part.split("=", 1) for part in url.split("?", 1)[1].split("&"))
+        variables = q["hourly"].split(",") + q["daily"].split(",")
+        self.assertLessEqual(len(variables), 10, variables)
+        self.assertLessEqual(int(q["past_days"]) + int(q["forecast_days"]), 14)
+        self.assertEqual(len(q["latitude"].split(",")), 2)
+
+    def test_one_full_load_fits_the_free_limits(self):
+        cells = {(round(l["lat"] * 4) / 4, round(l["lon"] * 4) / 4) for l in mapped_lakes().values()}
+        got = run_js(["weather.js"], "[window.Weather.BATCH_SIZE]")
+        self.assertLessEqual(len(cells), 600, "one full load must fit in a minute")
+        # Saved for 3 hours, so at most 8 full loads a day from one device.
+        self.assertLessEqual(len(cells) * 8, 10000)
+        self.assertLessEqual(got[0], 100)
+
+    def test_forecasts_are_saved_for_three_hours(self):
+        self.assertEqual(run_js(["weather.js"], "window.Weather.TTL_MS"), 3 * 3600 * 1000)
+
+    def test_every_lake_loads_with_no_indexeddb(self):
+        """A private window can refuse IndexedDB. The forecasts must still load
+        and be readable for the visit."""
+        prelude = (
+            "var store = {};"
+            "var localStorage = { getItem: k => (k in store ? store[k] : null),"
+            " setItem: (k, v) => { store[k] = String(v); }, removeItem: k => { delete store[k]; },"
+            " key: i => Object.keys(store)[i], get length() { return Object.keys(store).length; } };"
+            "var calls = 0;"
+            "function rec() { return { utc_offset_seconds: -21600, timezone: 'America/Edmonton', hourly: { time: [1, 2],"
+            " temperature_2m: [1, 2], cloud_cover: [0, 0], wind_speed_10m: [5, 6], wind_gusts_10m: [9, 9],"
+            " precipitation: [0, 0], precipitation_probability: [10, 20], pressure_msl: [1010, 1011],"
+            " weather_code: [0, 0] }, daily: { time: [0], temperature_2m_mean: [3] } }; }"
+            "var fetch = url => { calls++; const n = new URL(url).searchParams.get('latitude').split(',').length;"
+            " return Promise.resolve({ ok: true, status: 200,"
+            " json: () => Promise.resolve(n > 1 ? Array.from({length: n}, rec) : rec()) }); };"
+        )
+        got = run_js(["weather.js"],
+                     "window.Weather.loadAll([{lat: 52.26, lon: -113.8}, {lat: 53.01, lon: -114.0},"
+                     " {lat: 52.27, lon: -113.81}]).then(s => [s, window.Weather.peek(52.26, -113.8).source,"
+                     " window.Weather.peek(53.01, -114).data.precipChance, calls])",
+                     prelude=prelude)
+        summary, source, chance, calls = got
+        self.assertEqual(summary["cells"], 2)
+        self.assertEqual(summary["fetched"], 2)
+        self.assertEqual(summary["calls"], 2)
+        self.assertEqual(summary["requests"], 1)
+        self.assertEqual(calls, 1)
+        self.assertEqual(source, "cache")
+        self.assertEqual(chance, [10, 20])
+
+
+class Build1bPageTests(unittest.TestCase):
+    """The page, the lake panel and the records they rest on."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.page = (ROOT / "index.html").read_text(encoding="utf-8")
+        cls.sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        cls.regs = json.loads((DATA_DIR / "lake_regulations.json").read_text(encoding="utf-8"))
+        cls.profiles = json.loads((DATA_DIR / "lake_profile.json").read_text(encoding="utf-8"))
+
+    def test_unused_functions_are_gone(self):
+        self.assertNotIn("function recencyDays", self.page)
+        self.assertNotIn("function chart_ref", self.page)
+
+    def tag_counts(self):
+        keys = sorted(mapped_lakes())
+        prelude = ("var REGULATIONS = %s; var PROFILES = %s;"
+                   "function regulationFor(l) { return REGULATIONS.lakes[l.lake_id] || null; }"
+                   "function profileFor(l) { return PROFILES.lakes[l.lake_id] || null; }"
+                   "function fishName(c) { return c; }") % (json.dumps(self.regs), json.dumps(self.profiles))
+        return run_js(["lake-sheet.js"],
+                      "(() => { const S = window.LakeSheet; const ks = %s; return ["
+                      " ks.filter(k => { const n = S.troutLimit({lake_id: k}); return n !== null && n <= 2; }).length,"
+                      " ks.filter(k => S.trophyRule({lake_id: k})).length,"
+                      " ks.filter(k => S.popularity({lake_id: k})).length]; })()" % json.dumps(keys),
+                      prelude=prelude)
+
+    def test_tags_come_from_the_regulations_and_the_atlas(self):
+        low, trophy, popular = self.tag_counts()
+        lakes = self.regs["lakes"]
+        mapped = mapped_lakes()
+
+        def limit(r):
+            if r.get("trout_total") and r["trout_total"].get("count") is not None:
+                return r["trout_total"]["count"]
+            if "limits" in r:
+                m = re.match(r"(\d+)", str(r["limits"].get("Trout", "")))
+                return int(m.group(1)) if m else None
+            return None
+
+        expected_low = sum(1 for k in mapped if k in lakes and limit(lakes[k]) is not None
+                           and limit(lakes[k]) <= 2)
+        self.assertEqual(low, expected_low)
+        self.assertGreater(trophy, 0)
+        with_reports = sum(1 for k in mapped if (self.profiles["lakes"].get(k) or {}).get("confirmed"))
+        self.assertGreater(popular, 0)
+        self.assertLessEqual(popular, with_reports)
+
+    def test_popularity_is_labelled_an_estimate(self):
+        self.assertIn("Popularity estimate", self.sheet)
+        self.assertIn("Not a count of visits", self.sheet)
+
+    def test_typical_size_is_never_guessed(self):
+        self.assertIn("Not published by Alberta. Shown: stocked size and date.", self.sheet)
+
+    def test_rules_and_licence_links(self):
+        self.assertIn('RULES_URL = "https://albertaregulations.ca/fishingregs/"', self.sheet)
+        self.assertIn('LICENCE_URL = "https://mywildalberta.ca/buy-licences/"', self.sheet)
+
+    def test_apple_maps_and_satellite(self):
+        self.assertIn("https://maps.apple.com/", self.sheet)
+        self.assertIn("World_Imagery", self.page)
+        self.assertIn('data-base="sat"', self.page)
+
+    def test_clearing_reminder_is_labelled_and_never_scored(self):
+        self.assertIn("A reminder only, not in the score.", self.sheet)
+        cond = (ROOT / "js" / "conditions.js").read_text(encoding="utf-8")
+        body = cond[cond.index("function scoreSlot("):cond.index("function bestOf(")]
+        self.assertNotIn("clearing", body)
+
+    def test_town_search_uses_the_saved_list_with_no_signal(self):
+        ui = (ROOT / "js" / "day-ui.js").read_text(encoding="utf-8")
+        self.assertIn('fetch("data/towns_ab.json")', ui)
+        self.assertIn("Town search uses the saved Alberta town list.", ui)
+        self.assertIn("countryCode=CA", ui)
+        worker = (ROOT / "sw.js").read_text(encoding="utf-8")
+        self.assertIn('"data/towns_ab.json"', worker)
+
+    def test_picking_a_town_does_not_change_home(self):
+        ui = (ROOT / "js" / "day-ui.js").read_text(encoding="utf-8")
+        pick = ui[ui.index("function pickResult("):ui.index("function buildSearch(")]
+        self.assertIn("setOrigin(", pick)
+        self.assertNotIn("setHome(", pick)
+
+    def test_town_list_has_a_confirmed_licence(self):
+        prov = json.loads((DATA_DIR / "towns_ab.provenance.json").read_text(encoding="utf-8"))
+        towns = json.loads((DATA_DIR / "towns_ab.json").read_text(encoding="utf-8"))
+        for field in ("source", "url", "licence", "licence_url", "attribution", "retrieved", "count"):
+            self.assertTrue(prov.get(field), field)
+        self.assertEqual(prov["count"], len(towns))
+        for name, lat, lon, *_ in towns:
+            self.assertTrue(48.9 <= lat <= 60.1 and -120.1 <= lon <= -109.9, name)
+
+    def test_learn_room_files_are_precached(self):
+        worker = (ROOT / "sw.js").read_text(encoding="utf-8")
+        start = worker.index("const SHELL_FILES = [")
+        shell = set(re.findall(r'"([^"]+)"', worker[start:worker.index("]", start)]))
+        learn = sorted(p.relative_to(ROOT).as_posix() for p in (ROOT / "learn").glob("*.html"))
+        self.assertGreaterEqual(len(learn), 6)
+        photos = sorted(p.relative_to(ROOT).as_posix() for p in (ROOT / "vendor" / "species").glob("*.jpg"))
+        for rel in learn + photos:
+            self.assertIn(rel, shell, rel + " is not precached")
+
+    def test_species_photos_are_licensed(self):
+        prov = json.loads((ROOT / "vendor" / "species" / "provenance.json").read_text(encoding="utf-8"))
+        free = ("CC0", "Public domain", "CC BY", "CC BY-SA")
+        for path in (ROOT / "vendor" / "species").glob("*.jpg"):
+            entry = prov.get(path.stem)
+            self.assertTrue(entry, path.name + " has no provenance")
+            self.assertTrue(any(str(entry.get("licence", "")).startswith(f) for f in free), entry)
+            self.assertTrue(entry.get("author"), path.name)

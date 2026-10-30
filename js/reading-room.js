@@ -115,7 +115,7 @@
   color: var(--ink-dim); margin-top: 4px; }
 #reading-room .rr-warn { padding: 8px 10px; margin: 0 0 12px;
   border-left: 3px solid var(--accent); background: rgba(201,138,62,0.08); }
-#reading-room .rr-list { list-style: none; padding: 0; margin: 0 0 16px; }
+#reading-room ul.rr-list { list-style: none; padding: 0; margin: 0 0 16px; }
 #reading-room .rr-list li { margin: 0 0 6px; }
 #reading-room .rr-item { display: block; width: 100%; min-height: 44px;
   box-sizing: border-box; text-align: left; padding: 8px 12px;

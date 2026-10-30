@@ -643,7 +643,229 @@
     return days.slice(-7).every(function (v) { return v < 0; });
   }
 
+  // ============================================================
+  // WHY THIS SCORE
+  // ============================================================
+
+  var PART_NAMES = { light: "Light", water: "Water temperature", pressure: "Pressure trend",
+                     wind: "Wind", precip: "Rain" };
+
+  /* The parts of a Bite score, as whole points that add up to the number shown.
+   *
+   * The score is a weighted mean over whichever factors were present, times the
+   * moon, then clamped. A multiplier is not a part you can add, so the moon is
+   * folded into every part in proportion, and the clamp the same way. Each part
+   * is its share of the weights times how well that factor scored. Rounding is
+   * by largest remainder, so the parts never sum to one more or one less than
+   * the score beside them. `max` is the most that part could have given. */
+  function whyParts(result) {
+    var r = result || {};
+    var factors = r.factors || {};
+    var total = Math.round(clamp01(num(r.score) || 0) * 100);
+    var raw = num(r.scoreRaw), score = num(r.score);
+    var squash = raw && raw > 0 && score !== null ? score / raw : 1;
+    var mult = (num(r.moonMult) || 1) * squash;
+    var denom = 0;
+    Object.keys(WEIGHTS).forEach(function (k) {
+      var f = factors[k];
+      if (f && f.s !== null && num(f.weight) !== null) denom += f.weight;
+    });
+    var parts = Object.keys(WEIGHTS).map(function (k) {
+      var f = factors[k];
+      var present = f && f.s !== null && num(f.weight) !== null && denom > 0;
+      var share = present ? f.weight / denom : 0;
+      return {
+        id: k, label: PART_NAMES[k],
+        exact: present ? share * f.s * mult * 100 : 0,
+        // The moon can lift a part above its weight, so its most is moon-sized too.
+        max: present ? Math.round(share * 100 * Math.max(1, num(r.moonMult) || 1)) : 0,
+        present: !!present,
+        note: f ? f.note : null,
+      };
+    });
+    var floors = parts.map(function (p) { return Math.floor(p.exact); });
+    var short = total - floors.reduce(function (a, b) { return a + b; }, 0);
+    var order = parts.map(function (p, i) { return i; })
+      .filter(function (i) { return parts[i].present; })
+      .sort(function (a, b) { return (parts[b].exact - floors[b]) - (parts[a].exact - floors[a]); });
+    for (var i = 0; short > 0 && order.length; i = (i + 1) % order.length, short--) floors[order[i]]++;
+    for (var j = order.length - 1; short < 0 && order.length; j = (j - 1 + order.length) % order.length) {
+      if (floors[order[j]] > 0) { floors[order[j]]--; short++; }
+    }
+    parts.forEach(function (p, i) { p.points = floors[i]; delete p.exact; });
+    return { parts: parts, total: total, moonMult: num(r.moonMult) || 1 };
+  }
+
+  // ============================================================
+  // DAY OUT
+  // ============================================================
+
+  /* Day out is about the person and the boat, not the fish. Gusts are left out
+   * of the Bite score on purpose, so this is where they count: the mean wind
+   * plus half of the gust spread above it, made larger on big water, where wind
+   * has the fetch to build waves, and smaller on a pond. Rain counts by amount
+   * and by chance, and the air by how cold or hot it is.
+   *
+   * The size cut-offs and factors are the owner's approved numbers (Build 1b
+   * plan, decision 9), not measurements. A lake with no published area is
+   * treated as medium and says so. */
+  var DAYOUT_WEIGHTS = { wind: 0.6, rain: 0.25, air: 0.15 };
+  var SIZE_CLASSES_HA = [
+    { id: "small", factor: 0.7, label: "small lake" },
+    { id: "medium", factor: 1.0, label: "medium lake" },
+    { id: "large", factor: 1.3, label: "large lake" },
+  ];
+
+  function sizeClass(areaHa) {
+    var a = num(areaHa);
+    if (a === null || a <= 0) {
+      return { id: "medium", factor: 1.0, label: "size unknown", unknown: true };
+    }
+    // Under 10 ha is small; 10 to 200 ha inclusive is medium; over 200 is large.
+    var c = a < 10 ? SIZE_CLASSES_HA[0] : a <= 200 ? SIZE_CLASSES_HA[1] : SIZE_CLASSES_HA[2];
+    return { id: c.id, factor: c.factor, label: c.label, unknown: false };
+  }
+
+  function dayOutWindScore(effKph) {
+    var w = num(effKph);
+    if (w === null) return null;
+    if (w <= 10) return 1.00;
+    if (w <= 20) return 0.80;
+    if (w <= 30) return 0.50;
+    if (w <= 40) return 0.25;
+    return 0.05;
+  }
+
+  function dayOutRainScore(mm, chancePct) {
+    var p = num(mm), c = num(chancePct);
+    if (p === null && c === null) return null;
+    var s = 1;
+    // Decision 9: only over 2 mm, or a chance over 60%, lowers the score.
+    if (p !== null) s = p >= 4 ? 0.30 : p > 2 ? 0.55 : 1;
+    if (c !== null && c > 60) s = Math.min(s, 0.70);
+    return s;
+  }
+
+  function dayOutAirScore(tempC) {
+    var t = num(tempC);
+    if (t === null) return null;
+    if (t < 5) return clamp(1 - (5 - t) * 0.08, 0.2, 1);
+    if (t > 28) return clamp(1 - (t - 28) * 0.1, 0.3, 1);
+    return 1;
+  }
+
+  /** Day out for one stretch of daylight: { windKph, gustKph, precipMm,
+   *  precipChancePct, airTempC, areaHa }. Never throws; null parts drop out. */
+  function dayOut(input) {
+    var o = input || {};
+    var size = sizeClass(o.areaHa);
+    var wind = num(o.windKph), gust = num(o.gustKph);
+    var eff = wind === null ? null
+      : (wind + 0.5 * Math.max(0, (gust === null ? wind : gust) - wind)) * size.factor;
+    var parts = {
+      wind: { s: dayOutWindScore(eff), value: eff === null ? null : Math.round(eff) },
+      rain: { s: dayOutRainScore(o.precipMm, o.precipChancePct),
+              value: num(o.precipMm), chance: num(o.precipChancePct) },
+      air: { s: dayOutAirScore(o.airTempC), value: num(o.airTempC) },
+    };
+    var numer = 0, denom = 0;
+    Object.keys(DAYOUT_WEIGHTS).forEach(function (k) {
+      if (parts[k].s === null) return;
+      numer += DAYOUT_WEIGHTS[k] * parts[k].s;
+      denom += DAYOUT_WEIGHTS[k];
+    });
+    var score = denom > 0 ? clamp01(numer / denom) : null;
+    return {
+      score: score,
+      band: score === null ? null : bandName(score),
+      parts: parts,
+      size: size,
+      gustWarn: gust !== null && gust >= GUST_WARN_KPH,
+      gustKph: gust,
+    };
+  }
+
+  // ============================================================
+  // THE BEST DAY, AND THE COLD
+  // ============================================================
+
+  /* The best day is the highest Bite among the days you can actually be out:
+   * gusts under the warning and a Day out of Fair or better. A tie goes to the
+   * calmer day. Frozen days are never best. Returns -1 when no day qualifies. */
+  function bestDay(days) {
+    var best = -1;
+    (days || []).forEach(function (d, i) {
+      if (!d || num(d.bite) === null || d.iced) return;
+      if (num(d.gustMax) !== null && d.gustMax >= GUST_WARN_KPH) return;
+      if (num(d.dayOut) !== null && d.dayOut < 0.42) return;
+      if (best < 0) { best = i; return; }
+      var b = days[best];
+      if (d.bite > b.bite || (d.bite === b.bite && (num(d.dayOut) || 0) > (num(b.dayOut) || 0))) best = i;
+    });
+    return best;
+  }
+
+  /* Environment Canada's wind chill index, defined for air at or below 10 °C
+   * and wind of at least 5 km/h. Outside that the air temperature is the honest
+   * answer, so that is what comes back. */
+  function windChill(tempC, windKph) {
+    var t = num(tempC), v = num(windKph);
+    if (t === null) return null;
+    if (v === null || t > 10 || v < 5) return t;
+    var p = Math.pow(v, 0.16);
+    return 13.12 + 0.6215 * t - 11.37 * p + 0.3965 * t * p;
+  }
+
+  // ============================================================
+  // PLAIN WORDS
+  // ============================================================
+
+  /* One line a person can act on, made only from the numbers this app already
+   * has. Pressure first because it is the part people ask about, then wind,
+   * then the best time if there is one. */
+  function dailyTip(day) {
+    var d = day || {};
+    var bits = [];
+    var p = num(d.pressureTrend3h);
+    if (p !== null) {
+      bits.push(p <= -0.7 ? "Falling pressure: a front is coming, and the bite is often short and strong before it."
+        : p >= 0.7 ? "Rising pressure after a front: fish can be slow, so fish deeper and slower."
+        : "Steady pressure: fish feed at normal depths.");
+    }
+    var g = num(d.gustMax);
+    if (g !== null && g >= GUST_WARN_KPH) bits.push("Gusts to " + Math.round(g) + " km/h: not a boat day, so fish from shore.");
+    else if (num(d.windMean) !== null && d.windMean < 3) bits.push("Flat calm: use a long, light leader.");
+    if (d.bestTime) bits.push("Best time: " + d.bestTime + ".");
+    return bits.join(" ");
+  }
+
+  /* The sun breaking through after a cloudy spell. Anglers report a short bite
+   * when that happens; there is no study behind it, so this is a reminder with
+   * its source named, and it never touches a score. Looks for the first daylight
+   * hour where cloud falls by 40 points or more within three hours, from at
+   * least 70%. Hours are { when: Date, cloudPct, sunUp }. */
+  function clearingHint(hours) {
+    var h = hours || [];
+    for (var i = 0; i + 3 < h.length; i++) {
+      var a = h[i], b = h[i + 3];
+      if (!a || !b || !b.sunUp) continue;
+      var ca = num(a.cloudPct), cb = num(b.cloudPct);
+      if (ca === null || cb === null) continue;
+      if (ca >= 70 && ca - cb >= 40) return { when: b.when, from: ca, to: cb };
+    }
+    return null;
+  }
+
   window.Conditions = {
+    whyParts: whyParts,
+    dayOut: dayOut,
+    sizeClass: sizeClass,
+    bestDay: bestDay,
+    windChill: windChill,
+    dailyTip: dailyTip,
+    clearingHint: clearingHint,
+    GUST_WARN_KPH: GUST_WARN_KPH,
+    DAYOUT_WEIGHTS: DAYOUT_WEIGHTS,
     scoreSlot: scoreSlot,
     seasonOpenOn: seasonOpenOn,
     seasonOpenAllWinter: seasonOpenAllWinter,
