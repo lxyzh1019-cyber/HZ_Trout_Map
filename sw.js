@@ -25,7 +25,9 @@
    Bumping the name retires the old shell outright. */
 /* v3: index.html now calls Conditions.seasonOpenAllWinter, which an older
    cached js/conditions.js does not have. */
-const SHELL_CACHE = "troutmap-shell-v3";
+/* v4: Build 1b. New js files (forecast, lake-sheet, day-ui, reading-room),
+   the Learn guides, and a weather.js that fetches every lake at once. */
+const SHELL_CACHE = "troutmap-shell-v4";
 const DATA_CACHE = "troutmap-data-v1";
 const TILE_CACHE = "troutmap-tiles-v1";
 const WX_CACHE = "troutmap-wx-v1";
@@ -55,6 +57,34 @@ const SHELL_FILES = [
   "js/weather.js",
   "js/conditions-ui.js",
   "js/lake-panel.js",
+  "js/forecast.js",
+  "js/lake-sheet.js",
+  "js/day-ui.js",
+  "js/reading-room.js",
+  "learn/scores.html",
+  "learn/winterkill.html",
+  "learn/ice-safety.html",
+  "learn/barometer.html",
+  "learn/stocked-sizes.html",
+  "learn/trout-id.html",
+  "learn/species-RNTR.html",
+  "learn/species-BKTR.html",
+  "learn/species-BNTR.html",
+  "learn/species-TGTR.html",
+  "learn/species-CTTR.html",
+  "learn/species-WSCT.html",
+  "learn/species-WALL.html",
+  "learn/species-NRPK.html",
+  "learn/species-ARGR.html",
+  "vendor/species/RNTR.jpg",
+  "vendor/species/BKTR.jpg",
+  "vendor/species/BNTR.jpg",
+  "vendor/species/TGTR.jpg",
+  "vendor/species/CTTR.jpg",
+  "vendor/species/WSCT.jpg",
+  "vendor/species/WALL.jpg",
+  "vendor/species/NRPK.jpg",
+  "vendor/species/ARGR.jpg",
   "evidence.html",
   "vendor/images/marker-icon.png",
   "vendor/images/marker-icon-2x.png",
@@ -76,6 +106,8 @@ async function precacheData() {
                  // is not worth the bytes. The photo COUNT is in the profile
                  // file, so a lake still says how many there are.
                  "data/lake_profile.json",
+                 // The saved town list is what town search uses with no signal.
+                 "data/towns_ab.json",
                  "live/advisories.json"];
   await Promise.all(fixed.map(u => cache.add(u).catch(() => {})));
 
@@ -121,8 +153,21 @@ function isWeather(url) {
   return url.hostname === "api.open-meteo.com";
 }
 
+/* A request for many lakes at once is large, slow on one bar of signal, and
+ * already saved by the page in IndexedDB. Caching it here as well would store
+ * it twice, and a 6 s timeout would cut it off. */
+function isBatchWeather(url) {
+  return isWeather(url) && (url.searchParams.get("latitude") || "").includes(",");
+}
+
+/* Place search is live by nature; with no signal the page falls back to its
+ * saved town list, so there is nothing to cache. */
+function isGeocoding(url) {
+  return url.hostname === "geocoding-api.open-meteo.com";
+}
+
 function isTile(url) {
-  return /tile\.opentopomap\.org|tile\.openstreetmap\.org/.test(url.hostname);
+  return /tile\.opentopomap\.org|tile\.openstreetmap\.org|server\.arcgisonline\.com/.test(url.hostname);
 }
 
 async function trimCache(name, limit) {
@@ -224,6 +269,7 @@ self.addEventListener("fetch", event => {
 
   // Before the same-origin bail below, because the forecast is someone else's
   // to serve but very much ours to keep.
+  if (isBatchWeather(url) || isGeocoding(url)) return;
   if (isWeather(url)) {
     event.respondWith(networkFirstTimed(request, WX_CACHE, 6000, WX_LIMIT));
     return;

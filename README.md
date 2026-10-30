@@ -16,7 +16,8 @@ alberta-trout-map/
 ├── manifest.webmanifest            ← lets the map install as an app
 ├── icon.svg                        ← the app icon
 ├── vendor/                         ← Leaflet, MarkerCluster and Chart.js, checked in
-├── js/                             ← conditions, weather, sun/moon and the lake panel
+├── js/                             ← scores, weather, sun/moon, the week bar and the lake panel
+├── learn/                          ← the Learn room: 6 guides and the species pages
 ├── live/
 │   └── advisories.json             ← what Alberta published today, collected daily
 ├── evidence.html                   ← the working shown, lake by lake
@@ -28,6 +29,7 @@ alberta-trout-map/
 │   ├── lake_depth.json             ← depth, summer layer and winterkill, generated
 │   ├── lake_profile.json           ← facilities, description, photo count, generated
 │   ├── lake_photos.json            ← photo links, generated, fetched on demand
+│   ├── towns_ab.json               ← Alberta place names for town search, offline
 │   ├── out_of_scope.csv            ← waters stocked with no trout, generated
 │   ├── lake_regulations.json       ← seasons and catch limits per lake, generated
 │   ├── lake_aliases.csv            ← your answers to past linking questions
@@ -516,16 +518,16 @@ They are linked, never copied. Three consequences, all deliberate:
   profile file, which is cached, so a lake still says how many there are with no
   signal, and a picture that fails to load is replaced by its caption as a link.
 
-### Popup or panel
+### One lake panel
 
-The popup holds what decides the trip and opens with a verdict line — how
-recently the lake was stocked, whether the season is open, what the winterkill
-risk is. It says one clause fewer rather than inventing one, so a lake with no
-depth simply has no winterkill clause.
-
-The description and the photographs go in a panel instead. They are long,
-neither changes a decision, and the popup is capped at 60% of the window height
-— putting them there would push the catch limits off the bottom.
+Since Build 1b a lake opens in one panel — sliding up on a phone, in the right
+column on a PC — instead of a pin popup, a conditions panel and a photos panel
+fighting for the same corner. It opens on what decides the trip: the bait ban,
+the verdict line (how recently stocked, whether the season is open, the
+winterkill risk), the best day this week and why. The forecast, the fish, the
+lake, the rules and the way there follow in sections that fold open, and the
+description and photographs sit inside "Lake info", so they never push the
+catch limits out of reach.
 
 ## Walleye and pike waters
 
@@ -578,8 +580,34 @@ On GitHub Pages it works natively.
 Built around one question: where should I fish, and has anything been put in
 there lately.
 
+**Which lake, which day**
+- A week bar over the map. Tap a day and every pin shows that day's Bite score.
+  On a phone a "Best near you" card lists the top three; on a PC the right-hand
+  column lists them all, with Near me, Saved, Area and Clear.
+- Two scores. **Bite** is whether the fish will feed: light 40, water
+  temperature 35, pressure trend 15, wind 6, rain 4, with the moon as a
+  multiplier capped at 5%. Gusts are never in it. **Day out** is whether you
+  want to be on the water: wind plus half the gust spread, made larger on a
+  big lake (over 200 ha, ×1.3) and smaller on a pond (under 10 ha, ×0.7), rain
+  amount and chance, and air temperature. A lake with no published area is
+  treated as medium and says "size unknown".
+- Each lake's best day: the highest Bite on a day with gusts under 40 km/h and
+  a Day out of Fair or better. Gusty days are named "not a boat day".
+- "Why this score" shows the parts that add up to the number, and compares
+  with the nearest lake that has a different forecast spot or size.
+- Gold pins: *Best this week* colours each lake by its best day.
+- Forecast tabs for wind, weather, barometer and solunar times, over 3 or 7
+  days, as lines or a grid, with today's feeding times and the moon phase.
+- Winter: when most lakes on screen have had a frozen week, the week bar shows
+  wind chill, pins show the legal ice season, and lakes say "Ice likely".
+- Tags: low harvest limit, trophy size rule (in the guide's words),
+  popularity estimate (Angler's Atlas reports, labelled an estimate).
+
 **Finding a lake**
-- Search by name, with distance shown, jumping straight to the lake.
+- Search lakes and towns. The saved Alberta town list answers first and works
+  with no signal; online, Open-Meteo place search adds more Canadian places.
+  Picking a town lists the lakes near it and measures from it, without moving
+  home.
 - Pins group together when zoomed out and separate as you zoom in, so the
   Kananaskis and Pierre Greys clusters stop being one unreadable blob.
 - Hover a pin for the name, distance, fish in view and last stocking date.
@@ -614,12 +642,12 @@ there lately.
   water near the aerators; stay behind the fence and the danger signs.
 - `data/aca_aeration_roster.csv` records ACA's *Winter Angling* Yes/No. The map
   uses the regulations, and a test fails if ACA's column ever disagrees.
-- Every lake popup has an *Ice season* line — all winter, early ice only, late
+- Every lake panel has an *Ice season* line — all winter, early ice only, late
   ice only, early and late ice, or closed — with "Legal is not safe. Ice
   thickness is never forecast."
-- A lake under a bait ban shows a red *Bait ban* line at the top of its popup.
+- A lake under a bait ban shows a red *Bait ban* line at the top of its panel.
 - When every day of the past 7 days had a mean air temperature below freezing,
-  the Conditions panel shows *Ice likely* and no open-water score.
+  the lake panel shows *Ice likely* and no open-water score.
 
 **Reading the history**
 - Charts: by species, by season, per-species trend, and a stocking calendar
@@ -629,10 +657,11 @@ there lately.
 - Planning summary with year-over-year totals, direction, and the lakes that
   moved most. A provisional year is labelled, so a partial report does not read
   as a collapse in stocking.
-- Click a pin to scope every chart to that lake.
+- Open a lake to scope every chart to that lake.
 
 **Seeing the shape of it**
-- **Pin colour** is either the main species, or year-over-year change: how the
+- **Pin colour** is the Bite score on the picked day, the best day this week,
+  the main species, or year-over-year change: how the
   latest selected year compares with the one before it, on a diverging scale
   where orange is down and purple is up. Change needs two selected years, and
   says so rather than colouring everything "about the same".
@@ -642,27 +671,58 @@ there lately.
   the zone reaches — the map says so rather than drawing an invented boundary.
 
 **Taking it with you**
-- List view, sortable on any column, with a CSV download.
-- Google Maps driving directions from your home to any lake, in the popup and
-  in the list. Google gives the road distance and time, which is what matters:
+- List view, sortable on any column, with Bite and Day out for the picked day
+  and a CSV download.
+- Google Maps and Apple Maps directions to any lake, in the lake panel, and
+  Google Maps in the list. Google gives the road distance and time, which is what matters:
   the straight line this app measures understates most of these drives.
 - Favourites, saved in your browser, and a one-click multi-stop driving route
   from home through all of them.
 - Every filter and your home location live in the URL, so a link reproduces
   exactly what you are looking at. `?lake=wb6051` opens one lake directly, and
-  each popup has a button that copies its own link.
+  each lake panel has a button that copies its own link.
 - **Works with no signal.** On first visit the map caches itself, the
   libraries, all sixteen years of data and the basemap tiles you have looked
   at, so it still opens at the lake. It says when it is offline, and offers a
   reload when a newer version has been fetched. It can be installed as an app.
 - Works at phone width, with the filters in a slide-over panel.
+- Forecasts for every lake are fetched in one go — about 250 forecast spots,
+  50 per request, inside Open-Meteo's free limit of 600 calls a minute and
+  10,000 a day — and saved on the device for 3 hours.
+- A Learn room: how the scores work, winterkill and aeration, ice safety,
+  reading the barometer, what stocked sizes mean, telling the trout apart, and
+  a page for each species.
 
 **Honesty about the data**
-- Popups say when a position is estimated from the land description rather than
-  verified.
+- The lake panel says when a position is estimated from the land description
+  rather than verified.
 - The data quality panel reports how many lakes sit at verified coordinates,
   how many cannot be placed at all, and how much of the sixteen-year history
   linked without a human.
+
+## Licences and credits
+
+- **Town list** (`data/towns_ab.json`): Natural Resources Canada, Canadian
+  Geographical Names Database. Contains information licensed under the Open
+  Government Licence – Canada
+  (https://open.canada.ca/en/open-government-licence-canada). Rebuild it with
+  `python -I scripts/towns.py <cgn_ab_csv_eng.zip>`; the source and date are in
+  `data/towns_ab.provenance.json`.
+- **Weather**: weather data by Open-Meteo.com, CC BY 4.0.
+- **Place search online**: Open-Meteo geocoding, built on GeoNames, CC BY 4.0.
+- **Satellite map**: Imagery © Esri, Maxar, Earthstar Geographics and the GIS
+  User Community.
+- **Species photos** (`vendor/species/`), from Wikimedia Commons, free licences
+  only; each species page names the author and licence and links the file page:
+  - RNTR: Harka, Akos, CC BY 3.0 — https://commons.wikimedia.org/wiki/File:Oncorhynchus_mykiss_Hungary.jpg
+  - BKTR: Engbretson, Eric, Public domain — https://commons.wikimedia.org/wiki/File:Salvelinus_fontinalis.jpg
+  - BNTR: USFWS Mountain Prairie, Public domain — https://commons.wikimedia.org/wiki/File:Brown_Trout_(Salmo_trutta).jpg
+  - TGTR: U.S. Department of Agriculture, Public domain — https://commons.wikimedia.org/wiki/File:Swimming_Tiger_Trout.jpg
+  - CTTR: USFWS - Pacific Region, Public domain — https://commons.wikimedia.org/wiki/File:Cutthroat_trout,_western_Washington_(53815470250).jpg
+  - WSCT: Craig D. Young, Public domain — https://commons.wikimedia.org/wiki/File:Wscutt.jpg
+  - WALL: USFWS Mountain Prairie, Public domain — https://commons.wikimedia.org/wiki/File:Walleye_(Sander_vitreus).jpg
+  - NRPK: Arnstein Rønning, CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:Esox_lucius_(no).JPG
+  - ARGR: U.S. Fish and Wildlife Service, Public domain — https://commons.wikimedia.org/wiki/File:Arctic_grayling_showing_iridescent_dorsal_fin.jpg
 
 ## Accessibility note
 

@@ -879,15 +879,8 @@
   #loading.hidden { display: none; }
 
   /* ---------- Phone ---------- */
-  #menu-btn { display: none; }
   #scrim { display: none; }
   @media (max-width: 760px) {
-    #menu-btn {
-      display: block; position: absolute; top: 10px; left: 10px; z-index: 900;
-      padding: 8px 11px; font-size: 15px; line-height: 1; background: var(--panel);
-      color: var(--ink); border: 1px solid var(--panel-edge); border-radius: 3px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4); cursor: pointer;
-    }
     #sidebar {
       position: fixed; top: 0; bottom: 0; left: 0; z-index: 1000; width: min(88vw, 340px);
       transform: translateX(-102%); transition: transform 0.22s ease-out;
@@ -908,7 +901,6 @@
     .leaflet-popup-content { min-width: 200px; max-height: 46vh; max-width: calc(100vw - 66px); }
     #sidebar-close { display: block; }
     #app.sidebar-hidden #sidebar { display: block; }
-    #app.sidebar-hidden #sidebar-open { display: none; }
     #app.sidebar-hidden .leaflet-top.leaflet-left { margin-top: 46px; }
     /* The zone table cannot float beside a phone-width map, so it sits under
        the map buttons across the full width, with its own scroll. */
@@ -938,16 +930,280 @@
     font-size: 20px; line-height: 1; cursor: pointer; float: right; padding: 0 0 6px 10px;
   }
   #app.sidebar-hidden #sidebar { display: none; }
-  #sidebar-open {
-    display: none; position: absolute; top: 10px; left: 10px; z-index: 900;
-    padding: 8px 11px; font-size: 12px; line-height: 1; background: var(--panel);
-    color: var(--ink); border: 1px solid var(--panel-edge); border-radius: 3px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.4); cursor: pointer;
+
+  /* ============================================================
+     BUILD 1B LAYOUT
+     Header across the top; the map with the week bar over it; on a PC a
+     380 px lake column on the right, on a phone a card and a bottom bar.
+     The filters panel is the old sidebar: a column on a wide PC, a
+     slide-over below 1024 px. Every control here is at least 44 px.
+     ============================================================ */
+  #app { flex-direction: row; }
+  #main { flex: 1; min-width: 0; display: flex; flex-direction: column; min-height: 0; }
+  #mainrow { flex: 1; display: flex; min-height: 0; position: relative; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  #topbar { display: flex; gap: 8px; align-items: center; padding: 8px 10px;
+    padding-top: calc(8px + env(safe-area-inset-top, 0px));
+    background: var(--panel-2); border-bottom: 1px solid var(--panel-edge); position: relative; z-index: 1100; }
+  #topbar h1 { font-size: 15px; margin: 0; white-space: nowrap; display: none; font-weight: 600; }
+  #topbar .search { flex: 1; min-width: 0; position: relative; }
+  #search { width: 100%; height: 44px; border-radius: 8px; border: 1px solid #555; background: var(--panel);
+    color: var(--ink); padding: 0 12px; font-size: 15px; }
+  #topbar #search-results { position: absolute; left: 0; right: 0; top: 48px; margin: 0; padding: 0;
+    background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 8px; z-index: 1200;
+    max-height: 60vh; overflow: auto; list-style: none; box-shadow: 0 6px 18px rgba(0,0,0,.45); }
+  #topbar #search-results li { padding: 8px 12px; font-size: 14px; display: grid; }
+  #topbar #search-results li.note { padding: 8px 12px 2px; font-size: 12px; color: var(--ink-dim); display: block; cursor: default; }
+  #topbar #search-results li.credit { padding-bottom: 8px; font-size: 11px; }
+  #topbar #search-results li.row:hover, #topbar #search-results li[aria-selected="true"] { background: var(--panel-2); color: var(--ink); }
+  .icon-btn { min-width: 44px; height: 44px; border-radius: 8px; border: 1px solid #555; background: var(--panel);
+    color: var(--ink); padding: 0 10px; font-size: 13px; cursor: pointer; position: relative; flex: none; }
+  .icon-btn[aria-pressed="true"], .icon-btn.open { border-color: var(--accent); color: var(--accent); }
+  #topbar #chart-toggle { position: static; box-shadow: none; transition: none; font-size: 13px; font-weight: 400;
+    padding: 0 10px; border-radius: 8px; border: 1px solid #555; background: var(--panel); }
+  #topbar #chart-toggle.open { background: var(--panel); color: var(--accent); border-color: var(--accent); }
+  .badge { position: absolute; top: -6px; right: -6px; min-width: 18px; height: 18px; border-radius: 9px; padding: 0 4px;
+    background: #c62828; color: #fff; font-size: 11px; font-weight: 700; line-height: 18px; }
+  .badge[hidden] { display: none; }
+  .filters-title { font-size: 17px; font-weight: 600; margin: 0 0 2px; }
+
+  /* Rows: search results, the card and the side list share one shape. */
+  .row { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; padding: 8px 12px;
+    border: 0; border-bottom: 1px solid var(--panel-edge); min-height: 52px; width: 100%; text-align: left;
+    background: none; color: var(--ink); font: inherit; cursor: pointer; }
+  .row:hover, .row:focus-visible { background: var(--panel-2); }
+  .row .nm { font-weight: 600; font-size: 14px; }
+  .row .sub { font-size: 12px; color: var(--ink-dim); }
+  .row .sc { font-variant-numeric: tabular-nums; font-weight: 700; min-width: 30px; text-align: right; font-size: 15px; }
+  .dayout { font-size: 12px; padding: 2px 8px; border-radius: 999px; white-space: nowrap; background: var(--panel-2); color: var(--ink-dim); }
+  .dayout.calm { background: #2f4a39; color: #a6dcb9; }
+  .dayout.breezy { background: #4a4530; color: #e8dca6; }
+  .dayout.gusty { background: #55332f; color: #f0b3ae; }
+  .dayout.rainy { background: #3a4553; color: #b9cfe6; }
+  .dayout.cold { background: #36495a; color: #bfe0f3; }
+  .dayout.shut { background: #3f4239; color: var(--ink-dim); }
+  .chipbtn { min-height: 44px; padding: 0 10px; border-radius: 8px; border: 1px solid #555; background: transparent;
+    color: var(--ink-dim); font-size: 12px; cursor: pointer; }
+  .chipbtn[aria-pressed="true"], .chipbtn[data-clear-origin] { border-color: var(--accent); color: var(--accent); }
+  .note { font-size: 12px; color: var(--ink-dim); padding: 6px 12px 10px; margin: 0; }
+  .zones { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 12px; }
+  .zones button { min-height: 44px; padding: 0 10px; border-radius: 8px; border: 1px solid #555; background: transparent;
+    color: var(--ink); font-size: 13px; cursor: pointer; }
+  .zones button small { color: var(--ink-dim); }
+  .zones button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); font-weight: 700; }
+  .btn-route, [data-route] { margin: 8px 12px; }
+
+  /* The map and what floats over it. */
+  #map-wrap { flex: 1; min-width: 0; }
+  /* Leaflet's panes run up to z-index 700; kept inside the map so the week bar
+     and the buttons over it are never covered by a pin. */
+  #map { position: relative; z-index: 0; isolation: isolate; }
+  .week { position: absolute; top: 8px; left: 6px; right: 6px; z-index: 600; display: grid;
+    grid-template-columns: repeat(7, 1fr); gap: 2px; background: rgba(43,46,42,.94);
+    border: 1px solid var(--panel-edge); border-radius: 10px; padding: 4px; }
+  .week button { border: 0; background: transparent; color: var(--ink); border-radius: 6px; min-height: 52px; min-width: 0;
+    padding: 4px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; cursor: pointer; }
+  .week .d { font-size: 12px; color: var(--ink-dim); }
+  .week .b { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .week .flag { font-size: 10px; color: #f0b3ae; }
+  .week button[aria-pressed="true"] { background: var(--accent); color: #1f211e; }
+  .week button[aria-pressed="true"] .d, .week button[aria-pressed="true"] .flag { color: #1f211e; }
+  #map-wrap .map-btns { top: 80px; right: 8px; }
+  #map-wrap .map-btn { min-height: 44px; min-width: 44px; padding: 0 10px; font-size: 12px; border-radius: 8px; }
+  .layers { display: flex; flex-direction: column; gap: 4px; }
+  .map-btn.active { border-color: var(--accent); color: var(--accent); background: var(--panel); }
+  .score-legend, .fx-progress { position: absolute; left: 8px; top: 80px; z-index: 550; max-width: calc(100% - 130px);
+    font-size: 12px; background: rgba(43,46,42,.92); border-radius: 8px; padding: 6px 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .score-legend[hidden], .fx-progress[hidden] { display: none; }
+  .score-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; vertical-align: -1px; border: 1px solid #1f211e; }
+  .leaflet-bottom.leaflet-right .leaflet-control-zoom { margin-bottom: 26px; }
+
+  /* Score pins: the number is the cue, colour the second one. */
+  .pin.spin { width: 100%; height: 100%; font-size: 11px; font-weight: 800; color: #1f211e; border: 2px solid #1f211e;
+    font-variant-numeric: tabular-nums; }
+  .pin.spin.b-Fair, .pin.spin.b-Poor { color: #fff; }
+  .pin.spin.none { background: #3f4239; color: var(--ink-dim); }
+  .pin.spin.ice { color: #14232c; }
+  .pin.spin.muted { opacity: .8; }
+  .pin.spin.fav { border-color: var(--accent); }
+  .pin.spin.sel { border-color: #fff; box-shadow: 0 0 0 3px rgba(255,255,255,.45); }
+  .marker-cluster.score-cluster { background: rgba(31,33,30,.45); }
+  .marker-cluster.score-cluster div { width: auto; height: auto; min-width: 34px; min-height: 34px; margin: 3px;
+    flex-direction: column; line-height: 1.05; font-size: 13px; font-weight: 800; color: #1f211e; border: 2px solid #1f211e; }
+  .marker-cluster.score-cluster div.b-Fair, .marker-cluster.score-cluster div.b-Poor { color: #fff; }
+  .marker-cluster.score-cluster small { font-size: 8px; font-weight: 600; }
+  .origin-dot { width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 3px solid var(--accent); }
+
+  /* "Best near you" (below 1024 px only). */
+  .best { position: absolute; left: 8px; right: 8px; bottom: 8px; z-index: 650; background: var(--panel);
+    border: 1px solid var(--panel-edge); border-radius: 12px; overflow: auto; max-height: 40%;
+    box-shadow: 0 4px 14px rgba(0,0,0,.4); }
+  .best.expanded { max-height: 70%; }
+  .best-head { display: flex; align-items: center; gap: 6px; padding: 6px 8px 2px 12px; }
+  .best-head h2 { font-size: 14px; margin: 0; flex: 1; color: var(--ink); font-weight: 600; }
+  .best .chipbtn.onscreen { margin: 2px 12px 6px; min-height: 44px; }
+  .best .chipbtn.onscreen[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  #map-wrap.charts-open .best, #map-wrap.list-mode .best, #map-wrap.zone-mode .best,
+  #map-wrap.list-mode .week, #map-wrap.list-mode .score-legend, #map-wrap.zone-mode .week,
+  #map-wrap.list-mode .fx-progress { display: none; }
+  body.lake-open #map-wrap .best { display: none; }
+
+  /* The lake panel. */
+  .sheet { background: var(--panel); color: var(--ink); overflow: auto; overscroll-behavior: contain;
+    padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px)); }
+  .sheet[hidden] { display: none; }
+  #sheet { position: absolute; left: 0; right: 0; bottom: 0; max-height: 82%; z-index: 800;
+    border-top: 1px solid var(--panel-edge); border-radius: 14px 14px 0 0; box-shadow: 0 -6px 20px rgba(0,0,0,.45); }
+  .grab { width: 40px; height: 4px; border-radius: 2px; background: #666; margin: 8px auto 2px; }
+  .lh { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; padding: 4px 8px 4px 14px; }
+  .lh h2 { font-size: 19px; margin: 6px 0 0; }
+  .lh h2:focus { outline: none; }
+  .lh .sub { font-size: 13px; color: var(--ink-dim); }
+  .lh-btns { display: flex; gap: 6px; flex: none; }
+  .lh .star { font-size: 18px; color: var(--ink-dim); }
+  .lh .star.on { color: var(--accent); }
+  .lake-top { padding: 0 14px; }
+  .lake-top .bait-ban { margin: 4px 0; }
+  .lake-top .verdict { margin: 4px 0 6px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 0; }
+  .tag { font-size: 12px; padding: 3px 8px; border-radius: 999px; background: var(--panel-2); border: 1px solid #555; color: var(--ink); text-decoration: none; }
+  .tag.aer { background: #7fb8d8; color: #14232c; border-color: #7fb8d8; font-weight: 700; }
+  .tag.low { border-color: var(--good); color: #a6dcb9; }
+  .tag.trophy { border-color: var(--TGTR); color: #f1cf86; }
+  .tag.est { border-style: dashed; color: var(--ink-dim); }
+  .tag.ice { border-color: #7fb8d8; color: #bfe0f3; }
+  .tag.warn-tag { border-color: #c62828; color: #f6cdc9; }
+  .banner { margin: 6px 14px 8px; border-radius: 12px; background: #4a3a20; border: 1px solid #e0a526; padding: 12px; }
+  .banner .go { font-size: 22px; font-weight: 800; color: #e0a526; }
+  .banner .why { font-size: 13px; margin-top: 2px; }
+  .banner.ice { background: #24343d; border-color: #7fb8d8; }
+  .banner.ice .go { color: #7fb8d8; }
+  .banner.shut, .banner.none { background: var(--panel-2); border-color: #555; }
+  .banner.shut .go, .banner.none .go { color: var(--ink); font-size: 18px; }
+  .bars { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; align-items: end; height: 96px; margin-top: 10px; }
+  .bars div { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; font-size: 11px; color: var(--ink-dim); }
+  .bars b { font-size: 11px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .bars i { font-style: normal; font-size: 10px; }
+  .bars span { display: block; width: 70%; border-radius: 3px 3px 0 0; background: #8fb8de; }
+  .bars .top span { background: #e0a526; }
+  .bars .top { color: #e0a526; font-weight: 700; }
+  .bars .gust span, .bars .shut span { background: #77736a; }
+  details.why { margin: 0 14px 8px; background: var(--panel-2); border-radius: 8px; padding: 0 10px; border: 0; }
+  details.why summary { padding: 0; color: #e0a526; font-size: 14px; }
+  details.why .body { padding: 0 0 10px; }
+  .why .lead { margin: 0 0 8px; font-size: 12px; color: var(--ink-dim); }
+  .why .compare { margin: 8px 0 0; font-size: 13px; }
+  .fac { display: grid; grid-template-columns: 130px 1fr 52px; gap: 8px; align-items: center; font-size: 13px; margin: 4px 0; }
+  .fac .track { height: 8px; background: #55584f; border-radius: 4px; overflow: hidden; }
+  .fac .track span { display: block; height: 100%; background: #e0a526; }
+  .fac b { text-align: right; font-variant-numeric: tabular-nums; }
+  .fac.absent { color: var(--ink-dim); }
+  .tip { margin: 0 14px 8px; font-size: 13px; padding: 8px 10px; border-left: 3px solid var(--accent); background: var(--panel-2); }
+  .tip.clear { border-left-color: #7fb8d8; }
+  .sheet > .aer-row { margin: 0 14px 8px; }
+  .sheet details { border-top: 1px solid var(--panel-edge); }
+  .sheet summary { list-style: none; min-height: 52px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 14px; font-weight: 600; cursor: pointer; }
+  .sheet summary::-webkit-details-marker { display: none; }
+  .sheet summary::after { content: "+"; color: var(--ink-dim); font-size: 20px; }
+  .sheet details[open] > summary::after { content: "−"; }
+  .sheet details > .body { padding: 0 14px 12px; font-size: 14px; }
+  .sheet details.why > summary { padding: 0; }
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0 0 8px; font-size: 13px; }
+  .kv dt { color: var(--ink-dim); }
+  .kv dd { margin: 0; }
+  .tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
+  .tabs button, .seg button { min-height: 44px; padding: 0 10px; border-radius: 8px; border: 1px solid #555;
+    background: transparent; color: var(--ink); font-size: 13px; cursor: pointer; }
+  .tabs button[aria-selected="true"], .seg button[aria-pressed="true"] { background: var(--accent); color: #1f211e; border-color: var(--accent); }
+  .seg { display: inline-flex; gap: 4px; margin: 0 6px 8px 0; }
+  .chart { background: var(--panel-2); border-radius: 8px; padding: 6px; }
+  .chart svg { width: 100%; height: auto; display: block; }
+  .key, .src { font-size: 12px; color: var(--ink-dim); margin-top: 4px; }
+  .explain { font-size: 13px; margin: 8px 0 0; }
+  .gridwrap { overflow-x: auto; }
+  .fxgrid { border-collapse: collapse; font-size: 12px; width: 100%; }
+  .fxgrid th, .fxgrid td { padding: 4px; text-align: center; border-bottom: 1px solid var(--panel-edge); font-variant-numeric: tabular-nums; }
+  .fxgrid th { color: var(--ink-dim); font-weight: 500; }
+  .fxgrid td.hot { background: #55332f; color: #f6cdc9; }
+  .fxgrid small { color: var(--ink-dim); }
+  .solunar .srow { display: grid; grid-template-columns: 44px 1fr; gap: 2px 8px; padding: 4px 0; border-bottom: 1px solid var(--panel-edge); font-size: 13px; }
+  .solunar .pers { grid-column: 2; display: flex; flex-wrap: wrap; gap: 4px 10px; }
+  .solunar .per b { color: #e0a526; }
+  .feed { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; margin-top: 8px; font-size: 13px; }
+  .feed b { color: #e0a526; }
+  .sheet a.btn, .sheet button.btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px;
+    border-radius: 8px; border: 1px solid #555; color: var(--ink); text-decoration: none; margin: 4px 6px 0 0;
+    background: transparent; font-size: 13px; cursor: pointer; }
+  .sheet .stock { width: 100%; }
+  .sheet .about:empty { display: none; }
+  .sheet .gmaps.as-btn { min-height: 44px; }
+  .cx-embed { font-size: 13px; }
+
+  /* Messages over the map. */
+  .state { position: absolute; inset: 0; z-index: 1300; display: flex; align-items: center; justify-content: center;
+    background: rgba(31,33,30,.85); padding: 20px; }
+  .state[hidden] { display: none; }
+  .state .card { background: var(--panel); border-radius: 12px; padding: 16px; max-width: 360px; font-size: 14px; }
+  .state .card h3 { margin: 0 0 6px; font-size: 16px; }
+  .state .card p, .state .card ol { margin: 0 0 10px; color: var(--ink-dim); }
+  .state .card button { min-height: 44px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--accent);
+    background: var(--accent); color: #1f211e; font-weight: 700; cursor: pointer; }
+
+  /* The list column (PC). */
+  .side { display: none; width: 380px; flex: none; background: var(--panel-2); border-left: 1px solid var(--panel-edge);
+    flex-direction: column; min-height: 0; }
+  .side .head { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px;
+    border-bottom: 1px solid var(--panel-edge); gap: 8px; flex-wrap: wrap; }
+  .side .head h2 { font-size: 14px; margin: 0; flex: 1 1 auto; }
+  .side .list { overflow: auto; flex: 1; }
+  .sidenav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; padding: 6px 8px; border-bottom: 1px solid var(--panel-edge); }
+  .sidenav button, .bar button { min-height: 44px; border: 1px solid #555; border-radius: 8px; background: transparent;
+    color: var(--ink); font-size: 13px; cursor: pointer; }
+  .sidenav button[aria-pressed="true"], .bar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); font-weight: 700; }
+  .side-sheet { flex: 1; min-height: 0; }
+  body.lake-open .side .head, body.lake-open .side .sidenav, body.lake-open .side .list { display: none; }
+
+  /* Phone bottom bar. */
+  .bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; padding: 4px 6px;
+    padding-bottom: calc(4px + env(safe-area-inset-bottom, 0px));
+    background: var(--panel-2); border-top: 1px solid var(--panel-edge); }
+  .bar button { min-height: 48px; border-color: transparent; }
+
+  @media (max-width: 1023px) {
+    .leaflet-control-zoom { display: none; }
+    /* Below a PC width the filters slide over the map, as on a phone. */
+    #sidebar {
+      position: fixed; top: 0; bottom: 0; left: 0; z-index: 1000; width: min(88vw, 340px);
+      transform: translateX(-102%); transition: transform 0.22s ease-out;
+      box-shadow: 4px 0 18px rgba(0,0,0,0.5);
+    }
+    #app.sidebar-hidden #sidebar { display: block; }
+    #app.menu-open #sidebar { transform: translateX(0); }
+    #app.menu-open #scrim { display: block; position: fixed; inset: 0; z-index: 950; background: rgba(0,0,0,0.45); }
+    #map-wrap #zone-panel { top: 80px; }
   }
-  #app.sidebar-hidden #sidebar-open { display: block; }
-  /* Leaflet's zoom control sits exactly where that tab goes, and wins the
-     click. Same remedy the phone layout already uses for the menu button. */
-  #app.sidebar-hidden .leaflet-top.leaflet-left { margin-top: 46px; }
+  @media (max-width: 760px) {
+    /* Results use the whole width of the header, not just the search box. */
+    #topbar .search { position: static; }
+    #topbar #search-results { left: 8px; right: 8px; top: calc(100% + 2px); }
+    #map-wrap .map-btns { top: 80px; right: 8px; }
+    .leaflet-top.leaflet-left { margin-top: 0; }
+    .fac { grid-template-columns: 110px 1fr 46px; }
+    #topbar .icon-btn { padding: 0 8px; font-size: 12px; }
+  }
+  @media (max-width: 400px) {
+    #topbar { gap: 6px; padding-left: 8px; padding-right: 8px; }
+    #topbar .icon-btn { padding: 0 6px; }
+    #search { padding: 0 8px; font-size: 14px; }
+  }
+  @media (min-width: 1024px) {
+    #topbar h1 { display: block; }
+    .side { display: flex; }
+    .bar, .best, #sheet { display: none; }
+    #sheet[hidden], #sheet { display: none; }
+  }
   @media (prefers-reduced-motion: reduce) {
     #sidebar, #chart-panel, #chart-toggle { transition: none; }
   }
@@ -961,15 +1217,8 @@
   <div id="scrim"></div>
   <aside id="sidebar">
     <button id="sidebar-close" type="button" aria-label="Close filters">×</button>
-    <h1>Alberta Trout Map</h1>
+    <h2 class="filters-title">Filters</h2>
     <div class="subtitle" id="subtitle">Stocking data</div>
-
-    <div class="group search-wrap">
-      <label class="group-label" for="search">Find a lake</label>
-      <input type="search" id="search" autocomplete="off" placeholder="Lake name…"
-             role="combobox" aria-expanded="false" aria-controls="search-results">
-      <ul id="search-results" role="listbox"></ul>
-    </div>
 
     <div class="count" id="result-count">Showing … lakes</div>
     <div class="filter-summary" id="filter-summary"></div>
@@ -1043,7 +1292,7 @@
     <div class="group">
       <div class="group-label"><span>Favourites</span><button type="button" class="linkish" id="fav-route">plan a route</button></div>
       <ul id="fav-list"></ul>
-      <div class="hint" id="fav-empty">Star a lake in its popup to keep it here.</div>
+      <div class="hint" id="fav-empty">Tap ☆ on a lake to save it here.</div>
     </div>
 
     <div class="group">
@@ -1058,18 +1307,12 @@
     <div class="group">
       <div class="group-label"><span>Pin colour</span></div>
       <div class="btn-row">
+        <button class="btn" data-color="bite">Bite on the day</button>
+        <button class="btn" data-color="best">Best this week</button>
         <button class="btn active" data-color="species">Species</button>
         <button class="btn" data-color="change">Change</button>
       </div>
       <div class="hint" id="color-hint"></div>
-    </div>
-
-    <div class="group">
-      <div class="group-label"><span>Basemap</span></div>
-      <div class="btn-row">
-        <button class="btn active" data-base="topo">Topo</button>
-        <button class="btn" data-base="osm">Street</button>
-      </div>
     </div>
 
     <details class="quality">
@@ -1079,16 +1322,37 @@
     </details>
   </aside>
 
+  <div id="main">
+  <header id="topbar">
+    <h1>Alberta Trout Map</h1>
+    <div class="search">
+      <input type="search" id="search" autocomplete="off" placeholder="Search a lake or a town, e.g. Innisfail"
+             aria-label="Search a lake or a town" role="combobox" aria-expanded="false" aria-controls="search-results"
+             aria-autocomplete="list">
+      <ul id="search-results" role="listbox" aria-label="Search results"></ul>
+    </div>
+    <button class="icon-btn" id="filters-btn" type="button">Filters<span class="badge" id="advisory-badge" hidden></span></button>
+    <button class="icon-btn" id="chart-toggle" type="button" aria-pressed="false">Charts</button>
+    <button class="icon-btn" id="learn-btn" type="button" aria-label="Learn: guides and fish">Learn</button>
+  </header>
+  <div id="mainrow">
   <div id="map-wrap">
-    <button id="menu-btn" type="button" aria-label="Filters">☰</button>
-    <button id="sidebar-open" type="button" aria-label="Show filters">☰ Filters</button>
     <div id="map"></div>
+    <div class="week" id="week" role="group" aria-label="Pick a day"></div>
+    <div class="score-legend" id="score-legend" hidden></div>
     <div class="map-btns">
+      <div class="layers" role="group" aria-label="Map layer">
+        <button class="map-btn active" data-base="topo" type="button" aria-pressed="true">Topo</button>
+        <button class="map-btn" data-base="osm" type="button" aria-pressed="false">Street</button>
+        <button class="map-btn" data-base="sat" type="button" aria-pressed="false">Satellite</button>
+      </div>
       <button class="map-btn" id="zoom-results" type="button">Zoom to results</button>
       <button class="map-btn" id="share-btn" type="button">Copy link</button>
-      <button class="map-btn" id="conditions-btn" type="button" aria-pressed="false">Conditions</button>
     </div>
-    <div id="conditions-panel" hidden aria-live="polite"></div>
+    <div id="fx-progress" class="fx-progress" hidden aria-live="polite"></div>
+    <div class="best" id="best"></div>
+    <section class="sheet lake-popup" id="sheet" hidden aria-labelledby="sheet-title"></section>
+    <div class="state" id="state" hidden></div>
     <div id="lake-panel" hidden aria-live="polite"></div>
     <div id="offline-badge" hidden>Offline · showing cached data</div>
     <div id="update-toast" hidden>
@@ -1106,6 +1370,8 @@
         <thead><tr>
           <th data-k="name">Lake</th>
           <th class="num" data-k="distanceKm">km</th>
+          <th class="num" data-k="bite" title="Bite score on the day picked in the week bar">Bite</th>
+          <th class="num" data-k="dayOut" title="Day out score on the day picked in the week bar">Day out</th>
           <th data-k="lastDate">Last stocked</th>
           <th class="num" data-k="fish">Fish shown</th>
           <th data-k="species">Species</th>
@@ -1116,7 +1382,6 @@
       </table>
     </div>
 
-    <button id="chart-toggle">📊 Show Charts</button>
     <div id="chart-panel">
       <div class="chart-header">
         <div class="chart-summary">
@@ -1140,6 +1405,28 @@
       <div class="chart-body"><canvas id="chart-canvas"></canvas></div>
     </div>
   </div>
+  <aside class="side" id="side" aria-label="Lakes">
+    <div class="head">
+      <h2 id="list-title">Best lakes</h2><span id="origin-chip"></span>
+      <button class="chipbtn" id="on-screen" type="button" aria-pressed="false">Only lakes on screen</button>
+    </div>
+    <nav class="sidenav" aria-label="Lists">
+      <button type="button" data-nav="near" aria-pressed="false">Near me</button>
+      <button type="button" data-nav="saved" aria-pressed="false">Saved</button>
+      <button type="button" data-nav="area" aria-pressed="false">Area</button>
+      <button type="button" data-nav="clear" aria-pressed="false">Clear</button>
+    </nav>
+    <div class="list" id="side-list"></div>
+    <section class="sheet side-sheet lake-popup" id="side-sheet" hidden aria-labelledby="sheet-title"></section>
+  </aside>
+  </div>
+  <nav class="bar" aria-label="Lists">
+    <button type="button" data-nav="near" aria-pressed="false">Near me</button>
+    <button type="button" data-nav="saved" aria-pressed="false">Saved</button>
+    <button type="button" data-nav="area" aria-pressed="false">Area</button>
+    <button type="button" data-nav="clear" aria-pressed="false">Clear</button>
+  </nav>
+  </div>
 </div>
 
 <script src="vendor/leaflet.js"></script>
@@ -1150,6 +1437,10 @@
 <script src="js/weather.js"></script>
 <script src="js/conditions-ui.js"></script>
 <script src="js/lake-panel.js"></script>
+<script src="js/forecast.js"></script>
+<script src="js/lake-sheet.js"></script>
+<script src="js/day-ui.js"></script>
+<script src="js/reading-room.js"></script>
 <script>
 // ============================================================
 // CONFIG
@@ -1220,9 +1511,19 @@ const RECENCY_OPTIONS = [
 /** Pins can carry either of two stories. Species answers "what is in there";
  *  change answers "is this lake getting more or less than it used to". */
 const COLOR_MODES = [
+  { id: "bite", label: "Bite on the day" },
+  { id: "best", label: "Best this week" },
   { id: "species", label: "Species" },
   { id: "change", label: "Change" },
 ];
+
+/** Score pins (Build 1b, decision 14). Grey, then two blues, then gold: the
+ *  steps run along the blue-yellow axis that red-green colour blindness keeps,
+ *  and every score pin also carries its number, so colour is never the only
+ *  cue. Gold is kept for the best band, which is what "gold pins" means. */
+const SCORE_PIN = { Prime: "#e0a526", Good: "#8fb8de", Fair: "#4f7cac", Poor: "#77736a" };
+/** Winter pins show the legal ice season instead of a score. */
+const ICE_PIN = { all: "#d6ecf7", part: "#7fa6bf", closed: "#55584f", unknown: "#3f4239" };
 
 /** Diverging scale for year-over-year change. ColorBrewer PuOr, which stays
  *  readable under protanopia and deuteranopia because it varies on the
@@ -1304,13 +1605,25 @@ const state = {
   chartType: "stacked-species",
   chartOpen: false,
   view: "map",
-  /** "species" or "change" — what pin colour means. */
-  colorMode: "species",
+  /** "bite" (the picked day), "best" (best day this week), "species" or
+   *  "change" — what pin colour means. */
+  colorMode: "bite",
+  /** Day picked on the week bar: 0 is today at the lake. */
+  day: 0,
+  /** A town picked in search, or "you" from Near me. Distances measure from
+   *  it while it is set; home does not move. */
+  origin: null,
+  /** Which list: null (best near you), "near", "saved" or "area". */
+  nav: null,
+  area: null,
+  onScreen: false,
+  /** The lake whose panel is open. */
+  selectedKey: null,
+  sections: null,
+  fx: { tab: "Wind", span: 7, view: "Lines" },
   home: { ...DEFAULT_HOME },
   /** Stable lake id the charts are scoped to, or null for every lake. */
   focusedLakeAts: null,
-  /** Lake whose popup is open, so it survives a re-render of the pin layer. */
-  openPopupAts: null,
   favourites: new Set(),
   pickingHome: false,
   /** Hide lakes whose season is shut today. Off by default: a closed lake is
@@ -1531,11 +1844,16 @@ function prepareLakes() {
   recomputeDistances();
 }
 
+/* While a town is picked, distances and the distance filter measure from it
+ * (Build 1b, decision 11). Home stays where it is. */
+function originLat() { return state.origin ? state.origin.lat : state.home.lat; }
+function originLon() { return state.origin ? state.origin.lon : state.home.lon; }
+
 function recomputeDistances() {
   for (const lake of LAKES) {
     lake.distanceKm = (lake.lat == null || lake.lon == null)
       ? Infinity
-      : haversineKm(state.home.lat, state.home.lon, lake.lat, lake.lon);
+      : haversineKm(originLat(), originLon(), lake.lat, lake.lon);
   }
 }
 
@@ -1558,7 +1876,6 @@ function stockingPasses(s) {
 function recencyOption(id) {
   return RECENCY_OPTIONS.find(o => o.id === (id ?? state.recency)) || RECENCY_OPTIONS[0];
 }
-function recencyDays() { return recencyOption().days ?? null; }
 function recencyIsActive() {
   const o = recencyOption();
   return o.days != null || !!o.season;
@@ -2248,81 +2565,8 @@ function yearRuns(years) {
   return runs.map(([a, b]) => a === b ? String(a) : `${a}–${b}`).join(", ");
 }
 
-function popupHtml(lake) {
-  const key = lakeKey(lake);
-  const filteredTotal = filteredFishTotal(lake);
-  const gmapsUrl = `https://www.google.com/maps/search/?api=1&query=${lake.lat},${lake.lon}`;
-  const driveUrl = directionsUrl(lake);
-  const rows = [...lake.stockings].filter(stockingPasses)
-    .sort((a, b) => stockingSortKey(b).localeCompare(stockingSortKey(a)));
-  const activeYears = [...new Set(rows.map(s => s.year))].sort((a, b) => a - b);
-  const activeSpecies = filteredDominantOrder(lake);
-  const yearRangeText = yearRuns(activeYears);
-  const speciesText = activeSpecies.length
-    ? activeSpecies.map(c => SPECIES_META[c]?.short || c).join(", ") : "none";
-
-  const last = rows[0];
-  const age = last ? daysAgo(last.date) : null;
-  const lastText = last
-    ? `${fmtDate(last.date, last.date_precision)}${age != null && age <= 365 ? ` · ${age} days ago` : ""}`
-    : "—";
-
-  const tableRows = rows.map(s => {
-    const color = SPECIES_META[s.species]?.color || "#888";
-    return `<tr>
-      ${dateCell(s.date, s.date_precision)}
-      <td><span class="sp-tag" style="background:${color}">${esc(s.species)}</span></td>
-      <td>${esc(s.strain) || "—"}</td>
-      <td>${s.length_cm ? Number(s.length_cm).toFixed(1) : "—"}</td>
-      <td${s.weight_g == null ? ' title="Alberta published no weight for this stocking. The weights come from its stocking map, which only goes back to 2021."' : ""}>${
-        s.weight_g == null ? "—" : fmtNum(Math.round(Number(s.weight_g)))}</td>
-      <td>${fmtNum(s.number)}</td>
-    </tr>`;
-  }).join("");
-
-  const approx = lake.coord_source === "ats"
-    ? `<div class="profile-row">Position estimated from the report's land description; expect a few hundred metres of error.</div>` : "";
-  const fav = state.favourites.has(key);
-  const distText = Number.isFinite(lake.distanceKm) ? `${Math.round(lake.distanceKm)} km` : "—";
-
-  const pair = changeYearPair();
-  const change = changeText(lake, pair);
-  const changeCls = changeClassOf(lake, pair);
-  const changeRow = change
-    ? `<div class="meta"><strong>Versus ${pair.previous}:</strong>
-         <span class="change-tag" style="background:${changeCls.color};color:${glyphInk(changeCls.id)}">${changeCls.glyph}</span>
-         ${esc(change)}</div>`
-    : "";
-
-  return `<div class="lake-popup">
-    <h3><button class="star ${fav ? "on" : ""}" data-fav="${esc(key)}" title="${fav ? "Remove from favourites" : "Add to favourites"}" aria-label="${fav ? "Remove from favourites" : "Add to favourites"}">${fav ? "★" : "☆"}</button>${esc(lake.name)}</h3>
-    ${baitBanLine(lake)}
-    <div class="ats">${esc(lake.ats || key)}</div>
-    ${verdictLine(lake)}
-    <div class="meta"><strong>${distText}</strong> from ${esc(state.home.name)} &nbsp;·&nbsp; <strong>${fmtNum(filteredTotal)}</strong> fish shown</div>
-    <div class="meta"><strong>Last stocked:</strong> ${esc(lastText)}</div>
-    <div class="meta"><strong>Years:</strong> ${esc(yearRangeText)} &nbsp;·&nbsp; <strong>Species:</strong> ${esc(speciesText)}</div>
-    ${changeRow}
-    ${approx}
-    ${profileBlock(lake)}
-    ${facilityBlock(lake)}
-    ${aerationBlock(lake)}
-    ${iceSeasonBlock(lake)}
-    ${depthBlock(lake)}
-    ${regulationBlock(lake)}
-    ${photoBlock(lake)}
-    <div class="popup-actions">
-      <a class="gmaps" href="${driveUrl}" target="_blank" rel="noopener">Directions from ${esc(state.home.name)} ↗</a>
-      <a class="gmaps" href="${gmapsUrl}" target="_blank" rel="noopener">Show on Google Maps ↗</a>
-      <button type="button" class="gmaps as-btn" data-conditions="${esc(key)}">Conditions here</button>
-      <button type="button" class="gmaps as-btn" data-lakelink="${esc(key)}" title="Copies a web address that reopens the map on this lake, with your filters, ready to paste into a message">Copy link to this lake</button>
-    </div>
-    <table>
-      <thead><tr><th>Date</th><th>Sp.</th><th>Strain</th><th>cm</th><th title="Average weight of a fish in this stocking, from Alberta's stocking map. Published from 2021 on; earlier years give a length and no weight.">g</th><th>Number</th></tr></thead>
-      <tbody>${tableRows}</tbody>
-    </table>
-  </div>`;
-}
+/* The pin popup became the lake panel in Build 1b: js/lake-sheet.js builds
+ * it from the same blocks above. */
 
 /** Google Maps driving directions, home to the lake. A plain URL, so there is
  *  no API key to keep and nothing to break when a quota runs out. Google shows
@@ -2343,10 +2587,61 @@ function lakeLinkUrl(key) {
 // MAP
 // ============================================================
 let map, pinLayer, zoneLayer, labelLayer, homeMarker, currentBasemap = "topo";
-let rerenderingPins = false;
 const basemaps = {};
 
+/* A score pin: the number on a band colour, one size, so a small pond with a
+ * good day reads as clearly as a reservoir. In winter (DayUI.winterOn) it shows
+ * the legal ice season instead, with no number, because the open-water score
+ * is hidden. A lake with no forecast yet falls back to its species pin. */
+/* Worked out once per renderPins, not once per pin: winterOn reads every lake in view. */
+let pinWinter = false;
+
+function scorePinIcon(lake) {
+  // Until the sliced computeAll reaches a lake, it keeps its species pin.
+  if (!Forecast.ready(lake)) return null;
+  const f = Forecast.forLake(lake);
+  if (!f) return null;
+  const fav = state.favourites.has(lakeKey(lake)) ? " fav" : "";
+  const sel = state.selectedKey === lakeKey(lake) ? " sel" : "";
+  if (pinWinter || f.iced) {
+    const kind = lakeIceKind(lake);
+    const bg = kind === "all-winter" ? ICE_PIN.all : kind === "closed" ? ICE_PIN.closed
+      : kind ? ICE_PIN.part : ICE_PIN.unknown;
+    return L.divIcon({ className: "pin-wrap",
+      html: `<div class="pin spin ice${fav}${sel}" style="background:${bg}">${kind === "all-winter" ? "❄" : ""}</div>`,
+      iconSize: [26, 26], iconAnchor: [13, 13] });
+  }
+  const score = state.colorMode === "best"
+    ? (f.bestDay >= 0 ? f.days[f.bestDay].bite : null)
+    : Forecast.rankable(f, state.day);
+  if (score === null) {
+    if (!f.hasWeather) return null;
+    return L.divIcon({ className: "pin-wrap",
+      html: `<div class="pin spin none${fav}${sel}">–</div>`, iconSize: [22, 22], iconAnchor: [11, 11] });
+  }
+  const band = Conditions.bandName(score);
+  const muted = state.colorMode === "best" && band !== "Prime" ? " muted" : "";
+  return L.divIcon({ className: "pin-wrap",
+    html: `<div class="pin spin b-${band}${fav}${sel}${muted}" style="background:${SCORE_PIN[band]}">${Math.round(score * 100)}</div>`,
+    iconSize: [28, 28], iconAnchor: [14, 14] });
+}
+
+/** The score a score pin shows, or null. */
+function scoreForPin(lake) {
+  if (state.colorMode !== "bite" && state.colorMode !== "best") return null;
+  if (lake.lat == null || pinWinter || !Forecast.ready(lake)) return null;
+  const f = Forecast.forLake(lake);
+  if (!f || f.iced) return null;
+  return state.colorMode === "best"
+    ? (f.bestDay >= 0 ? f.days[f.bestDay].bite : null)
+    : Forecast.rankable(f, state.day);
+}
+
 function pinIcon(lake, radius, order, changePair) {
+  if (state.colorMode === "bite" || state.colorMode === "best") {
+    const icon = scorePinIcon(lake);
+    if (icon) return icon;
+  }
   const changeMode = state.colorMode === "change" && changePair;
   const cls = changeMode ? changeClassOf(lake, changePair) : null;
   const primary = changeMode ? cls.color : (SPECIES_META[order[0]]?.color || "#888");
@@ -2375,17 +2670,26 @@ function tooltipHtml(lake) {
   const dist = Number.isFinite(lake.distanceKm) ? `${Math.round(lake.distanceKm)} km · ` : "";
   const pair = state.colorMode === "change" ? changeYearPair() : null;
   const change = pair ? changeText(lake, pair) : null;
-  return `<b>${esc(lake.name)}</b><br><span class="tip-sub">${dist}${fmtNum(filteredFishTotal(lake))} fish · last ${esc(when)}</span>` +
+  const f = (state.colorMode === "bite" || state.colorMode === "best") ? Forecast.forLake(lake) : null;
+  const s = f ? Forecast.rankable(f, state.day) : null;
+  const score = s === null ? "" : `<br><span class="tip-sub">Bite ${Math.round(s * 100)} · ${LakeSheet.bandWord(s)}</span>`;
+  return `<b>${esc(lake.name)}</b>${score}<br><span class="tip-sub">${dist}${fmtNum(filteredFishTotal(lake))} fish · last ${esc(when)}</span>` +
          (change ? `<br><span class="tip-sub">${esc(change)}</span>` : "");
 }
 
 function initMap() {
-  map = L.map("map", { zoomControl: true }).setView([53.2, -114.5], 6);
+  map = L.map("map", { zoomControl: false }).setView([53.2, -114.5], 6);
+  // The week bar has the top left now. The zoom buttons go bottom right, and a
+  // phone has pinch zoom, so the stylesheet hides them there.
+  L.control.zoom({ position: "bottomright" }).addTo(map);
   basemaps.topo = L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
     maxZoom: 17, attribution: '© OpenTopoMap (CC-BY-SA) · © OpenStreetMap contributors'
   });
   basemaps.osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19, attribution: '© OpenStreetMap contributors'
+  });
+  basemaps.sat = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+    maxZoom: 18, attribution: 'Imagery © Esri, Maxar, Earthstar Geographics and the GIS User Community'
   });
   basemaps.topo.addTo(map);
 
@@ -2397,6 +2701,21 @@ function initMap() {
     iconCreateFunction(cluster) {
       const n = cluster.getChildCount();
       const size = n >= 100 ? 46 : n >= 20 ? 40 : 34;
+      /* With score pins, a group shows the best score inside it, so the gold
+         is visible from a province-wide view, and the count goes underneath. */
+      if (state.colorMode === "bite" || state.colorMode === "best") {
+        let best = null;
+        for (const m of cluster.getAllChildMarkers()) {
+          if (m._score != null && (best === null || m._score > best)) best = m._score;
+        }
+        if (best !== null) {
+          const band = Conditions.bandName(best);
+          return L.divIcon({
+            html: `<div class="b-${band}" style="background:${SCORE_PIN[band]}">${Math.round(best * 100)}<small>${n} lakes</small></div>`,
+            className: "marker-cluster score-cluster", iconSize: [size + 6, size + 6],
+          });
+        }
+      }
       return L.divIcon({
         html: `<div>${n}</div>`, className: "marker-cluster",
         iconSize: [size, size],
@@ -2418,73 +2737,27 @@ function initMap() {
   map.on("click", ev => {
     if (state.pickingHome) { setHome({ lat: ev.latlng.lat, lon: ev.latlng.lng, name: "Chosen point" }); return; }
     if (Date.now() - lastPinClickAt < PIN_CLICK_GRACE_MS) return;
-    state.openPopupAts = null;
-    if (state.focusedLakeAts != null) {
+    if (state.focusedLakeAts != null && !state.selectedKey) {
       state.focusedLakeAts = null;
       updateChartScopeUI();
       renderChart();
     }
   });
-  map.on("popupclose", () => { if (!rerenderingPins) state.openPopupAts = null; });
-  /* The top-right buttons float above the map, so Leaflet's own auto-pan
-   * cannot see them and a popup opened near that corner had its × under
-   * "Zoom to results". Once any auto-pan has settled, the map moves the
-   * popup clear: left past the buttons if it fits, otherwise down below them. */
-  let autopanPending = false;
-  map.on("autopanstart", () => { autopanPending = true; });
-  // A pan that ended before the popup said it was open leaves nothing to wait for.
-  map.on("moveend", () => { autopanPending = false; });
-  const clearPopupClose = popup => {
-    const el = popup.getElement();
-    const close = el?.querySelector(".leaflet-popup-close-button");
-    const btns = document.querySelector(".map-btns");
-    if (!popup.isOpen() || !close || !btns || !btns.offsetParent) return;
-    const x = close.getBoundingClientRect(), b = btns.getBoundingClientRect();
-    if (x.left >= b.right || x.right <= b.left || x.top >= b.bottom || x.bottom <= b.top) return;
-    const box = el.getBoundingClientRect();
-    const mapBox = map.getContainer().getBoundingClientRect();
-    const gap = 8;
-    const left = x.right - b.left + gap;
-    const down = b.bottom - x.top + gap;
-    const leftFits = box.left - left >= mapBox.left + gap;
-    if (leftFits && left <= down) map.panBy([left, 0]);
-    else map.panBy([0, -down]);
-  };
-  map.on("popupopen", e => {
-    if (autopanPending) {
-      autopanPending = false;
-      map.once("moveend", () => clearPopupClose(e.popup));
-    } else {
-      clearPopupClose(e.popup);
-    }
+}
+
+/* A town picked in search, drawn so you can see what the distances measure
+ * from. Not draggable: it is a place, not a setting. */
+let originMarker = null;
+function placeOriginMarker() {
+  if (originMarker) { map.removeLayer(originMarker); originMarker = null; }
+  if (!state.origin) return;
+  const icon = L.divIcon({
+    className: "pin-wrap",
+    html: `<div class="origin-dot"></div>`, iconSize: [14, 14], iconAnchor: [7, 7],
   });
-  map.on("popupopen", e => {
-    const el = e.popup.getElement();
-    const btn = el?.querySelector("[data-fav]");
-    if (btn) btn.addEventListener("click", () => toggleFavourite(btn.dataset.fav));
-    // Every popup button is wired here, when the popup opens. "Conditions here"
-    // used to be wired only inside toggleFavourite(), so it did nothing at all
-    // until you happened to star a lake first.
-    const conditions = el?.querySelector("[data-conditions]");
-    if (conditions) conditions.addEventListener("click",
-      () => ConditionsUI.focusLake(conditions.dataset.conditions));
-    const photos = el?.querySelector("[data-photos]");
-    if (photos) photos.addEventListener("click",
-      () => LakePanel.open(photos.dataset.photos));
-    const link = el?.querySelector("[data-lakelink]");
-    if (link) link.addEventListener("click", async () => {
-      const url = lakeLinkUrl(link.dataset.lakelink);
-      try {
-        await navigator.clipboard.writeText(url);
-        link.textContent = "Link copied";
-      } catch {
-        // Clipboard access is refused over plain http and in some browsers.
-        // Showing the link is still useful; it can be copied by hand.
-        link.textContent = url;
-      }
-      setTimeout(() => { link.textContent = "Copy link to this lake"; }, 2500);
-    });
-  });
+  originMarker = L.marker([state.origin.lat, state.origin.lon], { icon, zIndexOffset: 900 })
+    .bindTooltip(() => `Measuring from ${esc(state.origin.name)}`, { direction: "right" })
+    .addTo(map);
 }
 
 function placeHomeMarker() {
@@ -2495,7 +2768,7 @@ function placeHomeMarker() {
   });
   if (homeMarker) map.removeLayer(homeMarker);
   homeMarker = L.marker([state.home.lat, state.home.lon], { icon, draggable: true, zIndexOffset: 1000 })
-    .bindTooltip(() => `Home: ${state.home.name}`, { direction: "right" })
+    .bindTooltip(() => `Home: ${esc(state.home.name)}`, { direction: "right" })
     .addTo(map);
   homeMarker.on("dragend", () => {
     const p = homeMarker.getLatLng();
@@ -2537,11 +2810,11 @@ function renderLabels() {
 }
 
 function renderPins() {
-  rerenderingPins = true;
   pinLayer.clearLayers();
   const markers = [];
   let shown = 0, unplaced = 0;
   const changePair = state.colorMode === "change" ? changeYearPair() : null;
+  pinWinter = (state.colorMode === "bite" || state.colorMode === "best") && DayUI.winterOn();
 
   for (const lake of LAKES) {
     if (!lakePassesFilters(lake)) continue;
@@ -2553,25 +2826,15 @@ function renderPins() {
       riseOnHover: true,
     });
     marker.bindTooltip(() => tooltipHtml(lake), { className: "lake-tip", direction: "top", offset: [0, -6] });
-    marker.bindPopup(() => popupHtml(lake), { maxWidth: 380 });
     marker.on("click", () => {
       lastPinClickAt = Date.now();
-      state.openPopupAts = lakeKey(lake);
-      state.focusedLakeAts = lakeKey(lake);
-      updateChartScopeUI();
-      renderChart();
+      DayUI.openLake(lakeKey(lake), { noPan: true });
     });
     marker._lakeKey = lakeKey(lake);
+    marker._score = scoreForPin(lake);
     markers.push(marker);
   }
   pinLayer.addLayers(markers);
-  rerenderingPins = false;
-
-  if (state.openPopupAts) {
-    const target = markers.find(m => m._lakeKey === state.openPopupAts);
-    if (target) pinLayer.zoomToShowLayer(target, () => target.openPopup());
-    else state.openPopupAts = null;
-  }
 
   renderLabels();
 
@@ -2740,12 +3003,7 @@ function toggleFavourite(key) {
   renderFavourites();
   renderPins();
   if (state.view === "list") renderList();
-  const open = document.querySelector(".leaflet-popup [data-fav]");
-  if (open && open.dataset.fav === key) {
-    const on = state.favourites.has(key);
-    open.textContent = on ? "★" : "☆";
-    open.classList.toggle("on", on);
-  }
+  DayUI.render();
 }
 
 function renderFavourites() {
@@ -2771,7 +3029,7 @@ function favouriteRouteUrl() {
     .filter(l => l && l.lat != null)
     .sort((a, b) => a.distanceKm - b.distanceKm);
   if (!favs.length) return null;
-  const origin = `${state.home.lat},${state.home.lon}`;
+  const origin = `${originLat()},${originLon()}`;
   const stops = favs.map(l => `${l.lat},${l.lon}`);
   const destination = stops.pop();
   const waypoints = stops.length ? `&waypoints=${stops.join("|")}` : "";
@@ -2828,6 +3086,11 @@ function buildAdvisories() {
     .flatMap(src => (src.entries || []).map(text => ({ text, url: src.url })));
   if (!lines.length) return;
   document.getElementById("advisory-group").hidden = false;
+  const badge = document.getElementById("advisory-badge");
+  badge.hidden = false;
+  badge.textContent = String(lines.length);
+  badge.title = `${lines.length} Alberta advisor${lines.length === 1 ? "y" : "ies"}, listed in Filters`;
+  document.getElementById("filters-btn").setAttribute("aria-label", `Filters, ${badge.title}`);
   const note = document.getElementById("advisory-note");
   const list = document.getElementById("advisory-list");
   const more = document.getElementById("advisory-more");
@@ -2847,19 +3110,6 @@ function buildAdvisories() {
   };
   more.addEventListener("click", () => { expanded = !expanded; draw(); });
   draw();
-}
-
-function buildConditionsPanel() {
-  const btn = document.getElementById("conditions-btn");
-  btn.addEventListener("click", () => {
-    ConditionsUI.toggle();
-    btn.setAttribute("aria-pressed", state.conditions.open ? "true" : "false");
-  });
-  if (state.conditions.open) {          // restored from the URL
-    state.conditions.open = false;
-    ConditionsUI.toggle(true);
-    btn.setAttribute("aria-pressed", "true");
-  }
 }
 
 function buildSeasonFilter() {
@@ -3110,6 +3360,13 @@ function updateDataQualitySummary() {
       parts.push(`<strong>${QUALITY_SUMMARY.rows_awaiting_review}</strong> row(s) awaiting a linking decision`);
     }
   }
+  const calls = Weather.callsToday();
+  const last = window.DayUI ? DayUI.lastSummary() : null;
+  if (last) {
+    parts.push(`weather: <strong>${last.calls}</strong> call(s) in ${last.requests} request(s) for ${last.cells} forecast spots`
+      + ` on the last load (${last.fromCache} already saved), <strong>${calls.calls}</strong> today on this device`
+      + ` — Open-Meteo's free limit is 600 a minute and 10,000 a day`);
+  }
   el.innerHTML = parts.join(" · ");
 
   updateLegend();
@@ -3128,6 +3385,12 @@ function updateLegend() {
     body = `Each bubble sits at the centre of its zone's stocked lakes, sized by fish and
             shaded by rank. Alberta does not publish zone outlines here, so a bubble marks
             where the zone's lakes are, not how far the zone reaches.`;
+  } else if (state.colorMode === "bite" || state.colorMode === "best") {
+    body = `Each pin shows the Bite score ${state.colorMode === "best" ? "on its best day this week" : "on the day picked in the week bar"},
+            from 0 to 100: gold is Best (75 and over), light blue Good (60 and over), blue Fair (42 and over),
+            grey Poor. A dash means no score that day: the season is shut${state.colorMode === "best" ? ", or no day this week is good enough" : ""}.
+            A lake with no forecast yet keeps its species colour.
+            In winter the pins show the legal ice season instead.`;
   } else if (state.colorMode === "change") {
     const pair = changeYearPair();
     if (!pair) {
@@ -3149,16 +3412,20 @@ function updateLegend() {
   document.getElementById("legend").innerHTML = provisional + body;
 }
 
+function setColorMode(mode) {
+  state.colorMode = mode;
+  document.querySelectorAll("[data-color]").forEach(b =>
+    b.classList.toggle("active", b.dataset.color === state.colorMode));
+  updateColorModeHint();
+  updateLegend();
+  renderPins();
+  DayUI.render();
+  writeUrl();
+}
+
 function buildColorModeToggle() {
   document.querySelectorAll("[data-color]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      state.colorMode = btn.dataset.color;
-      document.querySelectorAll("[data-color]").forEach(b =>
-        b.classList.toggle("active", b.dataset.color === state.colorMode));
-      updateColorModeHint();
-      renderPins();
-      writeUrl();
-    });
+    btn.addEventListener("click", () => setColorMode(btn.dataset.color));
   });
   updateColorModeHint();
 }
@@ -3168,7 +3435,11 @@ function buildColorModeToggle() {
 function updateColorModeHint() {
   const hint = document.getElementById("color-hint");
   const pair = changeYearPair();
-  if (state.colorMode !== "change") {
+  if (state.colorMode === "bite") {
+    hint.textContent = "Pin colour and number are the Bite score on the day picked in the week bar.";
+  } else if (state.colorMode === "best") {
+    hint.textContent = "Gold pins have a Best day this week; the number is that day's Bite score.";
+  } else if (state.colorMode !== "change") {
     hint.textContent = "Pin colour is the main species stocked there.";
   } else if (!pair) {
     hint.textContent = "Select at least two years to compare.";
@@ -3186,7 +3457,10 @@ function buildBasemapToggle() {
       map.removeLayer(basemaps[currentBasemap]);
       basemaps[target].addTo(map);
       currentBasemap = target;
-      document.querySelectorAll("[data-base]").forEach(b => b.classList.toggle("active", b === btn));
+      document.querySelectorAll("[data-base]").forEach(b => {
+        b.classList.toggle("active", b === btn);
+        b.setAttribute("aria-pressed", String(b === btn));
+      });
     });
   });
 }
@@ -3215,60 +3489,11 @@ function buildSelectAll() {
 // ============================================================
 // SEARCH
 // ============================================================
-function buildSearch() {
-  const input = document.getElementById("search");
-  const results = document.getElementById("search-results");
-  let active = -1;
-
-  const close = () => { results.innerHTML = ""; active = -1; input.setAttribute("aria-expanded", "false"); };
-
-  const render = () => {
-    const q = input.value.trim().toLowerCase();
-    if (q.length < 2) return close();
-    const matches = LAKES
-      .filter(l => l.name.toLowerCase().includes(q))
-      .sort((a, b) => {
-        const aStarts = a.name.toLowerCase().startsWith(q) ? 0 : 1;
-        const bStarts = b.name.toLowerCase().startsWith(q) ? 0 : 1;
-        return aStarts - bStarts || a.distanceKm - b.distanceKm;
-      })
-      .slice(0, 12);
-    results.innerHTML = matches.map((l, i) =>
-      `<li role="option" data-key="${esc(lakeKey(l))}" ${i === active ? 'aria-selected="true"' : ""}>
-        <span style="flex:1">${esc(l.name)}</span>
-        <span class="r-dist">${Number.isFinite(l.distanceKm) ? Math.round(l.distanceKm) + " km" : ""}</span>
-      </li>`).join("");
-    input.setAttribute("aria-expanded", matches.length ? "true" : "false");
-  };
-
-  input.addEventListener("input", () => { active = -1; render(); });
-  input.addEventListener("keydown", e => {
-    const items = [...results.querySelectorAll("li")];
-    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-      e.preventDefault();
-      if (!items.length) return;
-      active = (active + (e.key === "ArrowDown" ? 1 : -1) + items.length) % items.length;
-      render();
-    } else if (e.key === "Enter") {
-      e.preventDefault();
-      const pick = items[active >= 0 ? active : 0];
-      if (pick) gotoLake(pick.dataset.key);
-    } else if (e.key === "Escape") { close(); }
-  });
-  results.addEventListener("click", e => {
-    const li = e.target.closest("li[data-key]");
-    if (li) gotoLake(li.dataset.key);
-  });
-  document.addEventListener("click", e => {
-    if (!e.target.closest(".search-wrap")) close();
-  });
-}
+// Search for towns and lakes lives in js/day-ui.js.
 
 function gotoLake(key) {
   const lake = LAKES.find(l => lakeKey(l) === key);
   if (!lake) return;
-  document.getElementById("search-results").innerHTML = "";
-  document.getElementById("search").value = "";
   closeMenu();
   if (state.view !== "map") setView("map");
   if (lake.lat == null) {
@@ -3284,13 +3509,8 @@ function gotoLake(key) {
     buildRecencyChipsState();
     onFilterChange();
   }
-  state.openPopupAts = key;
-  state.focusedLakeAts = key;
-  updateChartScopeUI();
   map.setView([lake.lat, lake.lon], Math.max(map.getZoom(), CLUSTER_OFF_ZOOM + 1));
-  renderPins();
-  renderChart();
-  writeUrl();
+  DayUI.openLake(key, { noPan: true });
 }
 function buildRecencyChipsState() {
   document.querySelectorAll("[data-recency]").forEach(c =>
@@ -3302,6 +3522,17 @@ function buildRecencyChipsState() {
 // ============================================================
 let listSort = { key: "distanceKm", asc: true };
 
+/** Bite and Day out on the picked day, as whole numbers, or null. */
+function listScores(lake) {
+  const f = lake.lat != null ? Forecast.forLake(lake) : null;
+  const day = f && f.days[state.day];
+  const bite = f ? Forecast.rankable(f, state.day) : null;
+  return {
+    bite: bite === null ? null : Math.round(bite * 100),
+    dayOut: day && day.dayOut !== null && !f.iced ? Math.round(day.dayOut * 100) : null,
+  };
+}
+
 function listRows() {
   return visibleLakes().map(l => {
     const last = lastStockedDate(l);
@@ -3310,6 +3541,7 @@ function listRows() {
       lastDate: last || "", fish: filteredFishTotal(l),
       species: filteredDominantOrder(l), zone: l.zone || "",
       lat: l.lat, lon: l.lon,
+      ...listScores(l),
     };
   });
 }
@@ -3330,6 +3562,8 @@ function renderList() {
     return `<tr>
       <td class="name"><button class="star ${fav ? "on" : ""}" data-listfav="${esc(r.key)}" aria-label="Favourite">${fav ? "★" : "☆"}</button> ${esc(r.name)}</td>
       <td class="num">${Number.isFinite(r.distanceKm) ? Math.round(r.distanceKm) : "—"}</td>
+      <td class="num">${r.bite ?? "—"}</td>
+      <td class="num">${r.dayOut ?? "—"}</td>
       <td>${esc(r.lastDate ? fmtDate(r.lastDate) : "—")}</td>
       <td class="num">${fmtNum(r.fish)}</td>
       <td>${r.species.map(c => `<span class="sp-tag" style="background:${SPECIES_META[c]?.color || "#888"}">${c}</span>`).join(" ")}</td>
@@ -3340,7 +3574,8 @@ function renderList() {
         : "—"}</td>
     </tr>`;
   }).join("");
-  document.getElementById("list-count").textContent = `${rows.length} lakes`;
+  document.getElementById("list-count").textContent =
+    `${rows.length} lakes · Bite and Day out are for the day picked on the week bar`;
   document.querySelectorAll("#list-table th[data-k]").forEach(th => {
     th.classList.toggle("sorted", th.dataset.k === key);
     th.classList.toggle("asc", th.dataset.k === key && asc);
@@ -3365,12 +3600,12 @@ function buildList() {
 }
 
 function exportCsv() {
-  const header = ["Lake", "Distance km", "Last stocked", "Fish shown", "Species", "Zone", "Latitude", "Longitude"];
+  const header = ["Lake", "Distance km", "Bite", "Day out", "Last stocked", "Fish shown", "Species", "Zone", "Latitude", "Longitude"];
   const quote = v => `"${String(v ?? "").replace(/"/g, '""')}"`;
   const lines = [header.map(quote).join(",")];
   for (const r of listRows()) {
     lines.push([r.name, Number.isFinite(r.distanceKm) ? Math.round(r.distanceKm) : "",
-                r.lastDate, r.fish, r.species.join(" "), r.zone, r.lat ?? "", r.lon ?? ""].map(quote).join(","));
+                r.bite ?? "", r.dayOut ?? "", r.lastDate, r.fish, r.species.join(" "), r.zone, r.lat ?? "", r.lon ?? ""].map(quote).join(","));
   }
   const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8" });
   const a = document.createElement("a");
@@ -3406,7 +3641,6 @@ function setView(view) {
 // CHARTS
 // ============================================================
 let chart = null;
-function chart_ref() { return chart; }
 
 function updateChartScopeUI() {
   // The year chips are scoped to the focused lake, so they move with it.
@@ -3432,8 +3666,8 @@ function buildChartToggle() {
     state.chartOpen = !state.chartOpen;
     panel.classList.toggle("open", state.chartOpen);
     btn.classList.toggle("open", state.chartOpen);
+    btn.setAttribute("aria-pressed", String(state.chartOpen));
     document.getElementById("map-wrap").classList.toggle("charts-open", state.chartOpen);
-    btn.textContent = state.chartOpen ? "📊 Hide Charts" : "📊 Show Charts";
     setTimeout(() => { map.invalidateSize(); if (state.chartOpen) renderChart(); }, 260);
   });
   document.querySelectorAll(".chart-type-btn").forEach(b => {
@@ -3659,9 +3893,13 @@ function writeUrl() {
   if (state.aeratedOnly) p.set("aer", "1");
   if (state.baitBanOnly) p.set("bait", "1");
   if (state.facilities.size) p.set("fac", [...state.facilities].join("|"));
-  if (state.conditions.open) p.set("cx", state.conditions.horizon);
+  if (state.day) p.set("day", state.day);
+  if (state.origin && state.origin.kind !== "me") {
+    p.set("org", `${state.origin.lat.toFixed(4)},${state.origin.lon.toFixed(4)},${state.origin.name}`);
+  }
+  if (state.nav) p.set("nav", state.nav);
   if (state.view !== "map") p.set("v", state.view);
-  if (state.colorMode !== "species") p.set("cm", state.colorMode);
+  if (state.colorMode !== "bite") p.set("cm", state.colorMode);
   if (state.focusedLakeAts) p.set("lake", state.focusedLakeAts);
   if (state.chartType !== "stacked-species") p.set("c", state.chartType);
   if (state.home.lat !== DEFAULT_HOME.lat || state.home.lon !== DEFAULT_HOME.lon) {
@@ -3687,9 +3925,15 @@ function readUrl() {
   // Validated against what was actually collected, so a stale or hand-typed
   // link cannot leave a filter switched on that nothing can satisfy.
   if (p.has("fac")) pendingFacilities = p.get("fac").split("|").filter(Boolean);
-  if (["now", "week"].includes(p.get("cx"))) {
-    state.conditions.open = true;
-    state.conditions.horizon = p.get("cx");
+  // Old links opened the conditions panel; that is now the lake panel.
+  if (["now", "week"].includes(p.get("cx"))) state.conditions.horizon = p.get("cx");
+  if (p.has("day")) state.day = Math.max(0, Math.min(6, Math.round(Number(p.get("day")) || 0)));
+  if (["near", "saved", "area"].includes(p.get("nav"))) state.nav = p.get("nav");
+  if (p.has("org")) {
+    const [lat, lon, ...rest] = p.get("org").split(",");
+    if (Number.isFinite(Number(lat)) && Number.isFinite(Number(lon))) {
+      state.origin = { lat: Number(lat), lon: Number(lon), name: rest.join(",") || "Chosen place", kind: "town" };
+    }
   }
   if (p.has("home")) {
     const [lat, lon, ...rest] = p.get("home").split(",");
@@ -3767,28 +4011,24 @@ function setSidebarHidden(hidden) {
 
 function buildMenu() {
   const app = document.getElementById("app");
-  document.getElementById("menu-btn").addEventListener("click", () =>
-    app.classList.toggle("menu-open"));
   // One control, two jobs: on a phone the sidebar is a slide-over and this
   // closes it; on a desktop it is a column and this collapses it.
   document.getElementById("sidebar-close").addEventListener("click", () => {
     if (app.classList.contains("menu-open")) closeMenu();
     else setSidebarHidden(true);
   });
-  document.getElementById("sidebar-open").addEventListener("click", () => setSidebarHidden(false));
   document.getElementById("scrim").addEventListener("click", closeMenu);
+  /* With the lake list on the right, the filters column starts closed on a PC
+   * narrower than 1400 px; once someone opens or closes it, that is kept. */
   const stored = readStore(STORE_SIDEBAR, null);
-  if (stored && stored.hidden) document.getElementById("app").classList.add("sidebar-hidden");
+  const hidden = stored ? !!stored.hidden : !matchMedia("(min-width: 1400px)").matches;
+  if (hidden) document.getElementById("app").classList.add("sidebar-hidden");
 }
 
 // ============================================================
 // FILTER CHANGE
 // ============================================================
 function clearChartFocusIfInvalid() {
-  if (state.openPopupAts) {
-    const open = LAKES.find(l => lakeKey(l) === state.openPopupAts);
-    if (!open || !lakePassesFilters(open)) state.openPopupAts = null;
-  }
   if (!state.focusedLakeAts) return;
   const lk = LAKES.find(l => lakeKey(l) === state.focusedLakeAts);
   if (!lk || !lakePassesFilters(lk)) {
@@ -3809,7 +4049,8 @@ function onFilterChange() {
   if (state.view === "zones") renderZones();
   // The species filter decides which thermal band applies, so the panel has to
   // follow the filters rather than only the map.
-  if (state.conditions.open) ConditionsUI.render();
+  DayUI.refresh();
+  DayUI.emptyCheck();
   writeUrl();
 }
 
@@ -3827,6 +4068,10 @@ async function init() {
       typeof Weather === "undefined" ? "js/weather.js" : null,
       typeof ConditionsUI === "undefined" ? "js/conditions-ui.js" : null,
       typeof LakePanel === "undefined" ? "js/lake-panel.js" : null,
+      typeof Forecast === "undefined" ? "js/forecast.js" : null,
+      typeof LakeSheet === "undefined" ? "js/lake-sheet.js" : null,
+      typeof DayUI === "undefined" ? "js/day-ui.js" : null,
+      typeof ReadingRoom === "undefined" ? "js/reading-room.js" : null,
     ].filter(Boolean);
     if (missing.length) throw new Error(`${missing.join(" and ")} did not load. Check the vendor/ and js/ folders are present.`);
 
@@ -3858,9 +4103,8 @@ async function init() {
     prepareLakes();
     updateDataQualitySummary();
     initMap();
-    buildSearch();
+    placeOriginMarker();
     buildAdvisories();
-    buildConditionsPanel();
     buildSeasonFilter();
     buildRecencyChips();
     buildFacilityFilters();
@@ -3886,6 +4130,7 @@ async function init() {
       catch { btn.textContent = "Copy from the address bar"; }
       setTimeout(() => { btn.textContent = "Copy link"; }, 2200);
     });
+    DayUI.init();
     document.getElementById("fav-route").addEventListener("click", () => {
       const url = favouriteRouteUrl();
       if (url) window.open(url, "_blank", "noopener");
