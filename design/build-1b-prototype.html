@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alberta Trout Map — Build 1b prototype</title>
+<style>
+:root{color-scheme:dark;--bg:#2b2e2a;--panel:#3a3d38;--panel-2:#33362f;--edge:#1f211e;--ink:#e8e4d8;--dim:#b4ae9f;--accent:#c98a3e;
+--gold:#e0a526;--green:#5cb27f;--yellow:#d9c55a;--grey:#77736a;--ice:#7fb8d8;--red:#d9534f;--map:#3f4a3c;--water:#4f6f80;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){color-scheme:dark}}
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;display:flex;flex-direction:column}
+button{font:inherit;color:inherit;cursor:pointer}
+.demo{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:6px 10px;background:var(--edge);font-size:12px;color:var(--dim)}
+.demo button{min-height:44px;padding:0 10px;border:1px solid #555;border-radius:6px;background:transparent;font-size:12px}
+.demo button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}
+header{display:flex;gap:8px;align-items:center;padding:8px 10px;background:var(--panel-2);border-bottom:1px solid var(--edge);position:relative}
+header h1{font-size:15px;margin:0;white-space:nowrap;display:none}
+.search{flex:1;min-width:0;position:relative}
+.search input{width:100%;height:44px;border-radius:8px;border:1px solid #555;background:var(--panel);color:var(--ink);padding:0 12px;font-size:15px}
+.results{position:absolute;left:0;right:0;top:48px;background:var(--panel);border:1px solid var(--edge);border-radius:8px;z-index:30;max-height:60vh;overflow:auto;display:none}
+.results.open{display:block}
+.row{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:10px 12px;border-bottom:1px solid var(--edge);min-height:52px;width:100%;text-align:left;background:none;border-left:0;border-right:0;border-top:0}
+.row:hover,.row:focus-visible{background:var(--panel-2)}
+.row .nm{font-weight:600}.row .sub{font-size:12px;color:var(--dim)}
+.sc{font-variant-numeric:tabular-nums;font-weight:700;min-width:34px;text-align:right}
+.dayout{font-size:12px;padding:2px 6px;border-radius:999px;white-space:nowrap}
+.calm{background:#2f4a39;color:#a6dcb9}.gusty{background:#55332f;color:#f0b3ae}.rainy{background:#3a4553;color:#b9cfe6}.cold{background:#36495a;color:#bfe0f3}
+.icon-btn{min-width:44px;height:44px;border-radius:8px;border:1px solid #555;background:var(--panel)}
+main{flex:1;display:flex;min-height:0;position:relative}
+.mapwrap{flex:1;position:relative;min-width:0;overflow:hidden;background:var(--map)}
+.mapwrap svg text{pointer-events:none}
+#map{width:100%;height:100%;display:block}
+.week{position:absolute;top:8px;left:6px;right:6px;display:grid;grid-template-columns:repeat(7,1fr);gap:2px;background:rgba(43,46,42,.94);border:1px solid var(--edge);border-radius:10px;padding:4px;z-index:5}
+.week button{border:0;background:transparent;border-radius:6px;min-height:52px;padding:4px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.week button .d{font-size:12px;color:var(--dim)}.week button .b{font-size:13px;font-weight:700}
+.week button[aria-pressed="true"]{background:var(--accent);color:#1f211e}.week button[aria-pressed="true"] .d{color:#1f211e}
+.week .flag{font-size:10px;color:#f0b3ae}
+.week button[aria-pressed="true"] .flag{color:#5a1d18}
+.legend{position:absolute;left:10px;top:84px;max-width:calc(100% - 110px);font-size:12px;background:rgba(43,46,42,.9);border-radius:8px;padding:6px 8px;z-index:4;display:flex;gap:8px;flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:-1px}
+.layers{position:absolute;right:10px;top:84px;z-index:4;display:flex;flex-direction:column;gap:4px}
+.layers button{min-height:44px;min-width:44px;padding:0 8px;border-radius:8px;border:1px solid var(--edge);background:var(--panel-2);font-size:12px}
+.layers button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}
+.best{position:absolute;left:10px;right:10px;bottom:10px;background:var(--panel);border:1px solid var(--edge);border-radius:12px;z-index:6;overflow:hidden}
+.best h2{font-size:14px;margin:0;padding:10px 12px 4px;color:var(--dim);font-weight:600}
+.best h2 strong{color:var(--ink)}
+.side{display:none;width:380px;flex:none;background:var(--panel-2);border-left:1px solid var(--edge);flex-direction:column;min-height:0}
+.side .head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--edge);gap:8px;flex-wrap:wrap}
+.side .head h2{font-size:14px;margin:0}
+.side .list{overflow:auto;flex:1}
+.toggle{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--dim);min-height:44px}
+.toggle input{width:20px;height:20px}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:78%;background:var(--panel);border-top:1px solid var(--edge);border-radius:14px 14px 0 0;z-index:20;overflow:auto;display:none}
+.sheet.open{display:block}
+.grab{width:40px;height:4px;border-radius:2px;background:#666;margin:8px auto}
+.lh{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:0 14px}
+.lh h2{font-size:19px;margin:0}
+.lh .sub{font-size:13px;color:var(--dim)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;padding:8px 14px}
+.tag{font-size:12px;padding:3px 8px;border-radius:999px;background:var(--panel-2);border:1px solid #555}
+.tag.ban{background:var(--red);color:#fff;border-color:var(--red);font-weight:700}
+.tag.aer{background:#7fb8d8;color:#14232c;border-color:#7fb8d8;font-weight:700}
+.tag.low{border-color:var(--green);color:#a6dcb9}
+.tag.est{border-style:dashed;color:var(--dim)}
+.banner{margin:4px 14px 8px;border-radius:12px;background:#4a3a20;border:1px solid var(--gold);padding:12px}
+.banner .go{font-size:22px;font-weight:800;color:var(--gold);letter-spacing:.01em}
+.banner .why{font-size:13px;margin-top:2px}
+.bars{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;align-items:end;height:64px;margin-top:10px}
+.bars div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;font-size:11px;color:var(--dim)}
+.bars span{display:block;width:70%;border-radius:3px 3px 0 0;background:var(--green)}
+.bars .top span{background:var(--gold)}.bars .gust span{background:var(--grey)}
+.why summary{min-height:44px;padding:0;font-size:14px;color:var(--gold)}
+details.why{border-top:0;margin:0 14px 8px;background:var(--panel-2);border-radius:8px;padding:0 10px}
+details.why .body{padding:0 0 10px}
+.fac{display:grid;grid-template-columns:130px 1fr 44px;gap:8px;align-items:center;font-size:13px;margin:3px 0}
+.fac .track{height:8px;background:#55584f;border-radius:4px;overflow:hidden}
+.fac .track span{display:block;height:100%;background:var(--gold)}
+.fac b{text-align:right;font-variant-numeric:tabular-nums}
+.tip{margin:0 14px 8px;font-size:13px;padding:8px 10px;border-left:3px solid var(--accent);background:var(--panel-2)}
+.warn{margin:0 14px 8px;font-size:13px;padding:8px 10px;border-radius:8px;background:#55332f;color:#f6cdc9;font-weight:600}
+details{border-top:1px solid var(--edge)}
+summary{list-style:none;min-height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-weight:600;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--dim);font-size:20px}
+details[open] summary::after{content:"−"}
+.body{padding:0 14px 12px;font-size:14px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px}
+.kv dt{color:var(--dim)}.kv dd{margin:0}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
+.tabs button,.seg button{min-height:44px;padding:0 10px;border-radius:8px;border:1px solid #555;background:transparent;font-size:13px}
+.tabs button[aria-selected="true"],.seg button[aria-pressed="true"]{background:var(--accent);color:#1f211e;border-color:var(--accent)}
+.seg{display:inline-flex;gap:4px;margin:0 6px 8px 0}
+.chart{background:var(--panel-2);border-radius:8px;padding:6px}
+.chart svg{width:100%;height:120px;display:block}
+.feed{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin-top:8px;font-size:13px}
+.feed b{color:var(--gold)}
+a.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:8px;border:1px solid #555;color:var(--ink);text-decoration:none;margin:4px 6px 0 0}
+.sidenav{display:none;grid-template-columns:repeat(4,1fr);gap:4px;padding:6px 8px;border-bottom:1px solid var(--edge)}
+.sidenav button{min-height:44px;border:1px solid #555;border-radius:8px;background:transparent;font-size:13px}
+.sidenav button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);font-weight:700}
+.side.lake .sidenav{display:none}
+.closebar{display:flex;justify-content:flex-end;padding:0 8px}
+.bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--panel-2);border-top:1px solid var(--edge)}
+.bar button{min-height:56px;border:0;background:transparent;font-size:13px}
+.bar button[aria-pressed="true"]{color:var(--accent);font-weight:700}
+.state{position:absolute;inset:0;display:none;align-items:center;justify-content:center;z-index:40;background:rgba(31,33,30,.85);padding:20px;text-align:center}
+.state.on{display:flex}
+.state .card{background:var(--panel);border-radius:12px;padding:16px;max-width:340px}
+.state .card h3{margin:0 0 6px;font-size:16px}
+.state .card p{margin:0 0 10px;font-size:14px;color:var(--dim)}
+.state .card button{min-height:44px;padding:0 14px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);color:#1f211e;font-weight:700}
+.zones{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px}
+.zones button{min-height:44px;padding:0 10px;border-radius:8px;border:1px solid #555;background:transparent;font-size:13px}
+.note{font-size:12px;color:var(--dim);padding:6px 12px 10px}
+@media (min-width:1024px){
+ header h1{display:block}
+ .side{display:flex}
+ .bar{display:none}
+ .sidenav{display:grid}
+ .best{display:none}
+ .sheet{position:static;display:none;max-height:none;border-radius:0;border-top:0;flex:1;overflow:auto}
+ .sheet.open{display:block}
+ .side.lake .list,.side.lake .head{display:none}
+}
+</style>
+</head>
+<body>
+<div class="demo" role="group" aria-label="Prototype controls">
+ <span>Prototype controls:</span>
+ <button data-demo="season" aria-pressed="false" id="winterBtn">Winter mode</button>
+ <button data-demo="loading" aria-pressed="false">Loading</button>
+ <button data-demo="offline" aria-pressed="false">No signal</button>
+ <button data-demo="empty" aria-pressed="false">No lakes in range</button>
+ <button data-demo="first" aria-pressed="false">First visit</button>
+ <span>Scores are samples.</span>
+</div>
+<header>
+ <h1>Alberta Trout Map</h1>
+ <div class="search">
+  <input id="q" type="search" placeholder="Search a lake or a town, e.g. Innisfail" aria-label="Search a lake or a town" autocomplete="off">
+  <div class="results" id="results" role="listbox" aria-label="Search results"></div>
+ </div>
+ <button class="icon-btn" id="learnBtn" aria-label="Reading room">Learn</button>
+</header>
+<main>
+ <div class="mapwrap">
+  <svg id="map" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid meet" aria-label="Map of lakes near Red Deer"></svg>
+  <div class="week" id="week" role="group" aria-label="Pick a day"></div>
+  <div class="legend" id="legend"></div>
+  <div class="layers" role="group" aria-label="Map layer">
+   <button aria-pressed="true" data-layer="Topo">Topo</button>
+   <button aria-pressed="false" data-layer="Street">Street</button>
+   <button aria-pressed="false" data-layer="Satellite">Satellite</button>
+  </div>
+  <div class="best" id="best"></div>
+  <div class="sheet" id="sheet" aria-label="Lake details"></div>
+  <div class="state" id="state"></div>
+ </div>
+ <aside class="side" id="side">
+  <div class="head">
+   <h2 id="listTitle">Best lakes</h2><span id="originChip"></span>
+   <button class="toggle" id="onScreen" aria-pressed="false" style="border:1px solid #555;border-radius:8px;background:transparent;padding:0 10px">Only lakes on screen</button>
+  </div>
+  <nav class="sidenav" aria-label="Main (PC)"><button data-nav="near" aria-pressed="false">Near me</button><button data-nav="saved" aria-pressed="false">Saved</button><button data-nav="area" aria-pressed="false">Area</button><button data-nav="clear" aria-pressed="false">Clear</button></nav>
+  <div class="list" id="list"></div>
+  <div class="sheet" id="sideSheet" aria-label="Lake details"></div>
+ </aside>
+</main>
+<nav class="bar" aria-label="Main">
+ <button data-nav="near" aria-pressed="false">Near me</button>
+ <button data-nav="saved" aria-pressed="false">Saved</button>
+ <button data-nav="area" aria-pressed="false">Area</button>
+ <button data-nav="clear" aria-pressed="false">Clear</button>
+</nav>
+<script>
+const DAYS=["Fri","Sat","Sun","Mon","Tue","Wed","Thu"];
+const LAKES=[
+ {id:"wb4014",lat:52.006721,lon:-114.788387,n:"Beaver Lake",km:73,ha:31.1,max:9,sp:"Rainbow",last:"May 21, 2026",cm:20.6,bait:"ban",trout:0,ice:"Early and late ice: closes Nov 30, opens Apr 1",aer:true,rep:4,x:150,y:250,bite:[62,71,58,49,66,74,82],gust:[22,48,31,18,25,20,14]},
+ {id:"wb4061",lat:52.011667,lon:-114.854167,n:"Birch Lake",km:77,ha:28.8,max:10.3,sp:"Rainbow",last:"May 21, 2026",cm:20.1,bait:"no bait fish",trout:3,ice:"Open all winter",aer:true,rep:9,x:110,y:300,bite:[58,66,61,52,60,70,79],gust:[24,46,30,20,27,22,16]},
+ {id:"wb6806",lat:52.297145,lon:-114.394522,n:"Hansen's Reservoir",km:40,ha:2.9,max:null,sp:"Rainbow",last:"May 6, 2026",cm:21,bait:"allowed",trout:5,ice:"Open all winter",aer:true,rep:2,x:170,y:330,bite:[55,60,64,50,58,68,74],gust:[20,44,28,17,24,19,15]},
+ {id:"wb6844",lat:52.011001,lon:-114.309334,n:"Dickson Trout Pond",km:44,ha:64.8,max:6,sp:"Rainbow, Tiger",last:"Jun 2, 2026",cm:20.4,bait:"allowed",trout:5,ice:"Open all winter",aer:false,rep:12,x:185,y:380,bite:[52,57,49,44,55,61,66],gust:[26,52,35,22,30,25,19]},
+ {id:"wb6770",lat:52.112277,lon:-112.844594,n:"Kerbe's Pond",km:68,ha:3.7,max:3.9,sp:"Tiger",last:"Apr 27, 2026",cm:16.7,bait:"ban",trout:1,ice:"Early and late ice: closes Nov 30, opens Apr 1",aer:true,rep:1,x:205,y:440,bite:[50,54,57,47,52,63,71],gust:[19,40,27,16,22,18,13]},
+ {id:"wb6623",lat:52.269458,lon:-113.853351,n:"Mitchell Pond",km:3,ha:2.2,max:null,sp:"Rainbow",last:"May 6, 2026",cm:null,bait:"allowed",trout:5,ice:"Open all winter",aer:false,rep:6,x:250,y:280,bite:[48,52,50,45,49,57,63],gust:[23,47,30,19,26,21,17]},
+ {id:"wb26322",lat:52.476805,lon:-113.712706,n:"Len Thompson Pond",km:24,ha:2,max:null,sp:"Brown, Rainbow, Tiger",last:"Jun 2, 2026",cm:null,bait:"allowed",trout:5,ice:"Open all winter",aer:false,rep:3,x:290,y:200,bite:[46,50,47,42,48,55,60],gust:[25,49,33,21,28,23,18]},
+ {id:"wb6871",lat:52.6804,lon:-113.58502,n:"Ponoka Centennial Park Pond",km:48,ha:6.5,max:null,sp:"Rainbow, Tiger",last:"May 7, 2026",cm:null,bait:"allowed",trout:5,ice:"Open all winter",aer:false,rep:5,x:270,y:120,bite:[44,49,46,40,47,52,58],gust:[27,53,34,23,29,24,20]}
+];
+const ZONES=["Parkland","Eastern Slopes","Boreal","Prairie","Northern Boreal"];
+LAKES.forEach(l=>{l.y=Math.round(110+(l.y-120)*250/320)});
+const PLACES=[["Red Deer",52.268,-113.811],["Sylvan Lake",52.311,-114.084],["Innisfail",52.027,-113.950],["Lacombe",52.468,-113.737],["Olds",51.792,-114.107],["Ponoka",52.677,-113.582],["Rocky Mountain House",52.377,-114.919],["Caroline",52.090,-114.744],["Sundre",51.797,-114.641]];
+let origin=PLACES[0];
+const rad=x=>x*Math.PI/180;
+const kmFrom=l=>{const a=Math.sin(rad(l.lat-origin[1])/2)**2+Math.cos(rad(origin[1]))*Math.cos(rad(l.lat))*Math.sin(rad(l.lon-origin[2])/2)**2;return Math.round(12742*Math.asin(Math.sqrt(a)))};
+const CHILL=[-8,-14,-11,-6,-9,-15,-12];
+let day=6,sel=null,winter=false,saved=new Set(["wb4014","wb6844"]),nav=null;
+const dayOut=(l,d)=>{if(winter)return["cold",CHILL[d]+" °C wind chill"];const g=l.gust[d];if(g>=40)return["gusty","gusts "+g+" km/h"];if(d===3)return["rainy","rain likely"];return["calm","calm"]};
+const band=s=>s>=75?"gold":s>=60?"green":s>=50?"yellow":"grey";
+const colour={gold:"var(--gold)",green:"var(--green)",yellow:"var(--yellow)",grey:"var(--grey)"};
+const bestDay=l=>{let b=-1;for(let d=0;d<7;d++){if(l.gust[d]>=40)continue;if(b<0||l.bite[d]>l.bite[b])b=d}return b};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function drawWeek(){const w=document.getElementById("week");
+ w.innerHTML=DAYS.map((d,i)=>{const gusty=LAKES.filter(l=>l.gust[i]>=40).length>LAKES.length/2;
+  const top=Math.max(...LAKES.map(l=>l.bite[i]));
+  return `<button aria-pressed="${i===day}" data-day="${i}"><span class="d">${d}</span><span class="b">${winter?CHILL[i]+"°":top}</span>${gusty&&!winter?'<span class="flag">gusty</span>':""}</button>`}).join("");
+ w.querySelectorAll("button").forEach(b=>b.onclick=()=>{day=+b.dataset.day;render()})}
+function drawMap(){const s=document.getElementById("map");
+ let h=`<rect width="400" height="600" fill="var(--map)"/><path d="M0 470 C120 430 160 520 260 480 S380 430 400 450 L400 600 L0 600Z" fill="#46533f"/><ellipse cx="300" cy="420" rx="40" ry="18" fill="var(--water)"/><ellipse cx="90" cy="180" rx="26" ry="12" fill="var(--water)"/><circle cx="252" cy="268" r="4" fill="var(--ink)"/><text x="260" y="262" font-size="11" fill="var(--ink)">Red Deer</text>`;
+  for(const l of LAKES){const b=winter?(l.ice.startsWith("Open all")?"ice":"grey"):band(l.bite[day]);const r=sel&&sel.id===l.id?13:10;
+  const fill=b==="ice"?"var(--ice)":colour[b];
+  h+=`<g role="button" tabindex="0" aria-label="${esc(l.n)}" data-id="${l.id}" style="cursor:pointer"><circle cx="${l.x}" cy="${l.y}" r="28" fill="transparent"/><circle cx="${l.x}" cy="${l.y}" r="${r}" fill="${fill}" stroke="${sel&&sel.id===l.id?"#fff":"#1f211e"}" stroke-width="2"/>${winter?"":`<text x="${l.x}" y="${l.y+4}" font-size="10" text-anchor="middle" fill="#1f211e" font-weight="700">${l.bite[day]}</text>`}</g>`}
+ s.innerHTML=h;s.querySelectorAll("g[data-id]").forEach(g=>{const f=()=>openLake(g.dataset.id);g.onclick=f;g.onkeydown=e=>{if(e.key==="Enter")f()}});
+ document.getElementById("legend").innerHTML=winter?'<span><i style="background:var(--ice)"></i>Open all winter</span><span>Week bar: wind chill</span><span><i style="background:var(--grey)"></i>Part winter or closed</span><span>Ice likely: bite score hidden</span>':'<span><i style="background:var(--gold)"></i>Best</span><span><i style="background:var(--green)"></i>Good</span><span><i style="background:var(--yellow)"></i>Fair</span><span><i style="background:var(--grey)"></i>Poor</span>'}
+function rowHtml(l){const[c,t]=dayOut(l,day);return `<button class="row" data-id="${l.id}"><span><span class="nm">${esc(l.n)}</span><br><span class="sub">${kmFrom(l)} km · ${l.ha} ha${l.bait==="ban"?" · bait ban":""}</span></span><span class="sc">${winter?"—":l.bite[day]}</span><span class="dayout ${c}">${t}</span></button>`}
+function ranked(){let a=[...LAKES];if(nav==="saved")a=a.filter(l=>saved.has(l.id));
+ if(nav==="near"||origin[0]!=="Red Deer")return a.sort((x,y)=>kmFrom(x)-kmFrom(y));
+ if(nav==="saved"&&!winter)return a.sort((x,y)=>{const bx=bestDay(x),by=bestDay(y);return (by<0?0:y.bite[by])-(bx<0?0:x.bite[bx])});
+ return a.sort((x,y)=>winter?kmFrom(x)-kmFrom(y):y.bite[day]-x.bite[day])}
+function drawLists(){const a=ranked();
+ const chip=origin[0]!=="Red Deer"?`<button class="toggle" id="clearOrigin" style="border:1px solid var(--accent);border-radius:8px;background:transparent;padding:0 10px;color:var(--accent)">Near ${esc(origin[0])} ✕</button>`:"";
+ const title=origin[0]!=="Red Deer"&&!nav?`Lakes near ${origin[0]}`:nav==="near"?"Nearest lakes":nav==="saved"?"Saved lakes, by best day":nav==="area"?"Lakes in Parkland":winter?"Ice season lakes":`Best lakes on ${DAYS[day]}`;
+ document.getElementById("listTitle").textContent=title;
+ const zones=nav==="area"?`<div class="zones">${ZONES.map((z,i)=>`<button aria-pressed="${i===0}">${z}</button>`).join("")}</div>`:"";
+ document.getElementById("list").innerHTML=zones+a.map(rowHtml).join("")+'<p class="note">Bite = will fish feed. Day out = wind, gusts, rain and cold for being on the water. Same day, different scores: each lake has its own forecast spot and its own water temperature. Open a lake and tap Why.</p>';
+ const b=document.getElementById("best");
+ b.innerHTML=`<h2>${nav||origin[0]!=="Red Deer"?esc(title):winter?`<strong>Ice season lakes near you</strong> · Day out ${DAYS[day]}`:`<strong>Best near you, ${DAYS[day]}</strong> · Bite and Day out`}</h2>${zones}${a.slice(0,3).map(rowHtml).join("")}`;
+ document.getElementById("originChip").innerHTML=chip;
+ const bh=document.querySelector("#best h2");if(chip&&bh){bh.style.cssText="display:flex;justify-content:space-between;align-items:center;gap:8px";bh.insertAdjacentHTML("beforeend",chip.replace('id="clearOrigin"','data-clear="1" aria-label="Back to Red Deer"').replace(`Near ${esc(origin[0])} ✕`,"✕"))}
+ document.querySelectorAll("#clearOrigin,[data-clear]").forEach(b=>b.onclick=()=>{origin=PLACES[0];render()});
+ document.querySelectorAll(".row[data-id]").forEach(r=>r.onclick=()=>openLake(r.dataset.id))}
+function bars(l){const bd=bestDay(l);return `<div class="bars" aria-label="Bite score for 7 days">${l.bite.map((v,i)=>`<div class="${i===bd?"top":l.gust[i]>=40?"gust":""}"><span style="height:${v*0.5}px"></span>${DAYS[i]}</div>`).join("")}</div>`}
+function lineChart(l){const W=300,H=110,px=i=>10+i*(W-20)/6,py=v=>H-8-v*1.5;
+ const p=a=>a.map((v,i)=>(i?"L":"M")+px(i)+" "+py(v)).join(" ");const wind=l.gust.map(g=>Math.round(g*.45));
+ return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Wind and gusts line chart"><path d="${p(l.gust)}" stroke="#f0b3ae" fill="none" stroke-width="2"/><path d="${p(wind)}" stroke="#a6dcb9" fill="none" stroke-width="2"/>${l.gust.map((g,i)=>`<text x="${px(i)}" y="${H-1}" font-size="9" fill="var(--dim)" text-anchor="middle">${DAYS[i]}</text>`).join("")}<line x1="10" x2="${W-10}" y1="${py(40)}" y2="${py(40)}" stroke="#d9534f" stroke-dasharray="4 3"/><text x="${W-12}" y="${py(40)-3}" font-size="9" fill="#f0b3ae" text-anchor="end">gust warning 40</text></svg><div class="sub" style="font-size:12px;color:var(--dim)"><span style="color:#a6dcb9">Wind</span> · <span style="color:#f0b3ae">Gusts</span> km/h</div>`}
+function gridChart(l){return `<div class="kv" style="grid-template-columns:repeat(8,auto);font-size:12px"><b></b>${DAYS.map(d=>`<b>${d}</b>`).join("")}${["Dawn","Morning","Midday","Evening","Night"].map((p,j)=>`<span>${p}</span>`+l.bite.map(v=>`<span>${Math.max(10,v-[0,8,20,4,25][j])}</span>`).join("")).join("")}</div>`}
+let tab="Wind",view="Lines",span=7;
+function forecast(l){const t=["Wind","Weather","Barometer","Solunar"];
+ const body=tab==="Wind"?(view==="Lines"?lineChart(l):gridChart(l)):tab==="Weather"?'<p>Thu: 6 °C, cloud clearing after 14:00, rain 10%.</p>':tab==="Barometer"?'<p>Steady, rising slowly since Wednesday evening.</p><p><b>Reading the barometer:</b> the direction matters, not the number. Steady or slowly rising: normal feeding. A sharp fall before a front: often a short, strong bite.</p>':'<p>Moon: waxing gibbous, 82% lit.</p>';
+ return `<div class="tabs" role="tablist">${t.map(x=>`<button role="tab" aria-selected="${x===tab}" data-tab="${x}">${x}</button>`).join("")}</div>
+ <div class="seg"><button aria-pressed="${span===3}" data-span="3">3 days</button><button aria-pressed="${span===7}" data-span="7">7 days</button></div><div class="seg"><button aria-pressed="${view==="Lines"}" data-view="Lines">Lines</button><button aria-pressed="${view==="Grid"}" data-view="Grid">Grid</button></div>
+ <div class="chart">${body}</div>
+ <div class="feed" aria-label="Feeding windows today"><b>Major</b><span>07:40–09:40 · 20:05–22:05</span><b>Minor</b><span>14:10–15:10 · 01:30–02:30</span></div>`}
+function parts(l,d){const wind=Math.max(0,Math.round(6-l.gust[d]/10)),rain=d===3?1:4,pres=12,light=Math.min(40,Math.round(l.bite[d]*0.42));
+ const water=Math.max(0,Math.min(35,l.bite[d]-light-pres-wind-rain));return{Light:[light,40],"Water temperature":[water,35],"Pressure trend":[pres,15],Wind:[wind,6],Rain:[rain,4]}}
+function whyHtml(l,d){const me=parts(l,d);const other=[...LAKES].filter(x=>x.id!==l.id).sort((a,b)=>Math.abs(a.bite[d]-l.bite[d]+8)-Math.abs(b.bite[d]-l.bite[d]+8))[0];const them=parts(other,d);
+ const diffs=Object.keys(me).map(k=>[k,me[k][0]-them[k][0]]).filter(x=>x[1]!==0).sort((a,b)=>Math.abs(b[1])-Math.abs(a[1])).slice(0,3);
+ const say={Light:"more cloud in the bright hours","Water temperature":"water closer to the best temperature (estimated from size and depth)","Pressure trend":"steadier pressure",Wind:"lighter wind on this lake",Rain:"less rain"};
+ const sayNeg={Light:"brighter sun at midday","Water temperature":"water further from the best temperature",Wind:"more wind here",Rain:"more rain","Pressure trend":"a falling barometer"};
+ const why=diffs.map(([k,v])=>`${v>0?say[k]:sayNeg[k]} (${v>0?"+":""}${v})`).join("; ");
+ return `<details class="why"><summary>Why ${l.bite[d]} on ${DAYS[d]}?</summary><div class="body"><p style="margin:0 0 8px">Each lake gets the forecast at its own spot, so wind, cloud and rain differ even on the same day. Water temperature is estimated for each lake from its size and depth. Pressure and moon are about the same for nearby lakes.</p>
+ ${Object.entries(me).map(([k,[v,m]])=>`<div class="fac"><span>${k}</span><span class="track"><span style="width:${Math.round(v/m*100)}%"></span></span><b>${v}/${m}</b></div>`).join("")}<div class="fac"><span>Moon</span><span></span><b>×1.02</b></div>
+ <p style="margin:8px 0 0"><b>${other.bite[d]<l.bite[d]?"Higher":other.bite[d]>l.bite[d]?"Lower":"Same as"}${other.bite[d]===l.bite[d]?"":" than"} ${esc(other.n)} (${other.bite[d]}):</b> ${why||"the parts are almost the same"}.</p></div></details>`}
+function lakeHtml(l){const bd=bestDay(l);const g=l.gust.findIndex(x=>x>=40);
+ const top=winter?`<div class="banner" style="border-color:var(--ice);background:#24343d"><div class="go" style="color:var(--ice)">Ice likely</div><div class="why">Open-water bite score hidden. Day out: ${CHILL[day]} °C wind chill on ${DAYS[day]}, light wind.</div></div>`
+ :`<div class="banner"><div class="go">Go ${DAYS[bd]} · ${l.bite[bd]}</div><div class="why">Best bite and calm.${g>=0?` ${DAYS[g]} gusts to ${l.gust[g]} km/h, not a boat day.`:""}</div>${bars(l)}</div>${whyHtml(l,day)}`;
+ return `<div class="grab"></div><div class="closebar"><button class="icon-btn" id="closeLake" aria-label="Close lake">✕</button></div>
+ <div class="lh"><div><h2>${esc(l.n)}</h2><div class="sub">${kmFrom(l)} km from ${esc(origin[0])} · ${l.ha} ha</div></div><button class="icon-btn" id="saveBtn" aria-label="Save lake" aria-pressed="${saved.has(l.id)}">${saved.has(l.id)?"★":"☆"}</button></div>
+ <div class="tags">${l.bait==="ban"?'<span class="tag ban">Bait ban</span>':""}${l.aer?'<span class="tag aer">Aerated</span>':""}${l.trout<=2?`<span class="tag low">Low harvest limit: ${l.trout} trout</span>`:""}<span class="tag est">Popularity est.: ${l.rep} community reports</span></div>
+ ${top}
+ ${l.aer?'<div class="warn">Thin ice and open water near the aerators. Stay behind the fence and the danger signs.</div>':""}
+ ${winter?"":'<div class="tip">Steady pressure: fish feed at normal depths. Sun breaks through around 14:30 Thu (anglers report a short bite).</div>'}
+ <details open><summary>Forecast</summary><div class="body">${forecast(l)}</div></details>
+ <details><summary>Fish and stocking</summary><div class="body"><dl class="kv"><dt>Species</dt><dd>${l.sp}</dd><dt>Last stocked</dt><dd>${l.last}${l.cm?`, ${l.cm} cm`:""}</dd><dt>Typical size</dt><dd>Not published by Alberta. Shown: stocked size and date.</dd><dt>Trout limit</dt><dd>${l.trout}${l.trout<=2?" (fewer fish taken, more can grow big)":""}</dd><dt>Trophy size rule</dt><dd>None for this lake. Lakes with one (for example "trout over 50 cm") get a Trophy rule tag.</dd></dl></div></details>
+ <details><summary>Lake info</summary><div class="body"><dl class="kv"><dt>Area</dt><dd>${l.ha?l.ha+" ha":"Not known: Day out uses a medium lake, labelled size unknown"}</dd><dt>Max depth</dt><dd>${l.max?l.max+" m":"Not known"}</dd><dt>Ice season</dt><dd>${l.ice}. Legal is not safe. Ice thickness is never forecast.</dd><dt>Depth chart</dt><dd>Checked in Build 2</dd></dl></div></details>
+ <details${l.bait==="ban"?" open":""}><summary>Rules${l.bait==="ban"?" · bait ban":""}</summary><div class="body"><dl class="kv"><dt>Bait</dt><dd>${l.bait==="ban"?"<b style='color:#f6cdc9'>Bait ban</b>":l.bait==="allowed"?"Allowed":"Allowed, except bait fish"}</dd><dt>Trout limit</dt><dd>${l.trout}</dd></dl><a class="btn" href="https://www.alberta.ca/fishing-regulations" target="_blank" rel="noopener">Alberta rules</a><a class="btn" href="https://www.albertarelm.com" target="_blank" rel="noopener">Buy a licence</a></div></details>
+ <details><summary>Getting there</summary><div class="body"><a class="btn" href="#" onclick="return false">Google Maps</a><a class="btn" href="#" onclick="return false">Apple Maps</a></div></details>`}
+function openLake(id){sel=LAKES.find(l=>l.id===id);document.getElementById("results").classList.remove("open");render()}
+function closeLake(){sel=null;render()}
+function render(){drawWeek();drawMap();drawLists();
+ const pc=matchMedia("(min-width:1024px)").matches;const sh=document.getElementById(pc?"sideSheet":"sheet");const other=document.getElementById(pc?"sheet":"sideSheet");
+ other.classList.remove("open");other.innerHTML="";document.getElementById("side").classList.toggle("lake",!!sel&&pc);
+ if(sel){sh.innerHTML=lakeHtml(sel);sh.classList.add("open");
+  sh.querySelector("#closeLake").onclick=closeLake;
+  sh.querySelector("#saveBtn").onclick=()=>{saved.has(sel.id)?saved.delete(sel.id):saved.add(sel.id);render()};
+  sh.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{tab=b.dataset.tab;render()});
+  sh.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>{view=b.dataset.view;render()});
+  sh.querySelectorAll("[data-span]").forEach(b=>b.onclick=()=>{span=+b.dataset.span;render()});
+ }else{sh.classList.remove("open");sh.innerHTML=""}
+ document.getElementById("best").style.display=sel&&!pc?"none":""}
+const q=document.getElementById("q"),res=document.getElementById("results");
+q.oninput=()=>{const t=q.value.trim().toLowerCase();if(!t){res.classList.remove("open");return}
+ const pl=PLACES.filter(p=>p[0].toLowerCase().includes(t));
+ const m=LAKES.filter(l=>l.n.toLowerCase().includes(t)).sort((a,b)=>kmFrom(a)-kmFrom(b));
+ const ph=pl.map(p=>{const near=[...LAKES].sort((a,b)=>dist2(a,p)-dist2(b,p))[0];return `<button class="row place" data-place="${esc(p[0])}"><span><span class="nm">${esc(p[0])}</span><br><span class="sub">Place · nearest: ${esc(near.n)}</span></span><span class="sc"></span><span class="dayout calm">Show lakes</span></button>`}).join("");
+ res.innerHTML=(pl.length?'<p class="note">Places</p>'+ph:"")+(m.length?'<p class="note">Lakes</p>'+m.map(rowHtml).join(""):"")||'<p class="note">No place or lake matches. Try part of a town or lake name.</p>';res.classList.add("open");
+ res.querySelectorAll(".row[data-id]").forEach(r=>r.onclick=()=>{q.value="";openLake(r.dataset.id)});
+ res.querySelectorAll(".row[data-place]").forEach(r=>r.onclick=()=>{origin=PLACES.find(p=>p[0]===r.dataset.place);q.value="";res.classList.remove("open");sel=null;nav=null;render()})};
+const dist2=(l,p)=>(l.lat-p[1])**2+((l.lon-p[2])*0.61)**2;
+document.querySelectorAll("[data-layer]").forEach(b=>b.onclick=()=>document.querySelectorAll("[data-layer]").forEach(x=>x.setAttribute("aria-pressed",x===b)));
+document.querySelectorAll("[data-nav]").forEach(b=>b.onclick=()=>{const v=b.dataset.nav;nav=v==="clear"||nav===v?null:v;if(v==="clear")sel=null;
+ document.querySelectorAll("[data-nav]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.nav===nav));render()});
+document.getElementById("onScreen").onclick=e=>{const b=e.currentTarget;b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")!=="true");render()};
+const STATES={loading:["Getting the forecast","Fetching 7 days for 309 lakes. Saved forecasts show first.",""],offline:["No signal","Showing the forecast saved at 06:10. Scores update when you are back online.","OK"],empty:["No lakes within 25 km","Widen the distance or turn off a filter.","Widen to 100 km"],first:["Find a lake in 3 taps","1. Pick a day on the week bar. 2. Gold pins are the best that day. 3. Tap a pin for its forecast and rules. Install: iPhone Share, then Add to Home Screen; Android or PC browser menu, then Install app.","Start"]};
+document.querySelectorAll("[data-demo]").forEach(b=>b.onclick=()=>{const k=b.dataset.demo;
+ if(k==="season"){winter=!winter;b.setAttribute("aria-pressed",winter);render();return}
+ const st=document.getElementById("state");const on=b.getAttribute("aria-pressed")!=="true";
+ document.querySelectorAll("[data-demo]:not([data-demo=season])").forEach(x=>x.setAttribute("aria-pressed","false"));
+ if(!on){st.classList.remove("on");return}b.setAttribute("aria-pressed","true");
+ const[h,p,btn]=STATES[k];st.innerHTML=`<div class="card"><h3>${h}</h3><p>${p}</p>${btn?`<button id="stOk">${btn}</button>`:""}</div>`;st.classList.add("on");
+ const ok=document.getElementById("stOk");if(ok)ok.onclick=()=>{st.classList.remove("on");b.setAttribute("aria-pressed","false")}});
+document.getElementById("learnBtn").onclick=()=>{const st=document.getElementById("state");st.innerHTML='<div class="card" style="text-align:left"><h3>Reading room</h3><p>How the Bite and Day out scores work · Winterkill and aeration · Ice safety · Reading the barometer · What stocked sizes mean · Telling the trout apart (6 species)</p><button id="stOk">Close</button></div>';st.classList.add("on");document.getElementById("stOk").onclick=()=>st.classList.remove("on")};
+addEventListener("resize",render);render();
+</script>
+</body>
+</html>
