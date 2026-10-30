@@ -731,6 +731,13 @@
     var mq = matchMedia("(min-width: 1024px)");
     var onMq = function () { renderSheet(); if (map) setTimeout(function () { map.invalidateSize(); }, 60); };
     if (mq.addEventListener) mq.addEventListener("change", onMq); else if (mq.addListener) mq.addListener(onMq);
+    // Q15: on a phone the header also holds Filters, Charts and Learn, so the long hint was cut off.
+    var phone = matchMedia("(max-width: 767px)");
+    var onPhone = function () {
+      $("search").placeholder = phone.matches ? "Search a lake or a town" : "Search a lake or a town, e.g. Innisfail";
+    };
+    onPhone();
+    if (phone.addEventListener) phone.addEventListener("change", onPhone); else if (phone.addListener) phone.addListener(onPhone);
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && state.selectedKey && !document.querySelector("#reading-room:not([hidden])")) closeLake();
     });

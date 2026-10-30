@@ -23,9 +23,10 @@ Single working record for this repository. Updated by the main session at the en
 - [agreed] Separate Conditions panel and popup button nudge removed — search: intentionally removed
 - [agreed] Colour-blind-safe score scale grey, blue, light blue, gold, with numbers — search: SCORE_PIN
 - [agreed] Winter week bar when more than half the lakes on screen have the guard on — search: winterOn
+- [agreed] Prototype differences Q1–Q17 (comparison page 2026-10-30): keep the build for Q1–Q14 and Q16–Q17; Q15 shorter search hint on phones — search: Search a lake or a town
 
 ## Pending
-- Build 1b: comparison of prototype and build sent to the owner; PR opens after the answers — 2026-10-30.
+- Build 1b: owner accepted all 17 recommendations 2026-10-30; PR open, waiting for the owner's merge and device check.
 - Build 2: starts on a new branch from main after the owner merges Build 1b.
 
 ## Request ledger
@@ -119,7 +120,7 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 |---|---|---|
 | Build 1a | COMPLETE | PR #15 merged 2026-10-16; 183 tests pass on main (2026-10-29) |
 | FEATURES.md, WORKING_RECORD.md | COMPLETE | this change, 2026-10-29 |
-| Build 1b | IN REVIEW | branch build-1b; comparison with the prototype sent 2026-10-30 |
+| Build 1b | IN REVIEW | branch build-1b; owner answered Q1–Q17 2026-10-30; PR waiting for merge |
 | Build 2 | NOT STARTED | |
 | Build 3 | NOT STARTED | |
 

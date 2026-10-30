@@ -2781,6 +2781,11 @@ class Build1bScoreTests(unittest.TestCase):
         self.assertIn('if (state.colorMode !== "bite") p.set("cm", state.colorMode);', page)
         self.assertIn("Home: ${esc(state.home.name)}", page)
 
+    def test_phone_search_hint_fits_beside_the_header_buttons(self):
+        """Owner answer Q15, 2026-10-30: a shorter search hint on phones."""
+        ui = (ROOT / "js" / "day-ui.js").read_text(encoding="utf-8")
+        self.assertIn('phone.matches ? "Search a lake or a town" :', ui)
+
     def test_why_parts_add_up_to_the_shown_score(self):
         cases = [
             # ordinary, all five present
