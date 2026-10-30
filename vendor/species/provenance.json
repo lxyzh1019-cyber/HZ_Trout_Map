@@ -1,0 +1,65 @@
+{
+  "RNTR": {
+    "file_page": "https://commons.wikimedia.org/wiki/File:Oncorhynchus_mykiss_Hungary.jpg",
+    "author": "Harka, Akos",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0",
+    "retrieved": "2026-10-29"
+  },
+  "BKTR": {
+    "file_page": "https://commons.wikimedia.org/wiki/File:Salvelinus_fontinalis.jpg",
+    "author": "Engbretson, Eric",
+    "licence": "Public domain",
+    "licence_url": null,
+    "retrieved": "2026-10-29"
+  },
+  "BNTR": {
+    "file_page": "https://commons.wikimedia.org/wiki/File:Brown_Trout_(Salmo_trutta).jpg",
+    "author": "USFWS Mountain Prairie",
+    "licence": "Public domain",
+    "licence_url": null,
+    "retrieved": "2026-10-29"
+  },
+  "TGTR": {
+    "file_page": "https://commons.wikimedia.org/wiki/File:Swimming_Tiger_Trout.jpg",
+    "author": "U.S. Department of Agriculture",
+    "licence": "Public domain",
+    "licence_url": null,
+    "retrieved": "2026-10-29"
+  },
+  "CTTR": {
+    "file_page": "https://commons.wikimedia.org/wiki/File:Cutthroat_trout,_western_Washington_(53815470250).jpg",
+    "author": "USFWS - Pacific Region",
+    "licence": "Public domain",
+    "licence_url": null,
+    "retrieved": "2026-10-29"
+  },
+  "WSCT": {
+    "file_page": "https://commons.wikimedia.org/wiki/File:Wscutt.jpg",
+    "author": "Craig D. Young",
+    "licence": "Public domain",
+    "licence_url": null,
+    "retrieved": "2026-10-29"
+  },
+  "WALL": {
+    "file_page": "https://commons.wikimedia.org/wiki/File:Walleye_(Sander_vitreus).jpg",
+    "author": "USFWS Mountain Prairie",
+    "licence": "Public domain",
+    "licence_url": null,
+    "retrieved": "2026-10-29"
+  },
+  "NRPK": {
+    "file_page": "https://commons.wikimedia.org/wiki/File:Esox_lucius_(no).JPG",
+    "author": "Arnstein Rønning",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "retrieved": "2026-10-29"
+  },
+  "ARGR": {
+    "file_page": "https://commons.wikimedia.org/wiki/File:Arctic_grayling_showing_iridescent_dorsal_fin.jpg",
+    "author": "U.S. Fish and Wildlife Service",
+    "licence": "Public domain",
+    "licence_url": null,
+    "retrieved": "2026-10-29"
+  }
+}

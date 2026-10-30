@@ -1,0 +1,26 @@
+{
+  "source": "Natural Resources Canada, Canadian Geographical Names Database (CGNDB) - Canadian Geographical Names (CGN), Alberta pre-packaged CSV",
+  "url": "https://open.canada.ca/data/en/dataset/e27c6eba-3c5d-4051-9db2-082dc6411c2c",
+  "download_url": "https://ftp.maps.canada.ca/pub/nrcan_rncan/vector/geobase_cgn_toponyme/prov_csv_eng/cgn_ab_csv_eng.zip",
+  "retrieved": "2026-10-29",
+  "licence": "Open Government Licence - Canada 2.0",
+  "licence_url": "https://open.canada.ca/en/open-government-licence-canada",
+  "attribution": "Contains information licensed under the Open Government Licence – Canada.",
+  "count": 1797,
+  "kinds": {
+    "locality": 898,
+    "hamlet": 421,
+    "Indian reserve": 148,
+    "town": 105,
+    "village": 84,
+    "summer village": 50,
+    "First Nation": 48,
+    "city": 19,
+    "urban community": 10,
+    "Metis settlement": 8,
+    "specialized municipality": 4,
+    "townsite": 2
+  },
+  "dropped": "Not populated places: counties, municipal districts, improvement districts, special areas, every natural or constructed feature. Populated-place entries that are not somewhere to go: Former Locality, Former Post Office, Post Office, Railway Point, Customs Point, Settlement (historic river-lot settlements). The same name within 5 km kept once, most specific kind first.",
+  "script": "scripts/towns.py"
+}
