@@ -175,7 +175,7 @@
       return '<div class="banner ice"><div class="go">Ice likely</div><div class="why">'
         + "Every day of the past 7 days had a mean air temperature below freezing, so the open-water Bite score is hidden. "
         + (chill === null ? "" : "Day out: " + Math.round(chill) + " °C wind chill on " + dayName(f, d) + ". ")
-        + "Legal is not safe. Ice thickness is never forecast.</div></div>";
+        + "Legal is not safe. Ice thickness is never forecast.</div>" + winterScoreHtml(f, d) + "</div>";
     }
     var gusty = f.days.map(function (x, i) { return [x, i]; })
       .filter(function (p) { return num(p[0].gustMax) !== null && p[0].gustMax >= Conditions.GUST_WARN_KPH; })
@@ -191,6 +191,18 @@
       + '<div class="why">Best bite on a day you can be out: Bite ' + bandWord(b.bite)
       + ", Day out " + bandWord(b.dayOut) + (b.bestWhen ? ", best around " + clock(b.bestWhen, f.offset) : "") + "."
       + gustText + "</div>" + barsHtml(f) + "</div>";
+  }
+
+  /* Build 2 (C17): the winter score for frozen lakes, and how cold it will feel. */
+  function winterScoreHtml(f, d) {
+    var day = f.days[d];
+    if (!day) return "";
+    var comfort = day.comfort;
+    var score = pct(day.winter);
+    return '<div class="winter-score"><b>Winter score ' + (score === null ? "—" : score) + "</b> on " + dayName(f, d)
+      + (day.winterWhen ? ", best around " + clock(day.winterWhen, f.offset) : "")
+      + ": light, pressure trend and moon only. Under ice the water and wind do not count."
+      + (comfort ? "<br>" + esc(comfort.text) : "") + "</div>";
   }
 
   // ============================================================
@@ -511,6 +523,90 @@
       + "&dirflg=d&q=" + encodeURIComponent(lake.name);
   }
 
+  // ============================================================
+  // BUILD 2: ESTIMATES, DEPTH CHART, HOT SPOTS
+  // ============================================================
+
+  function estHead(title) { return "<h3>" + esc(title) + ' <span class="est-chip">estimated</span></h3>'; }
+  function inputsLine(inputs) { return '<p class="inputs">From: ' + esc(inputs.join("; ")) + ".</p>"; }
+
+  /** Every estimate for this lake now, from the same water and depth the scores use. */
+  function estimatesFor(lake, f) {
+    var wx = Weather.peek(lake.lat, lake.lon);
+    var species = filteredDominantOrder(lake);
+    var water = ConditionsUI._internal.waterFor({ lat: lake.lat, lon: lake.lon, lake: lake, species: species }, wx);
+    var depth = depthFor(lake) || {};
+    var now = new Date(), month = now.getMonth() + 1;
+    var elev = typeof elevationFor === "function" ? elevationFor(lake) : null;
+    var cellElev = wx.data ? wx.data.elevM : null;
+    var ice = Estimates.ice({
+      dailyT: wx.data ? wx.data.dailyT : [], dailyMeanC: wx.data ? wx.data.dailyMeanC : [],
+      airOffsetC: Conditions.heightOffsetC(cellElev, elev), lat: lake.lat, elevM: elev, cellElevM: cellElev,
+      maxDepthM: depth.max_depth_m, iced: !!(f && f.iced), now: now, offset: f ? f.offset : null,
+    });
+    var iced = ice.state === "ice";
+    var waterC = water ? water.tempC : null;
+    var hatch = Estimates.hatch({ waterC: waterC, waterSource: water ? water.source : null,
+                                  sigmaC: water ? water.sigmaC : null, month: month, iced: iced });
+    var turn = Estimates.turnover({
+      stratification: depth.stratification || null, maxDepthM: depth.max_depth_m == null ? null : depth.max_depth_m,
+      waterC: waterC, month: month, iced: iced, now: now,
+      iceOffDate: ice.iceOff && ice.iceOff.basis === "past days" ? ice.iceOff.date : null,
+    });
+    var tack = Estimates.tackle({ month: month, iced: iced, waterC: waterC, baitBan: lakeBaitBan(lake),
+                                  species: species, hatches: hatch });
+    return { ice: ice, hatch: hatch, turnover: turn, tackle: tack };
+  }
+
+  function seasonHtml(lake, f) {
+    var e = estimatesFor(lake, f);
+    var hatchRows = e.hatch.hatches.map(function (h) {
+      return "<span>" + esc(h.name) + " <small>(" + h.startC + " °C)</small></span><b class=\"" + esc(h.status) + "\">"
+        + esc(h.status) + "</b>";
+    }).join("");
+    var t = e.tackle;
+    return '<div class="est">' + estHead("Ice cover") + "<p>" + esc(e.ice.text) + "</p>"
+      + '<p class="warn">' + esc(e.ice.warning) + "</p>" + inputsLine(e.ice.inputs) + "</div>"
+      + '<div class="est">' + estHead("Insect hatches") + '<div class="hatch">' + hatchRows + "</div>"
+      + inputsLine(e.hatch.inputs) + "</div>"
+      + '<div class="est">' + estHead("Turnover") + "<p>" + esc(e.turnover.text) + "</p>" + inputsLine(e.turnover.inputs) + "</div>"
+      + '<div class="est">' + estHead("Flies and lures") + "<p><b>Flies:</b> " + esc(t.flies.join("; ")) + "</p>"
+      + "<p><b>Lures:</b> " + esc(t.lures.join("; ")) + "</p>"
+      + (t.bait ? "<p><b>Bait:</b> " + esc(t.bait.join("; ")) + "</p>" : '<p class="warn">' + esc(t.baitNote) + "</p>")
+      + "<p>" + esc(t.legal) + "</p>" + inputsLine(t.inputs) + "</div>";
+  }
+
+  function howHtml(lake) {
+    var depth = depthFor(lake) || {};
+    var h = Estimates.howToFish({
+      maxDepthM: depth.max_depth_m == null ? null : depth.max_depth_m, stratification: depth.stratification || null,
+      areaHa: lake.surface_area_ha, aerated: lakeAerated(lake), amenities: (profileFor(lake) || {}).amenities || [],
+      baitBan: lakeBaitBan(lake), iceKind: lakeIceKind(lake), troutLimit: troutLimit(lake),
+    });
+    return '<div class="est">' + estHead("From its depth, size, facilities and rules") + "<ul>"
+      + h.lines.map(function (l) { return "<li>" + esc(l) + "</li>"; }).join("") + "</ul>" + inputsLine(h.inputs) + "</div>";
+  }
+
+  function depthChartHtml(lake) {
+    if (typeof depthChartFor !== "function" || !DEPTH_CHARTS) return "";
+    var c = depthChartFor(lake);
+    var of = DEPTH_CHARTS.matched + " of the " + DEPTH_CHARTS.placed_lakes + " lakes on this map have one";
+    return '<dl class="kv"><dt>Depth chart</dt><dd>' + (c
+      ? '<a class="btn" href="' + esc(c.url) + '" target="_blank" rel="noopener">Alberta depth chart, ' + esc(c.dig) + " ↗</a>"
+        + '<br><span class="dim">Alberta Geological Survey, ' + esc(c.name) + ". " + esc(of) + ".</span>"
+      : '<span class="dim">None published for this lake. ' + esc(of) + ".</span>") + "</dd></dl>";
+  }
+
+  function hotSpotsHtml(spots) {
+    return spots.map(function (s) {
+      var host = "";
+      try { host = new URL(s.source_url).hostname; } catch (e) { host = "source"; }
+      return '<div class="est"><h3>' + esc(s.name) + "</h3>" + (s.note ? "<p>" + esc(s.note) + "</p>" : "")
+        + '<p class="inputs">Source: <a href="' + esc(s.source_url) + '" target="_blank" rel="noopener">' + esc(host)
+        + "</a>, " + esc(s.source_date) + ".</p></div>";
+    }).join("");
+  }
+
   function section(id, title, body, open) {
     return '<details data-sec="' + id + '"' + (open ? " open" : "") + "><summary>" + title + '</summary><div class="body">' + body + "</div></details>";
   }
@@ -532,6 +628,7 @@
     var open = state.sections || {};
     var isOpen = function (id, def) { return open[id] === undefined ? def : open[id]; };
     var forecast = f ? forecastHtml(lake, f) : '<p class="dim">This lake has no position, so it has no forecast.</p>';
+    var spots = typeof hotSpotsFor === "function" ? hotSpotsFor(lake) : [];
 
     return '<div class="grab" aria-hidden="true"></div>'
       + '<div class="lh"><div><h2 id="sheet-title">' + esc(lake.name) + '</h2><div class="sub">' + km + (km ? " · " : "") + size + "</div></div>"
@@ -547,9 +644,13 @@
       + (f ? tipHtml(lake, f, d) : "")
       + section("forecast", "Forecast", forecast, isOpen("forecast", true))
       + section("bite", "Bite by time of day", '<div class="cx-embed" data-cx></div>', isOpen("bite", false))
+      + (f ? section("season", "Ice, hatches and tackle", seasonHtml(lake, f), isOpen("season", false)) : "")
+      + section("how", "How to fish this lake", howHtml(lake), isOpen("how", false))
       + section("fish", "Fish and stocking", stockingHtml(lake), isOpen("fish", false))
-      + section("info", "Lake info", profileBlock(lake) + facilityBlock(lake) + depthBlock(lake)
+      + section("info", "Lake info", profileBlock(lake) + facilityBlock(lake) + depthBlock(lake) + depthChartHtml(lake)
           + '<div class="about" data-about></div>' + photoBlock(lake), isOpen("info", false))
+      // Hot spots only when there are some, each with its source and date.
+      + (spots.length ? section("spots", "Hot spots", hotSpotsHtml(spots), isOpen("spots", false)) : "")
       + section("rules", "Rules" + (ban ? " · bait ban" : ""), iceSeasonBlock(lake) + regulationBlock(lake)
           + '<a class="btn" href="' + RULES_URL + '" target="_blank" rel="noopener">Alberta fishing rules ↗</a>'
           + '<a class="btn" href="' + LICENCE_URL + '" target="_blank" rel="noopener">Buy a licence ↗</a>', isOpen("rules", ban))
@@ -613,6 +714,8 @@
     troutLimit: troutLimit,
     trophyRule: trophyRule,
     popularity: popularity,
+    estimatesFor: estimatesFor,
+    winterScoreHtml: winterScoreHtml,
     BAND_WORD: BAND_WORD,
     RULES_URL: RULES_URL,
     LICENCE_URL: LICENCE_URL,

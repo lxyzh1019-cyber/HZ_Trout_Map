@@ -272,9 +272,22 @@
   var WT_STEEPNESS = 0.13;
   var WT_HALFLIFE_DAYS = 3;
 
+  /* The forecast is for the weather cell's own height. A lake that sits lower
+   * is warmer, a lake that sits higher is colder: about 6.5 °C per kilometre,
+   * the standard lapse rate. Build 2 (C18): this corrects the air for the
+   * lake's own height. Only the water model and the ice estimates use it. */
+  var LAPSE_C_PER_M = 0.0065;
+  function heightOffsetC(cellElevM, lakeElevM) {
+    var c = num(cellElevM), l = num(lakeElevM);
+    if (c === null || l === null) return 0;
+    return (c - l) * LAPSE_C_PER_M;
+  }
+
   function waterFromAir(dailyMeanC, opts) {
     var o = opts || {};
-    var series = (dailyMeanC || []).map(num).filter(function (v) { return v !== null; });
+    var shift = num(o.airOffsetC) || 0;
+    var series = (dailyMeanC || []).map(num).filter(function (v) { return v !== null; })
+      .map(function (v) { return v + shift; });
     if (!series.length) return null;
 
     // Exponentially weighted, most recent last, so recent days dominate.
@@ -310,6 +323,7 @@
       source: "modeled",
       likelyIce: likelyIce,
       airMeanC: mean,
+      airOffsetC: shift,
     };
   }
 
@@ -817,6 +831,52 @@
   }
 
   // ============================================================
+  // WINTER: A SCORE UNDER THE ICE, AND THE COLD
+  // ============================================================
+
+  /* Under ice the water is near 4 °C at the bottom whatever the air does, wind
+   * cannot reach the water and rain is snow on the ice. So the winter score
+   * keeps only the parts that still mean something: light (the dawn and dusk
+   * windows still matter through clear ice and thin snow), the pressure trend,
+   * and the moon. Light and pressure keep their weights and are renormalised
+   * to add up to one; the moon stays the same five percent multiplier.
+   * Build 2 (C17). It never replaces the open-water Bite score. */
+  var WINTER_PARTS = ["light", "pressure"];
+
+  function scoreWinter(result) {
+    var r = result || {};
+    var factors = r.factors || {};
+    var numer = 0, denom = 0, parts = {};
+    WINTER_PARTS.forEach(function (k) {
+      var f = factors[k];
+      if (!f || num(f.s) === null) return;
+      var w = num(f.weight) !== null ? f.weight : WEIGHTS[k];
+      numer += w * f.s;
+      denom += w;
+      parts[k] = { s: f.s, weight: w, note: f.note || null };
+    });
+    Object.keys(parts).forEach(function (k) { parts[k].share = denom ? parts[k].weight / denom : 0; });
+    if (!denom) return { score: null, scoreRaw: null, band: null, parts: parts, moonMult: 1 };
+    var mult = num(r.moonMult) || 1;
+    var raw = numer / denom * mult;
+    var score = clamp01(raw);
+    return { score: score, scoreRaw: raw, band: bandName(score), parts: parts, moonMult: mult };
+  }
+
+  /* Environment Canada's wind chill risk bands, in plain words. */
+  function comfortNote(chillC) {
+    var c = num(chillC);
+    if (c === null) return null;
+    if (c > 0) return { level: "mild", text: "Above freezing: wet ice and slush are the hazard, not the cold." };
+    if (c > -10) return { level: "low", text: "Cold: dress warmly and keep dry." };
+    if (c > -28) return { level: "moderate", text: "Very cold: layers, a windproof shell, a hat, and cover your face and hands." };
+    if (c > -40) return { level: "high", text: "Frostbite risk: bare skin can freeze in 10 to 30 minutes. Use a shelter and cover all skin." };
+    if (c > -48) return { level: "very-high", text: "Frostbite risk: bare skin can freeze in 5 to 10 minutes. Short trips only, with a shelter." };
+    if (c > -55) return { level: "severe", text: "Severe: bare skin can freeze in 2 to 5 minutes. Stay off the ice." };
+    return { level: "extreme", text: "Extreme: bare skin can freeze in under 2 minutes. Stay off the ice." };
+  }
+
+  // ============================================================
   // PLAIN WORDS
   // ============================================================
 
@@ -862,6 +922,10 @@
     sizeClass: sizeClass,
     bestDay: bestDay,
     windChill: windChill,
+    scoreWinter: scoreWinter,
+    comfortNote: comfortNote,
+    heightOffsetC: heightOffsetC,
+    LAPSE_C_PER_M: LAPSE_C_PER_M,
     dailyTip: dailyTip,
     clearingHint: clearingHint,
     GUST_WARN_KPH: GUST_WARN_KPH,

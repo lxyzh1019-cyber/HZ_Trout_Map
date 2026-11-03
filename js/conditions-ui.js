@@ -170,7 +170,10 @@
     if (!wx.data) return null;
     return Conditions.waterFromAir(
       Weather.dailyMeansUpTo(wx.data, new Date()),
-      { areaHa: place.lake ? place.lake.surface_area_ha : null });
+      { areaHa: place.lake ? place.lake.surface_area_ha : null,
+        // Build 2 (C18): the air at the lake's own height, not the cell's.
+        airOffsetC: place.lake && typeof elevationFor === "function"
+          ? Conditions.heightOffsetC(wx.data.elevM, elevationFor(place.lake)) : 0 });
   }
 
   // ============================================================

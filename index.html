@@ -1101,6 +1101,17 @@
   .fac.absent { color: var(--ink-dim); }
   .tip { margin: 0 14px 8px; font-size: 13px; padding: 8px 10px; border-left: 3px solid var(--accent); background: var(--panel-2); }
   .tip.clear { border-left-color: #7fb8d8; }
+  /* Build 2: estimates, each with the word "estimated" and what it used. */
+  .est { margin: 0 0 12px; }
+  .est h3 { font-size: 14px; margin: 0 0 4px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .est p { margin: 0 0 4px; font-size: 13px; }
+  .est ul { margin: 0 0 4px; padding-left: 18px; font-size: 13px; }
+  .est-chip { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; border: 1px dashed var(--ink-dim); color: var(--ink-dim); }
+  .est .inputs { font-size: 12px; color: var(--ink-dim); }
+  .est .warn { color: #f0b3ae; }
+  .hatch { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; font-size: 13px; margin: 0 0 4px; }
+  .hatch .likely { color: #a6dcb9; } .hatch .soon { color: #e0a526; }
+  .winter-score { margin-top: 6px; font-size: 13px; }
   .sheet > .aer-row { margin: 0 14px 8px; }
   .sheet details { border-top: 1px solid var(--panel-edge); }
   .sheet summary { list-style: none; min-height: 52px; display: flex; align-items: center; justify-content: space-between;
@@ -1438,6 +1449,7 @@
 <script src="js/conditions-ui.js"></script>
 <script src="js/lake-panel.js"></script>
 <script src="js/forecast.js"></script>
+<script src="js/estimates.js"></script>
 <script src="js/lake-sheet.js"></script>
 <script src="js/day-ui.js"></script>
 <script src="js/reading-room.js"></script>
@@ -1663,6 +1675,9 @@ let DEPTHS = null;
 let PROFILES = null;
 let PHOTOS = null;
 let ADVISORIES = null;
+let ELEVATIONS = null;     // Build 2: lake heights, for the water model and ice only
+let DEPTH_CHARTS = null;   // Build 2: Alberta Geological Survey depth charts, matched lakes
+let HOT_SPOTS = null;      // Build 2: hot spots, each with a source link and date
 let PROVISIONAL_YEARS = new Set();
 const DATA_ISSUES = { invalidStockings: 0, examples: [] };
 
@@ -1812,6 +1827,34 @@ async function loadAdvisories() {
     const resp = await fetch("live/advisories.json");
     return resp.ok ? await resp.json() : null;
   } catch { return null; }
+}
+
+/* Build 2 data: soft like the rest. Each is null when missing, and every
+ * reader says nothing rather than guess. */
+async function loadOptionalJson(path) {
+  try {
+    const resp = await fetch(path);
+    return resp.ok ? await resp.json() : null;
+  } catch { return null; }
+}
+
+/** The lake's own height in metres, or null. */
+function elevationFor(lake) {
+  const v = ELEVATIONS && ELEVATIONS.lakes ? ELEVATIONS.lakes[lakeKey(lake)] : null;
+  return Number.isFinite(v) ? v : null;
+}
+
+/** The lake's published depth chart ({name, dig, url}), or null. */
+function depthChartFor(lake) {
+  return DEPTH_CHARTS && DEPTH_CHARTS.lakes ? DEPTH_CHARTS.lakes[lakeKey(lake)] || null : null;
+}
+
+/** Hot spots on this lake, each with its source link and date. */
+function hotSpotsFor(lake) {
+  if (!HOT_SPOTS || !Array.isArray(HOT_SPOTS.spots)) return [];
+  const key = lakeKey(lake);
+  return HOT_SPOTS.spots.filter(s => s && s.lake === key
+    && /^https:\/\//.test(String(s.source_url || "")) && /^\d{4}-\d{2}-\d{2}$/.test(String(s.source_date || "")));
 }
 
 async function loadQualitySummary() {
@@ -4069,6 +4112,7 @@ async function init() {
       typeof ConditionsUI === "undefined" ? "js/conditions-ui.js" : null,
       typeof LakePanel === "undefined" ? "js/lake-panel.js" : null,
       typeof Forecast === "undefined" ? "js/forecast.js" : null,
+      typeof Estimates === "undefined" ? "js/estimates.js" : null,
       typeof LakeSheet === "undefined" ? "js/lake-sheet.js" : null,
       typeof DayUI === "undefined" ? "js/day-ui.js" : null,
       typeof ReadingRoom === "undefined" ? "js/reading-room.js" : null,
@@ -4087,6 +4131,11 @@ async function init() {
     DEPTHS = await loadDepths();
     PROFILES = await loadProfiles();
     ADVISORIES = await loadAdvisories();
+    [ELEVATIONS, DEPTH_CHARTS, HOT_SPOTS] = await Promise.all([
+      loadOptionalJson("data/lake_elevation.json"),
+      loadOptionalJson("data/depth_charts.json"),
+      loadOptionalJson("data/hot_spots.json"),
+    ]);
     LAKES = lakes;
     ALL_YEARS = years;
     /* Sixteen years of everything is a poor first view: it buries this season
