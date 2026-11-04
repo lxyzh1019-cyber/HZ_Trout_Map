@@ -3299,7 +3299,11 @@ class Build2DataTests(unittest.TestCase):
         self.assertEqual(got[1], 0)
         self.assertGreater(got[3], got[2])
         users = [p.name for p in (ROOT / "js").glob("*.js") if "heightOffsetC(" in p.read_text(encoding="utf-8")]
-        self.assertEqual(sorted(users), ["conditions-ui.js", "conditions.js", "lake-sheet.js"])
+        # Build 4: forecast.js runs the same ice estimate for the "Ice forming" days (ice only).
+        self.assertEqual(sorted(users), ["conditions-ui.js", "conditions.js", "forecast.js", "lake-sheet.js"])
+        fc = (ROOT / "js" / "forecast.js").read_text(encoding="utf-8")
+        self.assertEqual(fc.count("heightOffsetC("), 1)
+        self.assertIn("Estimates.ice(", fc[fc.index("function iceWindow("):fc.index("function formingOn(")])
         cui = (ROOT / "js" / "conditions-ui.js").read_text(encoding="utf-8")
         water_for = cui[cui.index("function waterFor("):cui.index("// THE NEXT SIX HOURS")]
         self.assertIn("elevationFor(place.lake)", water_for)
@@ -3355,8 +3359,8 @@ class Build2DataTests(unittest.TestCase):
 
     def test_build2_files_are_loaded_and_precached(self):
         worker = (ROOT / "sw.js").read_text(encoding="utf-8")
-        # v6 since Build 3 (the 3D depth model); Build 2's files stay listed.
-        self.assertIn('const SHELL_CACHE = "troutmap-shell-v6";', worker)
+        # v7 since Build 4; Build 2 files stay listed.
+        self.assertIn('const SHELL_CACHE = "troutmap-shell-v7";', worker)
         start = worker.index("const SHELL_FILES = [")
         shell = set(re.findall(r'"([^"]+)"', worker[start:worker.index("]", start)]))
         self.assertIn("js/estimates.js", shell)
@@ -3521,3 +3525,234 @@ class Build3DepthModelTests(unittest.TestCase):
         self.assertIn('id: "depth-model"', room)
         self.assertIn("Open Government Licence – Alberta", guide)
         self.assertIn("Not the official version", guide)
+
+
+class Build4Tests(unittest.TestCase):
+    """Build 4: the fish depth range, the day picked in the lake panel, ice
+    forming, the Filters count, the 3D links and the two Learn guides."""
+
+    def test_fish_depth_rule(self):
+        got = run_js(["estimates.js"], """(() => { const F = window.Estimates.fishDepth;
+          const lay = {stratifies: true, band_m: [6, 9]};
+          const r = o => { const x = F(o); return x && [x.lo, x.hi, x.kind]; };
+          return [r({underIce: true, maxDepthM: 10}), r({waterC: 4, maxDepthM: 5.5}), r({waterC: 14, maxDepthM: 20}),
+                  r({waterC: 20, maxDepthM: 20, stratification: lay}), r({waterC: 20, maxDepthM: 5}),
+                  r({waterC: 4, maxDepthM: 5.5, pressureTrend3h: 1}), r({waterC: 4, maxDepthM: 5.5, pressureTrend3h: -1}),
+                  r({waterC: 14, maxDepthM: 3}), F({maxDepthM: 5}), F({waterC: 4, maxDepthM: 5.5}).text]; })()""")
+        ice, cool, mid, layer, deep, rising, falling, capped, none, text = got
+        self.assertEqual(ice, [1.5, 4, "ice"])
+        self.assertEqual(cool, [1, 4, "cool"])
+        self.assertEqual(mid, [2, 6, "mid"])
+        self.assertEqual(layer, [5, 9, "layer"])
+        self.assertEqual(deep, [2.5, 5, "deep"])
+        self.assertEqual(rising, [2.5, 4, "cool"])
+        self.assertEqual(falling, [1, 2.5, "cool"])
+        self.assertEqual(capped, [1.5, 3, "mid"])       # never deeper than the lake
+        self.assertIsNone(none)                          # no water temperature, no range
+        self.assertEqual(text, "Here today: about 1–4 m, near shore and on flats (water about 4 °C today, lake 5.5 m deep, estimated).")
+
+    def test_the_tip_gives_the_depth_not_normal_depths(self):
+        tip = run_js(["conditions.js", "estimates.js"], """window.Conditions.dailyTip({pressureTrend3h: 0,
+          depthRange: window.Estimates.fishDepth({waterC: 4, maxDepthM: 5.5})})""")
+        self.assertNotIn("normal depths", tip)
+        self.assertIn("Steady pressure: fish feed at their usual depth. Here today: about 1–4 m", tip)
+
+    PRELUDE = (
+        "window = globalThis;"
+        "function esc(s) { return String(s == null ? '' : s).replace(/[&<>\"']/g, c => '&#' + c.charCodeAt(0) + ';'); }"
+        "var state = {day: 2};"
+        "function profileFor(l) { return l.amen ? {amenities: l.amen} : null; }"
+        "function lakeKey(l) { return l.lake_id; }"
+    )
+
+    def test_day_bars_pick_a_day_and_why_compares_with_today(self):
+        got = run_js(["conditions.js", "lake-sheet.js"], """(() => {
+          const S = window.LakeSheet._internal;
+          window.Conditions.whyParts = r => r;
+          const part = (id, p) => ({id: id, points: p});
+          const mk = (t, pr, wa) => ({total: t, parts: [part('light', 30), part('water', wa), part('pressure', pr), part('wind', 5), part('precip', 4)]});
+          const day = (i, extra) => Object.assign({start: new Date(Date.UTC(2026, 10, 4 + i, 7)), bite: 0.7, best: mk(70 + i * 3, 9 + i * 2, 14 + i)}, extra || {});
+          const f = {offset: -25200, bestDay: 1, days: [day(0), day(1), day(2), day(3, {iceForming: true}), day(4), day(5), day(6)]};
+          return [S.barsHtml(f), S.dayCompareSentence(f, 2), S.dayCompareSentence(f, 0)]; })()""", prelude=self.PRELUDE)
+        bars, vs, today = got
+        self.assertEqual(bars.count('data-pickday="'), 7)
+        self.assertIn('data-pickday="2" aria-pressed="true"', bars)
+        self.assertEqual(bars.count('aria-pressed="true"'), 1)
+        self.assertIn("ice forming, no score", bars)
+        self.assertEqual(vs, "Fri is 6 higher than today (70): pressure trend +4, water temperature +2.")
+        self.assertEqual(today, "This is today.")
+        dayui = (ROOT / "js" / "day-ui.js").read_text(encoding="utf-8")
+        self.assertIn("function setDay(d)", dayui)
+        self.assertIn("setDay: setDay", dayui)
+        sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        self.assertIn("DayUI.setDay(Number(b.dataset.pickday))", sheet)
+
+    def test_ice_forming_days_have_no_score(self):
+        got = run_js(["forecast.js"], """(() => { const F = window.Forecast, I = F._internal;
+          const day = d => new Date(Date.UTC(2026, 10, d, 7));
+          const w = {on: new Date(Date.UTC(2026, 10, 6, 12)), off: null};
+          return [[4, 5, 6, 7].map(d => I.formingOn(w, day(d))), I.formingOn(null, day(6)),
+                  F.rankable({iced: false, days: [{bite: 0.7, iceForming: true}]}, 0),
+                  F.rankable({iced: false, days: [{bite: 0.7}]}, 0)]; })()""")
+        self.assertEqual(got[0], [False, False, True, True])
+        self.assertFalse(got[1])
+        self.assertIsNone(got[2])
+        self.assertEqual(got[3], 0.7)
+        # Only a date from this forecast removes a score; the usual date near or past adds a warning.
+        prelude = ("window = globalThis; function lakeKey(l) { return l.id; } var state = {};"
+                   "var Conditions = { heightOffsetC: () => 0 };"
+                   "var Estimates = { ice: o => o.fake };")
+        cases = run_js(["forecast.js"], """(() => { const I = window.Forecast._internal; const soon = new Date(Date.now() + 2 * 864e5);
+          const later = new Date(Date.now() + 40 * 864e5); const lake = {id: 'x', lat: 53, lon: -114};
+          const w = fake => I.iceWindow(lake, {data: {dailyT: [], dailyMeanC: [], elevM: 700}}, false);
+          const run = fake => { Estimates.ice = () => fake; const r = w(); return r && {on: !!r.on, usual: !!r.usual}; };
+          return [run({state: 'open', iceOn: {date: soon, basis: 'usual dates'}}),
+                  run({state: 'open', iceOn: {date: later, basis: 'usual dates'}}),
+                  run({state: 'open', iceOn: {date: soon, basis: 'forecast'}}),
+                  run({state: 'ice', iceOn: null})]; })()""", prelude=prelude)
+        self.assertEqual(cases, [{"on": False, "usual": True}, None, {"on": True, "usual": False}, {"on": True, "usual": False}])
+        sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        self.assertIn("This forecast shows no ice yet. Check the lake before you go.", sheet)
+
+    def test_escape_closes_only_the_top_layer(self):
+        dayui = (ROOT / "js" / "day-ui.js").read_text(encoding="utf-8")
+        self.assertIn("if (e.defaultPrevented) return;", dayui)
+        self.assertIn("#reading-room:not([hidden]), #depth3d", dayui)
+        self.assertIn('} else if (e.key === "Escape") { e.preventDefault(); closeSearch(); }', dayui)
+        self.assertIn('if (e.key === "Escape") { e.preventDefault(); close(); return; }',
+                      (ROOT / "js" / "reading-room.js").read_text(encoding="utf-8"))
+        self.assertIn('if (ev.key === "Escape") { ev.preventDefault(); close(); return; }',
+                      (ROOT / "js" / "depth-3d.js").read_text(encoding="utf-8"))
+
+    def test_filters_count_only_changed_filters(self):
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn('id="filter-count"', page)
+        self.assertIn('class="badge warn" id="advisory-badge"', page)
+        self.assertIn('badge.textContent = "⚠" + lines.length;', page)
+        # The default years are listed, not counted (decision 4B).
+        self.assertIn("counted: !def", page)
+        self.assertIn("function defaultYears() { return new Set(ALL_YEARS.slice(-5)); }", page)
+        self.assertIn('if (state.gridOnly) p.set("3d", "1");', page)
+        self.assertIn('if (p.get("3d") === "1") state.gridOnly = true;', page)
+
+    def test_boating_rule_shows_in_the_rules_section(self):
+        rules = json.loads((DATA_DIR / "boating_rules.json").read_text(encoding="utf-8"))
+        prelude = self.PRELUDE + "var BOATING_RULES = %s;" % json.dumps(rules)
+        got = run_js(["fishing-spots.js", "lake-sheet.js"], """['wb6086', 'wb5466', 'wb4018', 'wb0'].map(k =>
+          window.LakeSheet._internal.boatingHtml({lake_id: k, amen: k === 'wb4018' ? ['Boat Launch'] : []}))""", prelude=prelude)
+        victor, cow, beaver, none = got
+        self.assertIn("Electric motors only", victor)
+        self.assertIn("MyWildAlberta says no motors", victor)
+        self.assertIn("Motors allowed.", cow)
+        self.assertIn("Speed limit 12 km/h", beaver)
+        self.assertIn("Boat launch listed.", beaver)
+        self.assertEqual(none, "")
+
+    def test_mean_depth_is_measured_from_the_saved_grids(self):
+        import struct
+        index = json.loads((DATA_DIR / "depth_grids" / "index.json").read_text(encoding="utf-8"))
+        for gd, g in index["grids"].items():
+            cells = (ROOT / g["file"]).read_bytes()
+            vals = [v for v in struct.unpack("<%dh" % (len(cells) // 2), cells) if v > 0]
+            self.assertAlmostEqual(g["mean_depth_m"], round(sum(vals) / len(vals) / 10, 1), places=1, msg=gd)
+            self.assertLessEqual(g["mean_depth_m"], g["max_depth_m"], gd)
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn("measured by the Alberta lakebed survey", page)
+        depth = json.loads((DATA_DIR / "lake_depth.json").read_text(encoding="utf-8"))["lakes"]
+        # The survey fills only what MyWildAlberta leaves empty (Build 4).
+        self.assertEqual(sum(1 for k in index["lakes"] if depth.get(k, {}).get("max_depth_source")), 18)
+        # A grid that covers a chain of lakes gives none of them its depth (review 1).
+        users = collections.Counter(v["grid"] for v in index["lakes"].values())
+        for k, v in index["lakes"].items():
+            if users[v["grid"]] > 1:
+                self.assertNotIn("max_depth_source", depth.get(k, {}), k)
+                self.assertNotEqual((depth.get(k, {}).get("mean_depth") or {}).get("source"), "ags-survey", k)
+        self.assertEqual(depth["wb5179"]["max_depth_m"], 42)
+        self.assertEqual(depth["wb4018"]["max_depth_m"], 5.5)
+        self.assertEqual(depth["wb4018"]["mean_depth"], {"m": 3.3, "source": "ags-survey"})
+
+    def test_lakebed_shapes_in_how_to_fish(self):
+        got = run_js(["estimates.js"], """window.Estimates.howToFish({maxDepthM: 42, areaHa: 600,
+          shapes: [{kind: 'basin', name: 'Basin 42 m', where: 'the middle'}, {kind: 'hump', name: 'Hump 3.1 m', where: 'the north part'},
+                   {kind: 'point', name: 'Point', where: 'the west part'}, {kind: 'odd', name: 'x', where: 'y'}]}).lines""")
+        line = [x for x in got if x.startswith("From the lakebed survey")][0]
+        self.assertEqual(line, "From the lakebed survey: a hump, 3.1 m under the surface in the north part; a point in the west part;"
+                               " the deep basin, 42 m in the middle.")
+
+    def test_a_cell_maps_back_to_its_lake(self):
+        index = json.loads((DATA_DIR / "depth_grids" / "index.json").read_text(encoding="utf-8"))
+        g = index["grids"]["DIG_2008_0378"]
+        got = run_js(["depth-3d.js"], "window.DepthModel._internal.cellLatLon(%s, %f, %f)"
+                     % (json.dumps(g), (g["w"] - 1) / 2, (g["h"] - 1) / 2), prelude="window = globalThis;")
+        self.assertAlmostEqual(got["lat"], g["centre"][0], places=3)
+        self.assertAlmostEqual(got["lon"], g["centre"][1], places=3)
+
+    def test_learn_guides_match_the_3d_view(self):
+        room = (ROOT / "js" / "reading-room.js").read_text(encoding="utf-8")
+        self.assertIn('id: "river"', room)
+        self.assertTrue((ROOT / "learn" / "river.html").exists())
+        worker = (ROOT / "sw.js").read_text(encoding="utf-8")
+        start = worker.index("const SHELL_FILES = [")
+        shell = set(re.findall(r'"([^"]+)"', worker[start:worker.index("]", start)]))
+        self.assertIn("learn/river.html", shell)
+        guide = (ROOT / "learn" / "depth-model.html").read_text(encoding="utf-8")
+        d3 = (ROOT / "js" / "depth-3d.js").read_text(encoding="utf-8")
+        start = d3.index("var LAYER_INFO = {")
+        info = d3[start:d3.index("};", start)]
+        for layer in re.findall(r"^\s*(\w+): \[", info, re.M) + ["aerator"]:
+            self.assertIn('id="layer-%s"' % layer, guide, layer)
+        demo = d3[d3.index("var DEMO = {"):d3.index("var demo = null;")]
+        presets = set(re.findall(r"^    (\w+): \{", demo, re.M))
+        buttons = set(re.findall(r'data-demo="(\w+)"', guide))
+        self.assertEqual(presets, buttons)
+        self.assertIn("data-demo-host", guide)
+        index = json.loads((DATA_DIR / "depth_grids" / "index.json").read_text(encoding="utf-8"))
+        self.assertIn('var DEMO_LAKE = "wb5179";', d3)
+        self.assertIn("wb5179", index["lakes"])
+        # The owner's rule texts are in the guide, word for word.
+        for text in ("a shore cell where water 3 m or deeper is within a 30 m cast",
+                     "the 5 m depth line on the downwind half of the lake; with light wind, the whole 5 m line",
+                     "1.5–4 m water within about 60 m of a drop-off, scored by the drop size, at least 150 m from the aerator. Up to 3.",
+                     "Wind too light to move food. Spots use the drop-offs only.",
+                     "No wind direction saved — open the app once with signal.",
+                     "3D add-on not saved yet — open the app once with signal.",
+                     "If you say no, there is no pin and no second question.",
+                     "The wind arrows and spots are only in the 3D view. The main map stays as it is.",
+                     "Depth at the survey water level; the real level changes.",
+                     "The Height slider starts at a lake-by-lake value so that each lake looks clear."):
+            self.assertIn(text, guide)
+
+    def test_the_page_script_parses(self):
+        # A stray character in index.html's own script stops the whole app.
+        import shutil
+        import subprocess
+        import tempfile
+        node = shutil.which("node")
+        if not node:
+            raise unittest.SkipTest("node is not installed")
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        blocks = re.findall(r"<script(?![^>]*src)[^>]*>(.*?)</script>", page, re.S)
+        self.assertTrue(blocks)
+        with tempfile.TemporaryDirectory() as tmp:
+            for i, body in enumerate(blocks):
+                path = Path(tmp) / ("inline%d.js" % i)
+                path.write_text(body, encoding="utf-8")
+                run = subprocess.run([node, "--check", str(path)], capture_output=True, text=True, encoding="utf-8")
+                self.assertEqual(run.returncode, 0, run.stderr[:400])
+        for f in sorted((ROOT / "js").glob("*.js")):
+            run = subprocess.run([node, "--check", str(f)], capture_output=True, text=True, encoding="utf-8")
+            self.assertEqual(run.returncode, 0, (f.name, run.stderr[:400]))
+
+    def test_the_sample_model_is_freed_and_never_doubled(self):
+        room = (ROOT / "js" / "reading-room.js").read_text(encoding="utf-8")
+        self.assertEqual(room.count("DepthModel.unmountDemo()"), 2)     # page change and close
+        show = room[room.index("function show("):room.index("function open(")]
+        self.assertLess(show.index("DepthModel.mountDemo(host)"), show.index("target.scrollIntoView"))
+        d3 = (ROOT / "js" / "depth-3d.js").read_text(encoding="utf-8")
+        mount = d3[d3.index("function mountDemo("):d3.index("function showDemo(")]
+        self.assertIn("if (view) {", mount)
+        unmount = d3[d3.index("function unmountDemo("):d3.index("// THE SCENE")]
+        self.assertIn("v.stop()", unmount)
+        # Directions only for shore spots (review 8).
+        self.assertIn("ud.shore && typeof ud.i", d3)
+        self.assertEqual(d3.count("shore: true"), 1)

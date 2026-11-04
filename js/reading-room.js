@@ -54,8 +54,10 @@
       blurb: "Alberta publishes the length at stocking, not the size you catch." },
     { id: "trout-id", title: "Telling the trout apart",
       blurb: "Key marks for the trout stocked in Alberta." },
-    { id: "depth-model", title: "3D depth model: layers and spots",
-      blurb: "What each layer shows, how a spot is found, and the sources." },
+    { id: "depth-model", title: "Reading a lake in 3D: layers and spots",
+      blurb: "A sample lake to turn, and what each layer and spot means." },
+    { id: "river", title: "Reading a river: the Red Deer River",
+      blurb: "How to read the current and where trout and whitefish hold." },
   ];
 
   const SPECIES = [
@@ -113,6 +115,10 @@
 #reading-room .rr-body img { display: block; max-width: 100%; height: auto;
   border-radius: 4px; background: var(--bg); }
 #reading-room .rr-body figure { margin: 0 0 14px; }
+#reading-room .rr-body .demo-btn { min-height: 44px; padding: 6px 12px; margin: 0 0 10px; border-radius: 8px; border: 1px solid var(--accent); background: none; color: var(--accent); font: inherit; cursor: pointer; }
+#reading-room .rr-body .demo-btn:hover { background: var(--panel-2); }
+#reading-room .rr-body .demo-note { padding: 10px; border: 1px dashed var(--ink-dim); border-radius: 8px; margin: 0 0 12px; }
+#reading-room .rr-body .msg-ex { padding: 6px 10px; border-left: 3px solid #FAC775; color: #FAC775; }
 #reading-room .rr-body figcaption, #reading-room .rr-note { font-size: 12px;
   color: var(--ink-dim); margin-top: 4px; }
 #reading-room .rr-warn { padding: 8px 10px; margin: 0 0 12px;
@@ -248,6 +254,8 @@
     const body = el.querySelector(".rr-body");
     const back = el.querySelector(".rr-back");
     const mine = ++seq;
+    // Build 4: a guide page can hold the sample 3D model; free it before the page changes.
+    if (window.DepthModel && DepthModel.unmountDemo) DepthModel.unmountDemo();
 
     head.textContent = title;
     back.hidden = !file;
@@ -263,6 +271,13 @@
       if (mine !== seq) return;
       // The fragments are this app's own files, served from its own origin.
       body.innerHTML = html || `<p class="rr-warn">${OFFLINE}</p>`;
+      // Build 4: the sample model at the top of the 3D guide, and its "Show on the model"
+      // buttons. Mounted before the scroll, so a "?" still lands on its section.
+      const host = body.querySelector("[data-demo-host]");
+      if (host && window.DepthModel && DepthModel.mountDemo) {
+        DepthModel.mountDemo(host);
+        body.querySelectorAll("[data-demo]").forEach(b => b.addEventListener("click", () => DepthModel.showDemo(b.getAttribute("data-demo"))));
+      }
       const target = section && /^[a-z0-9-]+$/.test(section) ? body.querySelector("#" + section) : null;
       if (target) target.scrollIntoView({ block: "start" });
     });
@@ -282,6 +297,7 @@
     if (!el || el.hidden) return;
     el.hidden = true;
     seq++;
+    if (window.DepthModel && DepthModel.unmountDemo) DepthModel.unmountDemo();
     const back = returnFocus;
     returnFocus = null;
     if (back && typeof back.focus === "function" && document.contains(back)) back.focus();

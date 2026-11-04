@@ -32,7 +32,9 @@
 /* v6: Build 3. The 3D depth model: js/lake-structure.js, js/fishing-spots.js,
    js/depth-3d.js, vendor/three.min.js, the Learn guide, the lakebed grids and
    the boating rules. js/weather.js now asks for wind direction too. */
-const SHELL_CACHE = "troutmap-shell-v6";
+/* v7: Build 4. The lake panel picks a day, the fish depth range, the Filters
+   chips, the sample 3D model in the Learn guide and the river guide. */
+const SHELL_CACHE = "troutmap-shell-v7";
 const DATA_CACHE = "troutmap-data-v1";
 const TILE_CACHE = "troutmap-tiles-v1";
 /* v2: the single-spot forecast URL gained wind_direction_10m, so the old
@@ -74,6 +76,7 @@ const SHELL_FILES = [
   "js/depth-3d.js",
   "vendor/three.min.js",
   "learn/depth-model.html",
+  "learn/river.html",
   "learn/scores.html",
   "learn/winterkill.html",
   "learn/ice-safety.html",

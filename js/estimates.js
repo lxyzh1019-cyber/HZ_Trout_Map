@@ -376,8 +376,18 @@
   var ICE_WORDS = { "all-winter": "open all winter", "early-late": "early and late ice", "early": "early ice only",
                     "late": "late ice only", "closed": "closed in winter" };
 
+  var SHAPE_ORDER = ["hump", "drop", "point", "island", "basin", "flat"];
+  var SHAPE_WORD = {
+    hump: function (x) { return "a hump, " + x.name.replace(/^Hump /, "") + " under the surface"; },
+    drop: function () { return "the steepest drop-off"; },
+    point: function () { return "a point"; },
+    island: function () { return "an island"; },
+    basin: function (x) { return "the deep basin, " + x.name.replace(/^Basin /, ""); },
+    flat: function () { return "a shallow flat, 1–3 m"; },
+  };
+
   /** o: { maxDepthM, stratification, areaHa, aerated, amenities: [..], baitRule (or baitBan),
-   *  iceKind, troutLimit } */
+   *  iceKind, troutLimit, shapes: [{kind, name, where}] (Build 4, surveyed lakes) } */
   function howToFish(o) {
     o = o || {};
     var lines = [], inputs = [];
@@ -395,6 +405,21 @@
         + " m; in spring and fall fish shallower, 1 to 4 m.");
     } else lines.push("Shallow (max " + depth + " m): fish the whole lake. In summer fish early and late.");
     inputs.push(depth === null ? "no depth" : "max depth " + depth + " m");
+
+    // Build 4: on a surveyed lake, the lakebed shapes worth fishing, with where they are.
+    var shapes = (o.shapes || []).filter(function (x) { return x && SHAPE_WORD[x.kind]; });
+    if (shapes.length) {
+      var seen = {}, bits = [];
+      SHAPE_ORDER.forEach(function (k) {
+        shapes.forEach(function (x) {
+          if (x.kind !== k || seen[k] >= 1) return;
+          seen[k] = (seen[k] || 0) + 1;
+          bits.push(SHAPE_WORD[k](x) + " in " + x.where);
+        });
+      });
+      lines.push("From the lakebed survey: " + bits.slice(0, 4).join("; ") + ".");
+      inputs.push("Alberta lakebed survey (lakebed shapes)");
+    }
 
     var have = function (a) { return (o.amenities || []).indexOf(a) >= 0; };
     var fac = [];
@@ -420,7 +445,65 @@
     return { label: "estimated", inputs: inputs, lines: lines };
   }
 
+  // ============================================================
+  // BUILD 4. FISH DEPTH TODAY
+  // ============================================================
+
+  /* Where trout feed on a day, as a depth range for this lake. The tip used to
+   * say "normal depths", which means nothing at a lake you do not know. First
+   * match wins:
+   *   under ice             1.5–4 m, the under-ice band
+   *   water under 10 °C     1–4 m, near shore and on flats
+   *   water 10–18 °C        2–6 m, along the weed edge and drop-offs
+   *   over 18 °C, layered   in or just above the summer layer
+   *   over 18 °C, no layer  half the lake depth to the bottom
+   * Pressure: steady keeps the range, rising takes the deeper half, falling the
+   * shallower half. The range never goes deeper than the lake. */
+  var COOL_C = 10, WARM_C = 18, PRESSURE_STEP = 0.7;
+
+  function half(v) { return Math.round(v * 2) / 2; }
+  function mWord(v) { return String(half(v)).replace(/\.0$/, ""); }
+
+  /** o: { waterC, waterSource, maxDepthM, stratification, underIce, pressureTrend3h, dayWord ("today", "on Mon") } */
+  function fishDepth(o) {
+    o = o || {};
+    var w = num(o.waterC), max = num(o.maxDepthM), s = o.stratification, p = num(o.pressureTrend3h);
+    var lo, hi, where, kind;
+    if (o.underIce) { lo = 1.5; hi = 4; where = "under the ice, along drop-offs and weed edges"; kind = "ice"; }
+    else if (w === null) return null;
+    else if (w < COOL_C) { lo = 1; hi = 4; where = "near shore and on flats"; kind = "cool"; }
+    else if (w <= WARM_C) { lo = 2; hi = 6; where = "along the weed edge and drop-offs"; kind = "mid"; }
+    else if (s && s.stratifies && s.band_m) {
+      lo = Math.max(1, s.band_m[0] - 1); hi = s.band_m[1]; where = "in or just above the summer layer"; kind = "layer";
+    } else if (max !== null) {
+      lo = max / 2; hi = max; where = "in the deepest water; shallow at dawn and dusk"; kind = "deep";
+    } else { lo = 3; hi = 6; where = "in the deepest water you can find; shallow at dawn and dusk"; kind = "deep"; }
+    if (max !== null) {
+      hi = Math.min(hi, max);
+      lo = Math.min(lo, max / 2);
+    }
+    var trend = "steady";
+    if (p !== null && p >= PRESSURE_STEP) trend = "rising";
+    else if (p !== null && p <= -PRESSURE_STEP) trend = "falling";
+    var mid = (lo + hi) / 2;
+    if (trend === "rising") lo = mid; else if (trend === "falling") hi = mid;
+    lo = half(lo); hi = half(hi);
+    if (hi <= lo) hi = lo + 0.5;
+    var inputs = [o.underIce ? "under ice (the same ice state as Lake info)"
+      : o.waterSource === "measured" ? "water " + round1(w) + " °C, measured" : "water about " + Math.round(w) + " °C, estimated from the air"];
+    inputs.push(max === null ? "lake depth unknown" : "lake " + max + " m deep");
+    if (kind === "layer") inputs.push("summer layer about " + s.band_m[0] + "–" + s.band_m[1] + " m");
+    inputs.push("pressure " + trend);
+    var why = [o.underIce ? "under ice" : "water about " + Math.round(w) + " °C today",
+               max === null ? "lake depth unknown" : "lake " + max + " m deep", "estimated"].join(", ");
+    return {
+      label: "estimated", inputs: inputs, lo: lo, hi: hi, where: where, kind: kind, trend: trend,
+      text: "Here " + (o.dayWord || "today") + ": about " + mWord(lo) + "–" + mWord(hi) + " m, " + where + " (" + why + ").",
+    };
+  }
+
   window.Estimates = {
+    fishDepth: fishDepth,
     ice: ice,
     hatch: hatch,
     turnover: turnover,

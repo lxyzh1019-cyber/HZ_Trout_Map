@@ -1,22 +1,61 @@
-<p>The 3D depth model shows the lakebed of 43 stocked lakes that Alberta has surveyed. Turn it with a finger, zoom with two fingers, and tap any spot to read the depth. The spots and layers are <strong>estimates</strong> from the lakebed shape, the forecast and the sun. Use them as a place to start, not as a promise.</p>
+<p>This guide shows how to read a lake in 3D. The model below is a real surveyed lake. Turn it with a finger, zoom with two fingers, and tap any spot to read the depth. Each section has a <strong>Show on the model</strong> button: it turns on only that layer and sets an example wind or ice. The spots and layers are <strong>estimates</strong> from the lakebed shape, the forecast and the sun. Use them as a place to start, not as a promise.</p>
 <p class="rr-warn"><strong>Legal is not safe. Ice thickness is never forecast.</strong> Check the ice yourself before you walk out.</p>
 
+<div data-demo-host></div>
+<p class="rr-note">Sample lake: Lower Kananaskis Lake, Alberta Geological Survey lakebed survey. The example wind is from the west at 20 km/h, unless a section says other.</p>
+<button type="button" class="demo-btn" data-demo="overview">Show on the model: the layers on at the start</button>
+
+<h3 id="layer-fishdepth">Fish depth today</h3>
+<p>Light blue dots mark the depth where trout likely feed on the day of the Time slider. It is the same range as the tip in the lake panel. The rule, first match wins:</p>
+<ul>
+  <li>Under ice: 1.5–4 m, the under-ice band.</li>
+  <li>Water under 10 °C (after ice-off, late fall): 1–4 m, near shore and on flats.</li>
+  <li>Water 10–18 °C: 2–6 m, along the weed edge and drop-offs.</li>
+  <li>Water over 18 °C on a lake that layers: in or just above the summer layer.</li>
+  <li>Water over 18 °C on a lake that does not layer: from half the lake depth to the bottom; shallow at dawn and dusk.</li>
+  <li>Pressure: steady uses the whole range; rising uses the deeper half; falling uses the shallower half.</li>
+  <li>The range never goes deeper than the lake.</li>
+</ul>
+<button type="button" class="demo-btn" data-demo="fishdepth">Show on the model</button>
+
 <h3 id="layer-depth">Depth and height</h3>
-<p>Depth is measured from the water level of the Alberta survey. The real level changes from year to year, so a spot can be a little deeper or shallower today.</p>
-<p>The lakebed is drawn taller than it is, so you can see its shape. The Height slider changes how much. Default view puts the model back to its first position and zoom.</p>
+<p>Depth is shown from the water level of the Alberta survey. The key says "Depth at the survey water level; the real level changes." A spot can be a little deeper or shallower today.</p>
+<button type="button" class="demo-btn" data-demo="depth">Show on the model</button>
+<p id="layer-height">The lakebed is drawn taller than it is, so you can see its shape. The Height slider starts at a lake-by-lake value so that each lake looks clear. Default view puts the model back to its first position and zoom.</p>
+<button type="button" class="demo-btn" data-demo="height">Show on the model</button>
 
 <h3 id="layer-wind">Wind arrows</h3>
-<p>The small red arrows show where the wind blows to, for the hour on the Time slider. The wind sign in the corner shows north, the wind and the sun. Play steps through the forecast hours.</p>
-<p>Wind pushes surface food and warm water to the shore it blows toward. Fish often feed there. With less than 8 km/h of wind, the wind moves too little food to matter, and the spots use the drop-offs only.</p>
+<p>The small red arrows show where the wind blows to. The wind sign in the corner shows north, the wind and the sun. Wind pushes surface food and warm water to the shore it blows toward. Fish often feed there.</p>
+<button type="button" class="demo-btn" data-demo="wind">Show on the model</button>
+
+<h3 id="layer-time">Wind time</h3>
+<p>The 3D view starts at the current hour. A time slider and a Play button move through the forecast hours. The arrows, the spots and the fish depth follow the hour.</p>
+<button type="button" class="demo-btn" data-demo="time">Show on the model</button>
+
+<h3 id="msg-light">Wind under 8 km/h</h3>
+<p class="msg-ex">Wind too light to move food. Spots use the drop-offs only.</p>
+<p>With less than 8 km/h of wind, the wind moves too little food to matter, so the shore spots come from the drop-offs only.</p>
+<button type="button" class="demo-btn" data-demo="light">Show on the model</button>
 
 <h3 id="layer-spots">Possible spots</h3>
-<p>The orange pins and line are spots you can reach. They match how you fish:</p>
-<ul>
-  <li><strong>Shore spot.</strong> A shore where water 3 m or deeper is within a 30 m cast. With wind, the shore must face the wind's push. A longer stretch of open water behind it scores higher, because the wind carries more food. Up to 3 spots, at least 150 m apart.</li>
-  <li><strong>Trolling route.</strong> The 5 m depth line (less on a shallow lake), on the downwind half of the lake. With light wind it goes around the whole lake. It says if a boat launch is listed, and gives the boating rules. With no launch listed, the line is faded: use a car-top boat, canoe or float tube.</li>
-  <li><strong>Ice spot.</strong> Under ice: water 1.5–4 m deep within about 60 m of a drop-off. A bigger drop scores higher. Up to 3 spots, at least 150 m apart. Check the ice thickness first.</li>
-</ul>
+<p>The orange pins and line are spots you can reach. They match how you fish. Tap a pin for its reason and a Directions link to that spot.</p>
+<button type="button" class="demo-btn" data-demo="spots">Show on the model</button>
+<p id="spot-shore"><strong>Shore spot:</strong> a shore cell where water 3 m or deeper is within a 30 m cast. With wind 8 km/h or more, the shore must face the wind's push, and a longer stretch of open water behind it scores higher. Up to 3, at least 150 m apart.</p>
+<button type="button" class="demo-btn" data-demo="shore">Show on the model</button>
+<p id="spot-troll"><strong>Trolling route:</strong> the 5 m depth line on the downwind half of the lake; with light wind, the whole 5 m line. Faded when no boat launch is listed: then use a car-top boat, canoe or float tube. A shallow lake uses a shallower line.</p>
+<button type="button" class="demo-btn" data-demo="troll">Show on the model</button>
+<p id="spot-ice"><strong>Ice spot:</strong> 1.5–4 m water within about 60 m of a drop-off, scored by the drop size, at least 150 m from the aerator. Up to 3. The text says to check the ice thickness first.</p>
+<button type="button" class="demo-btn" data-demo="ice">Show on the model</button>
 <p>On big lakes the lakebed grid is coarse (one cell can be up to about 130 m), so "within a cast" means the nearest cell; the tap text then says the real distance. The app does not know the shore trails or where you can park. Make sure you can reach a shore spot legally.</p>
+
+<h3 id="msg-ice">Under ice</h3>
+<p class="msg-ex">Under ice: ice spots only, in the 1.5–4 m band next to a drop. Check the ice thickness first.</p>
+<p>Under ice there are no wind arrows. The view uses the same ice state that Lake info shows for that day.</p>
+<button type="button" class="demo-btn" data-demo="underice">Show on the model</button>
+
+<h3 id="layer-ice">Under-ice band</h3>
+<p>White dots show all 1.5–4 m water. In winter trout feed there, along weed edges and drop-offs, where there is more food and oxygen. It shows where to drill. Tick the layer any time of year, to plan before the ice. The ice spots are the best places in this band.</p>
+<button type="button" class="demo-btn" data-demo="iceband">Show on the model</button>
 
 <h3 id="layer-struct">Structure</h3>
 <p>Small markers show the shape of the lakebed. Point at a marker on a PC, or tap it on a phone, to see its name and why it matters.</p>
@@ -28,37 +67,65 @@
   <li><strong>Drop-off:</strong> the steepest slope of the lake. A good edge to cast along.</li>
   <li><strong>Flat:</strong> a wide shallow shelf, 1–3 m. Weeds and bugs grow here; best at dawn, dusk and in spring.</li>
 </ul>
+<button type="button" class="demo-btn" data-demo="struct">Show on the model</button>
 
 <h3 id="layer-drop">Drop-offs</h3>
 <p>Orange dots on the lakebed mark its steepest parts: the steepest 6 % of this lake, and never less than 1 m of drop in 40 m. Trout follow these edges between shallow food and deep safety.</p>
+<button type="button" class="demo-btn" data-demo="drop">Show on the model</button>
 
 <h3 id="layer-weed">Weed line (estimate)</h3>
 <p>The green line is the 4 m depth line. In most Alberta lakes weeds stop near this depth, where light no longer reaches the bottom. Trout cruise this edge for bugs and minnows. Clear lakes can grow weeds deeper; brown water stops them sooner.</p>
+<button type="button" class="demo-btn" data-demo="weed">Show on the model</button>
 
 <h3 id="layer-summer">Summer layer</h3>
 <p>In July and August a deep lake forms layers. Below the summer layer the water is cold and low in oxygen. The two see-through planes show the layer the app expects for this lake, from June to September and never under ice. Fish in it or just above it. A lake too shallow to layer has no planes.</p>
+<button type="button" class="demo-btn" data-demo="summer">Show on the model</button>
 
 <h3 id="layer-cast">Deep within a cast</h3>
 <p>Purple dots mark shore where water 4 m or deeper is within 30 m. These are good bank spots on a hot day or at midday.</p>
+<button type="button" class="demo-btn" data-demo="cast">Show on the model</button>
 
 <h3 id="layer-calm">Calm shore</h3>
 <p>Green dots mark the shore the wind blows away from. The water there is flat. It is the best place for a float tube or a fly line on a windy day.</p>
+<button type="button" class="demo-btn" data-demo="calm">Show on the model</button>
 
 <h3 id="layer-sun">Sun and shade shore</h3>
 <p>For the hour on the Time slider: dark dots mark the shade shore, where the bank on the sun's side shades the water. Yellow dots mark the sunny shore across from it. On bright days trout come shallower in shade. In spring and fall the sunny shore warms first.</p>
+<button type="button" class="demo-btn" data-demo="sun">Show on the model</button>
 
 <h3 id="layer-rep">Reported spots</h3>
 <p>Purple pins are spots reported by anglers, each with its source and date. They come from the Hot spots list of this app. The list is short today, so most lakes have none yet.</p>
-
-<h3 id="layer-ice">Under-ice band</h3>
-<p>White dots mark all water 1.5–4 m deep. Tick the layer any time of year, to plan before the ice. In winter trout feed in this band, along weed edges and drop-offs, where there is more food and oxygen than in the deep basin. It shows where to drill. The ice spots are the best places in this band.</p>
+<button type="button" class="demo-btn" data-demo="rep">Show on the model</button>
 
 <h3 id="layer-aerator">Aerator warning</h3>
-<p>On an aerated lake the aerator keeps water open and ice thin from October to April. The open water moves, and the thin ice around it does not look different. Stay off that area. The app does not know where the aerator is; the signs at the lake show it.</p>
+<p>On an aerated lake the aerator keeps water open and ice thin from October to April. The open water moves, and the thin ice around it does not look different. Stay off that area. The app does not know where the aerator is; the signs at the lake show it. The sample lake is not aerated.</p>
+
+<h3 id="msg-nowind">No saved wind direction</h3>
+<p class="msg-ex">No wind direction saved — open the app once with signal.</p>
+<p>Then there are no arrows and no wind scoring. The spots use the drop-offs only.</p>
+<button type="button" class="demo-btn" data-demo="nowind">Show on the model</button>
+
+<h3 id="msg-addon">3D add-on not saved</h3>
+<p class="msg-ex">3D add-on not saved yet — open the app once with signal.</p>
+<p>The Alberta depth chart link in Lake info stays and still works.</p>
+<button type="button" class="demo-btn" data-demo="addon">Show on the model</button>
+
+<h3 id="layer-position">Your position</h3>
+<p>The view asks for your position one time when it opens. If you say no, there is no pin and no second question. The sample model here does not ask.</p>
+<button type="button" class="demo-btn" data-demo="position">Show on the model</button>
+
+<h3 id="layer-only3d">Only in the 3D view</h3>
+<p>The wind arrows and spots are only in the 3D view. The main map stays as it is.</p>
+<button type="button" class="demo-btn" data-demo="only3d">Show on the model</button>
 
 <h3 id="layer-boating">Boating rules</h3>
-<p>The trolling route gives the rule for each lake from two sources: the Transport Canada list of boating limits (the law), and the MyWildAlberta lake page. When they differ, the app uses the Transport Canada list and names both. On every Alberta lake the speed limit is 10 km/h within 30 m of shore (Vessel Operation Restriction Regulations, section 2(7); section 2(8) lists the exceptions, such as towing a skier straight out from shore).</p>
+<p>The trolling route gives the rule for each lake from two sources: the Transport Canada list of boating limits (the law), and the MyWildAlberta lake page. When they differ, the app uses the Transport Canada list and names both. The same rule is in the Rules section of the lake panel. On every Alberta lake the speed limit is 10 km/h within 30 m of shore (Vessel Operation Restriction Regulations, section 2(7); section 2(8) lists the exceptions, such as towing a skier straight out from shore).</p>
 <p>When neither source gives a rule, the app says so. Check the signs at the launch.</p>
+<button type="button" class="demo-btn" data-demo="boating">Show on the model</button>
+
+<h3 id="layer-credit">Credit line</h3>
+<p>The 3D view shows the Alberta credit line. The Alberta depth chart link stays next to the 3D button in Lake info. Lakes without a lakebed survey keep the depth chart text they have.</p>
+<button type="button" class="demo-btn" data-demo="credit">Show on the model</button>
 
 <h3 id="layer-sources">Sources</h3>
 <ul>
@@ -72,4 +139,5 @@
   <li><a href="https://ags.aer.ca/interactive-data-and-tools/lake-bathymetry-data">Alberta Lake Bathymetry Data</a></li>
   <li><a href="https://tc.canada.ca/en/marine-transportation/marine-safety/boating-safety/schedules-vessel-operation-restriction-regulations-2nd-edition-april-2026">Transport Canada boating limits (TP 15587E)</a></li>
   <li><a href="#" data-topic="ice-safety">Ice safety</a></li>
+  <li><a href="#" data-topic="river">Reading a river: the Red Deer River</a></li>
 </ul>

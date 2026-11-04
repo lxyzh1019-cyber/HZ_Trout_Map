@@ -252,10 +252,41 @@ def join_id(lake):
     return str(lake.get("waterbody_id") or lake.get("published_waterbody_id") or "")
 
 
+# Build 4: Alberta Geological Survey lakebed surveys (data/depth_grids, made by
+# depth_grids.py). 21 of the 43 surveyed lakes publish no maximum depth on
+# MyWildAlberta, and almost none a mean, though the survey measured both. The
+# survey fills only what MyWildAlberta leaves empty; a published number wins.
+SURVEY_INDEX = ROOT / "data" / "depth_grids" / "index.json"
+SURVEY_SOURCE = "Alberta Geological Survey lakebed survey"
+
+
+def load_survey():
+    """Lake id -> {max_depth_m, mean_depth_m} from the saved lakebed grids."""
+    if not SURVEY_INDEX.exists():
+        return {}
+    index = json.loads(SURVEY_INDEX.read_text(encoding="utf-8"))
+    # One grid can cover a chain of lakes (Pierre Greys, Wildhorse). Its deepest
+    # cell and its mean belong to the chain, not to any one lake, and a lake's
+    # own maximum can only be shallower: giving each lake the chain's numbers
+    # would understate its winterkill risk. Those lakes get nothing from it.
+    users = {}
+    for lake in index.get("lakes", {}).values():
+        users[lake.get("grid")] = users.get(lake.get("grid"), 0) + 1
+    out = {}
+    for key, lake in index.get("lakes", {}).items():
+        grid = index.get("grids", {}).get(lake.get("grid"))
+        if grid and grid.get("max_depth_m") and users.get(lake.get("grid")) == 1:
+            out[key] = {"max_depth_m": grid["max_depth_m"], "mean_depth_m": grid.get("mean_depth_m"),
+                        "water_ha": grid.get("water_ha")}
+    return out
+
+
 def build(lakes):
     """Per-lake depth, stratification and winterkill, keyed as the app keys them."""
     depths = load_depths()
     aerated, aeration_noted = load_aerated()
+    survey = load_survey()
+    from_survey = 0
 
     out, with_depth, unavailable = {}, 0, 0
     mean_published, mean_estimated, mean_contradicted = 0, 0, 0
@@ -265,12 +296,22 @@ def build(lakes):
         if not key:
             continue
         found = depths.get(wid)
-        if not found:
+        surveyed = survey.get(key)
+        if not found and not surveyed:
             continue
+        if not found:
+            found = {"max_depth_m": None, "mean_depth_m": None, "surface_area_ha": lake.get("surface_area_ha"),
+                     "stated_unavailable": False}
         depth = found["max_depth_m"]
-        if depth is not None:
+        depth_source = None
+        if depth is None and surveyed:
+            depth = surveyed["max_depth_m"]
+            depth_source = SURVEY_SOURCE
+            from_survey += 1
+        # Counted as published only; the survey ones are counted in from_survey.
+        if depth is not None and not depth_source:
             with_depth += 1
-        elif found["stated_unavailable"]:
+        elif depth is None and found["stated_unavailable"]:
             unavailable += 1
         # Aeration is known per lake, not per file. Alberta publishes the
         # aerated ones and says nothing whatsoever about the rest, so for any
@@ -282,18 +323,26 @@ def build(lakes):
         is_aerated = wid in aerated
         aeration_known = is_aerated
         average = mean_depth(depth, found["mean_depth_m"])
+        # A measured survey mean replaces an estimate, never a published number.
+        if surveyed and surveyed.get("mean_depth_m") is not None and (not average or average.get("source") != "mywildalberta"):
+            average = {"m": surveyed["mean_depth_m"], "source": "ags-survey"}
         entry = {
             "max_depth_m": depth,
             "mean_depth": average,
             "surface_area_ha": found["surface_area_ha"],
             "source": "mywildalberta stocking map export 2026-09-11",
-            "depth_stated_unavailable": found["stated_unavailable"],
-            "stratification": stratification(depth, found["surface_area_ha"]),
+            "depth_stated_unavailable": found["stated_unavailable"] and depth is None,
+            # With no published area, the survey's water area sets the band (it is the fetch).
+            "stratification": stratification(depth, found["surface_area_ha"]
+                                             or (surveyed or {}).get("water_ha")),
             "winterkill": winterkill(depth, is_aerated, aeration_known),
         }
+        if depth_source:
+            entry["max_depth_source"] = depth_source
+            entry["source"] = depth_source + " (max and mean depth), at the survey water level"
         if average:
             source = average.get("source")
-            if source == "mywildalberta":
+            if source in ("mywildalberta", "ags-survey"):
                 mean_published += 1
             elif source == "estimated":
                 mean_estimated += 1
@@ -309,7 +358,7 @@ def build(lakes):
     return out, {"with_depth": with_depth, "stated_unavailable": unavailable,
                  "aerated": len(aerated), "aeration_photo_only": len(aeration_noted),
                  "mean_published": mean_published, "mean_estimated": mean_estimated,
-                 "mean_contradicted": mean_contradicted, "rows": len(depths)}
+                 "mean_contradicted": mean_contradicted, "rows": len(depths), "from_survey": from_survey}
 
 
 def write(lakes, data_dir):

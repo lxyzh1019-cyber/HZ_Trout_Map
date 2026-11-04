@@ -43,11 +43,23 @@ Single working record for this repository. Updated by the main session at the en
 - [agreed] (owner kept it 2026-11-04) Time slider from now to the end of the forecast, not from 24 h back: past hours add nothing to planning — search: A saved forecast that ended
 - [differs from plan] A new 3D renderer per open, freed on Close (plan: one reused); "This phone cannot show 3D" shows in the view, not on the button; credit lines in the 3D view footer and the Learn guide, not in the search credits — search: v.stop
 - [differs from plan] Transport Canada Schedule 4 (engine power) has no Alberta rows, so it is not read; structure sizes in metres (point window 60 m, basin and hump radius 100 m, basin from 4 m) so they work on every grid size; Learn ids layer-struct and layer-rep — search: cellsFor
+- [agreed] Build 4 plan Rev 3 approved 2026-11-04: Learn 3D guide has one model with "Show on the model" per section (1A) — search: mountDemo
+- [agreed] Learn demo lake is a real surveyed lake with island, hump, point and basin, fixed example wind (2A) — search: DEMO_LAKE
+- [agreed] New Learn guide "Reading a river", Red Deer River example (3B) — search: learn/river.html
+- [agreed] Filters count shows only changed filters; default years listed as a chip but not counted (4B) — search: filter-count
+- [agreed] Days on or after the estimated ice-on date: "Ice forming — no score", out of Best (5A) — search: iceForming
+- [agreed] Depth range rule: ice 1.5–4; <10 °C 1–4; 10–18 °C 2–6; >18 °C layered = summer layer, else half depth to bottom; rising deeper half, falling shallower half; capped at max depth — search: fishDepth
+- [agreed] Tap a day bar in the lake panel to pick the day; Why starts with the change from today — search: dayCompareSentence
+- [differs from plan] "3D" in list rows and the hover card is a label, not a button (a button inside the row button is invalid); the lake panel gets a "Show 3D depth model" button at its top instead — search: btn3d
+- [differs from plan] Ice forming removes the score only on an ice-on date worked out from this forecast; near or past the usual (calendar) date the score stays and the banner warns "Ice usually forms here about …" — search: iceUsual
+- [differs from plan] Survey depths go beyond the mean: 18 surveyed lakes with no published max depth get the survey's max, so their summer layer, winterkill band and fish depth change; chain grids (Pierre Greys, Wildhorse) give none — search: load_survey
+- [differs from plan] River guide has one labelled bend drawing (A–G), not one drawing per water type; the sample 3D model in the guide is a second small view, off while a lake's 3D view is open — search: data-demo-host
 
 ## Pending
 - Build 1b: merged 2026-10-30 (PR #18). Owner still to do: device check, and the 4 species facts on the Learn pages.
 - Build 2: merged 2026-11-04 (PR #19, cd9a470). Owner still to do: device check.
-- Build 3 (3D depth model): built on branch build-3 2026-11-04; pull request waiting for its checks, the owner's merge and device check.
+- Build 3 (3D depth model): merged 2026-11-04 (PR #20, d3e3c0d). Owner still to do: device check.
+- Build 4 (feature check fixes and connections): built on branch build-4 2026-11-04; pull request waiting for its checks, the owner's merge and device check, and the owner's answer on the 4 differences above.
 - Leftover helper worktree .claude/worktrees/agent-a00cd60cf51c9739a: removal needs the owner's separate yes (QC2).
 
 ## Request ledger
@@ -129,6 +141,14 @@ Single working record for this repository. Updated by the main session at the en
 | K7 | 10-29 | Fill WORKING_RECORD.md | done | 10-29, this change |
 | K8 | 10-29 | Distance slider label | done | 1a |
 | K10 | 10-29 | Unused functions recencyDays, chart_ref | done | 1b; removed, test_unused_functions_are_gone |
+| L1 | 11-04 | Overall feature check: anything broken or lost | done | 4; nothing lost; 2 bugs fixed (double Escape, repeated credit name), search Escape found in review |
+| L2 | 11-04 | New connections, e.g. lake with 3D, map in the filter | done | 4; 3D filter, 3D mark, panel 3D button, boating in Rules, survey depths, shapes in How to fish, Learn links |
+| L3 | 11-04 | Other features that help me | done | 4; fish depth layer, shore directions, ice-forming days, day-vs-today |
+| L4 | 11-04 | "Steady pressure: fish feed at normal depths" — what depth in this lake | done | 4; Estimates.fishDepth, test_fish_depth_rule |
+| L5 | 11-04 | Filters shows 2 but I cannot tell which filters | done | 4; the 2 were Alberta notices; chips + changed-filter count + ⚠ |
+| L6 | 11-04 | 3D map in the Learn guide with the rule texts (points 7–20) | done | 4; sample model + Show on the model, test_learn_guides_match_the_3d_view |
+| L7 | 11-04 | Pick a different day and see why its score differs from today | done | 4; day bars + dayCompareSentence |
+| L8 | 11-04 | How to read a river and find the fish, Red Deer River example | done | 4; learn/river.html; facts for the owner to check |
 
 ## Hotspot counter
 | Area / feature | Fix rounds | Recurrences | Regressions caused | Workarounds/exceptions | Last symptom | Rewrite-vs-repair reviewed? |
@@ -143,7 +163,8 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 | FEATURES.md, WORKING_RECORD.md | COMPLETE | this change, 2026-10-29 |
 | Build 1b | COMPLETE | PR #18 merged 2026-10-30 (64852ae) |
 | Build 2 | COMPLETE | PR #19 merged 2026-11-04 (cd9a470) |
-| Build 3 | IN REVIEW | branch build-3; 3D depth model, 25 new tests, browser check 2026-11-04 |
+| Build 3 | COMPLETE | PR #20 merged 2026-11-04 (d3e3c0d) |
+| Build 4 | IN REVIEW | branch build-4; 13 new tests, full suite 277 pass, browser and offline proof 2026-11-04 |
 
 ## Checks and evidence
 - 2026-10-29 unittest discover on main → 183 passed; live site has bait-chip, ice-chip, aerated-chip; live stamp troutmap-shell-v3
@@ -166,6 +187,13 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 - 2026-11-04 build-3 reviewer pass → 13 findings, all fixed (ice state now matches Lake info; summer planes out of taps and out of season; old forecast not shown as Now; Escape, focus and Tab trap; 44 px targets; 10 km/h rule cited to s. 2(7); deviations recorded; arrows every 300 m; real reach on coarse grids; materials and failed builds freed; lost-context message; this proof)
 - Proof: 2026-11-04 offline at 375×812, server stopped, service worker v6: 40 of 40 lakebed files and three.js in the cache; Chickakoo opens in 0.54 s with no network; turn, wheel zoom, Default view, time slider (Thu 18:00 · 7 km/h from W · Sun down), Play steps the hours, summer layer out-of-season message, WebGL context lost → "3D paused" message → restored → hidden, Escape closes, reopen works, smallest button 44 px; console: only the deliberate network test failed
 
+- 2026-11-04 build-4 feature check on main (d3e3c0d): GitHub checks pass; live site has shell v6 and the 3D view; FEATURES.md items all have code; Build 3 removed no Build 2 feature
+- 2026-11-04 build-4 data: build_history.py rebuild changes only data/lake_depth.json (116 published depths unchanged, 18 more from the survey; 3 chain lakes left as they were); data/depth_grids/index.json gains mean_depth_m and water_ha from the saved grids (no grid rebuilt)
+- 2026-11-04 build-4 tests: unittest discover 277 run → 277 pass locally (PYTHONUTF8=1, openpyxl installed)
+- 2026-11-04 build-4 reviewer pass → 16 findings, all fixed or recorded as differences (shared grids, usual-date ice warning, "?" lands after the sample mounts, one 3D drawing at a time, search Escape, shore-only directions, 44 px targets, page scroll over the sample, river winter wording and life jacket, day water said "today", sample model message, See it in 3D button, tests)
+- Proof: 2026-11-04 browser at 390×844 and 1440×900: day bar picks the day (URL day=, week bar follows), Why "Mon is 6 higher than today (70)…", tip "Here on Sat: about 2.5–4 m … lake 5.5 m deep", Beaver Mines banner "Ice usually forms here about Nov 5 … Check the lake before you go", Filters chips and count (0 at start, 2 after 90 days + 3D, ✕ removes), 3D fish depth layer, shore spot Directions 49.36759,-114.30766, Escape one layer at a time (guide, 3D, search), guide "?" lands on its section, sample model on/off note, smallest tap 44 px. Offline (headless Chrome, network off, shell v7): app loads 382 lakes, lake panel 7 day bars, river guide and the sample model build from the cache, 0 page errors
+
 ## Open questions / blockers
 - H4 answered 2026-10-30: Open-Meteo counts per IP; one full load = 250 calls in 5 requests (measured in the browser), 3 h cache.
 - Species page facts from general knowledge (Athabasca rainbow at risk, westslope cutthroat Threatened, walleye special licence, bull trout protected): owner to check.
+- River guide facts from general knowledge (learn/river.html): water from deep in Gleniffer Reservoir stays cold all summer; brown trout and mountain whitefish the main fish, some rainbow, bull trout pass through; releases can raise the river fast; the dam keeps some water open in winter: owner to check.
