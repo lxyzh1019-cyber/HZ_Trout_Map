@@ -3355,7 +3355,8 @@ class Build2DataTests(unittest.TestCase):
 
     def test_build2_files_are_loaded_and_precached(self):
         worker = (ROOT / "sw.js").read_text(encoding="utf-8")
-        self.assertIn('const SHELL_CACHE = "troutmap-shell-v5";', worker)
+        # v6 since Build 3 (the 3D depth model); Build 2's files stay listed.
+        self.assertIn('const SHELL_CACHE = "troutmap-shell-v6";', worker)
         start = worker.index("const SHELL_FILES = [")
         shell = set(re.findall(r'"([^"]+)"', worker[start:worker.index("]", start)]))
         self.assertIn("js/estimates.js", shell)
@@ -3366,3 +3367,157 @@ class Build2DataTests(unittest.TestCase):
         self.assertIn('<script src="js/estimates.js"></script>', page)
         for f in ("data/lake_elevation.json", "data/depth_charts.json", "data/hot_spots.json"):
             self.assertIn('loadOptionalJson("%s")' % f, page)
+
+
+# A made-up lake for the 3D depth model tests: a bowl 600 m across on a 10 m
+# grid, 12 m deep in the middle, with a small island and an underwater hump.
+BOWL_PRELUDE = """
+var W = 70, H = 70, CELL = 10, depth = new Float32Array(W * H);
+for (var j = 0; j < H; j++) for (var i = 0; i < W; i++) {
+  var x = (i - 34.5) / 30, y = (j - 34.5) / 30, d = Math.hypot(x, y);
+  var isle = Math.hypot(i - 20, j - 35) < 3;
+  var z = 12 * (1 - d * d) - 6 * Math.exp(-(Math.pow(i - 48, 2) + Math.pow(j - 35, 2)) / 12);
+  depth[j * W + i] = d < 1 && !isle ? Math.max(0.2, z) : 0;
+}
+var grid = { w: W, h: H, cell: CELL, depth: depth, landHeight: new Float32Array(W * H) };
+"""
+
+
+class Build3DepthModelTests(unittest.TestCase):
+    """Build 3: the 3D depth model, its structure and spot finders, the wind
+    direction, and the offline files."""
+
+    FILES = ["lake-structure.js", "fishing-spots.js"]
+
+    def test_structure_finds_island_hump_basin_and_dropoff(self):
+        got = run_js(self.FILES, "window.LakeStructure.find(grid).labels.map(l => [l.kind, l.i, l.j])", BOWL_PRELUDE)
+        kinds = [k for k, _, _ in got]
+        for kind in ("island", "hump", "basin", "drop"):
+            self.assertIn(kind, kinds)
+        island = next((i, j) for k, i, j in got if k == "island")
+        self.assertLess(abs(island[0] - 20) + abs(island[1] - 35), 4)
+        hump = next((i, j) for k, i, j in got if k == "hump")
+        self.assertLess(abs(hump[0] - 48) + abs(hump[1] - 35), 5)
+
+    def test_wind_from_the_west_puts_shore_spots_and_route_on_the_east(self):
+        # Wind blows TO 90 degrees (east), 20 km/h.
+        got = run_js(self.FILES, """(() => {
+          const S = window.LakeStructure, F = window.FishingSpots, st = S.find(grid);
+          const spots = F.shoreSpots(grid, st.shore, 90, 20);
+          const route = F.trollingRoute(grid, S.contour(grid, F.trollDepth(12)), 90, 20);
+          const xs = []; for (let k = 0; k < route.segments.length; k += 2) xs.push(route.segments[k]);
+          return { spots: spots.map(s => [s.i, s.j]), route: xs, down: route.downwind, why: spots.map(s => s.why) };
+        })()""", BOWL_PRELUDE)
+        self.assertTrue(got["spots"], "no shore spot found")
+        # Downwind: the east shore, or the west face of the island (wind piles food there too).
+        near_island = lambda i, j: abs(i - 20) <= 6 and abs(j - 35) <= 6
+        self.assertTrue(all(i > 34.5 or near_island(i, j) for i, j in got["spots"]), got["spots"])
+        self.assertTrue(got["down"])
+        self.assertTrue(got["route"] and all(x > 30 for x in got["route"]))
+        self.assertTrue(all("estimate" in w and "30 m" in w for w in got["why"]))
+
+    def test_light_wind_uses_the_dropoffs_only(self):
+        got = run_js(self.FILES, """(() => {
+          const S = window.LakeStructure, F = window.FishingSpots, st = S.find(grid);
+          const r = F.trollingRoute(grid, S.contour(grid, 5), 90, 4);
+          return [F.shoreSpots(grid, st.shore, 90, 4).map(s => s.why), r.downwind, F.calmShore(st.shore, 90, 4).length];
+        })()""", BOWL_PRELUDE)
+        self.assertTrue(got[0])
+        self.assertTrue(all("wind pushes" not in w for w in got[0]))
+        self.assertFalse(got[1])
+        self.assertEqual(got[2], 0)
+
+    def test_ice_spots_are_in_the_band_and_away_from_the_aerator(self):
+        got = run_js(self.FILES, """(() => {
+          const st = window.LakeStructure.find(grid), F = window.FishingSpots;
+          return F.iceSpots(grid, st.dropCells, { i: 35, j: 15 }).map(s => [s.i, s.j, grid.depth[s.j * grid.w + s.i], s.why]);
+        })()""", BOWL_PRELUDE)
+        self.assertTrue(got)
+        for i, j, z, why in got:
+            self.assertTrue(1.5 <= z <= 4, z)
+            self.assertGreaterEqual(((i - 35) ** 2 + (j - 15) ** 2) ** 0.5 * 10, 150)
+            self.assertIn("Check the ice thickness", why)
+
+    def test_sun_and_shade_shore_sit_on_opposite_sides(self):
+        got = run_js(self.FILES, """(() => {
+          const st = window.LakeStructure.find(grid), r = window.FishingSpots.sunShore(st.shore, 180, 30);
+          const night = window.FishingSpots.sunShore(st.shore, 180, -5);
+          const lake = c => Math.abs(c.i - 20) > 6 || Math.abs(c.j - 35) > 6;   // leave out the island's own shore
+          return [r.shade.filter(lake).map(c => c.j), r.sun.filter(lake).map(c => c.j), night.shade.length + night.sun.length];
+        })()""", BOWL_PRELUDE)
+        # Sun in the south: the south bank shades the water next to it.
+        self.assertTrue(got[0] and all(j > 34.5 for j in got[0]))
+        self.assertTrue(got[1] and all(j < 34.5 for j in got[1]))
+        self.assertEqual(got[2], 0)
+
+    def test_boating_text_names_the_rule_and_the_source(self):
+        got = run_js(self.FILES, """[
+          window.FishingSpots.boatingText({ motor: "electric", kw_max: 7.5, mywildalberta: "none", differs: true,
+            sources: ["Transport Canada, TP 15587E (2nd edition, April 2026)", "MyWildAlberta lake page"] }, true),
+          window.FishingSpots.boatingText(null, false)]""")
+        self.assertIn("Electric motors only (up to 7.5 kW)", got[0])
+        self.assertIn("MyWildAlberta says no motors", got[0])
+        self.assertIn("not the official version", got[0])
+        self.assertIn("10 km/h within 30 m of shore", got[0])
+        self.assertIn("No motor rule found", got[1])
+        self.assertIn("No boat launch listed", got[1])
+
+    def test_sun_position_has_an_azimuth(self):
+        # Edmonton, midsummer: morning sun in the east, midday sun in the south.
+        got = run_js(["astro.js"], "[15, 19].map(h => window.Astro.sunPosition("
+                     "new Date(Date.UTC(2026, 5, 21, h, 30)), 53.5, -113.5).azimuth)")
+        self.assertTrue(70 < got[0] < 110, got)
+        self.assertTrue(165 < got[1] < 200, got)
+
+    def test_forecast_asks_for_wind_direction_within_ten_variables(self):
+        got = run_js(["weather.js"], """[window.Weather.HOURLY.length + window.Weather.DAILY.length,
+          window.Weather.HOURLY.indexOf("wind_direction_10m") >= 0,
+          window.Weather.hasAll({ data: { windDir: [] } }), window.Weather.hasAll({ data: {} }),
+          window.Weather.hasAll({ data: { windDir: [270] } })]""",
+                     "var localStorage = { getItem: () => null, setItem: () => {}, removeItem: () => {} };"
+                     " window.localStorage = localStorage;")
+        self.assertLessEqual(got[0], 10)
+        self.assertTrue(got[1])
+        self.assertEqual(got[2:], [False, False, True])
+
+    def test_depth_model_files_are_loaded_and_precached(self):
+        worker = (ROOT / "sw.js").read_text(encoding="utf-8")
+        start = worker.index("const SHELL_FILES = [")
+        shell = set(re.findall(r'"([^"]+)"', worker[start:worker.index("]", start)]))
+        for f in ("js/lake-structure.js", "js/fishing-spots.js", "js/depth-3d.js", "vendor/three.min.js",
+                  "learn/depth-model.html"):
+            self.assertIn(f, shell)
+            self.assertTrue((ROOT / f).exists(), f)
+        self.assertIn('const WX_CACHE = "troutmap-wx-v2";', worker)
+        data = worker[worker.index("async function precacheData"):worker.index("let years")]
+        for f in ("data/depth_grids/index.json", "data/boating_rules.json"):
+            self.assertIn('"%s"' % f, data)
+        # The worker reads the index and caches every lakebed file it names.
+        self.assertIn('fetch("data/depth_grids/index.json"', data)
+        self.assertIn("cache.add(g.file)", data)
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        for f in ("data/depth_grids/index.json", "data/boating_rules.json"):
+            self.assertIn('loadOptionalJson("%s")' % f, page)
+        for f in ("lake-structure.js", "fishing-spots.js", "depth-3d.js"):
+            self.assertIn('<script src="js/%s"></script>' % f, page)
+        # three.js loads only when a model opens, never as a page script.
+        self.assertNotIn('<script src="vendor/three.min.js">', page)
+
+    def test_lake_panel_offers_the_model_and_keeps_the_alberta_link(self):
+        sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        self.assertIn("Show 3D depth model", sheet)
+        self.assertIn("DepthModel.open(lake)", sheet)
+        self.assertIn("Alberta depth chart, ", sheet)
+
+    def test_learn_guide_has_a_section_per_layer(self):
+        guide = (ROOT / "learn" / "depth-model.html").read_text(encoding="utf-8")
+        view = (ROOT / "js" / "depth-3d.js").read_text(encoding="utf-8")
+        lists = re.findall(r"var LAYERS_(?:ON|OFF) = \[([^\]]+)\]", view)
+        layers = re.findall(r'"([a-z]+)"', " ".join(lists))
+        self.assertGreaterEqual(len(layers), 11)
+        for layer in layers + ["aerator"]:
+            self.assertIn('id="layer-%s"' % layer, guide, layer)
+        room = (ROOT / "js" / "reading-room.js").read_text(encoding="utf-8")
+        self.assertIn('id: "depth-model"', room)
+        self.assertIn("Open Government Licence – Alberta", guide)
+        self.assertIn("Not the official version", guide)

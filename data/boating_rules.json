@@ -1,0 +1,952 @@
+{
+ "lakes": {
+  "wb18014": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": []
+  },
+  "wb3494": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": true,
+   "no_wake_surf": true,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "Blood Indian Creek Reservoir",
+     "location": "17-26-9-W4",
+     "name": "Unnamed reservoir",
+     "schedule": "6"
+    },
+    {
+     "local": "Blood Indian Creek Reservoir",
+     "location": "17-26-9-W4",
+     "name": "Unnamed reservoir",
+     "schedule": "7"
+    }
+   ]
+  },
+  "wb4018": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": true,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": 12,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "11-5-3-W5",
+     "name": "Beaver Mines Lakes, as indicated by signs",
+     "schedule": "1"
+    },
+    {
+     "local": "",
+     "location": "11-5-3-W5",
+     "name": "Beaver Mines Lake",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb4161": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": []
+  },
+  "wb4261": {
+   "kw_max": 7.5,
+   "motor": "electric",
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "34-53-1-W5",
+     "name": "Chickakoo Lake",
+     "schedule": "3"
+    }
+   ]
+  },
+  "wb4265": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": []
+  },
+  "wb4340": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": []
+  },
+  "wb4374": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": []
+  },
+  "wb4446": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": true,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": 12,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "41,42-1-W4",
+     "name": "Dillberry Lake, as indicated by signs",
+     "schedule": "1"
+    },
+    {
+     "local": "",
+     "location": "41,42-1-W4",
+     "name": "Dillberry Lake, as indicated by signs",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb4571": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": 12,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "31-51-19-W5",
+     "name": "Fickle Lake, as indicated by signs",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb4635": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": []
+  },
+  "wb4697": {
+   "kw_max": 7.5,
+   "motor": "electric",
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "Goldeye Lake",
+     "location": "14-40-16-W5",
+     "name": "Unnamed lake",
+     "schedule": "3"
+    }
+   ]
+  },
+  "wb4708": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": true,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": 12,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "61-8-W5",
+     "name": "Goose Lake, as indicated by signs",
+     "schedule": "1"
+    },
+    {
+     "local": "",
+     "location": "61-8-W5",
+     "name": "Goose Lake, as indicated by signs",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb4725": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": []
+  },
+  "wb4794": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": true,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": 12,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "Hasse Lake",
+     "location": "13-52-2-W5",
+     "name": "Unnamed lake, as indicated by signs",
+     "schedule": "1"
+    },
+    {
+     "local": "Hasse Lake",
+     "location": "13-52-2-W5",
+     "name": "Unnamed lake",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb4977": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": []
+  },
+  "wb4978": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": true,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "11-22,23-W4",
+     "name": "Keho Lake, as indicated by signs",
+     "schedule": "1"
+    }
+   ]
+  },
+  "wb5002": {
+   "kw_max": 7.5,
+   "motor": "electric",
+   "mywildalberta": "electric",
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)",
+    "MyWildAlberta lake page"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "50-26-W5",
+     "name": "Kinky Lake",
+     "schedule": "3"
+    }
+   ]
+  },
+  "wb5050": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": true,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": 12,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "7,8-7-2-W5",
+     "name": "Lee Lake, as indicated by signs",
+     "schedule": "1"
+    },
+    {
+     "local": "",
+     "location": "7,8-7-2-W5",
+     "name": "Lee Lake",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb5179": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": 12,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "19-9-W5",
+     "name": "Upper Kananaskis Lake, as indicated by signs",
+     "schedule": "5",
+     "speed_kmh": "12"
+    },
+    {
+     "local": "",
+     "location": "19,20-9-W5",
+     "name": "Lower Kananaskis Lake, as indicated by signs",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb5245": {
+   "kw_max": 7.5,
+   "motor": "electric",
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "48-24-W5",
+     "name": "Mary Gregg Lake",
+     "schedule": "3"
+    }
+   ]
+  },
+  "wb5286": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": true,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": 12,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "Carson Lake",
+     "location": "61-11,12-W5",
+     "name": "McLeod Lake, as indicated by signs",
+     "schedule": "1"
+    },
+    {
+     "local": "Carson Lake",
+     "location": "61-11,12-W5",
+     "name": "McLeod Lake",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb5324": {
+   "kw_max": 7.5,
+   "motor": "electric",
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "Millers Lake",
+     "location": "8-53-19-W5",
+     "name": "Unnamed lake",
+     "schedule": "3"
+    }
+   ]
+  },
+  "wb5348": {
+   "kw_max": 7.5,
+   "motor": "electric",
+   "mywildalberta": "electric",
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)",
+    "MyWildAlberta lake page"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "Mitchell Lake",
+     "location": "36-37-8-W5",
+     "name": "Unnamed lake",
+     "schedule": "3"
+    }
+   ]
+  },
+  "wb5387": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": 12,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "32-53-27-W4",
+     "name": "Muir Lake",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb5466": {
+   "kw_max": null,
+   "motor": "allowed",
+   "mywildalberta": "allowed",
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)",
+    "MyWildAlberta lake page"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": 12,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "11-53-22-W5",
+     "name": "Obed Lake, as indicated by signs",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb5504": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": true,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": 12,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "Police Lake",
+     "location": "1-26-W4",
+     "name": "Outpost Lake, as indicated by signs",
+     "schedule": "1"
+    },
+    {
+     "local": "Police Lake",
+     "location": "1-26-W4",
+     "name": "Outpost Lake",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb5513": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": []
+  },
+  "wb5538": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": 12,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "Peanut Lake",
+     "location": "58-3-W5",
+     "name": "Unnamed lake",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb5572": {
+   "kw_max": 7.5,
+   "motor": "electric",
+   "mywildalberta": "electric",
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)",
+    "MyWildAlberta lake page"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "6-57-4-W6",
+     "name": "Pierre Greys Lakes",
+     "schedule": "3"
+    }
+   ]
+  },
+  "wb5581": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": []
+  },
+  "wb5820": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": true,
+   "no_wake_surf": true,
+   "signed_no_boat_zones": true,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": 12,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "65-18,19-W4",
+     "name": "Skeleton Lake, as indicated by signs",
+     "schedule": "1"
+    },
+    {
+     "local": "",
+     "location": "65-18,19-W4",
+     "name": "Skeleton Lake, as indicated by signs",
+     "schedule": "5",
+     "speed_kmh": "12"
+    },
+    {
+     "local": "",
+     "location": "65-18,19-W4",
+     "name": "Skeleton Lake, as indicated by signs",
+     "schedule": "6"
+    },
+    {
+     "local": "",
+     "location": "65-18,19-W4",
+     "name": "Skeleton Lake, as indicated by signs",
+     "schedule": "7"
+    }
+   ]
+  },
+  "wb5874": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": 12,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "Cottage Lake",
+     "location": "30-52-1-W5",
+     "name": "Spring Lake",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb5895": {
+   "kw_max": 7.5,
+   "motor": "electric",
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "Star Lake",
+     "location": "20-52-2-W5",
+     "name": "Unnamed lake",
+     "schedule": "3"
+    }
+   ]
+  },
+  "wb5919": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": 12,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "Strubel Lake",
+     "location": "25-37-8-W5",
+     "name": "Unnamed lake",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb5952": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": true,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": 12,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "39-1-2-W5",
+     "name": "Sylvan Lake, as indicated by signs",
+     "schedule": "1"
+    },
+    {
+     "local": "",
+     "location": "39-1,2-W5",
+     "name": "Sylvan Lake, as indicated by signs",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb6061": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": 12,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "19-9-W5",
+     "name": "Upper Kananaskis Lake, as indicated by signs",
+     "schedule": "5",
+     "speed_kmh": "12"
+    },
+    {
+     "local": "",
+     "location": "19,20-9-W5",
+     "name": "Lower Kananaskis Lake, as indicated by signs",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb6086": {
+   "differs": true,
+   "kw_max": 7.5,
+   "motor": "electric",
+   "mywildalberta": "none",
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)",
+    "MyWildAlberta lake page"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "35-56-8-W6",
+     "name": "Victor Lake",
+     "schedule": "3"
+    }
+   ]
+  },
+  "wb6095": {
+   "kw_max": null,
+   "motor": null,
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": true,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": 12,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "52,53-4,5-W5",
+     "name": "That part of Wabamun Lake that is a zone extending 100 m into the lake from the shoreline of the area indicated by signs and buoys to be the Wabamun Lake Provincial Park beach area or swim area",
+     "schedule": "1"
+    },
+    {
+     "local": "Moonlight Bay",
+     "location": "52,53-4,5-W5",
+     "name": "That part of Wabamun Lake known locally as Moonlight Bay at coordinates 53\u00b033\u203239\u2033 114\u00b026\u203250\u2033, which includes all waters northeast of the rail bridge that crosses Wabamun Lake",
+     "schedule": "5",
+     "speed_kmh": "12"
+    }
+   ]
+  },
+  "wb6160": {
+   "kw_max": 7.5,
+   "motor": "electric",
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "49-26-W5",
+     "name": "Wildhorse Lakes",
+     "schedule": "3"
+    }
+   ]
+  },
+  "wb6533": {
+   "kw_max": 7.5,
+   "motor": "electric",
+   "mywildalberta": "electric",
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)",
+    "MyWildAlberta lake page"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "6-57-4-W6",
+     "name": "Pierre Greys Lakes",
+     "schedule": "3"
+    }
+   ]
+  },
+  "wb6534": {
+   "kw_max": 7.5,
+   "motor": "electric",
+   "mywildalberta": "electric",
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)",
+    "MyWildAlberta lake page"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "6-57-4-W6",
+     "name": "Pierre Greys Lakes",
+     "schedule": "3"
+    }
+   ]
+  },
+  "wb6537": {
+   "kw_max": 7.5,
+   "motor": "electric",
+   "no_boats": false,
+   "no_towing": false,
+   "no_wake_surf": false,
+   "signed_no_boat_zones": false,
+   "sources": [
+    "Transport Canada, TP 15587E (2nd edition, April 2026)"
+   ],
+   "speed_kmh": null,
+   "speed_kmh_signed": null,
+   "tc_rows": [
+    {
+     "local": "",
+     "location": "49-26-W5",
+     "name": "Wildhorse Lakes",
+     "schedule": "3"
+    }
+   ]
+  }
+ },
+ "schema": 1,
+ "sources": {
+  "mywildalberta": "MyWildAlberta lake pages, saved in data/raw",
+  "tc": {
+   "name": "Transport Canada, TP 15587E (2nd edition, April 2026)",
+   "note": "Not the official version. Reproduced with permission for non-commercial use.",
+   "retrieved": "2026-11-04",
+   "url": "https://tc.canada.ca/en/marine-transportation/marine-safety/boating-safety/schedules-vessel-operation-restriction-regulations-2nd-edition-april-2026"
+  }
+ }
+}

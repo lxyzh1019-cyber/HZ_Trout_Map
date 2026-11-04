@@ -89,7 +89,9 @@
     var dec = declinationOf(ec.L, 0);
     var ra = rightAscensionOf(ec.L, 0);
     var ha = siderealTime(d, lon) - ra;
-    return { altitude: altitudeOf(ha, lat, dec), declination: dec, longitude: ec.L };
+    // Azimuth clockwise from true north (Build 3: sun and shade shore).
+    var az = Math.atan2(sin(ha), cos(ha) * sin(lat) - Math.tan(dec * RAD) * cos(lat)) * DEG + 180;
+    return { altitude: altitudeOf(ha, lat, dec), azimuth: ((az % 360) + 360) % 360, declination: dec, longitude: ec.L };
   }
 
   /* Solar noon and the two times either side of it when the sun crosses a given

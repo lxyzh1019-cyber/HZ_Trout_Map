@@ -1,0 +1,260 @@
+{
+ "wb18014": {
+  "name": "South Heart Reservoir",
+  "contour_dig": "DIG 2008-0676",
+  "grid_dig": "DIG_2008_0507",
+  "zip": "DIG_2008_0507.zip"
+ },
+ "wb3494": {
+  "name": "Blood Indian Creek Reservoir",
+  "contour_dig": "DIG 2008-0551",
+  "grid_dig": "DIG_2008_0382",
+  "zip": "DIG_2008_0382.zip"
+ },
+ "wb4018": {
+  "name": "Beaver Mines Lake",
+  "contour_dig": "DIG 2008-0547",
+  "grid_dig": "DIG_2008_0378",
+  "zip": "DIG_2008_0378.zip"
+ },
+ "wb4161": {
+  "name": "Burnstick Lake",
+  "contour_dig": "DIG 2008-0558",
+  "grid_dig": "DIG_2008_0389",
+  "zip": "DIG_2008_0389.zip"
+ },
+ "wb4261": {
+  "name": "Chickakoo Lake",
+  "contour_dig": "DIG 2008-0566",
+  "grid_dig": "DIG_2008_0397",
+  "zip": "DIG_2008_0397.zip"
+ },
+ "wb4265": {
+  "name": "Chin Lakes",
+  "contour_dig": "DIG 2008-0568",
+  "grid_dig": "DIG_2008_0399",
+  "zip": "DIG_2008_0399.zip"
+ },
+ "wb4340": {
+  "name": "Cow Lake",
+  "contour_dig": "DIG 2008-0574",
+  "grid_dig": "DIG_2008_0405",
+  "zip": "DIG_2008_0405.zip"
+ },
+ "wb4374": {
+  "name": "Crowsnest Lake",
+  "contour_dig": "DIG 2008-0577",
+  "grid_dig": "DIG_2008_0408",
+  "zip": "DIG_2008_0408.zip"
+ },
+ "wb4446": {
+  "name": "Dillberry Lake",
+  "contour_dig": "DIG 2008-0580",
+  "grid_dig": "DIG_2008_0411",
+  "zip": "DIG_2008_0411.zip"
+ },
+ "wb4571": {
+  "name": "Fickle Lake",
+  "contour_dig": "DIG 2008-0585",
+  "grid_dig": "DIG_2008_0416",
+  "zip": "DIG_2008_0416.zip"
+ },
+ "wb4635": {
+  "name": "Frog Lake",
+  "contour_dig": "DIG 2008-0589",
+  "grid_dig": "DIG_2008_0420",
+  "zip": "DIG_2008_0420.zip"
+ },
+ "wb4697": {
+  "name": "Goldeye Lake",
+  "contour_dig": "DIG 2008-0594",
+  "grid_dig": "DIG_2008_0425",
+  "zip": "DIG_2008_0425.zip"
+ },
+ "wb4708": {
+  "name": "Goose Lake",
+  "contour_dig": "DIG 2008-0597",
+  "grid_dig": "DIG_2008_0428",
+  "zip": "DIG_2008_0428.zip"
+ },
+ "wb4725": {
+  "name": "Grande Cache Lake",
+  "contour_dig": "DIG 2008-0599",
+  "grid_dig": "DIG_2008_0430",
+  "zip": "DIG_2008_0430.zip"
+ },
+ "wb4794": {
+  "name": "Hasse Lake",
+  "contour_dig": "DIG 2008-0605",
+  "grid_dig": "DIG_2008_0436",
+  "zip": "DIG_2008_0436.zip"
+ },
+ "wb4977": {
+  "name": "Kehiwin Lake",
+  "contour_dig": "DIG 2008-0618",
+  "grid_dig": "DIG_2008_0449",
+  "zip": "DIG_2008_0449.zip"
+ },
+ "wb4978": {
+  "name": "Keho Lake",
+  "contour_dig": "DIG 2008-0619",
+  "grid_dig": "DIG_2008_0450",
+  "zip": "DIG_2008_0450.zip"
+ },
+ "wb5002": {
+  "name": "Kinky Lake",
+  "contour_dig": "DIG 2008-0620",
+  "grid_dig": "DIG_2008_0451",
+  "zip": "DIG_2008_0451.zip"
+ },
+ "wb5050": {
+  "name": "Lee Lake",
+  "contour_dig": "DIG 2008-0623",
+  "grid_dig": "DIG_2008_0454",
+  "zip": "DIG_2008_0454.zip"
+ },
+ "wb5179": {
+  "name": "Lower Kananaskis Lake",
+  "contour_dig": "DIG 2008-0627",
+  "grid_dig": "DIG_2008_0458",
+  "zip": "DIG_2008_0458.zip"
+ },
+ "wb5245": {
+  "name": "Mary Gregg Lake",
+  "contour_dig": "DIG 2008-0633",
+  "grid_dig": "DIG_2008_0464",
+  "zip": "DIG_2008_0464.zip"
+ },
+ "wb5286": {
+  "name": "McLeod Lake",
+  "contour_dig": "DIG 2008-0635",
+  "grid_dig": "DIG_2008_0466",
+  "zip": "DIG_2008_0466.zip"
+ },
+ "wb5324": {
+  "name": "Millers Lake",
+  "contour_dig": "DIG 2008-0638",
+  "grid_dig": "DIG_2008_0469",
+  "zip": "DIG_2008_0469.zip"
+ },
+ "wb5348": {
+  "name": "Mitchell Lake",
+  "contour_dig": "DIG 2008-0643",
+  "grid_dig": "DIG_2008_0474",
+  "zip": "DIG_2008_0474.zip"
+ },
+ "wb5387": {
+  "name": "Muir Lake",
+  "contour_dig": "DIG 2008-0647",
+  "grid_dig": "DIG_2008_0478",
+  "zip": "DIG_2008_0478.zip"
+ },
+ "wb5466": {
+  "name": "Obed Lake",
+  "contour_dig": "DIG 2008-0653",
+  "grid_dig": "DIG_2008_0484",
+  "zip": "DIG_2008_0484.zip"
+ },
+ "wb5504": {
+  "name": "Outpost Lake",
+  "contour_dig": "DIG 2008-0655",
+  "grid_dig": "DIG_2008_0486",
+  "zip": "DIG_2008_0486.zip"
+ },
+ "wb5513": {
+  "name": "Payne Lake",
+  "contour_dig": "DIG 2008-0656",
+  "grid_dig": "DIG_2008_0487",
+  "zip": "DIG_2008_0487.zip"
+ },
+ "wb5538": {
+  "name": "Peanut Lake",
+  "contour_dig": "DIG 2008-0657",
+  "grid_dig": "DIG_2008_0488",
+  "zip": "DIG_2008_0488.zip"
+ },
+ "wb5572": {
+  "name": "Pierre Greys Lakes",
+  "contour_dig": "DIG 2008-0658",
+  "grid_dig": "DIG_2008_0489",
+  "zip": "DIG_2008_0489.zip"
+ },
+ "wb5581": {
+  "name": "Pinehurst Lake",
+  "contour_dig": "DIG 2008-0661",
+  "grid_dig": "DIG_2008_0492",
+  "zip": "DIG_2008_0492.zip"
+ },
+ "wb5820": {
+  "name": "Skeleton Lake",
+  "contour_dig": "DIG 2008-0671",
+  "grid_dig": "DIG_2008_0502",
+  "zip": "DIG_2008_0502.zip"
+ },
+ "wb5874": {
+  "name": "Spring Lake",
+  "contour_dig": "DIG 2008-0677",
+  "grid_dig": "DIG_2008_0508",
+  "zip": "DIG_2008_0508.zip"
+ },
+ "wb5895": {
+  "name": "Star Lake",
+  "contour_dig": "DIG 2008-0679",
+  "grid_dig": "DIG_2008_0510",
+  "zip": "DIG_2008_0510.zip"
+ },
+ "wb5919": {
+  "name": "Strubel Lake",
+  "contour_dig": "DIG 2008-0681",
+  "grid_dig": "DIG_2008_0512",
+  "zip": "DIG_2008_0512.zip"
+ },
+ "wb5952": {
+  "name": "Sylvan Lake",
+  "contour_dig": "DIG 2008-0684",
+  "grid_dig": "DIG_2008_0515",
+  "zip": "DIG_2008_0515.zip"
+ },
+ "wb6061": {
+  "name": "Upper Kananaskis Lake",
+  "contour_dig": "DIG 2008-0689",
+  "grid_dig": "DIG_2008_0520",
+  "zip": "DIG_2008_0520.zip"
+ },
+ "wb6086": {
+  "name": "Victor Lake",
+  "contour_dig": "DIG 2008-0692",
+  "grid_dig": "DIG_2008_0523",
+  "zip": "DIG_2008_0523.zip"
+ },
+ "wb6095": {
+  "name": "Wabamun Lake",
+  "contour_dig": "DIG 2008-0694",
+  "grid_dig": "DIG_2008_0525",
+  "zip": "DIG_2008_0525.zip"
+ },
+ "wb6160": {
+  "name": "Wildhorse Lakes",
+  "contour_dig": "DIG 2008-0699",
+  "grid_dig": "DIG_2008_0530",
+  "zip": "DIG_2008_0530.zip"
+ },
+ "wb6533": {
+  "name": "Pierre Greys Lakes",
+  "contour_dig": "DIG 2008-0658",
+  "grid_dig": "DIG_2008_0489",
+  "zip": "DIG_2008_0489.zip"
+ },
+ "wb6534": {
+  "name": "Pierre Greys Lakes",
+  "contour_dig": "DIG 2008-0658",
+  "grid_dig": "DIG_2008_0489",
+  "zip": "DIG_2008_0489.zip"
+ },
+ "wb6537": {
+  "name": "Wildhorse Lakes",
+  "contour_dig": "DIG 2008-0699",
+  "grid_dig": "DIG_2008_0530",
+  "zip": "DIG_2008_0530.zip"
+ }
+}

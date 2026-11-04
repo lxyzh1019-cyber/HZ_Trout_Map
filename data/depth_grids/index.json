@@ -1,0 +1,1540 @@
+{
+ "grids": {
+  "DIG_2008_0378": {
+   "affine": [
+    550944.6,
+    5466975.97,
+    49.373052,
+    -114.297949,
+    -1033.495,
+    72564.838,
+    111126.727,
+    674.863
+   ],
+   "ats": [
+    "005-03-W5"
+   ],
+   "cell_m": 11.27,
+   "centre": [
+    49.373052,
+    -114.297949
+   ],
+   "contour_max_depth_m": 5.18,
+   "file": "data/depth_grids/DIG_2008_0378.bin",
+   "h": 156,
+   "level_m": [
+    1455.5
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 5.2,
+   "north_deg": -0.533,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0378 (lakebed grid) and DIG 2008-0547 (contours, water level)",
+   "w": 161,
+   "x0": 550042.7,
+   "y0": 5467849.7
+  },
+  "DIG_2008_0382": {
+   "affine": [
+    764700.76,
+    5682577.25,
+    51.253428,
+    -111.204882,
+    -5748.437,
+    69725.566,
+    111111.282,
+    3607.311
+   ],
+   "ats": [
+    "026-09-W4"
+   ],
+   "cell_m": 25.81,
+   "centre": [
+    51.253428,
+    -111.204882
+   ],
+   "contour_max_depth_m": 12.19,
+   "file": "data/depth_grids/DIG_2008_0382.bin",
+   "h": 161,
+   "level_m": [
+    759.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 12.2,
+   "north_deg": -2.962,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0382 (lakebed grid) and DIG 2008-0551 (contours, water level)",
+   "w": 61,
+   "x0": 763926.5,
+   "y0": 5684641.9
+  },
+  "DIG_2008_0389": {
+   "affine": [
+    507875.76,
+    5757409.17,
+    51.988038,
+    -114.885262,
+    -175.414,
+    68641.33,
+    111178.059,
+    108.301
+   ],
+   "ats": [
+    "035-06-W5, 035-07-W5"
+   ],
+   "cell_m": 31.39,
+   "centre": [
+    51.988038,
+    -114.885262
+   ],
+   "contour_max_depth_m": 18.29,
+   "file": "data/depth_grids/DIG_2008_0389.bin",
+   "h": 96,
+   "level_m": [
+    1184.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 18.3,
+   "north_deg": -0.09,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0389 (lakebed grid) and DIG 2008-0558 (contours, water level)",
+   "w": 161,
+   "x0": 505364.7,
+   "y0": 5758900.1
+  },
+  "DIG_2008_0397": {
+   "affine": [
+    561334.54,
+    5939121.64,
+    53.618699,
+    -114.072372,
+    -1449.622,
+    66118.065,
+    111204.537,
+    861.891
+   ],
+   "ats": [
+    "053-01-W5"
+   ],
+   "cell_m": 8.0,
+   "centre": [
+    53.618699,
+    -114.072372
+   ],
+   "contour_max_depth_m": 15.24,
+   "file": "data/depth_grids/DIG_2008_0397.bin",
+   "h": 125,
+   "level_m": [
+    736.2
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 15.2,
+   "north_deg": -0.747,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0397 (lakebed grid) and DIG 2008-0566 (contours, water level)",
+   "w": 154,
+   "x0": 560722.5,
+   "y0": 5939617.6
+  },
+  "DIG_2008_0399": {
+   "affine": [
+    701321.07,
+    5499597.27,
+    49.635113,
+    -112.210637,
+    -4124.826,
+    72165.398,
+    111111.904,
+    2679.009
+   ],
+   "ats": [
+    "007-16-W4, 007-17-W4, 008-17-W4, 008-18-W4"
+   ],
+   "cell_m": 134.5,
+   "centre": [
+    49.635113,
+    -112.210637
+   ],
+   "contour_max_depth_m": 23,
+   "file": "data/depth_grids/DIG_2008_0399.bin",
+   "h": 78,
+   "level_m": [
+    862
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 23.0,
+   "north_deg": -2.126,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0399 (lakebed grid) and DIG 2008-0568 (contours, water level)",
+   "w": 161,
+   "x0": 690561.3,
+   "y0": 5504775.4
+  },
+  "DIG_2008_0405": {
+   "affine": [
+    499013.19,
+    5788892.05,
+    52.271261,
+    -115.014468,
+    22.205,
+    68207.518,
+    111183.483,
+    -13.622
+   ],
+   "ats": [
+    "038-07-W5, 038-08-W5"
+   ],
+   "cell_m": 31.54,
+   "centre": [
+    52.271261,
+    -115.014468
+   ],
+   "contour_max_depth_m": 2.09,
+   "file": "data/depth_grids/DIG_2008_0405.bin",
+   "h": 161,
+   "level_m": [
+    1031.4
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 2.1,
+   "north_deg": 0.011,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0405 (lakebed grid) and DIG 2008-0574 (contours, water level)",
+   "w": 91,
+   "x0": 497594.1,
+   "y0": 5791415.0
+  },
+  "DIG_2008_0408": {
+   "affine": [
+    526382.42,
+    5495569.03,
+    49.631899,
+    -114.634511,
+    -540.129,
+    72183.643,
+    111132.623,
+    350.828
+   ],
+   "ats": [
+    "008-05-W5"
+   ],
+   "cell_m": 22.72,
+   "centre": [
+    49.631899,
+    -114.634511
+   ],
+   "contour_max_depth_m": 27.43,
+   "file": "data/depth_grids/DIG_2008_0408.bin",
+   "h": 87,
+   "level_m": [
+    1351.2
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 27.4,
+   "north_deg": -0.278,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0408 (lakebed grid) and DIG 2008-0577 (contours, water level)",
+   "w": 161,
+   "x0": 524564.9,
+   "y0": 5496545.9
+  },
+  "DIG_2008_0411": {
+   "affine": [
+    838119.51,
+    5834644.96,
+    52.577405,
+    -110.00667,
+    -7707.582,
+    67669.148,
+    111078.434,
+    4695.47
+   ],
+   "ats": [
+    "041-01-W4, 042-01-W4"
+   ],
+   "cell_m": 8.0,
+   "centre": [
+    52.577405,
+    -110.00667
+   ],
+   "contour_max_depth_m": 10.67,
+   "file": "data/depth_grids/DIG_2008_0411.bin",
+   "h": 125,
+   "level_m": [
+    617.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 10.7,
+   "north_deg": -3.969,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0411 (lakebed grid) and DIG 2008-0580 (contours, water level)",
+   "w": 158,
+   "x0": 837491.5,
+   "y0": 5835141.0
+  },
+  "DIG_2008_0416": {
+   "affine": [
+    381536.82,
+    5921351.25,
+    53.44917,
+    -116.784564,
+    2782.977,
+    66375.906,
+    111190.025,
+    -1661.323
+   ],
+   "ats": [
+    "051-19-W5, 051-20-W5, 052-19-W5"
+   ],
+   "cell_m": 23.22,
+   "centre": [
+    53.44917,
+    -116.784564
+   ],
+   "contour_max_depth_m": 4.57,
+   "file": "data/depth_grids/DIG_2008_0416.bin",
+   "h": 108,
+   "level_m": [
+    976.9
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 4.6,
+   "north_deg": 1.434,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0416 (lakebed grid) and DIG 2008-0585 (contours, water level)",
+   "w": 161,
+   "x0": 379679.6,
+   "y0": 5922593.3
+  },
+  "DIG_2008_0420": {
+   "affine": [
+    806369.3,
+    5981949.2,
+    53.916615,
+    -110.332008,
+    -7331.419,
+    65587.264,
+    111101.04,
+    4328.022
+   ],
+   "ats": [
+    "056-02-W4, 056-03-W4, 057-02-W4, 057-03-W4, 058-03-W4"
+   ],
+   "cell_m": 90.96,
+   "centre": [
+    53.916615,
+    -110.332008
+   ],
+   "contour_max_depth_m": 27.43,
+   "file": "data/depth_grids/DIG_2008_0420.bin",
+   "h": 161,
+   "level_m": [
+    568.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 27.4,
+   "north_deg": -3.775,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0420 (lakebed grid) and DIG 2008-0589 (contours, water level)",
+   "w": 83,
+   "x0": 802640.1,
+   "y0": 5989225.6
+  },
+  "DIG_2008_0425": {
+   "affine": [
+    419057.49,
+    5809300.39,
+    52.448813,
+    -116.191498,
+    1833.291,
+    67930.919,
+    111180.682,
+    -1120.133
+   ],
+   "ats": [
+    "040-16-W5"
+   ],
+   "cell_m": 8.0,
+   "centre": [
+    52.448813,
+    -116.191498
+   ],
+   "contour_max_depth_m": 13.2,
+   "file": "data/depth_grids/DIG_2008_0425.bin",
+   "h": 121,
+   "level_m": [
+    1369.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 13.2,
+   "north_deg": 0.945,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0425 (lakebed grid) and DIG 2008-0594 (contours, water level)",
+   "w": 90,
+   "x0": 418701.5,
+   "y0": 5809780.4
+  },
+  "DIG_2008_0428": {
+   "affine": [
+    491377.92,
+    6016248.73,
+    54.315714,
+    -115.132593,
+    209.062,
+    65026.467,
+    111221.732,
+    -122.23
+   ],
+   "ats": [
+    "061-08-W5"
+   ],
+   "cell_m": 22.17,
+   "centre": [
+    54.315714,
+    -115.132593
+   ],
+   "contour_max_depth_m": 6.1,
+   "file": "data/depth_grids/DIG_2008_0428.bin",
+   "h": 98,
+   "level_m": [
+    720.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 6.1,
+   "north_deg": 0.108,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0428 (lakebed grid) and DIG 2008-0597 (contours, water level)",
+   "w": 161,
+   "x0": 489604.0,
+   "y0": 6017324.2
+  },
+  "DIG_2008_0430": {
+   "affine": [
+    234666.78,
+    5977873.81,
+    53.902716,
+    -119.041058,
+    6343.738,
+    65625.963,
+    111129.434,
+    -3746.207
+   ],
+   "ats": [
+    "057-07-W6, 057-08-W6"
+   ],
+   "cell_m": 19.44,
+   "centre": [
+    53.902716,
+    -119.041058
+   ],
+   "contour_max_depth_m": 12.19,
+   "file": "data/depth_grids/DIG_2008_0430.bin",
+   "h": 90,
+   "level_m": [
+    1113.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 12.2,
+   "north_deg": 3.267,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0430 (lakebed grid) and DIG 2008-0599 (contours, water level)",
+   "w": 161,
+   "x0": 233111.5,
+   "y0": 5978739.0
+  },
+  "DIG_2008_0436": {
+   "affine": [
+    554697.06,
+    5924339.62,
+    53.486526,
+    -114.175334,
+    -1286.486,
+    66324.987,
+    111203.018,
+    767.301
+   ],
+   "ats": [
+    "052-02-W5"
+   ],
+   "cell_m": 10.69,
+   "centre": [
+    53.486526,
+    -114.175334
+   ],
+   "contour_max_depth_m": 9,
+   "file": "data/depth_grids/DIG_2008_0436.bin",
+   "h": 161,
+   "level_m": [
+    727
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 9.0,
+   "north_deg": -0.663,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0436 (lakebed grid) and DIG 2008-0605 (contours, water level)",
+   "w": 144,
+   "x0": 553932.6,
+   "y0": 5925194.9
+  },
+  "DIG_2008_0449": {
+   "affine": [
+    766868.21,
+    5994666.9,
+    54.052543,
+    -110.920918,
+    -6415.804,
+    65389.154,
+    111129.209,
+    3775.101
+   ],
+   "ats": [
+    "058-06-W4, 058-07-W4, 059-06-W4, 059-07-W4"
+   ],
+   "cell_m": 56.5,
+   "centre": [
+    54.052543,
+    -110.920918
+   ],
+   "contour_max_depth_m": 9.87,
+   "file": "data/depth_grids/DIG_2008_0449.bin",
+   "h": 161,
+   "level_m": [
+    539.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 9.9,
+   "north_deg": -3.304,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0449 (lakebed grid) and DIG 2008-0618 (contours, water level)",
+   "w": 85,
+   "x0": 764495.0,
+   "y0": 5999187.3
+  },
+  "DIG_2008_0450": {
+   "affine": [
+    643290.58,
+    5532636.83,
+    49.948799,
+    -113.001859,
+    -2967.767,
+    71706.99,
+    111127.534,
+    1915.004
+   ],
+   "ats": [
+    "011-22-W4, 011-23-W4, 012-22-W4, 012-23-W4"
+   ],
+   "cell_m": 47.12,
+   "centre": [
+    49.948799,
+    -113.001859
+   ],
+   "contour_max_depth_m": 3.05,
+   "file": "data/depth_grids/DIG_2008_0450.bin",
+   "h": 92,
+   "level_m": [
+    958.8
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 3.1,
+   "north_deg": -1.53,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0450 (lakebed grid) and DIG 2008-0619 (contours, water level)",
+   "w": 161,
+   "x0": 639521.2,
+   "y0": 5534780.7
+  },
+  "DIG_2008_0451": {
+   "affine": [
+    314540.35,
+    5904771.84,
+    53.280931,
+    -117.783016,
+    4331.611,
+    66624.881,
+    111165.158,
+    -2596.075
+   ],
+   "ats": [
+    "049-26-W5, 050-26-W5"
+   ],
+   "cell_m": 8.0,
+   "centre": [
+    53.280931,
+    -117.783016
+   ],
+   "contour_max_depth_m": 2.44,
+   "file": "data/depth_grids/DIG_2008_0451.bin",
+   "h": 99,
+   "level_m": [
+    1151.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 2.4,
+   "north_deg": 2.231,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0451 (lakebed grid) and DIG 2008-0620 (contours, water level)",
+   "w": 116,
+   "x0": 314080.4,
+   "y0": 5905163.8
+  },
+  "DIG_2008_0454": {
+   "affine": [
+    554616.5,
+    5485801.37,
+    49.542119,
+    -114.244754,
+    -1114.653,
+    72315.482,
+    111129.738,
+    725.338
+   ],
+   "ats": [
+    "007-02-W5"
+   ],
+   "cell_m": 11.19,
+   "centre": [
+    49.542119,
+    -114.244754
+   ],
+   "contour_max_depth_m": 13.72,
+   "file": "data/depth_grids/DIG_2008_0454.bin",
+   "h": 69,
+   "level_m": [
+    1238.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 13.7,
+   "north_deg": -0.575,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0454 (lakebed grid) and DIG 2008-0623 (contours, water level)",
+   "w": 161,
+   "x0": 553721.6,
+   "y0": 5486181.7
+  },
+  "DIG_2008_0458": {
+   "affine": [
+    490544.15,
+    5609308.63,
+    50.655763,
+    -115.133823,
+    200.773,
+    70659.219,
+    111152.625,
+    -127.631
+   ],
+   "ats": [
+    "019-09-W5, 020-09-W5"
+   ],
+   "cell_m": 54.5,
+   "centre": [
+    50.655763,
+    -115.133823
+   ],
+   "contour_max_depth_m": 42,
+   "file": "data/depth_grids/DIG_2008_0458.bin",
+   "h": 161,
+   "level_m": [
+    1670
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 42,
+   "north_deg": 0.103,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0458 (lakebed grid) and DIG 2008-0627 (contours, water level)",
+   "w": 46,
+   "x0": 489317.9,
+   "y0": 5613668.5
+  },
+  "DIG_2008_0464": {
+   "affine": [
+    335806.57,
+    5885193.2,
+    53.112045,
+    -117.454164,
+    3810.884,
+    66892.597,
+    111170.888,
+    -2293.046
+   ],
+   "ats": [
+    "048-24-W5"
+   ],
+   "cell_m": 8.47,
+   "centre": [
+    53.112045,
+    -117.454164
+   ],
+   "contour_max_depth_m": 16.4,
+   "file": "data/depth_grids/DIG_2008_0464.bin",
+   "h": 86,
+   "level_m": [
+    1542.4
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 16.4,
+   "north_deg": 1.963,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0464 (lakebed grid) and DIG 2008-0633 (contours, water level)",
+   "w": 161,
+   "x0": 335129.1,
+   "y0": 5885553.1
+  },
+  "DIG_2008_0466": {
+   "affine": [
+    457458.82,
+    6014395.1,
+    54.297348,
+    -115.653926,
+    1030.839,
+    65054.129,
+    111219.182,
+    -602.957
+   ],
+   "ats": [
+    "061-11-W5, 061-12-W5"
+   ],
+   "cell_m": 18.3,
+   "centre": [
+    54.297348,
+    -115.653926
+   ],
+   "contour_max_depth_m": 10.67,
+   "file": "data/depth_grids/DIG_2008_0466.bin",
+   "h": 131,
+   "level_m": [
+    852.4
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 10.7,
+   "north_deg": 0.531,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0466 (lakebed grid) and DIG 2008-0635 (contours, water level)",
+   "w": 161,
+   "x0": 455994.6,
+   "y0": 6015584.8
+  },
+  "DIG_2008_0469": {
+   "affine": [
+    382940.57,
+    5933656.8,
+    53.560086,
+    -116.768026,
+    2761.175,
+    66202.921,
+    111192.194,
+    -1643.981
+   ],
+   "ats": [
+    "053-19-W5"
+   ],
+   "cell_m": 8.0,
+   "centre": [
+    53.560086,
+    -116.768026
+   ],
+   "contour_max_depth_m": 6.09,
+   "file": "data/depth_grids/DIG_2008_0469.bin",
+   "h": 144,
+   "level_m": [
+    973.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 6.1,
+   "north_deg": 1.423,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0469 (lakebed grid) and DIG 2008-0638 (contours, water level)",
+   "w": 139,
+   "x0": 382388.6,
+   "y0": 5934228.8
+  },
+  "DIG_2008_0474": {
+   "affine": [
+    499509.57,
+    5782798.87,
+    52.216459,
+    -115.007181,
+    11.014,
+    68291.597,
+    111182.445,
+    -6.765
+   ],
+   "ats": [
+    "037-08-W5"
+   ],
+   "cell_m": 8.0,
+   "centre": [
+    52.216459,
+    -115.007181
+   ],
+   "contour_max_depth_m": 6.1,
+   "file": "data/depth_grids/DIG_2008_0474.bin",
+   "h": 105,
+   "level_m": [
+    1047.7
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 6.1,
+   "north_deg": 0.006,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0474 (lakebed grid) and DIG 2008-0643 (contours, water level)",
+   "w": 101,
+   "x0": 499109.6,
+   "y0": 5783214.9
+  },
+  "DIG_2008_0478": {
+   "affine": [
+    568887.11,
+    5939882.21,
+    53.624597,
+    -113.957998,
+    -1628.503,
+    66108.175,
+    111203.515,
+    968.111
+   ],
+   "ats": [
+    "053-27-W4, 054-27-W4"
+   ],
+   "cell_m": 8.44,
+   "centre": [
+    53.624597,
+    -113.957998
+   ],
+   "contour_max_depth_m": 5.49,
+   "file": "data/depth_grids/DIG_2008_0478.bin",
+   "h": 161,
+   "level_m": [
+    730.5
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 5.5,
+   "north_deg": -0.839,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0478 (lakebed grid) and DIG 2008-0647 (contours, water level)",
+   "w": 134,
+   "x0": 568325.8,
+   "y0": 5940557.5
+  },
+  "DIG_2008_0484": {
+   "affine": [
+    358117.16,
+    5934893.36,
+    53.565071,
+    -117.14325,
+    3347.67,
+    66190.778,
+    111184.962,
+    -1992.939
+   ],
+   "ats": [
+    "053-22-W5"
+   ],
+   "cell_m": 23.39,
+   "centre": [
+    53.565071,
+    -117.14325
+   ],
+   "contour_max_depth_m": 9.45,
+   "file": "data/depth_grids/DIG_2008_0484.bin",
+   "h": 161,
+   "level_m": [
+    1051.3
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 9.4,
+   "north_deg": 1.725,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0484 (lakebed grid) and DIG 2008-0653 (contours, water level)",
+   "w": 123,
+   "x0": 356690.5,
+   "y0": 5936764.4
+  },
+  "DIG_2008_0486": {
+   "affine": [
+    612764.83,
+    5427679.74,
+    49.011247,
+    -113.457296,
+    -2258.882,
+    73093.123,
+    111115.409,
+    1485.921
+   ],
+   "ats": [
+    "001-26-W4"
+   ],
+   "cell_m": 10.94,
+   "centre": [
+    49.011247,
+    -113.457296
+   ],
+   "contour_max_depth_m": 4.96,
+   "file": "data/depth_grids/DIG_2008_0486.bin",
+   "h": 145,
+   "level_m": [
+    1379.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 5.0,
+   "north_deg": -1.165,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0486 (lakebed grid) and DIG 2008-0655 (contours, water level)",
+   "w": 161,
+   "x0": 611889.8,
+   "y0": 5428467.3
+  },
+  "DIG_2008_0487": {
+   "affine": [
+    597941.27,
+    5438554.47,
+    49.111616,
+    -113.657397,
+    -1968.817,
+    72946.901,
+    111118.6,
+    1292.485
+   ],
+   "ats": [
+    "002-28-W4"
+   ],
+   "cell_m": 21.6,
+   "centre": [
+    49.111616,
+    -113.657397
+   ],
+   "contour_max_depth_m": 6.1,
+   "file": "data/depth_grids/DIG_2008_0487.bin",
+   "h": 118,
+   "level_m": [
+    1340.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 6.1,
+   "north_deg": -1.015,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0487 (lakebed grid) and DIG 2008-0656 (contours, water level)",
+   "w": 161,
+   "x0": 596213.6,
+   "y0": 5439817.8
+  },
+  "DIG_2008_0488": {
+   "affine": [
+    542453.48,
+    5983195.72,
+    54.016851,
+    -114.35182,
+    -1018.127,
+    65495.554,
+    111214.075,
+    599.589
+   ],
+   "ats": [
+    "058-03-W5"
+   ],
+   "cell_m": 8.0,
+   "centre": [
+    54.016851,
+    -114.35182
+   ],
+   "contour_max_depth_m": 14,
+   "file": "data/depth_grids/DIG_2008_0488.bin",
+   "h": 119,
+   "level_m": [
+    644.4
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 14.0,
+   "north_deg": -0.525,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0488 (lakebed grid) and DIG 2008-0657 (contours, water level)",
+   "w": 131,
+   "x0": 541933.5,
+   "y0": 5983667.7
+  },
+  "DIG_2008_0489": {
+   "affine": [
+    263983.93,
+    5976594.18,
+    53.905419,
+    -118.594596,
+    5642.006,
+    65632.193,
+    111147.207,
+    -3331.593
+   ],
+   "ats": [
+    "057-04-W6, 057-05-W6"
+   ],
+   "cell_m": 13.79,
+   "centre": [
+    53.905419,
+    -118.594596
+   ],
+   "contour_max_depth_m": 9.14,
+   "file": "data/depth_grids/DIG_2008_0489.bin",
+   "h": 161,
+   "level_m": [
+    1254.9,
+    1264.8
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 9.1,
+   "north_deg": 2.906,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0489 (lakebed grid) and DIG 2008-0658 (contours, water level)",
+   "w": 156,
+   "x0": 262915.0,
+   "y0": 5977697.6
+  },
+  "DIG_2008_0492": {
+   "affine": [
+    731001.06,
+    6060802.07,
+    54.663345,
+    -111.416549,
+    -5678.677,
+    64435.435,
+    111156.216,
+    3291.836
+   ],
+   "ats": [
+    "065-09-W4, 065-10-W4, 066-10-W4"
+   ],
+   "cell_m": 65.63,
+   "centre": [
+    54.663345,
+    -111.416549
+   ],
+   "contour_max_depth_m": 21.34,
+   "file": "data/depth_grids/DIG_2008_0492.bin",
+   "h": 140,
+   "level_m": [
+    599.1
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 21.3,
+   "north_deg": -2.925,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0492 (lakebed grid) and DIG 2008-0661 (contours, water level)",
+   "w": 161,
+   "x0": 725750.6,
+   "y0": 6065363.4
+  },
+  "DIG_2008_0502": {
+   "affine": [
+    646828.15,
+    6052741.4,
+    54.62251,
+    -112.724874,
+    -3602.119,
+    64525.098,
+    111198.637,
+    2090.197
+   ],
+   "ats": [
+    "065-18-W4, 065-19-W4"
+   ],
+   "cell_m": 37.77,
+   "centre": [
+    54.62251,
+    -112.724874
+   ],
+   "contour_max_depth_m": 16.66,
+   "file": "data/depth_grids/DIG_2008_0502.bin",
+   "h": 161,
+   "level_m": [
+    622.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 16.7,
+   "north_deg": -1.855,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0502 (lakebed grid) and DIG 2008-0671 (contours, water level)",
+   "w": 148,
+   "x0": 644052.3,
+   "y0": 6055762.7
+  },
+  "DIG_2008_0507": {
+   "affine": [
+    404685.51,
+    6173193.44,
+    55.71734,
+    -116.517881,
+    2435.418,
+    62789.063,
+    111233.365,
+    -1374.746
+   ],
+   "ats": [
+    "077-16-W5, 077-17-W5, 078-16-W5, 078-17-W5"
+   ],
+   "cell_m": 76.99,
+   "centre": [
+    55.71734,
+    -116.517881
+   ],
+   "contour_max_depth_m": 6,
+   "file": "data/depth_grids/DIG_2008_0507.bin",
+   "h": 101,
+   "level_m": [
+    622
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 6,
+   "north_deg": 1.254,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0507 (lakebed grid) and DIG 2008-0676 (contours, water level)",
+   "w": 161,
+   "x0": 398526.5,
+   "y0": 6177042.8
+  },
+  "DIG_2008_0508": {
+   "affine": [
+    557066.78,
+    5927751.81,
+    53.516954,
+    -114.138989,
+    -1343.725,
+    66277.325,
+    111203.273,
+    800.862
+   ],
+   "ats": [
+    "052-01-W5"
+   ],
+   "cell_m": 9.25,
+   "centre": [
+    53.516954,
+    -114.138989
+   ],
+   "contour_max_depth_m": 9.14,
+   "file": "data/depth_grids/DIG_2008_0508.bin",
+   "h": 161,
+   "level_m": [
+    724.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 9.1,
+   "north_deg": -0.692,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0508 (lakebed grid) and DIG 2008-0677 (contours, water level)",
+   "w": 161,
+   "x0": 556326.9,
+   "y0": 5928491.7
+  },
+  "DIG_2008_0510": {
+   "affine": [
+    548167.29,
+    5926924.47,
+    53.510406,
+    -114.273377,
+    -1133.883,
+    66288.173,
+    111204.208,
+    675.901
+   ],
+   "ats": [
+    "052-02-W5"
+   ],
+   "cell_m": 8.0,
+   "centre": [
+    53.510406,
+    -114.273377
+   ],
+   "contour_max_depth_m": 6.1,
+   "file": "data/depth_grids/DIG_2008_0510.bin",
+   "h": 138,
+   "level_m": [
+    738.9
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 6.1,
+   "north_deg": -0.584,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0510 (lakebed grid) and DIG 2008-0679 (contours, water level)",
+   "w": 128,
+   "x0": 547659.3,
+   "y0": 5927472.5
+  },
+  "DIG_2008_0512": {
+   "affine": [
+    499898.79,
+    5781414.48,
+    52.204007,
+    -115.001482,
+    2.272,
+    68310.692,
+    111182.209,
+    -1.396
+   ],
+   "ats": [
+    "037-07-W5, 037-08-W5"
+   ],
+   "cell_m": 8.0,
+   "centre": [
+    52.204007,
+    -115.001482
+   ],
+   "contour_max_depth_m": 12.19,
+   "file": "data/depth_grids/DIG_2008_0512.bin",
+   "h": 114,
+   "level_m": [
+    1060.5
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 12.2,
+   "north_deg": 0.001,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0512 (lakebed grid) and DIG 2008-0681 (contours, water level)",
+   "w": 112,
+   "x0": 499454.8,
+   "y0": 5781866.5
+  },
+  "DIG_2008_0515": {
+   "affine": [
+    557252.44,
+    5798751.03,
+    52.356942,
+    -114.158984,
+    -1292.35,
+    68074.084,
+    111182.074,
+    791.275
+   ],
+   "ats": [
+    "038-01-W5, 039-01-W5, 039-02-W5"
+   ],
+   "cell_m": 76.14,
+   "centre": [
+    52.356942,
+    -114.158984
+   ],
+   "contour_max_depth_m": 18.29,
+   "file": "data/depth_grids/DIG_2008_0515.bin",
+   "h": 141,
+   "level_m": [
+    934.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 18.3,
+   "north_deg": -0.666,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0515 (lakebed grid) and DIG 2008-0684 (contours, water level)",
+   "w": 161,
+   "x0": 551161.4,
+   "y0": 5804080.7
+  },
+  "DIG_2008_0520": {
+   "affine": [
+    489139.87,
+    5605331.05,
+    50.619954,
+    -115.153581,
+    230.296,
+    70712.918,
+    111151.92,
+    -146.51
+   ],
+   "ats": [
+    "019-09-W5"
+   ],
+   "cell_m": 32.15,
+   "centre": [
+    50.619954,
+    -115.153581
+   ],
+   "contour_max_depth_m": 112,
+   "file": "data/depth_grids/DIG_2008_0520.bin",
+   "h": 105,
+   "level_m": [
+    1708
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 112.0,
+   "north_deg": 0.119,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0520 (lakebed grid) and DIG 2008-0689 (contours, water level)",
+   "w": 161,
+   "x0": 486567.9,
+   "y0": 5607002.8
+  },
+  "DIG_2008_0523": {
+   "affine": [
+    231274.5,
+    5975829.16,
+    53.882631,
+    -119.090784,
+    6420.29,
+    65656.305,
+    111127.142,
+    -3793.245
+   ],
+   "ats": [
+    "056-08-W6"
+   ],
+   "cell_m": 10.9,
+   "centre": [
+    53.882631,
+    -119.090784
+   ],
+   "contour_max_depth_m": 18.29,
+   "file": "data/depth_grids/DIG_2008_0523.bin",
+   "h": 161,
+   "level_m": [
+    1119.8
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 18.3,
+   "north_deg": 3.307,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0523 (lakebed grid) and DIG 2008-0692 (contours, water level)",
+   "w": 156,
+   "x0": 230430.1,
+   "y0": 5976700.8
+  },
+  "DIG_2008_0525": {
+   "affine": [
+    527406.45,
+    5929694.72,
+    53.53681,
+    -114.586307,
+    -645.77,
+    66248.016,
+    111206.464,
+    384.699
+   ],
+   "ats": [
+    "052-03-W5, 052-04-W5, 052-05-W5, 053-03-W5, 053-04-W5, 053-05-W5"
+   ],
+   "cell_m": 125.02,
+   "centre": [
+    53.53681,
+    -114.586307
+   ],
+   "contour_max_depth_m": 10.7,
+   "file": "data/depth_grids/DIG_2008_0525.bin",
+   "h": 79,
+   "level_m": [
+    724.7
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 10.7,
+   "north_deg": -0.333,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0525 (lakebed grid) and DIG 2008-0694 (contours, water level)",
+   "w": 161,
+   "x0": 517405.1,
+   "y0": 5934570.4
+  },
+  "DIG_2008_0530": {
+   "affine": [
+    313813.5,
+    5903571.84,
+    53.269898,
+    -117.793205,
+    4346.854,
+    66641.903,
+    111164.726,
+    -2605.886
+   ],
+   "ats": [
+    "049-26-W5"
+   ],
+   "cell_m": 8.0,
+   "centre": [
+    53.269898,
+    -117.793205
+   ],
+   "contour_max_depth_m": 3.96,
+   "file": "data/depth_grids/DIG_2008_0530.bin",
+   "h": 118,
+   "level_m": [
+    1148.0
+   ],
+   "licence": "Open Government Licence - Alberta",
+   "max_depth_m": 4.0,
+   "north_deg": 2.239,
+   "schema": 1,
+   "source": "Alberta Geological Survey DIG 2008-0530 (lakebed grid) and DIG 2008-0699 (contours, water level)",
+   "w": 114,
+   "x0": 313361.5,
+   "y0": 5904039.8
+  }
+ },
+ "lakes": {
+  "wb18014": {
+   "grid": "DIG_2008_0507",
+   "name": "South Heart Reservoir"
+  },
+  "wb3494": {
+   "grid": "DIG_2008_0382",
+   "name": "Blood Indian Creek Reservoir"
+  },
+  "wb4018": {
+   "grid": "DIG_2008_0378",
+   "name": "Beaver Mines Lake"
+  },
+  "wb4161": {
+   "grid": "DIG_2008_0389",
+   "name": "Burnstick Lake"
+  },
+  "wb4261": {
+   "grid": "DIG_2008_0397",
+   "name": "Chickakoo Lake"
+  },
+  "wb4265": {
+   "grid": "DIG_2008_0399",
+   "name": "Chin Lakes"
+  },
+  "wb4340": {
+   "grid": "DIG_2008_0405",
+   "name": "Cow Lake"
+  },
+  "wb4374": {
+   "grid": "DIG_2008_0408",
+   "name": "Crowsnest Lake"
+  },
+  "wb4446": {
+   "grid": "DIG_2008_0411",
+   "name": "Dillberry Lake"
+  },
+  "wb4571": {
+   "grid": "DIG_2008_0416",
+   "name": "Fickle Lake"
+  },
+  "wb4635": {
+   "grid": "DIG_2008_0420",
+   "name": "Frog Lake"
+  },
+  "wb4697": {
+   "grid": "DIG_2008_0425",
+   "name": "Goldeye Lake"
+  },
+  "wb4708": {
+   "grid": "DIG_2008_0428",
+   "name": "Goose Lake"
+  },
+  "wb4725": {
+   "grid": "DIG_2008_0430",
+   "name": "Grande Cache Lake"
+  },
+  "wb4794": {
+   "grid": "DIG_2008_0436",
+   "name": "Hasse Lake"
+  },
+  "wb4977": {
+   "grid": "DIG_2008_0449",
+   "name": "Kehiwin Lake"
+  },
+  "wb4978": {
+   "grid": "DIG_2008_0450",
+   "name": "Keho Lake"
+  },
+  "wb5002": {
+   "grid": "DIG_2008_0451",
+   "name": "Kinky Lake"
+  },
+  "wb5050": {
+   "grid": "DIG_2008_0454",
+   "name": "Lee Lake"
+  },
+  "wb5179": {
+   "grid": "DIG_2008_0458",
+   "name": "Lower Kananaskis Lake"
+  },
+  "wb5245": {
+   "grid": "DIG_2008_0464",
+   "name": "Mary Gregg Lake"
+  },
+  "wb5286": {
+   "grid": "DIG_2008_0466",
+   "name": "McLeod Lake"
+  },
+  "wb5324": {
+   "grid": "DIG_2008_0469",
+   "name": "Millers Lake"
+  },
+  "wb5348": {
+   "grid": "DIG_2008_0474",
+   "name": "Mitchell Lake"
+  },
+  "wb5387": {
+   "grid": "DIG_2008_0478",
+   "name": "Muir Lake"
+  },
+  "wb5466": {
+   "grid": "DIG_2008_0484",
+   "name": "Obed Lake"
+  },
+  "wb5504": {
+   "grid": "DIG_2008_0486",
+   "name": "Outpost Lake"
+  },
+  "wb5513": {
+   "grid": "DIG_2008_0487",
+   "name": "Payne Lake"
+  },
+  "wb5538": {
+   "grid": "DIG_2008_0488",
+   "name": "Peanut Lake"
+  },
+  "wb5572": {
+   "grid": "DIG_2008_0489",
+   "name": "Pierre Greys Lakes"
+  },
+  "wb5581": {
+   "grid": "DIG_2008_0492",
+   "name": "Pinehurst Lake"
+  },
+  "wb5820": {
+   "grid": "DIG_2008_0502",
+   "name": "Skeleton Lake"
+  },
+  "wb5874": {
+   "grid": "DIG_2008_0508",
+   "name": "Spring Lake"
+  },
+  "wb5895": {
+   "grid": "DIG_2008_0510",
+   "name": "Star Lake"
+  },
+  "wb5919": {
+   "grid": "DIG_2008_0512",
+   "name": "Strubel Lake"
+  },
+  "wb5952": {
+   "grid": "DIG_2008_0515",
+   "name": "Sylvan Lake"
+  },
+  "wb6061": {
+   "grid": "DIG_2008_0520",
+   "name": "Upper Kananaskis Lake"
+  },
+  "wb6086": {
+   "grid": "DIG_2008_0523",
+   "name": "Victor Lake"
+  },
+  "wb6095": {
+   "grid": "DIG_2008_0525",
+   "name": "Wabamun Lake"
+  },
+  "wb6160": {
+   "grid": "DIG_2008_0530",
+   "name": "Wildhorse Lakes"
+  },
+  "wb6533": {
+   "grid": "DIG_2008_0489",
+   "name": "Pierre Greys Lakes"
+  },
+  "wb6534": {
+   "grid": "DIG_2008_0489",
+   "name": "Pierre Greys Lakes"
+  },
+  "wb6537": {
+   "grid": "DIG_2008_0530",
+   "name": "Wildhorse Lakes"
+  }
+ },
+ "schema": 1
+}

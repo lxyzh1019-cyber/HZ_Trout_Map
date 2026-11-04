@@ -1453,6 +1453,9 @@
 <script src="js/lake-sheet.js"></script>
 <script src="js/day-ui.js"></script>
 <script src="js/reading-room.js"></script>
+<script src="js/lake-structure.js"></script>
+<script src="js/fishing-spots.js"></script>
+<script src="js/depth-3d.js"></script>
 <script>
 // ============================================================
 // CONFIG
@@ -1678,6 +1681,8 @@ let ADVISORIES = null;
 let ELEVATIONS = null;     // Build 2: lake heights, for the water model and ice only
 let DEPTH_CHARTS = null;   // Build 2: Alberta Geological Survey depth charts, matched lakes
 let HOT_SPOTS = null;      // Build 2: hot spots, each with a source link and date
+let DEPTH_GRIDS = null;    // Build 3: lakebed grids for the 3D depth model (AGS)
+let BOATING_RULES = null;  // Build 3: boating rules (Transport Canada TP 15587E, MyWildAlberta)
 let PROVISIONAL_YEARS = new Set();
 const DATA_ISSUES = { invalidStockings: 0, examples: [] };
 
@@ -4124,6 +4129,9 @@ async function init() {
       typeof LakeSheet === "undefined" ? "js/lake-sheet.js" : null,
       typeof DayUI === "undefined" ? "js/day-ui.js" : null,
       typeof ReadingRoom === "undefined" ? "js/reading-room.js" : null,
+      typeof LakeStructure === "undefined" ? "js/lake-structure.js" : null,
+      typeof FishingSpots === "undefined" ? "js/fishing-spots.js" : null,
+      typeof DepthModel === "undefined" ? "js/depth-3d.js" : null,
     ].filter(Boolean);
     if (missing.length) throw new Error(`${missing.join(" and ")} did not load. Check the vendor/ and js/ folders are present.`);
 
@@ -4139,10 +4147,12 @@ async function init() {
     DEPTHS = await loadDepths();
     PROFILES = await loadProfiles();
     ADVISORIES = await loadAdvisories();
-    [ELEVATIONS, DEPTH_CHARTS, HOT_SPOTS] = await Promise.all([
+    [ELEVATIONS, DEPTH_CHARTS, HOT_SPOTS, DEPTH_GRIDS, BOATING_RULES] = await Promise.all([
       loadOptionalJson("data/lake_elevation.json"),
       loadOptionalJson("data/depth_charts.json"),
       loadOptionalJson("data/hot_spots.json"),
+      loadOptionalJson("data/depth_grids/index.json"),
+      loadOptionalJson("data/boating_rules.json"),
     ]);
     LAKES = lakes;
     ALL_YEARS = years;

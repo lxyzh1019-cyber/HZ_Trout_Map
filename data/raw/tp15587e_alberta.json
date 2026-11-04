@@ -1,0 +1,2549 @@
+{
+ "source": "Transport Canada, TP 15587E (2nd edition, April 2026)",
+ "url": "https://tc.canada.ca/en/marine-transportation/marine-safety/boating-safety/schedules-vessel-operation-restriction-regulations-2nd-edition-april-2026",
+ "retrieved": "2026-11-04",
+ "licence": "Transport Canada: personal and public non-commercial use, credit Transport Canada, not the official version",
+ "rows": [
+  {
+   "schedule": "1",
+   "name": "Elkwater Lake, as indicated by signs",
+   "local": "",
+   "location": "23,25-8-3-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Outpost Lake, as indicated by signs",
+   "local": "Police Lake",
+   "location": "1-26-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Beauvais Lake, as indicated by signs",
+   "local": "",
+   "location": "29-5-1-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake, as indicated by signs",
+   "local": "Park Lake",
+   "location": "9,10-22-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Lee Lake, as indicated by signs",
+   "local": "",
+   "location": "7,8-7-2-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "St. Mary Reservoir, as indicated by signs",
+   "local": "",
+   "location": "4-24,25-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Newell Lake, as indicated by signs",
+   "local": "",
+   "location": "17-15-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Travers Reservoir, as indicated by signs",
+   "local": "",
+   "location": "31-14-21-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Keho Lake, as indicated by signs",
+   "local": "",
+   "location": "11-22,23-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Stafford Reservoir, as indicated by signs",
+   "local": "Chin Lakes",
+   "location": "9-19-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Beaver Mines Lakes, as indicated by signs",
+   "local": "",
+   "location": "11-5-3-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Milk River Ridge Reservoir, as indicated by signs",
+   "local": "Ridge Reservoir",
+   "location": "5-20-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Chain Lakes, as indicated by signs",
+   "local": "",
+   "location": "14,15-2-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "That portion of the Oldman River between the Bitango Bridge in 30-7-29-W4 and the Oldman River Dam Project access bridge in 16-7-29-W4",
+   "local": "",
+   "location": "27-11-13-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Little Fish Lake, as indicated by signs",
+   "local": "",
+   "location": "28-16-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Bow River at Carseland Weir, as indicated by signs",
+   "local": "",
+   "location": "31,32-21-25-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake",
+   "local": "Sikome Lake",
+   "location": "25-1-22-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed reservoir",
+   "local": "Cipperley’s Reservoir",
+   "location": "8-32-1-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed reservoir",
+   "local": "Hwy No. 2 (Harris) Reservoir",
+   "location": "36-44-25-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake, as indicated by signs",
+   "local": "Lacombe Experimental Farm Pond",
+   "location": "24-40-27-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed reservoir",
+   "local": "Ponoka Centennial Park Reservoir",
+   "location": "43-25-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed reservoir",
+   "local": "Simpson Reservoir",
+   "location": "12-35-6-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Gull Lake, as indicated by signs",
+   "local": "",
+   "location": "41-28-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Gooseberry Lake, as indicated by signs",
+   "local": "",
+   "location": "36-5,6-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Miquelon Lakes, as indicated by signs",
+   "local": "",
+   "location": "49-20,21-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Buffalo Lake, as indicated by signs",
+   "local": "",
+   "location": "25-40-21-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Pine Lake, as indicated by signs",
+   "local": "",
+   "location": "36-24,25-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed reservoir",
+   "local": "Tees Reservoir",
+   "location": "25-40-24-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed reservoir",
+   "local": "Hwy No. 2 Reservoir",
+   "location": "22-42-26-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake",
+   "local": "Prins’ Pond",
+   "location": "25-40-28-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake",
+   "local": "Owen’s Pond",
+   "location": "28-45-10-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake",
+   "local": "Wallace Park Pond",
+   "location": "44-6-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake",
+   "local": "Monitor Pond",
+   "location": "6-35-4-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Sylvan Lake, as indicated by signs",
+   "local": "",
+   "location": "39-1-2-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake, as indicated by signs",
+   "local": "Hardisty Lake",
+   "location": "1-43-10-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake, as indicated by signs",
+   "local": "Keivers Lake",
+   "location": "25-31-26-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Red Deer Lake, as indicated by signs",
+   "local": "",
+   "location": "43-21,22-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Twin Lakes West, as indicated by signs",
+   "local": "",
+   "location": "9-46-3-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Bow River at Western Irrigation District Weir Calgary, as indicated by signs",
+   "local": "",
+   "location": "13-24-1-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Buck Lake, as indicated by signs",
+   "local": "",
+   "location": "46-6-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Pigeon Lake, as indicated by signs",
+   "local": "",
+   "location": "47-1-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Gleniffer Lake, as indicated by signs",
+   "local": "Dickson Reservoir",
+   "location": "35-2,3-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Red Deer River, as indicated by signs",
+   "local": "",
+   "location": "36-2-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Jarvis Lake, as indicated by signs",
+   "local": "",
+   "location": "52-26-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Gregg Lake, as indicated by signs",
+   "local": "",
+   "location": "52,53-26-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake, as indicated by signs",
+   "local": "Bear Lake",
+   "location": "10-55-15-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "McLeod Lake, as indicated by signs",
+   "local": "Carson Lake",
+   "location": "61-11,12-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake, as indicated by signs",
+   "local": "Pegasus Lake",
+   "location": "61-11-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Goose Lake, as indicated by signs",
+   "local": "",
+   "location": "61-8-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Wolf Lake, as indicated by signs",
+   "local": "",
+   "location": "49-14-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake",
+   "local": "Rocky Fish and Game Pond",
+   "location": "33-39-7-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Garner Lake, as indicated by signs",
+   "local": "",
+   "location": "60-12-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake, as indicated by signs",
+   "local": "Long Lake",
+   "location": "63-19-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Moose Lake, as indicated by signs",
+   "local": "",
+   "location": "60,61-6,7-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Lac la Biche, as indicated by signs",
+   "local": "",
+   "location": "68-15-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed reservoir, as indicated by signs",
+   "local": "Vermilion Reservoir",
+   "location": "50-6-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Gregoire Lake, as indicated by signs",
+   "local": "",
+   "location": "13-86-8-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Whitney Lake, as indicated by signs",
+   "local": "",
+   "location": "16,17-56-4-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Cold Lake, as indicated by signs",
+   "local": "",
+   "location": "63,65-1,2-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Touchwood Lake, as indicated by signs",
+   "local": "",
+   "location": "67-10-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Beaver Lake, as indicated by signs",
+   "local": "",
+   "location": "66-12,13-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Manatokan Lake, as indicated by signs",
+   "local": "",
+   "location": "63-7-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Namur Lake, as indicated by signs",
+   "local": "",
+   "location": "97-17-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Lower Thérien Lake, as indicated by signs",
+   "local": "",
+   "location": "57-10-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Floatingstone Lake, as indicated by signs",
+   "local": "Boyne Lake",
+   "location": "60-11-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Thunder Lake",
+   "local": "",
+   "location": "59-5,6-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "That part of Wabamun Lake that is a zone extending 100 m into the lake from the shoreline of the area indicated by signs and buoys to be the Wabamun Lake Provincial Park beach area or swim area",
+   "local": "",
+   "location": "52,53-4,5-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Jack Fish Lake, as indicated by signs",
+   "local": "",
+   "location": "52-2-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Lac Ste. Anne, as indicated by signs",
+   "local": "",
+   "location": "54,55-3,4-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Lac la Nonne, as indicated by signs",
+   "local": "",
+   "location": "57-2,3-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Steele Lake, as indicated by signs",
+   "local": "Cross Lake",
+   "location": "65-25,26-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Calling Lake, as indicated by signs",
+   "local": "",
+   "location": "33-72-22-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Halfmoon Lake, as indicated by signs",
+   "local": "",
+   "location": "58-23-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake",
+   "local": "Morinville Pond",
+   "location": "5-56-25-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake",
+   "local": "Westlock Pond",
+   "location": "31-59-25-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake",
+   "local": "Namepi Reservoir",
+   "location": "14-58-20-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Sandy Lake, as indicated by signs",
+   "local": "",
+   "location": "55,56-1-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Isle Lake, as indicated by signs",
+   "local": "",
+   "location": "53,54-5,6-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Dillberry Lake, as indicated by signs",
+   "local": "",
+   "location": "41,42-1-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Wizard Lake, as indicated by signs",
+   "local": "",
+   "location": "48-27,28-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Shorncliffe Lake, as indicated by signs",
+   "local": "",
+   "location": "40-6,7-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Unnamed lake, as indicated by signs",
+   "local": "Hasse Lake",
+   "location": "13-52-2-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Lac Santé, as indicated by signs",
+   "local": "Big Fish Lake",
+   "location": "56-11-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Vincent Lake, as indicated by signs",
+   "local": "",
+   "location": "59-9,10-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Bonnie Lake, as indicated by signs",
+   "local": "",
+   "location": "59,60-13-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Fork Lake, as indicated by signs",
+   "local": "",
+   "location": "63-11-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "North Buck Lake, as indicated by signs",
+   "local": "",
+   "location": "66-17-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Hanmore Lake, as indicated by signs",
+   "local": "",
+   "location": "61-17,18-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Jackfish Lake, as indicated by signs",
+   "local": "",
+   "location": "67-21-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Moore Lake, as indicated by signs",
+   "local": "",
+   "location": "64-4-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Skeleton Lake, as indicated by signs",
+   "local": "",
+   "location": "65-18,19-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Camp Lake, as indicated by signs",
+   "local": "",
+   "location": "10-48-11-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Long Island Lake, as indicated by signs",
+   "local": "",
+   "location": "63-25,26-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Muriel Lake, as indicated by signs",
+   "local": "",
+   "location": "59,60-5-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Ross Lake",
+   "local": "",
+   "location": "11-56-4-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Half Moon Lake",
+   "local": "Half Moon Lake",
+   "location": "6-52-21-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Baptiste Lake, as indicated by signs",
+   "local": "Baptiste Lake",
+   "location": "66-24-W4"
+  },
+  {
+   "schedule": "1",
+   "name": "Cardinal Lake, as indicated by signs",
+   "local": "Cardinal Lake",
+   "location": "83-24-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Lesser Slave Lake, as indicated by signs",
+   "local": "",
+   "location": "19-75-12-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Saskatoon Lake, as indicated by signs",
+   "local": "",
+   "location": "72-7,8-W6"
+  },
+  {
+   "schedule": "1",
+   "name": "Sturgeon Lake, as indicated by signs",
+   "local": "",
+   "location": "70-23-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Winagami Lake, as indicated by signs",
+   "local": "",
+   "location": "76,77-18,19-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Mirage Lake, as indicated by signs",
+   "local": "Moonshine Lake",
+   "location": "79-8-W6"
+  },
+  {
+   "schedule": "1",
+   "name": "Musreau Lake, as indicated by signs",
+   "local": "",
+   "location": "64-5-W6"
+  },
+  {
+   "schedule": "1",
+   "name": "Rycroft Pond",
+   "local": "",
+   "location": "15-78-5-W6"
+  },
+  {
+   "schedule": "1",
+   "name": "Grimshaw Agricultural Society Pond # 1",
+   "local": "",
+   "location": "27-83-23-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Lesser Slave River, as indicated by signs",
+   "local": "",
+   "location": "73-3-W5"
+  },
+  {
+   "schedule": "1",
+   "name": "Fawcett Lake, as indicated by signs",
+   "local": "",
+   "location": "73-26-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Burmis Lake",
+   "location": "13-7-3-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Gold Springs Reservoir",
+   "location": "6-2-15-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Henderson Lake",
+   "local": "",
+   "location": "33-8-21-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Lehto’s Reservoir",
+   "location": "2-13-21-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Spruce Coulee Reservoir",
+   "location": "26-8-2-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Taber Fish and Game Pond",
+   "location": "1-10-17-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Granlea Reservoir",
+   "location": "33-8-9-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "University Reservoir",
+   "location": "25-8-2-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Nicholas Sheran Park Lake",
+   "location": "26-8-22-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Ducks Unlimited Reservoir",
+   "location": "18-15,16-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Bathing Lake",
+   "location": "12-4-1-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Bovin Lake",
+   "location": "19-3-1-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Little Beaverdam Lake",
+   "location": "34-1-28-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Phillips Lake",
+   "location": "18-8-5-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Allison Reservoir",
+   "location": "27-8-5-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Anderson’s Reservoir No. 2",
+   "location": "25-28-21-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Anderson’s Reservoir No. 3",
+   "location": "24-28-21-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Dewitt Pond",
+   "location": "31-26-1-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Hanna-Mattis Reservoir",
+   "location": "19-31-12-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Hilton Reservoir",
+   "location": "19-24-23-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Parks Reservoir",
+   "location": "14-31-2-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Starland Reservoir",
+   "location": "26-32-21-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Strathmore Children’s Pond",
+   "location": "14-24-25-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Langdon Reservoir",
+   "local": "",
+   "location": "23-23-27-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Braconnier’s Reservoir",
+   "location": "20-31-23-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Clark’s Reservoir",
+   "location": "21-30-1-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Hansen’s Reservoir",
+   "location": "29-38-3-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Hiller’s Reservoir",
+   "location": "13-32-29-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Midway Centennial Reservoir",
+   "location": "16-30-27-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Sedgewick Lake",
+   "location": "16-44-12-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Neimala Reservoir",
+   "location": "1-39-3-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Treasure Island",
+   "location": "20-46-19-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Primus Reservoir",
+   "location": "28-39-23-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Pofiango Reservoir",
+   "location": "1-44-26-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Rosalind Gravel Pit",
+   "location": "31-43-17-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Donalda Pond",
+   "location": "20-42-19-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Hugh Bower Pond",
+   "location": "17-38-27-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Pigeon Lake, as indicated by signs",
+   "local": "",
+   "location": "22-46-28-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "West Stettler Fishpond",
+   "location": "6-39-19-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "That part of the Elbow River commencing at the west boundary of Section 4, Township 24, Range 2, west of the 5th Meridian where it enters the City of Calgary, and continuing downstream to its confluence with the Bow River in Section 14, Township 24, Range 1, west of the 5th Meridian",
+   "local": "Elbow River",
+   "location": "Downstream of 04-24-02-W5 to 14-24-1-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "That part of the Bow River commencing at the west boundary of Section 5, Township 25, Range 2, west of the 5th Meridian and continuing downstream to the point where it exits the City of Calgary at the south boundary of Section 20, Township 22, Range 29, west of the 4th Meridian",
+   "local": "Bow River",
+   "location": "Downstream of 05-25-02-W5 to 20-22-29-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Ruby Lake",
+   "location": "22-44-22-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Mystery Lake",
+   "local": "",
+   "location": "48-26-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Pedley Reservoir",
+   "location": "2-52-24-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Crystal Lake",
+   "location": "31-59-18-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Smoky River",
+   "local": "",
+   "location": "Upstream of NW 14 18-56-8-W6"
+  },
+  {
+   "schedule": "2",
+   "name": "Berland River",
+   "local": "",
+   "location": "upstream of 1-55-4-W6"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Lambert Pond",
+   "location": "8-53-17-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Elbow Lake",
+   "location": "26-19-8-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Sibbald Lake",
+   "location": "14,15-24-7-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Chilver Lake",
+   "local": "",
+   "location": "28-24-8-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Shunda Creek",
+   "local": "",
+   "location": "31-40-14-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Cow Lake",
+   "location": "6,7-28-7-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Crimson Lake, as indicated by signs",
+   "local": "",
+   "location": "40-8-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Gap Lake",
+   "local": "",
+   "location": "5-39-13-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Pinto Lake",
+   "local": "",
+   "location": "36-21-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Job Lake",
+   "local": "",
+   "location": "20-39-20-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake near Sundre",
+   "local": "Eagle Lake",
+   "location": "11-32-11-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Dore Lake",
+   "location": "12-113-7-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Maqua Lake",
+   "location": "13-85-9-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Wolf Lake, as indicated by signs",
+   "local": "",
+   "location": "66-6,7-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Crow Lake",
+   "location": "32-78-14-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "George Lake",
+   "local": "",
+   "location": "28-57-1-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Islet Lake",
+   "local": "",
+   "location": "that portion being in sectors 1 & 2-52-20-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Beaverhill Lake",
+   "local": "",
+   "location": "51,52-17,18-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Coyote Lake",
+   "location": "49-4-W5"
+  },
+  {
+   "schedule": "2",
+   "name": "Bennet Lake",
+   "local": "",
+   "location": "35-52-21-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed reservoir",
+   "local": "Leduc Reservoir",
+   "location": "27-49-25-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Happy Hollow Lake",
+   "location": "64-4-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Provost Reservoir",
+   "location": "18-39-2-W4"
+  },
+  {
+   "schedule": "2",
+   "name": "Nose Lake",
+   "local": "",
+   "location": "16-64-11-W6"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Motto Lake",
+   "location": "4-87-3-W6"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Bird’s Pond",
+   "location": "22-79-8-W6"
+  },
+  {
+   "schedule": "2",
+   "name": "Two Lakes (North)",
+   "local": "",
+   "location": "29-62-12-W6"
+  },
+  {
+   "schedule": "2",
+   "name": "Unnamed lake",
+   "local": "Long Lake",
+   "location": "62-6-W6"
+  },
+  {
+   "schedule": "2",
+   "name": "Sandhill Lake",
+   "local": "",
+   "location": "82,83-4-W6"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed reservoir",
+   "local": "Michelle Reservoir",
+   "location": "5-7-3-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Reesor Lake",
+   "location": "20-8-1-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "McQuillan Lake",
+   "location": "13-8-19-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Round Lake",
+   "location": "16,17-1,2-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Beaverdam Lake",
+   "local": "",
+   "location": "1,2-27,28-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Cochrane Lake",
+   "local": "",
+   "location": "30-4-27-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed reservoir",
+   "local": "Bullshead Reservoir",
+   "location": "28,29-8-4-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Emerald Lake",
+   "location": "8-8-5-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Brooks Aqueduct Pond",
+   "location": "15-18-14-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed reservoir",
+   "local": "Dobson Reservoir",
+   "location": "12-30-8-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed reservoir",
+   "local": "Fyten Reservoir",
+   "location": "9-30-24-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed reservoir",
+   "local": "Michichi Reservoir",
+   "location": "19-30-18-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed reservoir",
+   "local": "Severn Creek Reservoir",
+   "location": "11-26-22-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Stafford Lake (Brooks Children′s Pond)",
+   "location": "4-19-14-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed reservoir",
+   "local": "Tilley A Reservoir",
+   "location": "8-18-12-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed reservoir",
+   "local": "Tilley B Reservoir",
+   "location": "31-18-12-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed reservoir",
+   "local": "Huber Reservoir",
+   "location": "36-37-13-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed reservoir",
+   "local": "Mound Red Reservoir",
+   "location": "11-45-28-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Sardine Lake",
+   "location": "32-48-4-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lakes",
+   "local": "Twin Lakes",
+   "location": "46-3-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Short Hills (Cran) Pond",
+   "location": "2-42-19-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Windsor Lake",
+   "location": "10-42-22-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Ashland Dam",
+   "location": "32-48-4-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Gooseberry Park Pond",
+   "location": "22-36-6-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Winchell Lake",
+   "location": "2-29-5-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Fish Lake",
+   "location": "2-43-10-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed reservoir",
+   "local": "Bigelow Reservoir",
+   "location": "34-25-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed reservoir",
+   "local": "Mirror Reservoir",
+   "location": "29-40-22-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Lacombe Lake",
+   "local": "Lacombe Lake",
+   "location": "40-27-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed reservoir",
+   "local": "Coronation Reservoir",
+   "location": "24-36-11-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Eccles Pond",
+   "location": "8-53-24-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Cache Lake",
+   "local": "",
+   "location": "52-26-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Donald Lake",
+   "local": "",
+   "location": "4-53-1-W6"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Emerald Lake",
+   "location": "5-62-11-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lakes",
+   "local": "Emerson Lakes",
+   "location": "52-21-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Graveyard Lake",
+   "local": "",
+   "location": "52-26-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Joachim Lakes",
+   "local": "",
+   "location": "18-57-3-W6"
+  },
+  {
+   "schedule": "3",
+   "name": "Kinky Lake",
+   "local": "",
+   "location": "50-26-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Laura Lake",
+   "location": "32-61-11-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Mary Gregg Lake",
+   "local": "",
+   "location": "48-24-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "À la Pêche Lake",
+   "local": "",
+   "location": "33-55-6-W6"
+  },
+  {
+   "schedule": "3",
+   "name": "Wildhorse Lakes",
+   "local": "",
+   "location": "49-26-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Millers Lake",
+   "location": "8-53-19-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Sang Lake",
+   "local": "Surprise Lake",
+   "location": "9-53-15-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Schuman Lake",
+   "location": "61-8-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Margaret Lake",
+   "location": "15-28-9-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Rat Lake",
+   "location": "11-38-9-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Peppers Lake",
+   "local": "",
+   "location": "30-35-12-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Goldeye Lake",
+   "location": "14-40-16-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Shunda Lake",
+   "local": "Fish Lake",
+   "location": "40-15-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Tay Lake",
+   "location": "6-36-8-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Phyllis Lake",
+   "location": "17-36-7-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Mitchell Lake",
+   "location": "36-37-8-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Alford Lake",
+   "location": "4-36-8-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Pierre Greys Lakes",
+   "local": "",
+   "location": "6-57-4-W6"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed reservoir",
+   "local": "Open Creek Reservoir",
+   "location": "31-42-4-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Dunn Lake",
+   "location": "7-54-25-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Petite Lake",
+   "location": "12-54-26-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Upper Moose Horn Lake",
+   "location": "31-50-1-W6"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Lower Moose Horn Lake",
+   "location": "6-51-1-W6"
+  },
+  {
+   "schedule": "3",
+   "name": "Kia Nea Lake",
+   "local": "",
+   "location": "49-26-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Peanut Lake",
+   "location": "9-55-15-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Pegasus Lake",
+   "location": "61-11-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Victor Lake",
+   "local": "",
+   "location": "35-56-8-W6"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake near Caroline",
+   "local": "Beaver Lake",
+   "location": "16-35-6-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Black Nugget Mine Pit",
+   "location": "2,11-49-18-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Eden Lake",
+   "local": "",
+   "location": "13-53-2-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Chickakoo Lake",
+   "local": "",
+   "location": "34-53-1-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Hubbles Lake",
+   "local": "",
+   "location": "9-53-1-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Lower Chain Lake",
+   "location": "17,18-69-23-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Sauer Lake",
+   "location": "33-53-1-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Star Lake",
+   "location": "20-52-2-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Mile 18 Lake",
+   "location": "18-71-13-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Hamilton Lake",
+   "local": "",
+   "location": "59-13,14-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Ashland Dam",
+   "location": "20-48-3-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Shuster Lake",
+   "location": "35-43-5-W4"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Figure Eight Lake",
+   "location": "20-84-25-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Mirage Lake",
+   "local": "",
+   "location": "79-8-W6"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Running Lake",
+   "location": "34-88-7-W6"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Spring Lake",
+   "location": "23-75-11-W6"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Stoney Lake",
+   "location": "31-86-3-W6"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Ole Lake",
+   "location": "30-84-12-W6"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Twin Lake",
+   "location": "97-22-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Hilltop Lake",
+   "location": "75-7-W6"
+  },
+  {
+   "schedule": "3",
+   "name": "Unnamed lake",
+   "local": "Machaeisis Lake",
+   "location": "23,27-107-16-W5"
+  },
+  {
+   "schedule": "3",
+   "name": "Swan Lake",
+   "local": "Swan Lake",
+   "location": "70-25,26-W5"
+  },
+  {
+   "schedule": "5",
+   "name": "Ross Lake",
+   "local": "Ross Lake",
+   "location": "11-56-4-W4",
+   "speed_kmh": "10"
+  },
+  {
+   "schedule": "5",
+   "name": "Half Moon Lake",
+   "local": "Half Moon Lake",
+   "location": "6-52-21-W4",
+   "speed_kmh": "10"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake",
+   "local": "Jackfish Lake",
+   "location": "20-53-9-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Garner Lake, as indicated by signs",
+   "local": "",
+   "location": "60-12-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake, as indicated by signs",
+   "local": "Long Lake",
+   "location": "63-19-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Moose Lake, as indicated by signs",
+   "local": "",
+   "location": "60,61-6,7-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Lac La Biche, as indicated by signs",
+   "local": "",
+   "location": "68-15-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed reservoir, as indicated by signs",
+   "local": "Vermilion Reservoir",
+   "location": "50-6-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake",
+   "local": "Bellis Lake",
+   "location": "59-15-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Gregoire Lake, as indicated by signs",
+   "local": "",
+   "location": "13-86-8-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake, as indicated by signs",
+   "local": "Little Fish Lake",
+   "location": "63-10-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Ethel Lake, as indicated by signs",
+   "local": "",
+   "location": "64-3-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Whitney Lake, as indicated by signs",
+   "local": "",
+   "location": "16,17-56-4-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Chatwin Lake",
+   "local": "",
+   "location": "4-61-6-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake",
+   "local": "Shemeluk Lake",
+   "location": "25-60-17-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Cold Lake, as indicated by signs",
+   "local": "",
+   "location": "63,65-1,2-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Lac Delorme",
+   "local": "George’s Lake",
+   "location": "5-57-8-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "The Snye",
+   "local": "Snye Inlet",
+   "location": "89-9-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Chickenhill Lake",
+   "local": "",
+   "location": "59-8-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake",
+   "local": "Hasse Lake",
+   "location": "13-52-2-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Mink Lake",
+   "local": "",
+   "location": "28-52-2-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Nakamun Lake, as indicated by signs",
+   "local": "",
+   "location": "56-2-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake",
+   "local": "Peanut Lake",
+   "location": "58-3-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Spring Lake",
+   "local": "Cottage Lake",
+   "location": "30-52-1-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Thunder Lake, as indicated by signs",
+   "local": "",
+   "location": "59-5,6-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "That part of Wabamun Lake known locally as Moonlight Bay at coordinates 53°33′39″ 114°26′50″, which includes all waters northeast of the rail bridge that crosses Wabamun Lake",
+   "local": "Moonlight Bay",
+   "location": "52,53-4,5-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Muir Lake",
+   "local": "",
+   "location": "32-53-27-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Mere Lake",
+   "local": "",
+   "location": "32-53-1-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Jack Fish Lake, as indicated by signs",
+   "local": "",
+   "location": "52-2-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Mayatan Lake",
+   "local": "",
+   "location": "52-3-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Whitewood Lake",
+   "local": "",
+   "location": "20-53-4-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Lac Ste. Anne, as indicated by signs",
+   "local": "",
+   "location": "54,55-3,4-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Lac la Nonne, as indicated by signs",
+   "local": "",
+   "location": "57-2,3-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Steele Lake, as indicated by signs",
+   "local": "Cross Lake",
+   "location": "65-25,26-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Calling Lake, as indicated by signs",
+   "local": "",
+   "location": "33-72-22-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Ghost Lake",
+   "local": "",
+   "location": "68-24-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Clear Lake, as indicated by signs",
+   "local": "",
+   "location": "60-6-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake, as indicated by signs",
+   "local": "Sandy Lake",
+   "location": "56-13-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Sandy Lake, as indicated by signs",
+   "local": "",
+   "location": "55,56-1-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Wizard Lake, as indicated by signs",
+   "local": "",
+   "location": "48-27,28-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake",
+   "local": "Cap Eyre Lake",
+   "location": "30-38-5-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Isle Lake, as indicated by signs",
+   "local": "",
+   "location": "53,54-5,6-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Lac Santé, as indicated by signs",
+   "local": "Big Fish Lake",
+   "location": "56-11-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake",
+   "local": "Little Moose Lake",
+   "location": "12,14-56-13-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Hope Lake",
+   "local": "",
+   "location": "65-18-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Long Lake, as indicated by signs",
+   "local": "Narrow Lake",
+   "location": "64,65-25-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "North Buck Lake, as indicated by signs",
+   "local": "",
+   "location": "66-17-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Skeleton Lake, as indicated by signs",
+   "local": "",
+   "location": "65-18,19-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Dillberry Lake, as indicated by signs",
+   "local": "",
+   "location": "41,42-1-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Jackfish Lake, as indicated by signs",
+   "local": "",
+   "location": "67-21-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Camp Lake, as indicated by signs",
+   "local": "",
+   "location": "10-48-11-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Long Island Lake, as indicated by signs",
+   "local": "",
+   "location": "63-25,26-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Muriel Lake, as indicated by signs",
+   "local": "",
+   "location": "59,60-5-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "That part of the Lesser Slave River commencing at the Town of Slave Lake’s raw water intake pumphouse located at the southeast quarter of Section 12, Township 73, Range 6, west of the 5th Meridian and continuing downstream to the Lesser Slave Weir located at the southeast quarter of Section 7, Township 73, Range 5, west of the 5th Meridian",
+   "local": "Lesser Slave River",
+   "location": "Downstream of 12-73-6-W5 to 7-73-5-W5",
+   "speed_kmh": "10"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake",
+   "local": "Sulphur Lake",
+   "location": "7-89-2-W6",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Cardinal Lake, as indicated by signs",
+   "local": "Cardinal Lake",
+   "location": "83-24-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Two Lakes",
+   "local": "",
+   "location": "29-62-12-W6",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Lesser Slave Lake, as indicated by signs",
+   "local": "",
+   "location": "19-75-12-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Saskatoon Lake, as indicated by signs",
+   "local": "",
+   "location": "72-7,8-W6",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Sturgeon Lake, as indicated by signs",
+   "local": "",
+   "location": "31-70-23-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Winagami Lake, as indicated by signs",
+   "local": "",
+   "location": "76,77-18,19-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Cutbank Lake",
+   "local": "",
+   "location": "26-72-8-W6",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Musreau Lake, as indicated by signs",
+   "local": "",
+   "location": "13-64-5-W6",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Fawcett Lake, as indicated by signs",
+   "local": "",
+   "location": "73-26-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Peerless Lake, as indicated by signs",
+   "local": "",
+   "location": "24-88-5-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "North Wabasca Lake, as indicated by signs",
+   "local": "",
+   "location": "1-81-26-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake",
+   "local": "Chrystina Lake",
+   "location": "8-67-8-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Pigeon Lake, within 100 m of shore",
+   "local": "Pigeon Lake",
+   "location": "47-1-W5",
+   "speed_kmh": "10"
+  },
+  {
+   "schedule": "5",
+   "name": "Chestermere Lake (north of Highway 1A)",
+   "local": "",
+   "location": "24-28-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake",
+   "local": "Winchell Lake",
+   "location": "2-29-5-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Little Fish Lake, as indicated by signs",
+   "local": "",
+   "location": "28-16-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Gull Lake, as indicated by signs",
+   "local": "",
+   "location": "16-41-28-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Gooseberry Lake, as indicated by signs",
+   "local": "",
+   "location": "36-5,6-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Miquelon Lakes, as indicated by signs",
+   "local": "",
+   "location": "49-20,21-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Pigeon Lake, as indicated by signs",
+   "local": "",
+   "location": "47-1-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Buffalo Lake, as indicated by signs",
+   "local": "",
+   "location": "25-40-21-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Pine Lake, as indicated by signs",
+   "local": "",
+   "location": "36-24,25-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Chain Lakes",
+   "local": "",
+   "location": "6-42-24-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Sylvan Lake, as indicated by signs",
+   "local": "",
+   "location": "39-1,2-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Battle Lake",
+   "local": "",
+   "location": "46-2-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Battle River at the Forestburg Power Plant",
+   "local": "",
+   "location": "29-40-15-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Buck Lake, as indicated by signs",
+   "local": "",
+   "location": "46-6-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Heninger’s Reservoir",
+   "local": "",
+   "location": "16-3-12-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Outpost Lake",
+   "local": "Police Lake",
+   "location": "1-26-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Beauvais Lake",
+   "local": "",
+   "location": "29-5-1-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Elkwater Lake, as indicated by signs",
+   "local": "",
+   "location": "23,25-8-3-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake",
+   "local": "Park Lake",
+   "location": "9-10-22-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Lee Lake",
+   "local": "",
+   "location": "7,8-7-2-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Tyrrell Lake, as indicated by signs",
+   "local": "",
+   "location": "5-17,18-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed reservoir",
+   "local": "Louisiana #13 Reservoir",
+   "location": "17-11-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Newell Lake, as indicated by signs",
+   "local": "",
+   "location": "17-15-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Travers Reservoir, as indicated by signs",
+   "local": "",
+   "location": "31-14-21-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Stonehill Lake",
+   "local": "",
+   "location": "14-15-17-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed reservoir",
+   "local": "Cavan Lake Reservoir",
+   "location": "30-11-3-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed reservoir",
+   "local": "Kitsim Reservoir",
+   "location": "17-15,16-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Beaver Mines Lake",
+   "local": "",
+   "location": "11-5-3-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Stafford Reservoir, as indicated by signs",
+   "local": "Chin Lakes",
+   "location": "9-19-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Chain Lakes, as indicated by signs",
+   "local": "",
+   "location": "14,15-2-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Milk River Ridge Reservoir, as indicated by signs",
+   "local": "Ridge Reservoir",
+   "location": "5-20-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Fairfax Lake",
+   "local": "",
+   "location": "17-46-18-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Muskiki Lake",
+   "local": "",
+   "location": "5-45-20-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Jarvis Lake, as indicated by signs",
+   "local": "",
+   "location": "52-26-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Gregg Lake",
+   "local": "",
+   "location": "52,53-26-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Wolf Lake, as indicated by signs",
+   "local": "",
+   "location": "49-14-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "McLeod Lake",
+   "local": "Carson Lake",
+   "location": "61-11,12-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Obed Lake, as indicated by signs",
+   "local": "",
+   "location": "11-53-22-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Bear Lake, as indicated by signs",
+   "local": "",
+   "location": "55-15-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Fickle Lake, as indicated by signs",
+   "local": "",
+   "location": "31-51-19-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Shiningbank Lake, as indicated by signs",
+   "local": "",
+   "location": "56-14-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Gosling Lake",
+   "local": "",
+   "location": "14,23-44-6-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake",
+   "local": "Jackfish Lake",
+   "location": "6-41-11-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake",
+   "local": "Klein Lake",
+   "location": "33-30-10-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Twin Lakes",
+   "local": "",
+   "location": "6-40-7-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Swan Lake",
+   "local": "",
+   "location": "36-9-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Crimson Lake, as indicated by signs",
+   "local": "",
+   "location": "40-8-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Medicine Lake",
+   "local": "",
+   "location": "43,44-6-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Goose Lake, as indicated by signs",
+   "local": "",
+   "location": "61-8-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Upper Kananaskis Lake, as indicated by signs",
+   "local": "",
+   "location": "19-9-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Lower Kananaskis Lake, as indicated by signs",
+   "local": "",
+   "location": "19,20-9-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Barrier Lake, as indicated by signs",
+   "local": "",
+   "location": "24-8-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Spray Lakes Reservoir",
+   "local": "",
+   "location": "23-10-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Unnamed lake",
+   "local": "Strubel Lake",
+   "location": "25-37-8-W5",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "5",
+   "name": "Hanmore Lake",
+   "local": "",
+   "location": "61-17,18-W4",
+   "speed_kmh": "12"
+  },
+  {
+   "schedule": "6",
+   "name": "Paine Lake",
+   "local": "Mami Lake",
+   "location": "2-28-W4"
+  },
+  {
+   "schedule": "6",
+   "name": "Unnamed reservoir",
+   "local": "Blood Indian Creek Reservoir",
+   "location": "17-26-9-W4"
+  },
+  {
+   "schedule": "6",
+   "name": "Rock Lake",
+   "local": "",
+   "location": "52-2-W6"
+  },
+  {
+   "schedule": "6",
+   "name": "Chain Lakes, as indicated by signs",
+   "local": "",
+   "location": "14,15-2-W5"
+  },
+  {
+   "schedule": "6",
+   "name": "Skeleton Lake, as indicated by signs",
+   "local": "",
+   "location": "65-18,19-W4"
+  },
+  {
+   "schedule": "7",
+   "name": "Paine Lake",
+   "local": "Mami Lake",
+   "location": "2-28-W4"
+  },
+  {
+   "schedule": "7",
+   "name": "Unnamed reservoir",
+   "local": "Blood Indian Creek Reservoir",
+   "location": "17-26-9-W4"
+  },
+  {
+   "schedule": "7",
+   "name": "Rock Lake",
+   "local": "",
+   "location": "52-2-W6"
+  },
+  {
+   "schedule": "7",
+   "name": "Chain Lakes, as indicated by signs",
+   "local": "",
+   "location": "14,15-2-W5"
+  },
+  {
+   "schedule": "7",
+   "name": "Skeleton Lake, as indicated by signs",
+   "local": "",
+   "location": "65-18,19-W4"
+  }
+ ]
+}

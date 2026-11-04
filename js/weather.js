@@ -24,14 +24,15 @@
 
   var ENDPOINT = "https://api.open-meteo.com/v1/forecast";
   var HOURLY = ["temperature_2m", "cloud_cover", "wind_speed_10m", "wind_gusts_10m",
-                "precipitation", "precipitation_probability", "pressure_msl", "weather_code"];
+                "precipitation", "precipitation_probability", "pressure_msl", "weather_code",
+                "wind_direction_10m"];
   var DAILY = ["temperature_2m_mean"];
   var TIMEOUT_MS = 8000;
   var BATCH_TIMEOUT_MS = 25000;
   /* Open-Meteo's free tier counts each location in a request as one call, as
    * long as the request asks for no more than ten variables and no more than
-   * two weeks. Nine variables and fourteen days stays inside both, so a call
-   * never counts double. The limits are 600 a minute and 10,000 a day. */
+   * two weeks. Ten variables (nine hourly, one daily) and fourteen days stays
+   * inside both, so a call never counts double. A test keeps it at ten. The limits are 600 a minute and 10,000 a day. */
   var BATCH_SIZE = 50;
   var MINUTE_BUDGET = 550;
   var COUNT_KEY = "troutmap.wxcount";
@@ -137,6 +138,9 @@
       cloud: h.cloud_cover || [],
       wind: h.wind_speed_10m || [],
       gust: h.wind_gusts_10m || [],
+      // Where the wind blows FROM, degrees clockwise from true north (Build 3,
+      // the 3D depth model). A record saved before Build 3 has none: see hasAll.
+      windDir: h.wind_direction_10m || [],
       precip: h.precipitation || [],
       precipChance: h.precipitation_probability || [],
       pressure: h.pressure_msl || [],
@@ -258,7 +262,7 @@
       seen[key] = true;
       var have = memory[key] || read(key);
       if (have && !memory[key]) memory[key] = have;
-      if (!o.force && have && (Date.now() - have.fetchedAt) < TTL_MS) return;
+      if (!o.force && have && hasAll(have) && (Date.now() - have.fetchedAt) < TTL_MS) return;
       need.push(key);
     });
     var cells = Object.keys(seen).length;
@@ -303,6 +307,13 @@
     return chain.then(function () { return summary; });
   }
 
+  /* A record saved by an older version of the app lacks a field added since
+   * (wind direction, Build 3). It is still shown, but it counts as stale, so
+   * the next look with signal fetches it again even inside the 3 hours. */
+  function hasAll(rec) {
+    return !!(rec && rec.data && Array.isArray(rec.data.windDir) && rec.data.windDir.length);
+  }
+
   var inflight = {};
 
   /** Fetch a cell, or hand back what we already have. Never rejects. */
@@ -310,7 +321,7 @@
     var key = cellKey(lat, lon);
     var cached = memory[key] || read(key);
     var force = opts && opts.force;
-    var fresh = cached && (Date.now() - cached.fetchedAt) < TTL_MS;
+    var fresh = cached && hasAll(cached) && (Date.now() - cached.fetchedAt) < TTL_MS;
     if (fresh && !force) {
       return Promise.resolve({ data: cached.data, fetchedAt: cached.fetchedAt, source: "cache" });
     }
@@ -394,6 +405,7 @@
       cloudCoverPct: value(data.cloud, i),
       windKph: value(data.wind, i),
       gustKph: value(data.gust, i),
+      windFromDeg: value(data.windDir, i),
       precipMm: value(data.precip, i),
       precipChancePct: value(data.precipChance, i),
       pressureMslHpa: p,
@@ -442,6 +454,7 @@
     restore: restore,
     callsToday: callsToday,
     HOURLY: HOURLY,
+    hasAll: hasAll,
     DAILY: DAILY,
     BATCH_SIZE: BATCH_SIZE,
     peek: peek,

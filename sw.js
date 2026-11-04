@@ -29,10 +29,15 @@
    the Learn guides, and a weather.js that fetches every lake at once. */
 /* v5: Build 2. js/estimates.js (ice, hatch, turnover, tackle, how to fish),
    the winter score, and the lake height, depth chart and hot spot files. */
-const SHELL_CACHE = "troutmap-shell-v5";
+/* v6: Build 3. The 3D depth model: js/lake-structure.js, js/fishing-spots.js,
+   js/depth-3d.js, vendor/three.min.js, the Learn guide, the lakebed grids and
+   the boating rules. js/weather.js now asks for wind direction too. */
+const SHELL_CACHE = "troutmap-shell-v6";
 const DATA_CACHE = "troutmap-data-v1";
 const TILE_CACHE = "troutmap-tiles-v1";
-const WX_CACHE = "troutmap-wx-v1";
+/* v2: the single-spot forecast URL gained wind_direction_10m, so the old
+ * copies would never match again; a new name retires them. */
+const WX_CACHE = "troutmap-wx-v2";
 /* Every troutmap-* cache missing from this list is deleted on activate, so a
  * cache added above and forgotten here is wiped on the next worker update —
  * silently, and only noticed by someone offline at a lake. */
@@ -64,6 +69,11 @@ const SHELL_FILES = [
   "js/lake-sheet.js",
   "js/day-ui.js",
   "js/reading-room.js",
+  "js/lake-structure.js",
+  "js/fishing-spots.js",
+  "js/depth-3d.js",
+  "vendor/three.min.js",
+  "learn/depth-model.html",
   "learn/scores.html",
   "learn/winterkill.html",
   "learn/ice-safety.html",
@@ -114,8 +124,22 @@ async function precacheData() {
                  // Build 2: lake heights, depth chart links and hot spots.
                  "data/lake_elevation.json", "data/depth_charts.json",
                  "data/hot_spots.json",
+                 // Build 3: the 3D depth model's index and boating rules; the
+                 // lakebed files named in the index follow below.
+                 "data/depth_grids/index.json", "data/boating_rules.json",
                  "live/advisories.json"];
   await Promise.all(fixed.map(u => cache.add(u).catch(() => {})));
+
+  // Every lakebed file, so the 3D model opens at the water with no signal.
+  try {
+    const res = await fetch("data/depth_grids/index.json", { cache: "no-store" });
+    const grids = (await res.json()).grids || {};
+    await Promise.all(Object.values(grids).map(g =>
+      typeof g.file === "string" && /^data\/depth_grids\/[A-Za-z0-9_]+\.bin$/.test(g.file)
+        ? cache.add(g.file).catch(() => {}) : null));
+  } catch {
+    // No index yet: the 3D model says the lakebed is not saved.
+  }
 
   let years = [];
   try {

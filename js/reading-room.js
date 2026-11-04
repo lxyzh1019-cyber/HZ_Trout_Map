@@ -54,6 +54,8 @@
       blurb: "Alberta publishes the length at stocking, not the size you catch." },
     { id: "trout-id", title: "Telling the trout apart",
       blurb: "Key marks for the trout stocked in Alberta." },
+    { id: "depth-model", title: "3D depth model: layers and spots",
+      blurb: "What each layer shows, how a spot is found, and the sources." },
   ];
 
   const SPECIES = [
@@ -232,6 +234,10 @@
 
   /* Render one page into the open room. "" or an unknown topic is the index. */
   function show(topic) {
+    // "depth-model#layer-ice" opens the guide at one section.
+    const hash = String(topic || "").indexOf("#");
+    const section = hash >= 0 ? String(topic).slice(hash + 1) : "";
+    if (hash >= 0) topic = String(topic).slice(0, hash);
     const el = room();
     const guide = guideFor(topic);
     const fish = speciesFor(topic);
@@ -257,6 +263,8 @@
       if (mine !== seq) return;
       // The fragments are this app's own files, served from its own origin.
       body.innerHTML = html || `<p class="rr-warn">${OFFLINE}</p>`;
+      const target = section && /^[a-z0-9-]+$/.test(section) ? body.querySelector("#" + section) : null;
+      if (target) target.scrollIntoView({ block: "start" });
     });
   }
 

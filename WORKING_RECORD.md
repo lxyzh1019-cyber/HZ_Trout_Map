@@ -27,10 +27,21 @@ Single working record for this repository. Updated by the main session at the en
 - [agreed] Winter week bar when more than half the lakes on screen have the guard on — search: winterOn
 - [agreed] Prototype differences Q1–Q17 (comparison page 2026-10-30): keep the build for Q1–Q14 and Q16–Q17; Q15 shorter search hint on phones — search: Search a lake or a town
 - [agreed] Build 2 differences Q1–Q8 (like-for-like comparison page 2026-11-03, https://claude.ai/artifact/5AM4Tg8tnJcL8u7GuiDpaJ): owner accepted all 8 recommendations; build kept as is — search: This winter near
+- [agreed] 3D depth model, free turning in every direction (decision 1B, 2026-11-04) — search: DepthModel
+- [agreed] Button in the Depth chart row of Lake info (2A) — search: Show 3D depth model
+- [agreed] All 43 lakes saved on the first visit (3A) and the 3D add-on too (5A) — search: depth_grids/index.json
+- [agreed] Opens full screen over the map with Close, Default view and the depth key (4A) — search: data-default
+- [agreed] Full detail; first visit may grow to about 2.2 MB (6A) — search: LONG_SIDE
+- [agreed] 4 layers on at the start (wind, spots, structure, drop-offs), the rest turned on (7B with 4 on) — search: LAYERS_ON
+- [agreed] All 4 extras: sun and shade shore, under-ice band, aerator warning, reported spots (8A) — search: sunShore
+- [agreed] Layer explanations in a Learn guide, opened from "i" and each layer's "?" (9A) — search: depth-model
+- [agreed] Motor rules from Transport Canada TP 15587E and MyWildAlberta (10B); the app stays free, so the non-commercial terms hold (11A) — search: boating_rules
+- [agreed] Names hidden until hover or tap; smaller wind arrows; spots by access (shore, trolling, ice) — search: showTip
 
 ## Pending
 - Build 1b: merged 2026-10-30 (PR #18). Owner still to do: device check, and the 4 species facts on the Learn pages.
-- Build 2: owner accepted all 8 picture differences 2026-11-03; pull request open, waiting for its checks, the owner's merge and device check.
+- Build 2: merged 2026-11-04 (PR #19, cd9a470). Owner still to do: device check.
+- Build 3 (3D depth model): built on branch build-3 2026-11-04; pull request waiting for its checks, the owner's merge and device check.
 - Leftover helper worktree .claude/worktrees/agent-a00cd60cf51c9739a: removal needs the owner's separate yes (QC2).
 
 ## Request ledger
@@ -125,8 +136,8 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 | Build 1a | COMPLETE | PR #15 merged 2026-10-16; 183 tests pass on main (2026-10-29) |
 | FEATURES.md, WORKING_RECORD.md | COMPLETE | this change, 2026-10-29 |
 | Build 1b | COMPLETE | PR #18 merged 2026-10-30 (64852ae) |
-| Build 2 | IN REVIEW | branch build-2; tests, layout check and reviewer fixes done 2026-11-03; owner accepted Q1–Q8 2026-11-03; PR waiting for merge |
-| Build 3 | NOT STARTED | |
+| Build 2 | COMPLETE | PR #19 merged 2026-11-04 (cd9a470) |
+| Build 3 | IN REVIEW | branch build-3; 3D depth model, 25 new tests, browser check 2026-11-04 |
 
 ## Checks and evidence
 - 2026-10-29 unittest discover on main → 183 passed; live site has bait-chip, ice-chip, aerated-chip; live stamp troutmap-shell-v3
@@ -143,6 +154,9 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 - 2026-11-03 build-2 behaviour: 380 of 380 lakes show 5 "estimated" blocks with inputs; 25 bait-ban lakes, 0 with a bait line; ice warning next to every ice date; 0 page errors; weather full load 250 calls in 5 requests
 - 2026-11-03 build-2 elevation effect: 181 of 380 lakes move ≥ 1 Bite point on some day; median correction 0.3 °C; largest 10 points (mountain lakes, forecast spot 700 m higher)
 - 2026-11-03 build-2 reviewer pass → 12 findings, all fixed; coverage gate 53 of 53
+- 2026-11-04 build-3 data: 43 lakes, 40 AGS lakebed grids (50 m, 10TM, elevation m a.s.l.); depth refilled from 728 contour lines; deepest cell within 1.5 m of the deepest contour on 40 of 40; 1.37 MB. Transport Canada TP 15587E: 403 Alberta rows, 33 of 43 lakes with a rule, 5 same-name rows dropped by location (Chin, Cow, Peanut, Spring)
+- 2026-11-04 build-3 tests: Build3DepthModelTests 11 pass, test_depth_grids 14 pass; test_regression_checks 230 run, only the 7 known local errors (no openpyxl; Windows text encoding, they pass with PYTHONUTF8=1)
+- 2026-11-04 build-3 browser check at 375×812 (Chickakoo, Sylvan, Wabamun): opens in about 0.2 s on PC; turn and glide, Default view, tap marker name and reason, tap depth, time slider, Learn "?" opens its section, under-ice mode; 0 console errors
 
 ## Open questions / blockers
 - H4 answered 2026-10-30: Open-Meteo counts per IP; one full load = 250 calls in 5 requests (measured in the browser), 3 h cache.
