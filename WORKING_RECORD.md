@@ -38,9 +38,9 @@ Single working record for this repository. Updated by the main session at the en
 - [agreed] Motor rules from Transport Canada TP 15587E and MyWildAlberta (10B); the app stays free, so the non-commercial terms hold (11A) — search: boating_rules
 - [agreed] Names hidden until hover or tap; smaller wind arrows; spots by access (shore, trolling, ice) — search: showTip
 - [agreed] Rev 5 smoothness: glide, eased zoom, Default view glide, instant Height, gentle land bank, Play button — search: requestAnimationFrame
-- [differs from plan, owner to confirm] three.js r149, not r159: r150+ prints a deprecation warning on every open; same API used — search: three@0.149
-- [differs from plan, owner to confirm] Depth from the contour lines (relaxation between them), not the AGS grid alone: the grid reads half the depth on small lakes (Chickakoo 6 m vs 15 m) — search: RELAX_SWEEPS
-- [differs from plan, owner to confirm] Time slider from now to the end of the forecast, not from 24 h back: past hours add nothing to planning — search: A saved forecast that ended
+- [agreed] (owner kept it 2026-11-04) three.js r149, not r159: r150+ prints a deprecation warning on every open; same API used — search: three@0.149
+- [agreed] (owner kept it 2026-11-04) Depth from the contour lines (relaxation between them), not the AGS grid alone: the grid reads half the depth on small lakes (Chickakoo 6 m vs 15 m) — search: RELAX_SWEEPS
+- [agreed] (owner kept it 2026-11-04) Time slider from now to the end of the forecast, not from 24 h back: past hours add nothing to planning — search: A saved forecast that ended
 - [differs from plan] A new 3D renderer per open, freed on Close (plan: one reused); "This phone cannot show 3D" shows in the view, not on the button; credit lines in the 3D view footer and the Learn guide, not in the search credits — search: v.stop
 - [differs from plan] Transport Canada Schedule 4 (engine power) has no Alberta rows, so it is not read; structure sizes in metres (point window 60 m, basin and hump radius 100 m, basin from 4 m) so they work on every grid size; Learn ids layer-struct and layer-rep — search: cellsFor
 
