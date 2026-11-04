@@ -50,16 +50,16 @@ Single working record for this repository. Updated by the main session at the en
 - [agreed] Days on or after the estimated ice-on date: "Ice forming — no score", out of Best (5A) — search: iceForming
 - [agreed] Depth range rule: ice 1.5–4; <10 °C 1–4; 10–18 °C 2–6; >18 °C layered = summer layer, else half depth to bottom; rising deeper half, falling shallower half; capped at max depth — search: fishDepth
 - [agreed] Tap a day bar in the lake panel to pick the day; Why starts with the change from today — search: dayCompareSentence
-- [differs from plan] "3D" in list rows and the hover card is a label, not a button (a button inside the row button is invalid); the lake panel gets a "Show 3D depth model" button at its top instead — search: btn3d
-- [differs from plan] Ice forming removes the score only on an ice-on date worked out from this forecast; near or past the usual (calendar) date the score stays and the banner warns "Ice usually forms here about …" — search: iceUsual
-- [differs from plan] Survey depths go beyond the mean: 18 surveyed lakes with no published max depth get the survey's max, so their summer layer, winterkill band and fish depth change; chain grids (Pierre Greys, Wildhorse) give none — search: load_survey
-- [differs from plan] River guide has one labelled bend drawing (A–G), not one drawing per water type; the sample 3D model in the guide is a second small view, off while a lake's 3D view is open — search: data-demo-host
+- [agreed] (owner accepted 2026-11-04) "3D" in list rows and the hover card is a label, not a button (a button inside the row button is invalid); the lake panel gets a "Show 3D depth model" button at its top instead — search: btn3d
+- [agreed] (owner accepted 2026-11-04) Ice forming removes the score only on an ice-on date worked out from this forecast; near or past the usual (calendar) date the score stays and the banner warns "Ice usually forms here about …" — search: iceUsual
+- [agreed] (owner accepted 2026-11-04) Survey depths go beyond the mean: 18 surveyed lakes with no published max depth get the survey's max, so their summer layer, winterkill band and fish depth change; chain grids (Pierre Greys, Wildhorse) give none — search: load_survey
+- [agreed] (owner accepted 2026-11-04) River guide has one labelled bend drawing (A–G), not one drawing per water type; the sample 3D model in the guide is a second small view, off while a lake's 3D view is open — search: data-demo-host
 
 ## Pending
 - Build 1b: merged 2026-10-30 (PR #18). Owner still to do: device check, and the 4 species facts on the Learn pages.
 - Build 2: merged 2026-11-04 (PR #19, cd9a470). Owner still to do: device check.
 - Build 3 (3D depth model): merged 2026-11-04 (PR #20, d3e3c0d). Owner still to do: device check.
-- Build 4 (feature check fixes and connections): built on branch build-4 2026-11-04; pull request waiting for its checks, the owner's merge and device check, and the owner's answer on the 4 differences above.
+- Build 4 (feature check fixes and connections): built on branch build-4 2026-11-04; PR #21; owner accepted the 4 differences 2026-11-04; waiting for the owner's merge and device check.
 - Leftover helper worktree .claude/worktrees/agent-a00cd60cf51c9739a: removal needs the owner's separate yes (QC2).
 
 ## Request ledger
