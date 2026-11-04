@@ -400,6 +400,27 @@ def build_one(grid_dig, raw, info, lines):
     }
 
 
+def water_summary(cells, cell_m):
+    """Build 4: mean depth and water area from a saved grid, so Lake info can say
+    "measured" for the surveyed lakes. Water cells are the positive ones (dm)."""
+    vals = struct.unpack("<%dh" % (len(cells) // 2), cells)
+    water = [v for v in vals if v > 0 and v != NODATA]
+    if not water:
+        return {"mean_depth_m": None, "water_ha": None}
+    return {"mean_depth_m": round(sum(water) / len(water) / 10, 1),
+            "water_ha": round(len(water) * cell_m * cell_m / 10000, 1)}
+
+
+def add_summaries():
+    """Add the mean depth to index.json from the saved grid files, without a rebuild."""
+    path = OUT / "index.json"
+    index = json.loads(path.read_text(encoding="utf-8"))
+    for g in index["grids"].values():
+        g.update(water_summary((ROOT / g["file"]).read_bytes(), g["cell_m"]))
+    path.write_text(json.dumps(index, indent=1, sort_keys=True), encoding="utf-8")
+    print("%d grids: mean depth added" % len(index["grids"]))
+
+
 def build():
     raw_index = json.loads((RAW / "index.json").read_text(encoding="utf-8"))
     info = json.loads((RAW / "levels_boundaries.json").read_text(encoding="utf-8"))
@@ -412,6 +433,7 @@ def build():
             cells, meta = build_one(gd, raw, info[raw["contour_dig"]],
                                     contours.get(raw["contour_dig"], {}).get("lines", []))
             meta["file"] = "data/depth_grids/%s.bin" % gd
+            meta.update(water_summary(cells, meta["cell_m"]))
             (OUT / (gd + ".bin")).write_bytes(cells)
             done[gd] = meta
         index[wid] = {"name": raw["name"], "grid": gd}
@@ -425,7 +447,11 @@ def build():
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--fetch", action="store_true", help="download into data/raw/ags_bathymetry first")
+    ap.add_argument("--summaries", action="store_true", help="only add mean depth to index.json from the saved grids")
     args = ap.parse_args()
+    if args.summaries:
+        add_summaries()
+        return 0
     if args.fetch:
         fetch()
     build()

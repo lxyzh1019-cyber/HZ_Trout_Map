@@ -144,22 +144,22 @@
   // THE BANNER: WHICH DAY
   // ============================================================
 
+  /* Build 4: each bar is a button that picks its day, the same as the week bar. */
   function barsHtml(f) {
     var best = f.bestDay;
-    return '<div class="bars" role="img" aria-label="Bite score for 7 days: ' + esc(f.days.map(function (day, i) {
-      var p = day.closed ? null : pct(day.bite);
-      return dayName(f, i) + " " + (p === null ? (day.closed ? "shut" : "no score") : p);
-    }).join(", ")) + '">' + f.days.map(function (day, i) {
-      // A shut day has no score, the same rule as the rest of the app.
-      var p = day.closed ? null : pct(day.bite);
+    return '<div class="bars" role="group" aria-label="Bite score for 7 days. Tap a day to see it.">' + f.days.map(function (day, i) {
+      // A shut day, or a day the ice is forming, has no score: the same rule as the rest of the app.
+      var p = day.closed || day.iceForming ? null : pct(day.bite);
       var gust = num(day.gustMax) !== null && day.gustMax >= Conditions.GUST_WARN_KPH;
-      var cls = i === best ? "top" : gust ? "gust" : day.closed ? "shut" : "";
-      var label = dayName(f, i) + ": " + (p === null ? "no score" : "Bite " + p + ", " + bandWord(day.bite))
+      var cls = i === best ? "top" : gust ? "gust" : day.closed || day.iceForming ? "shut" : "";
+      var word = day.closed ? "Shut" : day.iceForming ? "Ice" : bandWord(day.bite);
+      var label = dayName(f, i) + ": " + (day.iceForming ? "ice forming, no score" : p === null ? "no score" : "Bite " + p + ", " + bandWord(day.bite))
         + (gust ? ", gusts " + Math.round(day.gustMax) + " km/h" : "") + (day.closed ? ", season shut" : "");
-      return '<div class="' + cls + '" title="' + esc(label) + '">'
+      return '<button type="button" class="' + cls + '" data-pickday="' + i + '" aria-pressed="' + (i === state.day)
+        + '" aria-label="' + esc(label) + '" title="' + esc(label) + '">'
         + '<b>' + (p === null ? "—" : p) + "</b>"
         + '<span style="height:' + Math.max(4, (p || 0) * 0.5) + 'px"></span>'
-        + dayName(f, i) + '<i>' + esc(day.closed ? "Shut" : bandWord(day.bite)) + "</i></div>";
+        + dayName(f, i) + '<i>' + esc(word) + "</i></button>";
     }).join("") + "</div>";
   }
 
@@ -181,16 +181,24 @@
       .filter(function (p) { return num(p[0].gustMax) !== null && p[0].gustMax >= Conditions.GUST_WARN_KPH; })
       .map(function (p) { return dayName(f, p[1]) + " gusts to " + Math.round(p[0].gustMax) + " km/h"; });
     var gustText = gusty.length ? " " + gusty.join(", ") + ": not a boat day." : "";
+    // Build 4 (decision 5A): days the ice estimate says the lake freezes over have no score.
+    var firstIce = -1;
+    f.days.forEach(function (x, i) { if (firstIce < 0 && x.iceForming) firstIce = i; });
+    var iceText = firstIce >= 0 ? '<div class="why ice-forming"><b>Ice forming — no score' + (firstIce > 0 ? " from " + dayName(f, firstIce) : "")
+      + ".</b> The ice estimate in “Ice, hatches and tackle” puts ice cover here. " + esc(Estimates.ICE_WARNING) + "</div>"
+      // Near or past the usual ice-on date, with no ice in this forecast: the scores stay, with a warning.
+      : f.iceUsual ? '<div class="why ice-forming"><b>Ice usually forms here about ' + esc(Estimates.fmtDate(f.iceUsual))
+        + ".</b> This forecast shows no ice yet. Check the lake before you go. " + esc(Estimates.ICE_WARNING) + "</div>" : "";
     if (f.bestDay < 0) {
       return '<div class="banner none"><div class="go">' + (f.hasWeather ? "No good day this week" : "No forecast yet") + '</div><div class="why">'
-        + (f.hasWeather ? "Every day is gusty, rough on the water or shut." : "No forecast yet for this lake, so only the sun and moon are known.")
-        + gustText + "</div>" + barsHtml(f) + "</div>";
+        + (f.hasWeather ? "Every day is gusty, rough on the water, shut or icing over." : "No forecast yet for this lake, so only the sun and moon are known.")
+        + gustText + "</div>" + iceText + barsHtml(f) + "</div>";
     }
     var b = f.days[f.bestDay];
     return '<div class="banner"><div class="go">Go ' + dayName(f, f.bestDay) + " · " + pct(b.bite) + "</div>"
       + '<div class="why">Best bite on a day you can be out: Bite ' + bandWord(b.bite)
       + ", Day out " + bandWord(b.dayOut) + (b.bestWhen ? ", best around " + clock(b.bestWhen, f.offset) : "") + "."
-      + gustText + "</div>" + barsHtml(f) + "</div>";
+      + gustText + "</div>" + iceText + barsHtml(f) + "</div>";
   }
 
   /* Build 2 (C17): the winter score for frozen lakes, and how cold it will feel. */
@@ -260,10 +268,30 @@
       + (diffs.length ? diffs.join("; ") : "the parts are almost the same") + ".";
   }
 
+  /* Build 4: the picked day against today, for the same lake: which parts moved most. */
+  var PART_WORD = { light: "light", water: "water temperature", pressure: "pressure trend", wind: "wind", precip: "rain" };
+  function dayCompareSentence(f, d) {
+    if (d === 0) return "This is today.";
+    var mine = f.days[d], today = f.days[0];
+    if (!today || !today.best || today.closed || today.iceForming) {
+      return "Today has no score to compare with.";
+    }
+    var a = Conditions.whyParts(mine.best), b = Conditions.whyParts(today.best);
+    var diffs = a.parts.map(function (p, i) { return [p.id, p.points - b.parts[i].points]; })
+      .filter(function (x) { return x[1] !== 0; })
+      .sort(function (x, y) { return Math.abs(y[1]) - Math.abs(x[1]); })
+      .slice(0, 2)
+      .map(function (x) { return (PART_WORD[x[0]] || x[0]) + " " + (x[1] > 0 ? "+" : "") + x[1]; });
+    var gap = a.total - b.total;
+    var head = dayName(f, d) + " is " + (gap === 0 ? "the same as" : Math.abs(gap) + (gap > 0 ? " higher than" : " lower than"))
+      + " today (" + b.total + ")";
+    return head + (diffs.length ? ": " + diffs.join(", ") : "") + ".";
+  }
+
   function whyHtml(lake, f, d) {
     var day = f.days[d];
-    // A shut day has no score, so it has no parts either.
-    if (!day || !day.best || f.iced || day.closed) return "";
+    // A shut day, or a day the ice is forming, has no score, so it has no parts either.
+    if (!day || !day.best || f.iced || day.closed || day.iceForming) return "";
     var w = Conditions.whyParts(day.best);
     var rows = w.parts.map(function (p) {
       if (!p.present) {
@@ -277,6 +305,7 @@
     var size = out ? out.size : Conditions.sizeClass(lake.surface_area_ha);
     var whyOpen = !!(state.sections && state.sections.why);
     return '<details class="why" data-sec="why"' + (whyOpen ? " open" : "") + "><summary>Why " + w.total + " on " + dayName(f, d) + "?</summary><div class=\"body\">"
+      + '<p class="lead day-vs-today"><b>' + esc(dayCompareSentence(f, d)) + "</b></p>"
       + '<p class="lead">These parts add up to the Bite score at the best time of the day'
       + (day.bestWhen ? " (" + clock(day.bestWhen, f.offset) + ")" : "") + ". The moon is already inside each part: "
       + (moon >= 0 ? "+" : "") + moon + "%.</p>"
@@ -285,21 +314,40 @@
       + size.factor + " for a " + esc(size.label) + (size.unknown ? " (a medium lake is used)" : "")
       + "; rain amount and chance; air temperature. Gusts are not in the Bite score.</p>"
       + '<p class="compare">' + compareSentence(lake, f, d) + "</p>"
+      + learnRow([learnLink("scores", "How the scores work")])
       + "</div></details>";
+  }
+
+  /* Build 4: the depth range for this lake on day d (Estimates.fishDepth), from the
+   * same water estimate the scores use, the lake's depth and summer layer, and the
+   * day's pressure trend. The 3D view uses it too. */
+  function fishDepthFor(lake, f, d, underIce) {
+    var day = f && f.days[d];
+    var wx = Weather.peek(lake.lat, lake.lon);
+    var water = ConditionsUI._internal.waterFor({ lat: lake.lat, lon: lake.lon, lake: lake, species: filteredDominantOrder(lake) }, wx);
+    var depth = depthFor(lake) || {};
+    return Estimates.fishDepth({
+      waterC: water ? water.tempC : null, waterSource: water ? water.source : null,
+      maxDepthM: depth.max_depth_m == null ? null : depth.max_depth_m, stratification: depth.stratification || null,
+      underIce: !!(underIce || (f && f.iced) || (day && day.iceForming)),
+      pressureTrend3h: day ? day.pressureTrend3h : null,
+      dayWord: !d ? "today" : "on " + dayName(f, d),
+    });
   }
 
   function tipHtml(lake, f, d) {
     var day = f.days[d];
-    if (!day || f.iced || !f.hasWeather || day.closed) return "";
+    if (!day || f.iced || !f.hasWeather || day.closed || day.iceForming) return "";
     var tip = Conditions.dailyTip({
       pressureTrend3h: day.pressureTrend3h, gustMax: day.gustMax, windMean: day.windMean,
       bestTime: day.bestWhen ? clock(day.bestWhen, f.offset) : null,
+      depthRange: fishDepthFor(lake, f, d),
     });
     var clear = day.clearing
       ? '<div class="tip clear">Sun breaking through around ' + clock(day.clearing.when, f.offset) + " " + dayName(f, d)
         + ". Anglers report a short bite when that happens. A reminder only, not in the score.</div>"
       : "";
-    return (tip ? '<div class="tip">' + esc(tip) + "</div>" : "") + clear;
+    return (tip ? '<div class="tip">' + esc(tip) + learnLink("barometer", "Reading the barometer") + "</div>" : "") + clear;
   }
 
   // ============================================================
@@ -527,6 +575,12 @@
   // BUILD 2: ESTIMATES, DEPTH CHART, HOT SPOTS
   // ============================================================
 
+  /* Build 4: a small link to the Learn guide for the term next to it. */
+  function learnLink(topic, text) {
+    return ' <button type="button" class="linkish learn-link" data-learn="' + esc(topic) + '">' + esc(text) + " ?</button>";
+  }
+  function learnRow(links) { return links.length ? '<p class="learn-row">Learn: ' + links.join(" ") + "</p>" : ""; }
+
   function estHead(title) { return "<h3>" + esc(title) + ' <span class="est-chip">estimated</span></h3>'; }
   function inputsLine(inputs) { return '<p class="inputs">From: ' + esc(inputs.join("; ")) + ".</p>"; }
 
@@ -566,7 +620,7 @@
     }).join("");
     var t = e.tackle;
     return '<div class="est">' + estHead("Ice cover") + "<p>" + esc(e.ice.text) + "</p>"
-      + '<p class="warn">' + esc(e.ice.warning) + "</p>" + inputsLine(e.ice.inputs) + "</div>"
+      + '<p class="warn">' + esc(e.ice.warning) + learnLink("ice-safety", "Ice safety") + "</p>" + inputsLine(e.ice.inputs) + "</div>"
       + '<div class="est">' + estHead("Insect hatches") + '<div class="hatch">' + hatchRows + "</div>"
       + inputsLine(e.hatch.inputs) + "</div>"
       + '<div class="est">' + estHead("Turnover") + "<p>" + esc(e.turnover.text) + "</p>" + inputsLine(e.turnover.inputs) + "</div>"
@@ -576,15 +630,35 @@
       + "<p>" + esc(t.legal) + "</p>" + inputsLine(t.inputs) + "</div>";
   }
 
+  /* Build 4: the lakebed shapes load once per lake, then the panel redraws. */
+  var shapesAsked = {};
+  function shapesFor(lake) {
+    if (!window.DepthModel || !DepthModel.has(lake)) return null;
+    var got = DepthModel.shapesCached(lake);
+    if (got) return got;
+    var key = lakeKey(lake);
+    if (!shapesAsked[key]) {
+      shapesAsked[key] = true;
+      DepthModel.shapes(lake).then(function (s) {
+        if (s && state.selectedKey === key) DayUI.renderSheet();
+      });
+    }
+    return null;
+  }
+
   function howHtml(lake) {
     var depth = depthFor(lake) || {};
     var h = Estimates.howToFish({
+      shapes: shapesFor(lake),
       maxDepthM: depth.max_depth_m == null ? null : depth.max_depth_m, stratification: depth.stratification || null,
       areaHa: lake.surface_area_ha, aerated: lakeAerated(lake), amenities: (profileFor(lake) || {}).amenities || [],
       baitRule: lakeBaitRule(lake), iceKind: lakeIceKind(lake), troutLimit: troutLimit(lake),
     });
     return '<div class="est">' + estHead("From its depth, size, facilities and rules") + "<ul>"
-      + h.lines.map(function (l) { return "<li>" + esc(l) + "</li>"; }).join("") + "</ul>" + inputsLine(h.inputs) + "</div>";
+      + h.lines.map(function (l) { return "<li>" + esc(l) + "</li>"; }).join("") + "</ul>"
+      // Build 4: the shapes named above, one tap away.
+      + (window.DepthModel && DepthModel.has(lake) ? '<button type="button" class="btn" data-depth3d>See it in 3D</button>' : "")
+      + inputsLine(h.inputs) + "</div>";
   }
 
   function depthChartHtml(lake) {
@@ -600,6 +674,16 @@
         + '<a class="btn" href="' + esc(DEPTH_CHARTS.page) + '" target="_blank" rel="noopener">Alberta depth chart list ↗</a>') + "</dd></dl>";
   }
 
+  /* Build 4: the boating rule (Transport Canada list and MyWildAlberta), which
+   * Build 3 showed only on the 3D trolling route. Same words, one function. */
+  function boatingHtml(lake) {
+    var r = typeof BOATING_RULES !== "undefined" && BOATING_RULES && BOATING_RULES.lakes ? BOATING_RULES.lakes[lakeKey(lake)] : null;
+    if (!r || !window.FishingSpots) return "";
+    var amen = (profileFor(lake) || {}).amenities || [];
+    return '<dl class="kv boating"><dt>Boating</dt><dd>' + esc(FishingSpots.boatingText(r, amen.indexOf("Boat Launch") >= 0))
+      + learnLink("depth-model#layer-boating", "About boating rules") + "</dd></dl>";
+  }
+
   function hotSpotsHtml(spots) {
     return spots.map(function (s) {
       var host = "";
@@ -611,6 +695,16 @@
         + (isFinite(s.lat) && isFinite(s.lon) ? '<a class="btn" href="' + esc(map) + '" target="_blank" rel="noopener">On the map ↗</a>' : "")
         + "</div>";
     }).join("");
+  }
+
+  /* The species guides for the fish stocked here, and what stocked sizes mean. */
+  function fishLinks(lake) {
+    var topics = window.ReadingRoom && ReadingRoom.topics ? ReadingRoom.topics : [];
+    var out = [learnLink("stocked-sizes", "Stocked sizes")];
+    filteredDominantOrder(lake).forEach(function (c) {
+      if (topics.indexOf("species:" + c) >= 0) out.push(learnLink("species:" + c, (SPECIES_META[c] || {}).short || c));
+    });
+    return out;
   }
 
   function section(id, title, body, open) {
@@ -644,7 +738,11 @@
       // The bait ban first, before anything else is read.
       + '<div class="lake-top">' + baitBanLine(lake)
       + tagsHtml(lake, winter)
-      + verdictLine(lake) + "</div>"
+      + verdictLine(lake)
+      // Build 4: the 3D model one tap from the top, for the 43 surveyed lakes.
+      + (window.DepthModel && DepthModel.has(lake)
+          ? '<button type="button" class="btn btn3d" data-depth3d><b class="mark3d">3D</b> Show 3D depth model</button>' : "")
+      + "</div>"
       + (f ? bannerHtml(lake, f, d) + whyHtml(lake, f, d) : "")
       + aerationBlock(lake)
       + (f ? tipHtml(lake, f, d) : "")
@@ -652,12 +750,15 @@
       + section("bite", "Bite by time of day", '<div class="cx-embed" data-cx></div>', isOpen("bite", false))
       + (f ? section("season", "Ice, hatches and tackle", seasonHtml(lake, f), isOpen("season", false)) : "")
       + section("how", "How to fish this lake", howHtml(lake), isOpen("how", false))
-      + section("fish", "Fish and stocking", stockingHtml(lake), isOpen("fish", false))
-      + section("info", "Lake info", profileBlock(lake) + facilityBlock(lake) + depthBlock(lake) + depthChartHtml(lake)
+      + section("fish", "Fish and stocking", stockingHtml(lake) + learnRow(fishLinks(lake)), isOpen("fish", false))
+      + section("info", "Lake info", profileBlock(lake) + facilityBlock(lake) + depthBlock(lake)
+          + learnRow([learnLink("winterkill", "Winterkill and aeration")].concat(window.DepthModel && DepthModel.has(lake)
+              ? [learnLink("depth-model", "3D depth model guide")] : []))
+          + depthChartHtml(lake)
           + '<div class="about" data-about></div>' + photoBlock(lake), isOpen("info", false))
       // Hot spots only when there are some, each with its source and date.
       + (spots.length ? section("spots", "Hot spots", hotSpotsHtml(spots), isOpen("spots", false)) : "")
-      + section("rules", "Rules" + (ban ? " · bait ban" : ""), iceSeasonBlock(lake) + regulationBlock(lake)
+      + section("rules", "Rules" + (ban ? " · bait ban" : ""), iceSeasonBlock(lake) + regulationBlock(lake) + boatingHtml(lake)
           + '<a class="btn" href="' + RULES_URL + '" target="_blank" rel="noopener">Alberta fishing rules ↗</a>'
           + '<a class="btn" href="' + LICENCE_URL + '" target="_blank" rel="noopener">Buy a licence ↗</a>', isOpen("rules", ban))
       + section("go", "Getting there", lake.lat == null ? '<p class="dim">No recorded position.</p>'
@@ -671,6 +772,12 @@
     var rerender = function () { DayUI.renderSheet(); };
     var q = function (sel) { return Array.prototype.slice.call(host.querySelectorAll(sel)); };
     q("[data-close-lake]").forEach(function (b) { b.addEventListener("click", function () { DayUI.closeLake(); }); });
+    // Build 4: Learn links open the guide for the term next to them.
+    q("[data-learn]").forEach(function (b) {
+      b.addEventListener("click", function (ev) { ev.preventDefault(); if (window.ReadingRoom) ReadingRoom.open(b.dataset.learn); });
+    });
+    // Build 4: a day bar picks that day for the whole app, as the week bar does.
+    q("[data-pickday]").forEach(function (b) { b.addEventListener("click", function () { DayUI.setDay(Number(b.dataset.pickday)); }); });
     q("[data-fav]").forEach(function (b) { b.addEventListener("click", function () { toggleFavourite(key); }); });
     q("[data-fxtab]").forEach(function (b) { b.addEventListener("click", function () { state.fx.tab = b.dataset.fxtab; rerender(); }); });
     q("[data-fxspan]").forEach(function (b) { b.addEventListener("click", function () { state.fx.span = Number(b.dataset.fxspan); rerender(); }); });
@@ -723,8 +830,9 @@
     trophyRule: trophyRule,
     popularity: popularity,
     estimatesFor: estimatesFor,
+    fishDepthFor: fishDepthFor,
     winterScoreHtml: winterScoreHtml,
-    _internal: { estimatesFor: estimatesFor, seasonHtml: seasonHtml, howHtml: howHtml, depthChartHtml: depthChartHtml, hotSpotsHtml: hotSpotsHtml },
+    _internal: { dayCompareSentence: dayCompareSentence, barsHtml: barsHtml, boatingHtml: boatingHtml, tipHtml: tipHtml, estimatesFor: estimatesFor, seasonHtml: seasonHtml, howHtml: howHtml, depthChartHtml: depthChartHtml, hotSpotsHtml: hotSpotsHtml },
     BAND_WORD: BAND_WORD,
     RULES_URL: RULES_URL,
     LICENCE_URL: LICENCE_URL,

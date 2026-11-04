@@ -242,6 +242,7 @@
     var day = f && f.days[d];
     if (!day) return ["", ""];
     if (day.closed) return ["shut", "season shut"];
+    if (day.iceForming && !winter) return ["cold", "ice forming"];
     if (winter || f.iced) return ["cold", num(day.chillMin) === null ? "ice likely" : Math.round(day.chillMin) + " °C wind chill"];
     if (num(day.gustMax) !== null && day.gustMax >= Conditions.GUST_WARN_KPH) return ["gusty", "gusts " + Math.round(day.gustMax) + " km/h"];
     if ((num(day.precipChancePct) || 0) > 60 || (num(day.precipMm) || 0) > 2) return ["rainy", "rain likely"];
@@ -261,7 +262,9 @@
     return '<button type="button" class="row" data-lake="' + esc(lakeKey(lake)) + '">'
       + '<span><span class="nm">' + esc(lake.name) + "</span><br>"
       + '<span class="sub">' + esc([km, size].concat(cold ? winterBits(lake) : []).filter(Boolean).join(" · "))
-      + (lakeBaitBan(lake) ? " · bait ban" : "") + "</span></span>"
+      + (lakeBaitBan(lake) ? " · bait ban" : "")
+      // Build 4: a lake with a lakebed survey; its panel has the 3D button at the top.
+      + (window.DepthModel && DepthModel.has(lake) ? ' · <b class="mark3d" title="Has a 3D depth model">3D</b>' : "") + "</span></span>"
       + '<span class="sc" title="' + (cold ? "Winter score: light, pressure trend and moon" : "Bite score") + '">' + esc(score) + "</span>"
       + '<span class="dayout ' + pill[0] + '">' + esc(pill[1]) + "</span></button>";
   }
@@ -359,7 +362,7 @@
 
   /* A selector for the focused control in the panel, so a redraw can give the
    * focus back to the same control instead of dropping it to the page. */
-  var FOCUS_ATTRS = ["data-fxtab", "data-fxspan", "data-fxview", "data-fav", "data-close-lake", "data-photos", "data-lakelink"];
+  var FOCUS_ATTRS = ["data-pickday", "data-fxtab", "data-fxspan", "data-fxview", "data-fav", "data-close-lake", "data-photos", "data-lakelink"];
   function focusKey(host) {
     var a = document.activeElement;
     if (!a || !host.contains(a)) return null;
@@ -565,7 +568,7 @@
       } else if (e.key === "Enter") {
         e.preventDefault();
         pickResult(items[active >= 0 ? active : 0]);
-      } else if (e.key === "Escape") closeSearch();
+      } else if (e.key === "Escape") { e.preventDefault(); closeSearch(); }
     });
     res.addEventListener("click", function (e) { pickResult(e.target.closest("li[data-key],li[data-place]")); });
     document.addEventListener("click", function (e) { if (!e.target.closest(".search")) closeSearch(); });
@@ -730,16 +733,22 @@
     writeUrl();
   }
 
+  /* One way to pick a day, from the week bar or the lake panel's day bars:
+   * pins, lists and the panel all redraw for it. */
+  function setDay(d) {
+    state.day = Math.max(0, Math.min(6, Math.round(Number(d) || 0)));
+    if (state.colorMode !== "bite" && state.colorMode !== "best") setColorMode("bite");
+    renderPins();
+    render();
+    writeUrl();
+  }
+
   function init() {
     buildSearch();
     $("week").addEventListener("click", function (e) {
       var b = e.target.closest("[data-day]");
       if (!b) return;
-      state.day = Number(b.dataset.day);
-      if (state.colorMode !== "bite" && state.colorMode !== "best") setColorMode("bite");
-      renderPins();
-      render();
-      writeUrl();
+      setDay(Number(b.dataset.day));
     });
     document.addEventListener("click", function (e) {
       var row = e.target.closest("[data-lake]");
@@ -777,7 +786,10 @@
     onPhone();
     if (phone.addEventListener) phone.addEventListener("change", onPhone); else if (phone.addListener) phone.addListener(onPhone);
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && state.selectedKey && !document.querySelector("#reading-room:not([hidden])")) closeLake();
+      // A dialog over the panel (Learn room, 3D view) handles its own Escape and marks it done;
+      // without this check one Escape closed the dialog and the lake under it.
+      if (e.defaultPrevented) return;
+      if (e.key === "Escape" && state.selectedKey && !document.querySelector("#reading-room:not([hidden]), #depth3d")) closeLake();
     });
     addEventListener("online", function () { fetchAll(false); });
     addEventListener("offline", function () { offlineNotice(); });
@@ -800,6 +812,7 @@
     renderSheet: renderSheet,
     openLake: openLake,
     closeLake: closeLake,
+    setDay: setDay,
     originPoint: originPoint,
     setOrigin: setOrigin,
     winterOn: winterOn,

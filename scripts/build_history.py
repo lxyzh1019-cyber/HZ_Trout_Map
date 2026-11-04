@@ -663,6 +663,8 @@ def write_depths(reg):
     print("\nReading lake depth...")
     print(f"  {stats['with_depth']} lake(s) with a depth, "
           f"{stats['stated_unavailable']} where Alberta states none is available")
+    if stats.get("from_survey"):
+        print(f"  {stats['from_survey']} more from the Alberta Geological Survey lakebed surveys")
     if stats["aerated"]:
         print(f"  {stats['aerated']} aerated; Alberta states nothing either way "
               f"for the rest")

@@ -53,6 +53,36 @@
     return reg && reg.season && reg.season.text;
   }
 
+  /* Build 4 (decision 5A): when the ice estimate (the same one Lake info shows)
+   * puts ice cover inside the forecast, the days from then on get no open-water
+   * score. Only a date worked out from this forecast counts: the "usual dates"
+   * fallback is a calendar average, and it would blank warm weeks too. */
+  function iceWindow(lake, wx, iced) {
+    if (!wx.data || typeof Estimates === "undefined" || iced) return null;
+    var depth = (typeof depthFor === "function" ? depthFor(lake) : null) || {};
+    var elev = typeof elevationFor === "function" ? elevationFor(lake) : null;
+    var e = Estimates.ice({
+      dailyT: wx.data.dailyT || [], dailyMeanC: wx.data.dailyMeanC || [],
+      airOffsetC: Conditions.heightOffsetC(wx.data.elevM, elev), lat: lake.lat, elevM: elev, cellElevM: wx.data.elevM,
+      maxDepthM: depth.max_depth_m, iced: false, now: new Date(), offset: wx.data.offset,
+    });
+    var on = null, off = null;
+    // The calendar date alone does not remove a score; it adds a warning line.
+    var usual = e.iceOn && e.iceOn.basis === "usual dates" && e.iceOn.date.getTime() <= Date.now() + 7 * 24 * HOUR
+      ? e.iceOn.date : null;
+    if (e.state === "ice") on = new Date(0);
+    else if (e.iceOn && e.iceOn.basis === "forecast") on = e.iceOn.date;
+    if (e.iceOff && e.iceOff.basis === "forecast") off = e.iceOff.date;
+    if (!on) return usual ? { on: null, usual: usual } : null;
+    return { on: on, off: off && off > on ? off : null };
+  }
+
+  function formingOn(w, start) {
+    if (!w || !w.on) return false;
+    var end = start.getTime() + 24 * HOUR;
+    return end > w.on.getTime() && !(w.off && start.getTime() >= w.off.getTime());
+  }
+
   function summarise(lake) {
     var CUI = ConditionsUI._internal;
     var place = { lat: lake.lat, lon: lake.lon, name: lake.name, lake: lake,
@@ -62,6 +92,7 @@
     var iced = !!(wx.data && Conditions.iceLikely(pastWeek(wx.data)));
     var season = seasonText(lake);
     var starts = dayStarts(wx.data);
+    var freeze = iceWindow(lake, wx, iced);
     var days = starts.map(function (start) {
       var astro = CUI.astroFor(place, CUI.startOfDay(new Date(start.getTime() + 12 * HOUR)));
       var sun = astro.sun || {};
@@ -126,13 +157,14 @@
         clearing: Conditions.clearingHint(hours),
         closed: closed,
         iced: iced,
+        iceForming: !iced && formingOn(freeze, start),
       };
     });
     var pick = Conditions.bestDay(days.map(function (d) {
-      return { bite: d.closed || d.confidence === "Astronomy only" ? null : d.bite,
-               dayOut: d.dayOut, gustMax: d.gustMax, iced: d.iced };
+      return { bite: d.closed || d.iceForming || d.confidence === "Astronomy only" ? null : d.bite,
+               dayOut: d.dayOut, gustMax: d.gustMax, iced: d.iced || d.iceForming };
     }));
-    return { key: lakeKey(lake), days: days, bestDay: pick, iced: iced,
+    return { key: lakeKey(lake), days: days, bestDay: pick, iced: iced, iceOn: freeze ? freeze.on : null, iceUsual: freeze ? freeze.usual || null : null,
              hasWeather: !!wx.data, fetchedAt: wx.fetchedAt, offset: wx.data ? wx.data.offset : null };
   }
 
@@ -183,7 +215,7 @@
   function rankable(f, d) {
     if (!f) return null;
     var day = f.days[d];
-    if (!day || day.closed || f.iced || day.confidence === "Astronomy only") return null;
+    if (!day || day.closed || day.iceForming || f.iced || day.confidence === "Astronomy only") return null;
     return day.bite;
   }
 
@@ -193,6 +225,6 @@
     computeAll: computeAll,
     clear: clear,
     rankable: rankable,
-    _internal: { dayStarts: dayStarts, pastWeek: pastWeek },
+    _internal: { dayStarts: dayStarts, pastWeek: pastWeek, iceWindow: iceWindow, formingOn: formingOn },
   };
 })();

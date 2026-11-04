@@ -251,6 +251,10 @@
     font-size: 11px; padding: 0; text-decoration: underline;
   }
   .linkish:hover { color: var(--ink); }
+  /* Build 4: Learn links in the lake panel, big enough to tap. */
+  .learn-link { display: inline-flex; align-items: center; font-size: 12px; min-height: 44px; padding: 0 4px; }
+  .learn-row { font-size: 12px; color: var(--ink-dim); margin: 8px 0 0; }
+  .btn3d { margin-top: 8px; }
 
   .species-row { display: flex; align-items: center; padding: 3px 0; cursor: pointer; user-select: none; }
   .species-row input { margin-right: 8px; }
@@ -966,6 +970,14 @@
   .badge { position: absolute; top: -6px; right: -6px; min-width: 18px; height: 18px; border-radius: 9px; padding: 0 4px;
     background: #c62828; color: #fff; font-size: 11px; font-weight: 700; line-height: 18px; }
   .badge[hidden] { display: none; }
+  /* Build 4: the number counts the filters you changed; the Alberta notices get their own sign. */
+  .badge.warn { right: auto; left: -6px; background: #e0a526; color: #1b1b1b; }
+  .active-filters { display: flex; flex-wrap: wrap; gap: 6px; margin: -4px 0 12px; }
+  .active-filters:empty { display: none; }
+  .af-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 4px 10px; border-radius: 16px;
+    border: 1px solid #555; background: var(--panel); color: var(--ink); font: inherit; font-size: 12px; cursor: pointer; }
+  .af-chip.def { color: var(--ink-dim); border-style: dashed; cursor: default; }
+  .af-chip b { font-weight: 700; color: var(--ink-dim); }
   .filters-title { font-size: 17px; font-weight: 600; margin: 0 0 2px; }
 
   /* Rows: search results, the card and the side list share one shape. */
@@ -975,6 +987,7 @@
   .row:hover, .row:focus-visible { background: var(--panel-2); }
   .row .nm { font-weight: 600; font-size: 14px; }
   .row .sub { font-size: 12px; color: var(--ink-dim); }
+  .mark3d { display: inline-block; padding: 0 5px; border-radius: 4px; background: #534AB7; color: #fff; font-size: 10px; font-weight: 700; line-height: 16px; }
   .row .sc { font-variant-numeric: tabular-nums; font-weight: 700; min-width: 30px; text-align: right; font-size: 15px; }
   .dayout { font-size: 12px; padding: 2px 8px; border-radius: 999px; white-space: nowrap; background: var(--panel-2); color: var(--ink-dim); }
   .dayout.calm { background: #2f4a39; color: #a6dcb9; }
@@ -1082,7 +1095,12 @@
   .banner.shut, .banner.none { background: var(--panel-2); border-color: #555; }
   .banner.shut .go, .banner.none .go { color: var(--ink); font-size: 18px; }
   .bars { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; align-items: end; height: 96px; margin-top: 10px; }
-  .bars div { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; font-size: 11px; color: var(--ink-dim); }
+  .bars div, .bars button { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; font-size: 11px; color: var(--ink-dim); }
+  /* Build 4: each day bar is a button that picks the day; the picked one is outlined. */
+  .bars button { font: inherit; font-size: 11px; background: none; border: 1px solid transparent; border-radius: 6px; padding: 2px 0; min-height: 44px; cursor: pointer; }
+  .bars button.top { color: #e0a526; font-weight: 700; }
+  .bars button[aria-pressed="true"] { border-color: var(--ink); background: rgba(255,255,255,.06); }
+  .bars button:focus-visible { outline: 2px solid #8fb8de; outline-offset: 1px; }
   .bars b { font-size: 11px; color: var(--ink); font-variant-numeric: tabular-nums; }
   .bars i { font-style: normal; font-size: 10px; }
   .bars span { display: block; width: 70%; border-radius: 3px 3px 0 0; background: #8fb8de; }
@@ -1233,6 +1251,7 @@
 
     <div class="count" id="result-count">Showing … lakes</div>
     <div class="filter-summary" id="filter-summary"></div>
+    <div class="active-filters" id="active-filters" aria-label="Filters that narrow the map"></div>
     <div class="empty-state" id="empty-state">No lakes match these filters. Try more years, more species, or a longer distance.</div>
 
     <div class="group" id="advisory-group" hidden>
@@ -1251,6 +1270,13 @@
         <button class="chip" id="bait-chip" type="button" aria-pressed="false">Bait ban</button>
       </div>
       <div class="hint" id="open-now-note"></div>
+    </div>
+    <div class="group" id="survey-group" hidden>
+      <div class="group-label"><span>Depth survey</span></div>
+      <div class="chips">
+        <button class="chip" id="grid-chip" type="button" aria-pressed="false">Has a 3D depth model</button>
+      </div>
+      <div class="hint" id="grid-note"></div>
     </div>
 
     <div class="group">
@@ -1342,7 +1368,7 @@
              aria-autocomplete="list">
       <ul id="search-results" role="listbox" aria-label="Search results"></ul>
     </div>
-    <button class="icon-btn" id="filters-btn" type="button">Filters<span class="badge" id="advisory-badge" hidden></span></button>
+    <button class="icon-btn" id="filters-btn" type="button">Filters<span class="badge" id="filter-count" hidden></span><span class="badge warn" id="advisory-badge" hidden></span></button>
     <button class="icon-btn" id="chart-toggle" type="button" aria-pressed="false">Charts</button>
     <button class="icon-btn" id="learn-btn" type="button" aria-label="Learn: guides and fish">Learn</button>
   </header>
@@ -1650,6 +1676,8 @@ const state = {
   aeratedOnly: false,
   /** Keep only lakes the regulations put under a bait ban. */
   baitBanOnly: false,
+  /** Build 4: keep only lakes with an Alberta lakebed survey (the 3D depth model). */
+  gridOnly: false,
   /** Facilities a lake must be KNOWN to have. Empty means no facility filter.
    *  Never inverted into "known not to have": 95 mapped lakes state no
    *  amenities at all, and that is Alberta not saying, not a lake with no
@@ -1948,6 +1976,7 @@ function lakePassesFilters(lake) {
   // Without the regulations the chip is hidden, so a shared link must not
   // leave an empty map with no way to switch the filter off.
   if (state.baitBanOnly && REGULATIONS && !lakeBaitBan(lake)) return false;
+  if (state.gridOnly && DEPTH_GRIDS && !(window.DepthModel && DepthModel.has(lake))) return false;
   if (!facilitiesPass(lake)) return false;
   return recencyPasses(lake, recencyOption());
 }
@@ -2342,12 +2371,17 @@ function depthBlock(lake) {
            <span class="dim">Alberta lists no depth for this lake</span></div>`
       : "";
   }
-  const parts = [`<span><span class="profile-label">Max depth</span> ${esc(d.max_depth_m)} m</span>`];
+  /* Build 4: on the surveyed lakes the depths can come from the Alberta
+   * Geological Survey lakebed survey (scripts/depth.py), and say so. */
+  const SURVEY_NOTE = "measured by the Alberta lakebed survey, at the survey water level";
+  const parts = [`<span><span class="profile-label">Max depth</span> ${esc(d.max_depth_m)} m`
+    + (d.max_depth_source ? `, <span class="dim">${SURVEY_NOTE}</span>` : "") + `</span>`];
   /* A measured mean sits beside the measured maximum. An estimated one never
    * does — it gets its own row below, so the two can never be read as equally
    * firm by glancing along a line. */
   if (measuredMean) {
-    parts.push(`<span><span class="profile-label">Mean depth</span> ${esc(mean.m)} m</span>`);
+    parts.push(`<span><span class="profile-label">Mean depth</span> ${esc(mean.m)} m`
+      + (mean.source === "ags-survey" && !d.max_depth_source ? `, <span class="dim">${SURVEY_NOTE}</span>` : "") + `</span>`);
   }
   const strat = d.stratification;
   if (strat && strat.stratifies) {
@@ -2730,7 +2764,9 @@ function tooltipHtml(lake) {
   const s = f ? Forecast.rankable(f, state.day) : null;
   const score = s === null ? "" : `<br><span class="tip-sub">Bite ${Math.round(s * 100)} · ${LakeSheet.bandWord(s)}</span>`;
   return `<b>${esc(lake.name)}</b>${score}<br><span class="tip-sub">${dist}${fmtNum(filteredFishTotal(lake))} fish · last ${esc(when)}</span>` +
-         (change ? `<br><span class="tip-sub">${esc(change)}</span>` : "");
+         (change ? `<br><span class="tip-sub">${esc(change)}</span>` : "") +
+         // Build 4: a lake with a lakebed survey; open it for the 3D model.
+         (window.DepthModel && DepthModel.has(lake) ? `<br><span class="tip-sub"><b class="mark3d">3D</b> depth model: open the lake</span>` : "");
 }
 
 function initMap() {
@@ -3144,9 +3180,9 @@ function buildAdvisories() {
   document.getElementById("advisory-group").hidden = false;
   const badge = document.getElementById("advisory-badge");
   badge.hidden = false;
-  badge.textContent = String(lines.length);
+  badge.textContent = "⚠" + lines.length;
   badge.title = `${lines.length} Alberta advisor${lines.length === 1 ? "y" : "ies"}, listed in Filters`;
-  document.getElementById("filters-btn").setAttribute("aria-label", `Filters, ${badge.title}`);
+  updateFiltersLabel();
   const note = document.getElementById("advisory-note");
   const list = document.getElementById("advisory-list");
   const more = document.getElementById("advisory-more");
@@ -3398,6 +3434,94 @@ function updateFilterSummary() {
     : recency.days ? `stocked in ${recency.label}` : "any time";
   document.getElementById("filter-summary").textContent =
     `${speciesLabel} · ${yearsLabel} · ${sizeLabel} · ${distLabel} · ${recencyLabel}`;
+  renderActiveFilters();
+}
+
+/* Build 4: every filter that narrows the map, as a chip at the top of Filters.
+ * The button's number counts only the ones you changed: the default years
+ * (the last 5) are listed but not counted (decision 4B). Each chip's ✕ uses the
+ * filter's own control, so the controls and the state never drift apart. */
+function yearsText(set) {
+  const ys = [...set].sort((a, b) => a - b);
+  if (!ys.length) return "no years";
+  const run = ys.every((y, i) => i === 0 || y === ys[i - 1] + 1);
+  return run ? (ys.length === 1 ? String(ys[0]) : `${ys[0]}–${ys[ys.length - 1]}`) : `${ys.length} years`;
+}
+function defaultYears() { return new Set(ALL_YEARS.slice(-5)); }
+function sameSet(a, b) { return a.size === b.size && [...a].every(x => b.has(x)); }
+function activeFilters() {
+  const out = [];
+  const click = sel => () => { const el = document.querySelector(sel); if (el) el.click(); };
+  if (state.years.size !== ALL_YEARS.length) {
+    const def = sameSet(state.years, defaultYears());
+    out.push({ id: "years", label: `Years ${yearsText(state.years)}`, counted: !def, def,
+               clear: def ? null : click('[data-range="last5"]') });
+  }
+  if (state.species.size !== SPECIES_ORDER.length) {
+    out.push({ id: "species", label: `${state.species.size} of ${SPECIES_ORDER.length} species`, counted: true, clear: click('[data-all="species"]') });
+  }
+  if (state.sizes.size !== SIZE_IDS.length) {
+    out.push({ id: "sizes", label: `${state.sizes.size} of ${SIZE_IDS.length} sizes`, counted: true, clear: click('[data-all="size"]') });
+  }
+  if (state.maxDistanceKm < 1000) {
+    out.push({ id: "distance", label: `Within ${state.maxDistanceKm} km`, counted: true, clear: () => {
+      const s = document.getElementById("dist-slider");
+      s.value = 1000; s.dispatchEvent(new Event("input"));
+    } });
+  }
+  const rc = recencyOption();
+  if (rc.days || rc.season) out.push({ id: "recency", label: `Stocked ${rc.season ? "this season" : "in " + rc.label}`, counted: true, clear: click('[data-recency="any"]') });
+  if (state.openNow) out.push({ id: "open", label: "Open today", counted: true, clear: click("#open-now-chip") });
+  if (state.iceFishing) out.push({ id: "ice", label: "Open for ice fishing", counted: true, clear: click("#ice-chip") });
+  if (state.aeratedOnly) out.push({ id: "aer", label: "Aerated", counted: true, clear: click("#aerated-chip") });
+  if (state.baitBanOnly) out.push({ id: "bait", label: "Bait ban", counted: true, clear: click("#bait-chip") });
+  if (state.gridOnly) out.push({ id: "3d", label: "Has a 3D depth model", counted: true, clear: click("#grid-chip") });
+  if (state.facilities.size) out.push({ id: "fac", label: `${state.facilities.size} facilit${state.facilities.size === 1 ? "y" : "ies"}`, counted: true, clear: click('[data-all="facility"]') });
+  return out;
+}
+function renderActiveFilters() {
+  const host = document.getElementById("active-filters");
+  const list = activeFilters();
+  if (host) {
+    host.innerHTML = list.map((f, i) => f.clear
+      ? `<button type="button" class="af-chip" data-af="${i}" aria-label="Remove filter: ${esc(f.label)}">${esc(f.label)} <b aria-hidden="true">✕</b></button>`
+      : `<span class="af-chip def" title="The default: the last 5 years. Change it under Years.">${esc(f.label)} (default)</span>`).join("");
+    host.querySelectorAll("[data-af]").forEach(b => b.addEventListener("click", () => list[Number(b.dataset.af)].clear()));
+  }
+  const n = list.filter(f => f.counted).length;
+  const badge = document.getElementById("filter-count");
+  if (badge) {
+    badge.hidden = n === 0;
+    badge.textContent = String(n);
+    badge.title = `${n} filter${n === 1 ? "" : "s"} changed`;
+  }
+  updateFiltersLabel(n);
+}
+function updateFiltersLabel(n) {
+  const btn = document.getElementById("filters-btn");
+  if (!btn) return;
+  if (n == null) n = activeFilters().filter(f => f.counted).length;
+  const adv = document.getElementById("advisory-badge");
+  const parts = [];
+  if (n) parts.push(`${n} filter${n === 1 ? "" : "s"} changed`);
+  if (adv && !adv.hidden) parts.push(adv.title);
+  btn.setAttribute("aria-label", parts.length ? `Filters, ${parts.join(", ")}` : "Filters");
+}
+
+/* Build 4: lakes with an Alberta lakebed survey, the ones with a 3D depth model. */
+function buildSurveyFilter() {
+  if (!DEPTH_GRIDS || !DEPTH_GRIDS.lakes) return;
+  const group = document.getElementById("survey-group");
+  const chip = document.getElementById("grid-chip");
+  const n = LAKES.filter(l => window.DepthModel && DepthModel.has(l)).length;
+  document.getElementById("grid-note").textContent = `${n} lakes have an Alberta lakebed survey you can turn in 3D.`;
+  group.hidden = false;
+  const sync = () => {
+    chip.classList.toggle("active", state.gridOnly);
+    chip.setAttribute("aria-pressed", state.gridOnly ? "true" : "false");
+  };
+  chip.addEventListener("click", () => { state.gridOnly = !state.gridOnly; sync(); onFilterChange(); });
+  sync();
 }
 
 function updateDataQualitySummary() {
@@ -3948,6 +4072,7 @@ function writeUrl() {
   if (state.iceFishing) p.set("ice", "1");
   if (state.aeratedOnly) p.set("aer", "1");
   if (state.baitBanOnly) p.set("bait", "1");
+  if (state.gridOnly) p.set("3d", "1");
   if (state.facilities.size) p.set("fac", [...state.facilities].join("|"));
   if (state.day) p.set("day", state.day);
   if (state.origin && state.origin.kind !== "me") {
@@ -3978,6 +4103,7 @@ function readUrl() {
   if (p.get("ice") === "1") state.iceFishing = true;
   if (p.get("aer") === "1") state.aeratedOnly = true;
   if (p.get("bait") === "1") state.baitBanOnly = true;
+  if (p.get("3d") === "1") state.gridOnly = true;
   // Validated against what was actually collected, so a stale or hand-typed
   // link cannot leave a filter switched on that nothing can satisfy.
   if (p.has("fac")) pendingFacilities = p.get("fac").split("|").filter(Boolean);
@@ -4173,6 +4299,7 @@ async function init() {
     placeOriginMarker();
     buildAdvisories();
     buildSeasonFilter();
+    buildSurveyFilter();
     buildRecencyChips();
     buildFacilityFilters();
     buildSpeciesFilters();

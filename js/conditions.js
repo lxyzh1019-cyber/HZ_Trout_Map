@@ -890,8 +890,10 @@
     if (p !== null) {
       bits.push(p <= -0.7 ? "Falling pressure: a front is coming, and the bite is often short and strong before it."
         : p >= 0.7 ? "Rising pressure after a front: fish can be slow, so fish deeper and slower."
-        : "Steady pressure: fish feed at normal depths.");
+        : "Steady pressure: fish feed at their usual depth.");
     }
+    // Build 4: the depth range for this lake on this day (Estimates.fishDepth), in place of "normal depths".
+    if (d.depthRange && d.depthRange.text) bits.push(d.depthRange.text);
     var g = num(d.gustMax);
     if (g !== null && g >= GUST_WARN_KPH) bits.push("Gusts to " + Math.round(g) + " km/h: not a boat day, so fish from shore.");
     else if (num(d.windMean) !== null && d.windMean < 3) bits.push("Flat calm: use a long, light leader.");

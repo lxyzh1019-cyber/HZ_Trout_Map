@@ -33,9 +33,10 @@
   var SIZE = 4.4;                    // model width in scene units
   var D0 = 6.4;                      // camera distance at the default view
   var LAND_CAP_M = 6;                // land is drawn at most this high
-  var LAYERS_ON = ["wind", "spots", "struct", "drop"];
+  var LAYERS_ON = ["fishdepth", "wind", "spots", "struct", "drop"];
   var LAYERS_OFF = ["weed", "summer", "cast", "calm", "sun", "rep", "ice"];
   var LAYER_INFO = {
+    fishdepth: ["Fish depth today", "c", "#4FC3F7"],
     wind: ["Wind arrows", "l", "#E24B4A"], spots: ["Possible spots", "c", "#EF9F27"],
     struct: ["Structure", "c", "#D4537E"], drop: ["Drop-offs", "c", "#D85A30"],
     weed: ["Weed line (estimate)", "l", "#3B6D11"], summer: ["Summer layer", "l", "#BA7517"],
@@ -96,6 +97,56 @@
       });
   }
 
+  /* Build 4: the lakebed shapes for the lake panel ("How to fish this lake"),
+   * without opening the 3D view. Cached per lake; null until loaded. */
+  var shapeCache = {};
+  var PART = ["north", "north-east", "east", "south-east", "south", "south-west", "west", "north-west"];
+  function partOf(grid, meta, i, j) {
+    var dx = (i - (grid.w - 1) / 2) * grid.cell, dy = ((grid.h - 1) / 2 - j) * grid.cell;
+    var r = Math.sqrt(dx * dx + dy * dy), half = Math.min(grid.w, grid.h) * grid.cell / 2;
+    if (r < half * 0.2) return "the middle";
+    // Grid north differs from true north by meta.north_deg.
+    var bearing = (Math.atan2(dx, dy) * 180 / Math.PI - (meta.north_deg || 0) + 360) % 360;
+    return "the " + PART[Math.round(bearing / 45) % 8] + " part";
+  }
+  function shapesCached(lake) { var e = entry(lake); return e && !sharedGrid(e) ? shapeCache[e.grid.file] || null : null; }
+  /* A grid shared by a chain of lakes (Pierre Greys, Wildhorse) shows the whole
+   * chain; its shapes are not one lake's, so "How to fish" leaves them out. */
+  function sharedGrid(e) {
+    var I = index(), n = 0;
+    Object.keys(I.lakes).forEach(function (k) { if (I.lakes[k].grid === e.lake.grid) n++; });
+    return n > 1;
+  }
+  function shapes(lake) {
+    var e = entry(lake);
+    if (!e || typeof LakeStructure === "undefined" || sharedGrid(e)) return Promise.resolve(null);
+    if (shapeCache[e.grid.file]) return Promise.resolve(shapeCache[e.grid.file]);
+    return loadGrid(e.grid).then(function (grid) {
+      var s = LakeStructure.find(grid);
+      var out = s.labels.map(function (l) { return { kind: l.kind, name: l.name, where: partOf(grid, e.grid, l.i, l.j) }; });
+      shapeCache[e.grid.file] = out;
+      return out;
+    }).catch(function () { return null; });
+  }
+
+  /* Build 4: a grid cell's latitude and longitude, from the grid's own 10TM
+   * origin and the linear map around its centre (affine, from depth_grids.py).
+   * Good to a few metres across one lake: enough for "Directions". */
+  function cellLatLon(meta, i, j) {
+    var a = meta.affine;
+    if (!a || a.length < 8) return null;
+    var de = meta.x0 + i * meta.cell_m - a[0], dn = meta.y0 - j * meta.cell_m - a[1];
+    var det = a[4] * a[7] - a[5] * a[6];
+    if (!det) return null;
+    return { lat: a[2] + (de * a[7] - a[5] * dn) / det, lon: a[3] + (a[4] * dn - a[6] * de) / det };
+  }
+  function directionsLink(meta, i, j) {
+    var ll = cellLatLon(meta, i, j);
+    if (!ll) return "";
+    return ' <a href="https://www.google.com/maps/dir/?api=1&destination=' + ll.lat.toFixed(5) + "," + ll.lon.toFixed(5)
+      + '&travelmode=driving" target="_blank" rel="noopener" class="d3-dir">Directions to the shore near this spot ↗</a>';
+  }
+
   function dirName(d) { return DIRS[Math.round((((d % 360) + 360) % 360) / 45) % 8]; }
   function round1(v) { return Math.round(v * 10) / 10; }
   function escHtml(s) {
@@ -109,30 +160,33 @@
   // ============================================================
 
   var CSS = "\
-#depth3d [hidden]{display:none!important}#depth3d{position:fixed;inset:0;z-index:4500;display:flex;flex-direction:column;background:var(--bg,#2b2e2a);color:var(--ink,#e8e4d8);font:14px/1.4 system-ui,sans-serif}\
-#depth3d .d3-bar{display:flex;align-items:center;gap:6px;padding:6px 8px;background:var(--panel,#3a3d38);border-bottom:1px solid var(--panel-edge,#1f211e)}\
-#depth3d .d3-title{flex:1;min-width:0;margin:0;font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\
-#depth3d button{min-height:44px;min-width:44px;border-radius:6px;border:1px solid var(--panel-edge,#1f211e);background:var(--panel-2,#33362f);color:inherit;font:inherit;cursor:pointer}\
-#depth3d .d3-stage{position:relative;flex:1 1 55%;min-height:220px;background:#1f211e}\
-#depth3d canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}\
-#depth3d .d3-sign{position:absolute;top:8px;right:8px;width:92px;text-align:center;background:rgba(43,46,42,.88);border:1px solid var(--panel-edge,#1f211e);border-radius:10px;padding:4px;font-size:12px;pointer-events:none}\
-#depth3d .d3-sign b{display:block;font-size:13px}\
-#depth3d .d3-wait{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;text-align:center;color:var(--ink-dim,#a8a396)}\
-#depth3d .d3-panel{flex:0 1 auto;max-height:45%;overflow-y:auto;background:var(--panel,#3a3d38);border-top:1px solid var(--panel-edge,#1f211e)}\
-#depth3d .d3-row{display:flex;align-items:center;gap:8px;padding:5px 10px;flex-wrap:wrap}\
-#depth3d .d3-row input[type=range]{flex:1;min-width:120px}\
-#depth3d .d3-row .lab{min-width:52px;color:var(--ink-dim,#a8a396)}\
-#depth3d .d3-key{display:flex;align-items:center;gap:6px;padding:6px 10px;font-size:12px;color:var(--ink-dim,#a8a396)}\
-#depth3d .d3-key span.g{flex:1;height:10px;border-radius:4px;background:linear-gradient(90deg,#B5D4F4,#378ADD,#0C447C,#042C53)}\
-#depth3d .d3-msg{padding:2px 10px;color:#FAC775}\
-#depth3d .d3-read{padding:8px 10px;border-top:1px solid var(--panel-edge,#1f211e);min-height:38px}\
-#depth3d .d3-hd{padding:8px 10px 0;font-size:12px;color:var(--ink-dim,#a8a396);border-top:1px solid var(--panel-edge,#1f211e)}\
-#depth3d .d3-lay{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:2px 10px;padding:4px 10px 8px}\
-#depth3d .d3-lay label{display:flex;align-items:center;gap:6px;min-height:44px}\
-#depth3d .d3-lay i.c{display:inline-block;width:10px;height:10px;border-radius:50%;flex:none}\
-#depth3d .d3-lay i.l{display:inline-block;width:14px;height:3px;flex:none}\
-#depth3d .d3-lay .q{min-height:44px;min-width:44px;padding:0;border-radius:50%;margin-left:auto;font-size:14px}\
-#depth3d .d3-foot{padding:6px 10px 12px;font-size:11px;color:var(--ink-dim,#a8a396)}\
+.d3v [hidden]{display:none!important}#depth3d{position:fixed;inset:0;z-index:4500}.d3v{display:flex;flex-direction:column;background:var(--bg,#2b2e2a);color:var(--ink,#e8e4d8);font:14px/1.4 system-ui,sans-serif}\
+.d3v .d3-bar{display:flex;align-items:center;gap:6px;padding:6px 8px;background:var(--panel,#3a3d38);border-bottom:1px solid var(--panel-edge,#1f211e)}\
+.d3v .d3-title{flex:1;min-width:0;margin:0;font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\
+.d3v button{min-height:44px;min-width:44px;border-radius:6px;border:1px solid var(--panel-edge,#1f211e);background:var(--panel-2,#33362f);color:inherit;font:inherit;cursor:pointer}\
+.d3v .d3-stage{position:relative;flex:1 1 55%;min-height:220px;background:#1f211e}\
+.d3v canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}\
+.d3v .d3-sign{position:absolute;top:8px;right:8px;width:92px;text-align:center;background:rgba(43,46,42,.88);border:1px solid var(--panel-edge,#1f211e);border-radius:10px;padding:4px;font-size:12px;pointer-events:none}\
+.d3v .d3-sign b{display:block;font-size:13px}\
+.d3v .d3-wait{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;text-align:center;color:var(--ink-dim,#a8a396)}\
+.d3v .d3-panel{flex:0 1 auto;max-height:45%;overflow-y:auto;background:var(--panel,#3a3d38);border-top:1px solid var(--panel-edge,#1f211e)}\
+.d3v .d3-row{display:flex;align-items:center;gap:8px;padding:5px 10px;flex-wrap:wrap}\
+.d3v .d3-row input[type=range]{flex:1;min-width:120px}\
+.d3v .d3-row .lab{min-width:52px;color:var(--ink-dim,#a8a396)}\
+.d3v .d3-key{display:flex;align-items:center;gap:6px;padding:6px 10px;font-size:12px;color:var(--ink-dim,#a8a396)}\
+.d3v .d3-key span.g{flex:1;height:10px;border-radius:4px;background:linear-gradient(90deg,#B5D4F4,#378ADD,#0C447C,#042C53)}\
+.d3v .d3-msg{padding:2px 10px;color:#FAC775}\
+.d3v .d3-dir{display:inline-flex;align-items:center;min-height:44px;padding:0 6px;color:var(--accent,#e0a526)}\
+.d3v .d3-read{padding:8px 10px;border-top:1px solid var(--panel-edge,#1f211e);min-height:38px}\
+.d3v .d3-hd{padding:8px 10px 0;font-size:12px;color:var(--ink-dim,#a8a396);border-top:1px solid var(--panel-edge,#1f211e)}\
+.d3v .d3-lay{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:2px 10px;padding:4px 10px 8px}\
+.d3v .d3-lay label{display:flex;align-items:center;gap:6px;min-height:44px}\
+.d3v .d3-lay i.c{display:inline-block;width:10px;height:10px;border-radius:50%;flex:none}\
+.d3v .d3-lay i.l{display:inline-block;width:14px;height:3px;flex:none}\
+.d3v .d3-lay .q{min-height:44px;min-width:44px;padding:0;border-radius:50%;margin-left:auto;font-size:14px}\
+.d3v.d3-embed{position:relative;height:min(74vh,640px);margin:0 0 14px;border:1px solid var(--panel-edge,#1f211e);border-radius:8px;overflow:hidden}\
+.d3v.d3-embed .d3-panel{max-height:48%}.d3v.d3-embed canvas{touch-action:pan-y}@media (max-width:600px){.d3v.d3-embed{height:min(64vh,560px)}}\
+.d3v .d3-foot{padding:6px 10px 12px;font-size:11px;color:var(--ink-dim,#a8a396)}\
 ";
 
   function ensureStyle() {
@@ -151,18 +205,25 @@
       + escHtml(inf[0]) + '<button type="button" class="q" data-learn="layer-' + id + '" aria-label="About ' + escHtml(inf[0]) + '">?</button></label>';
   }
 
-  function shell(lake, meta, aerated) {
+  function shell(lake, meta, aerated, host) {
     ensureStyle();
     var el = document.createElement("div");
-    el.id = ROOT_ID;
-    el.setAttribute("role", "dialog");
-    el.setAttribute("aria-modal", "true");
-    el.setAttribute("aria-label", "3D depth model of " + lake.name);
+    el.className = "d3v" + (host ? " d3-embed" : "");
+    // Build 4: the Learn guide holds a second, smaller copy of the view (host).
+    if (host) {
+      el.id = ROOT_ID + "-demo";
+      el.setAttribute("role", "region");
+    } else {
+      el.id = ROOT_ID;
+      el.setAttribute("role", "dialog");
+      el.setAttribute("aria-modal", "true");
+    }
+    el.setAttribute("aria-label", (host ? "Sample 3D depth model of " : "3D depth model of ") + lake.name);
     el.tabIndex = -1;
-    el.innerHTML = '<div class="d3-bar"><h2 class="d3-title">' + escHtml(lake.name) + " · 3D depth</h2>"
-      + '<button type="button" data-learn="" aria-label="About the 3D depth model">i</button>'
+    el.innerHTML = '<div class="d3-bar"><h2 class="d3-title">' + (host ? "Sample lake: " : "") + escHtml(lake.name) + " · 3D depth</h2>"
+      + (host ? "" : '<button type="button" data-learn="" aria-label="About the 3D depth model">i</button>')
       + '<button type="button" data-default>Default view</button>'
-      + '<button type="button" data-close aria-label="Close the 3D depth model">✕</button></div>'
+      + (host ? "" : '<button type="button" data-close aria-label="Close the 3D depth model">✕</button>') + "</div>"
       + '<div class="d3-stage"><canvas></canvas><div class="d3-wait">Loading the lakebed…</div>'
       + '<div class="d3-sign" hidden><svg viewBox="-50 -50 100 100" width="70" height="70" aria-hidden="true"><g data-rose>'
       + '<circle r="44" fill="none" stroke="#888780" stroke-width="1.5"/>'
@@ -185,10 +246,10 @@
         + '<button type="button" class="q" data-learn="layer-aerator" aria-label="About the aerator warning">?</button></label>' : "")
       + "</div>"
       + '<div class="d3-foot">Depth at the survey water level; the real level changes. Height is made taller so the shape is easy to see. '
-      + "Spots and layers are estimates. Lakebed: Alberta Geological Survey (" + escHtml(meta.source) + "), Open Government Licence – Alberta. "
+      + "Spots and layers are estimates. Lakebed: " + escHtml(meta.source) + ", Open Government Licence – Alberta. "
       + "Boating rules: Transport Canada TP 15587E (2026), not the official version, and MyWildAlberta. Wind: Open-Meteo.com (CC BY 4.0). 3D: three.js (MIT).</div>"
       + "</div>";
-    document.body.appendChild(el);
+    (host || document.body).appendChild(el);
     return el;
   }
 
@@ -246,6 +307,120 @@
     if (v.stop) v.stop();
     if (v.el && v.el.parentNode) v.el.parentNode.removeChild(v.el);
     if (v.returnFocus && v.returnFocus.focus) { try { v.returnFocus.focus(); } catch (e) { /* gone */ } }
+  }
+
+  // ============================================================
+  // BUILD 4: THE SAMPLE MODEL IN THE LEARN GUIDE
+  // ============================================================
+
+  /* One real surveyed lake with every shape the guide talks about: an island, a
+   * point, a hump, a basin, a drop-off and a flat (decision 2A; the smallest
+   * lakebed file that has all six). Each guide section has a "Show on the
+   * model" button that sets the layers, the example wind or ice, and the
+   * message the real view would show. The wind is fixed so the example reads
+   * the same every time: from the west, 20 km/h. */
+  var DEMO_LAKE = "wb5179";             // Lower Kananaskis Lake, DIG 2008-0458
+  var WEST = { kph: 20, from: 270 };
+  function at(hour, month) {
+    var d = new Date();
+    if (month) d.setMonth(month - 1, 15);
+    d.setHours(hour, 0, 0, 0);
+    return d.getTime();
+  }
+  var DEMO = {
+    overview: { layers: LAYERS_ON, wind: WEST, iced: false },
+    fishdepth: { layers: ["fishdepth"], wind: WEST, iced: false },
+    wind: { layers: ["wind"], wind: WEST, iced: false },
+    time: { layers: ["wind", "spots"], iced: false,
+            read: "The Time slider and Play use the saved forecast for this lake. Move the slider: the arrows and spots follow each hour." },
+    light: { layers: ["wind", "spots", "drop"], wind: { kph: 5, from: 270 }, iced: false },
+    spots: { layers: ["spots"], wind: WEST, iced: false },
+    shore: { layers: ["spots"], wind: WEST, iced: false, read: "Shore spots are the orange pins on the east shore: the west wind pushes food there." },
+    troll: { layers: ["spots"], wind: WEST, iced: false, read: "The orange line is the trolling route along the 5 m line, on the downwind half." },
+    ice: { layers: ["spots", "drop"], wind: null, iced: true },
+    iceband: { layers: ["ice"], wind: null, iced: true },
+    underice: { layers: ["wind", "spots"], wind: WEST, iced: true },
+    nowind: { layers: ["wind", "spots", "drop"], wind: { kph: 12, from: null }, iced: false,
+              msg: "Example message: No wind direction saved — open the app once with signal." },
+    addon: { layers: [], wind: WEST, iced: false,
+             msg: "Example message: 3D add-on not saved yet — open the app once with signal. The Alberta depth chart link in Lake info still works." },
+    position: { layers: ["struct"], wind: WEST, iced: false,
+                read: "In the real view a blue pin marks you, when you are near the lake and said yes to the one question. The sample does not ask." },
+    only3d: { layers: ["wind", "spots"], wind: WEST, iced: false,
+              read: "Wind arrows and spots are only here, in the 3D view. The main map does not change." },
+    depth: { layers: ["drop"], wind: WEST, iced: false, read: "Tap the lakebed: the line here shows the depth at the survey water level." },
+    height: { layers: ["struct"], wind: WEST, iced: false, height: 3,
+              read: "The Height slider is set 3 times higher than this lake's start value. Default view keeps the height; move the slider back." },
+    struct: { layers: ["struct"], wind: WEST, iced: false },
+    drop: { layers: ["drop"], wind: WEST, iced: false },
+    weed: { layers: ["weed"], wind: WEST, iced: false },
+    summer: { layers: ["summer"], wind: WEST, iced: false, when: at(12, 7), read: "The example is set to a July midday, when the lake is layered." },
+    cast: { layers: ["cast"], wind: WEST, iced: false },
+    calm: { layers: ["calm", "wind"], wind: WEST, iced: false },
+    sun: { layers: ["sun"], wind: WEST, iced: false, when: at(15, 7), read: "The example is set to 3 pm on a July day: the sun is in the south-west." },
+    rep: { layers: ["rep"], wind: WEST, iced: false, read: "Reported spots show here when the Hot spots list has some for this lake." },
+    boating: { layers: ["spots"], wind: WEST, iced: false, read: "Tap the orange trolling line: its text gives this lake's boating rule." },
+    credit: { layers: LAYERS_ON, wind: WEST, iced: false, read: "The credit line is at the bottom of the model's panel: scroll down inside it." },
+  };
+  var demo = null;
+
+  function lakeById(id) {
+    return typeof LAKES !== "undefined" ? LAKES.find(function (l) { return lakeKey(l) === id; }) : null;
+  }
+
+  /** Put the sample model into host (the Learn guide). Frees an older one first. */
+  function mountDemo(host) {
+    unmountDemo();
+    if (!host) return;
+    var note = function (t) { host.innerHTML = '<p class="demo-note">' + escHtml(t) + "</p>"; };
+    // One 3D drawing at a time: a phone has little memory for two.
+    if (view) { note("The sample model is off while a lake's 3D view is open. Close the 3D view, then open this guide again to turn the sample lake."); return; }
+    var lake = lakeById(DEMO_LAKE), e = lake && entry(lake);
+    if (!e) { note("The sample model opens when the lakebed files are saved: open the app once with signal."); return; }
+    var el = shell(lake, e.grid, false, host);
+    var wait = el.querySelector(".d3-wait");
+    demo = { el: el, lake: lake, meta: e.grid, aerated: false, alive: true, demo: true, preset: DEMO.overview };
+    // Inside the guide, "?" scrolls to its section instead of reopening the guide.
+    el.addEventListener("click", function (ev) {
+      var b = ev.target.closest("[data-learn]");
+      if (!b) return;
+      ev.preventDefault();
+      var room = el.closest(".rr-body") || document;
+      var t = b.dataset.learn && room.querySelector("#" + b.dataset.learn);
+      if (t) t.scrollIntoView({ block: "start" });
+    });
+    if (!canWebGL()) { wait.textContent = "This phone cannot show 3D, so the sample model is off. The text below still explains every layer."; return; }
+    var mine = demo;
+    Promise.all([loadThree(), loadGrid(e.grid).catch(function () { return null; })]).then(function (got) {
+      if (demo !== mine || !mine.alive) return;
+      if (!got[0]) { wait.textContent = "3D add-on not saved yet — open the app once with signal."; return; }
+      if (!got[1]) { wait.textContent = "This lakebed is not saved yet — open the app once with signal."; return; }
+      wait.hidden = true;
+      try { build(mine, got[1]); if (mine.apply) mine.apply(mine.preset); } catch (err) {
+        wait.hidden = false;
+        wait.textContent = "The 3D model could not start on this device.";
+        if (window.console) console.warn("depth3d demo:", err);
+      }
+    });
+  }
+
+  /** "Show on the model": one guide section's preset. */
+  function showDemo(id) {
+    var p = DEMO[id];
+    if (!demo || !p) return false;
+    demo.preset = p;
+    if (demo.apply) demo.apply(p);
+    if (demo.el.scrollIntoView) demo.el.scrollIntoView({ block: "start", behavior: "smooth" });
+    return true;
+  }
+
+  function unmountDemo() {
+    if (!demo) return;
+    var v = demo;
+    demo = null;
+    v.alive = false;
+    if (v.stop) v.stop();
+    if (v.el && v.el.parentNode) v.el.parentNode.removeChild(v.el);
   }
 
   // ============================================================
@@ -383,7 +558,7 @@
 
     // ---- layers
     var L = {};
-    ["weed", "drop", "summer", "ice"].forEach(function (id) { L[id] = new T.Group(); bed.add(L[id]); });
+    ["fishdepth", "weed", "drop", "summer", "ice"].forEach(function (id) { L[id] = new T.Group(); bed.add(L[id]); });
     ["wind", "spots", "struct", "cast", "calm", "sun", "rep"].forEach(function (id) { L[id] = new T.Group(); top.add(L[id]); });
 
     if (maxD > 4) L.weed.add(lines(LakeStructure.contour(grid, 4), 4, 0x3B6D11, 1, { name: "Weed line ~4 m (estimate)", color: "#3B6D11",
@@ -485,7 +660,7 @@
 
     // ---- your position, asked once
     var me = null;
-    if (navigator.geolocation) {
+    if (navigator.geolocation && !v.demo) {
       navigator.geolocation.getCurrentPosition(function (p) {
         if (!v.alive) return;
         var c = toCell(p.coords.latitude, p.coords.longitude);
@@ -566,6 +741,7 @@
       }
     } catch (e1) { iceEst = null; }
     var icedAt = function (when) {
+      if (v.preset && v.preset.iced !== undefined) return !!v.preset.iced;
       if (!iceEst) return false;
       // Now is what Lake info says. A later hour changes only on a date the
       // forecast itself gives; "usual dates" and the trend are not used.
@@ -576,6 +752,11 @@
 
     var hourIdx = 0;
     function momentFor(idx) {
+      var P = v.preset;
+      if (P && P.wind !== undefined) {
+        var base = P.when ? new Date(P.when) : new Date();
+        return { when: new Date(base.getTime() + idx * 3600000), kph: P.wind ? P.wind.kph : null, fromTrue: P.wind ? P.wind.from : null };
+      }
       if (!hours.length) return { when: new Date(), kph: null, fromTrue: null };
       var di = hours[idx];
       // Rounded once, so the number shown and the calm test always agree.
@@ -596,7 +777,7 @@
 
     function hourUpdate() {
       var mo = momentFor(hourIdx), iced = icedAt(mo.when);
-      hourTxt.textContent = hourIdx === 0 ? "Now" : clockText(mo.when);
+      hourTxt.textContent = hourIdx === 0 && !(v.preset && v.preset.when) ? "Now" : clockText(mo.when);
       var windy = !iced && mo.kph != null && mo.fromTrue != null;
       // Grid bearing the wind blows TO.
       var toGrid = windy ? (mo.fromTrue + 180 + meta.north_deg) % 360 : null;
@@ -609,7 +790,8 @@
       $("[data-from]").textContent = iced ? "no wind" : mo.fromTrue == null ? "" : "from " + dirName(mo.fromTrue);
 
       var msgs = [];
-      if (!hours.length) msgs.push(data ? "The saved forecast is old (" + Weather.ageText(wx.fetchedAt) + ") — open the app with signal for wind and spots by hour."
+      if (v.preset) { if (v.preset.msg) msgs.push(v.preset.msg); }
+      else if (!hours.length) msgs.push(data ? "The saved forecast is old (" + Weather.ageText(wx.fetchedAt) + ") — open the app with signal for wind and spots by hour."
                                          : "No forecast saved for this lake — open the app once with signal.");
       else if (!hasDir) msgs.push("No wind direction saved — open the app once with signal.");
       if (iced) msgs.push("Under ice: ice spots only, in the 1.5–4 m band next to a drop. Check the ice thickness first.");
@@ -626,7 +808,7 @@
         });
       } else {
         FishingSpots.shoreSpots(grid, shore, toGrid, windy ? mo.kph : null).forEach(function (s) {
-          pin(0xEF9F27, 0.045, s.i, s.j, 0.3, L.spots, { name: s.name, color: "#EF9F27", why: s.why });
+          pin(0xEF9F27, 0.045, s.i, s.j, 0.3, L.spots, { name: s.name, color: "#EF9F27", why: s.why, shore: true });
         });
         var route = FishingSpots.trollingRoute(grid, trollSegs, toGrid, windy ? mo.kph : null);
         var tl = lines(route.segments, null, 0xEF9F27, hasLaunch ? 1 : 0.45, {
@@ -658,6 +840,9 @@
         sunDot.style.display = "none";
         sunW.textContent = "Sun down";
       }
+      // Build 4: the fish depth range for the slider's day, the same words as the tip.
+      var fd = fishDepthAt(mo.when, iced);
+      if (layerOn("fishdepth") && !fd) msgs.push("Fish depth today needs a water temperature: open the app once with signal.");
       // The under-ice band helps plan before the ice too, so it shows whenever it is ticked.
       L.ice.visible = layerOn("ice");
       var summer = !iced && month >= 6 && month <= 9;
@@ -668,10 +853,34 @@
       req();
     }
 
+    var fdKey = null;
+    function fishDepthAt(when, iced) {
+      var f = typeof Forecast !== "undefined" ? Forecast.forLake(lake) : null;
+      var d = 0;
+      if (f) f.days.forEach(function (x, i) { if (when.getTime() >= x.start.getTime()) d = i; });
+      var r = window.LakeSheet && LakeSheet.fishDepthFor ? LakeSheet.fishDepthFor(lake, f, d, iced) : null;
+      var key = r ? r.lo + "-" + r.hi : "none";
+      if (key !== fdKey) {
+        fdKey = key;
+        clearGroup(L.fishdepth);
+        if (r) {
+          var cells = [];
+          for (var k4 = 0; k4 < n; k4 += 1) {
+            if (grid.depth[k4] >= r.lo && grid.depth[k4] <= r.hi && ((k4 % w) + Math.floor(k4 / w)) % 2 === 0) cells.push({ i: k4 % w, j: Math.floor(k4 / w) });
+          }
+          L.fishdepth.add(dots(cells, 0x4FC3F7, function (c) { return -grid.depth[c.j * w + c.i] * U; }, 3,
+            { name: "Fish depth " + r.lo + "–" + r.hi + " m", color: "#4FC3F7",
+              why: "Fish depth (estimate): " + r.text.replace(/^Here [^:]*: /, "") + " The same range as the tip in the lake panel." }));
+        }
+      }
+      L.fishdepth.visible = layerOn("fishdepth");
+      return r;
+    }
+
     function layerOn(id) { var c = el.querySelector('[data-layer="' + id + '"]'); return !!(c && c.checked); }
     Array.prototype.forEach.call(el.querySelectorAll("[data-layer]"), function (c) {
       var id = c.dataset.layer;
-      var sync = function () { L[id].visible = c.checked; showTip(null); if (id === "wind" || id === "ice" || id === "summer") hourUpdate(); req(); };
+      var sync = function () { L[id].visible = c.checked; showTip(null); if (id === "wind" || id === "ice" || id === "summer" || id === "fishdepth") hourUpdate(); req(); };
       L[id].visible = c.checked;
       c.addEventListener("change", sync);
     });
@@ -732,7 +941,7 @@
       var b = canvas.getBoundingClientRect();
       ray.setFromCamera(new T.Vector2((ev.clientX - b.left) / b.width * 2 - 1, -(ev.clientY - b.top) / b.height * 2 + 1), cam);
       // Not the summer planes: they cover the lake and would catch every tap.
-      var groups = [L.spots, L.struct, L.rep, L.cast, L.calm, L.sun, L.ice, L.drop, L.weed];
+      var groups = [L.spots, L.struct, L.rep, L.cast, L.calm, L.sun, L.ice, L.drop, L.weed, L.fishdepth];
       for (var g = 0; g < groups.length; g++) {
         if (!groups[g].visible || !groups[g].parent.visible) continue;
         var hs = ray.intersectObjects(groups[g].children, true)[0];
@@ -744,7 +953,13 @@
     }
     function pick(ev) {
       var hh = hit(ev);
-      if (hh) { showTip(hh.o, hh.p); readEl.textContent = hh.o.userData.why; req(); return; }
+      if (hh) {
+        showTip(hh.o, hh.p);
+        var ud = hh.o.userData;
+        // Build 4: a spot or marker gets driving directions to its place on the shore or water.
+        readEl.innerHTML = escHtml(ud.why) + (ud.shore && typeof ud.i === "number" ? directionsLink(meta, ud.i, ud.j) : "");
+        req(); return;
+      }
       showTip(null);
       var r = ray.intersectObject(mesh)[0];
       if (!r) { req(); return; }
@@ -807,6 +1022,8 @@
     canvas.addEventListener("pointercancel", function (ev) { endPtr(ev, false); });
     canvas.addEventListener("pointerleave", function () { if (tipFor && !ptrs.size) { showTip(null); req(); } });
     canvas.addEventListener("wheel", function (ev) {
+      // In the Learn guide the wheel scrolls the page; Ctrl or ⌘ plus the wheel zooms.
+      if (v.demo && !(ev.ctrlKey || ev.metaKey)) return;
       ev.preventDefault();
       distT = Math.max(1.5, Math.min(20, distT * (ev.deltaY > 0 ? 1.12 : 0.89)));
       req();
@@ -849,9 +1066,30 @@
     ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(size) : null;
     if (ro) ro.observe(canvas); else window.addEventListener("resize", size);
 
+    // Build 4: the Learn guide's sample model sets its layers, wind, ice and message here.
+    var ex0 = ex;
+    v.apply = function (p) {
+      p = p || {};
+      Array.prototype.forEach.call(el.querySelectorAll("[data-layer]"), function (c) {
+        c.checked = (p.layers || []).indexOf(c.dataset.layer) >= 0;
+        L[c.dataset.layer].visible = c.checked;
+      });
+      if (playT) { clearInterval(playT); playT = null; playBtn.textContent = "▶"; }
+      hourIdx = 0; hourIn.value = 0;
+      ex = Math.max(1, Math.min(200, Math.round(ex0 * (p.height || 1))));
+      heightIn.value = ex; heightIn.dispatchEvent(new Event("input"));
+      tapMark.visible = false;
+      hourUpdate();
+      readEl.textContent = p.read || (v.demo ? "Drag sideways to turn; the page scrolls up and down. Pinch, or Ctrl or ⌘ with the scroll wheel, to zoom. Tap a marker for its name."
+        : "Drag to turn any way; let go and it glides. Pinch or scroll to zoom. Point at or tap a marker for its name.");
+      $("[data-default]").click();
+    };
+
     size();
     hourUpdate();
   }
 
-  window.DepthModel = { has: has, open: open, close: close, _internal: { canWebGL: canWebGL } };
+  window.DepthModel = { has: has, open: open, close: close, shapes: shapes, shapesCached: shapesCached,
+    mountDemo: mountDemo, showDemo: showDemo, unmountDemo: unmountDemo, DEMO_LAKE: DEMO_LAKE,
+    _internal: { canWebGL: canWebGL, partOf: partOf, cellLatLon: cellLatLon, DEMO: DEMO, sharedGrid: sharedGrid } };
 })();
