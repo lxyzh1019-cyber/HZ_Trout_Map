@@ -26,10 +26,11 @@ Single working record for this repository. Updated by the main session at the en
 - [agreed] Colour-blind-safe score scale grey, blue, light blue, gold, with numbers — search: SCORE_PIN
 - [agreed] Winter week bar when more than half the lakes on screen have the guard on — search: winterOn
 - [agreed] Prototype differences Q1–Q17 (comparison page 2026-10-30): keep the build for Q1–Q14 and Q16–Q17; Q15 shorter search hint on phones — search: Search a lake or a town
+- [agreed] Build 2 differences Q1–Q8 (like-for-like comparison page 2026-11-03, https://claude.ai/artifact/5AM4Tg8tnJcL8u7GuiDpaJ): owner accepted all 8 recommendations; build kept as is — search: This winter near
 
 ## Pending
 - Build 1b: merged 2026-10-30 (PR #18). Owner still to do: device check, and the 4 species facts on the Learn pages.
-- Build 2: built and checked on branch build-2; waiting for the owner's answers to the picture differences, then the pull request opens ready.
+- Build 2: owner accepted all 8 picture differences 2026-11-03; pull request open, waiting for its checks, the owner's merge and device check.
 - Leftover helper worktree .claude/worktrees/agent-a00cd60cf51c9739a: removal needs the owner's separate yes (QC2).
 
 ## Request ledger
@@ -124,7 +125,7 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 | Build 1a | COMPLETE | PR #15 merged 2026-10-16; 183 tests pass on main (2026-10-29) |
 | FEATURES.md, WORKING_RECORD.md | COMPLETE | this change, 2026-10-29 |
 | Build 1b | COMPLETE | PR #18 merged 2026-10-30 (64852ae) |
-| Build 2 | IN REVIEW | branch build-2; tests, layout check and reviewer fixes done 2026-11-03; waiting for the difference answers, then the PR |
+| Build 2 | IN REVIEW | branch build-2; tests, layout check and reviewer fixes done 2026-11-03; owner accepted Q1–Q8 2026-11-03; PR waiting for merge |
 | Build 3 | NOT STARTED | |
 
 ## Checks and evidence
