@@ -41,13 +41,14 @@ Locked features of the current version (branch build-3, from main at cd9a470). E
 - Lakebed from the Alberta Geological Survey: outline for the shore, contour lines for the depth (the AGS grid alone reads too shallow on small lakes), AGS grid for land height; up to 160 cells on the long side; deepest cell within 1.5 m of the deepest contour on all 40 (tested). Depth at the survey water level, said in the key.
 - Turn freely in every direction; it glides after you let go; pinch or scroll to zoom; Height slider (starts at a lake-by-lake value, 1–200×); tap the lakebed for depth.
 - Names hidden until you point at a marker (PC) or tap it (phone); one name at a time, with its reason under the model.
-- Wind: small arrows about every 300 m of water and a wind sign (compass that turns with the model, wind arrow, speed, from, sun position). Time slider and Play over the saved forecast hours. Wind direction comes from the forecast (new field, Build 3).
-- Possible spots (estimates) by access: up to 3 shore spots (3 m water within a 30 m cast, facing the wind's push, more open water behind it scores higher), one trolling route (5 m line, or less on a shallow lake, on the downwind half; faded without a boat launch; with the boating rules), and under ice up to 3 ice spots (1.5–4 m within about 60 m of a drop-off). Under 8 km/h the spots use the drop-offs only.
+- Wind: small arrows about every 300 m of water (fewer on the biggest lakes, at most about 160) and a wind sign (compass that turns with the model, wind arrow, speed, from, sun position). Time slider and Play over the saved forecast hours. Wind direction comes from the forecast (new field, Build 3).
+- Possible spots (estimates) by access: up to 3 shore spots (3 m water within a 30 m cast, facing the wind's push, more open water behind it scores higher), one trolling route (5 m line, or less on a shallow lake, on the downwind half; faded without a boat launch; with the boating rules), and under ice up to 3 ice spots (1.5–4 m within about 60 m of a drop-off). Under 8 km/h the spots use the drop-offs only. On big lakes (cells over 30 m) the reasons give the real distance instead of "30 m".
 - Structure markers: island, point, hump, basin, drop-off, flat. Drop-off dots.
-- Layers you turn on: weed line (4 m, estimate), summer layer (the lake's layer band), deep within a cast, calm shore, sun and shade shore, reported spots, under-ice band. 4 are on at the start (wind, spots, structure, drop-offs). Aerated lakes show the aerator warning October to April.
-- Boating rules on the trolling route: Transport Canada TP 15587E (2nd edition, April 2026; name AND township-range must match) and MyWildAlberta wording; 33 of 43 lakes have a rule; Transport Canada wins and both are named (Victor Lake); the 10 km/h within 30 m of shore rule on every lake.
+- Layers you turn on: weed line (4 m, estimate), summer layer (the lake's layer band, June to September, not under ice), deep within a cast, calm shore, sun and shade shore, reported spots, under-ice band (any time of year). 4 are on at the start (wind, spots, structure, drop-offs). Aerated lakes show the aerator warning October to April.
+- Boating rules on the trolling route: Transport Canada TP 15587E (2nd edition, April 2026; name AND township-range must match) and MyWildAlberta wording; 33 of 43 lakes have a rule; Transport Canada wins and both are named (Victor Lake); the 10 km/h within 30 m of shore rule on every lake (Vessel Operation Restriction Regulations, s. 2(7)).
 - Learn guide "3D depth model: layers and spots" with one section per layer; each layer row's "?" opens its section.
-- Messages: 3D add-on not saved, lakebed not saved, no wind direction saved, no forecast saved, phone cannot show 3D, under ice, wind too light.
+- Messages: 3D add-on not saved, lakebed not saved, no wind direction saved, no forecast saved, saved forecast old, phone cannot show 3D, 3D paused by the phone, under ice, wind too light, summer layer out of season.
+- Dialog: Escape closes, Tab stays inside, buttons and layer rows at least 44 px; closing frees the 3D memory.
 - Works with no signal: the add-on, the 40 lakebed files (1.37 MB) and the boating rules are saved on the first visit.
 
 ## Map and finding a lake
@@ -95,7 +96,7 @@ Locked features of the current version (branch build-3, from main at cd9a470). E
 - Alberta advisories (closures, consumption) collected daily and shown in Filters.
 - ACA aeration roster with ACA's Winter Angling column; a test fails if it disagrees with the regulations.
 - Colour-blind-safe pin palettes; every score pin carries its number.
-- Credit lines: Open-Meteo (CC BY 4.0), town list licence, GeoNames via Open-Meteo, Esri imagery, photo credits, Alberta Geological Survey (depth charts; in the 3D view and its guide with the Open Government Licence – Alberta line), Open-Meteo elevation with Copernicus DEM (in the ice inputs), Transport Canada TP 15587E (not the official version), three.js (MIT).
+- Credit lines: Open-Meteo (CC BY 4.0), town list licence, GeoNames via Open-Meteo, Esri imagery, photo credits, Alberta Geological Survey (depth charts), Open-Meteo elevation with Copernicus DEM (in the ice inputs). The 3D view footer and its Learn guide carry the Open Government Licence – Alberta line, Transport Canada TP 15587E (not the official version), MyWildAlberta, Open-Meteo and three.js (MIT).
 
 ## Regression table — manifest v3 → v4 (Build 3)
 | Feature | v3 → v4 | Note |

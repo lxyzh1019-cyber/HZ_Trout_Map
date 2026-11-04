@@ -27,6 +27,8 @@
   "use strict";
 
   var ROOT_ID = "depth3d";
+  // three.js r149 (npm three@0.149.0, MIT). r150 and later print a
+  // deprecation warning for this build file on every load.
   var THREE_SRC = "vendor/three.min.js";
   var SIZE = 4.4;                    // model width in scene units
   var D0 = 6.4;                      // camera distance at the default view
@@ -61,7 +63,11 @@
     if (webgl !== null) return webgl;
     try {
       var c = document.createElement("canvas");
-      webgl = !!(window.WebGLRenderingContext && (c.getContext("webgl") || c.getContext("experimental-webgl")));
+      var gl = window.WebGLRenderingContext && (c.getContext("webgl") || c.getContext("experimental-webgl"));
+      webgl = !!gl;
+      // Phones allow only a few live 3D contexts; give the test one back.
+      var lose = gl && gl.getExtension && gl.getExtension("WEBGL_lose_context");
+      if (lose) lose.loseContext();
     } catch (e) { webgl = false; }
     return webgl;
   }
@@ -106,7 +112,7 @@
 #depth3d [hidden]{display:none!important}#depth3d{position:fixed;inset:0;z-index:4500;display:flex;flex-direction:column;background:var(--bg,#2b2e2a);color:var(--ink,#e8e4d8);font:14px/1.4 system-ui,sans-serif}\
 #depth3d .d3-bar{display:flex;align-items:center;gap:6px;padding:6px 8px;background:var(--panel,#3a3d38);border-bottom:1px solid var(--panel-edge,#1f211e)}\
 #depth3d .d3-title{flex:1;min-width:0;margin:0;font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\
-#depth3d button{min-height:40px;min-width:40px;border-radius:6px;border:1px solid var(--panel-edge,#1f211e);background:var(--panel-2,#33362f);color:inherit;font:inherit;cursor:pointer}\
+#depth3d button{min-height:44px;min-width:44px;border-radius:6px;border:1px solid var(--panel-edge,#1f211e);background:var(--panel-2,#33362f);color:inherit;font:inherit;cursor:pointer}\
 #depth3d .d3-stage{position:relative;flex:1 1 55%;min-height:220px;background:#1f211e}\
 #depth3d canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}\
 #depth3d .d3-sign{position:absolute;top:8px;right:8px;width:92px;text-align:center;background:rgba(43,46,42,.88);border:1px solid var(--panel-edge,#1f211e);border-radius:10px;padding:4px;font-size:12px;pointer-events:none}\
@@ -122,10 +128,10 @@
 #depth3d .d3-read{padding:8px 10px;border-top:1px solid var(--panel-edge,#1f211e);min-height:38px}\
 #depth3d .d3-hd{padding:8px 10px 0;font-size:12px;color:var(--ink-dim,#a8a396);border-top:1px solid var(--panel-edge,#1f211e)}\
 #depth3d .d3-lay{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:2px 10px;padding:4px 10px 8px}\
-#depth3d .d3-lay label{display:flex;align-items:center;gap:6px;min-height:36px}\
+#depth3d .d3-lay label{display:flex;align-items:center;gap:6px;min-height:44px}\
 #depth3d .d3-lay i.c{display:inline-block;width:10px;height:10px;border-radius:50%;flex:none}\
 #depth3d .d3-lay i.l{display:inline-block;width:14px;height:3px;flex:none}\
-#depth3d .d3-lay .q{min-height:28px;min-width:28px;padding:0;border-radius:50%;margin-left:auto;font-size:13px}\
+#depth3d .d3-lay .q{min-height:44px;min-width:44px;padding:0;border-radius:50%;margin-left:auto;font-size:14px}\
 #depth3d .d3-foot{padding:6px 10px 12px;font-size:11px;color:var(--ink-dim,#a8a396)}\
 ";
 
@@ -152,6 +158,7 @@
     el.setAttribute("role", "dialog");
     el.setAttribute("aria-modal", "true");
     el.setAttribute("aria-label", "3D depth model of " + lake.name);
+    el.tabIndex = -1;
     el.innerHTML = '<div class="d3-bar"><h2 class="d3-title">' + escHtml(lake.name) + " · 3D depth</h2>"
       + '<button type="button" data-learn="" aria-label="About the 3D depth model">i</button>'
       + '<button type="button" data-default>Default view</button>'
@@ -200,7 +207,16 @@
     view = { el: el, lake: lake, meta: e.grid, aerated: aerated, returnFocus: returnFocus, alive: true };
     el.querySelector("[data-close]").addEventListener("click", close);
     el.querySelector("[data-close]").focus();
-    el.addEventListener("keydown", function (ev) { if (ev.key === "Escape") close(); });
+    el.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape") { ev.preventDefault(); close(); return; }
+      if (ev.key !== "Tab") return;
+      // Tab stays inside the dialog, as in the Learn room.
+      var f = Array.prototype.filter.call(el.querySelectorAll("button, input, a[href]"),
+        function (x) { return !x.disabled && x.offsetParent !== null; });
+      if (!f.length) return;
+      if (ev.shiftKey && (document.activeElement === f[0] || document.activeElement === el)) { ev.preventDefault(); f[f.length - 1].focus(); }
+      else if (!ev.shiftKey && document.activeElement === f[f.length - 1]) { ev.preventDefault(); f[0].focus(); }
+    });
     el.addEventListener("click", function (ev) {
       var b = ev.target.closest("[data-learn]");
       if (!b || !window.ReadingRoom) return;
@@ -273,6 +289,21 @@
     ren.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
     ren.setClearColor(0x1f211e);
     var sc = new T.Scene(), cam = new T.PerspectiveCamera(38, 1, 0.05, 100);
+    var ro = null, playT = null;
+    var freeAll = function (obj) {
+      obj.traverse(function (o) {
+        if (o.geometry) o.geometry.dispose();
+        if (o.material) { if (o.material.map) o.material.map.dispose(); o.material.dispose(); }
+      });
+    };
+    // Set at once, so a build that fails halfway still frees the 3D context.
+    v.stop = function () {
+      if (playT) clearInterval(playT);
+      if (ro) ro.disconnect(); else window.removeEventListener("resize", size);
+      freeAll(sc);
+      ren.dispose();
+      if (ren.forceContextLoss) ren.forceContextLoss();
+    };
     // The start zoom fits the model's width on a narrow phone screen too.
     var fitDist = function () {
       var half = Math.tan(19 * Math.PI / 180) * Math.min(1.3, cam.aspect || 1);
@@ -406,7 +437,7 @@
         group.remove(c);
         var at = pins.indexOf(c);
         if (at >= 0) pins.splice(at, 1);
-        c.traverse(function (o) { if (o.geometry) o.geometry.dispose(); });
+        c.traverse(function (o) { if (o.geometry) o.geometry.dispose(); if (o.material) o.material.dispose(); });
       });
     }
     structure.labels.forEach(function (s) {
@@ -437,7 +468,9 @@
     shp.lineTo(-0.08, -0.5); shp.lineTo(-0.08, 0.16); shp.lineTo(-0.24, 0.16); shp.closePath();
     var aG = new T.ShapeGeometry(shp), aM = new T.MeshBasicMaterial({ color: 0xE24B4A, transparent: true, opacity: 0.7, side: T.DoubleSide, depthWrite: false });
     var arrows = [];
-    var spacing = Math.max(3, Math.round(Math.max(w, h) / 7));
+    // About every 300 m of water, but never more than about 80 arrows.
+    var spacing = Math.max(3, Math.round(300 / cell));
+    while ((w / spacing) * (h / spacing) > 160) spacing++;
     for (var aj = Math.round(spacing / 2); aj < h; aj += spacing) {
       for (var ai = Math.round(spacing / 2); ai < w; ai += spacing) {
         if (grid.depth[aj * w + ai] > 0) {
@@ -516,7 +549,10 @@
     var hours = [];
     if (data && data.t && data.t.length) {
       var startI = Math.max(0, Weather.nearestIndex(data, new Date()));
-      for (var hi = startI; hi < data.t.length; hi++) hours.push(hi);
+      // A saved forecast that ended before now has no "now" hour.
+      if (Math.abs(data.t[startI] * 1000 - Date.now()) <= 90 * 60000) {
+        for (var hi = startI; hi < data.t.length; hi++) hours.push(hi);
+      }
     }
     var hourIn = $("[data-hour]"), hourTxt = $("[data-hourtxt]");
     hourIn.max = Math.max(0, hours.length - 1);
@@ -531,8 +567,11 @@
     } catch (e1) { iceEst = null; }
     var icedAt = function (when) {
       if (!iceEst) return false;
-      if (iceEst.state === "ice") return !(iceEst.iceOff && iceEst.iceOff.date && when >= iceEst.iceOff.date);
-      return !!(iceEst.iceOn && iceEst.iceOn.date && when >= iceEst.iceOn.date);
+      // Now is what Lake info says. A later hour changes only on a date the
+      // forecast itself gives; "usual dates" and the trend are not used.
+      var now = Date.now();
+      var flip = function (x) { return !!(x && x.date && x.basis === "forecast" && x.date.getTime() > now && when >= x.date); };
+      return iceEst.state === "ice" ? !flip(iceEst.iceOff) : flip(iceEst.iceOn);
     };
 
     var hourIdx = 0;
@@ -551,7 +590,9 @@
       var hh = off == null ? dd.getHours() : dd.getUTCHours();
       return day + " " + (hh < 10 ? "0" : "") + hh + ":00";
     }
-    function clearGroup(g) { g.children.slice().forEach(function (c) { g.remove(c); if (c.geometry) c.geometry.dispose(); }); }
+    function clearGroup(g) {
+      g.children.slice().forEach(function (c) { g.remove(c); if (c.geometry) c.geometry.dispose(); if (c.material) c.material.dispose(); });
+    }
 
     function hourUpdate() {
       var mo = momentFor(hourIdx), iced = icedAt(mo.when);
@@ -568,13 +609,13 @@
       $("[data-from]").textContent = iced ? "no wind" : mo.fromTrue == null ? "" : "from " + dirName(mo.fromTrue);
 
       var msgs = [];
-      if (!hours.length) msgs.push("No forecast saved for this lake — open the app once with signal.");
+      if (!hours.length) msgs.push(data ? "The saved forecast is old (" + Weather.ageText(wx.fetchedAt) + ") — open the app with signal for wind and spots by hour."
+                                         : "No forecast saved for this lake — open the app once with signal.");
       else if (!hasDir) msgs.push("No wind direction saved — open the app once with signal.");
       if (iced) msgs.push("Under ice: ice spots only, in the 1.5–4 m band next to a drop. Check the ice thickness first.");
       else if (windy && mo.kph < FishingSpots.CALM_KPH) msgs.push("Wind too light to move food. Spots use the drop-offs only.");
       var month = mo.when.getMonth() + 1;
       if (aerated && (iced || month >= 10 || month <= 4)) msgs.push("Aerated lake: open water and thin ice near the aerator from October to April. Stay off that area.");
-      msgEl.textContent = msgs.join(" ");
 
       unpinAll(L.spots);
       clearGroup(L.spots);
@@ -617,14 +658,20 @@
         sunDot.style.display = "none";
         sunW.textContent = "Sun down";
       }
-      L.ice.visible = iced && layerOn("ice");
+      // The under-ice band helps plan before the ice too, so it shows whenever it is ticked.
+      L.ice.visible = layerOn("ice");
+      var summer = !iced && month >= 6 && month <= 9;
+      L.summer.visible = layerOn("summer") && summer;
+      if (layerOn("summer") && !band) msgs.push("This lake is too shallow to form a summer layer.");
+      else if (layerOn("summer") && !summer) msgs.push("The summer layer shows from June to September, not under ice.");
+      msgEl.textContent = msgs.join(" ");
       req();
     }
 
     function layerOn(id) { var c = el.querySelector('[data-layer="' + id + '"]'); return !!(c && c.checked); }
     Array.prototype.forEach.call(el.querySelectorAll("[data-layer]"), function (c) {
       var id = c.dataset.layer;
-      var sync = function () { L[id].visible = c.checked; showTip(null); if (id === "wind" || id === "ice") hourUpdate(); req(); };
+      var sync = function () { L[id].visible = c.checked; showTip(null); if (id === "wind" || id === "ice" || id === "summer") hourUpdate(); req(); };
       L[id].visible = c.checked;
       c.addEventListener("change", sync);
     });
@@ -684,7 +731,8 @@
     function hit(ev) {
       var b = canvas.getBoundingClientRect();
       ray.setFromCamera(new T.Vector2((ev.clientX - b.left) / b.width * 2 - 1, -(ev.clientY - b.top) / b.height * 2 + 1), cam);
-      var groups = [L.spots, L.struct, L.rep, L.cast, L.calm, L.sun, L.ice, L.drop, L.weed, L.summer];
+      // Not the summer planes: they cover the lake and would catch every tap.
+      var groups = [L.spots, L.struct, L.rep, L.cast, L.calm, L.sun, L.ice, L.drop, L.weed];
       for (var g = 0; g < groups.length; g++) {
         if (!groups[g].visible || !groups[g].parent.visible) continue;
         var hs = ray.intersectObjects(groups[g].children, true)[0];
@@ -714,6 +762,7 @@
     // ---- pointer: turn, glide, pinch, wheel, hover, tap
     var ptrs = new Map(), moved = 0, pinch0 = 0;
     canvas.addEventListener("pointerdown", function (ev) {
+      if (!el.contains(document.activeElement) || document.activeElement === document.body) el.focus({ preventScroll: true });
       canvas.setPointerCapture(ev.pointerId);
       ptrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
       moved = 0; vA = 0; tween = null; dragging = true;
@@ -777,7 +826,7 @@
       req();
     });
     hourIn.addEventListener("input", function () { hourIdx = Number(hourIn.value) || 0; hourUpdate(); });
-    var playT = null, playBtn = $("[data-play]");
+    var playBtn = $("[data-play]");
     playBtn.addEventListener("click", function () {
       if (playT) { clearInterval(playT); playT = null; playBtn.textContent = "▶"; return; }
       if (!hours.length) return;
@@ -790,21 +839,15 @@
     });
 
     // A phone that drops the 3D context in the background gets it back here.
-    canvas.addEventListener("webglcontextlost", function (ev) { ev.preventDefault(); });
-    canvas.addEventListener("webglcontextrestored", function () { req(); });
-    var ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(size) : null;
+    var waitEl = $(".d3-wait");
+    canvas.addEventListener("webglcontextlost", function (ev) {
+      ev.preventDefault();
+      waitEl.textContent = "3D paused by the phone. It comes back on its own; if not, close and open it again.";
+      waitEl.hidden = false;
+    });
+    canvas.addEventListener("webglcontextrestored", function () { waitEl.hidden = true; req(); });
+    ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(size) : null;
     if (ro) ro.observe(canvas); else window.addEventListener("resize", size);
-
-    v.stop = function () {
-      if (playT) clearInterval(playT);
-      if (ro) ro.disconnect(); else window.removeEventListener("resize", size);
-      sc.traverse(function (o) {
-        if (o.geometry) o.geometry.dispose();
-        if (o.material) { if (o.material.map) o.material.map.dispose(); o.material.dispose(); }
-      });
-      ren.dispose();
-      if (ren.forceContextLoss) ren.forceContextLoss();
-    };
 
     size();
     hourUpdate();

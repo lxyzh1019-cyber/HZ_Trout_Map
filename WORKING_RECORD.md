@@ -37,6 +37,12 @@ Single working record for this repository. Updated by the main session at the en
 - [agreed] Layer explanations in a Learn guide, opened from "i" and each layer's "?" (9A) — search: depth-model
 - [agreed] Motor rules from Transport Canada TP 15587E and MyWildAlberta (10B); the app stays free, so the non-commercial terms hold (11A) — search: boating_rules
 - [agreed] Names hidden until hover or tap; smaller wind arrows; spots by access (shore, trolling, ice) — search: showTip
+- [agreed] Rev 5 smoothness: glide, eased zoom, Default view glide, instant Height, gentle land bank, Play button — search: requestAnimationFrame
+- [differs from plan, owner to confirm] three.js r149, not r159: r150+ prints a deprecation warning on every open; same API used — search: three@0.149
+- [differs from plan, owner to confirm] Depth from the contour lines (relaxation between them), not the AGS grid alone: the grid reads half the depth on small lakes (Chickakoo 6 m vs 15 m) — search: RELAX_SWEEPS
+- [differs from plan, owner to confirm] Time slider from now to the end of the forecast, not from 24 h back: past hours add nothing to planning — search: A saved forecast that ended
+- [differs from plan] A new 3D renderer per open, freed on Close (plan: one reused); "This phone cannot show 3D" shows in the view, not on the button; credit lines in the 3D view footer and the Learn guide, not in the search credits — search: v.stop
+- [differs from plan] Transport Canada Schedule 4 (engine power) has no Alberta rows, so it is not read; structure sizes in metres (point window 60 m, basin and hump radius 100 m, basin from 4 m) so they work on every grid size; Learn ids layer-struct and layer-rep — search: cellsFor
 
 ## Pending
 - Build 1b: merged 2026-10-30 (PR #18). Owner still to do: device check, and the 4 species facts on the Learn pages.
@@ -157,6 +163,8 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 - 2026-11-04 build-3 data: 43 lakes, 40 AGS lakebed grids (50 m, 10TM, elevation m a.s.l.); depth refilled from 728 contour lines; deepest cell within 1.5 m of the deepest contour on 40 of 40; 1.37 MB. Transport Canada TP 15587E: 403 Alberta rows, 33 of 43 lakes with a rule, 5 same-name rows dropped by location (Chin, Cow, Peanut, Spring)
 - 2026-11-04 build-3 tests: Build3DepthModelTests 11 pass, test_depth_grids 14 pass; test_regression_checks 230 run, only the 7 known local errors (no openpyxl; Windows text encoding, they pass with PYTHONUTF8=1)
 - 2026-11-04 build-3 browser check at 375×812 (Chickakoo, Sylvan, Wabamun): opens in about 0.2 s on PC; turn and glide, Default view, tap marker name and reason, tap depth, time slider, Learn "?" opens its section, under-ice mode; 0 console errors
+- 2026-11-04 build-3 reviewer pass → 13 findings, all fixed (ice state now matches Lake info; summer planes out of taps and out of season; old forecast not shown as Now; Escape, focus and Tab trap; 44 px targets; 10 km/h rule cited to s. 2(7); deviations recorded; arrows every 300 m; real reach on coarse grids; materials and failed builds freed; lost-context message; this proof)
+- Proof: 2026-11-04 offline at 375×812, server stopped, service worker v6: 40 of 40 lakebed files and three.js in the cache; Chickakoo opens in 0.54 s with no network; turn, wheel zoom, Default view, time slider (Thu 18:00 · 7 km/h from W · Sun down), Play steps the hours, summer layer out-of-season message, WebGL context lost → "3D paused" message → restored → hidden, Escape closes, reopen works, smallest button 44 px; console: only the deliberate network test failed
 
 ## Open questions / blockers
 - H4 answered 2026-10-30: Open-Meteo counts per IP; one full load = 250 calls in 5 requests (measured in the browser), 3 h cache.

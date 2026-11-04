@@ -89,7 +89,7 @@
           }
         }
         out.push({ i: i, j: j, k: j * w + i, z: grid.depth[j * w + i], nx: nx / len, ny: ny / len,
-                   point: landN / all < 0.37, reach: reach });
+                   point: landN / all < 0.37, reach: reach, reachM: Math.max(30, Math.round(r * grid.cell)) });
       }
     }
     return out;

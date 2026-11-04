@@ -60,13 +60,15 @@
         f = fetchM(grid, s, w);
         score *= Math.min(1, f / 1500) * (0.6 + 0.4 * dot);
       }
-      c.push({ i: s.i, j: s.j, z: s.z, reach: s.reach, point: s.point, fetch: f, score: score });
+      c.push({ i: s.i, j: s.j, z: s.z, reach: s.reach, reachM: s.reachM || CAST_M, point: s.point, fetch: f, score: score });
     });
     c.sort(function (a, b) { return b.score - a.score; });
     return spaced(c, 3, SPACING_M, grid.cell).map(function (p, n) {
       return {
         kind: "shore", name: "Shore spot " + (n + 1), i: p.i, j: p.j,
-        why: "Shore spot " + (n + 1) + " (estimate): stand here and cast " + CAST_M + " m to " + p.reach.toFixed(1) + " m water"
+        why: "Shore spot " + (n + 1) + " (estimate): " + (p.reachM <= CAST_M
+            ? "stand here and cast " + CAST_M + " m to " + p.reach.toFixed(1) + " m water"
+            : "water " + p.reach.toFixed(1) + " m deep within about " + p.reachM + " m of this shore (this big lake's grid is coarse)")
           + (windy ? "; the wind pushes food to this shore over " + (p.fetch / 1000).toFixed(1) + " km of open water" : "")
           + (p.point ? "; on a point." : "."),
       };
@@ -127,7 +129,7 @@
       return {
         kind: "ice", name: "Ice spot " + (m + 1), i: p.i, j: p.j,
         why: "Ice spot " + (m + 1) + " (estimate): " + p.z.toFixed(1) + " m, next to a drop to " + p.mx.toFixed(0)
-          + " m within about 60 m. Check the ice thickness before you walk out.",
+          + " m within about " + Math.max(60, Math.round(r * grid.cell)) + " m. Check the ice thickness before you walk out.",
       };
     });
   }
@@ -166,7 +168,7 @@
     if (r.speed_kmh_signed) parts.push(r.speed_kmh_signed + " km/h where signs say so.");
     if (r.signed_no_boat_zones) parts.push("No boats in signed areas, often swimming areas.");
     if (r.no_towing) parts.push("No towing (skis, tubes).");
-    parts.push("On every Alberta lake: 10 km/h within 30 m of shore.");
+    parts.push("On every Alberta lake: 10 km/h within 30 m of shore (Vessel Operation Restriction Regulations, s. 2(7); towing straight out from shore is excepted, s. 2(8)).");
     if (r.differs && r.mywildalberta === "none" && r.motor === "electric") {
       parts.push("MyWildAlberta says no motors; the Transport Canada list allows electric motors. The law is the Transport Canada list.");
     }
