@@ -592,7 +592,9 @@
     var c = depthChartFor(lake);
     var of = DEPTH_CHARTS.matched + " of the " + DEPTH_CHARTS.placed_lakes + " lakes on this map have one";
     return '<dl class="kv"><dt>Depth chart</dt><dd>' + (c
-      ? '<a class="btn" href="' + esc(c.url) + '" target="_blank" rel="noopener">Alberta depth chart, ' + esc(c.dig) + " ↗</a>"
+      ? (window.DepthModel && DepthModel.has(lake)
+          ? '<button type="button" class="btn" data-depth3d>Show 3D depth model</button>' : "")
+        + '<a class="btn" href="' + esc(c.url) + '" target="_blank" rel="noopener">Alberta depth chart, ' + esc(c.dig) + " ↗</a>"
         + '<br><span class="dim">Alberta Geological Survey, ' + esc(c.name) + ". " + esc(of) + ".</span>"
       : '<span class="dim">No match found in Alberta&#39;s depth chart list. ' + esc(of) + ".</span><br>"
         + '<a class="btn" href="' + esc(DEPTH_CHARTS.page) + '" target="_blank" rel="noopener">Alberta depth chart list ↗</a>') + "</dd></dl>";
@@ -693,6 +695,8 @@
     if (state.sections && state.sections.photos && host.querySelector("[data-about]")) {
       LakePanel.open(key, host.querySelector("[data-about]"));
     }
+    // Build 3: the 3D depth model opens full screen over the map.
+    q("[data-depth3d]").forEach(function (b) { b.addEventListener("click", function () { DepthModel.open(lake); }); });
     q("[data-lakelink]").forEach(function (link) {
       link.addEventListener("click", function () {
         var url = lakeLinkUrl(key);
@@ -720,7 +724,7 @@
     popularity: popularity,
     estimatesFor: estimatesFor,
     winterScoreHtml: winterScoreHtml,
-    _internal: { seasonHtml: seasonHtml, howHtml: howHtml, depthChartHtml: depthChartHtml, hotSpotsHtml: hotSpotsHtml },
+    _internal: { estimatesFor: estimatesFor, seasonHtml: seasonHtml, howHtml: howHtml, depthChartHtml: depthChartHtml, hotSpotsHtml: hotSpotsHtml },
     BAND_WORD: BAND_WORD,
     RULES_URL: RULES_URL,
     LICENCE_URL: LICENCE_URL,

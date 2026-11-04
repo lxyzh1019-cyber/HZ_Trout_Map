@@ -1,6 +1,6 @@
-# FEATURES — HZ_Trout_Map — manifest v3 — Build 2
+# FEATURES — HZ_Trout_Map — manifest v4 — Build 3
 
-Locked features of the current version (branch build-2, from main at 64852ae). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
+Locked features of the current version (branch build-3, from main at cd9a470). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
 
 ## Which lake, which day (Build 1b)
 - Week bar over the map: 7 days, each with the top Bite score of the lakes on screen; tap a day and the pins recolour for it. "gusty" marks a day when most lakes on screen gust to 40 km/h or more.
@@ -19,7 +19,7 @@ Locked features of the current version (branch build-2, from main at 64852ae). E
 - Stocked size and date shown; "Typical size: not published by Alberta"; growth never guessed.
 - Search for towns and lakes: the saved Alberta town list first (works with no signal), then Open-Meteo place search in Canada (Alberta first). Each lake row has distance, Bite and Day out. Picking a town measures from it (lists, distances and the distance filter) and does not change home.
 - Messages: forecast progress, "No signal" once per visit (says town search uses the saved Alberta town list), "No lakes in range" with a widen button, and a first-visit walkthrough with install steps.
-- Satellite basemap (Esri imagery); Apple Maps and Google Maps links; Alberta rules and licence links; Learn room with 6 guides and species pages (licensed photos only); plain explainers (Reading the barometer).
+- Satellite basemap (Esri imagery); Apple Maps and Google Maps links; Alberta rules and licence links; Learn room with 7 guides and species pages (licensed photos only); plain explainers (Reading the barometer).
 - Weather for every lake: one request per 50 forecast spots, 250 calls for a full load, saved for 3 hours in IndexedDB (memory if IndexedDB is refused); the data quality panel shows the count.
 
 ## Estimates and winter (Build 2)
@@ -34,6 +34,22 @@ Locked features of the current version (branch build-2, from main at 64852ae). E
 - "This winter" list: lakes open in the ice season and aerated lakes first, then the lower winterkill band, then the better winter score, then the nearer; rows say "aerated" and the winterkill band.
 - Depth chart link in Lake info for 43 of the 380 lakes, matched by name and position to the Alberta Geological Survey bathymetry layer (166 surveyed lakes); other lakes say "No match found in Alberta's depth chart list" with a link to that list.
 - Hot spots section, shown only when data/hot_spots.json has spots for the lake; each spot shows its note, source site and date, a Source button and an On the map button. Every spot needs an https source link and an ISO date (tested), and scripts/check_links.py checks the links live. The file starts empty.
+
+## 3D depth model (Build 3)
+- "Show 3D depth model" button in the Depth chart row of Lake info, for the 43 lakes with an Alberta depth chart (40 lakebed files; the Pierre Greys and Wildhorse chains share one). The Alberta depth chart link stays next to it.
+- Opens full screen over the map: Close, Default view (glides back to the first position and zoom) and an "i" button that opens the Learn guide.
+- Lakebed from the Alberta Geological Survey: outline for the shore, contour lines for the depth (the AGS grid alone reads too shallow on small lakes), AGS grid for land height; up to 160 cells on the long side; deepest cell within 1.5 m of the deepest contour on all 40 (tested). Depth at the survey water level, said in the key.
+- Turn freely in every direction; it glides after you let go; pinch or scroll to zoom; Height slider (starts at a lake-by-lake value, 1–200×); tap the lakebed for depth.
+- Names hidden until you point at a marker (PC) or tap it (phone); one name at a time, with its reason under the model.
+- Wind: small arrows about every 300 m of water (fewer on the biggest lakes, at most about 160) and a wind sign (compass that turns with the model, wind arrow, speed, from, sun position). Time slider and Play over the saved forecast hours. Wind direction comes from the forecast (new field, Build 3).
+- Possible spots (estimates) by access: up to 3 shore spots (3 m water within a 30 m cast, facing the wind's push, more open water behind it scores higher), one trolling route (5 m line, or less on a shallow lake, on the downwind half; faded without a boat launch; with the boating rules), and under ice up to 3 ice spots (1.5–4 m within about 60 m of a drop-off). Under 8 km/h the spots use the drop-offs only. On big lakes (cells over 30 m) the reasons give the real distance instead of "30 m".
+- Structure markers: island, point, hump, basin, drop-off, flat. Drop-off dots.
+- Layers you turn on: weed line (4 m, estimate), summer layer (the lake's layer band, June to September, not under ice), deep within a cast, calm shore, sun and shade shore, reported spots, under-ice band (any time of year). 4 are on at the start (wind, spots, structure, drop-offs). Aerated lakes show the aerator warning October to April.
+- Boating rules on the trolling route: Transport Canada TP 15587E (2nd edition, April 2026; name AND township-range must match) and MyWildAlberta wording; 33 of 43 lakes have a rule; Transport Canada wins and both are named (Victor Lake); the 10 km/h within 30 m of shore rule on every lake (Vessel Operation Restriction Regulations, s. 2(7)).
+- Learn guide "3D depth model: layers and spots" with one section per layer; each layer row's "?" opens its section.
+- Messages: 3D add-on not saved, lakebed not saved, no wind direction saved, no forecast saved, saved forecast old, phone cannot show 3D, 3D paused by the phone, under ice, wind too light, summer layer out of season.
+- Dialog: Escape closes, Tab stays inside, buttons and layer rows at least 44 px; closing frees the 3D memory.
+- Works with no signal: the add-on, the 40 lakebed files (1.37 MB) and the boating rules are saved on the first visit.
 
 ## Map and finding a lake
 - Pins cluster when zoomed out and split as you zoom in; hover shows name, score, distance, fish in view and last stocking date.
@@ -73,14 +89,32 @@ Locked features of the current version (branch build-2, from main at 64852ae). E
 ## Taking it with you
 - List view sortable on any column, including Bite and Day out for the picked day, with CSV download.
 - Saved lakes in the browser and a one-click multi-stop driving route through them.
-- Works offline after the first visit (service worker, shell cache v5, saved town list, saved forecasts, lake heights, depth chart links, hot spots).
+- Works offline after the first visit (service worker, shell cache v6, saved town list, saved forecasts, lake heights, depth chart links, hot spots, the 3D depth model with its lakebed files and boating rules).
 
 ## Data and honesty
 - Estimated positions are labelled; data quality panel; evidence page (evidence.html).
 - Alberta advisories (closures, consumption) collected daily and shown in Filters.
 - ACA aeration roster with ACA's Winter Angling column; a test fails if it disagrees with the regulations.
 - Colour-blind-safe pin palettes; every score pin carries its number.
-- Credit lines: Open-Meteo (CC BY 4.0), town list licence, GeoNames via Open-Meteo, Esri imagery, photo credits, Alberta Geological Survey (depth charts), Open-Meteo elevation with Copernicus DEM (in the ice inputs).
+- Credit lines: Open-Meteo (CC BY 4.0), town list licence, GeoNames via Open-Meteo, Esri imagery, photo credits, Alberta Geological Survey (depth charts), Open-Meteo elevation with Copernicus DEM (in the ice inputs). The 3D view footer and its Learn guide carry the Open Government Licence – Alberta line, Transport Canada TP 15587E (not the official version), MyWildAlberta, Open-Meteo and three.js (MIT).
+
+## Regression table — manifest v3 → v4 (Build 3)
+| Feature | v3 → v4 | Note |
+|---|---|---|
+| Week bar, Best near you, PC column, nav, Only lakes on screen | kept | |
+| Bite and Day out scores, banner, Why this score | kept | forecast gains wind direction only; scores do not use it |
+| Pin colour modes, score scale | kept | |
+| Forecast tabs, feeding times, tip | kept | |
+| Winter guard, winter list, winter score | kept | |
+| Estimates (ice, hatches, turnover, tackle, how to fish) | kept | the ice state is reused by the 3D view |
+| Depth chart row | kept | plus "Show 3D depth model" on the 43 lakes |
+| Hot spots section | kept | its spots also show as pins in 3D |
+| Learn room | kept | plus the 3D depth model guide; a topic can open at a section |
+| Search, towns, messages, satellite, links | kept | |
+| Filters, charts, list view and CSV, favourites, advisories | kept | |
+| Offline | kept | shell cache v5 → v6, forecast copies v1 → v2 |
+| Weather calls per full load | kept | 10 variables per call (Open-Meteo's limit), so a call still counts once |
+| 3D depth model | added | Build 3 |
 
 ## Regression table — manifest v2 → v3 (Build 2)
 | Feature | v2 → v3 | Note |
