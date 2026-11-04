@@ -241,8 +241,8 @@
     var f = Forecast.forLake(lake);
     var day = f && f.days[d];
     if (!day) return ["", ""];
-    if (winter || f.iced) return ["cold", num(day.chillMin) === null ? "ice likely" : Math.round(day.chillMin) + " °C wind chill"];
     if (day.closed) return ["shut", "season shut"];
+    if (winter || f.iced) return ["cold", num(day.chillMin) === null ? "ice likely" : Math.round(day.chillMin) + " °C wind chill"];
     if (num(day.gustMax) !== null && day.gustMax >= Conditions.GUST_WARN_KPH) return ["gusty", "gusts " + Math.round(day.gustMax) + " km/h"];
     if ((num(day.precipChancePct) || 0) > 60 || (num(day.precipMm) || 0) > 2) return ["rainy", "rain likely"];
     if (num(day.dayOut) === null) return ["", "no forecast"];
@@ -269,6 +269,8 @@
   /* In winter the score column shows the winter score, or "ice" when there
    * is none; the row says whether the lake is aerated and its winterkill band. */
   function winterText(lake, d) {
+    var f = Forecast.forLake(lake);
+    if (f && f.days[d] && f.days[d].closed) return "shut";
     var w = winterScore(lake, d);
     return w === null ? "ice" : String(pct(w));
   }

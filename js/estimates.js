@@ -97,9 +97,10 @@
     var inputs = [];
     inputs.push(days.length ? days.length + " days of daily mean air (past and forecast), Open-Meteo" : "no forecast: usual dates only");
     if (num(o.elevM) !== null) {
+      var shiftWords = Math.abs(shift) < 0.05 ? "no height correction"
+        : "so the air is corrected " + round1(Math.abs(shift)) + " °C " + (shift > 0 ? "warmer" : "colder") + " (6.5 °C per km)";
       inputs.push("lake height " + Math.round(o.elevM) + " m (Open-Meteo elevation, Copernicus DEM)"
-        + (num(o.cellElevM) !== null ? "; forecast spot " + Math.round(o.cellElevM) + " m, so the air is "
-          + (shift >= 0 ? "+" : "") + round1(shift) + " °C" : ""));
+        + (num(o.cellElevM) !== null ? "; forecast spot " + Math.round(o.cellElevM) + " m, " + shiftWords : ""));
     }
     if (num(o.lat) !== null) inputs.push("latitude " + round1(o.lat) + "°");
     inputs.push(depth.label);
@@ -109,11 +110,13 @@
     var usualNow = usualDates(o.lat, o.elevM, depth.id, year);
     var inUsualIce = now >= usualNow.on || now < usualNow.off;
 
-    // State at the first day: the guard, or the usual season with a cold week.
-    var firstWeek = days.slice(0, 7).map(function (d) { return d.airC; });
-    var firstMean = firstWeek.length ? firstWeek.reduce(function (a, b) { return a + b; }, 0) / firstWeek.length : null;
-    var covered = !!o.iced || (inUsualIce && firstMean !== null && firstMean < 0);
-    var startCovered = covered;
+    /* Covered at the first day only on evidence: the past-week guard, or, in
+     * the usual ice season, enough freezing degree-days in the past days to
+     * have formed ice. A mildly cold week is not ice. */
+    var pastFreeze = 0;
+    days.forEach(function (d) { if (d.date.getTime() <= now.getTime()) pastFreeze = Math.max(0, pastFreeze - d.airC); });
+    var startCovered = !!o.iced || (inUsualIce && pastFreeze >= thrOn);
+    var covered = startCovered;
     var freeze = 0, thaw = 0, onDate = null, offDate = null, todayCovered = covered;
     days.forEach(function (d) {
       if (!covered) {
@@ -125,7 +128,9 @@
       }
       if (d.date.getTime() <= now.getTime()) todayCovered = covered;
     });
-    if (o.iced) todayCovered = true;
+    var when = function (d) { return d.getTime() <= now.getTime() ? "past" : "forecast"; };
+    // The guard says frozen now, unless the thaw already opened the lake in the past days.
+    if (o.iced && !(offDate && when(offDate) === "past")) todayCovered = true;
 
     // Beyond the forecast: the trend of the last three days, then usual dates.
     var tail = days.slice(-3).map(function (d) { return d.airC; });
@@ -138,9 +143,8 @@
         if (need <= TREND_DAYS_MAX) next = { kind: "on", date: new Date(lastDay.getTime() + need * DAY_MS), basis: "trend" };
       }
       if (!next) {
-        // Open water between the usual dates: the usual ice-on has passed.
-        var on = now < usualNow.off ? usualDates(o.lat, o.elevM, depth.id, year - 1).on : usualNow.on;
-        next = { kind: "on", date: on, basis: "usual dates", passed: inUsualIce };
+        // This year's usual date; "any week now" only once it has passed this fall.
+        next = { kind: "on", date: usualNow.on, basis: "usual dates", passed: now >= usualNow.on && !offDate };
       }
     } else if (covered && !offDate) {
       if (tailMean !== null && tailMean > 0) {
@@ -148,34 +152,43 @@
         if (needT <= TREND_DAYS_MAX) next = { kind: "off", date: new Date(lastDay.getTime() + needT * DAY_MS), basis: "trend" };
       }
       if (!next) {
-        var off = usualNow.off;
-        if (off < now) off = usualDates(o.lat, o.elevM, depth.id, year + 1).off;
-        next = { kind: "off", date: off, basis: "usual dates" };
+        var late = now >= usualNow.off && now < usualNow.on;
+        var off = now >= usualNow.on ? usualDates(o.lat, o.elevM, depth.id, year + 1).off : usualNow.off;
+        next = { kind: "off", date: off, basis: "usual dates", late: late };
       }
     }
 
-    var lines = [];
-    var when = function (d) { return d.getTime() <= now.getTime() ? "past" : "forecast"; };
+    // Sentences in date order, after what is true now.
+    var lines = [], events = [];
+    if (startCovered && !(offDate && when(offDate) === "past")) {
+      // The guard alone (a short cold week) is not enough cold to cover the lake.
+      lines.push(o.iced && pastFreeze < thrOn
+        ? "Ice likely: the past 7 days were below freezing, but the ice may not cover the whole lake yet."
+        : "Ice cover likely now.");
+    }
     if (onDate) {
-      lines.push(when(onDate) === "past" ? "Ice cover likely since about " + fmtDate(onDate, o.offset) + "."
-        : "Ice cover estimated to form about " + fmtDate(onDate, o.offset) + ".");
+      events.push({ at: onDate, text: when(onDate) === "past" ? "Ice cover likely since about " + fmtDate(onDate, o.offset) + "."
+        : "Ice cover estimated to form about " + fmtDate(onDate, o.offset) + "." });
     }
     if (offDate) {
-      lines.push(when(offDate) === "past" ? "Ice-off likely about " + fmtDate(offDate, o.offset) + "."
-        : "Ice-off estimated about " + fmtDate(offDate, o.offset) + ".");
+      events.push({ at: offDate, text: when(offDate) === "past" ? "Ice-off likely about " + fmtDate(offDate, o.offset) + "."
+        : "Ice-off estimated about " + fmtDate(offDate, o.offset) + "." });
     }
-    if (!onDate && !offDate && startCovered) lines.push("Ice cover likely now.");
     if (next) {
       var dateText = fmtDate(next.date, next.basis === "usual dates" ? null : o.offset);
+      var text;
       if (next.kind === "on") {
-        lines.push(next.basis === "trend" ? "At the forecast's end trend, ice cover about " + dateText + "."
+        text = next.basis === "trend" ? "At the forecast's end trend, ice cover about " + dateText + "."
           : next.passed ? "Ice usually forms here by about " + dateText + ": it could form any week now."
-          : "Ice usually forms here about " + dateText + ".");
+          : "Ice usually forms here about " + dateText + ".";
       } else {
-        lines.push(next.basis === "trend" ? "At the forecast's end trend, ice-off about " + dateText + "."
-          : "Ice-off usually about " + dateText + " here.");
+        text = next.basis === "trend" ? "At the forecast's end trend, ice-off about " + dateText + "."
+          : next.late ? "Ice-off is later than usual here (usually about " + dateText + ")."
+          : "Ice-off usually about " + dateText + " here.";
       }
+      events.push({ at: next.late ? new Date(8.64e15) : next.date, text: text });
     }
+    events.sort(function (a, b) { return a.at - b.at; }).forEach(function (e) { lines.push(e.text); });
     return {
       label: "estimated",
       inputs: inputs,
@@ -255,23 +268,28 @@
     }
     if (o.iced) return out("ice", "Under ice. Spring turnover follows ice-off.");
     var sinceOff = o.iceOffDate instanceof Date ? (now - o.iceOffDate) / DAY_MS : null;
-    var spring = month !== null && month <= 6
-      && ((sinceOff !== null && sinceOff >= 0 && sinceOff <= SPRING_WEEKS * 7) || (w !== null && w >= FALL_LO_C && w <= FALL_HI_C));
-    if (spring) {
+    var recentOff = sinceOff !== null && sinceOff >= 0 && sinceOff <= SPRING_WEEKS * 7;
+    // Spring is March to June: a January chinook that warms the surface is not spring turnover.
+    var springMonth = month !== null && month >= 3 && month <= 6;
+    if (springMonth && (recentOff || (w !== null && w >= FALL_LO_C && w <= FALL_HI_C))) {
       return out("spring", "Spring turnover likely now: after ice-off the lake mixes top to bottom. Fish spread out and the bite can be off for a few days.");
     }
+    if (w === null) {
+      return out("unknown", "Not known now: there is no water estimate for this lake yet. In summer it layers at about "
+        + s.band_m[0] + "–" + s.band_m[1] + " m.");
+    }
     if (month !== null && month >= 9) {
-      if (w !== null && w >= FALL_LO_C && w <= FALL_HI_C) {
+      if (w >= FALL_LO_C && w <= FALL_HI_C) {
         return out("fall", "Fall turnover likely now: the surface has cooled to about " + Math.round(w)
           + " °C and the lake mixes top to bottom. Fish spread out and the bite can be off for a few days.");
       }
-      if (w !== null && w < FALL_LO_C) return out("cold", "Mixed and cold after turnover. Ice comes next.");
+      if (w < FALL_LO_C) return out("cold", "Mixed and cold after turnover. Ice comes next.");
       return out("layered", "Still layered. Fall turnover comes when the surface cools to about 10 °C.");
     }
-    if (month !== null && month >= 6) {
+    if (w > FALL_HI_C) {
       return out("layered", "Layered: in warm weather fish the summer layer, about " + s.band_m[0] + "–" + s.band_m[1] + " m.");
     }
-    return out("cold", "Cold and mixed before the summer layer forms.");
+    return out("cold", "Cold and mixed: the summer layer forms once the surface warms past about 10 °C.");
   }
 
   // ============================================================
@@ -288,9 +306,17 @@
     return "open winter";
   }
 
-  /** o: { month (1-12), iced, waterC, baitBan, species: [codes], hatches (hatch() result) } */
+  /** o: { month (1-12), iced, waterC, baitRule ("ban"|"allowed"|"unknown"),
+   *  species: [codes], hatches (hatch() result) }. baitBan (true/false) is
+   *  read when baitRule is missing; with neither, the rule is unknown. */
+  function baitRuleOf(o) {
+    if (o.baitRule === "ban" || o.baitRule === "allowed" || o.baitRule === "unknown") return o.baitRule;
+    return o.baitBan === true ? "ban" : o.baitBan === false ? "allowed" : "unknown";
+  }
+
   function tackle(o) {
     o = o || {};
+    var rule = baitRuleOf(o);
     var month = num(o.month) || (new Date().getMonth() + 1);
     var w = num(o.waterC);
     var season = seasonOf(month, !!o.iced, w);
@@ -325,7 +351,8 @@
       lures.push("jig with a soft plastic, for walleye, pike or perch");
     }
     var inputs = ["season: " + season, w === null ? "no water temperature" : "water about " + Math.round(w) + " °C",
-                  o.baitBan ? "bait ban in the regulations" : "bait allowed in the regulations"];
+                  rule === "ban" ? "bait ban in the regulations" : rule === "allowed" ? "bait allowed in the regulations"
+                    : "bait rule not found: check the regulations"];
     if ((o.species || []).length) inputs.push("stocked species: " + o.species.join(", "));
     return {
       label: "estimated",
@@ -333,9 +360,11 @@
       season: season,
       flies: flies,
       lures: lures,
-      // Never bait on a bait-ban lake: the list is not shortened, it is gone.
-      bait: o.baitBan ? null : bait,
-      baitNote: o.baitBan ? "Bait ban: flies and lures only, no bait, not even on a jig." : null,
+      // Never bait on a bait-ban lake, nor where the rule is not known: the list is gone.
+      bait: rule === "allowed" ? bait : null,
+      baitNote: rule === "ban" ? "Bait ban: flies and lures only, no bait, not even on a jig."
+        : rule === "unknown" ? "Bait rule not found for this lake: check the regulations before you use any bait." : null,
+      baitRule: rule,
       legal: LEGAL,
     };
   }
@@ -347,7 +376,7 @@
   var ICE_WORDS = { "all-winter": "open all winter", "early-late": "early and late ice", "early": "early ice only",
                     "late": "late ice only", "closed": "closed in winter" };
 
-  /** o: { maxDepthM, stratification, areaHa, aerated, amenities: [..], baitBan,
+  /** o: { maxDepthM, stratification, areaHa, aerated, amenities: [..], baitRule (or baitBan),
    *  iceKind, troutLimit } */
   function howToFish(o) {
     o = o || {};
@@ -380,7 +409,9 @@
       lines.push("Aerated: in winter there is thin ice and open water near the aerators. Stay behind the fence.");
       inputs.push("aerated (ACA or Alberta)");
     }
-    if (o.baitBan) lines.push("Bait ban: flies and lures only.");
+    var rule = baitRuleOf(o);
+    if (rule === "ban") lines.push("Bait ban: flies and lures only.");
+    else if (rule === "unknown") lines.push("Bait rule not found for this lake: check the regulations before you use bait.");
     if (o.iceKind) lines.push("Ice fishing season: " + (ICE_WORDS[o.iceKind] || o.iceKind) + ". " + ICE_WARNING);
     var lim = num(o.troutLimit);
     if (lim !== null) lines.push(lim === 0 ? "Catch and release only for trout." : "Trout limit " + lim + ": keep few, release the rest.");

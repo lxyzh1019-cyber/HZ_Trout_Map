@@ -553,7 +553,7 @@
       waterC: waterC, month: month, iced: iced, now: now,
       iceOffDate: ice.iceOff && ice.iceOff.basis === "past days" ? ice.iceOff.date : null,
     });
-    var tack = Estimates.tackle({ month: month, iced: iced, waterC: waterC, baitBan: lakeBaitBan(lake),
+    var tack = Estimates.tackle({ month: month, iced: iced, waterC: waterC, baitRule: lakeBaitRule(lake),
                                   species: species, hatches: hatch });
     return { ice: ice, hatch: hatch, turnover: turn, tackle: tack };
   }
@@ -581,7 +581,7 @@
     var h = Estimates.howToFish({
       maxDepthM: depth.max_depth_m == null ? null : depth.max_depth_m, stratification: depth.stratification || null,
       areaHa: lake.surface_area_ha, aerated: lakeAerated(lake), amenities: (profileFor(lake) || {}).amenities || [],
-      baitBan: lakeBaitBan(lake), iceKind: lakeIceKind(lake), troutLimit: troutLimit(lake),
+      baitRule: lakeBaitRule(lake), iceKind: lakeIceKind(lake), troutLimit: troutLimit(lake),
     });
     return '<div class="est">' + estHead("From its depth, size, facilities and rules") + "<ul>"
       + h.lines.map(function (l) { return "<li>" + esc(l) + "</li>"; }).join("") + "</ul>" + inputsLine(h.inputs) + "</div>";
@@ -594,16 +594,20 @@
     return '<dl class="kv"><dt>Depth chart</dt><dd>' + (c
       ? '<a class="btn" href="' + esc(c.url) + '" target="_blank" rel="noopener">Alberta depth chart, ' + esc(c.dig) + " ↗</a>"
         + '<br><span class="dim">Alberta Geological Survey, ' + esc(c.name) + ". " + esc(of) + ".</span>"
-      : '<span class="dim">None published for this lake. ' + esc(of) + ".</span>") + "</dd></dl>";
+      : '<span class="dim">No match found in Alberta&#39;s depth chart list. ' + esc(of) + ".</span><br>"
+        + '<a class="btn" href="' + esc(DEPTH_CHARTS.page) + '" target="_blank" rel="noopener">Alberta depth chart list ↗</a>') + "</dd></dl>";
   }
 
   function hotSpotsHtml(spots) {
     return spots.map(function (s) {
       var host = "";
       try { host = new URL(s.source_url).hostname; } catch (e) { host = "source"; }
+      var map = "https://www.google.com/maps/search/?api=1&query=" + Number(s.lat) + "," + Number(s.lon);
       return '<div class="est"><h3>' + esc(s.name) + "</h3>" + (s.note ? "<p>" + esc(s.note) + "</p>" : "")
-        + '<p class="inputs">Source: <a href="' + esc(s.source_url) + '" target="_blank" rel="noopener">' + esc(host)
-        + "</a>, " + esc(s.source_date) + ".</p></div>";
+        + '<p class="inputs">Source: ' + esc(host) + ", " + esc(s.source_date) + ".</p>"
+        + '<a class="btn" href="' + esc(s.source_url) + '" target="_blank" rel="noopener">Source ↗</a>'
+        + (isFinite(s.lat) && isFinite(s.lon) ? '<a class="btn" href="' + esc(map) + '" target="_blank" rel="noopener">On the map ↗</a>' : "")
+        + "</div>";
     }).join("");
   }
 
@@ -716,6 +720,7 @@
     popularity: popularity,
     estimatesFor: estimatesFor,
     winterScoreHtml: winterScoreHtml,
+    _internal: { seasonHtml: seasonHtml, howHtml: howHtml, depthChartHtml: depthChartHtml, hotSpotsHtml: hotSpotsHtml },
     BAND_WORD: BAND_WORD,
     RULES_URL: RULES_URL,
     LICENCE_URL: LICENCE_URL,

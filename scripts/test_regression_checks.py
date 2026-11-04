@@ -3046,7 +3046,18 @@ class Build2EstimateTests(unittest.TestCase):
                 self.assertNotRegex(text.lower(), r"\b(worm|maggot|dough|minnow)\b")
             self.assertIn("only legal source", banned["legal"])
         sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
-        self.assertIn("baitBan: lakeBaitBan(lake)", sheet)
+        self.assertIn("baitRule: lakeBaitRule(lake)", sheet)
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn('if (!reg || !reg.bait) return "unknown";', page)
+
+    def test_an_unknown_bait_rule_never_lists_bait(self):
+        got = run_js(["estimates.js"], "(() => { const E = window.Estimates; return [E.tackle({month: 6, waterC: 12, baitRule: 'unknown'}),"
+                     " E.tackle({month: 6, waterC: 12}), E.howToFish({baitRule: 'unknown'}).lines.join(' ')]; })()")
+        for t in got[:2]:
+            self.assertIsNone(t["bait"])
+            self.assertIn("check the regulations", t["baitNote"])
+            self.assertIn("bait rule not found: check the regulations", t["inputs"])
+        self.assertIn("Bait rule not found", got[2])
 
     def test_ice_dates_come_with_the_warning_and_never_a_thickness(self):
         est = (ROOT / "js" / "estimates.js").read_text(encoding="utf-8")
@@ -3077,6 +3088,46 @@ class Build2EstimateTests(unittest.TestCase):
         self.assertLess(freeze["medium"], freeze["deep"])
         self.assertLess(thaw["shallow"], thaw["deep"])
 
+    def ice_case(self, temps, now, **kw):
+        """Daily means from 7 days before `now` to 6 days after, in Edmonton time."""
+        expr = ("(() => { const now = new Date(%s); const T = %s;"
+                " const t0 = Math.floor(now.getTime() / 1000) - 7 * 86400;"
+                " return window.Estimates.ice(Object.assign({dailyT: T.map((_, i) => t0 + i * 86400), dailyMeanC: T,"
+                " now, offset: -25200}, %s)); })()") % (json.dumps(now), json.dumps(temps), json.dumps(kw))
+        return run_js(["estimates.js"], expr)
+
+    def test_a_mildly_cold_week_is_not_ice(self):
+        r = self.ice_case([-0.5, -1, 0, -0.5, -1, -0.5, 0, 1, 0, -1, 0, 1, 2, 1], "2026-11-03T12:00:00-07:00",
+                          lat=56, elevM=800, maxDepthM=10)
+        self.assertEqual(r["state"], "open")
+        self.assertNotIn("Ice cover likely now", r["text"])
+        self.assertIn("any week now", r["text"])
+
+    def test_a_cold_past_week_in_the_ice_season_is_ice(self):
+        r = self.ice_case([-12] * 14, "2027-01-10T12:00:00-07:00", lat=53, elevM=700, maxDepthM=10)
+        self.assertEqual(r["state"], "ice")
+        self.assertTrue(r["text"].startswith("Ice cover likely now."), r["text"])
+        self.assertIn("Ice-off usually about", r["text"])
+
+    def test_spring_ice_off_in_the_past_days_and_no_fall_warning(self):
+        warm = [1, 4, 8, 10, 12, 12, 13, 14, 12, 13, 14, 15, 14, 15]
+        r = self.ice_case(warm, "2027-04-20T12:00:00-06:00", lat=53, elevM=700, maxDepthM=10, iced=True)
+        self.assertEqual(r["iceOff"]["basis"], "past days")
+        self.assertEqual(r["state"], "open")
+        self.assertRegex(r["text"], r"^Ice-off likely about Apr (1[3-9]|20)\.")
+        self.assertNotIn("any week now", r["text"])
+        self.assertIn("Ice usually forms here about Nov", r["text"])
+
+    def test_ice_dates_use_the_lake_time_zone(self):
+        # Midnight in Edmonton is 07:00 UTC in winter: the date must not slip a day.
+        got = run_js(["estimates.js"], "[window.Estimates.fmtDate(new Date(Date.UTC(2026, 10, 12, 7)), -25200),"
+                     " window.Estimates.fmtDate(new Date(Date.UTC(2026, 10, 12, 6)), -25200)]")
+        self.assertEqual(got, ["Nov 12", "Nov 11"])
+
+    def test_the_height_correction_is_said_in_words(self):
+        r = self.ice_case([5] * 14, "2026-08-01T12:00:00-06:00", elevM=900, cellElevM=1050, airOffsetC=0.975)
+        self.assertIn("corrected 1 °C warmer (6.5 °C per km)", " ".join(r["inputs"]))
+
     def test_usual_ice_dates_move_with_latitude_and_height(self):
         got = run_js(["estimates.js"], "(() => { const U = window.Estimates.usualDates;"
                      " return [U(53, 700, 'medium', 2026), U(56, 700, 'medium', 2026), U(53, 1500, 'medium', 2026)]"
@@ -3105,6 +3156,11 @@ class Build2EstimateTests(unittest.TestCase):
         self.assertIn("3–6 m", summer["text"])
         self.assertEqual(spring, "spring")
         self.assertEqual(iced, "ice")
+        more = run_js(["estimates.js"], "(() => { const T = window.Estimates.turnover; const s = {stratifies: true, band_m: [3, 6]};"
+                      " return [T({stratification: s, maxDepthM: 12, waterC: 5, month: 1}).state,"
+                      " T({stratification: s, maxDepthM: 12, waterC: null, month: 10}).state,"
+                      " T({stratification: s, maxDepthM: 12, waterC: 12, month: 5}).state]; })()")
+        self.assertEqual(more, ["cold", "unknown", "layered"])
         sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
         self.assertIn("stratification: depth.stratification", sheet)
         est = (ROOT / "js" / "estimates.js").read_text(encoding="utf-8")
@@ -3119,6 +3175,58 @@ class Build2EstimateTests(unittest.TestCase):
         for part in ("Big water (300 ha)", "3–6 m", "boat launch", "Aerated", "Bait ban", "open all winter",
                      "Legal is not safe. Ice thickness is never forecast.", "Catch and release", "only legal source"):
             self.assertIn(part, text)
+
+
+class Build2PanelTests(unittest.TestCase):
+    """The new panel sections render for a lake with nothing known, and for an
+    old saved forecast that has no height."""
+
+    PRELUDE = (
+        "window = globalThis;"
+        "function esc(s) { return String(s == null ? '' : s).replace(/[&<>\"']/g, c => '&#' + c.charCodeAt(0) + ';'); }"
+        "var WX = {}; var Weather = { peek: (a, b) => WX.rec || {data: null, fetchedAt: null, source: 'none'} };"
+        "var ConditionsUI = { _internal: { waterFor: (p, wx) => wx.data ? {tempC: 6, source: 'modeled', sigmaC: 2} : null } };"
+        "var DEPTHS = {}; function depthFor(l) { return DEPTHS[l.lake_id] || null; }"
+        "function elevationFor(l) { return l.elev == null ? null : l.elev; }"
+        "function filteredDominantOrder(l) { return l.species || []; }"
+        "function lakeBaitRule(l) { return l.rule || 'unknown'; } function lakeAerated(l) { return false; }"
+        "function profileFor(l) { return null; } function lakeIceKind(l) { return null; } function regulationFor(l) { return null; }"
+        "var DEPTH_CHARTS = {matched: 43, placed_lakes: 380, page: 'https://ags.aer.ca/interactive-data-and-tools/lake-bathymetry-data',"
+        " lakes: {wb1: {name: 'Test Lake', dig: 'DIG 2008-0001', url: 'https://ags.aer.ca/publication/dig-2008-0001'}}};"
+        "function depthChartFor(l) { return DEPTH_CHARTS.lakes[l.lake_id] || null; }"
+    )
+
+    def render(self, setup):
+        return run_js(["conditions.js", "estimates.js", "lake-sheet.js"],
+                      "(() => { %s; const S = window.LakeSheet._internal;"
+                      " const lake = {lake_id: 'wb2', name: 'Nothing Pond', lat: 53, lon: -114};"
+                      " const f = {iced: false, offset: null, days: []};"
+                      " return [S.seasonHtml(lake, f), S.howHtml(lake), S.depthChartHtml(lake), S.depthChartHtml({lake_id: 'wb1'}),"
+                      " S.hotSpotsHtml([{name: 'Weed edge', note: 'n', lat: 53.1, lon: -114.2,"
+                      " source_url: 'https://example.org/a', source_date: '2026-10-01'}])]; })()" % setup,
+                      prelude=self.PRELUDE)
+
+    def test_a_lake_with_no_weather_depth_or_height(self):
+        season, how, nochart, chart, spot = self.render("")
+        self.assertEqual(season.count('class="est-chip">estimated'), 4)
+        self.assertIn("no forecast: usual dates only", season)
+        self.assertIn("Not known: there is no depth survey", season)
+        self.assertIn("Bait rule not found", season)
+        self.assertNotIn("<b>Bait:</b>", season)
+        self.assertIn("No depth survey", how)
+        self.assertIn("No match found in Alberta", nochart)
+        self.assertIn('class="btn" href="https://ags.aer.ca/interactive-data-and-tools/lake-bathymetry-data"', nochart)
+        self.assertIn('class="btn" href="https://ags.aer.ca/publication/dig-2008-0001"', chart)
+        self.assertIn('class="btn" href="https://example.org/a"', spot)
+        self.assertIn("query=53.1,-114.2", spot)
+        self.assertIn("2026-10-01", spot)
+
+    def test_an_old_saved_forecast_without_height(self):
+        setup = "WX.rec = {data: {dailyT: [1793167200, 1793253600], dailyMeanC: [3, 2], offset: -25200}, fetchedAt: 1, source: 'cache'}"
+        season = self.render(setup)[0]
+        self.assertIn("2 days of daily mean air", season)
+        self.assertNotIn("NaN", season)
+        self.assertNotIn("undefined", season)
 
 
 class Build2WinterTests(unittest.TestCase):

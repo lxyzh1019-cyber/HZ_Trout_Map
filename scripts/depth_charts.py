@@ -111,6 +111,13 @@ def outlines():
     url = (LAYER + "?where=1%3D1&outFields=LAKE_NAME,ATS_GRID,BATHYMETRY_DIG_NUM"
            "&returnGeometry=true&outSR=4326&geometryPrecision=5&f=json")
     body = get_json(url)
+    # A failed or cut-short answer must never replace the saved file.
+    if not isinstance(body, dict) or body.get("error"):
+        raise SystemExit(f"layer query failed: {str(body)[:200]}")
+    if body.get("exceededTransferLimit"):
+        raise SystemExit("layer answer was cut short (exceededTransferLimit); page through it before writing")
+    if not body.get("features"):
+        raise SystemExit("layer returned no lake outlines")
     out = []
     for f in body.get("features", []):
         a = f.get("attributes") or {}

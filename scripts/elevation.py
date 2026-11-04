@@ -85,6 +85,10 @@ def main():
             if isinstance(h, (int, float)) and -100 < h < 5000:
                 out[k] = round(float(h), 1)
         time.sleep(1)
+    if len(out) != len(keys):
+        missing = sorted(set(keys) - set(out))
+        print(f"{len(out)} of {len(keys)} lakes have a height; missing {missing[:10]}. File not written.")
+        return 1
     record = {
         "source": "Open-Meteo Elevation API (Copernicus DEM GLO-90, 90 m)",
         "url": ENDPOINT,
@@ -96,7 +100,7 @@ def main():
     }
     OUT.write_text(json.dumps(record, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\r\n")
     print(f"{len(out)} of {len(keys)} lakes, {calls} calls -> {OUT.relative_to(ROOT)}")
-    return 0 if len(out) == len(keys) else 1
+    return 0
 
 
 if __name__ == "__main__":

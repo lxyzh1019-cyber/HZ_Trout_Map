@@ -2414,6 +2414,14 @@ function lakeIceKind(lake) {
   return Conditions.seasonIceKind(reg.season.text);
 }
 
+/** "ban", "allowed", or "unknown" when there is no regulation or its bait
+ *  rule is blank. Unknown is never read as allowed (Build 2). */
+function lakeBaitRule(lake) {
+  const reg = regulationFor(lake);
+  if (!reg || !reg.bait) return "unknown";
+  return reg.bait === "Bait ban" ? "ban" : "allowed";
+}
+
 /** The regulations put this lake under a bait ban. */
 function lakeBaitBan(lake) {
   const reg = regulationFor(lake);

@@ -1,6 +1,6 @@
-# FEATURES — HZ_Trout_Map — manifest v2 — Build 1b
+# FEATURES — HZ_Trout_Map — manifest v3 — Build 2
 
-Locked features of the current version (branch build-1b, from main at 243d3a2). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
+Locked features of the current version (branch build-2, from main at 64852ae). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
 
 ## Which lake, which day (Build 1b)
 - Week bar over the map: 7 days, each with the top Bite score of the lakes on screen; tap a day and the pins recolour for it. "gusty" marks a day when most lakes on screen gust to 40 km/h or more.
@@ -14,13 +14,26 @@ Locked features of the current version (branch build-1b, from main at 243d3a2). 
 - Pin colour modes: Bite on the day (default), Best this week (gold pins), Species, Change. Score pins carry the number; groups show the best score inside them. Colour-blind-safe score scale: grey, blue, light blue, gold.
 - Forecast section: Wind / Weather / Barometer / Solunar tabs, 3 or 7 days, Lines or Grid, today's major and minor feeding times and the moon phase. "Bite by time of day" keeps the 6-hour strip, the 7 x 5 grid, the factor rows and the measured water temperature input.
 - A plain daily tip, and a "sun breaking through" reminder labelled as anglers' reports and never scored.
-- Winter: when more than half the lakes on screen have the winter guard on, the week bar shows wind chill, pins show the legal ice season, and the panel says "Ice likely". Frozen lakes are left out of gold pins, "Best near you" and the Saved ranking.
+- Winter: when more than half the lakes on screen have the winter guard on, the week bar shows wind chill, pins show the legal ice season, and the panel says "Ice likely". Frozen lakes are left out of gold pins, "Best near you" and the Saved ranking. The list becomes "This winter" (Build 2).
 - Tags: Low harvest limit (trout limit 0–2), Trophy size rule (the guide's words), Popularity estimate (largest Angler's Atlas report count, labelled estimate), Aerated, Ice season (winter), Advisory (when an Alberta notice names the lake).
 - Stocked size and date shown; "Typical size: not published by Alberta"; growth never guessed.
 - Search for towns and lakes: the saved Alberta town list first (works with no signal), then Open-Meteo place search in Canada (Alberta first). Each lake row has distance, Bite and Day out. Picking a town measures from it (lists, distances and the distance filter) and does not change home.
 - Messages: forecast progress, "No signal" once per visit (says town search uses the saved Alberta town list), "No lakes in range" with a widen button, and a first-visit walkthrough with install steps.
 - Satellite basemap (Esri imagery); Apple Maps and Google Maps links; Alberta rules and licence links; Learn room with 6 guides and species pages (licensed photos only); plain explainers (Reading the barometer).
 - Weather for every lake: one request per 50 forecast spots, 250 calls for a full load, saved for 3 hours in IndexedDB (memory if IndexedDB is refused); the data quality panel shows the count.
+
+## Estimates and winter (Build 2)
+- Lake height for every placed lake (380, Open-Meteo elevation, Copernicus DEM). It corrects the forecast air to the lake's own height (6.5 °C per km) for the water temperature estimate and the ice estimate only.
+- "Ice, hatches and tackle" section in the lake panel. Each block says "estimated" and lists what it used ("From: …").
+  - Ice cover: ice-on and ice-off dates from freezing and thawing degree-days over 14 days of air (7 past, 7 forecast), by latitude, height and depth; beyond the forecast the trend, then the usual dates. Dates only, with "Legal is not safe. Ice thickness is never forecast." next to them.
+  - Insect hatches on the water estimate: chironomids 10 °C, mayflies 14 °C, damselflies 16 °C, sedges 17 °C (likely / soon / not yet / done for the year / under ice).
+  - Turnover from the summer layer: spring after ice-off; fall when the surface is 4–10 °C on a lake that layers; "too shallow to layer" and "no depth survey" said plainly.
+  - Flies and lures by season, water temperature and bait rule. A bait-ban lake gets no bait line, only "Bait ban: flies and lures only, no bait, not even on a jig." A lake with no bait rule on record gets no bait line either, and "Bait rule not found". The regulations stay the only legal source.
+- "How to fish this lake" section: from area, depth and summer layer, facilities, aeration, bait rule, ice season and trout limit.
+- Winter score for frozen lakes: light, pressure trend and moon only, renormalised; shown in the "Ice likely" banner with a cold comfort note from Environment Canada's wind chill bands, and in the list rows in winter.
+- "This winter" list: lakes open in the ice season and aerated lakes first, then the lower winterkill band, then the better winter score, then the nearer; rows say "aerated" and the winterkill band.
+- Depth chart link in Lake info for 43 of the 380 lakes, matched by name and position to the Alberta Geological Survey bathymetry layer (166 surveyed lakes); other lakes say "No match found in Alberta's depth chart list" with a link to that list.
+- Hot spots section, shown only when data/hot_spots.json has spots for the lake; each spot shows its note, source site and date, a Source button and an On the map button. Every spot needs an https source link and an ISO date (tested), and scripts/check_links.py checks the links live. The file starts empty.
 
 ## Map and finding a lake
 - Pins cluster when zoomed out and split as you zoom in; hover shows name, score, distance, fish in view and last stocking date.
@@ -60,14 +73,43 @@ Locked features of the current version (branch build-1b, from main at 243d3a2). 
 ## Taking it with you
 - List view sortable on any column, including Bite and Day out for the picked day, with CSV download.
 - Saved lakes in the browser and a one-click multi-stop driving route through them.
-- Works offline after the first visit (service worker, shell cache v4, saved town list, saved forecasts).
+- Works offline after the first visit (service worker, shell cache v5, saved town list, saved forecasts, lake heights, depth chart links, hot spots).
 
 ## Data and honesty
 - Estimated positions are labelled; data quality panel; evidence page (evidence.html).
 - Alberta advisories (closures, consumption) collected daily and shown in Filters.
 - ACA aeration roster with ACA's Winter Angling column; a test fails if it disagrees with the regulations.
 - Colour-blind-safe pin palettes; every score pin carries its number.
-- Credit lines: Open-Meteo (CC BY 4.0), town list licence, GeoNames via Open-Meteo, Esri imagery, photo credits.
+- Credit lines: Open-Meteo (CC BY 4.0), town list licence, GeoNames via Open-Meteo, Esri imagery, photo credits, Alberta Geological Survey (depth charts), Open-Meteo elevation with Copernicus DEM (in the ice inputs).
+
+## Regression table — manifest v2 → v3 (Build 2)
+| Feature | v2 → v3 | Note |
+|---|---|---|
+| Week bar, Best near you, PC column, nav, Only lakes on screen | kept | |
+| Bite weights and gust rule | kept | tested unchanged |
+| Bite score values | kept, moved a little | water estimate now uses the lake's height; see the table below |
+| Day out, best-day banner, Why this score | kept | |
+| Pin colour modes, score scale | kept | |
+| Forecast tabs, feeding times, tip, clearing reminder | kept | |
+| Winter guard, wind-chill week bar, ice pins, "Ice likely" | kept | banner adds the winter score and a cold note |
+| Winter list "Ice season lakes near …" | changed | now "This winter near …": ice-season and aerated lakes first, winterkill band, winter score (D14) |
+| Winter list rows showed "ice" | changed | show the winter score; "ice" only when there is none |
+| Tags, stocked size, typical size not guessed | kept | |
+| Search, towns, messages, Learn room, satellite, links | kept | |
+| Lake panel sections | kept | plus "Ice, hatches and tackle", "How to fish this lake", Depth chart row, Hot spots (only with spots) |
+| Filters, charts, list view and CSV, favourites, advisories | kept | |
+| Offline | kept | shell cache v4 → v5 |
+| Weather calls per full load | kept | 250 calls in 5 requests (measured again) |
+
+Bite score before and after the lake height (measured 2026-11-03 evening, Edmonton time; the 5 lakes that moved most; 181 of 380 lakes moved at least 1 point on some day of the week; the median air correction is 0.3 °C, the largest 5.7 °C):
+
+| Lake | Forecast spot / lake height | Air correction | Water before → after | Bite today before → after |
+|---|---|---|---|---|
+| Upper Kananaskis Lake | 2436 m / 1702 m | +4.8 °C | 2.2 → 3.8 °C | 58 → 67 |
+| Crowsnest Lake | 2028 m / 1347 m | +4.4 °C | 2.5 → 4.2 °C | 59 → 68 |
+| Island Lake | 2028 m / 1353 m | +4.4 °C | 2.5 → 4.1 °C | 59 → 68 |
+| Sparrows Egg Lake | 2202 m / 1641 m | +3.6 °C | 2.9 → 4.3 °C | 61 → 69 |
+| Grotto Mountain Pond | 1730 m / 1290 m | +2.9 °C | 3.6 → 4.9 °C | 61 → 68 |
 
 ## Regression table — manifest v1 → v2 (Build 1b)
 | Feature | v1 → v2 | Note |

@@ -7,6 +7,8 @@ Single working record for this repository. Updated by the main session at the en
 - Build 1a merged 2026-10-16 (PR #15), live.
 - Build 1b prototype picked by the owner 2026-10-29: design/build-1b-prototype.html (PR #17), for feature reference only.
 - Plan "Build 1b and Build 2" Rev 2 approved 2026-10-29: decisions 1–15 at option A.
+- Build 1b merged 2026-10-30 (PR #18, merge 64852ae).
+- Build 2 started 2026-11-03 on branch build-2 from 64852ae; Stage 2 shown again in plan mode and approved 2026-11-03.
 
 ## Design decisions
 - [agreed] Filters stay in a Filters panel (left on a wide PC, slide-over below) — search: Filters panel
@@ -26,8 +28,9 @@ Single working record for this repository. Updated by the main session at the en
 - [agreed] Prototype differences Q1–Q17 (comparison page 2026-10-30): keep the build for Q1–Q14 and Q16–Q17; Q15 shorter search hint on phones — search: Search a lake or a town
 
 ## Pending
-- Build 1b: owner accepted all 17 recommendations 2026-10-30; PR open, waiting for the owner's merge and device check.
-- Build 2: starts on a new branch from main after the owner merges Build 1b.
+- Build 1b: merged 2026-10-30 (PR #18). Owner still to do: device check, and the 4 species facts on the Learn pages.
+- Build 2: built and checked on branch build-2; waiting for the owner's answers to the picture differences, then the pull request opens ready.
+- Leftover helper worktree .claude/worktrees/agent-a00cd60cf51c9739a: removal needs the owner's separate yes (QC2).
 
 ## Request ledger
 | # | Round/date | Requirement (user's words, short) | Status | Note |
@@ -66,8 +69,8 @@ Single working record for this repository. Updated by the main session at the en
 | C14 | 10-11 | Plain-language daily tip from own data, no outside service | done | 1b; Conditions.dailyTip |
 | C15 | 10-11 | Clearing reminder (sun breaking through), labelled anglers' reports, not scored | done | 1b; Conditions.clearingHint, not in score |
 | C16 | 10-11 | Winter guard: hide open-water score when frozen (K9) | done | moved to 1a by D22 |
-| C17 | 10-11 | Winter score: light, pressure, moon + cold/wind-chill comfort note | open | Build 2 |
-| C18 | 10-11 | Elevation from weather service, for ice and water temperature only | open | Build 2 |
+| C17 | 10-11 | Winter score: light, pressure, moon + cold/wind-chill comfort note | done | 2; Conditions.scoreWinter + comfortNote, test_winter_score_renormalises_light_pressure_and_moon |
+| C18 | 10-11 | Elevation from weather service, for ice and water temperature only | done | 2; 380 lakes in 4 calls, data/lake_elevation.json; test_lake_height_only_feeds_the_water_model_and_ice |
 | D1 | 10-11 | Near me one-tap list | done | 1b |
 | D2 | 10-11 | Browse by area: zone opens a list of its lakes | done | 1b; 10 fish management zones |
 | D3 | 10-11 | Split view with scores, PC only | done | 1b; ≥ 1024 px |
@@ -81,14 +84,14 @@ Single working record for this repository. Updated by the main session at the en
 | D11 | 10-11 | Reading room: 6 guides + species pages with licensed photos | done | 1b; 6 guides, 9 species, 9 free-licence photos |
 | D12 | 10-11 | First-visit walkthrough + install guide | done | 1b; first visit, troutmap.visited |
 | D13 | 10-11 | Popup close button covered by top-right buttons (K4) | done | 1a |
-| D14 | 10-11 | This winter view: ice and aerated lakes first | open | Build 2 |
-| E1 | 10-11 | Ice-on / ice-off estimates, labelled estimated | open | Build 2 |
-| E2 | 10-11 | Hatch timing | open | Build 2 |
-| E3 | 10-11 | Turnover | open | Build 2 |
-| E4 | 10-11 | Fly and lure choice | open | Build 2 |
-| E5 | 10-11 | How to fish each lake, from own data | open | Build 2 |
-| E6 | 10-11 | Lake notes and hot spots via Gemini, each with source link and date | open | Build 2, D18 |
-| E7 | 10-11 | Depth chart links vs Alberta's 169 surveyed lakes | open | Build 2 |
+| D14 | 10-11 | This winter view: ice and aerated lakes first | done | 2; "This winter near …", test_this_winter_puts_ice_season_and_aerated_lakes_first |
+| E1 | 10-11 | Ice-on / ice-off estimates, labelled estimated | done | 2; Estimates.ice degree-days, warning next to dates; test_ice_forms_and_goes_by_degree_days |
+| E2 | 10-11 | Hatch timing | done | 2; 10/14/16/17 °C, test_hatch_thresholds |
+| E3 | 10-11 | Turnover | done | 2; reuses stratification, test_turnover_reuses_the_summer_layer |
+| E4 | 10-11 | Fly and lure choice | done | 2; no bait on 25 bait-ban lakes, test_never_bait_on_a_bait_ban_lake |
+| E5 | 10-11 | How to fish each lake, from own data | done | 2; Estimates.howToFish, test_how_to_fish_uses_the_lake_data |
+| E6 | 10-11 | Lake notes and hot spots via Gemini, each with source link and date | done | 2; empty data/hot_spots.json (0 spots), schema test, scripts/check_links.py; filling it is the owner's step |
+| E7 | 10-11 | Depth chart links vs Alberta's 169 surveyed lakes | done | 2; AGS layer has 166 outlines; 43 of 380 lakes matched by name and position |
 | E8 | 10-11 | Trout depth finder | done | exists as Summer layer |
 | F1 | 10-11 | Saved lakes on every device (Firebase) | open | Build 3 |
 | F2 | 10-11 | Weekly email when a saved lake has a top day | open | Build 3 |
@@ -120,8 +123,8 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 |---|---|---|
 | Build 1a | COMPLETE | PR #15 merged 2026-10-16; 183 tests pass on main (2026-10-29) |
 | FEATURES.md, WORKING_RECORD.md | COMPLETE | this change, 2026-10-29 |
-| Build 1b | IN REVIEW | branch build-1b; owner answered Q1–Q17 2026-10-30; PR waiting for merge |
-| Build 2 | NOT STARTED | |
+| Build 1b | COMPLETE | PR #18 merged 2026-10-30 (64852ae) |
+| Build 2 | IN REVIEW | branch build-2; tests, layout check and reviewer fixes done 2026-11-03; waiting for the difference answers, then the PR |
 | Build 3 | NOT STARTED | |
 
 ## Checks and evidence
@@ -133,6 +136,12 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 - 2026-10-30 coverage gate (hz-change-guard) on FEATURES.md items → 42 of 42 present
 - 2026-10-30 reviewer pass → 19 findings, all fixed; prototype vs build comparison: https://claude.ai/artifact/7dPaCHfY45Yw7xB9gruG7q (17 questions)
 - Dry-run: passed — the working tree served as the owner's clone would be after Pull origin, opened in a fresh browser profile, compared screen by screen with the prototype
+- 2026-11-03 build-2: lake heights 380 of 380 in 4 calls (Open-Meteo elevation); depth charts 43 of 380 lakes matched to 166 AGS outlines; hot spots 0; live link check 40 links, 0 broken
+- 2026-11-03 build-2: Build 1b + Build 2 test classes 61 run → 61 pass locally (PYTHONUTF8=1); 239 tests in the file
+- 2026-11-03 build-2 layout check (headless Chrome, fresh profile) at 360×740, 390×844, 768×1024, 1024×768, 1440×900: no lake, lake open, new sections open → 0 problems; winter mode at 390 and 1440 → 0; hot spot section scrolled into view → only "close button covered" (the panel header scrolls away, as in 1b)
+- 2026-11-03 build-2 behaviour: 380 of 380 lakes show 5 "estimated" blocks with inputs; 25 bait-ban lakes, 0 with a bait line; ice warning next to every ice date; 0 page errors; weather full load 250 calls in 5 requests
+- 2026-11-03 build-2 elevation effect: 181 of 380 lakes move ≥ 1 Bite point on some day; median correction 0.3 °C; largest 10 points (mountain lakes, forecast spot 700 m higher)
+- 2026-11-03 build-2 reviewer pass → 12 findings, all fixed; coverage gate 53 of 53
 
 ## Open questions / blockers
 - H4 answered 2026-10-30: Open-Meteo counts per IP; one full load = 250 calls in 5 requests (measured in the browser), 3 h cache.
