@@ -71,7 +71,7 @@
       var rise = sun.sunrise ? sun.sunrise.getTime() : noon.getTime() - 6 * HOUR;
       var set = sun.sunset ? sun.sunset.getTime() : noon.getTime() + 6 * HOUR;
 
-      var best = null, bestWhen = null;
+      var best = null, bestWhen = null, winter = null, winterWhen = null;
       var wind = [], gustMax = null, rain = 0, rainSeen = false, chanceMax = null;
       var airMax = null, airMin = null, chillMin = null, hours = [];
       // Today's best time is never one already gone; the rest of the day still counts.
@@ -81,6 +81,9 @@
         var r = CUI.scoreAt(place, when, wx, water);
         var later = t + HOUR > nowMs || to < nowMs;
         if (later && (!best || r.scoreRaw > best.scoreRaw)) { best = r; bestWhen = when; }
+        // Build 2 (C17): the winter score of the same slot, for frozen lakes.
+        var ws = Conditions.scoreWinter(r);
+        if (later && ws.score !== null && (!winter || ws.scoreRaw > winter.scoreRaw)) { winter = ws; winterWhen = when; }
         var w = wx.data ? Weather.at(wx.data, when) : null;
         var sunUp = t >= rise && t <= set;
         if (w) hours.push({ when: when, cloudPct: w.cloudCoverPct, sunUp: sunUp });
@@ -115,6 +118,10 @@
         gustMax: gustMax, windMean: windMean,
         precipMm: rainSeen ? rain : null, precipChancePct: chanceMax,
         airMax: airMax, airMin: airMin, chillMin: chillMin,
+        winter: winter ? winter.score : null,
+        winterDetail: winter,
+        winterWhen: winterWhen,
+        comfort: Conditions.comfortNote(chillMin),
         pressureTrend3h: w3,
         clearing: Conditions.clearingHint(hours),
         closed: closed,

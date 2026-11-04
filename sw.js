@@ -27,7 +27,9 @@
    cached js/conditions.js does not have. */
 /* v4: Build 1b. New js files (forecast, lake-sheet, day-ui, reading-room),
    the Learn guides, and a weather.js that fetches every lake at once. */
-const SHELL_CACHE = "troutmap-shell-v4";
+/* v5: Build 2. js/estimates.js (ice, hatch, turnover, tackle, how to fish),
+   the winter score, and the lake height, depth chart and hot spot files. */
+const SHELL_CACHE = "troutmap-shell-v5";
 const DATA_CACHE = "troutmap-data-v1";
 const TILE_CACHE = "troutmap-tiles-v1";
 const WX_CACHE = "troutmap-wx-v1";
@@ -58,6 +60,7 @@ const SHELL_FILES = [
   "js/conditions-ui.js",
   "js/lake-panel.js",
   "js/forecast.js",
+  "js/estimates.js",
   "js/lake-sheet.js",
   "js/day-ui.js",
   "js/reading-room.js",
@@ -108,6 +111,9 @@ async function precacheData() {
                  "data/lake_profile.json",
                  // The saved town list is what town search uses with no signal.
                  "data/towns_ab.json",
+                 // Build 2: lake heights, depth chart links and hot spots.
+                 "data/lake_elevation.json", "data/depth_charts.json",
+                 "data/hot_spots.json",
                  "live/advisories.json"];
   await Promise.all(fixed.map(u => cache.add(u).catch(() => {})));
 

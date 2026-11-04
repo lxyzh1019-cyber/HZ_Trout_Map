@@ -3000,3 +3000,369 @@ class Build1bPageTests(unittest.TestCase):
             self.assertTrue(entry, path.name + " has no provenance")
             self.assertTrue(any(str(entry.get("licence", "")).startswith(f) for f in free), entry)
             self.assertTrue(entry.get("author"), path.name)
+class Build2EstimateTests(unittest.TestCase):
+    """Build 2: ice, hatches, turnover, tackle and how to fish. Each is
+    labelled "estimated" and lists its inputs."""
+
+    def test_every_estimate_is_labelled_with_its_inputs(self):
+        got = run_js(["estimates.js"], "(() => { const E = window.Estimates; const now = new Date(2026, 10, 3);"
+                     " const h = E.hatch({waterC: 12, month: 6});"
+                     " return [E.ice({now, lat: 53, elevM: 800, maxDepthM: 8}), h,"
+                     " E.turnover({stratification: {stratifies: true, band_m: [3, 6]}, maxDepthM: 12, waterC: 15, month: 7}),"
+                     " E.tackle({month: 6, waterC: 12, hatches: h}), E.howToFish({areaHa: 40, maxDepthM: 3})]; })()")
+        for result in got:
+            self.assertEqual(result["label"], "estimated")
+            self.assertTrue(result["inputs"], result)
+            self.assertTrue(all(isinstance(i, str) and i for i in result["inputs"]))
+
+    def test_the_panel_shows_estimated_and_the_inputs(self):
+        sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        self.assertIn('<span class="est-chip">estimated</span>', sheet)
+        self.assertIn('class="inputs">From: ', sheet)
+        for title in ("Ice cover", "Insect hatches", "Turnover", "Flies and lures", "How to fish this lake"):
+            self.assertIn(title, sheet)
+
+    def test_hatch_thresholds(self):
+        got = run_js(["estimates.js"], "(() => { const E = window.Estimates; return [E.HATCHES,"
+                     " E.hatch({waterC: 15, month: 6}).hatches.map(h => h.status),"
+                     " E.hatch({waterC: 9, month: 5}).hatches.map(h => h.status),"
+                     " E.hatch({waterC: 18, month: 7, iced: true}).hatches.map(h => h.status)]; })()")
+        starts = {h["id"]: h["startC"] for h in got[0]}
+        self.assertEqual(starts, {"chironomid": 10, "mayfly": 14, "damselfly": 16, "sedge": 17})
+        self.assertEqual(got[1], ["likely", "likely", "soon", "soon"])
+        self.assertEqual(got[2], ["soon", "not yet", "not yet", "not yet"])
+        self.assertEqual(set(got[3]), {"under ice"})
+
+    def test_never_bait_on_a_bait_ban_lake(self):
+        cases = [{"month": m, "waterC": w, "iced": i} for m in (1, 5, 7, 10) for w in (2, 8, 13, 19) for i in (False, True)]
+        got = run_js(["estimates.js"], "%s.map(c => [window.Estimates.tackle(Object.assign({baitBan: true}, c)),"
+                     " window.Estimates.tackle(Object.assign({baitBan: false}, c))])" % json.dumps(cases))
+        for banned, allowed in got:
+            self.assertIsNone(banned["bait"])
+            self.assertIn("no bait", banned["baitNote"])
+            self.assertNotIn("bait allowed", " ".join(banned["inputs"]))
+            self.assertTrue(allowed["bait"])
+            for text in banned["flies"] + banned["lures"]:
+                self.assertNotRegex(text.lower(), r"\b(worm|maggot|dough|minnow)\b")
+            self.assertIn("only legal source", banned["legal"])
+        sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        self.assertIn("baitRule: lakeBaitRule(lake)", sheet)
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn('if (!reg || !reg.bait) return "unknown";', page)
+
+    def test_an_unknown_bait_rule_never_lists_bait(self):
+        got = run_js(["estimates.js"], "(() => { const E = window.Estimates; return [E.tackle({month: 6, waterC: 12, baitRule: 'unknown'}),"
+                     " E.tackle({month: 6, waterC: 12}), E.howToFish({baitRule: 'unknown'}).lines.join(' ')]; })()")
+        for t in got[:2]:
+            self.assertIsNone(t["bait"])
+            self.assertIn("check the regulations", t["baitNote"])
+            self.assertIn("bait rule not found: check the regulations", t["inputs"])
+        self.assertIn("Bait rule not found", got[2])
+
+    def test_ice_dates_come_with_the_warning_and_never_a_thickness(self):
+        est = (ROOT / "js" / "estimates.js").read_text(encoding="utf-8")
+        self.assertIn('ICE_WARNING = "Legal is not safe. Ice thickness is never forecast."', est)
+        self.assertNotRegex(est.lower(), r"thick(ness)?\s*(of|=|:)\s*\d|\b\d+\s*cm of ice|ice is safe")
+        sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        self.assertIn("esc(e.ice.text)", sheet)
+        self.assertIn("esc(e.ice.warning)", sheet)
+
+    def test_ice_forms_and_goes_by_degree_days(self):
+        t0 = 1793167200  # 2026-10-27 06:00 UTC
+        cold = [2, 1, -1, -3, -2, -4, -5, -6, -8, -10, -12, -9, -11, -14]
+        warm = [-3, -1, 1, 3, 5, 8, 9, 10, 11, 12, 12, 13, 11, 12]
+        expr = ("(() => { const E = window.Estimates; const T = %s, W = %s, t0 = %d;"
+                " const days = T.map((_, i) => t0 + i * 86400);"
+                " const on = E.ice({dailyT: days, dailyMeanC: T, lat: 53, elevM: 700, maxDepthM: 8, now: new Date(2026, 10, 3, 12)});"
+                " const shallow = E.ice({dailyT: days, dailyMeanC: T, lat: 53, elevM: 700, maxDepthM: 3, now: new Date(2026, 10, 3, 12)});"
+                " const off = E.ice({dailyT: days, dailyMeanC: W, lat: 53, elevM: 700, maxDepthM: 8, iced: true, now: new Date(2026, 3, 20, 12)});"
+                " return [on.iceOn, shallow.iceOn, off.state, off.iceOff, on.warning, E.FREEZE_DD, E.THAW_DD]; })()"
+                % (json.dumps(cold), json.dumps(warm), t0))
+        on, shallow, state, off, warning, freeze, thaw = run_js(["estimates.js"], expr)
+        self.assertEqual(on["basis"], "forecast")
+        self.assertLess(shallow["date"], on["date"], "a shallow lake freezes first")
+        self.assertEqual(state, "ice")
+        self.assertIsNotNone(off)
+        self.assertEqual(warning, "Legal is not safe. Ice thickness is never forecast.")
+        self.assertLess(freeze["shallow"], freeze["medium"])
+        self.assertLess(freeze["medium"], freeze["deep"])
+        self.assertLess(thaw["shallow"], thaw["deep"])
+
+    def ice_case(self, temps, now, **kw):
+        """Daily means from 7 days before `now` to 6 days after, in Edmonton time."""
+        expr = ("(() => { const now = new Date(%s); const T = %s;"
+                " const t0 = Math.floor(now.getTime() / 1000) - 7 * 86400;"
+                " return window.Estimates.ice(Object.assign({dailyT: T.map((_, i) => t0 + i * 86400), dailyMeanC: T,"
+                " now, offset: -25200}, %s)); })()") % (json.dumps(now), json.dumps(temps), json.dumps(kw))
+        return run_js(["estimates.js"], expr)
+
+    def test_a_mildly_cold_week_is_not_ice(self):
+        r = self.ice_case([-0.5, -1, 0, -0.5, -1, -0.5, 0, 1, 0, -1, 0, 1, 2, 1], "2026-11-03T12:00:00-07:00",
+                          lat=56, elevM=800, maxDepthM=10)
+        self.assertEqual(r["state"], "open")
+        self.assertNotIn("Ice cover likely now", r["text"])
+        self.assertIn("any week now", r["text"])
+
+    def test_a_cold_past_week_in_the_ice_season_is_ice(self):
+        r = self.ice_case([-12] * 14, "2027-01-10T12:00:00-07:00", lat=53, elevM=700, maxDepthM=10)
+        self.assertEqual(r["state"], "ice")
+        self.assertTrue(r["text"].startswith("Ice cover likely now."), r["text"])
+        self.assertIn("Ice-off usually about", r["text"])
+
+    def test_spring_ice_off_in_the_past_days_and_no_fall_warning(self):
+        warm = [1, 4, 8, 10, 12, 12, 13, 14, 12, 13, 14, 15, 14, 15]
+        r = self.ice_case(warm, "2027-04-20T12:00:00-06:00", lat=53, elevM=700, maxDepthM=10, iced=True)
+        self.assertEqual(r["iceOff"]["basis"], "past days")
+        self.assertEqual(r["state"], "open")
+        self.assertRegex(r["text"], r"^Ice-off likely about Apr (1[3-9]|20)\.")
+        self.assertNotIn("any week now", r["text"])
+        self.assertIn("Ice usually forms here about Nov", r["text"])
+
+    def test_ice_dates_use_the_lake_time_zone(self):
+        # Midnight in Edmonton is 07:00 UTC in winter: the date must not slip a day.
+        got = run_js(["estimates.js"], "[window.Estimates.fmtDate(new Date(Date.UTC(2026, 10, 12, 7)), -25200),"
+                     " window.Estimates.fmtDate(new Date(Date.UTC(2026, 10, 12, 6)), -25200)]")
+        self.assertEqual(got, ["Nov 12", "Nov 11"])
+
+    def test_the_height_correction_is_said_in_words(self):
+        r = self.ice_case([5] * 14, "2026-08-01T12:00:00-06:00", elevM=900, cellElevM=1050, airOffsetC=0.975)
+        self.assertIn("corrected 1 °C warmer (6.5 °C per km)", " ".join(r["inputs"]))
+
+    def test_usual_ice_dates_move_with_latitude_and_height(self):
+        got = run_js(["estimates.js"], "(() => { const U = window.Estimates.usualDates;"
+                     " return [U(53, 700, 'medium', 2026), U(56, 700, 'medium', 2026), U(53, 1500, 'medium', 2026)]"
+                     ".map(d => [d.on.getTime(), d.off.getTime()]); })()")
+        base, north, high = got
+        self.assertLess(north[0], base[0])
+        self.assertGreater(north[1], base[1])
+        self.assertLess(high[0], base[0])
+        self.assertGreater(high[1], base[1])
+
+    def test_turnover_reuses_the_summer_layer(self):
+        expr = ("(() => { const T = window.Estimates.turnover; const s = {stratifies: true, band_m: [3, 6]};"
+                " return [T({stratification: null, maxDepthM: null, waterC: 7, month: 10}).state,"
+                " T({stratification: {stratifies: false}, maxDepthM: 3, waterC: 7, month: 10}).state,"
+                " T({stratification: s, maxDepthM: 12, waterC: 7, month: 10}).state,"
+                " T({stratification: s, maxDepthM: 12, waterC: 14, month: 10}).state,"
+                " T({stratification: s, maxDepthM: 12, waterC: 18, month: 7}),"
+                " T({stratification: s, maxDepthM: 12, waterC: 6, month: 5}).state,"
+                " T({stratification: s, maxDepthM: 12, month: 1, iced: true}).state]; })()")
+        unknown, mixed, fall, layered_fall, summer, spring, iced = run_js(["estimates.js"], expr)
+        self.assertEqual(unknown, "unknown")
+        self.assertEqual(mixed, "mixed")
+        self.assertEqual(fall, "fall")
+        self.assertEqual(layered_fall, "layered")
+        self.assertEqual(summer["state"], "layered")
+        self.assertIn("3–6 m", summer["text"])
+        self.assertEqual(spring, "spring")
+        self.assertEqual(iced, "ice")
+        more = run_js(["estimates.js"], "(() => { const T = window.Estimates.turnover; const s = {stratifies: true, band_m: [3, 6]};"
+                      " return [T({stratification: s, maxDepthM: 12, waterC: 5, month: 1}).state,"
+                      " T({stratification: s, maxDepthM: 12, waterC: null, month: 10}).state,"
+                      " T({stratification: s, maxDepthM: 12, waterC: 12, month: 5}).state]; })()")
+        self.assertEqual(more, ["cold", "unknown", "layered"])
+        sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        self.assertIn("stratification: depth.stratification", sheet)
+        est = (ROOT / "js" / "estimates.js").read_text(encoding="utf-8")
+        body = est[est.index("function turnover("):est.index("// E4.")]
+        self.assertNotIn("maxDepthM <", body, "turnover must not decide layering itself")
+
+    def test_how_to_fish_uses_the_lake_data(self):
+        got = run_js(["estimates.js"], "window.Estimates.howToFish({maxDepthM: 12, stratification: {stratifies: true,"
+                     " band_m: [3, 6]}, areaHa: 300, aerated: true, amenities: ['Boat Launch', 'Dock/Pier'], baitBan: true,"
+                     " iceKind: 'all-winter', troutLimit: 0})")
+        text = " ".join(got["lines"])
+        for part in ("Big water (300 ha)", "3–6 m", "boat launch", "Aerated", "Bait ban", "open all winter",
+                     "Legal is not safe. Ice thickness is never forecast.", "Catch and release", "only legal source"):
+            self.assertIn(part, text)
+
+
+class Build2PanelTests(unittest.TestCase):
+    """The new panel sections render for a lake with nothing known, and for an
+    old saved forecast that has no height."""
+
+    PRELUDE = (
+        "window = globalThis;"
+        "function esc(s) { return String(s == null ? '' : s).replace(/[&<>\"']/g, c => '&#' + c.charCodeAt(0) + ';'); }"
+        "var WX = {}; var Weather = { peek: (a, b) => WX.rec || {data: null, fetchedAt: null, source: 'none'} };"
+        "var ConditionsUI = { _internal: { waterFor: (p, wx) => wx.data ? {tempC: 6, source: 'modeled', sigmaC: 2} : null } };"
+        "var DEPTHS = {}; function depthFor(l) { return DEPTHS[l.lake_id] || null; }"
+        "function elevationFor(l) { return l.elev == null ? null : l.elev; }"
+        "function filteredDominantOrder(l) { return l.species || []; }"
+        "function lakeBaitRule(l) { return l.rule || 'unknown'; } function lakeAerated(l) { return false; }"
+        "function profileFor(l) { return null; } function lakeIceKind(l) { return null; } function regulationFor(l) { return null; }"
+        "var DEPTH_CHARTS = {matched: 43, placed_lakes: 380, page: 'https://ags.aer.ca/interactive-data-and-tools/lake-bathymetry-data',"
+        " lakes: {wb1: {name: 'Test Lake', dig: 'DIG 2008-0001', url: 'https://ags.aer.ca/publication/dig-2008-0001'}}};"
+        "function depthChartFor(l) { return DEPTH_CHARTS.lakes[l.lake_id] || null; }"
+    )
+
+    def render(self, setup):
+        return run_js(["conditions.js", "estimates.js", "lake-sheet.js"],
+                      "(() => { %s; const S = window.LakeSheet._internal;"
+                      " const lake = {lake_id: 'wb2', name: 'Nothing Pond', lat: 53, lon: -114};"
+                      " const f = {iced: false, offset: null, days: []};"
+                      " return [S.seasonHtml(lake, f), S.howHtml(lake), S.depthChartHtml(lake), S.depthChartHtml({lake_id: 'wb1'}),"
+                      " S.hotSpotsHtml([{name: 'Weed edge', note: 'n', lat: 53.1, lon: -114.2,"
+                      " source_url: 'https://example.org/a', source_date: '2026-10-01'}])]; })()" % setup,
+                      prelude=self.PRELUDE)
+
+    def test_a_lake_with_no_weather_depth_or_height(self):
+        season, how, nochart, chart, spot = self.render("")
+        self.assertEqual(season.count('class="est-chip">estimated'), 4)
+        self.assertIn("no forecast: usual dates only", season)
+        self.assertIn("Not known: there is no depth survey", season)
+        self.assertIn("Bait rule not found", season)
+        self.assertNotIn("<b>Bait:</b>", season)
+        self.assertIn("No depth survey", how)
+        self.assertIn("No match found in Alberta", nochart)
+        self.assertIn('class="btn" href="https://ags.aer.ca/interactive-data-and-tools/lake-bathymetry-data"', nochart)
+        self.assertIn('class="btn" href="https://ags.aer.ca/publication/dig-2008-0001"', chart)
+        self.assertIn('class="btn" href="https://example.org/a"', spot)
+        self.assertIn("query=53.1,-114.2", spot)
+        self.assertIn("2026-10-01", spot)
+
+    def test_an_old_saved_forecast_without_height(self):
+        setup = "WX.rec = {data: {dailyT: [1793167200, 1793253600], dailyMeanC: [3, 2], offset: -25200}, fetchedAt: 1, source: 'cache'}"
+        season = self.render(setup)[0]
+        self.assertIn("2 days of daily mean air", season)
+        self.assertNotIn("NaN", season)
+        self.assertNotIn("undefined", season)
+
+
+class Build2WinterTests(unittest.TestCase):
+    """Build 2: a winter score of light, pressure and moon, a cold note, and
+    the This winter list."""
+
+    def test_winter_score_renormalises_light_pressure_and_moon(self):
+        got = run_js(["conditions.js"], "(() => { const W = window.Conditions.scoreWinter; return ["
+                     " W({moonMult: 1.02, factors: {light: {s: .8, weight: .4}, pressure: {s: .5, weight: .15},"
+                     " water: {s: 0, weight: .35}, wind: {s: 0, weight: .06}, precip: {s: 0, weight: .04}}}),"
+                     " W({moonMult: 1, factors: {light: {s: .6, weight: .4}, pressure: {s: null}}}),"
+                     " W({factors: {}})]; })()")
+        full, light_only, empty = got
+        self.assertAlmostEqual(full["score"], (0.4 * 0.8 + 0.15 * 0.5) / 0.55 * 1.02, places=6)
+        self.assertAlmostEqual(full["parts"]["light"]["share"] + full["parts"]["pressure"]["share"], 1)
+        self.assertEqual(sorted(full["parts"]), ["light", "pressure"])
+        self.assertAlmostEqual(light_only["score"], 0.6)
+        self.assertIsNone(empty["score"])
+
+    def test_winter_score_is_scored_for_every_day(self):
+        forecast = (ROOT / "js" / "forecast.js").read_text(encoding="utf-8")
+        self.assertIn("Conditions.scoreWinter(r)", forecast)
+        self.assertIn("comfort: Conditions.comfortNote(chillMin)", forecast)
+        sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        self.assertIn("winterScoreHtml(f, d)", sheet)
+
+    def test_cold_comfort_follows_environment_canada_bands(self):
+        got = run_js(["conditions.js"], "[5, -5, -20, -30, -45, -50, -60, null].map(c => {"
+                     " const n = window.Conditions.comfortNote(c); return n && n.level; })")
+        self.assertEqual(got, ["mild", "low", "moderate", "high", "very-high", "severe", "extreme", None])
+
+    def test_this_winter_puts_ice_season_and_aerated_lakes_first(self):
+        prelude = ("var state = {day: 0};"
+                   "function lakeIceKind(l) { return l.kind; } function lakeAerated(l) { return !!l.aer; }"
+                   "function depthFor(l) { return l.wk ? {winterkill: {level: l.wk}} : null; }"
+                   "var Forecast = { forLake: l => ({ days: [{ winter: l.w }] }) };")
+        lakes = [
+            {"name": "closed near", "kind": "closed", "aer": False, "wk": "low", "w": 0.9, "distanceKm": 1},
+            {"name": "ice high risk", "kind": "all-winter", "aer": False, "wk": "high", "w": 0.9, "distanceKm": 2},
+            {"name": "ice aerated", "kind": "all-winter", "aer": True, "wk": "moderate", "w": 0.5, "distanceKm": 50},
+            {"name": "ice low risk", "kind": "early-late", "aer": False, "wk": "low", "w": 0.4, "distanceKm": 30},
+            {"name": "ice low risk better", "kind": "all-winter", "aer": False, "wk": "low", "w": 0.8, "distanceKm": 40},
+        ]
+        got = run_js(["day-ui.js"], "%s.sort(window.DayUI._internal.thisWinter).map(l => l.name)" % json.dumps(lakes),
+                     prelude=prelude)
+        self.assertEqual(got, ["ice aerated", "ice low risk better", "ice low risk", "ice high risk", "closed near"])
+        ui = (ROOT / "js" / "day-ui.js").read_text(encoding="utf-8")
+        self.assertIn('title = "This winter near " + originPoint().name;', ui)
+
+
+class Build2DataTests(unittest.TestCase):
+    """Build 2 data: lake heights, depth chart links and hot spots."""
+
+    def test_every_placed_lake_has_a_height(self):
+        rec = json.loads((DATA_DIR / "lake_elevation.json").read_text(encoding="utf-8"))
+        placed = mapped_lakes()
+        self.assertEqual(set(rec["lakes"]), set(placed))
+        self.assertEqual(rec["count"], len(placed))
+        self.assertEqual(rec["calls"], -(-len(placed) // 100), "100 lakes per call")
+        for key, h in rec["lakes"].items():
+            self.assertTrue(200 < h < 3000, (key, h))
+        for field in ("source", "url", "licence", "retrieved"):
+            self.assertTrue(rec.get(field), field)
+
+    def test_lake_height_only_feeds_the_water_model_and_ice(self):
+        got = run_js(["conditions.js"], "(() => { const C = window.Conditions; const air = [10, 11, 12, 12, 13, 12, 12];"
+                     " return [C.heightOffsetC(1000, 900), C.heightOffsetC(null, 900),"
+                     " C.waterFromAir(air, {}).tempC, C.waterFromAir(air, {airOffsetC: 3}).tempC]; })()")
+        self.assertAlmostEqual(got[0], 0.65)
+        self.assertEqual(got[1], 0)
+        self.assertGreater(got[3], got[2])
+        users = [p.name for p in (ROOT / "js").glob("*.js") if "heightOffsetC(" in p.read_text(encoding="utf-8")]
+        self.assertEqual(sorted(users), ["conditions-ui.js", "conditions.js", "lake-sheet.js"])
+        cui = (ROOT / "js" / "conditions-ui.js").read_text(encoding="utf-8")
+        water_for = cui[cui.index("function waterFor("):cui.index("// THE NEXT SIX HOURS")]
+        self.assertIn("elevationFor(place.lake)", water_for)
+        cond = (ROOT / "js" / "conditions.js").read_text(encoding="utf-8")
+        score = cond[cond.index("function scoreSlot("):cond.index("function bestOf(")]
+        self.assertNotIn("elev", score.lower())
+
+    def test_depth_chart_links_are_matched_lakes(self):
+        rec = json.loads((DATA_DIR / "depth_charts.json").read_text(encoding="utf-8"))
+        placed = mapped_lakes()
+        self.assertEqual(rec["matched"], len(rec["lakes"]))
+        self.assertGreaterEqual(rec["surveyed"], 160)
+        self.assertGreater(rec["matched"], 20)
+        self.assertEqual(rec["placed_lakes"], len(placed))
+        for key, c in rec["lakes"].items():
+            self.assertIn(key, placed)
+            self.assertRegex(c["url"], r"^https://ags\.aer\.ca/publication/dig-\d{4}-\d{4}$")
+            self.assertRegex(c["dig"], r"^DIG \d{4}-\d{4}$")
+            self.assertLessEqual(c["km_from_outline"], 2)
+        sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        self.assertIn("depthChartHtml(lake)", sheet)
+
+    def check_spot(self, spot):
+        import datetime
+        for field in ("lake", "name", "lat", "lon", "note", "source_url", "source_date"):
+            self.assertIn(field, spot)
+        self.assertRegex(spot["source_url"], r"^https://\S+$")
+        self.assertRegex(spot["source_date"], r"^\d{4}-\d{2}-\d{2}$")
+        datetime.date.fromisoformat(spot["source_date"])
+        self.assertTrue(48.9 <= spot["lat"] <= 60.1 and -120.1 <= spot["lon"] <= -109.9)
+
+    def test_hot_spots_have_https_links_and_iso_dates(self):
+        rec = json.loads((DATA_DIR / "hot_spots.json").read_text(encoding="utf-8"))
+        self.assertEqual(rec["schema"], 1)
+        self.assertIsInstance(rec["spots"], list)
+        placed = mapped_lakes()
+        for spot in rec["spots"]:
+            self.check_spot(spot)
+            self.assertIn(spot["lake"], placed)
+        # The check itself refuses a plain http link and a written-out date.
+        bad = {"lake": "wb1", "name": "x", "lat": 52, "lon": -114, "note": "", "source_url": "http://a.b", "source_date": "2026-10-01"}
+        with self.assertRaises(AssertionError):
+            self.check_spot(bad)
+        with self.assertRaises(AssertionError):
+            self.check_spot(dict(bad, source_url="https://a.b", source_date="Oct 1 2026"))
+
+    def test_hot_spots_section_only_when_spots_exist(self):
+        sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        self.assertIn('(spots.length ? section("spots", "Hot spots"', sheet)
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn("function hotSpotsFor(lake)", page)
+        self.assertTrue((ROOT / "scripts" / "check_links.py").exists())
+
+    def test_build2_files_are_loaded_and_precached(self):
+        worker = (ROOT / "sw.js").read_text(encoding="utf-8")
+        self.assertIn('const SHELL_CACHE = "troutmap-shell-v5";', worker)
+        start = worker.index("const SHELL_FILES = [")
+        shell = set(re.findall(r'"([^"]+)"', worker[start:worker.index("]", start)]))
+        self.assertIn("js/estimates.js", shell)
+        data = worker[worker.index("async function precacheData"):worker.index("let years")]
+        for f in ("data/lake_elevation.json", "data/depth_charts.json", "data/hot_spots.json"):
+            self.assertIn('"%s"' % f, data)
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn('<script src="js/estimates.js"></script>', page)
+        for f in ("data/lake_elevation.json", "data/depth_charts.json", "data/hot_spots.json"):
+            self.assertIn('loadOptionalJson("%s")' % f, page)

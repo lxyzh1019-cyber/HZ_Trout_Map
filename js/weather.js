@@ -143,6 +143,9 @@
       code: h.weather_code || [],
       dailyT: (json.daily || {}).time || [],
       dailyMeanC: (json.daily || {}).temperature_2m_mean || [],
+      // The height the forecast is for (the cell centre), so the water model
+      // and the ice estimates can correct the air to the lake's own height.
+      elevM: typeof json.elevation === "number" && isFinite(json.elevation) ? json.elevation : null,
     };
   }
 

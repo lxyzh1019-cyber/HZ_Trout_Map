@@ -1,0 +1,270 @@
+{
+ "source": "Alberta Geological Survey, Lake Bathymetry Data (Lake_Boundary layer)",
+ "page": "https://ags.aer.ca/interactive-data-and-tools/lake-bathymetry-data",
+ "layer": "https://services2.arcgis.com/jQV6VMr2Loovu7GU/arcgis/rest/services/Lake_Boundary/FeatureServer/0",
+ "retrieved": "2026-11-03",
+ "surveyed": 166,
+ "placed_lakes": 380,
+ "matched": 43,
+ "rule": "same name without 'lake', chain parts (Upper, #3), brackets and punctuation, with the lake's point inside the outline or within 2 km; or one letter different with the point inside",
+ "lakes": {
+  "wb18014": {
+   "name": "South Heart Reservoir",
+   "dig": "DIG 2008-0676",
+   "url": "https://ags.aer.ca/publication/dig-2008-0676",
+   "km_from_outline": 0.0
+  },
+  "wb3494": {
+   "name": "Blood Indian Creek Reservoir",
+   "dig": "DIG 2008-0551",
+   "url": "https://ags.aer.ca/publication/dig-2008-0551",
+   "km_from_outline": 0.0
+  },
+  "wb4018": {
+   "name": "Beaver Mines Lake",
+   "dig": "DIG 2008-0547",
+   "url": "https://ags.aer.ca/publication/dig-2008-0547",
+   "km_from_outline": 0.0
+  },
+  "wb4161": {
+   "name": "Burnstick Lake",
+   "dig": "DIG 2008-0558",
+   "url": "https://ags.aer.ca/publication/dig-2008-0558",
+   "km_from_outline": 0.0
+  },
+  "wb4261": {
+   "name": "Chickakoo Lake",
+   "dig": "DIG 2008-0566",
+   "url": "https://ags.aer.ca/publication/dig-2008-0566",
+   "km_from_outline": 0.0
+  },
+  "wb4265": {
+   "name": "Chin Lakes",
+   "dig": "DIG 2008-0568",
+   "url": "https://ags.aer.ca/publication/dig-2008-0568",
+   "km_from_outline": 0.0
+  },
+  "wb4340": {
+   "name": "Cow Lake",
+   "dig": "DIG 2008-0574",
+   "url": "https://ags.aer.ca/publication/dig-2008-0574",
+   "km_from_outline": 0.0
+  },
+  "wb4374": {
+   "name": "Crowsnest Lake",
+   "dig": "DIG 2008-0577",
+   "url": "https://ags.aer.ca/publication/dig-2008-0577",
+   "km_from_outline": 0.0
+  },
+  "wb4446": {
+   "name": "Dillberry Lake",
+   "dig": "DIG 2008-0580",
+   "url": "https://ags.aer.ca/publication/dig-2008-0580",
+   "km_from_outline": 0.0
+  },
+  "wb4571": {
+   "name": "Fickle Lake",
+   "dig": "DIG 2008-0585",
+   "url": "https://ags.aer.ca/publication/dig-2008-0585",
+   "km_from_outline": 0.0
+  },
+  "wb4635": {
+   "name": "Frog Lake",
+   "dig": "DIG 2008-0589",
+   "url": "https://ags.aer.ca/publication/dig-2008-0589",
+   "km_from_outline": 0.0
+  },
+  "wb4697": {
+   "name": "Goldeye Lake",
+   "dig": "DIG 2008-0594",
+   "url": "https://ags.aer.ca/publication/dig-2008-0594",
+   "km_from_outline": 0.0
+  },
+  "wb4708": {
+   "name": "Goose Lake",
+   "dig": "DIG 2008-0597",
+   "url": "https://ags.aer.ca/publication/dig-2008-0597",
+   "km_from_outline": 0.0
+  },
+  "wb4725": {
+   "name": "Grande Cache Lake",
+   "dig": "DIG 2008-0599",
+   "url": "https://ags.aer.ca/publication/dig-2008-0599",
+   "km_from_outline": 0.0
+  },
+  "wb4794": {
+   "name": "Hasse Lake",
+   "dig": "DIG 2008-0605",
+   "url": "https://ags.aer.ca/publication/dig-2008-0605",
+   "km_from_outline": 0.0
+  },
+  "wb4977": {
+   "name": "Kehiwin Lake",
+   "dig": "DIG 2008-0618",
+   "url": "https://ags.aer.ca/publication/dig-2008-0618",
+   "km_from_outline": 0.0
+  },
+  "wb4978": {
+   "name": "Keho Lake",
+   "dig": "DIG 2008-0619",
+   "url": "https://ags.aer.ca/publication/dig-2008-0619",
+   "km_from_outline": 0.0
+  },
+  "wb5002": {
+   "name": "Kinky Lake",
+   "dig": "DIG 2008-0620",
+   "url": "https://ags.aer.ca/publication/dig-2008-0620",
+   "km_from_outline": 0.0
+  },
+  "wb5050": {
+   "name": "Lee Lake",
+   "dig": "DIG 2008-0623",
+   "url": "https://ags.aer.ca/publication/dig-2008-0623",
+   "km_from_outline": 0.0
+  },
+  "wb5179": {
+   "name": "Lower Kananaskis Lake",
+   "dig": "DIG 2008-0627",
+   "url": "https://ags.aer.ca/publication/dig-2008-0627",
+   "km_from_outline": 0.0
+  },
+  "wb5245": {
+   "name": "Mary Gregg Lake",
+   "dig": "DIG 2008-0633",
+   "url": "https://ags.aer.ca/publication/dig-2008-0633",
+   "km_from_outline": 0.0
+  },
+  "wb5286": {
+   "name": "McLeod Lake",
+   "dig": "DIG 2008-0635",
+   "url": "https://ags.aer.ca/publication/dig-2008-0635",
+   "km_from_outline": 0.0
+  },
+  "wb5324": {
+   "name": "Millers Lake",
+   "dig": "DIG 2008-0638",
+   "url": "https://ags.aer.ca/publication/dig-2008-0638",
+   "km_from_outline": 0.0
+  },
+  "wb5348": {
+   "name": "Mitchell Lake",
+   "dig": "DIG 2008-0643",
+   "url": "https://ags.aer.ca/publication/dig-2008-0643",
+   "km_from_outline": 0.0
+  },
+  "wb5387": {
+   "name": "Muir Lake",
+   "dig": "DIG 2008-0647",
+   "url": "https://ags.aer.ca/publication/dig-2008-0647",
+   "km_from_outline": 0.0
+  },
+  "wb5466": {
+   "name": "Obed Lake",
+   "dig": "DIG 2008-0653",
+   "url": "https://ags.aer.ca/publication/dig-2008-0653",
+   "km_from_outline": 0.0
+  },
+  "wb5504": {
+   "name": "Outpost Lake",
+   "dig": "DIG 2008-0655",
+   "url": "https://ags.aer.ca/publication/dig-2008-0655",
+   "km_from_outline": 0.0
+  },
+  "wb5513": {
+   "name": "Payne Lake",
+   "dig": "DIG 2008-0656",
+   "url": "https://ags.aer.ca/publication/dig-2008-0656",
+   "km_from_outline": 0.0
+  },
+  "wb5538": {
+   "name": "Peanut Lake",
+   "dig": "DIG 2008-0657",
+   "url": "https://ags.aer.ca/publication/dig-2008-0657",
+   "km_from_outline": 0.0
+  },
+  "wb5572": {
+   "name": "Pierre Greys Lakes",
+   "dig": "DIG 2008-0658",
+   "url": "https://ags.aer.ca/publication/dig-2008-0658",
+   "km_from_outline": 0.0
+  },
+  "wb5581": {
+   "name": "Pinehurst Lake",
+   "dig": "DIG 2008-0661",
+   "url": "https://ags.aer.ca/publication/dig-2008-0661",
+   "km_from_outline": 0.0
+  },
+  "wb5820": {
+   "name": "Skeleton Lake",
+   "dig": "DIG 2008-0671",
+   "url": "https://ags.aer.ca/publication/dig-2008-0671",
+   "km_from_outline": 0.0
+  },
+  "wb5874": {
+   "name": "Spring Lake",
+   "dig": "DIG 2008-0677",
+   "url": "https://ags.aer.ca/publication/dig-2008-0677",
+   "km_from_outline": 0.0
+  },
+  "wb5895": {
+   "name": "Star Lake",
+   "dig": "DIG 2008-0679",
+   "url": "https://ags.aer.ca/publication/dig-2008-0679",
+   "km_from_outline": 0.0
+  },
+  "wb5919": {
+   "name": "Strubel Lake",
+   "dig": "DIG 2008-0681",
+   "url": "https://ags.aer.ca/publication/dig-2008-0681",
+   "km_from_outline": 0.0
+  },
+  "wb5952": {
+   "name": "Sylvan Lake",
+   "dig": "DIG 2008-0684",
+   "url": "https://ags.aer.ca/publication/dig-2008-0684",
+   "km_from_outline": 0.0
+  },
+  "wb6061": {
+   "name": "Upper Kananaskis Lake",
+   "dig": "DIG 2008-0689",
+   "url": "https://ags.aer.ca/publication/dig-2008-0689",
+   "km_from_outline": 0.0
+  },
+  "wb6086": {
+   "name": "Victor Lake",
+   "dig": "DIG 2008-0692",
+   "url": "https://ags.aer.ca/publication/dig-2008-0692",
+   "km_from_outline": 0.0
+  },
+  "wb6095": {
+   "name": "Wabamun Lake",
+   "dig": "DIG 2008-0694",
+   "url": "https://ags.aer.ca/publication/dig-2008-0694",
+   "km_from_outline": 0.0
+  },
+  "wb6160": {
+   "name": "Wildhorse Lakes",
+   "dig": "DIG 2008-0699",
+   "url": "https://ags.aer.ca/publication/dig-2008-0699",
+   "km_from_outline": 0.31
+  },
+  "wb6533": {
+   "name": "Pierre Greys Lakes",
+   "dig": "DIG 2008-0658",
+   "url": "https://ags.aer.ca/publication/dig-2008-0658",
+   "km_from_outline": 0.0
+  },
+  "wb6534": {
+   "name": "Pierre Greys Lakes",
+   "dig": "DIG 2008-0658",
+   "url": "https://ags.aer.ca/publication/dig-2008-0658",
+   "km_from_outline": 0.0
+  },
+  "wb6537": {
+   "name": "Wildhorse Lakes",
+   "dig": "DIG 2008-0699",
+   "url": "https://ags.aer.ca/publication/dig-2008-0699",
+   "km_from_outline": 0.0
+  }
+ }
+}

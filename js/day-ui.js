@@ -113,12 +113,8 @@
       list = lakes.filter(function (l) { return l.zone === zone; }).sort(byScore(function (l) { return biteOn(l, d); }));
       title = "Lakes in " + (zone || "a zone");
     } else if (winter) {
-      list = nearby(lakes).sort(function (a, b) {
-        var ia = lakeIceKind(a) && lakeIceKind(a) !== "closed" ? 0 : 1;
-        var ib = lakeIceKind(b) && lakeIceKind(b) !== "closed" ? 0 : 1;
-        return ia - ib || a.distanceKm - b.distanceKm;
-      });
-      title = "Ice season lakes near " + originPoint().name;
+      list = nearby(lakes).sort(thisWinter);
+      title = "This winter near " + originPoint().name;
     } else if (state.origin) {
       list = lakes.slice().sort(function (a, b) { return a.distanceKm - b.distanceKm; });
       title = "Lakes near " + state.origin.name;
@@ -127,6 +123,29 @@
       title = "Best near you, " + dayLabel(d);
     }
     return { title: title, list: list, winter: winter };
+  }
+
+  /* "This winter" (Build 2, D14): lakes open in the ice season and aerated
+   * lakes first, then the lower winterkill band (the same band as the lake
+   * panel), then the better winter score, then the nearer. */
+  var WK_ORDER = { low: 0, moderate: 1, high: 2 };
+  function winterKey(l) {
+    var kind = lakeIceKind(l);
+    var d = typeof depthFor === "function" ? depthFor(l) : null;
+    var wk = d && d.winterkill ? WK_ORDER[d.winterkill.level] : null;
+    return [kind && kind !== "closed" ? 0 : 1, lakeAerated(l) ? 0 : 1, wk == null ? 1 : wk];
+  }
+  function winterScore(l, d) {
+    var f = Forecast.forLake(l);
+    var day = f && f.days[d];
+    return day && !day.closed && num(day.winter) !== null ? day.winter : null;
+  }
+  function thisWinter(a, b) {
+    var ka = winterKey(a), kb = winterKey(b);
+    for (var i = 0; i < ka.length; i++) if (ka[i] !== kb[i]) return ka[i] - kb[i];
+    var sa = winterScore(a, state.day), sb = winterScore(b, state.day);
+    if (sa !== sb) return (sb === null ? -1 : sb) - (sa === null ? -1 : sa);
+    return a.distanceKm - b.distanceKm;
   }
 
   function zonesInPlay() {
@@ -222,8 +241,8 @@
     var f = Forecast.forLake(lake);
     var day = f && f.days[d];
     if (!day) return ["", ""];
-    if (winter || f.iced) return ["cold", num(day.chillMin) === null ? "ice likely" : Math.round(day.chillMin) + " °C wind chill"];
     if (day.closed) return ["shut", "season shut"];
+    if (winter || f.iced) return ["cold", num(day.chillMin) === null ? "ice likely" : Math.round(day.chillMin) + " °C wind chill"];
     if (num(day.gustMax) !== null && day.gustMax >= Conditions.GUST_WARN_KPH) return ["gusty", "gusts " + Math.round(day.gustMax) + " km/h"];
     if ((num(day.precipChancePct) || 0) > 60 || (num(day.precipMm) || 0) > 2) return ["rainy", "rain likely"];
     if (num(day.dayOut) === null) return ["", "no forecast"];
@@ -237,12 +256,30 @@
     var pill = dayOutPill(lake, d, winter);
     var km = Number.isFinite(lake.distanceKm) ? Math.round(lake.distanceKm) + " km" : "";
     var size = lake.surface_area_ha != null ? lake.surface_area_ha + " ha" : "size unknown";
-    var score = winter || (f && f.iced) ? "ice" : s === null ? "—" : pct(s);
+    var cold = winter || (f && f.iced);
+    var score = cold ? winterText(lake, d) : s === null ? "—" : pct(s);
     return '<button type="button" class="row" data-lake="' + esc(lakeKey(lake)) + '">'
       + '<span><span class="nm">' + esc(lake.name) + "</span><br>"
-      + '<span class="sub">' + esc([km, size].filter(Boolean).join(" · ")) + (lakeBaitBan(lake) ? " · bait ban" : "") + "</span></span>"
-      + '<span class="sc" title="Bite score">' + esc(score) + "</span>"
+      + '<span class="sub">' + esc([km, size].concat(cold ? winterBits(lake) : []).filter(Boolean).join(" · "))
+      + (lakeBaitBan(lake) ? " · bait ban" : "") + "</span></span>"
+      + '<span class="sc" title="' + (cold ? "Winter score: light, pressure trend and moon" : "Bite score") + '">' + esc(score) + "</span>"
       + '<span class="dayout ' + pill[0] + '">' + esc(pill[1]) + "</span></button>";
+  }
+
+  /* In winter the score column shows the winter score, or "ice" when there
+   * is none; the row says whether the lake is aerated and its winterkill band. */
+  function winterText(lake, d) {
+    var f = Forecast.forLake(lake);
+    if (f && f.days[d] && f.days[d].closed) return "shut";
+    var w = winterScore(lake, d);
+    return w === null ? "ice" : String(pct(w));
+  }
+  function winterBits(lake) {
+    var bits = [];
+    if (lakeAerated(lake)) bits.push("aerated");
+    var dd = typeof depthFor === "function" ? depthFor(lake) : null;
+    if (dd && dd.winterkill) bits.push("winterkill " + dd.winterkill.level);
+    return bits;
   }
 
   var NOTE = '<p class="note">Bite = will the fish feed. Day out = wind, gusts, rain and cold for being on the water. '
@@ -427,7 +464,8 @@
       + '<span><span class="nm">' + esc(l.name) + '</span><br><span class="sub">'
       + (Number.isFinite(l.distanceKm) ? Math.round(l.distanceKm) + " km from " + esc(originPoint().name) : "no position")
       + "</span></span>"
-      + '<span class="sc" title="Bite score">' + (winter || (f && f.iced) ? "ice" : s === null ? "—" : pct(s)) + "</span>"
+      + '<span class="sc" title="' + (winter || (f && f.iced) ? "Winter score" : "Bite score") + '">'
+      + esc(winter || (f && f.iced) ? winterText(l, state.day) : s === null ? "—" : pct(s)) + "</span>"
       + '<span class="dayout ' + pill[0] + '">' + esc(pill[1]) + "</span></li>";
   }
 
@@ -769,6 +807,6 @@
     emptyCheck: emptyCheck,
     showState: showState,
     lastSummary: function () { return fx.lastSummary; },
-    _internal: { ranked: ranked, rowHtml: rowHtml, dayOutPill: dayOutPill, pool: pool },
+    _internal: { ranked: ranked, rowHtml: rowHtml, dayOutPill: dayOutPill, pool: pool, thisWinter: thisWinter, winterKey: winterKey },
   };
 })();
