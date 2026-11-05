@@ -654,8 +654,44 @@
   // GETTING EVERY LAKE'S FORECAST
   // ============================================================
 
+  /* Build 5 Stage 2: every forecast point (a lake, or each spot on a river
+   * stretch). The ones within 200 km of you or on screen load first; the rest
+   * load when you move the map to them. A cell already saved costs nothing. */
+  var NEAR_KM = 200;
+  function weatherPoints() {
+    var out = [];
+    LAKES.forEach(function (l) {
+      if (l.river && Array.isArray(l.spots)) l.spots.forEach(function (p) { out.push({ lat: p[0], lon: p[1] }); });
+      else if (l.lat != null && l.lon != null) out.push({ lat: l.lat, lon: l.lon });
+    });
+    return out;
+  }
+  function onScreenOrNear(points) {
+    var o = originPoint();
+    var b = map && map.getBounds ? map.getBounds() : null;
+    return points.filter(function (p) {
+      return haversineKm(o.lat, o.lon, p.lat, p.lon) <= NEAR_KM || (b && b.contains([p.lat, p.lon]));
+    });
+  }
+  var panTimer = null;
+  function fetchOnScreen() {
+    clearTimeout(panTimer);
+    panTimer = setTimeout(function () {
+      if (!navigator.onLine || fx.loading || !map || !map.getBounds) return;
+      var b = map.getBounds();
+      var pts = weatherPoints().filter(function (p) { return b.contains([p.lat, p.lon]); });
+      Weather.loadAll(pts, {}).then(function (summary) {
+        if (!summary.calls) return;
+        fx.panSummary = summary;
+        if (typeof updateDataQualitySummary === "function") updateDataQualitySummary();
+        Forecast.clear();
+        refresh();
+      });
+    }, 700);
+  }
+
   function fetchAll(force) {
-    var lakes = LAKES.filter(function (l) { return l.lat != null && l.lon != null; });
+    var lakes = onScreenOrNear(weatherPoints());
     fx.loading = true; fx.done = 0; fx.of = 0;
     progressHtml();
     return Weather.loadAll(lakes, {
@@ -774,7 +810,10 @@
       else setSidebarHidden(!app.classList.contains("sidebar-hidden"));
     });
     if (map) {
-      map.on("moveend", function () { if (state.onScreen || winterOn() !== lastWinter) { lastWinter = winterOn(); render(); renderPins(); } else drawWeek(); });
+      map.on("moveend", function () {
+        if (state.onScreen || winterOn() !== lastWinter) { lastWinter = winterOn(); render(); renderPins(); } else drawWeek();
+        fetchOnScreen();
+      });
     }
     var mq = matchMedia("(min-width: 1024px)");
     var onMq = function () { renderSheet(); if (map) setTimeout(function () { map.invalidateSize(); }, 60); };
@@ -808,6 +847,7 @@
 
   window.DayUI = {
     init: init,
+    _weather: { weatherPoints: function () { return weatherPoints(); }, onScreenOrNear: function (p) { return onScreenOrNear(p); }, NEAR_KM: NEAR_KM },
     render: render,
     refresh: refresh,
     renderSheet: renderSheet,

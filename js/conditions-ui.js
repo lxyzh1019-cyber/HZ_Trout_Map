@@ -115,6 +115,8 @@
     var key = state.conditions && state.conditions.anchorKey;
     if (key) {
       var lake = LAKES.find(function (l) { return lakeKey(l) === key; });
+      // Build 5: a river stretch is shown at the forecast spot that stands for it.
+      if (lake && window.LakeSheet && LakeSheet.viewOf) lake = LakeSheet.viewOf(lake);
       if (lake) return placeFor(lake);
     }
     var near = nearestLake();

@@ -1302,6 +1302,14 @@
       </div>
       <div class="hint" id="open-now-note"></div>
     </div>
+    <div class="group" id="stocking-group">
+      <div class="group-label"><span>Stocking</span></div>
+      <div class="chips">
+        <button class="chip active" id="stocked-chip" type="button" aria-pressed="true">Stocked</button>
+        <button class="chip active" id="unstocked-chip" type="button" aria-pressed="true">Not stocked</button>
+      </div>
+      <div class="hint" id="stocking-note"></div>
+    </div>
     <div class="group" id="survey-group" hidden>
       <div class="group-label"><span>Depth survey</span></div>
       <div class="chips">
@@ -1713,6 +1721,9 @@ const state = {
   baitBanOnly: false,
   /** Build 4: keep only lakes with an Alberta lakebed survey (the 3D depth model). */
   gridOnly: false,
+  /** Build 5: show stocked waters, waters that are not stocked, or both (default). */
+  showStocked: true,
+  showUnstocked: true,
   /** Facilities a lake must be KNOWN to have. Empty means no facility filter.
    *  Never inverted into "known not to have": 95 mapped lakes state no
    *  amenities at all, and that is Alberta not saying, not a lake with no
@@ -1826,11 +1837,49 @@ async function loadAllData() {
     }
   }
   const lakes = [...byLake.values()];
+  // Build 5 Stage 2: the waters the 2026 guide names that are not stocked, and
+  // the guide's river stretches. Each carries its own rule row; a missing file
+  // costs the map those waters, never the stocked lakes.
+  lakes.push(...await loadWaters(new Set(lakes.map(l => l.lake_id || l.ats))));
   for (const lk of lakes) {
     lk.total_fish = lk.stockings.reduce((acc, s) => acc + (Number(s.number) || 0), 0);
     lk.species_set = [...new Set(lk.stockings.map(s => s.species).filter(Boolean))].sort();
   }
   return { lakes, years };
+}
+
+/** Lakes not stocked (data/lakes_unstocked.json) and river stretches
+ *  (data/rivers.json), shaped like a stocked lake with no stockings. */
+let WATERS_INFO = null;
+async function loadWaters(known) {
+  const out = [];
+  WATERS_INFO = { lakes: 0, stretches: 0, lakeSource: null, riverSource: null };
+  try {
+    const r = await fetch("data/lakes_unstocked.json");
+    if (r.ok) {
+      const d = await r.json();
+      WATERS_INFO.lakeSource = d.source || null;
+      for (const w of d.lakes || []) {
+        if (!w.lake_id || known.has(w.lake_id)) continue;
+        out.push({ ...w, stockings: [], unstocked: true });
+        WATERS_INFO.lakes++;
+      }
+    }
+  } catch (e) { /* the stocked map still works */ }
+  try {
+    const r = await fetch("data/rivers.json");
+    if (r.ok) {
+      const d = await r.json();
+      WATERS_INFO.riverSource = d.source || null;
+      for (const w of d.stretches || []) {
+        if (!w.lake_id || !Array.isArray(w.spots) || !w.spots.length) continue;
+        const [lat, lon] = w.spots[Math.floor((w.spots.length - 1) / 2)];
+        out.push({ ...w, lat, lon, stockings: [], unstocked: true, river: true });
+        WATERS_INFO.stretches++;
+      }
+    }
+  } catch (e) { /* the stocked map still works */ }
+  return out;
 }
 
 /** Catch limits, resolved per lake when the data was built. Matching names to
@@ -2001,7 +2050,17 @@ function lastStockedDate(lake) {
 }
 function lakePassesFilters(lake) {
   if (lake.distanceKm > state.maxDistanceKm) return false;
-  if (!lake.stockings.some(stockingPasses)) return false;
+  // Build 5: the stocking filters (species, years, size, recently stocked) are
+  // about stocked fish. A water that is not stocked passes years and size, and
+  // is left out only when you ask for particular stocked species or a recent
+  // stocking, or switch "Not stocked" off.
+  if (lake.unstocked) {
+    if (!state.showUnstocked) return false;
+    if (state.species.size !== SPECIES_ORDER.length || recencyIsActive()) return false;
+  } else {
+    if (!state.showStocked) return false;
+    if (!lake.stockings.some(stockingPasses)) return false;
+  }
   // A lake we cannot read a season for is kept, not hidden: "we do not know"
   // is not the same as "closed", and hiding it would quietly shorten the list
   // without saying why.
@@ -2013,7 +2072,7 @@ function lakePassesFilters(lake) {
   if (state.baitBanOnly && REGULATIONS && !lakeBaitBan(lake)) return false;
   if (state.gridOnly && DEPTH_GRIDS && !(window.DepthModel && DepthModel.has(lake))) return false;
   if (!facilitiesPass(lake)) return false;
-  return recencyPasses(lake, recencyOption());
+  return lake.unstocked ? true : recencyPasses(lake, recencyOption());
 }
 
 /* Every facility asked for has to be one this lake is KNOWN to have.
@@ -2464,8 +2523,9 @@ function depthBlock(lake) {
 
 /** The regulation resolved for this lake, or null if none could be. */
 function regulationFor(lake) {
-  if (!REGULATIONS) return null;
-  return REGULATIONS.lakes[lakeKey(lake)] || null;
+  // Build 5: a water that is not stocked carries its own rule row from the guide.
+  if (!REGULATIONS) return (lake && lake.rules) || null;
+  return REGULATIONS.lakes[lakeKey(lake)] || (lake && lake.rules) || null;
 }
 
 /* Season parsing lives in js/conditions.js, because a shut season has to
@@ -2769,7 +2829,7 @@ function pinIcon(lake, radius, order, changePair) {
   }
   const changeMode = state.colorMode === "change" && changePair;
   const cls = changeMode ? changeClassOf(lake, changePair) : null;
-  const primary = changeMode ? cls.color : (SPECIES_META[order[0]]?.color || "#888");
+  const primary = changeMode ? cls.color : (SPECIES_META[order[0]]?.color || (lake.river ? "#5aa9e6" : "#888"));
   /* In change mode the ring still names a second species, so switching colour
      mode never costs you the information the other mode was carrying. */
   const secondary = order.length > 1 ? SPECIES_META[order[1]]?.color : null;
@@ -2798,7 +2858,8 @@ function tooltipHtml(lake) {
   const f = (state.colorMode === "bite" || state.colorMode === "best") ? Forecast.forLake(lake) : null;
   const s = f ? Forecast.rankable(f, state.day) : null;
   const score = s === null ? "" : `<br><span class="tip-sub">Bite ${Math.round(s * 100)} · ${LakeSheet.bandWord(s)}</span>`;
-  return `<b>${esc(lake.name)}</b>${score}<br><span class="tip-sub">${dist}${fmtNum(filteredFishTotal(lake))} fish · last ${esc(when)}</span>` +
+  const stockLine = lake.unstocked ? (lake.river ? "river stretch · not stocked" : "not stocked") : `${fmtNum(filteredFishTotal(lake))} fish · last ${esc(when)}`;
+  return `<b>${esc(lake.name)}</b>${score}<br><span class="tip-sub">${dist}${stockLine}</span>` +
          (change ? `<br><span class="tip-sub">${esc(change)}</span>` : "") +
          // Build 4: a lake with a lakebed survey; open it for the 3D model.
          (window.DepthModel && DepthModel.has(lake) ? `<br><span class="tip-sub"><b class="mark3d">3D</b> depth model: open the lake</span>` : "");
@@ -2962,6 +3023,7 @@ function renderPins() {
     markers.push(marker);
   }
   pinLayer.addLayers(markers);
+  renderRivers();
 
   renderLabels();
 
@@ -2971,6 +3033,25 @@ function renderPins() {
   updateFilterSummary();
   updateLegend();
   return shown;
+}
+
+/* Build 5: each river stretch the guide names is a thin blue line; the open one
+ * is wider. A tap on the line opens the stretch, as its pin does. */
+let riverLayer = null;
+function renderRivers() {
+  if (!map) return;
+  if (!riverLayer) riverLayer = L.layerGroup().addTo(map);
+  riverLayer.clearLayers();
+  const open = state.selectedKey || null;
+  for (const lake of LAKES) {
+    if (!lake.river || !Array.isArray(lake.line) || lake.line.length < 2 || !lakePassesFilters(lake)) continue;
+    const on = lakeKey(lake) === open;
+    const line = L.polyline(lake.line, { color: on ? "#bfe0f3" : "#5aa9e6", weight: on ? 6 : 3, opacity: on ? 0.95 : 0.8,
+      className: "river-line" });
+    line.bindTooltip(() => tooltipHtml(lake), { className: "lake-tip", sticky: true });
+    line.on("click", () => { lastPinClickAt = Date.now(); DayUI.openLake(lakeKey(lake), { noPan: true }); });
+    riverLayer.addLayer(line);
+  }
 }
 
 function zoomToResults() {
@@ -3511,6 +3592,8 @@ function activeFilters() {
   if (state.aeratedOnly) out.push({ id: "aer", label: "Aerated", counted: true, clear: click("#aerated-chip") });
   if (state.baitBanOnly) out.push({ id: "bait", label: "Bait ban", counted: true, clear: click("#bait-chip") });
   if (state.gridOnly) out.push({ id: "3d", label: "Has a 3D depth model", counted: true, clear: click("#grid-chip") });
+  if (!state.showStocked) out.push({ id: "nostocked", label: "Not stocked only", counted: true, clear: click("#stocked-chip") });
+  if (!state.showUnstocked) out.push({ id: "nounstocked", label: "Stocked only", counted: true, clear: click("#unstocked-chip") });
   if (state.facilities.size) out.push({ id: "fac", label: `${state.facilities.size} facilit${state.facilities.size === 1 ? "y" : "ies"}`, counted: true, clear: click('[data-all="facility"]') });
   return out;
 }
@@ -3541,6 +3624,22 @@ function updateFiltersLabel(n) {
   if (n) parts.push(`${n} filter${n === 1 ? "" : "s"} changed`);
   if (adv && !adv.hidden) parts.push(adv.title);
   btn.setAttribute("aria-label", parts.length ? `Filters, ${parts.join(", ")}` : "Filters");
+}
+
+/* Build 5: stocked waters, waters the guide names that are not stocked, or both. */
+function buildStockingFilter() {
+  const pairs = [["stocked-chip", "showStocked"], ["unstocked-chip", "showUnstocked"]];
+  const note = document.getElementById("stocking-note");
+  const stocked = LAKES.filter(l => !l.unstocked).length;
+  const lakes = LAKES.filter(l => l.unstocked && !l.river).length;
+  const rivers = LAKES.filter(l => l.river).length;
+  note.textContent = `${stocked} stocked lakes · ${lakes} lakes and ${rivers} river stretches not stocked, from the ${REGULATIONS ? REGULATIONS.guide_year + " " : ""}guide`;
+  pairs.forEach(([id, key]) => {
+    const el = document.getElementById(id);
+    const sync = () => { el.classList.toggle("active", state[key]); el.setAttribute("aria-pressed", state[key] ? "true" : "false"); };
+    el.addEventListener("click", () => { state[key] = !state[key]; sync(); onFilterChange(); });
+    sync();
+  });
 }
 
 /* Build 4: lakes with an Alberta lakebed survey, the ones with a 3D depth model. */
@@ -4108,6 +4207,8 @@ function writeUrl() {
   if (state.aeratedOnly) p.set("aer", "1");
   if (state.baitBanOnly) p.set("bait", "1");
   if (state.gridOnly) p.set("3d", "1");
+  if (!state.showStocked) p.set("st", "0");
+  if (!state.showUnstocked) p.set("ns", "0");
   if (state.facilities.size) p.set("fac", [...state.facilities].join("|"));
   if (state.day) p.set("day", state.day);
   if (state.origin && state.origin.kind !== "me") {
@@ -4139,6 +4240,8 @@ function readUrl() {
   if (p.get("aer") === "1") state.aeratedOnly = true;
   if (p.get("bait") === "1") state.baitBanOnly = true;
   if (p.get("3d") === "1") state.gridOnly = true;
+  if (p.get("st") === "0") state.showStocked = false;
+  if (p.get("ns") === "0") state.showUnstocked = false;
   // Validated against what was actually collected, so a stale or hand-typed
   // link cannot leave a filter switched on that nothing can satisfy.
   if (p.has("fac")) pendingFacilities = p.get("fac").split("|").filter(Boolean);
@@ -4335,6 +4438,7 @@ async function init() {
     buildAdvisories();
     buildSeasonFilter();
     buildSurveyFilter();
+    buildStockingFilter();
     buildRecencyChips();
     buildFacilityFilters();
     buildSpeciesFilters();
