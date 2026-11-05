@@ -4,8 +4,8 @@
  "layer": "https://services2.arcgis.com/jQV6VMr2Loovu7GU/arcgis/rest/services/Lake_Boundary/FeatureServer/0",
  "retrieved": "2026-11-05",
  "surveyed": 166,
- "placed_lakes": 672,
- "matched": 111,
+ "placed_lakes": 661,
+ "matched": 109,
  "rule": "same name without 'lake', chain parts (Upper, #3), brackets and punctuation, with the lake's point inside the outline or within 2 km; or one letter different with the point inside",
  "lakes": {
   "gu-es1-gap-lake": {
@@ -42,7 +42,7 @@
    "name": "Shiningbank Lake",
    "dig": "DIG 2008-0670",
    "url": "https://ags.aer.ca/publication/dig-2008-0670",
-   "km_from_outline": 0.0
+   "km_from_outline": 0.11
   },
   "gu-es4-iosegun-lake": {
    "name": "Iosegun Lake",
@@ -146,12 +146,6 @@
    "url": "https://ags.aer.ca/publication/dig-2008-0610",
    "km_from_outline": 0.0
   },
-  "gu-nb1-kehiwin-lake": {
-   "name": "Kehiwin Lake",
-   "dig": "DIG 2008-0618",
-   "url": "https://ags.aer.ca/publication/dig-2008-0618",
-   "km_from_outline": 0.0
-  },
   "gu-nb1-lac-la-biche": {
    "name": "Lac la Biche",
    "dig": "DIG 2008-0548",
@@ -162,7 +156,7 @@
    "name": "Lac Saint Cyr",
    "dig": "DIG 2008-0629",
    "url": "https://ags.aer.ca/publication/dig-2008-0629",
-   "km_from_outline": 0.02
+   "km_from_outline": 0.11
   },
   "gu-nb1-laurier-lake": {
    "name": "Laurier Lake",
@@ -252,7 +246,7 @@
    "name": "Freeman Lake",
    "dig": "DIG 2008-0588",
    "url": "https://ags.aer.ca/publication/dig-2008-0588",
-   "km_from_outline": 0.0
+   "km_from_outline": 0.03
   },
   "gu-nb2-ghost-lake": {
    "name": "Ghost Lake",
@@ -320,12 +314,6 @@
    "url": "https://ags.aer.ca/publication/dig-2008-0565",
    "km_from_outline": 0.01
   },
-  "gu-pp1-chin-lakes": {
-   "name": "Chin Lakes",
-   "dig": "DIG 2008-0568",
-   "url": "https://ags.aer.ca/publication/dig-2008-0568",
-   "km_from_outline": 0.0
-  },
   "gu-pp1-elkwater-lake": {
    "name": "Elkwater Lake",
    "dig": "DIG 2008-0582",
@@ -354,7 +342,7 @@
    "name": "Coal Lake",
    "dig": "DIG 2008-0571",
    "url": "https://ags.aer.ca/publication/dig-2008-0571",
-   "km_from_outline": 0.0
+   "km_from_outline": 1.22
   },
   "gu-pp2-gull-lake": {
    "name": "Gull Lake",
@@ -390,7 +378,7 @@
    "name": "Mere Lake",
    "dig": "DIG 2008-0637",
    "url": "https://ags.aer.ca/publication/dig-2008-0637",
-   "km_from_outline": 0.04
+   "km_from_outline": 0.09
   },
   "gu-pp2-mink-lake": {
    "name": "Mink Lake",
@@ -414,7 +402,7 @@
    "name": "Wizard Lake",
    "dig": "DIG 2008-0702",
    "url": "https://ags.aer.ca/publication/dig-2008-0702",
-   "km_from_outline": 0.0
+   "km_from_outline": 1.43
   },
   "wb18014": {
    "name": "South Heart Reservoir",

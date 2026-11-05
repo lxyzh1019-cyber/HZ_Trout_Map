@@ -67,9 +67,9 @@ def get_json(url):
     try:
         with urllib.request.urlopen(req, timeout=60) as resp:
             return json.loads(resp.read().decode("utf-8"))
-    except urllib.error.URLError as err:
-        if not isinstance(err.reason, ssl.SSLError):
-            raise
+    except urllib.error.URLError:
+        # A refused certificate chain (seen on one Windows PC) or a reset
+        # connection: curl uses the system store and its own connection.
         out = subprocess.run(["curl", "-sfL", "-A", "troutmap-build/1.0", url],
                              capture_output=True, check=True, timeout=90).stdout
         return json.loads(out.decode("utf-8"))
@@ -79,14 +79,15 @@ def fetch(points):
     lats = ",".join(f"{lat:.5f}" for lat, _ in points)
     lons = ",".join(f"{lon:.5f}" for _, lon in points)
     # A reset connection is retried a few times before the build gives up.
-    for attempt in range(6):
+    # A reset connection or a rate limit (HTTP 429) is retried, waiting longer each time.
+    for attempt in range(8):
         try:
             body = get_json(f"{ENDPOINT}?latitude={lats}&longitude={lons}")
             break
-        except (urllib.error.URLError, ConnectionError, TimeoutError):
-            if attempt == 5:
+        except (urllib.error.URLError, ConnectionError, TimeoutError, subprocess.CalledProcessError):
+            if attempt == 7:
                 raise
-            time.sleep(2 * (attempt + 1))
+            time.sleep(15 * (attempt + 1))
     heights = body.get("elevation")
     if not isinstance(heights, list) or len(heights) != len(points):
         raise ValueError(f"expected {len(points)} heights, got {body!r:.200}")
@@ -97,8 +98,15 @@ def main():
     lakes = placed_lakes()
     keys = list(lakes)
     out, calls = {}, 0
-    for i in range(0, len(keys), PER_CALL):
-        chunk = keys[i:i + PER_CALL]
+    # A height already saved for the same id is kept: the DEM does not change, and
+    # each point is one call on Open-Meteo's free limit. Only new points are asked for.
+    if OUT.exists():
+        saved = json.loads(OUT.read_text(encoding="utf-8")).get("lakes", {})
+        out = {k: v for k, v in saved.items() if k in lakes}
+    out = dict(out)
+    need = [k for k in keys if k not in out]
+    for i in range(0, len(need), PER_CALL):
+        chunk = need[i:i + PER_CALL]
         heights = fetch([lakes[k] for k in chunk])
         calls += 1
         for k, h in zip(chunk, heights):
@@ -114,9 +122,11 @@ def main():
         "url": ENDPOINT,
         "licence": "CC BY 4.0 (Open-Meteo); Copernicus DEM © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018, provided under COPERNICUS by the European Union and ESA",
         "retrieved": datetime.date.today().isoformat(),
-        "calls": calls,
+        # Calls a build from nothing takes (100 points per call); this run made calls_this_run.
+        "calls": -(-len(out) // PER_CALL),
+        "calls_this_run": calls,
         "count": len(out),
-        "lakes": out,
+        "lakes": dict(sorted(out.items())),
     }
     OUT.write_text(json.dumps(record, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\r\n")
     print(f"{len(out)} of {len(keys)} lakes, {calls} calls -> {OUT.relative_to(ROOT)}")

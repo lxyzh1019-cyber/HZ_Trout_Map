@@ -397,7 +397,12 @@
     var title = $("sheet-title");
     if (title && !(opts && opts.noFocus)) { title.setAttribute("tabindex", "-1"); title.focus({ preventScroll: true }); }
     // A lake with no saved forecast gets one now, so its panel fills in.
-    if (lake.lat != null && Weather.peek(lake.lat, lake.lon).source === "none") {
+    if (lake.river && Array.isArray(lake.spots)) {
+      // Build 5: a river stretch is scored at all its forecast spots.
+      Weather.loadAll(lake.spots.map(function (p) { return { lat: p[0], lon: p[1] }; }), {}).then(function (s) {
+        if (s.calls) { Forecast.clear(); refresh(); }
+      });
+    } else if (lake.lat != null && Weather.peek(lake.lat, lake.lon).source === "none") {
       Weather.load(lake.lat, lake.lon).then(function () { refresh(); });
     }
   }
@@ -657,7 +662,10 @@
   /* Build 5 Stage 2: every forecast point (a lake, or each spot on a river
    * stretch). The ones within 200 km of you or on screen load first; the rest
    * load when you move the map to them. A cell already saved costs nothing. */
-  var NEAR_KM = 200;
+  var WX_NEAR_KM = 200;
+  /* On screen counts only once the map is zoomed in this far (about a 200 km
+   * wide view on a phone); at the province view everything is on screen. */
+  var WX_SCREEN_ZOOM = 8;
   function weatherPoints() {
     var out = [];
     LAKES.forEach(function (l) {
@@ -668,16 +676,16 @@
   }
   function onScreenOrNear(points) {
     var o = originPoint();
-    var b = map && map.getBounds ? map.getBounds() : null;
+    var b = map && map.getBounds && map.getZoom && map.getZoom() >= WX_SCREEN_ZOOM ? map.getBounds() : null;
     return points.filter(function (p) {
-      return haversineKm(o.lat, o.lon, p.lat, p.lon) <= NEAR_KM || (b && b.contains([p.lat, p.lon]));
+      return haversineKm(o.lat, o.lon, p.lat, p.lon) <= WX_NEAR_KM || (b && b.contains([p.lat, p.lon]));
     });
   }
   var panTimer = null;
   function fetchOnScreen() {
     clearTimeout(panTimer);
     panTimer = setTimeout(function () {
-      if (!navigator.onLine || fx.loading || !map || !map.getBounds) return;
+      if (!navigator.onLine || fx.loading || !map || !map.getBounds || map.getZoom() < WX_SCREEN_ZOOM) return;
       var b = map.getBounds();
       var pts = weatherPoints().filter(function (p) { return b.contains([p.lat, p.lon]); });
       Weather.loadAll(pts, {}).then(function (summary) {
@@ -847,7 +855,7 @@
 
   window.DayUI = {
     init: init,
-    _weather: { weatherPoints: function () { return weatherPoints(); }, onScreenOrNear: function (p) { return onScreenOrNear(p); }, NEAR_KM: NEAR_KM },
+    _weather: { weatherPoints: function () { return weatherPoints(); }, onScreenOrNear: function (p) { return onScreenOrNear(p); }, NEAR_KM: WX_NEAR_KM, SCREEN_ZOOM: WX_SCREEN_ZOOM },
     render: render,
     refresh: refresh,
     renderSheet: renderSheet,

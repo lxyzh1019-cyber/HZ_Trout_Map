@@ -1,9 +1,10 @@
 {
  "by_position": {
-  "ats": 68,
-  "place names": 224
+  "ats": 61,
+  "outline": 126,
+  "place names": 94
  },
- "count": 292,
+ "count": 281,
  "guide_year": 2026,
  "lakes": [
   {
@@ -126,6 +127,7 @@
     "trout_total": null,
     "zone": "ES1"
    },
+   "surface_area_ha": 5.0,
    "zone": "ES1"
   },
   {
@@ -149,43 +151,6 @@
     "trout_total": {
      "count": 2,
      "text": "2 trout"
-    },
-    "zone": "ES1"
-   },
-   "zone": "ES1"
-  },
-  {
-   "ats": "8-8-5-W5",
-   "coord_source": "ats",
-   "lake_id": "gu-es1-emerald-hart-lake",
-   "lat": 49.63349,
-   "lon": -114.64567,
-   "name": "Emerald (Hart) Lake",
-   "rules": {
-    "bait": "Bait allowed, except bait fish",
-    "basis": "site-specific",
-    "detail": "SE-8-8-5-W5",
-    "page": 7,
-    "season": {
-     "closed": false,
-     "implied": false,
-     "text": "OPEN ALL YEAR"
-    },
-    "species": {
-     "LKTR": {
-      "count": 3,
-      "text": "3 fish"
-     },
-     "MNWH": {
-      "count": 3,
-      "size_cm": 30,
-      "size_op": "over",
-      "text": "3 over 30 cm"
-     }
-    },
-    "trout_total": {
-     "count": 5,
-     "text": "5 trout"
     },
     "zone": "ES1"
    },
@@ -225,6 +190,7 @@
     },
     "zone": "ES1"
    },
+   "surface_area_ha": 28.4,
    "zone": "ES1"
   },
   {
@@ -300,45 +266,6 @@
    "zone": "ES1"
   },
   {
-   "ats": "30-21-9-W5",
-   "coord_source": "ats",
-   "lake_id": "gu-es1-headwall-lakes",
-   "lat": 50.81309,
-   "lon": -115.23899,
-   "name": "Headwall Lakes",
-   "rules": {
-    "bait": "Bait allowed, except bait fish",
-    "basis": "site-specific",
-    "detail": "Upper and lower; 19,30-21-9-W5",
-    "page": 7,
-    "season": {
-     "closed": false,
-     "implied": false,
-     "text": "OPEN ALL YEAR"
-    },
-    "species": {
-     "NRPK": {
-      "count": 3,
-      "text": "3 fish"
-     },
-     "WALL": {
-      "count": 3,
-      "text": "3 fish"
-     },
-     "YLPR": {
-      "count": 15,
-      "text": "15 fish"
-     }
-    },
-    "trout_total": {
-     "count": 2,
-     "text": "2 trout"
-    },
-    "zone": "ES1"
-   },
-   "zone": "ES1"
-  },
-  {
    "ats": "26-3-3-W5",
    "coord_source": "ats",
    "lake_id": "gu-es1-lys-lake",
@@ -356,45 +283,6 @@
      "text": "OPEN ALL YEAR"
     },
     "species": {},
-    "trout_total": {
-     "count": 2,
-     "text": "2 trout"
-    },
-    "zone": "ES1"
-   },
-   "zone": "ES1"
-  },
-  {
-   "ats": "6-23-9-W5",
-   "coord_source": "ats",
-   "lake_id": "gu-es1-memorial-lakes",
-   "lat": 50.92959,
-   "lon": -115.24834,
-   "name": "Memorial Lakes",
-   "rules": {
-    "bait": "Bait allowed, except bait fish",
-    "basis": "site-specific",
-    "detail": "South, East and West; 6-23-9-W5",
-    "page": 8,
-    "season": {
-     "closed": false,
-     "implied": false,
-     "text": "OPEN ALL YEAR"
-    },
-    "species": {
-     "NRPK": {
-      "count": 3,
-      "text": "3 fish"
-     },
-     "WALL": {
-      "count": 3,
-      "text": "3 fish"
-     },
-     "YLPR": {
-      "count": 15,
-      "text": "15 fish"
-     }
-    },
     "trout_total": {
      "count": 2,
      "text": "2 trout"
@@ -427,32 +315,7 @@
     },
     "zone": "ES1"
    },
-   "zone": "ES1"
-  },
-  {
-   "ats": "18-8-5-W5",
-   "coord_source": "ats",
-   "lake_id": "gu-es1-phillips-lake",
-   "lat": 49.64805,
-   "lon": -114.66833,
-   "name": "Phillips Lake",
-   "rules": {
-    "bait": "Bait allowed, except bait fish",
-    "basis": "site-specific",
-    "detail": "18-8-5-W5",
-    "page": 8,
-    "season": {
-     "closed": false,
-     "implied": false,
-     "text": "OPEN ALL YEAR"
-    },
-    "species": {},
-    "trout_total": {
-     "count": 2,
-     "text": "2 trout"
-    },
-    "zone": "ES1"
-   },
+   "surface_area_ha": 17.5,
    "zone": "ES1"
   },
   {
@@ -550,75 +413,7 @@
     },
     "zone": "ES1"
    },
-   "zone": "ES1"
-  },
-  {
-   "ats": "7-18-7-W5",
-   "coord_source": "ats",
-   "lake_id": "gu-es1-running-rain-lake",
-   "lat": 50.50727,
-   "lon": -114.95398,
-   "name": "Running Rain Lake",
-   "rules": {
-    "bait": "Bait ban",
-    "basis": "site-specific",
-    "detail": "7-18-7-W5",
-    "page": 8,
-    "season": {
-     "closed": false,
-     "implied": false,
-     "text": "OPEN ALL YEAR"
-    },
-    "species": {},
-    "trout_total": {
-     "count": 2,
-     "size_cm": 30,
-     "size_op": "under",
-     "text": "2 under 30 cm"
-    },
-    "zone": "ES1"
-   },
-   "zone": "ES1"
-  },
-  {
-   "ats": "24-21-11-W5",
-   "coord_source": "ats",
-   "lake_id": "gu-es1-smuts-lakes",
-   "lat": 50.79853,
-   "lon": -115.4011,
-   "name": "Smuts Lakes",
-   "rules": {
-    "bait": "Bait ban",
-    "basis": "site-specific",
-    "detail": "Upper and lower; 24-21-11-W5; Includes tributaries and outlet",
-    "page": 8,
-    "season": {
-     "closed": false,
-     "implied": false,
-     "text": "OPEN ALL YEAR"
-    },
-    "species": {
-     "NRPK": {
-      "count": 3,
-      "text": "3 fish"
-     },
-     "WALL": {
-      "count": 3,
-      "text": "3 fish"
-     },
-     "YLPR": {
-      "count": 15,
-      "text": "15 fish"
-     }
-    },
-    "trout_total": {
-     "count": 1,
-     "size_cm": 40,
-     "size_op": "over",
-     "text": "1 trout over 40 cm"
-    },
-    "zone": "ES1"
-   },
+   "surface_area_ha": 3.7,
    "zone": "ES1"
   },
   {
@@ -664,10 +459,10 @@
    "zone": "ES1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-es1-spray-lakes-reservoir",
-   "lat": 50.91167,
-   "lon": -115.33944,
+   "lat": 50.92889,
+   "lon": -115.38135,
    "name": "Spray Lakes Reservoir",
    "rules": {
     "also": [
@@ -753,6 +548,7 @@
     },
     "zone": "ES1"
    },
+   "surface_area_ha": 1886.2,
    "zone": "ES1"
   },
   {
@@ -846,6 +642,7 @@
     },
     "zone": "ES1"
    },
+   "surface_area_ha": 4.4,
    "zone": "ES1"
   },
   {
@@ -972,6 +769,7 @@
     },
     "zone": "ES2"
    },
+   "surface_area_ha": 2.9,
    "zone": "ES2"
   },
   {
@@ -1105,6 +903,7 @@
     "trout_total": null,
     "zone": "ES2"
    },
+   "surface_area_ha": 106.5,
    "zone": "ES2"
   },
   {
@@ -1170,6 +969,7 @@
     },
     "zone": "ES2"
    },
+   "surface_area_ha": 5.2,
    "zone": "ES2"
   },
   {
@@ -1225,13 +1025,14 @@
     },
     "zone": "ES2"
    },
+   "surface_area_ha": 140.5,
    "zone": "ES2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-es3-bear-lake",
-   "lat": 53.74444,
-   "lon": -116.15222,
+   "lat": 53.74446,
+   "lon": -116.1517,
    "name": "Bear Lake",
    "rules": {
     "bait": "Bait allowed",
@@ -1263,13 +1064,14 @@
     "trout_total": null,
     "zone": "ES3"
    },
+   "surface_area_ha": 153.2,
    "zone": "ES3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-es3-blue-lake",
-   "lat": 53.48056,
-   "lon": -117.79833,
+   "lat": 53.48038,
+   "lon": -117.79797,
    "name": "Blue Lake",
    "rules": {
     "bait": "Bait allowed",
@@ -1299,6 +1101,7 @@
     "trout_total": null,
     "zone": "ES3"
    },
+   "surface_area_ha": 10.3,
    "zone": "ES3"
   },
   {
@@ -1329,10 +1132,10 @@
    "zone": "ES3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-es3-cache-lake",
-   "lat": 53.48944,
-   "lon": -117.80028,
+   "lat": 53.48929,
+   "lon": -117.80093,
    "name": "Cache Lake",
    "rules": {
     "bait": "Bait allowed",
@@ -1362,6 +1165,7 @@
     "trout_total": null,
     "zone": "ES3"
    },
+   "surface_area_ha": 27.3,
    "zone": "ES3"
   },
   {
@@ -1419,10 +1223,10 @@
    "zone": "ES3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-es3-graveyard-lake",
-   "lat": 53.49528,
-   "lon": -117.80417,
+   "lat": 53.49568,
+   "lon": -117.80537,
    "name": "Graveyard Lake",
    "rules": {
     "bait": "Bait allowed",
@@ -1448,13 +1252,14 @@
     "trout_total": null,
     "zone": "ES3"
    },
+   "surface_area_ha": 12.8,
    "zone": "ES3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-es3-gregg-lake",
-   "lat": 53.54611,
-   "lon": -117.79528,
+   "lat": 53.54254,
+   "lon": -117.79143,
    "name": "Gregg Lake",
    "rules": {
     "bait": "Bait allowed",
@@ -1484,13 +1289,14 @@
     "trout_total": null,
     "zone": "ES3"
    },
+   "surface_area_ha": 144.2,
    "zone": "ES3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-es3-horseshoe-lake",
-   "lat": 52.69806,
-   "lon": -117.86528,
+   "lat": 52.69813,
+   "lon": -117.86531,
    "name": "Horseshoe Lake",
    "rules": {
     "bait": "Bait allowed",
@@ -1515,13 +1321,14 @@
     "trout_total": null,
     "zone": "ES3"
    },
+   "surface_area_ha": 8.0,
    "zone": "ES3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-es3-jarvis-lake",
-   "lat": 53.45833,
-   "lon": -117.7975,
+   "lat": 53.45816,
+   "lon": -117.79838,
    "name": "Jarvis Lake",
    "rules": {
     "bait": "Bait allowed",
@@ -1555,6 +1362,7 @@
     "trout_total": null,
     "zone": "ES3"
    },
+   "surface_area_ha": 141.9,
    "zone": "ES3"
   },
   {
@@ -1642,13 +1450,14 @@
     },
     "zone": "ES3"
    },
+   "surface_area_ha": 15.8,
    "zone": "ES3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-es3-rock-lake",
-   "lat": 53.45972,
-   "lon": -118.26278,
+   "lat": 53.45969,
+   "lon": -118.26257,
    "name": "Rock Lake",
    "rules": {
     "bait": "Bait ban",
@@ -1681,13 +1490,14 @@
     "trout_total": null,
     "zone": "ES3"
    },
+   "surface_area_ha": 188.1,
    "zone": "ES3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-es3-shiningbank-lake",
-   "lat": 53.86694,
-   "lon": -116.02472,
+   "lat": 53.86372,
+   "lon": -116.02556,
    "name": "Shiningbank Lake",
    "rules": {
     "also": [
@@ -1757,6 +1567,7 @@
     "trout_total": null,
     "zone": "ES3"
    },
+   "surface_area_ha": 430.1,
    "zone": "ES3"
   },
   {
@@ -1777,35 +1588,6 @@
      "text": "CLOSED ALL YEAR"
     },
     "species": {},
-    "trout_total": null,
-    "zone": "ES3"
-   },
-   "zone": "ES3"
-  },
-  {
-   "coord_source": "place names",
-   "lake_id": "gu-es3-sundance-lake",
-   "lat": 53.73389,
-   "lon": -116.97222,
-   "name": "Sundance Lake",
-   "rules": {
-    "bait": "Bait allowed",
-    "basis": "site-specific",
-    "detail": "",
-    "page": 17,
-    "season": {
-     "closed": false,
-     "implied": false,
-     "text": "OPEN ALL YEAR"
-    },
-    "species": {
-     "NRPK": {
-      "count": 3,
-      "size_cm": 63,
-      "size_op": "over",
-      "text": "3 over 63 cm"
-     }
-    },
     "trout_total": null,
     "zone": "ES3"
    },
@@ -1877,6 +1659,7 @@
     "trout_total": null,
     "zone": "ES3"
    },
+   "surface_area_ha": 240.8,
    "zone": "ES3"
   },
   {
@@ -1911,10 +1694,10 @@
    "zone": "ES4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-es4-goose-lake",
-   "lat": 54.97361,
-   "lon": -117.54972,
+   "lat": 54.97871,
+   "lon": -117.54864,
    "name": "Goose Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -1939,6 +1722,7 @@
     "trout_total": null,
     "zone": "ES4"
    },
+   "surface_area_ha": 378.2,
    "zone": "ES4"
   },
   {
@@ -2352,6 +2136,7 @@
     "trout_total": null,
     "zone": "ES4"
    },
+   "surface_area_ha": 3755.3,
    "zone": "ES4"
   },
   {
@@ -2437,10 +2222,10 @@
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-angling-lake",
-   "lat": 54.19917,
-   "lon": -110.32806,
+   "lat": 54.20038,
+   "lon": -110.32893,
    "name": "Angling Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -2465,13 +2250,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 582.7,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-bangs-lake",
-   "lat": 54.15611,
-   "lon": -111.03389,
+   "lat": 54.15595,
+   "lon": -111.03435,
    "name": "Bangs Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -2500,13 +2286,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 175.7,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-beartrap-lake",
-   "lat": 54.20417,
-   "lon": -110.53722,
+   "lat": 54.20429,
+   "lon": -110.53809,
    "name": "Beartrap Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -2532,6 +2319,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 141.8,
    "zone": "NB1"
   },
   {
@@ -2576,6 +2364,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 3362.3,
    "zone": "NB1"
   },
   {
@@ -2616,13 +2405,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 1407.9,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-bentley-lake",
-   "lat": 54.04556,
-   "lon": -111.05417,
+   "lat": 54.04575,
+   "lon": -111.05279,
    "name": "Bentley Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -2649,6 +2439,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 116.3,
    "zone": "NB1"
   },
   {
@@ -2681,6 +2472,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 274.5,
    "zone": "NB1"
   },
   {
@@ -2720,10 +2512,10 @@
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-bourque-lake",
-   "lat": 54.67361,
-   "lon": -110.54472,
+   "lat": 54.67369,
+   "lon": -110.53964,
    "name": "Bourque Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -2761,6 +2553,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 511.1,
    "zone": "NB1"
   },
   {
@@ -2844,10 +2637,10 @@
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-claude-lake",
-   "lat": 54.79222,
-   "lon": -111.90694,
+   "lat": 54.792,
+   "lon": -111.90703,
    "name": "Claude Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -2872,6 +2665,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 70.8,
    "zone": "NB1"
   },
   {
@@ -2954,6 +2748,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 19529.1,
    "zone": "NB1"
   },
   {
@@ -2990,13 +2785,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 200.0,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-elinor-lake",
-   "lat": 54.66278,
-   "lon": -111.65694,
+   "lat": 54.66756,
+   "lon": -111.66573,
    "name": "Elinor Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -3033,6 +2829,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 949.8,
    "zone": "NB1"
   },
   {
@@ -3082,10 +2879,10 @@
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-fishing-lake",
-   "lat": 53.89889,
-   "lon": -110.21972,
+   "lat": 53.90358,
+   "lon": -110.2163,
    "name": "Fishing Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -3112,13 +2909,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 665.4,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-floatingstone-lake",
-   "lat": 54.22694,
-   "lon": -111.63139,
+   "lat": 54.22432,
+   "lon": -111.6361,
    "name": "Floatingstone Lake",
    "rules": {
     "also": [
@@ -3194,6 +2992,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 593.0,
    "zone": "NB1"
   },
   {
@@ -3236,10 +3035,10 @@
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-francis-lake",
-   "lat": 54.95833,
-   "lon": -111.56778,
+   "lat": 54.95967,
+   "lon": -111.56822,
    "name": "Francis Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -3269,13 +3068,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 271.8,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-garner-lake",
-   "lat": 54.19833,
-   "lon": -111.72972,
+   "lat": 54.19929,
+   "lon": -111.72666,
    "name": "Garner Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -3309,6 +3109,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 728.4,
    "zone": "NB1"
   },
   {
@@ -3345,10 +3146,10 @@
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-goodfish-lake",
-   "lat": 54.285,
-   "lon": -111.81833,
+   "lat": 54.28268,
+   "lon": -111.81605,
    "name": "Goodfish Lake",
    "rules": {
     "bait": "",
@@ -3364,13 +3165,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 844.7,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-goodwin-lake",
-   "lat": 55.41917,
-   "lon": -111.655,
+   "lat": 55.42489,
+   "lon": -111.66667,
    "name": "Goodwin Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -3396,6 +3198,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 818.7,
    "zone": "NB1"
   },
   {
@@ -3430,10 +3233,10 @@
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-hanmore-lake",
-   "lat": 54.29583,
-   "lon": -112.52778,
+   "lat": 54.29578,
+   "lon": -112.52974,
    "name": "Hanmore Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -3462,6 +3265,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 296.0,
    "zone": "NB1"
   },
   {
@@ -3509,10 +3313,10 @@
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-hilda-lake",
-   "lat": 54.52028,
-   "lon": -110.43194,
+   "lat": 54.52207,
+   "lon": -110.43132,
    "name": "Hilda Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -3552,13 +3356,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 347.9,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-hope-lake",
-   "lat": 54.65639,
-   "lon": -112.65944,
+   "lat": 54.65679,
+   "lon": -112.65983,
    "name": "Hope Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -3593,6 +3398,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 274.9,
    "zone": "NB1"
   },
   {
@@ -3628,51 +3434,6 @@
      "WALL": {
       "count": 1,
       "text": "1 fish 50-55 cm"
-     },
-     "YLPR": {
-      "count": 15,
-      "text": "15 fish"
-     }
-    },
-    "trout_total": null,
-    "zone": "NB1"
-   },
-   "zone": "NB1"
-  },
-  {
-   "coord_source": "place names",
-   "lake_id": "gu-nb1-kehiwin-lake",
-   "lat": 54.05611,
-   "lon": -110.90417,
-   "name": "Kehiwin Lake",
-   "rules": {
-    "bait": "Bait allowed, except bait fish",
-    "basis": "site-specific",
-    "detail": "",
-    "page": 31,
-    "season": {
-     "closed": false,
-     "implied": false,
-     "text": "OPEN MAY 15 TO MAR. 31"
-    },
-    "species": {
-     "BURB": {
-      "count": 10,
-      "text": "10 fish"
-     },
-     "LKWH": {
-      "count": 10,
-      "text": "10 fish"
-     },
-     "NRPK": {
-      "count": 0,
-      "text": "0 fish",
-      "zero": true
-     },
-     "WALL": {
-      "count": 0,
-      "text": "0 fish",
-      "zero": true
      },
      "YLPR": {
       "count": 15,
@@ -3743,10 +3504,10 @@
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-lac-saint-cyr",
-   "lat": 53.89694,
-   "lon": -111.19194,
+   "lat": 53.89766,
+   "lon": -111.19114,
    "name": "Lac Saint Cyr",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -3773,6 +3534,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 202.4,
    "zone": "NB1"
   },
   {
@@ -3841,10 +3603,10 @@
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-lodge-lake",
-   "lat": 54.72306,
-   "lon": -112.44333,
+   "lat": 54.72293,
+   "lon": -112.44258,
    "name": "Lodge Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -3879,6 +3641,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 216.7,
    "zone": "NB1"
   },
   {
@@ -3918,10 +3681,10 @@
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-lone-pine-lake",
-   "lat": 54.42944,
-   "lon": -112.06361,
+   "lat": 54.42848,
+   "lon": -112.0628,
    "name": "Lone Pine Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -3952,13 +3715,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 194.0,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-long-lake",
-   "lat": 53.86722,
-   "lon": -110.15917,
+   "lat": 53.86945,
+   "lon": -110.15833,
    "name": "Long Lake",
    "rules": {
     "also": [
@@ -4032,13 +3796,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 320.6,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-manatokan-lake",
-   "lat": 54.46472,
-   "lon": -110.94583,
+   "lat": 54.46471,
+   "lon": -110.94651,
    "name": "Manatokan Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -4063,13 +3828,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 436.1,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-marie-lake",
-   "lat": 54.63278,
-   "lon": -110.29806,
+   "lat": 54.62437,
+   "lon": -110.29927,
    "name": "Marie Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -4107,13 +3873,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 3725.3,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-may-lake",
-   "lat": 54.71667,
-   "lon": -110.39139,
+   "lat": 54.71723,
+   "lon": -110.39025,
    "name": "May Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -4151,13 +3918,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 320.5,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-minnie-lake",
-   "lat": 54.28722,
-   "lon": -111.10444,
+   "lat": 54.28749,
+   "lon": -111.10439,
    "name": "Minnie Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -4183,13 +3951,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 86.0,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-mons-lake",
-   "lat": 54.18972,
-   "lon": -112.36139,
+   "lat": 54.18993,
+   "lon": -112.36102,
    "name": "Mons Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -4216,13 +3985,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 270.9,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-moonshine-lake",
-   "lat": 54.01361,
-   "lon": -110.09944,
+   "lat": 54.01579,
+   "lon": -110.10417,
    "name": "Moonshine Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -4245,6 +4015,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 98.4,
    "zone": "NB1"
   },
   {
@@ -4331,10 +4102,10 @@
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-moosehills-lake",
-   "lat": 53.93278,
-   "lon": -110.815,
+   "lat": 53.93368,
+   "lon": -110.81261,
    "name": "Moosehills Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -4357,6 +4128,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 155.9,
    "zone": "NB1"
   },
   {
@@ -4431,13 +4203,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 2038.7,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-reed-lake",
-   "lat": 54.24722,
-   "lon": -111.76694,
+   "lat": 54.26161,
+   "lon": -111.75618,
    "name": "Reed Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -4464,13 +4237,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 574.8,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-rock-island-lake",
-   "lat": 53.84583,
-   "lon": -110.13139,
+   "lat": 53.84729,
+   "lon": -110.1339,
    "name": "Rock Island Lake",
    "rules": {
     "also": [
@@ -4544,13 +4318,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 312.3,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-ross-lake",
-   "lat": 53.82611,
-   "lon": -110.48778,
+   "lat": 53.82737,
+   "lon": -110.48826,
    "name": "Ross Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -4577,6 +4352,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 105.3,
    "zone": "NB1"
   },
   {
@@ -4659,10 +4435,10 @@
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-soars-lake",
-   "lat": 54.15056,
-   "lon": -110.15,
+   "lat": 54.15101,
+   "lon": -110.15071,
    "name": "Soars Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -4693,13 +4469,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 146.9,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-spencer-lake",
-   "lat": 54.80389,
-   "lon": -111.27944,
+   "lat": 54.79641,
+   "lon": -111.28104,
    "name": "Spencer Lake",
    "rules": {
     "also": [
@@ -4845,6 +4622,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 1787.9,
    "zone": "NB1"
   },
   {
@@ -4886,10 +4664,10 @@
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-touchwood-lake",
-   "lat": 54.80944,
-   "lon": -111.41194,
+   "lat": 54.81031,
+   "lon": -111.39571,
    "name": "Touchwood Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -4928,13 +4706,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 2842.7,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-tucker-lake",
-   "lat": 54.53417,
-   "lon": -110.60556,
+   "lat": 54.53423,
+   "lon": -110.6062,
    "name": "Tucker Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -4963,13 +4742,14 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 655.6,
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-wayetenaw-lake",
-   "lat": 54.3225,
-   "lon": -111.86167,
+   "lat": 54.32273,
+   "lon": -111.86165,
    "name": "Wayetenaw Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -4996,6 +4776,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 148.4,
    "zone": "NB1"
   },
   {
@@ -5044,10 +4825,10 @@
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb1-whitney-lake",
-   "lat": 53.83667,
-   "lon": -110.5525,
+   "lat": 53.83721,
+   "lon": -110.55289,
    "name": "Whitney Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -5074,6 +4855,7 @@
     "trout_total": null,
     "zone": "NB1"
    },
+   "surface_area_ha": 139.0,
    "zone": "NB1"
   },
   {
@@ -5113,10 +4895,10 @@
    "zone": "NB1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb2-baptiste-lake",
-   "lat": 54.75667,
-   "lon": -113.56056,
+   "lat": 54.77008,
+   "lon": -113.55079,
    "name": "Baptiste Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -5151,13 +4933,14 @@
     "trout_total": null,
     "zone": "NB2"
    },
+   "surface_area_ha": 941.6,
    "zone": "NB2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb2-bolloque-lake",
-   "lat": 54.52306,
-   "lon": -113.68306,
+   "lat": 54.52486,
+   "lon": -113.68331,
    "name": "Bolloque Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -5182,6 +4965,7 @@
     "trout_total": null,
     "zone": "NB2"
    },
+   "surface_area_ha": 295.9,
    "zone": "NB2"
   },
   {
@@ -5365,10 +5149,10 @@
    "zone": "NB2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb2-freeman-lake",
-   "lat": 54.69111,
-   "lon": -115.54,
+   "lat": 54.6906,
+   "lon": -115.53687,
    "name": "Freeman Lake",
    "rules": {
     "also": [
@@ -5408,6 +5192,7 @@
     "trout_total": null,
     "zone": "NB2"
    },
+   "surface_area_ha": 250.3,
    "zone": "NB2"
   },
   {
@@ -5440,13 +5225,14 @@
     "trout_total": null,
     "zone": "NB2"
    },
+   "surface_area_ha": 200.5,
    "zone": "NB2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb2-jenkins-lake",
-   "lat": 54.91778,
-   "lon": -113.60361,
+   "lat": 54.9183,
+   "lon": -113.60542,
    "name": "Jenkins Lake",
    "rules": {
     "also": [
@@ -5520,6 +5306,7 @@
     "trout_total": null,
     "zone": "NB2"
    },
+   "surface_area_ha": 161.3,
    "zone": "NB2"
   },
   {
@@ -5569,10 +5356,10 @@
    "zone": "NB2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb2-lawrence-lake",
-   "lat": 54.98583,
-   "lon": -113.70278,
+   "lat": 54.97662,
+   "lon": -113.69782,
    "name": "Lawrence Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -5601,6 +5388,7 @@
     "trout_total": null,
     "zone": "NB2"
    },
+   "surface_area_ha": 1340.8,
    "zone": "NB2"
   },
   {
@@ -5749,13 +5537,14 @@
     "trout_total": null,
     "zone": "NB2"
    },
+   "surface_area_ha": 166.3,
    "zone": "NB2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb2-meyer-lake",
-   "lat": 54.97361,
-   "lon": -113.57667,
+   "lat": 54.97213,
+   "lon": -113.57682,
    "name": "Meyer Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -5780,6 +5569,7 @@
     "trout_total": null,
     "zone": "NB2"
    },
+   "surface_area_ha": 421.2,
    "zone": "NB2"
   },
   {
@@ -5837,10 +5627,10 @@
    "zone": "NB2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb2-narrow-lake",
-   "lat": 54.61944,
-   "lon": -113.61583,
+   "lat": 54.6194,
+   "lon": -113.61535,
    "name": "Narrow Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -5871,6 +5661,7 @@
     "trout_total": null,
     "zone": "NB2"
    },
+   "surface_area_ha": 116.2,
    "zone": "NB2"
   },
   {
@@ -5946,10 +5737,10 @@
    "zone": "NB2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb2-paul-lake",
-   "lat": 55.27222,
-   "lon": -113.94111,
+   "lat": 55.27289,
+   "lon": -113.94098,
    "name": "Paul Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -5977,6 +5768,7 @@
     "trout_total": null,
     "zone": "NB2"
    },
+   "surface_area_ha": 400.5,
    "zone": "NB2"
   },
   {
@@ -6011,10 +5803,10 @@
    "zone": "NB2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb2-thunder-lake",
-   "lat": 54.12694,
-   "lon": -114.75833,
+   "lat": 54.12702,
+   "lon": -114.75801,
    "name": "Thunder Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -6040,6 +5832,7 @@
     "trout_total": null,
     "zone": "NB2"
    },
+   "surface_area_ha": 793.5,
    "zone": "NB2"
   },
   {
@@ -6070,10 +5863,10 @@
    "zone": "NB3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb3-beatty-lake",
-   "lat": 59.86056,
-   "lon": -118.05222,
+   "lat": 59.86071,
+   "lon": -118.0512,
    "name": "Beatty Lake",
    "rules": {
     "also": [
@@ -6129,6 +5922,7 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 2421.0,
    "zone": "NB3"
   },
   {
@@ -6239,6 +6033,7 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 15579.7,
    "zone": "NB3"
   },
   {
@@ -6336,10 +6131,10 @@
    "zone": "NB3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb3-caribou-lake",
-   "lat": 59.06472,
-   "lon": -116.08278,
+   "lat": 59.06402,
+   "lon": -116.0839,
    "name": "Caribou Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -6380,6 +6175,7 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 841.3,
    "zone": "NB3"
   },
   {
@@ -6496,10 +6292,10 @@
    "zone": "NB3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb3-gods-lake",
-   "lat": 56.81972,
-   "lon": -114.28917,
+   "lat": 56.81894,
+   "lon": -114.29002,
    "name": "Gods Lake",
    "rules": {
     "also": [
@@ -6577,6 +6373,7 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 760.7,
    "zone": "NB3"
   },
   {
@@ -6717,10 +6514,10 @@
    "zone": "NB3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb3-haig-lake",
-   "lat": 56.89833,
-   "lon": -116.09833,
+   "lat": 56.90307,
+   "lon": -116.09783,
    "name": "Haig Lake",
    "rules": {
     "also": [
@@ -6798,6 +6595,7 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 870.4,
    "zone": "NB3"
   },
   {
@@ -6887,10 +6685,10 @@
    "zone": "NB3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb3-hutch-lake",
-   "lat": 58.75917,
-   "lon": -117.33194,
+   "lat": 58.75945,
+   "lon": -117.33183,
    "name": "Hutch Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -6924,6 +6722,7 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 107.3,
    "zone": "NB3"
   },
   {
@@ -6958,13 +6757,14 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 1684.9,
    "zone": "NB3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb3-long-lake",
-   "lat": 56.72389,
-   "lon": -114.63139,
+   "lat": 56.72375,
+   "lon": -114.63118,
    "name": "Long Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -7001,6 +6801,7 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 582.8,
    "zone": "NB3"
   },
   {
@@ -7200,6 +7001,7 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 2219.2,
    "zone": "NB3"
   },
   {
@@ -7456,10 +7258,10 @@
    "zone": "NB3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb3-pitchimi-lake",
-   "lat": 59.01472,
-   "lon": -114.77306,
+   "lat": 59.02202,
+   "lon": -114.77709,
    "name": "Pitchimi Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -7494,13 +7296,14 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 1277.9,
    "zone": "NB3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb3-rainbow-lake",
-   "lat": 58.28583,
-   "lon": -119.275,
+   "lat": 58.28581,
+   "lon": -119.27324,
    "name": "Rainbow Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -7531,13 +7334,14 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 447.5,
    "zone": "NB3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb3-round-lake",
-   "lat": 56.75,
-   "lon": -114.56694,
+   "lat": 56.75624,
+   "lon": -114.56909,
    "name": "Round Lake",
    "rules": {
     "also": [
@@ -7615,13 +7419,14 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 538.5,
    "zone": "NB3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb3-sawn-lake",
-   "lat": 56.9825,
-   "lon": -115.89583,
+   "lat": 56.98173,
+   "lon": -115.89473,
    "name": "Sawn Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -7653,6 +7458,7 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 1209.9,
    "zone": "NB3"
   },
   {
@@ -7819,10 +7625,10 @@
    "zone": "NB3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb3-spawn-lake",
    "lat": 59.99306,
-   "lon": -118.46056,
+   "lon": -118.45988,
    "name": "Spawn Lake",
    "rules": {
     "also": [
@@ -7894,13 +7700,14 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 561.4,
    "zone": "NB3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb3-talbot-lake",
-   "lat": 57.46167,
-   "lon": -115.73361,
+   "lat": 57.4614,
+   "lon": -115.73436,
    "name": "Talbot Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -7927,13 +7734,14 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 660.0,
    "zone": "NB3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb3-thurston-lake",
-   "lat": 59.92528,
-   "lon": -118.11056,
+   "lat": 59.926,
+   "lon": -118.11179,
    "name": "Thurston Lake",
    "rules": {
     "also": [
@@ -7997,47 +7805,7 @@
     "trout_total": null,
     "zone": "NB3"
    },
-   "zone": "NB3"
-  },
-  {
-   "ats": "29-97-22-W5",
-   "coord_source": "ats",
-   "lake_id": "gu-nb3-twin-lakes",
-   "lat": 57.4538,
-   "lon": -117.54819,
-   "name": "Twin Lakes",
-   "rules": {
-    "bait": "Bait allowed, except bait fish",
-    "basis": "site-specific",
-    "detail": "29-97-22-W5",
-    "page": 42,
-    "season": {
-     "closed": false,
-     "implied": false,
-     "text": "OPEN ALL YEAR"
-    },
-    "species": {
-     "NRPK": {
-      "count": 3,
-      "text": "3 fish"
-     },
-     "WALL": {
-      "count": 3,
-      "text": "3 fish"
-     },
-     "YLPR": {
-      "count": 15,
-      "text": "15 fish"
-     }
-    },
-    "trout_total": {
-     "count": 5,
-     "size_cm": 35,
-     "size_op": "over",
-     "text": "5 trout; only 2 TGTR over 35 cm"
-    },
-    "zone": "NB3"
-   },
+   "surface_area_ha": 1417.9,
    "zone": "NB3"
   },
   {
@@ -8087,10 +7855,10 @@
    "zone": "NB3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb3-vandersteene-lake",
-   "lat": 56.6025,
-   "lon": -114.43694,
+   "lat": 56.60288,
+   "lon": -114.43437,
    "name": "Vandersteene Lake",
    "rules": {
     "also": [
@@ -8168,6 +7936,7 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 1990.9,
    "zone": "NB3"
   },
   {
@@ -8215,13 +7984,14 @@
     "trout_total": null,
     "zone": "NB3"
    },
+   "surface_area_ha": 3847.4,
    "zone": "NB3"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-alexander-lake",
-   "lat": 59.62361,
-   "lon": -110.48028,
+   "lat": 59.62432,
+   "lon": -110.47381,
    "name": "Alexander Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -8244,13 +8014,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 858.3,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-andrew-lake",
-   "lat": 59.89333,
-   "lon": -110.11472,
+   "lat": 59.89602,
+   "lon": -110.102,
    "name": "Andrew Lake",
    "rules": {
     "bait": "Bait ban",
@@ -8289,13 +8060,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 4773.2,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-arch-lake",
-   "lat": 59.87056,
-   "lon": -110.63,
+   "lat": 59.85419,
+   "lon": -110.64361,
    "name": "Arch Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -8318,13 +8090,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 493.2,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-ashton-lake",
-   "lat": 59.8425,
-   "lon": -110.40694,
+   "lat": 59.84081,
+   "lon": -110.41119,
    "name": "Ashton Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -8351,13 +8124,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 881.4,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-barrow-lake",
-   "lat": 59.25083,
-   "lon": -111.22472,
+   "lat": 59.25746,
+   "lon": -111.20475,
    "name": "Barrow Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -8395,6 +8169,7 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 330.9,
    "zone": "NB4"
   },
   {
@@ -8468,6 +8243,7 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 407.6,
    "zone": "NB4"
   },
   {
@@ -8551,10 +8327,10 @@
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-bocquene-lake",
-   "lat": 59.47222,
-   "lon": -111.07917,
+   "lat": 59.47301,
+   "lon": -111.07568,
    "name": "Bocquene Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -8591,13 +8367,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 759.7,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-bryant-lake",
-   "lat": 59.30722,
-   "lon": -110.265,
+   "lat": 59.30685,
+   "lon": -110.25875,
    "name": "Bryant Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -8628,13 +8405,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 694.6,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-burstall-lake",
-   "lat": 59.34472,
-   "lon": -110.18,
+   "lat": 59.34587,
+   "lon": -110.19188,
    "name": "Burstall Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -8669,6 +8447,7 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 842.7,
    "zone": "NB4"
   },
   {
@@ -8710,13 +8489,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 5.3,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-cherry-lake",
-   "lat": 59.75722,
-   "lon": -110.09917,
+   "lat": 59.73544,
+   "lon": -110.09867,
    "name": "Cherry Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -8751,6 +8531,7 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 325.4,
    "zone": "NB4"
   },
   {
@@ -8834,13 +8615,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 1755.5,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-cockscomb-lake",
-   "lat": 59.5425,
-   "lon": -111.11972,
+   "lat": 59.54022,
+   "lon": -111.10835,
    "name": "Cockscomb Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -8871,6 +8653,7 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 482.1,
    "zone": "NB4"
   },
   {
@@ -8915,10 +8698,10 @@
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-collins-lake",
-   "lat": 59.9725,
-   "lon": -110.33333,
+   "lat": 59.97103,
+   "lon": -110.33417,
    "name": "Collins Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -8953,13 +8736,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 105.4,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-cornwall-lake",
-   "lat": 59.59861,
-   "lon": -110.59917,
+   "lat": 59.59858,
+   "lon": -110.60572,
    "name": "Cornwall Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -8994,13 +8778,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 2846.4,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-cowper-lake",
-   "lat": 55.89722,
-   "lon": -110.44417,
+   "lat": 55.89846,
+   "lon": -110.44294,
    "name": "Cowper Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -9029,13 +8814,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 1463.1,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-daly-lake",
-   "lat": 59.62222,
-   "lon": -110.83917,
+   "lat": 59.62143,
+   "lon": -110.84696,
    "name": "Daly Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -9066,13 +8852,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 255.6,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-darwin-lake",
-   "lat": 59.30806,
-   "lon": -111.02583,
+   "lat": 59.30871,
+   "lon": -111.03139,
    "name": "Darwin Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -9103,13 +8890,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 388.7,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-dawson-lake",
-   "lat": 59.87139,
-   "lon": -110.45667,
+   "lat": 59.88492,
+   "lon": -110.4583,
    "name": "Dawson Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -9144,13 +8932,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 327.1,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-disappointment-lake",
-   "lat": 59.41861,
-   "lon": -110.77806,
+   "lat": 59.41995,
+   "lon": -110.77941,
    "name": "Disappointment Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -9181,13 +8970,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 272.6,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-ells-lake",
-   "lat": 59.6725,
-   "lon": -110.53944,
+   "lat": 59.67226,
+   "lon": -110.53929,
    "name": "Ells Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -9210,13 +9000,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 84.3,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-fletcher-lake",
-   "lat": 59.12,
-   "lon": -110.83694,
+   "lat": 59.11768,
+   "lon": -110.83553,
    "name": "Fletcher Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -9253,13 +9044,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 109.6,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-florence-lake",
-   "lat": 59.28556,
-   "lon": -110.3775,
+   "lat": 59.27107,
+   "lon": -110.38133,
    "name": "Florence Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -9294,6 +9086,7 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 528.6,
    "zone": "NB4"
   },
   {
@@ -9364,13 +9157,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 1989.6,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-gipsy-lake",
-   "lat": 56.42639,
-   "lon": -110.23278,
+   "lat": 56.42679,
+   "lon": -110.23376,
    "name": "Gipsy Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -9405,6 +9199,7 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 3511.3,
    "zone": "NB4"
   },
   {
@@ -9530,10 +9325,10 @@
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-hooker-lake",
-   "lat": 59.55361,
-   "lon": -110.86028,
+   "lat": 59.54668,
+   "lon": -110.86166,
    "name": "Hooker Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -9556,6 +9351,7 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 648.0,
    "zone": "NB4"
   },
   {
@@ -9683,10 +9479,10 @@
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-leggo-lake",
-   "lat": 59.74139,
-   "lon": -110.63778,
+   "lat": 59.7285,
+   "lon": -110.63968,
    "name": "Leggo Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -9721,6 +9517,7 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 451.6,
    "zone": "NB4"
   },
   {
@@ -9771,10 +9568,10 @@
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-limon-lake",
-   "lat": 58.42361,
-   "lon": -111.3225,
+   "lat": 58.41236,
+   "lon": -111.32721,
    "name": "Limon Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -9807,13 +9604,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 78.0,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-loutit-lake",
-   "lat": 58.97806,
-   "lon": -110.85694,
+   "lat": 58.97782,
+   "lon": -110.86107,
    "name": "Loutit Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -9850,13 +9648,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 746.3,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-mcclelland-lake",
-   "lat": 57.49111,
-   "lon": -111.33111,
+   "lat": 57.47588,
+   "lon": -111.33076,
    "name": "Mcclelland Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -9897,6 +9696,7 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 2957.0,
    "zone": "NB4"
   },
   {
@@ -9984,9 +9784,9 @@
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-namur-lake",
-   "lat": 57.41722,
+   "lat": 57.41704,
    "lon": -112.68306,
    "name": "Namur Lake",
    "rules": {
@@ -10028,13 +9828,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 4312.8,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-one-week-lake",
-   "lat": 59.88056,
-   "lon": -110.34333,
+   "lat": 59.87704,
+   "lon": -110.33446,
    "name": "One Week Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -10065,13 +9866,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 303.8,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-pans-lake",
-   "lat": 59.76833,
-   "lon": -110.33889,
+   "lat": 59.76889,
+   "lon": -110.34049,
    "name": "Pans Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -10092,13 +9894,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 473.7,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-peters-lake",
-   "lat": 59.48972,
-   "lon": -110.02639,
+   "lat": 59.48333,
+   "lon": -110.00311,
    "name": "Peters Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -10129,6 +9932,7 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 34.4,
    "zone": "NB4"
   },
   {
@@ -10170,6 +9974,7 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 1884.3,
    "zone": "NB4"
   },
   {
@@ -10212,10 +10017,10 @@
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-roderick-lake",
-   "lat": 59.49806,
-   "lon": -110.15306,
+   "lat": 59.48746,
+   "lon": -110.15717,
    "name": "Roderick Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -10246,6 +10051,7 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 671.6,
    "zone": "NB4"
   },
   {
@@ -10328,10 +10134,10 @@
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-st-agnes-lake",
-   "lat": 59.68111,
-   "lon": -110.2325,
+   "lat": 59.67877,
+   "lon": -110.23471,
    "name": "St. Agnes Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -10366,6 +10172,7 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 734.1,
    "zone": "NB4"
   },
   {
@@ -10443,10 +10250,10 @@
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-turtle-lake",
-   "lat": 59.38056,
-   "lon": -110.59917,
+   "lat": 59.38096,
+   "lon": -110.59575,
    "name": "Turtle Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -10469,6 +10276,7 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 630.9,
    "zone": "NB4"
   },
   {
@@ -10501,13 +10309,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 450.1,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-weekes-lake",
-   "lat": 59.72944,
-   "lon": -110.01722,
+   "lat": 59.72631,
+   "lon": -110.00313,
    "name": "Weekes Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -10534,6 +10343,7 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 48.6,
    "zone": "NB4"
   },
   {
@@ -10581,10 +10391,10 @@
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-winnifred-lake",
-   "lat": 59.23139,
-   "lon": -110.40611,
+   "lat": 59.2322,
+   "lon": -110.40418,
    "name": "Winnifred Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -10611,13 +10421,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 369.1,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-woodman-lake",
-   "lat": 59.53556,
-   "lon": -110.46444,
+   "lat": 59.53462,
+   "lon": -110.46069,
    "name": "Woodman Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -10644,13 +10455,14 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 505.0,
    "zone": "NB4"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-nb4-wylie-lake",
-   "lat": 59.32611,
-   "lon": -110.385,
+   "lat": 59.33095,
+   "lon": -110.36752,
    "name": "Wylie Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -10681,50 +10493,8 @@
     "trout_total": null,
     "zone": "NB4"
    },
+   "surface_area_ha": 1743.5,
    "zone": "NB4"
-  },
-  {
-   "coord_source": "place names",
-   "lake_id": "gu-pp1-badger-lake",
-   "lat": 50.38028,
-   "lon": -112.46444,
-   "name": "Badger Lake",
-   "rules": {
-    "bait": "Bait allowed, except bait fish",
-    "basis": "site-specific",
-    "detail": "",
-    "page": 22,
-    "season": {
-     "closed": false,
-     "implied": false,
-     "text": "OPEN MAY 8 TO MAR. 15"
-    },
-    "species": {
-     "BURB": {
-      "count": 10,
-      "text": "10 fish"
-     },
-     "LKWH": {
-      "count": 10,
-      "text": "10 fish"
-     },
-     "NRPK": {
-      "count": 1,
-      "text": "1 fish 63-70 cm"
-     },
-     "WALL": {
-      "count": 1,
-      "text": "1 fish 50-55 cm"
-     },
-     "YLPR": {
-      "count": 15,
-      "text": "15 fish"
-     }
-    },
-    "trout_total": null,
-    "zone": "PP1"
-   },
-   "zone": "PP1"
   },
   {
    "coord_source": "place names",
@@ -10760,50 +10530,10 @@
    "zone": "PP1"
   },
   {
-   "coord_source": "place names",
-   "lake_id": "gu-pp1-chin-lakes",
-   "lat": 49.61667,
-   "lon": -112.23194,
-   "name": "Chin Lakes",
-   "rules": {
-    "bait": "Bait allowed, except bait fish",
-    "basis": "site-specific",
-    "detail": "",
-    "page": 22,
-    "season": {
-     "closed": false,
-     "implied": false,
-     "text": "OPEN MAY 8 TO MAR. 15"
-    },
-    "species": {
-     "BURB": {
-      "count": 10,
-      "text": "10 fish"
-     },
-     "LKWH": {
-      "count": 10,
-      "text": "10 fish"
-     },
-     "NRPK": {
-      "count": 0,
-      "text": "0 fish",
-      "zero": true
-     },
-     "WALL": {
-      "count": 1,
-      "text": "1 fish 50-55 cm"
-     }
-    },
-    "trout_total": null,
-    "zone": "PP1"
-   },
-   "zone": "PP1"
-  },
-  {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp1-clear-lake",
-   "lat": 50.14694,
-   "lon": -113.41667,
+   "lat": 50.14723,
+   "lon": -113.4178,
    "name": "Clear Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -10824,6 +10554,7 @@
     "trout_total": null,
     "zone": "PP1"
    },
+   "surface_area_ha": 288.1,
    "zone": "PP1"
   },
   {
@@ -11015,10 +10746,10 @@
    "zone": "PP1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp1-elkwater-lake",
-   "lat": 49.66778,
-   "lon": -110.295,
+   "lat": 49.67183,
+   "lon": -110.29767,
    "name": "Elkwater Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -11043,13 +10774,14 @@
     "trout_total": null,
     "zone": "PP1"
    },
+   "surface_area_ha": 216.7,
    "zone": "PP1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp1-fincastle-lake",
-   "lat": 49.82917,
-   "lon": -111.98194,
+   "lat": 49.82792,
+   "lon": -111.98124,
    "name": "Fincastle Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -11088,6 +10820,7 @@
     "trout_total": null,
     "zone": "PP1"
    },
+   "surface_area_ha": 171.5,
    "zone": "PP1"
   },
   {
@@ -11125,10 +10858,10 @@
    "zone": "PP1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp1-henderson-lake",
-   "lat": 49.68861,
-   "lon": -112.79667,
+   "lat": 49.68772,
+   "lon": -112.79652,
    "name": "Henderson Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -11153,13 +10886,14 @@
     "trout_total": null,
     "zone": "PP1"
    },
+   "surface_area_ha": 27.1,
    "zone": "PP1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp1-horsefly-lake-reservoir",
-   "lat": 49.71944,
-   "lon": -112.07417,
+   "lat": 49.73127,
+   "lon": -112.07171,
    "name": "Horsefly Lake Reservoir",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -11188,6 +10922,7 @@
     "trout_total": null,
     "zone": "PP1"
    },
+   "surface_area_ha": 409.1,
    "zone": "PP1"
   },
   {
@@ -11218,6 +10953,7 @@
     "trout_total": null,
     "zone": "PP1"
    },
+   "surface_area_ha": 104.8,
    "zone": "PP1"
   },
   {
@@ -11291,13 +11027,14 @@
     "trout_total": null,
     "zone": "PP1"
    },
+   "surface_area_ha": 45.9,
    "zone": "PP1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp1-lost-lake",
-   "lat": 50.14778,
-   "lon": -112.30139,
+   "lat": 50.14765,
+   "lon": -112.3015,
    "name": "Lost Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -11318,6 +11055,7 @@
     "trout_total": null,
     "zone": "PP1"
    },
+   "surface_area_ha": 726.1,
    "zone": "PP1"
   },
   {
@@ -11369,10 +11107,10 @@
    "zone": "PP1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp1-park-lake",
-   "lat": 49.81,
-   "lon": -112.92306,
+   "lat": 49.80998,
+   "lon": -112.92501,
    "name": "Park Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -11401,6 +11139,7 @@
     "trout_total": null,
     "zone": "PP1"
    },
+   "surface_area_ha": 84.3,
    "zone": "PP1"
   },
   {
@@ -11506,10 +11245,10 @@
    "zone": "PP1"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp1-taber-lake",
-   "lat": 49.80333,
-   "lon": -112.0925,
+   "lat": 49.80431,
+   "lon": -112.09219,
    "name": "Taber Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -11530,6 +11269,7 @@
     "trout_total": null,
     "zone": "PP1"
    },
+   "surface_area_ha": 414.4,
    "zone": "PP1"
   },
   {
@@ -11678,6 +11418,7 @@
     "trout_total": null,
     "zone": "PP2"
    },
+   "surface_area_ha": 434.4,
    "zone": "PP2"
   },
   {
@@ -11762,10 +11503,10 @@
    "zone": "PP2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp2-coal-lake",
-   "lat": 53.07472,
-   "lon": -113.27139,
+   "lat": 53.06925,
+   "lon": -113.29038,
    "name": "Coal Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -11790,6 +11531,7 @@
     "trout_total": null,
     "zone": "PP2"
    },
+   "surface_area_ha": 973.6,
    "zone": "PP2"
   },
   {
@@ -11881,13 +11623,14 @@
     "trout_total": null,
     "zone": "PP2"
    },
+   "surface_area_ha": 6059.4,
    "zone": "PP2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp2-hubbles-lake",
-   "lat": 53.56444,
-   "lon": -114.09111,
+   "lat": 53.56365,
+   "lon": -114.09095,
    "name": "Hubbles Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -11914,13 +11657,14 @@
     "trout_total": null,
     "zone": "PP2"
    },
+   "surface_area_ha": 42.3,
    "zone": "PP2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp2-isle-lake",
-   "lat": 53.62639,
-   "lon": -114.72806,
+   "lat": 53.62319,
+   "lon": -114.73207,
    "name": "Isle Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -11956,6 +11700,7 @@
     "trout_total": null,
     "zone": "PP2"
    },
+   "surface_area_ha": 2205.1,
    "zone": "PP2"
   },
   {
@@ -12004,10 +11749,10 @@
    "zone": "PP2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp2-lessard-lake",
-   "lat": 53.785,
-   "lon": -114.6525,
+   "lat": 53.78552,
+   "lon": -114.65278,
    "name": "Lessard Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -12034,13 +11779,14 @@
     "trout_total": null,
     "zone": "PP2"
    },
+   "surface_area_ha": 299.0,
    "zone": "PP2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp2-magee-lake",
-   "lat": 52.56111,
-   "lon": -113.38583,
+   "lat": 52.56036,
+   "lon": -113.38335,
    "name": "Magee Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -12061,6 +11807,7 @@
     "trout_total": null,
     "zone": "PP2"
    },
+   "surface_area_ha": 44.8,
    "zone": "PP2"
   },
   {
@@ -12106,10 +11853,10 @@
    "zone": "PP2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp2-mayatan-lake",
-   "lat": 53.48667,
-   "lon": -114.30111,
+   "lat": 53.48591,
+   "lon": -114.30134,
    "name": "Mayatan Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -12134,6 +11881,7 @@
     "trout_total": null,
     "zone": "PP2"
    },
+   "surface_area_ha": 144.8,
    "zone": "PP2"
   },
   {
@@ -12170,10 +11918,10 @@
    "zone": "PP2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp2-mere-lake",
-   "lat": 53.62278,
-   "lon": -114.10167,
+   "lat": 53.62316,
+   "lon": -114.10239,
    "name": "Mere Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -12200,13 +11948,14 @@
     "trout_total": null,
     "zone": "PP2"
    },
+   "surface_area_ha": 52.0,
    "zone": "PP2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp2-mink-lake",
-   "lat": 53.52167,
-   "lon": -114.2275,
+   "lat": 53.52155,
+   "lon": -114.22707,
    "name": "Mink Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -12233,6 +11982,7 @@
     "trout_total": null,
     "zone": "PP2"
    },
+   "surface_area_ha": 76.7,
    "zone": "PP2"
   },
   {
@@ -12283,10 +12033,10 @@
    "zone": "PP2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp2-pine-lake",
-   "lat": 52.08861,
-   "lon": -113.4425,
+   "lat": 52.08954,
+   "lon": -113.44167,
    "name": "Pine Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -12317,6 +12067,7 @@
     "trout_total": null,
     "zone": "PP2"
    },
+   "surface_area_ha": 393.6,
    "zone": "PP2"
   },
   {
@@ -12386,10 +12137,10 @@
    "zone": "PP2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp2-spotted-lake",
-   "lat": 52.49056,
-   "lon": -113.13639,
+   "lat": 52.50313,
+   "lon": -113.12813,
    "name": "Spotted Lake",
    "rules": {
     "bait": "Bait allowed, except bait fish",
@@ -12415,6 +12166,7 @@
     "trout_total": null,
     "zone": "PP2"
    },
+   "surface_area_ha": 72.6,
    "zone": "PP2"
   },
   {
@@ -12452,9 +12204,9 @@
    "zone": "PP2"
   },
   {
-   "coord_source": "place names",
+   "coord_source": "outline",
    "lake_id": "gu-pp2-wizard-lake",
-   "lat": 53.11139,
+   "lat": 53.12456,
    "lon": -113.895,
    "name": "Wizard Lake",
    "rules": {
@@ -12482,6 +12234,7 @@
     "trout_total": null,
     "zone": "PP2"
    },
+   "surface_area_ha": 320.5,
    "zone": "PP2"
   }
  ],

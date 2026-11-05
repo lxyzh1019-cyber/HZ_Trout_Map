@@ -1,4 +1,400 @@
 {
+ "gu-es1-gap-lake": {
+  "name": "Gap Lake",
+  "contour_dig": "DIG 2008-0590",
+  "grid_dig": "DIG_2008_0421",
+  "zip": "DIG_2008_0421.zip"
+ },
+ "gu-es1-glenmore-reservoir": {
+  "name": "Glenmore Reservoir",
+  "contour_dig": "DIG 2008-0593",
+  "grid_dig": "DIG_2008_0424",
+  "zip": "DIG_2008_0424.zip"
+ },
+ "gu-es2-swan-lake": {
+  "name": "Swan Lake",
+  "contour_dig": "DIG 2008-0683",
+  "grid_dig": "DIG_2008_0514",
+  "zip": "DIG_2008_0514.zip"
+ },
+ "gu-es3-jarvis-lake": {
+  "name": "Jarvis Lake",
+  "contour_dig": "DIG 2008-0614",
+  "grid_dig": "DIG_2008_0445",
+  "zip": "DIG_2008_0445.zip"
+ },
+ "gu-es3-rock-lake": {
+  "name": "Rock Lake",
+  "contour_dig": "DIG 2008-0664",
+  "grid_dig": "DIG_2008_0495",
+  "zip": "DIG_2008_0495.zip"
+ },
+ "gu-es3-shiningbank-lake": {
+  "name": "Shiningbank Lake",
+  "contour_dig": "DIG 2008-0670",
+  "grid_dig": "DIG_2008_0501",
+  "zip": "DIG_2008_0501.zip"
+ },
+ "gu-es4-iosegun-lake": {
+  "name": "Iosegun Lake",
+  "contour_dig": "DIG 2008-0609",
+  "grid_dig": "DIG_2008_0440",
+  "zip": "DIG_2008_0440.zip"
+ },
+ "gu-es4-smoke-lake": {
+  "name": "Smoke Lake",
+  "contour_dig": "DIG 2008-0672",
+  "grid_dig": "DIG_2008_0503",
+  "zip": "DIG_2008_0503.zip"
+ },
+ "gu-es4-snipe-lake": {
+  "name": "Snipe Lake",
+  "contour_dig": "DIG 2008-0674",
+  "grid_dig": "DIG_2008_0505",
+  "zip": "DIG_2008_0505.zip"
+ },
+ "gu-es4-sturgeon-lake": {
+  "name": "Sturgeon Lake",
+  "contour_dig": "DIG 2008-0682",
+  "grid_dig": "DIG_2008_0513",
+  "zip": "DIG_2008_0513.zip"
+ },
+ "gu-nb1-amisk-lake": {
+  "name": "Amisk Lake",
+  "contour_dig": "DIG 2008-0535",
+  "grid_dig": "DIG_2008_0366",
+  "zip": "DIG_2008_0366.zip"
+ },
+ "gu-nb1-angling-lake": {
+  "name": "Angling Lake",
+  "contour_dig": "DIG 2008-0536",
+  "grid_dig": "DIG_2008_0367",
+  "zip": "DIG_2008_0367.zip"
+ },
+ "gu-nb1-beaver-lake": {
+  "name": "Beaver Lake",
+  "contour_dig": "DIG 2008-0546",
+  "grid_dig": "DIG_2008_0377",
+  "zip": "DIG_2008_0377.zip"
+ },
+ "gu-nb1-claude-lake": {
+  "name": "Claude Lake",
+  "contour_dig": "DIG 2008-0570",
+  "grid_dig": "DIG_2008_0401",
+  "zip": "DIG_2008_0401.zip"
+ },
+ "gu-nb1-cold-lake": {
+  "name": "Cold Lake",
+  "contour_dig": "DIG 2008-0572",
+  "grid_dig": "DIG_2008_0403",
+  "zip": "DIG_2008_0403.zip"
+ },
+ "gu-nb1-ethel-bear-lake": {
+  "name": "Ethel Lake",
+  "contour_dig": "DIG 2008-0583",
+  "grid_dig": "DIG_2008_0414",
+  "zip": "DIG_2008_0414.zip"
+ },
+ "gu-nb1-floatingstone-lake": {
+  "name": "Floatingstone Lake",
+  "contour_dig": "DIG 2008-0586",
+  "grid_dig": "DIG_2008_0417",
+  "zip": "DIG_2008_0417.zip"
+ },
+ "gu-nb1-fork-lake": {
+  "name": "Fork Lake",
+  "contour_dig": "DIG 2008-0587",
+  "grid_dig": "DIG_2008_0418",
+  "zip": "DIG_2008_0418.zip"
+ },
+ "gu-nb1-garner-lake": {
+  "name": "Garner Lake",
+  "contour_dig": "DIG 2008-0591",
+  "grid_dig": "DIG_2008_0422",
+  "zip": "DIG_2008_0422.zip"
+ },
+ "gu-nb1-goodfish-lake": {
+  "name": "Goodfish Lake",
+  "contour_dig": "DIG 2008-0596",
+  "grid_dig": "DIG_2008_0427",
+  "zip": "DIG_2008_0427.zip"
+ },
+ "gu-nb1-hanmore-lake": {
+  "name": "Hanmore Lake",
+  "contour_dig": "DIG 2008-0604",
+  "grid_dig": "DIG_2008_0435",
+  "zip": "DIG_2008_0435.zip"
+ },
+ "gu-nb1-hilda-lake": {
+  "name": "Hilda Lake",
+  "contour_dig": "DIG 2008-0607",
+  "grid_dig": "DIG_2008_0438",
+  "zip": "DIG_2008_0438.zip"
+ },
+ "gu-nb1-ironwood-lake": {
+  "name": "Ironwood Lake",
+  "contour_dig": "DIG 2008-0610",
+  "grid_dig": "DIG_2008_0441",
+  "zip": "DIG_2008_0441.zip"
+ },
+ "gu-nb1-lac-la-biche": {
+  "name": "Lac la Biche",
+  "contour_dig": "DIG 2008-0548",
+  "grid_dig": "DIG_2008_0379",
+  "zip": "DIG_2008_0379.zip"
+ },
+ "gu-nb1-lac-saint-cyr": {
+  "name": "Lac Saint Cyr",
+  "contour_dig": "DIG 2008-0629",
+  "grid_dig": "DIG_2008_0460",
+  "zip": "DIG_2008_0460.zip"
+ },
+ "gu-nb1-laurier-lake": {
+  "name": "Laurier Lake",
+  "contour_dig": "DIG 2008-0621",
+  "grid_dig": "DIG_2008_0452",
+  "zip": "DIG_2008_0452.zip"
+ },
+ "gu-nb1-manatokan-lake": {
+  "name": "Manatokan Lake",
+  "contour_dig": "DIG 2008-0631",
+  "grid_dig": "DIG_2008_0462",
+  "zip": "DIG_2008_0462.zip"
+ },
+ "gu-nb1-marie-lake": {
+  "name": "Marie Lake",
+  "contour_dig": "DIG 2008-0632",
+  "grid_dig": "DIG_2008_0463",
+  "zip": "DIG_2008_0463.zip"
+ },
+ "gu-nb1-may-lake": {
+  "name": "May Lake",
+  "contour_dig": "DIG 2008-0634",
+  "grid_dig": "DIG_2008_0465",
+  "zip": "DIG_2008_0465.zip"
+ },
+ "gu-nb1-minnie-lake": {
+  "name": "Minnie Lake",
+  "contour_dig": "DIG 2008-0641",
+  "grid_dig": "DIG_2008_0472",
+  "zip": "DIG_2008_0472.zip"
+ },
+ "gu-nb1-moose-lake": {
+  "name": "Moose Lake",
+  "contour_dig": "DIG 2008-0645",
+  "grid_dig": "DIG_2008_0476",
+  "zip": "DIG_2008_0476.zip"
+ },
+ "gu-nb1-north-buck-lake": {
+  "name": "North Buck Lake",
+  "contour_dig": "DIG 2008-0652",
+  "grid_dig": "DIG_2008_0483",
+  "zip": "DIG_2008_0483.zip"
+ },
+ "gu-nb1-seibert-lake": {
+  "name": "Seibert Lake",
+  "contour_dig": "DIG 2008-0669",
+  "grid_dig": "DIG_2008_0500",
+  "zip": "DIG_2008_0500.zip"
+ },
+ "gu-nb1-touchwood-lake": {
+  "name": "Touchwood Lake",
+  "contour_dig": "DIG 2008-0686",
+  "grid_dig": "DIG_2008_0517",
+  "zip": "DIG_2008_0517.zip"
+ },
+ "gu-nb1-tucker-lake": {
+  "name": "Tucker Lake",
+  "contour_dig": "DIG 2008-0687",
+  "grid_dig": "DIG_2008_0518",
+  "zip": "DIG_2008_0518.zip"
+ },
+ "gu-nb1-whitefish-lake": {
+  "name": "Whitefish Lake",
+  "contour_dig": "DIG 2008-0697",
+  "grid_dig": "DIG_2008_0528",
+  "zip": "DIG_2008_0528.zip"
+ },
+ "gu-nb1-whitney-lake": {
+  "name": "Whitney Lake",
+  "contour_dig": "DIG 2008-0698",
+  "grid_dig": "DIG_2008_0529",
+  "zip": "DIG_2008_0529.zip"
+ },
+ "gu-nb2-baptiste-lake": {
+  "name": "Baptiste Lake",
+  "contour_dig": "DIG 2008-0541",
+  "grid_dig": "DIG_2008_0372",
+  "zip": "DIG_2008_0372.zip"
+ },
+ "gu-nb2-fawcett-lake": {
+  "name": "Fawcett Lake",
+  "contour_dig": "DIG 2008-0584",
+  "grid_dig": "DIG_2008_0415",
+  "zip": "DIG_2008_0415.zip"
+ },
+ "gu-nb2-freeman-lake": {
+  "name": "Freeman Lake",
+  "contour_dig": "DIG 2008-0588",
+  "grid_dig": "DIG_2008_0419",
+  "zip": "DIG_2008_0419.zip"
+ },
+ "gu-nb2-ghost-lake": {
+  "name": "Ghost Lake",
+  "contour_dig": "DIG 2008-0592",
+  "grid_dig": "DIG_2008_0423",
+  "zip": "DIG_2008_0423.zip"
+ },
+ "gu-nb2-lac-la-nonne": {
+  "name": "Lac la Nonne",
+  "contour_dig": "DIG 2008-0651",
+  "grid_dig": "DIG_2008_0482",
+  "zip": "DIG_2008_0482.zip"
+ },
+ "gu-nb2-lawrence-lake": {
+  "name": "Lawrence Lake",
+  "contour_dig": "DIG 2008-0622",
+  "grid_dig": "DIG_2008_0453",
+  "zip": "DIG_2008_0453.zip"
+ },
+ "gu-nb2-lesser-slave-lake": {
+  "name": "Lesser Slave Lake",
+  "contour_dig": "DIG 2008-0624",
+  "grid_dig": "DIG_2008_0455",
+  "zip": "DIG_2008_0455.zip"
+ },
+ "gu-nb2-long-island-lake": {
+  "name": "Long Island Lake",
+  "contour_dig": "DIG 2008-0626",
+  "grid_dig": "DIG_2008_0457",
+  "zip": "DIG_2008_0457.zip"
+ },
+ "gu-nb2-mitsue-lake": {
+  "name": "Mitsue Lake",
+  "contour_dig": "DIG 2008-0644",
+  "grid_dig": "DIG_2008_0475",
+  "zip": "DIG_2008_0475.zip"
+ },
+ "gu-nb2-nakamun-lake": {
+  "name": "Nakamun Lake",
+  "contour_dig": "DIG 2008-0649",
+  "grid_dig": "DIG_2008_0480",
+  "zip": "DIG_2008_0480.zip"
+ },
+ "gu-nb2-steele-cross-lake": {
+  "name": "Steele Lake",
+  "contour_dig": "DIG 2008-0680",
+  "grid_dig": "DIG_2008_0511",
+  "zip": "DIG_2008_0511.zip"
+ },
+ "gu-nb3-nipisi-lake": {
+  "name": "Nipisi Lake",
+  "contour_dig": "DIG 2008-0650",
+  "grid_dig": "DIG_2008_0481",
+  "zip": "DIG_2008_0481.zip"
+ },
+ "gu-nb4-winefred-lake": {
+  "name": "Winefred Lake",
+  "contour_dig": "DIG 2008-0701",
+  "grid_dig": "DIG_2008_0532",
+  "zip": "DIG_2008_0532.zip"
+ },
+ "gu-pp1-chestermere-lake": {
+  "name": "Chestermere Lake",
+  "contour_dig": "DIG 2008-0565",
+  "grid_dig": "DIG_2008_0396",
+  "zip": "DIG_2008_0396.zip"
+ },
+ "gu-pp1-elkwater-lake": {
+  "name": "Elkwater Lake",
+  "contour_dig": "DIG 2008-0582",
+  "grid_dig": "DIG_2008_0413",
+  "zip": "DIG_2008_0413.zip"
+ },
+ "gu-pp2-arm-lake": {
+  "name": "Arm Lake",
+  "contour_dig": "DIG 2008-0539",
+  "grid_dig": "DIG_2008_0370",
+  "zip": "DIG_2008_0370.zip"
+ },
+ "gu-pp2-battle-lake": {
+  "name": "Battle Lake",
+  "contour_dig": "DIG 2008-0543",
+  "grid_dig": "DIG_2008_0374",
+  "zip": "DIG_2008_0374.zip"
+ },
+ "gu-pp2-buck-lake": {
+  "name": "Buck Lake",
+  "contour_dig": "DIG 2008-0555",
+  "grid_dig": "DIG_2008_0386",
+  "zip": "DIG_2008_0386.zip"
+ },
+ "gu-pp2-coal-lake": {
+  "name": "Coal Lake",
+  "contour_dig": "DIG 2008-0571",
+  "grid_dig": "DIG_2008_0402",
+  "zip": "DIG_2008_0402.zip"
+ },
+ "gu-pp2-gull-lake": {
+  "name": "Gull Lake",
+  "contour_dig": "DIG 2008-0603",
+  "grid_dig": "DIG_2008_0434",
+  "zip": "DIG_2008_0434.zip"
+ },
+ "gu-pp2-hubbles-lake": {
+  "name": "Hubbles Lake",
+  "contour_dig": "DIG 2008-0608",
+  "grid_dig": "DIG_2008_0439",
+  "zip": "DIG_2008_0439.zip"
+ },
+ "gu-pp2-isle-lake": {
+  "name": "Isle Lake",
+  "contour_dig": "DIG 2008-0612",
+  "grid_dig": "DIG_2008_0443",
+  "zip": "DIG_2008_0443.zip"
+ },
+ "gu-pp2-magee-lake": {
+  "name": "Magee Lake",
+  "contour_dig": "DIG 2008-0630",
+  "grid_dig": "DIG_2008_0461",
+  "zip": "DIG_2008_0461.zip"
+ },
+ "gu-pp2-medicine-lake": {
+  "name": "Medicine Lake",
+  "contour_dig": "DIG 2008-0636",
+  "grid_dig": "DIG_2008_0467",
+  "zip": "DIG_2008_0467.zip"
+ },
+ "gu-pp2-mere-lake": {
+  "name": "Mere Lake",
+  "contour_dig": "DIG 2008-0637",
+  "grid_dig": "DIG_2008_0468",
+  "zip": "DIG_2008_0468.zip"
+ },
+ "gu-pp2-mink-lake": {
+  "name": "Mink Lake",
+  "contour_dig": "DIG 2008-0640",
+  "grid_dig": "DIG_2008_0471",
+  "zip": "DIG_2008_0471.zip"
+ },
+ "gu-pp2-pigeon-lake": {
+  "name": "Pigeon Lake",
+  "contour_dig": "DIG 2008-0659",
+  "grid_dig": "DIG_2008_0490",
+  "zip": "DIG_2008_0490.zip"
+ },
+ "gu-pp2-pine-lake": {
+  "name": "Pine Lake",
+  "contour_dig": "DIG 2008-0660",
+  "grid_dig": "DIG_2008_0491",
+  "zip": "DIG_2008_0491.zip"
+ },
+ "gu-pp2-wizard-lake": {
+  "name": "Wizard Lake",
+  "contour_dig": "DIG 2008-0702",
+  "grid_dig": "DIG_2008_0533",
+  "zip": "DIG_2008_0533.zip"
+ },
  "wb18014": {
   "name": "South Heart Reservoir",
   "contour_dig": "DIG 2008-0676",

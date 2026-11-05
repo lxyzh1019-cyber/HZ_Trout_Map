@@ -3981,3 +3981,90 @@ class Build5Stage1Tests(unittest.TestCase):
         self.assertNotIn('id="map-menu-btn" type="button" aria-haspopup', page)
         dayui = (ROOT / "js" / "day-ui.js").read_text(encoding="utf-8")
         self.assertIn('"data-tag", "data-info"]', dayui)
+
+
+class Build5Stage2Tests(unittest.TestCase):
+    """Build 5, Stage 2: the waters the 2026 guide names that are not stocked,
+    and its river stretches, scored like the stocked lakes."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.waters = json.loads((DATA_DIR / "waters_unstocked.json").read_text(encoding="utf-8"))
+        cls.rivers = json.loads((DATA_DIR / "rivers.json").read_text(encoding="utf-8"))
+        cls.by_name = {(l["name"], l["zone"]): l for l in cls.waters["lakes"]}
+
+    def test_gull_pigeon_and_gleniffer_are_placed_with_their_rules(self):
+        for name, zone in (("Gull Lake", "PP2"), ("Pigeon Lake", "PP2"), ("Gleniffer Lake", "ES2")):
+            lake = self.by_name[(name, zone)]
+            self.assertIsNotNone(lake.get("lat"), name)
+            self.assertEqual(lake["rules"]["basis"], "site-specific", name)
+            self.assertTrue(lake["rules"]["season"]["text"], name)
+        self.assertEqual(self.by_name[("Gleniffer Lake", "ES2")]["coord_source"], "ats")
+        # Gull Lake (PP2) is the one near Bentley, not the Gull Lake in the far north.
+        self.assertLess(abs(self.by_name[("Gull Lake", "PP2")]["lat"] - 52.54), 0.1)
+
+    def test_no_new_water_duplicates_a_stocked_lake(self):
+        stocked = mapped_lakes()
+        names = {}
+        for k, l in stocked.items():
+            names.setdefault(l["name"].casefold(), []).append((l["lat"], l["lon"]))
+        for l in self.waters["lakes"]:
+            self.assertFalse(l["lake_id"] in stocked, l["lake_id"])
+            for lat, lon in names.get(l["name"].casefold(), []):
+                d = ((lat - l["lat"]) ** 2 + ((lon - l["lon"]) * 0.62) ** 2) ** 0.5 * 111
+                self.assertGreater(d, 10, l["name"])
+            self.assertIn(l["coord_source"], ("ats", "outline", "place names"))
+        self.assertGreaterEqual(len(self.waters["lakes"]), 250)
+
+    def test_red_deer_below_dickson_dam_is_its_own_stretch(self):
+        rd = [s for s in self.rivers["stretches"] if s["name"] == "Red Deer River" and s["zone"] == "PP2"
+              and (s["detail"] or "").startswith("Mainstem from Dickson Dam")]
+        self.assertEqual(len(rd), 1)
+        s = rd[0]
+        self.assertIn(s["limits"], ("found", "approximate"))
+        self.assertEqual(s["rules"]["season"]["text"], "OPEN MAY 15 TO MAR. 1")
+        self.assertEqual(s["rules"]["bait"], "Only maggots allowed")
+        self.assertGreater(s["length_km"], 150)
+        self.assertGreaterEqual(len(s["spots"]), 5)
+
+    def test_every_stretch_has_spots_about_every_25_km(self):
+        def km(a, b):
+            import math
+            return 111.2 * math.hypot(a[0] - b[0], (a[1] - b[1]) * math.cos(math.radians(a[0])))
+        for s in self.rivers["stretches"]:
+            self.assertTrue(s["spots"], s["lake_id"])
+            self.assertTrue(s["line"], s["lake_id"])
+            self.assertIn(s["limits"], ("found", "approximate", "unit", "estimated"))
+            # No two spots closer than 25 km, and every line point within about 25 km of a spot.
+            for i, a in enumerate(s["spots"]):
+                for b in s["spots"][i + 1:]:
+                    self.assertGreaterEqual(km(a, b), 24.9, s["lake_id"])
+            for line in s["line"]:
+                for p in line[::10]:
+                    self.assertLessEqual(min(km(p, q) for q in s["spots"]), 26, s["lake_id"])
+        self.assertIn("Open Government Licence - Canada", self.rivers["source"]["licence"])
+
+    def test_waters_load_and_filter_in_the_app(self):
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn('fetch("data/waters_unstocked.json")', page)
+        self.assertIn('fetch("data/rivers.json")', page)
+        self.assertIn('id="stocked-chip"', page)
+        self.assertIn('id="unstocked-chip"', page)
+        passes = page[page.index("function lakePassesFilters("):page.index("function facilitiesPass(")]
+        self.assertIn("if (lake.unstocked) {", passes)
+        # A water without rules is never hidden by a season or bait filter (same tests as stocked).
+        self.assertIn("state.openNow && lakeOpenNow(lake) === false", passes)
+        self.assertIn("(lake && lake.rules)", page[page.index("function regulationFor("):page.index("function regulationFor(") + 400])
+        sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        self.assertIn("Not stocked. Alberta\\'s stocking reports 2011–2026 do not list this water.", sheet)
+        worker = (ROOT / "sw.js").read_text(encoding="utf-8")
+        self.assertIn('"data/waters_unstocked.json", "data/rivers.json"', worker)
+
+    def test_weather_loads_near_and_on_screen_first(self):
+        day = (ROOT / "js" / "day-ui.js").read_text(encoding="utf-8")
+        self.assertIn("var WX_NEAR_KM = 200;", day)
+        self.assertIn("var NEAR_KM = [100, 200, Infinity];", day)   # "Best near you" steps unchanged
+        self.assertIn("fetchOnScreen();", day)
+        got = run_js(["forecast.js"], """(() => { const F = window.Forecast;
+          return typeof F.forLake; })()""", prelude="window = globalThis;")
+        self.assertEqual(got, "function")

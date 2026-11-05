@@ -1,4 +1,4 @@
-# FEATURES — HZ_Trout_Map — manifest v6 — Build 5 Stage 1
+# FEATURES — HZ_Trout_Map — manifest v7 — Build 5 Stage 2
 
 Locked features of the current version (branch claude/funny-ritchie-bealq0, from main at 922ddb0). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
 
@@ -57,6 +57,15 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - Dialog: Escape closes only the top layer (Build 4: the Learn guide, the 3D view, the search box, then the lake), Tab stays inside, buttons and layer rows at least 44 px; closing frees the 3D memory.
 - Works with no signal: the add-on, the 40 lakebed files (1.37 MB) and the boating rules are saved on the first visit.
 
+## All the guide's waters (Build 5 Stage 2)
+- 281 lakes, reservoirs and ponds the 2026 guide's tables name that the stocking reports never list (data/waters_unstocked.json), each with its own rule row from the guide, its height, Bite and Day out, forecast, winter guard and ice estimates. Positions: the guide's land location (61), a lake outline in Canada's water data (126), or Canada's place names (94); 46 names that could not be placed with confidence are in data/waters_review.csv, not on the map. A guide lake that is already on the map as a stocked lake (same water, same or close name) is left as it is.
+- Fish and stocking says "Not stocked. Alberta's stocking reports 2011–2026 do not list this water."
+- 85 river and creek stretches on 79 named waters (data/rivers.json), drawn as thin blue lines (wider when open), each with its rule row; a forecast spot about every 25 km (318 spots), the spot with the best day of the week stands for the stretch and the panel names it. Limits: "unit" (the river in that part of the guide, 69), "approximate" (by a named place, 2: the Red Deer River below the Dickson Dam to the Tolman Bridge, and on to the border), "estimated" (a road or park limit the maps could not place, 14). No 3D on rivers. "River stretch" section with the guide's words and a "Reading a river" link.
+- 3D depth model on 109 lakes (66 of them new), all lakebed files saved on the first visit (3.8 MB, was 1.37 MB).
+- Filters: "Stocking" with Stocked and Not stocked (both on at the start). A water that is not stocked passes years and size, and is left out only for a species choice or a recent-stocking filter. A water without rules is never hidden by a season or bait filter.
+- Weather: spots within 200 km of you load first (161 calls on a fresh load from Red Deer); spots on screen load when the map is zoomed in to about 200 km across; a lake panel loads its own forecast.
+- Credits: Natural Resources Canada place names (CGNDB) and CanVec 1:50,000 water data, Open Government Licence – Canada, in the data quality panel.
+
 ## Map and finding a lake
 - Pins cluster when zoomed out and split as you zoom in; hover shows name, score, distance, fish in view and last stocking date.
 - One "Map ▾" button on the map (Build 5) opens a small menu: Topo, Street, Satellite, Zoom to results, Copy link. A pick, a tap outside or Escape closes it.
@@ -100,7 +109,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 ## Taking it with you
 - List view sortable on any column, including Bite and Day out for the picked day, with CSV download.
 - Saved lakes in the browser and a one-click multi-stop driving route through them.
-- Works offline after the first visit (service worker, shell cache v8, saved town list, saved forecasts, lake heights, depth chart links, hot spots, the 3D depth model with its lakebed files and boating rules).
+- Works offline after the first visit (service worker, shell cache v9, the guide's waters and rivers, saved town list, saved forecasts, lake heights, depth chart links, hot spots, the 3D depth model with its lakebed files and boating rules).
 
 ## Data and honesty
 - Estimated positions are labelled; data quality panel; evidence page (evidence.html).
@@ -108,6 +117,19 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - ACA aeration roster with ACA's Winter Angling column; a test fails if it disagrees with the regulations.
 - Colour-blind-safe pin palettes; every score pin carries its number.
 - Credit lines: Open-Meteo (CC BY 4.0), town list licence, GeoNames via Open-Meteo, Esri imagery, photo credits, Alberta Geological Survey (depth charts), Open-Meteo elevation with Copernicus DEM (in the ice inputs). The 3D view footer and its Learn guide carry the Open Government Licence – Alberta line, Transport Canada TP 15587E (not the official version), MyWildAlberta, Open-Meteo and three.js (MIT).
+
+## Regression table — manifest v6 → v7 (Build 5 Stage 2)
+| Feature | v6 → v7 | Note |
+|---|---|---|
+| Stocked lakes, pins, clusters, hover | kept | 382 lakes unchanged; plus waters not stocked and river lines |
+| Bite and Day out, banner, Why, tip | kept | same engine for every water; rivers use their best spot |
+| Best near you | kept | 100 / 200 km / all steps unchanged (checked after a name clash was fixed) |
+| Filters | kept | plus Stocking: Stocked / Not stocked |
+| Rules | kept | waters not stocked carry the guide's row |
+| 3D depth model | kept | 43 → 109 lakes; offline lakebeds 1.37 → 3.8 MB |
+| Weather calls per load | changed | near you first (161 from Red Deer), on screen when zoomed in |
+| Lake heights | kept | plus new lakes and river spots |
+| Offline | kept | shell cache v8 → v9, two new data files |
 
 ## Regression table — manifest v5 → v6 (Build 5 Stage 1)
 | Feature | v5 → v6 | Note |
