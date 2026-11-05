@@ -605,7 +605,7 @@
       ? now.advisories.filter(function (a) { return !/expect ice/.test(a); })
       : now.advisories;
     var source = wx.source === "none"
-      ? '<span class="cx-warn">No weather — sun and moon only</span>'
+      ? '<span class="cx-warn">No forecast yet</span>'
       : '<span class="cx-src">weather ' + esc(Weather.ageText(wx.fetchedAt))
         + (wx.source === "cache" ? " (cached)" : "") + "</span>";
 
@@ -624,7 +624,9 @@
     } else if (wx.source === "none") {
       // Build 5 (W1): no forecast, no score; sun and moon alone are not a Bite score.
       body = '<div class="cx-closed"><strong>Needs a forecast</strong>'
-        + '<div class="cx-why">The Bite score needs the weather for this lake. It shows when the forecast arrives.</div></div>';
+        + '<div class="cx-why">The Bite score needs the weather for this lake. It shows when the forecast arrives.</div></div>'
+        // The measured water temperature box stays: it is kept for when the forecast comes.
+        + waterInputHtml(place, water);
     } else {
       body = (state.conditions.horizon === "week"
         ? gridHtml(place, wx, water)
@@ -648,12 +650,12 @@
       + weatherNowHtml(wx, new Date())
       // A shut lake gets no verdict: the closed block below says why.
       + (closed || iced || wx.source === "none" ? "" : verdictHtml(now))
-      + '<div class="cx-row">'
+      + (wx.source === "none" ? "" : '<div class="cx-row">'
       + '<div class="chips cx-horizon">'
       + '<button class="chip' + (state.conditions.horizon === "now" ? " active" : "") + '" data-horizon="now">Next 6 h</button>'
       + '<button class="chip' + (state.conditions.horizon === "week" ? " active" : "") + '" data-horizon="week">7 days</button>'
       + '</div>'
-      + '</div>'
+      + '</div>')
       + '<div class="cx-src-row">' + source
       + '<span class="cx-tz">' + (tzOffsetSec === null
           ? "times on this device's clock"

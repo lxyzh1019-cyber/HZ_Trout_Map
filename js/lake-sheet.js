@@ -144,15 +144,22 @@
     return t;
   }
 
+  /* The words a tapped tag shows, with the Alberta notice link for an advisory. */
+  function tagFullHtml(full, url) {
+    return esc(full) + (url ? ' <a href="' + esc(url) + '" target="_blank" rel="noopener">Alberta notice ↗</a>' : "");
+  }
+
   function tagsHtml(lake, winter) {
     var t = tagList(lake, winter);
     if (!t.length) return "";
+    // The open tag stays open when the panel redraws (a forecast arriving, the lakebed loading).
+    var open = typeof state !== "undefined" && state.sections && typeof state.sections.tag === "number" && t[state.sections.tag] ? state.sections.tag : -1;
     return '<div class="tags">' + t.map(function (x, i) {
       // A 44 px tap area around a small pill.
       return '<button type="button" class="tag-btn" data-tag="' + i + '" data-full="' + esc(x[2]) + '"'
-        + (x[3] ? ' data-url="' + esc(x[3]) + '"' : "") + ' aria-expanded="false" aria-controls="tag-full">'
+        + (x[3] ? ' data-url="' + esc(x[3]) + '"' : "") + ' aria-expanded="' + (i === open) + '" aria-controls="tag-full">'
         + '<span class="tag ' + x[0] + '">' + esc(x[1]) + "</span></button>";
-    }).join("") + '</div><p class="tag-full" id="tag-full" hidden></p>';
+    }).join("") + '</div><p class="tag-full" id="tag-full" aria-live="polite"' + (open < 0 ? " hidden>" : ">" + tagFullHtml(t[open][2], t[open][3])) + "</p>";
   }
 
   // ============================================================
@@ -224,11 +231,15 @@
   /* Build 5 (W4): one answer line at the top of the panel: which day, the score,
    * the wind, the best two hours, what to use and how deep. Everything behind it
    * is in the folds below. */
+  /* The same word the list rows use for a day (Day out: calm, breezy, gusty), so the
+   * panel and the list never say different things about one day. */
+  function dayOutWord(dayOut) {
+    if (num(dayOut) === null) return null;
+    return dayOut >= 0.6 ? "calm" : dayOut >= 0.42 ? "breezy" : "gusty";
+  }
   function windWord(day) {
     if (num(day.gustMax) !== null && day.gustMax >= Conditions.GUST_WARN_KPH) return "gusty";
-    var w = num(day.windMean);
-    if (w === null) return null;
-    return w < 8 ? "calm" : w < 15 ? "light wind" : w < 25 ? "breezy" : "windy";
+    return dayOutWord(day.dayOut);
   }
 
   /* The first fly or lure of the tackle estimate, without its how-to words:
@@ -269,11 +280,12 @@
   function answerHtml(lake, f) {
     var a = answerParts(lake, f);
     var ice = "";
-    if (f && f.hasWeather && !f.iced) {
+    if (f && f.hasWeather && f.iced) ice = Estimates.ICE_WARNING;
+    else if (f && f.hasWeather) {
       var first = -1;
       f.days.forEach(function (x, i) { if (first < 0 && x.iceForming) first = i; });
-      if (first >= 0) ice = "Ice forming" + (first > 0 ? " from " + dayName(f, first) : "") + ". Check the lake before you go.";
-      else if (f.iceUsual) ice = "Ice usually forms here about " + Estimates.fmtDate(f.iceUsual) + ". Check the lake before you go.";
+      if (first >= 0) ice = "Ice forming" + (first > 0 ? " from " + dayName(f, first) : "") + ". Check the lake before you go. " + Estimates.ICE_WARNING;
+      else if (f.iceUsual) ice = "Ice usually forms here about " + Estimates.fmtDate(f.iceUsual) + ". Check the lake before you go. " + Estimates.ICE_WARNING;
     }
     return '<div class="answer ' + a.cls + '" data-answer>' + esc(a.text) + "</div>"
       + (ice ? '<div class="answer-ice">' + esc(ice) + "</div>" : "");
@@ -701,14 +713,14 @@
   function learnRow(links) { return links.length ? '<p class="learn-row">Learn: ' + links.join(" ") + "</p>" : ""; }
 
   /* Build 5 (W6): what each estimate used sits behind a small ⓘ button. */
-  var infoSeq = 0;
-  function estHead(title, inputs) {
+  function estHead(title, inputs, key) {
     if (!inputs || !inputs.length) return "<h3>" + esc(title) + ' <span class="est-chip">estimated</span></h3>';
-    var id = "est-in-" + (++infoSeq);
+    var id = "est-in-" + key;
+    var open = !!(typeof state !== "undefined" && state.sections && state.sections["info:" + id]);
     return "<h3>" + esc(title) + ' <span class="est-chip">estimated</span>'
-      + ' <button type="button" class="info-btn" data-info="' + id + '" aria-expanded="false" aria-controls="' + id
-      + '" aria-label="What this estimate used">ⓘ</button></h3>'
-      + '<p class="inputs" id="' + id + '" hidden>From: ' + esc(inputs.join("; ")) + ".</p>";
+      + ' <button type="button" class="info-btn" data-info="' + id + '" aria-expanded="' + open + '" aria-controls="' + id
+      + '" aria-label="What the ' + esc(title) + ' estimate used">ⓘ</button></h3>'
+      + '<p class="inputs" id="' + id + '"' + (open ? "" : " hidden") + ">From: " + esc(inputs.join("; ")) + ".</p>";
   }
 
   /** Every estimate for this lake now, from the same water and depth the scores use. */
@@ -746,11 +758,11 @@
         + esc(h.status) + "</b>";
     }).join("");
     var t = e.tackle;
-    return '<div class="est">' + estHead("Ice cover", e.ice.inputs) + "<p>" + esc(e.ice.text) + "</p>"
+    return '<div class="est">' + estHead("Ice cover", e.ice.inputs, "ice") + "<p>" + esc(e.ice.text) + "</p>"
       + '<p class="warn">' + esc(e.ice.warning) + learnLink("ice-safety", "Ice safety") + "</p></div>"
-      + '<div class="est">' + estHead("Insect hatches", e.hatch.inputs) + '<div class="hatch">' + hatchRows + "</div></div>"
-      + '<div class="est">' + estHead("Turnover", e.turnover.inputs) + "<p>" + esc(e.turnover.text) + "</p></div>"
-      + '<div class="est">' + estHead("Flies and lures", t.inputs) + "<p><b>Flies:</b> " + esc(t.flies.join("; ")) + "</p>"
+      + '<div class="est">' + estHead("Insect hatches", e.hatch.inputs, "hatch") + '<div class="hatch">' + hatchRows + "</div></div>"
+      + '<div class="est">' + estHead("Turnover", e.turnover.inputs, "turnover") + "<p>" + esc(e.turnover.text) + "</p></div>"
+      + '<div class="est">' + estHead("Flies and lures", t.inputs, "tackle") + "<p><b>Flies:</b> " + esc(t.flies.join("; ")) + "</p>"
       + "<p><b>Lures:</b> " + esc(t.lures.join("; ")) + "</p>"
       + (t.bait ? "<p><b>Bait:</b> " + esc(t.bait.join("; ")) + "</p>" : '<p class="warn">' + esc(t.baitNote) + "</p>")
       + "<p>" + esc(t.legal) + "</p></div>";
@@ -780,7 +792,7 @@
       areaHa: lake.surface_area_ha, aerated: lakeAerated(lake), amenities: (profileFor(lake) || {}).amenities || [],
       baitRule: lakeBaitRule(lake), iceKind: lakeIceKind(lake), troutLimit: troutLimit(lake),
     });
-    return '<div class="est">' + estHead("From its depth, size, facilities and rules", h.inputs) + "<ul>"
+    return '<div class="est">' + estHead("From its depth, size, facilities and rules", h.inputs, "how") + "<ul>"
       + h.lines.map(function (l) { return "<li>" + esc(l) + "</li>"; }).join("") + "</ul>"
       // Build 4: the shapes named above, one tap away.
       + (window.DepthModel && DepthModel.has(lake) ? '<button type="button" class="btn" data-depth3d>See it in 3D</button>' : "")
@@ -906,15 +918,12 @@
       b.addEventListener("click", function () {
         var was = b.getAttribute("aria-expanded") === "true";
         q("[data-tag]").forEach(function (o) { o.setAttribute("aria-expanded", "false"); });
+        state.sections = state.sections || {};
+        state.sections.tag = was ? null : Number(b.dataset.tag);
         if (!full) return;
-        if (was) { full.hidden = true; full.textContent = ""; return; }
+        if (was) { full.hidden = true; full.innerHTML = ""; return; }
         b.setAttribute("aria-expanded", "true");
-        full.textContent = b.dataset.full || "";
-        if (b.dataset.url) {
-          var a = document.createElement("a");
-          a.href = b.dataset.url; a.target = "_blank"; a.rel = "noopener"; a.textContent = " Alberta notice ↗";
-          full.appendChild(a);
-        }
+        full.innerHTML = tagFullHtml(b.dataset.full || "", b.dataset.url || null);
         full.hidden = false;
       });
     });
@@ -925,6 +934,8 @@
         if (!p) return;
         p.hidden = !p.hidden;
         b.setAttribute("aria-expanded", String(!p.hidden));
+        state.sections = state.sections || {};
+        state.sections["info:" + b.dataset.info] = !p.hidden;
       });
     });
     // Build 4: Learn links open the guide for the term next to them.
@@ -988,8 +999,10 @@
     fishDepthFor: fishDepthFor,
     winterScoreHtml: winterScoreHtml,
     usualMonths: usualMonths,
+    dayOutWord: dayOutWord,
     rulesYearWarning: rulesYearWarning,
     answerParts: answerParts,
+    _answerHtml: answerHtml,
     _internal: { bannerHtml: bannerHtml, whyHtml: whyHtml, tagsHtml: tagsHtml, shortTackle: shortTackle, windWord: windWord, dayCompareSentence: dayCompareSentence, barsHtml: barsHtml, boatingHtml: boatingHtml, tipHtml: tipHtml, estimatesFor: estimatesFor, seasonHtml: seasonHtml, howHtml: howHtml, depthChartHtml: depthChartHtml, hotSpotsHtml: hotSpotsHtml },
     BAND_WORD: BAND_WORD,
     RULES_URL: RULES_URL,

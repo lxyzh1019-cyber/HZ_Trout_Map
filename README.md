@@ -130,7 +130,9 @@ the new guide PDF from Alberta's site. The session does these steps:
 2. Change `REGULATIONS_PDF` in `scripts/build_history.py` to the new file name.
 3. Rebuild: `cd scripts` then `python3 build_history.py`. `data/lake_regulations.json`
    now says the new `guide_year`, and the warning goes away.
-4. Answer anything new in `data/regs_review.csv`.
+4. For each new row in `data/regs_review.csv` (a lake the guide could not be
+   matched to), add a line to `data/regs_aliases.csv` naming the guide's entry,
+   then run step 3 again.
 5. Run the tests and open a pull request. You merge it.
 
 When it worked, a lake panel shows no rules-year warning and its Rules section
