@@ -1,10 +1,10 @@
 {
  "by_position": {
   "ats": 61,
-  "outline": 168,
+  "outline": 169,
   "place names": 56
  },
- "count": 285,
+ "count": 286,
  "guide_year": 2026,
  "lakes": [
   {
@@ -4847,6 +4847,36 @@
     "zone": "NB1"
    },
    "surface_area_ha": 655.6,
+   "zone": "NB1"
+  },
+  {
+   "coord_source": "outline",
+   "lake_id": "gu-nb1-victor-lake",
+   "lat": 54.41786,
+   "lon": -112.04489,
+   "name": "Victor Lake",
+   "rules": {
+    "bait": "Bait allowed, except bait fish",
+    "basis": "site-specific",
+    "detail": "63-14-W4",
+    "page": 34,
+    "season": {
+     "closed": false,
+     "implied": false,
+     "text": "OPEN MAY 15 TO MAR. 31"
+    },
+    "species": {
+     "NRPK": {
+      "count": 1,
+      "size_cm": 63,
+      "size_op": "over",
+      "text": "1 over 63 cm"
+     }
+    },
+    "trout_total": null,
+    "zone": "NB1"
+   },
+   "surface_area_ha": 54.8,
    "zone": "NB1"
   },
   {

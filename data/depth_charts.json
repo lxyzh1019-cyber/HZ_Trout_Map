@@ -4,7 +4,7 @@
  "layer": "https://services2.arcgis.com/jQV6VMr2Loovu7GU/arcgis/rest/services/Lake_Boundary/FeatureServer/0",
  "retrieved": "2026-11-05",
  "surveyed": 166,
- "placed_lakes": 665,
+ "placed_lakes": 666,
  "matched": 114,
  "rule": "same name without 'lake', chain parts (Upper, #3), brackets and punctuation, with the lake's point inside the outline or within 2 km; or one letter different with the point inside",
  "lakes": {

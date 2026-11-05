@@ -139,6 +139,45 @@ def seed_from_stocking_map(reg):
     return added
 
 
+def apply_zones(reg):
+    """The fishing zone from Alberta's regulations map (data/lake_zones.csv).
+
+    The profile gives most lakes their zone. scripts/lake_zones.py looked up
+    every stocked lake on Alberta's own sportfishing regulations map, by its
+    waterbody id, and noted the zones whose guide tables or put-and-take list
+    name it. A lake takes Alberta's zone where it has none, or where its zone
+    differs and the guide names it in Alberta's zone. A guide row attaches
+    only inside the lake's zone, so a lake with the wrong zone, or none, loses
+    its own rules. Returns the number of lakes whose zone changed.
+    """
+    path = DATA_DIR / "lake_zones.csv"
+    if not path.exists():
+        return 0
+    with path.open(newline="", encoding="utf-8") as handle:
+        # Keyed by id and name: a minted lk00NN id follows the order lakes are
+        # minted in, so the name guards against a zone landing on another lake.
+        rows = {(r["lake_id"], r["name"]): r for r in csv.DictReader(handle)}
+    # A zone you answered in data/lake_facts.csv is never replaced here.
+    answered = set()
+    if FACTS_PATH.exists():
+        with FACTS_PATH.open(newline="", encoding="utf-8") as handle:
+            answered = {r["lake_id"] for r in csv.DictReader(handle) if r.get("field") == "zone"}
+    changed = 0
+    for lake in reg.lakes:
+        if lake["lake_id"] in answered:
+            continue
+        row = rows.get((lake["lake_id"], lake["name"]))
+        if not row or not row["alberta_zone"]:
+            continue
+        zone, now = row["alberta_zone"], lake.get("zone")
+        if now == zone:
+            continue
+        if not now or zone in row["guide_zones"].split():
+            lake["zone"] = zone
+            changed += 1
+    return changed
+
+
 def apply_facts(reg):
     """Your answers to past attribute questions, from data/lake_facts.csv.
 
@@ -768,8 +807,12 @@ def main():
     print(f"  {drift} of them carry more than one land description across years")
 
     matched = attach_profiles(reg)
+    # Zones before facts; a zone answered in data/lake_facts.csv is left alone.
+    zoned = apply_zones(reg)
     confirmed = apply_facts(reg)
     print(f"  {matched} matched to a profile entry (zone, amenities, verified position)")
+    if zoned:
+        print(f"  {zoned} zone(s) from Alberta's regulations map (data/lake_zones.csv)")
     demoted = resolve_duplicate_coordinates(reg)
     for name, gap in demoted:
         print(f"  shared coordinate: {name} moved to its own land description ({gap} km away)")
@@ -802,9 +845,12 @@ def main():
     # Again, now that the lakes minted from a land description exist: those are
     # precisely the ones with no waterbody id, so they are the ones a published
     # id is recorded for, and they are not in the registry during the first pass.
+    zoned = apply_zones(reg)
     confirmed += apply_facts(reg)
     if confirmed:
         print(f"\n  {confirmed} field(s) from data/lake_facts.csv, your past answers")
+    if zoned:
+        print(f"  {zoned} more zone(s) from Alberta's regulations map, for the minted lakes")
 
     dropped = drop_empty_lakes(reg, linked)
     if dropped:

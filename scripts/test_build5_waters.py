@@ -141,13 +141,18 @@ class Build5WatersTests(unittest.TestCase):
         self.assertIn(("Medley River", "on the map as a stocked water"), why)
 
     def test_rivers_with_no_line_are_in_the_review_file(self):
-        # No CanVec line of the name at all, or none in the zone (the line there is
-        # in a neighbouring unit by the nearest stocked lakes).
+        # No CanVec line of the name at all, or none inside the zone's outline on
+        # Alberta's regulations map.
         missing = {r["lake"] for r in self.review if r["why"] in (
             "no river line of that name in the water data", "no river line of that name in the zone")}
-        for name in ("South Castle River", "Redwater River", "Muskwa River",
-                     "Nipisi River", "Birch Creek", "Monday Creek", "Sunday Creek"):
+        for name in ("South Castle River", "Monday Creek"):
             self.assertIn(name, missing)
+        # With Alberta's zone outlines (not the nearest stocked lakes) these
+        # found their line inside their zone.
+        have = {s["name"] for s in self.rivers["stretches"]}
+        for name in ("Redwater River", "Muskwa River", "Nipisi River", "Birch Creek", "Sunday Creek"):
+            self.assertIn(name, have)
+            self.assertNotIn(name, missing)
         # Piche River is "Piché River" in CanVec: found once accents are dropped.
         self.assertIn("rv-nb1-piche-river-1", self.by_id)
         placed = {s["name"] for s in self.rivers["stretches"]}
@@ -202,3 +207,69 @@ class Build5WatersTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Build5ZoneTests(unittest.TestCase):
+    """Zones from Alberta's regulations map (data/lake_zones.csv), the zone of each
+    entry in the guide's put-and-take list, and the guide rows they let attach."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.regs = load("lake_regulations.json")["lakes"]
+        cls.lakes = {}
+        for path in sorted(DATA.glob("lakes_20*.json")):
+            for lk in json.loads(path.read_text(encoding="utf-8")):
+                cls.lakes[lk["lake_id"]] = lk
+        with (DATA / "lake_zones.csv").open(newline="", encoding="utf-8") as f:
+            cls.zones = list(csv.DictReader(f))
+
+    def by_name(self, name):
+        hits = [k for k, lk in self.lakes.items() if lk["name"] == name]
+        self.assertTrue(hits, name)
+        return hits[0]
+
+    def test_lakes_that_had_no_zone_now_have_their_guide_rows(self):
+        for name, zone in [("Headwall Lakes (Lower Headwall Lake)", "ES1"),
+                           ("Memorial Lakes (West Memorial Lake)", "ES1"),
+                           ("Running Rain Lake (Storm Lake)", "ES1"),
+                           ("Lower Kananaskis Lake", "ES1"),
+                           ("Wabamun Lake", "PP2")]:
+            key = self.by_name(name)
+            self.assertEqual(self.lakes[key]["zone"], zone, name)
+            self.assertEqual(self.regs[key]["basis"], "site-specific", name)
+
+    def test_a_wrong_profile_zone_is_replaced_only_when_the_guide_agrees(self):
+        key = self.by_name("Pine Coulee Reservoir")
+        self.assertEqual(self.lakes[key]["zone"], "ES1")
+        self.assertEqual(self.regs[key]["basis"], "site-specific")
+        self.assertEqual(self.lakes[self.by_name("Brooks Aquaduct Pond")]["zone"], "PP1")
+        # The guide names Victor Lake in two zones; Alberta's map, which finds
+        # the lake by its waterbody id, decides.
+        self.assertEqual(self.lakes[self.by_name("Victor Lake")]["zone"], "ES4")
+        # No guide row in Alberta's zone (NB3): the profile's ES4 stays.
+        key = next(k for k, lk in self.lakes.items() if lk["name"].startswith("Montagneuse"))
+        row = next(r for r in self.zones if r["lake_id"] == key)
+        self.assertEqual(row["alberta_zone"], "NB3")
+        self.assertEqual(self.lakes[key]["zone"], "ES4")
+
+    def test_zones_reach_the_year_files(self):
+        for r in self.zones:
+            lk = self.lakes.get(r["lake_id"])
+            if lk and r["alberta_zone"] and r["alberta_zone"] in r["guide_zones"].split():
+                self.assertEqual(lk["zone"], r["alberta_zone"], r["name"])
+        missing = sorted(lk["name"] for lk in self.lakes.values() if not lk.get("zone"))
+        self.assertEqual(missing, ["Morinville Lake", "Niton Pond"])
+
+    def test_put_and_take_entries_carry_their_watershed_unit(self):
+        import regulations
+        st = regulations.load(DATA / "raw" / "alberta-sportfishing-regulations-2026-tables.pdf")["stocked"]
+        self.assertTrue(all(v.get("zone") for v in st.values()))
+        for name, zone in [("Allison Lake", "ES1"), ("Dickson Trout Pond", "ES2"),
+                           ("Mayan Lake", "ES3"), ("Brooks Aquaduct Pond", "PP1"),
+                           ("Castor Eastside Trout Pond", "PP2"), ("Michichi Reservoir", "PP2"),
+                           ("Chatwin Lake", "NB1")]:
+            self.assertEqual(st[name]["zone"], zone, name)
+        # Two entries on one printed line, from two columns, used to read as one.
+        for name in ("Kramer Pond", "Innisfree Trout Pond", "Ashland Reservoir", "Boulder Lake"):
+            self.assertIn(name, st)
+        self.assertEqual(self.regs[self.by_name("Kramer Pond")]["basis"], "put-and-take")

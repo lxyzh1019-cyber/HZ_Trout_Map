@@ -224,19 +224,51 @@ def stocked_lakes():
 
 
 class Zones:
-    """The zone of a point: the most common zone of its 5 nearest stocked lakes."""
+    """The fishing zone (watershed unit) of a point.
 
-    def __init__(self, lakes):
+    From Alberta's own zone outlines (the sportfishing regulations map, see
+    scripts/lake_zones.py) where they are given. Without them, or for a point
+    outside every outline (the Saskatchewan or BC side of a border river), the
+    most common zone of the 5 nearest stocked lakes stands in. That stand-in
+    shifts whenever a stocked lake's zone is corrected, so it moved river
+    stretch edges, such as the Dickson Dam, that the outlines hold still.
+    """
+
+    STEP = 0.045  # about 5 km north to south
+
+    def __init__(self, lakes, outlines=None):
         self.pts = [(v[1], v[2], v[3]) for v in lakes.values() if v[3]]
+        self.outlines = outlines or []
+        self._seen = {}
 
     def _near(self, lat, lon, n):
         return sorted(self.pts, key=lambda p: (p[0] - lat) ** 2 + ((p[1] - lon) * math.cos(math.radians(lat))) ** 2)[:n]
 
+    def _outline(self, lat, lon):
+        if not self.outlines:
+            return None
+        key = (round(lat, 4), round(lon, 4))
+        if key not in self._seen:
+            import lake_zones
+            self._seen[key] = lake_zones.point_zone(self.outlines, lat, lon)
+        return self._seen[key]
+
     def of(self, lat, lon):
+        z = self._outline(lat, lon)
+        if z:
+            return z
         return Counter(p[2] for p in self._near(lat, lon, 5)).most_common(1)[0][0]
 
     def touches(self, lat, lon, zone):
-        """The zone is among the 8 nearest stocked lakes: a point near a zone edge."""
+        """The point is in the zone or within about 5 km of it: a point near a zone edge."""
+        if self.outlines:
+            dlon = self.STEP / max(0.2, math.cos(math.radians(lat)))
+            for dy in (-self.STEP, 0, self.STEP):
+                for dx in (-dlon, 0, dlon):
+                    if self._outline(lat + dy, lon + dx) == zone:
+                        return True
+            if self._outline(lat, lon):
+                return False
         return any(p[2] == zone for p in self._near(lat, lon, 8))
 
 
@@ -544,6 +576,31 @@ def placed_lakes(regs, zones, cgn, lines_by_name, stocked):
 
 
 HEIGHTS = {}
+HEIGHT_CACHE = {"path": None}
+
+
+def heights_of(points):
+    """Open-Meteo heights for points, saved in a file next to the CanVec download.
+
+    A river's headwater end and the Dickson Dam are found from heights. When
+    the service refused (its daily limit), the build used to carry on without
+    them and quietly cut the Red Deer River at a rougher place. Now every
+    height is saved, a re-run reads it back, and a height that cannot be had
+    stops the build with a message instead of changing the result."""
+    import elevation
+    key = json.dumps([[round(a, 5), round(b, 5)] for a, b in points])
+    path = HEIGHT_CACHE["path"]
+    if path and not HEIGHTS and Path(path).exists():
+        HEIGHTS.update(json.loads(Path(path).read_text(encoding="utf-8")))
+    if key not in HEIGHTS:
+        try:
+            HEIGHTS[key] = elevation.fetch(points)
+        except Exception as e:
+            raise SystemExit(f"Heights from Open-Meteo are not available ({e}). "
+                             "Run again when the service answers; nothing was written.")
+        if path:
+            Path(path).write_text(json.dumps(HEIGHTS), encoding="utf-8")
+    return HEIGHTS[key]
 
 # "A downstream to B", or "A upstream to B" (Owl River: from Lac La Biche upstream to ...).
 LIMIT_RE = re.compile(r"(?:from\s+)?(.+?)\s+(downstream|upstream)\s+to\s+(?:the\s+)?(.+)", re.I)
@@ -624,13 +681,7 @@ def dam_by_height(river_lines, place):
         if not ring or not any(min(km(v, q) for q in ring[::20]) <= 1.0 for v in river if km(v, rp) <= 30):
             continue
         sample = ring[::max(1, len(ring) // 99)][:99] + [rp]
-        key = tuple(sample)
-        if key not in HEIGHTS:
-            try:
-                HEIGHTS[key] = elevation.fetch(sample)
-            except Exception:
-                HEIGHTS[key] = None
-        h = HEIGHTS[key]
+        h = heights_of(sample)
         if not h or h[-1] is None:
             continue
         flat = [p for p, x in zip(sample[:-1], h[:-1]) if x is not None and abs(x - h[-1]) <= FLAT_M]
@@ -684,15 +735,8 @@ def find_limit(text, river_lines, feature_lines, outl):
 
 def higher_end(line):
     """The end of a line that sits higher (the headwater), from Open-Meteo heights."""
-    import elevation
     ends = [line[0], line[-1]]
-    key = tuple(ends)
-    if key not in HEIGHTS:
-        try:
-            HEIGHTS[key] = elevation.fetch(ends)
-        except Exception:
-            HEIGHTS[key] = None
-    h = HEIGHTS[key]
+    h = heights_of(ends)
     if not h or None in h:
         return None
     return ends[0] if h[0] >= h[1] else ends[1]
@@ -1062,6 +1106,8 @@ def run(canvec_path, cgn_path, regs=None, cgn=None, outl=None, river_lines=None)
     """Everything main() writes, as (lakes, review, rivers, twins). The inputs can
     be handed in (the tests and a re-run read them once)."""
     regs = regs or regulations.load(PDF)
+    if HEIGHT_CACHE["path"] is None and Path(canvec_path).is_dir():
+        HEIGHT_CACHE["path"] = str(Path(canvec_path) / "waterbodies_heights.json")
     cgn = cgn if cgn is not None else read_cgn(cgn_path)
     PLACES.clear()
     for r in cgn:
@@ -1070,7 +1116,8 @@ def run(canvec_path, cgn_path, regs=None, cgn=None, outl=None, river_lines=None)
         except ValueError:
             pass
     stocked = stocked_lakes()
-    zones = Zones(stocked)
+    import lake_zones
+    zones = Zones(stocked, lake_zones.zone_outlines())
     outl = outl if outl is not None else outlines(canvec_path)
     WATER["path"] = canvec_path
     LAKE_POINTS[:] = cgn_rows(cgn)

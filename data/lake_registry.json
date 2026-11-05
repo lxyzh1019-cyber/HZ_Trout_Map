@@ -17,7 +17,7 @@
       "JARVIS CREEK",
       "Jarvis Creek"
     ],
-    "zone": null,
+    "zone": "ES3",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Jarvis Creek"
@@ -39,7 +39,7 @@
       "SIBBALD CREEK",
       "Sibbald Creek"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Sibbald Creek"
@@ -61,7 +61,7 @@
       "SMUTS CREEK",
       "Smuts Creek"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Smuts Creek"
@@ -83,7 +83,7 @@
       "HIGHWOOD RIVER",
       "Highwood River"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Highwood River"
@@ -105,7 +105,7 @@
       "KANANASKIS RIVER",
       "Kananaskis River"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Kananaskis River"
@@ -151,7 +151,7 @@
       "ALLEN BILL POND",
       "Allen Bill Pond"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Allen Bill Pond"
@@ -291,7 +291,7 @@
       "WEDGE POND",
       "Wedge Pond"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Wedge Pond"
@@ -360,7 +360,7 @@
       "FYTEN RESERVOIR",
       "Fyten Reservoir"
     ],
-    "zone": null,
+    "zone": "PP2",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Fyten Reservoir"
@@ -383,7 +383,7 @@
       "HENINGERS RESERVOIR",
       "Heningers Reservoir"
     ],
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Heningers Reservoir"
@@ -691,7 +691,7 @@
       "BLUE LAKE",
       "Blue Lake"
     ],
-    "zone": null,
+    "zone": "NB2",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Blue Lake"
@@ -814,7 +814,7 @@
       "CARNARVON LAKE",
       "Carnarvon Lake"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Carnarvon Lake"
@@ -1234,7 +1234,7 @@
       "LAKE OF FALLS",
       "Lake Of Falls"
     ],
-    "zone": null,
+    "zone": "ES2",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Lake Of Falls"
@@ -1347,7 +1347,7 @@
       "GRANDE CACHE LAKE",
       "Grande Cache Lake"
     ],
-    "zone": "ES2",
+    "zone": "ES4",
     "surface_area_ha": 163.6,
     "amenities": "Day use picnic area, fire pits, picnic tables, boat launch, natural beach, playground, beach, dock for small motors.",
     "base_name": "Grande Cache Lake"
@@ -1393,7 +1393,7 @@
       "HEADWALL LAKES (UPPER HEADWALL LAKE)",
       "Headwall Lakes (Upper Headwall Lake)"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Headwall Lakes (Upper Headwall Lake)"
@@ -1484,7 +1484,7 @@
       "INVINCIBLE LAKE",
       "Invincible Lake"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Invincible Lake"
@@ -1597,7 +1597,7 @@
       "JOB LAKE",
       "Job Lake"
     ],
-    "zone": null,
+    "zone": "ES2",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Job Lake"
@@ -1827,7 +1827,7 @@
       "LOWER KANANASKIS LAKE",
       "Lower Kananaskis Lake"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Lower Kananaskis Lake"
@@ -2113,7 +2113,7 @@
       "OBSTRUCTION LAKES",
       "Obstruction Lakes"
     ],
-    "zone": null,
+    "zone": "ES2",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Obstruction Lakes"
@@ -2451,7 +2451,7 @@
       "RUNNING RAIN LAKE (STORM LAKE)",
       "Running Rain Lake (Storm Lake)"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Running Rain Lake (Storm Lake)"
@@ -2784,7 +2784,7 @@
       "TALUS LAKE",
       "Talus Lake"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Talus Lake"
@@ -3009,7 +3009,7 @@
       "VICTOR LAKE",
       "Victor Lake"
     ],
-    "zone": "NB1",
+    "zone": "ES4",
     "surface_area_ha": 72.4,
     "amenities": "Kayaking, canoeing, fishing.",
     "base_name": "Victor Lake"
@@ -3032,7 +3032,7 @@
       "WABAMUN LAKE",
       "Wabamun Lake"
     ],
-    "zone": null,
+    "zone": "PP2",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Wabamun Lake"
@@ -3177,7 +3177,7 @@
       "HEADWALL LAKES (LOWER HEADWALL LAKE)",
       "Headwall Lakes (Lower Headwall Lake)"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Headwall Lakes (Lower Headwall Lake)"
@@ -3520,7 +3520,7 @@
       "MEMORIAL LAKES (WEST MEMORIAL LAKE)",
       "Memorial Lakes (West Memorial Lake)"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Memorial Lakes (West Memorial Lake)"
@@ -3627,7 +3627,7 @@
       "Valleyview Children'S Pond",
       "Valleyview Children's Pond"
     ],
-    "zone": null,
+    "zone": "ES4",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Valleyview Children's Pond"
@@ -4008,7 +4008,7 @@
       "LAMONT POND",
       "Lamont Pond"
     ],
-    "zone": null,
+    "zone": "PP2",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Lamont Pond"
@@ -4033,7 +4033,7 @@
       "Lovett Lake",
       "Unnamed Lovett Lake"
     ],
-    "zone": "ES2",
+    "zone": "ES3",
     "surface_area_ha": 2.6,
     "amenities": "This waterbody has no amenities.",
     "base_name": "Lovett Lake"
@@ -4205,7 +4205,7 @@
       "AVALANCHE LAKE",
       "Avalanche Lake"
     ],
-    "zone": null,
+    "zone": "ES2",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Avalanche Lake"
@@ -4256,7 +4256,7 @@
       "Tim Horton Children's Pond",
       "Unnamed Tim Horton Children's Pond"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Tim Horton Children's Pond"
@@ -4585,7 +4585,7 @@
       "PRO ALTA POND",
       "Pro Alta Pond"
     ],
-    "zone": null,
+    "zone": "PP2",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Pro Alta Pond"
@@ -4607,7 +4607,7 @@
       "QUARRY LAKE",
       "Quarry Lake"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Quarry Lake"
@@ -4629,7 +4629,7 @@
       "RAINBOW LAKE",
       "Rainbow Lake"
     ],
-    "zone": null,
+    "zone": "ES3",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Rainbow Lake"
@@ -4676,7 +4676,7 @@
       "PADDLE RIVER DAM POND",
       "Paddle River Dam Pond"
     ],
-    "zone": null,
+    "zone": "NB2",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Paddle River Dam Pond"
@@ -5253,7 +5253,7 @@
       "Legal Reservoir",
       "Unnamed Legal Reservoir"
     ],
-    "zone": "PP2",
+    "zone": "NB1",
     "surface_area_ha": 1.5,
     "amenities": "Day use only, no open fires, foot access only.",
     "base_name": "Legal Reservoir"
@@ -5281,7 +5281,7 @@
       "Little Beaverdam Lake",
       "Unnamed Little Beaverdam Lake"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Little Beaverdam Lake"
@@ -5304,7 +5304,7 @@
       "KEENEX COULEE RESERVOIR",
       "Keenex Coulee Reservoir"
     ],
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Keenex Coulee Reservoir"
@@ -5823,7 +5823,7 @@
       "Granum Pond",
       "Unnamed Granum Pond"
     ],
-    "zone": "PP1",
+    "zone": "ES1",
     "surface_area_ha": 1.4,
     "amenities": "Day use, no open fires, foot access only.",
     "base_name": "Granum Pond"
@@ -5850,7 +5850,7 @@
       "Fox Creek Trout Pond",
       "Unnamed Fox Creek Trout Pond"
     ],
-    "zone": "ES3",
+    "zone": "ES4",
     "surface_area_ha": 2.5,
     "amenities": "Fishing dock",
     "base_name": "Fox Creek Trout Pond"
@@ -6500,7 +6500,7 @@
       "Brooks Aquaduct Pond",
       "Unnamed Brooks Aquaduct Pond"
     ],
-    "zone": "ES2",
+    "zone": "PP1",
     "surface_area_ha": 13.9,
     "amenities": "This waterbody has no amenities.",
     "base_name": "Brooks Aquaduct Pond"
@@ -6548,7 +6548,7 @@
       "BULLER POND",
       "Buller Pond"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Buller Pond"
@@ -6573,7 +6573,7 @@
       "BULLSHEAD RESERVOIR (BULLSHEAD CREEK RESERVOIR)",
       "Bullshead Reservoir (Bullshead Creek Reservoir)"
     ],
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Bullshead Reservoir (Bullshead Creek Reservoir)"
@@ -6651,7 +6651,7 @@
       "Bow City East Ponds",
       "Unnamed Bow City East Ponds"
     ],
-    "zone": "PP2",
+    "zone": "PP1",
     "surface_area_ha": 4.0,
     "amenities": "This waterbody has no amenities.",
     "base_name": "Bow City East Ponds"
@@ -6676,7 +6676,7 @@
       "Boyle Pond",
       "Unnamed Boyle Pond"
     ],
-    "zone": "NB2",
+    "zone": "NB1",
     "surface_area_ha": 2.8,
     "amenities": "Day use, fires in designated pits only.",
     "base_name": "Boyle Pond"
@@ -6699,7 +6699,7 @@
       "BOEHLKE'S POND",
       "Boehlke'S Pond"
     ],
-    "zone": null,
+    "zone": "PP2",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Boehlke'S Pond"
@@ -6820,7 +6820,7 @@
       "BENNETT'S POND",
       "Bennett'S Pond"
     ],
-    "zone": null,
+    "zone": "PP2",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Bennett'S Pond"
@@ -7176,7 +7176,7 @@
       "FOUR MILE CREEK",
       "Four Mile Creek"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Four Mile Creek"
@@ -7225,7 +7225,7 @@
       "Pine Coulee Reservoir",
       "Unnamed Pine Coulee Reservoir"
     ],
-    "zone": "PP2",
+    "zone": "ES1",
     "surface_area_ha": 503.2,
     "amenities": "Camping area, day use area.",
     "base_name": "Pine Coulee Reservoir"
@@ -7611,7 +7611,7 @@
       "HIGH LEVEL POND",
       "High Level Pond"
     ],
-    "zone": null,
+    "zone": "NB3",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "High Level Pond"
@@ -7792,7 +7792,7 @@
       "NEW DAYTON FISH AND GAME POND",
       "New Dayton Fish And Game Pond"
     ],
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "New Dayton Fish And Game Pond"
@@ -7994,7 +7994,7 @@
       "WEST HIGHLANDS STORMWATER POND",
       "West Highlands Stormwater Pond"
     ],
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "West Highlands Stormwater Pond"
@@ -8016,7 +8016,7 @@
       "FAIRMONT POND",
       "Fairmont Pond"
     ],
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Fairmont Pond"
@@ -8038,7 +8038,7 @@
       "WALMART POND",
       "Walmart Pond"
     ],
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Walmart Pond"
@@ -8062,7 +8062,7 @@
       "Kids Can Catch Pond",
       "Unnamed Kids Can Catch Pond"
     ],
-    "zone": "PP2",
+    "zone": "ES1",
     "surface_area_ha": 1.0,
     "amenities": "Bow habitat station has amenities.",
     "base_name": "Kids Can Catch Pond"
@@ -8137,7 +8137,7 @@
       "Taber Trout Pond",
       "Unnamed Taber Trout Pond"
     ],
-    "zone": "PP2",
+    "zone": "PP1",
     "surface_area_ha": 53.0,
     "amenities": "Camping, day use, picnic sites, pit toilets.",
     "base_name": "Taber Trout Pond"
@@ -8161,7 +8161,7 @@
       "Shell True North Pond",
       "Unnamed Shell True North Pond"
     ],
-    "zone": "ES4",
+    "zone": "NB3",
     "surface_area_ha": 8.0,
     "amenities": "Day use, no open fires, foot access only.",
     "base_name": "Shell True North Pond"
@@ -8233,7 +8233,7 @@
       "KEENEX TROUT POND",
       "Keenex Trout Pond"
     ],
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Keenex Trout Pond"
@@ -8368,7 +8368,7 @@
       "Badger Lake (Badger Lake Reservior)",
       "Badger Lake Reservoir"
     ],
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Badger Lake Reservoir"
@@ -8498,7 +8498,7 @@
     "name_variants": [
       "Frog Lake"
     ],
-    "zone": null,
+    "zone": "NB1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Frog Lake"
@@ -8584,7 +8584,7 @@
     "name_variants": [
       "Little Fish Lake"
     ],
-    "zone": null,
+    "zone": "PP2",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Little Fish Lake"
@@ -8650,7 +8650,7 @@
     "name_variants": [
       "Lake Newell"
     ],
-    "zone": "PP2",
+    "zone": "PP1",
     "surface_area_ha": 6218.3,
     "amenities": "Camping; Trails; Fishing Access; Boating; Swimming",
     "base_name": "Lake Newell"
@@ -8760,7 +8760,7 @@
       "Sawn Lake",
       "Swan Lake"
     ],
-    "zone": null,
+    "zone": "NB3",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Swan Lake"
@@ -8783,7 +8783,7 @@
       "Sherburne Lake (Sherburne Reservoir)",
       "Sherburne Reservoir"
     ],
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Sherburne Reservoir"
@@ -8867,7 +8867,7 @@
     "name_variants": [
       "Watridge Lake"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Watridge Lake"
@@ -9001,7 +9001,7 @@
       "Fort Saskatchewan Fish & Game Pond",
       "Unnamed Fort Saskatchewan Fish & Game Pond"
     ],
-    "zone": null,
+    "zone": "PP2",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Fort Saskatchewan Fish & Game Pond"
@@ -9024,7 +9024,7 @@
       "Twin Valley Reservoir",
       "Unnamed Twin Valley Reservoir"
     ],
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Twin Valley Reservoir"
@@ -9066,7 +9066,7 @@
     "name_variants": [
       "Goodwin Reservoir"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "base_name": "Goodwin Reservoir"
@@ -9134,7 +9134,7 @@
       "MOUNTAIN VISTA ESTATES POND",
       "Mountain Vista Estates Pond"
     ],
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null
   },
@@ -9155,7 +9155,7 @@
       "PRIMROSE LAKE",
       "Primrose Lake"
     ],
-    "zone": null,
+    "zone": "NB1",
     "surface_area_ha": null,
     "amenities": null
   },
@@ -9176,7 +9176,7 @@
       "BRACONNIER RESERVOIR",
       "Braconnier Reservoir"
     ],
-    "zone": null,
+    "zone": "PP2",
     "surface_area_ha": null,
     "amenities": null
   },
@@ -9197,7 +9197,7 @@
       "CONSORT RESERVOIR",
       "Consort Reservoir"
     ],
-    "zone": null,
+    "zone": "PP2",
     "surface_area_ha": null,
     "amenities": null
   },
@@ -9255,7 +9255,7 @@
     "name_variants": [
       "St. Mary reservoir"
     ],
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null
   },
@@ -9275,7 +9275,7 @@
     "name_variants": [
       "Jackfish Lake"
     ],
-    "zone": null,
+    "zone": "ES2",
     "surface_area_ha": null,
     "amenities": null
   }

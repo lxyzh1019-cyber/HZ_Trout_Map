@@ -276,6 +276,12 @@ def _segments(page, gap=12, line_tol=3):
 
     out = []
     for top, line in lines:
+        # A printed line can gather words whose tops round differently, so
+        # they arrive out of left-to-right order. Unsorted, a word from the
+        # first column lands after a word from the second, no gap opens, and
+        # two entries read as one: "Kramer Pond (SW 25-45-6-W5) Boulder Lake
+        # (NE 18-39-27-W4)".
+        line = sorted(line, key=lambda w: w["x0"])
         run = [line[0]]
         for w in line[1:]:
             if w["x0"] - run[-1]["x1"] > gap:
@@ -304,6 +310,14 @@ def read_stocked(pdf):
     the line below, in the same column, and is joined back to it.
     """
     stocked = {}
+    # Each entry's watershed unit is the last "Watershed Unit XX" heading
+    # before it in reading order. A zone banner ("NORTHERN BOREAL ZONE")
+    # starts a new block of three columns; inside a block the list runs down
+    # the first column, then the second, then the third, and it carries over
+    # from page to page. Headings are found from the words themselves, not
+    # from the segments, because a heading can share a printed line, and so a
+    # segment, with an entry from another column.
+    headings, placed = [], []
     for number in range(1, len(pdf.pages) + 1):
         page = pdf.pages[number - 1]
         if not page.chars:
@@ -314,9 +328,23 @@ def read_stocked(pdf):
         if len(re.findall(ATS, text)) < 20:
             continue
 
+        third = page.width / 3
+        words = page.extract_words()
+        banners = sorted(b["top"] for a, b in zip(words, words[1:])
+                         if b["text"] == "ZONE" and a["text"] in ("SLOPES", "PARKLAND-PRAIRIE", "BOREAL"))
+
+        def at(x0, top):
+            return (number, sum(1 for t in banners if t <= top + 2), int(x0 // third), top)
+
+        for a, b, c in zip(words, words[1:], words[2:]):
+            if a["text"] == "Watershed" and b["text"] == "Unit" and re.fullmatch(r"(ES|NB|PP)[1-4]", c["text"]):
+                headings.append((at(a["x0"], a["top"]), c["text"]))
+
         segments = _segments(page)
         for index, segment in enumerate(segments):
-            body = segment["text"]
+            # A heading from another column can be glued onto the end of an
+            # entry's line: "Michichi Reservoir (SW 19-30-18-W4) Watershed Unit PP1".
+            body = re.sub(r"\s*Watershed Unit\s+(ES|NB|PP)[1-4]\s*$", "", segment["text"])
             # A description alone on its line belongs to the name above it, in
             # the same column.
             if re.fullmatch(r"\(" + ATS + r"\)", body.strip()):
@@ -338,6 +366,11 @@ def read_stocked(pdf):
             name = re.sub(r"^(?:Watershed Unit\s*\w*|(?:NE|NW|SE|SW)?\s*[\d\-]+)\s*", "", name).strip()
             if len(name) > 2:
                 stocked[name] = {"ats": _cell(match.group(2)), "page": number}
+                placed.append((at(segment["x0"], segment["top"]), name))
+    headings.sort()
+    for key, name in placed:
+        before = [zone for at, zone in headings if at <= key]
+        stocked[name]["zone"] = before[-1] if before else None
     return stocked
 
 
