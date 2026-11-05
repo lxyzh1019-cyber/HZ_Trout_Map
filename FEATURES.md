@@ -82,7 +82,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - Basemaps: Topo, Street, Satellite.
 
 ## Filters (Filters button; a column on a wide PC, a slide-over below 1024 px)
-- Stocking: Stocked, Not stocked (lakes) and Rivers, each its own switch (URL st, ns, rv). Rivers ignore the species and "stocked recently" filters. Below 1024 px a "Show N waters" button at the bottom closes the panel. Every control is at least 44 px; text a size up (phone check after Stage 2).
+- Stocking: Stocked, Not stocked (lakes) and Rivers, each its own switch (URL st, ns, rv). Rivers ignore the species and "stocked recently" filters. Below 1024 px a "Show N waters" button at the bottom closes the panel. Every control is at least 44 px; text two sizes up (phone check after Stage 2).
 - Stocked recently: 30, 60, 90 days, or this season.
 - Species: nine (rainbow, brook, brown, tiger, cutthroat, westslope cutthroat, walleye, northern pike, Arctic grayling).
 - Fish size: under 15 cm, 15 to 20 cm, catchable 20 cm and over.
@@ -99,7 +99,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - Ice season line: all winter / early ice only / late ice only / closed, with "Legal is not safe. Ice thickness is never forecast."
 - Aerated tag on every stated-aerated lake (24), with or without a known depth; red thin-ice warning October to April, at the top of the panel. The extra "kept aerated so trout survive the winter" row is gone (Build 5).
 - Rules-year warning (Build 5): from 1 April after the guide year, "Rules shown are from the 2026 guide; check the 2027 guide" at the top of the panel and in Rules, until the data is refreshed (README steps).
-- Sections start closed (Build 5), in the owner's order (phone check after Stage 2): Rules, Fish and stocking, Lake info, How to fish (River stretch and Hot spots after it), Ice hatches and tackle, Tip and status, Forecast, Bite by hour, Getting there. "bait ban" is red in the Rules title and in the Rules block's Bait row.
+- Sections start closed (Build 5), in the owner's order (phone check after Stage 2): Rules, Fish and stocking, Lake info, How to fish (River stretch and Hot spots after it), Ice hatches and tackle, Tip and status, Forecast, Bite by hour, Getting there. "Bait Ban" (owner's spelling) is red in the Rules title and in the Rules block's Bait row; the badge, the filter chip and the list rows say "Bait Ban" too.
 - Stocking summary, last stocked with size, years, "Usually stocked" (Build 5: months used in at least 60% of the stocked years 2011–2026, with counts, e.g. "May (14 of 16 years)"; under 3 stocked years "Too few years to tell"; 282 of 382 lakes have a usual month), species, change versus last year, the stocking table.
 - Zone, area, reported species (Anglers Atlas, with agree / disagree counts), on-site facilities and facility chips.
 - Max depth, mean depth, summer layer, winterkill risk band with its reasons.
@@ -139,7 +139,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 | Depth of waters not stocked | added | from their lakebed survey |
 | Picked day, home marker | changed | white day, house symbol |
 | Filters | changed | Show N waters button; 44 px controls; text a size up |
-| Text sizes | changed | labels at least 12 px; panel text 15 px; rules block 14 px |
+| Text sizes | changed | owner asked twice for bigger: labels at least 14 px; panel text 17 px; section titles 18 px; rules block 16 px |
 | Bite and Day out, forecast, rules data, stocking data | kept | |
 | Offline | kept | shell cache v9 → v10 |
 

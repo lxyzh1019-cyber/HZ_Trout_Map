@@ -857,7 +857,7 @@
       + aerationBlock(lake)
       // Owner, phone check after Stage 2: the rules first, then the fish and the
       // lake, how to fish it, the season, and the day's detail last.
-      + section("rules", ban ? '<span>Rules · <span class="ban-word">bait ban</span></span>' : "Rules", rulesYearHtml() + iceSeasonBlock(lake) + regulationBlock(lake) + boatingHtml(lake)
+      + section("rules", ban ? '<span>Rules · <span class="ban-word">Bait Ban</span></span>' : "Rules", rulesYearHtml() + iceSeasonBlock(lake) + regulationBlock(lake) + boatingHtml(lake)
           + '<a class="btn" href="' + RULES_URL + '" target="_blank" rel="noopener">Alberta fishing rules ↗</a>'
           + '<a class="btn" href="' + LICENCE_URL + '" target="_blank" rel="noopener">Buy a licence ↗</a>', isOpen("rules", false))
       + section("fish", "Fish and stocking", stockingHtml(lake) + learnRow(fishLinks(lake)), isOpen("fish", false))

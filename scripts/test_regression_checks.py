@@ -3192,7 +3192,7 @@ class Build2EstimateTests(unittest.TestCase):
                      " band_m: [3, 6]}, areaHa: 300, aerated: true, amenities: ['Boat Launch', 'Dock/Pier'], baitBan: true,"
                      " iceKind: 'all-winter', troutLimit: 0})")
         text = " ".join(got["lines"])
-        for part in ("Big water (300 ha)", "3–6 m", "boat launch", "Aerated", "Bait ban", "open all winter",
+        for part in ("Big water (300 ha)", "3–6 m", "boat launch", "Aerated", "Bait Ban", "open all winter",
                      "Legal is not safe. Ice thickness is never forecast.", "Catch and release", "only legal source"):
             self.assertIn(part, text)
 
@@ -4156,7 +4156,8 @@ class Build5PhoneCheckTests(unittest.TestCase):
         self.assertIn('if (!state.showRivers) p.set("rv", "0");', self.page)
 
     def test_bait_ban_is_red(self):
-        self.assertIn('<span class="ban-word">bait ban</span>', self.sheet)
+        self.assertIn('<span class="ban-word">Bait Ban</span>', self.sheet)
+        self.assertIn('function baitWords(text) { return /^bait ban$/i.test(text || "") ? "Bait Ban" : text; }', self.page)
         self.assertIn('/ban/i.test(reg.bait) ? " ban-word" : ""', self.page)
         self.assertIn(".ban-word { color: var(--danger-ink); font-weight: 700; }", self.page)
 
@@ -4192,5 +4193,5 @@ class Build5PhoneCheckTests(unittest.TestCase):
         for sel in (".reg-legend", ".reg-basis", ".reg-year", ".lake-popup .profile-label", ".seen-foot", ".seen-chip i"):
             i = css.index(sel + " {") if sel + " {" in css else css.index(sel)
             size = float(re.search(r"font-size:\s*([\d.]+)px", css[i:i + 300]).group(1))
-            self.assertGreaterEqual(size, 12, sel)
-        self.assertRegex(css, r"\.sheet details > \.body \{[^}]*font-size: 15px")
+            self.assertGreaterEqual(size, 14, sel)
+        self.assertRegex(css, r"\.sheet details > \.body \{[^}]*font-size: 17px")   # owner: even bigger

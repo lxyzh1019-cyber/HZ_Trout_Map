@@ -362,7 +362,7 @@
       lures: lures,
       // Never bait on a bait-ban lake, nor where the rule is not known: the list is gone.
       bait: rule === "allowed" ? bait : null,
-      baitNote: rule === "ban" ? "Bait ban: flies and lures only, no bait, not even on a jig."
+      baitNote: rule === "ban" ? "Bait Ban: flies and lures only, no bait, not even on a jig."
         : rule === "unknown" ? "Bait rule not found for this lake: check the regulations before you use any bait." : null,
       baitRule: rule,
       legal: LEGAL,
@@ -435,7 +435,7 @@
       inputs.push("aerated (ACA or Alberta)");
     }
     var rule = baitRuleOf(o);
-    if (rule === "ban") lines.push("Bait ban: flies and lures only.");
+    if (rule === "ban") lines.push("Bait Ban: flies and lures only.");
     else if (rule === "unknown") lines.push("Bait rule not found for this lake: check the regulations before you use bait.");
     if (o.iceKind) lines.push("Ice fishing season: " + (ICE_WORDS[o.iceKind] || o.iceKind) + ". " + ICE_WARNING);
     var lim = num(o.troutLimit);
