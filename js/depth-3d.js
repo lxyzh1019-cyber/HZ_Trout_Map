@@ -33,6 +33,7 @@
   var SIZE = 4.4;                    // model width in scene units
   var D0 = 6.4;                      // camera distance at the default view
   var LAND_CAP_M = 6;                // land is drawn at most this high
+  var COLOUR_DEEP_M = 20;            // the darkest blue: 20 m or deeper, the same on every lake
   var LAYERS_ON = ["fishdepth", "wind", "spots", "struct", "drop"];
   var LAYERS_OFF = ["weed", "summer", "cast", "calm", "sun", "rep", "ice"];
   var LAYER_INFO = {
@@ -174,6 +175,8 @@
 .d3v .d3-row input[type=range]{flex:1;min-width:120px}\
 .d3v .d3-row .lab{min-width:52px;color:var(--ink-dim,#a8a396)}\
 .d3v .d3-key{display:flex;align-items:center;gap:6px;padding:6px 10px;font-size:12px;color:var(--ink-dim,#a8a396)}\
+.d3v .d3-key .d3-max{flex-basis:100%;color:var(--ink,#e8e4d8)}\
+.d3v .d3-key{flex-wrap:wrap}\
 .d3v .d3-key span.g{flex:1;height:10px;border-radius:4px;background:linear-gradient(90deg,#B5D4F4,#378ADD,#0C447C,#042C53)}\
 .d3v .d3-msg{padding:2px 10px;color:#FAC775}\
 .d3v .d3-dir{display:inline-flex;align-items:center;min-height:44px;padding:0 6px;color:var(--accent,#e0a526)}\
@@ -234,12 +237,13 @@
       + '<g data-arrow><path d="M0 -24 L9 -6 L3 -6 L3 22 L-3 22 L-3 -6 L-9 -6 Z" fill="#E24B4A"/></g></g></svg>'
       + '<b data-kph>—</b><span data-from></span><br><span data-sunw style="font-size:11px"></span></div></div>'
       + '<div class="d3-panel">'
-      + '<div class="d3-key"><span>0 m</span><span class="g"></span><span>' + round1(meta.max_depth_m) + " m</span></div>"
+      + '<div class="d3-key"><span>0 m</span><span class="g"></span><span>' + COLOUR_DEEP_M + ' m or deeper</span>'
+      + '<span class="d3-max">deepest here ' + round1(meta.max_depth_m) + " m</span></div>"
       + '<div class="d3-msg" data-msg></div>'
       + '<div class="d3-row"><span class="lab">Time</span><button type="button" data-play aria-label="Play the wind hours">▶</button>'
       + '<input type="range" data-hour min="0" max="0" step="1" value="0" aria-label="Forecast hour"><span data-hourtxt style="min-width:84px">Now</span></div>'
       + '<div class="d3-row"><span class="lab">Height</span><input type="range" data-height min="1" max="200" step="1" aria-label="Height"><span data-heighttxt style="min-width:84px"></span></div>'
-      + '<div class="d3-read" data-read aria-live="polite">Drag to turn any way; let go and it glides. Pinch or scroll to zoom. Point at or tap a marker for its name.</div>'
+      + '<div class="d3-read" data-read aria-live="polite">' + (host ? 'Drag sideways to turn; the page scrolls up and down. Pinch, or Ctrl or ⌘ with the scroll wheel, to zoom. Tap a marker for its name.' : 'Drag to move. Two fingers, or the right mouse button, turn it. Pinch or scroll to zoom. Tap the lakebed for its depth.') + '</div>'
       + '<div class="d3-hd">On at the start</div><div class="d3-lay">' + LAYERS_ON.map(layerRow).join("") + "</div>"
       + '<div class="d3-hd">Turn on when you need them</div><div class="d3-lay">' + LAYERS_OFF.map(layerRow).join("")
       + (aerated ? '<label style="color:var(--ink-dim,#a8a396)"><i class="c" style="border:2px solid #E24B4A"></i>Aerator warning (always on)'
@@ -500,9 +504,12 @@
     bed.scale.z = ex;
 
     // ---- lakebed mesh
+    // Colour by metres, the same for every lake (owner, after Stage 2): a
+    // shallow lake stays light and only 20 m or more is the darkest blue.
+    // Scaled to each lake's own deepest point, shallow Gull looked as dark as Sylvan.
     var stops = [[181, 212, 244], [55, 138, 221], [12, 68, 124], [4, 44, 83]];
     var col = function (z) {
-      var t = Math.min(1, z / maxD) * (stops.length - 1), i = Math.min(stops.length - 2, Math.floor(t)), f = t - i;
+      var t = Math.min(1, z / COLOUR_DEEP_M) * (stops.length - 1), i = Math.min(stops.length - 2, Math.floor(t)), f = t - i;
       return stops[i].map(function (c, k) { return (c + (stops[i + 1][k] - c) * f) / 255; });
     };
     var geo = new T.PlaneGeometry((w - 1) * cell * U, (h - 1) * cell * U, w - 1, h - 1);
@@ -874,9 +881,12 @@
         }
       }
       L.fishdepth.visible = layerOn("fishdepth");
+      fdRange = r;
       return r;
     }
 
+    // The day the Time slider shows: the range's own words, "Here today: …" or "Here on Thu: …".
+    function fdWord(r) { var m = /^Here ([^:]+):/.exec(r.text || ""); return m ? m[1] : "today"; }
     function layerOn(id) { var c = el.querySelector('[data-layer="' + id + '"]'); return !!(c && c.checked); }
     Array.prototype.forEach.call(el.querySelectorAll("[data-layer]"), function (c) {
       var id = c.dataset.layer;
@@ -888,7 +898,11 @@
     // ---- the frame loop
     var q0 = new T.Quaternion().setFromAxisAngle(new T.Vector3(1, 0, 0), -0.95);
     root.quaternion.copy(q0);
-    var tween = null, need = false, vA = 0, dragging = false, lastMove = 0, hoverEv = null;
+    var tween = null, need = false, vA = 0, dragging = false, lastMove = 0, hoverEv = null, fdRange = null;
+    // One finger or the left mouse button moves the model; two fingers or the
+    // right button turn it (owner, after Stage 2: it turned far too easily).
+    // In the Learn guide the page has to scroll, so one finger still turns there.
+    var panOne = !v.demo, turning = false, multi = false, mid0 = null;
     var vAx = new T.Vector3(1, 0, 0), tq = new T.Quaternion(), v0 = new T.Vector3(), v1 = new T.Vector3();
     var northV = new T.Vector3(Math.sin(meta.north_deg * Math.PI / 180), Math.cos(meta.north_deg * Math.PI / 180), 0);
     var roseEl = $("[data-rose]");
@@ -915,8 +929,9 @@
         if ((hh && hh.o) !== tipFor) { showTip(hh && hh.o, hh && hh.p); canvas.style.cursor = hh ? "pointer" : "grab"; }
       }
       ren.render(sc, cam);
-      v0.set(0, 0, 0).applyQuaternion(root.quaternion).project(cam);
-      v1.copy(northV).applyQuaternion(root.quaternion).project(cam);
+      // The model may be moved off the middle (one-finger move): north is read where it is.
+      v0.set(0, 0, 0).applyQuaternion(root.quaternion).add(root.position).project(cam);
+      v1.copy(northV).applyQuaternion(root.quaternion).add(root.position).project(cam);
       roseEl.setAttribute("transform", "rotate(" + (Math.atan2(v1.x - v0.x, (v1.y - v0.y) / cam.aspect) * 180 / Math.PI).toFixed(1) + ")");
       if (more) req();
     }
@@ -937,14 +952,31 @@
     ray.params.Points.threshold = 0.03;
     ray.params.Line.threshold = 0.03;
     function owner(o) { while (o && !(o.userData && o.userData.name)) o = o.parent; return o; }
+    // A marker counts only where it is drawn: within HIT_PX of the finger on
+    // the screen, and not behind the lakebed. The lakebed is stretched in height
+    // (up to 150×), and three.js tests dots in that stretched space, so the
+    // fish-depth dots used to catch every tap, even one on the bank.
+    var HIT_PX = 16, vs = new T.Vector3();
+    function onScreen(hs, ev, b) {
+      if (hs.object.isPoints && typeof hs.index === "number") {
+        vs.fromBufferAttribute(hs.object.geometry.attributes.position, hs.index);
+        hs.object.localToWorld(vs);
+      } else vs.copy(hs.point);
+      vs.project(cam);
+      var sx = (vs.x + 1) / 2 * b.width + b.left, sy = (1 - vs.y) / 2 * b.height + b.top;
+      return Math.hypot(sx - ev.clientX, sy - ev.clientY) <= HIT_PX;
+    }
     function hit(ev) {
       var b = canvas.getBoundingClientRect();
       ray.setFromCamera(new T.Vector2((ev.clientX - b.left) / b.width * 2 - 1, -(ev.clientY - b.top) / b.height * 2 + 1), cam);
+      var bedHit = ray.intersectObject(mesh)[0];
+      var far = bedHit ? bedHit.distance + 0.05 : Infinity;
       // Not the summer planes: they cover the lake and would catch every tap.
-      var groups = [L.spots, L.struct, L.rep, L.cast, L.calm, L.sun, L.ice, L.drop, L.weed, L.fishdepth];
+      // Not the fish-depth dots either: a tap there reads the depth, with the fish depth after it.
+      var groups = [L.spots, L.struct, L.rep, L.cast, L.calm, L.sun, L.ice, L.drop, L.weed];
       for (var g = 0; g < groups.length; g++) {
         if (!groups[g].visible || !groups[g].parent.visible) continue;
-        var hs = ray.intersectObjects(groups[g].children, true)[0];
+        var hs = ray.intersectObjects(groups[g].children, true).filter(function (x) { return x.distance <= far && onScreen(x, ev, b); })[0];
         var o = hs && owner(hs.object);
         if (o) return { o: o, p: top.worldToLocal(hs.point.clone()) };
       }
@@ -970,7 +1002,8 @@
       tapMark.visible = true;
       tapMark.userData.z = z;
       tapMark.position.set(l.x, l.y, -z * U * ex + 0.02);
-      readEl.textContent = "Depth here: " + z.toFixed(1) + " m (survey water level).";
+      readEl.textContent = "Depth here: " + z.toFixed(1) + " m (survey water level)."
+        + (fdRange && L.fishdepth.visible ? " Fish depth " + fdWord(fdRange) + " (estimate): " + fdRange.lo + "–" + fdRange.hi + " m." : "");
       req();
     }
 
@@ -981,7 +1014,8 @@
       canvas.setPointerCapture(ev.pointerId);
       ptrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
       moved = 0; vA = 0; tween = null; dragging = true;
-      if (ptrs.size === 2) { var pp = Array.from(ptrs.values()); pinch0 = Math.hypot(pp[0].x - pp[1].x, pp[0].y - pp[1].y); }
+      turning = !panOne || ev.button === 2 || ev.shiftKey;
+      if (ptrs.size === 2) { var pp = Array.from(ptrs.values()); pinch0 = Math.hypot(pp[0].x - pp[1].x, pp[0].y - pp[1].y); mid0 = null; }
     });
     canvas.addEventListener("pointermove", function (ev) {
       if (!ptrs.has(ev.pointerId)) {
@@ -993,13 +1027,31 @@
       if (ptrs.size === 2) {
         var pp = Array.from(ptrs.values()), dd = Math.hypot(pp[0].x - pp[1].x, pp[0].y - pp[1].y);
         if (pinch0 && dd) distT = Math.max(1.5, Math.min(20, distT * pinch0 / dd));
-        pinch0 = dd; moved += 10; vA = 0; req();
+        pinch0 = dd; moved += 10; vA = 0; multi = true;
+        // Two fingers moving together turn it: only the midpoint's movement turns,
+        // so a pinch (fingers apart or together, one finger still) only zooms.
+        var mx = (pp[0].x + pp[1].x) / 2, my = (pp[0].y + pp[1].y) / 2;
+        if (panOne && mid0) {
+          var tx = mx - mid0.x, ty = my - mid0.y, tl = Math.hypot(tx, ty);
+          if (tl > 0.5) { vAx.set(ty, tx, 0).normalize(); root.quaternion.premultiply(tq.setFromAxisAngle(vAx, tl * 0.008)); }
+        }
+        mid0 = { x: mx, y: my };
+        req();
         return;
       }
+      // After two fingers, the one left on the glass does nothing until it lifts.
+      if (multi) return;
       var len = Math.hypot(dx, dy);
       if (!len) return;
       moved += len;
       if (moved > 6 && tipFor) showTip(null);
+      if (!turning) {
+        // Move: one screen pixel is this much of the scene at the camera's distance.
+        var k = dist * 2 * Math.tan(cam.fov * Math.PI / 360) / Math.max(1, canvas.clientHeight);
+        root.position.x += dx * k; root.position.y -= dy * k; vA = 0;
+        req();
+        return;
+      }
       vAx.set(dy, dx, 0).normalize();
       vA = len * 0.008;
       root.quaternion.premultiply(tq.setFromAxisAngle(vAx, vA));
@@ -1009,9 +1061,9 @@
     function endPtr(ev, tap) {
       var before = ptrs.size;
       ptrs.delete(ev.pointerId);
-      if (ptrs.size < 2) pinch0 = 0;
+      if (ptrs.size < 2) { pinch0 = 0; mid0 = null; }
       if (!ptrs.size) {
-        dragging = false;
+        dragging = false; multi = false;
         if ((window.performance ? performance.now() : Date.now()) - lastMove > 80) vA = 0;
         vA = Math.min(vA, 0.08);
         req();
@@ -1019,6 +1071,7 @@
       if (tap && before === 1 && moved < 6) pick(ev);
     }
     canvas.addEventListener("pointerup", function (ev) { endPtr(ev, true); });
+    canvas.addEventListener("contextmenu", function (ev) { ev.preventDefault(); });
     canvas.addEventListener("pointercancel", function (ev) { endPtr(ev, false); });
     canvas.addEventListener("pointerleave", function () { if (tipFor && !ptrs.size) { showTip(null); req(); } });
     canvas.addEventListener("wheel", function (ev) {
@@ -1031,6 +1084,7 @@
 
     $("[data-default]").addEventListener("click", function () {
       tween = { qa: root.quaternion.clone(), t0: (window.performance ? performance.now() : Date.now()) };
+      root.position.set(0, 0, 0);
       vA = 0; distT = fitDist(); req();
     });
     heightIn.addEventListener("input", function () {
@@ -1081,7 +1135,7 @@
       tapMark.visible = false;
       hourUpdate();
       readEl.textContent = p.read || (v.demo ? "Drag sideways to turn; the page scrolls up and down. Pinch, or Ctrl or ⌘ with the scroll wheel, to zoom. Tap a marker for its name."
-        : "Drag to turn any way; let go and it glides. Pinch or scroll to zoom. Point at or tap a marker for its name.");
+        : "Drag to move. Two fingers, or the right mouse button, turn it. Pinch or scroll to zoom. Tap the lakebed for its depth.");
       $("[data-default]").click();
     };
 

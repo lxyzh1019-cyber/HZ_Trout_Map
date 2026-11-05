@@ -1,6 +1,2206 @@
 {
  "joined_on": "Alberta waterbody id",
  "lakes": {
+  "gu-es1-gap-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 2.4,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 2.0,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 2.4,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 28.4,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "high",
+    "reasons": [
+     "only 2.4 m at its deepest"
+    ]
+   }
+  },
+  "gu-es1-glenmore-reservoir": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 16.8,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 5.7,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 16.8,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "16.8 m deep"
+    ]
+   }
+  },
+  "gu-es2-swan-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 12.1,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 5.8,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 12.1,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 140.5,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "12.1 m deep"
+    ]
+   }
+  },
+  "gu-es3-jarvis-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 27.4,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 8.2,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 27.4,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 141.9,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "27.4 m deep"
+    ]
+   }
+  },
+  "gu-es3-rock-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 27.4,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 12.9,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 27.4,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 188.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "27.4 m deep"
+    ]
+   }
+  },
+  "gu-es3-shiningbank-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.5,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 3.2,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 5.5,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": 430.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5.5 m deep"
+    ]
+   }
+  },
+  "gu-es4-iosegun-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 10.7,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 4.2,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 10.7,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 1343.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "10.7 m deep"
+    ]
+   }
+  },
+  "gu-es4-smoke-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 8.0,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 5.0,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     7
+    ],
+    "max_depth_m": 8.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 907.8,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "8 m deep"
+    ]
+   }
+  },
+  "gu-es4-snipe-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.1,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 3.9,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 6.1,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": 4175.4,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6.1 m deep"
+    ]
+   }
+  },
+  "gu-es4-sturgeon-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 9.4,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 5.6,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     8
+    ],
+    "max_depth_m": 9.4,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 4734.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "9.4 m deep"
+    ]
+   }
+  },
+  "gu-nb1-amisk-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 58.3,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 15.9,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 58.3,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "58.3 m deep"
+    ]
+   }
+  },
+  "gu-nb1-angling-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 11.0,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 6.8,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 11.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 582.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "11 m deep"
+    ]
+   }
+  },
+  "gu-nb1-beaver-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 12.2,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 6.9,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 12.2,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 3656.9,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "12.2 m deep"
+    ]
+   }
+  },
+  "gu-nb1-burnt-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.0,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 3.6,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 5.0,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": 443.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5 m deep"
+    ]
+   }
+  },
+  "gu-nb1-claude-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 13.5,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 8.4,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 13.5,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 70.8,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "13.5 m deep"
+    ]
+   }
+  },
+  "gu-nb1-cold-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 99.1,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 49.7,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 99.1,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 25110.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "99.1 m deep"
+    ]
+   }
+  },
+  "gu-nb1-ethel-bear-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 30.0,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 7.3,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 30.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "30 m deep"
+    ]
+   }
+  },
+  "gu-nb1-floatingstone-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 19.8,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 5.8,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 19.8,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 593.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "19.8 m deep"
+    ]
+   }
+  },
+  "gu-nb1-fork-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 15.2,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 5.5,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 15.2,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "15.2 m deep"
+    ]
+   }
+  },
+  "gu-nb1-garner-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 17.2,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 9.2,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 17.2,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 728.4,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "17.2 m deep"
+    ]
+   }
+  },
+  "gu-nb1-goodfish-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 18.5,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 7.6,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 18.5,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 844.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "18.5 m deep"
+    ]
+   }
+  },
+  "gu-nb1-hanmore-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 22.9,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 9.0,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 22.9,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 296.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "22.9 m deep"
+    ]
+   }
+  },
+  "gu-nb1-hilda-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 14.0,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 6.5,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 14.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 347.9,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "14 m deep"
+    ]
+   }
+  },
+  "gu-nb1-ironwood-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 19,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 12.3,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 19,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "19 m deep"
+    ]
+   }
+  },
+  "gu-nb1-lac-la-biche": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 22.1,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 9.2,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 22.1,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "22.1 m deep"
+    ]
+   }
+  },
+  "gu-nb1-lac-saint-cyr": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 21.3,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 5.8,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 21.3,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 202.4,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "21.3 m deep"
+    ]
+   }
+  },
+  "gu-nb1-lac-sante": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 24.4,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 9.5,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 24.4,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 977.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "24.4 m deep"
+    ]
+   }
+  },
+  "gu-nb1-laurier-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.6,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 4.0,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 7.6,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7.6 m deep"
+    ]
+   }
+  },
+  "gu-nb1-manatokan-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.4,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 3.6,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     6
+    ],
+    "max_depth_m": 7.4,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 436.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7.4 m deep"
+    ]
+   }
+  },
+  "gu-nb1-marie-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 25.8,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 13.6,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 25.8,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 3725.3,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "25.8 m deep"
+    ]
+   }
+  },
+  "gu-nb1-may-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 14.0,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 5.3,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 14.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 320.5,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "14 m deep"
+    ]
+   }
+  },
+  "gu-nb1-minnie-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 24.0,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 10.0,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 24.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 86.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "24 m deep"
+    ]
+   }
+  },
+  "gu-nb1-moose-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 18.4,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 4.6,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 18.4,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "18.4 m deep"
+    ]
+   }
+  },
+  "gu-nb1-north-buck-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.1,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 2.1,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 6.1,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": 2038.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6.1 m deep"
+    ]
+   }
+  },
+  "gu-nb1-seibert-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 9.1,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 6.6,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     8
+    ],
+    "max_depth_m": 9.1,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "9.1 m deep"
+    ]
+   }
+  },
+  "gu-nb1-touchwood-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 40.0,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 14.6,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 40.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 2842.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "40 m deep"
+    ]
+   }
+  },
+  "gu-nb1-tucker-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.3,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 2.3,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 6.3,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": 655.6,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6.3 m deep"
+    ]
+   }
+  },
+  "gu-nb1-whitefish-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 33.5,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 13.5,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 33.5,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "33.5 m deep"
+    ]
+   }
+  },
+  "gu-nb1-whitney-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 42.3,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 31.9,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 42.3,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 139.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "42.3 m deep"
+    ]
+   }
+  },
+  "gu-nb2-baptiste-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 25.4,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 8.9,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 25.4,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 941.6,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "25.4 m deep"
+    ]
+   }
+  },
+  "gu-nb2-fawcett-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 21.3,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 4.9,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 21.3,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "21.3 m deep"
+    ]
+   }
+  },
+  "gu-nb2-freeman-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 3.7,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 2.0,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 3.7,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 250.3,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "3.7 m at its deepest"
+    ]
+   }
+  },
+  "gu-nb2-ghost-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 11.0,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 4.4,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 11.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 200.5,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "11 m deep"
+    ]
+   }
+  },
+  "gu-nb2-island-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 18.3,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 3.7,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 18.3,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "18.3 m deep"
+    ]
+   }
+  },
+  "gu-nb2-lac-la-nonne": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 19.8,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 7.4,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 19.8,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 1276.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "19.8 m deep"
+    ]
+   }
+  },
+  "gu-nb2-lawrence-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.6,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 4.3,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 7.6,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": 1340.8,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7.6 m deep"
+    ]
+   }
+  },
+  "gu-nb2-lesser-slave-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 21.0,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 12.2,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 21.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "21 m deep"
+    ]
+   }
+  },
+  "gu-nb2-long-island-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 12.2,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 3.7,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 12.2,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "12.2 m deep"
+    ]
+   }
+  },
+  "gu-nb2-mitsue-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 2.1,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 1.4,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 2.1,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "high",
+    "reasons": [
+     "only 2.1 m at its deepest"
+    ]
+   }
+  },
+  "gu-nb2-nakamun-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.6,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 3.5,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 7.6,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 320.4,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7.6 m deep"
+    ]
+   }
+  },
+  "gu-nb2-steele-cross-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.1,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 2.9,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 6.1,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6.1 m deep"
+    ]
+   }
+  },
+  "gu-nb3-nipisi-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.0,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 2.8,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 7.0,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": 2219.2,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7 m deep"
+    ]
+   }
+  },
+  "gu-nb3-utikuma-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.2,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 2.3,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 6.2,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": 25335.3,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6.2 m deep"
+    ]
+   }
+  },
+  "gu-nb4-winefred-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 15.2,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 7.2,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 15.2,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 12542.3,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "15.2 m deep"
+    ]
+   }
+  },
+  "gu-pp1-chestermere-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.7,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 3.5,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     6
+    ],
+    "max_depth_m": 6.7,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6.7 m deep"
+    ]
+   }
+  },
+  "gu-pp1-elkwater-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 8.2,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 3.4,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 8.2,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 216.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "8.2 m deep"
+    ]
+   }
+  },
+  "gu-pp2-arm-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 14.0,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 5.1,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 14.0,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "14 m deep"
+    ]
+   }
+  },
+  "gu-pp2-battle-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 11.8,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 6.6,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 11.8,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 434.4,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "11.8 m deep"
+    ]
+   }
+  },
+  "gu-pp2-buck-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 12.2,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 6.0,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     10
+    ],
+    "max_depth_m": 12.2,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "12.2 m deep"
+    ]
+   }
+  },
+  "gu-pp2-buffalo-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 6.1,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 2.4,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 6.1,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": 8909.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "6.1 m deep"
+    ]
+   }
+  },
+  "gu-pp2-coal-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 5.0,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 3.4,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 5.0,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": 973.6,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "5 m deep"
+    ]
+   }
+  },
+  "gu-pp2-gull-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.6,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 4.9,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 7.6,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": 7891.8,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7.6 m deep"
+    ]
+   }
+  },
+  "gu-pp2-hubbles-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 27.4,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 8.9,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     3,
+     5
+    ],
+    "max_depth_m": 27.4,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 42.3,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "27.4 m deep"
+    ]
+   }
+  },
+  "gu-pp2-isle-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.6,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 4.0,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 7.6,
+    "stratifies": false,
+    "why": "not deep enough for a layer to form clear of the bottom"
+   },
+   "surface_area_ha": 2205.1,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7.6 m deep"
+    ]
+   }
+  },
+  "gu-pp2-magee-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 3.7,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 2.0,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "max_depth_m": 3.7,
+    "stratifies": false,
+    "why": "shallow enough that wind keeps it mixed all summer"
+   },
+   "surface_area_ha": 44.8,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "moderate",
+    "reasons": [
+     "3.7 m at its deepest"
+    ]
+   }
+  },
+  "gu-pp2-medicine-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 9.1,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 3.5,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 9.1,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "9.1 m deep"
+    ]
+   }
+  },
+  "gu-pp2-mere-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 16.8,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 4.9,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 16.8,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 52.0,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "16.8 m deep"
+    ]
+   }
+  },
+  "gu-pp2-mink-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 7.6,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 3.3,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 7.6,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 76.7,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "7.6 m deep"
+    ]
+   }
+  },
+  "gu-pp2-pigeon-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 9.1,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 5.9,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     6,
+     8
+    ],
+    "max_depth_m": 9.1,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": null,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "9.1 m deep"
+    ]
+   }
+  },
+  "gu-pp2-pine-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 12,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 5.5,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 12,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 393.6,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "12 m deep"
+    ]
+   }
+  },
+  "gu-pp2-wizard-lake": {
+   "depth_stated_unavailable": false,
+   "max_depth_m": 10.7,
+   "max_depth_source": "Alberta Geological Survey lakebed survey",
+   "mean_depth": {
+    "m": 5.5,
+    "source": "ags-survey"
+   },
+   "source": "Alberta Geological Survey lakebed survey (max and mean depth), at the survey water level",
+   "stratification": {
+    "band_m": [
+     4,
+     7
+    ],
+    "max_depth_m": 10.7,
+    "stratifies": true,
+    "why": "deep enough to layer in midsummer"
+   },
+   "surface_area_ha": 320.5,
+   "winterkill": {
+    "inputs": {
+     "aeration": false,
+     "depth": true,
+     "eutrophy": false,
+     "ice_duration": false
+    },
+    "level": "low",
+    "reasons": [
+     "10.7 m deep"
+    ]
+   }
+  },
   "wb17894": {
    "depth_stated_unavailable": false,
    "max_depth_m": null,

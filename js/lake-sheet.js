@@ -855,24 +855,26 @@
       // The best-day box stays open (owner, Build 5 Rev 3); Why under it, closed.
       + (f ? bannerHtml(lake, f, d) + whyHtml(lake, f, d) : '<p class="dim lake-nopos">This lake has no position, so it has no forecast.</p>')
       + aerationBlock(lake)
-      // Build 5: the stocked / open / winterkill line and the daily tip, folded.
-      + section("status", "Tip and status", verdictLine(lake) + (f ? tipHtml(lake, f, d) : ""), isOpen("status", false))
-      + section("forecast", "Forecast", forecast, isOpen("forecast", false))
-      + section("bite", "Bite by hour", '<div class="cx-embed" data-cx></div>', isOpen("bite", false))
-      + (f ? section("season", "Ice, hatches and tackle", seasonHtml(lake, f), isOpen("season", false)) : "")
-      + section("how", lake.river ? "How to fish this water" : "How to fish this lake", howHtml(lake), isOpen("how", false))
-      + (lake.river ? section("river", "River stretch", riverHtml(lake, f) + learnRow([learnLink("river", "Reading a river")]), isOpen("river", false)) : "")
+      // Owner, phone check after Stage 2: the rules first, then the fish and the
+      // lake, how to fish it, the season, and the day's detail last.
+      + section("rules", ban ? '<span>Rules · <span class="ban-word">bait ban</span></span>' : "Rules", rulesYearHtml() + iceSeasonBlock(lake) + regulationBlock(lake) + boatingHtml(lake)
+          + '<a class="btn" href="' + RULES_URL + '" target="_blank" rel="noopener">Alberta fishing rules ↗</a>'
+          + '<a class="btn" href="' + LICENCE_URL + '" target="_blank" rel="noopener">Buy a licence ↗</a>', isOpen("rules", false))
       + section("fish", "Fish and stocking", stockingHtml(lake) + learnRow(fishLinks(lake)), isOpen("fish", false))
       + section("info", lake.river ? "Water info" : "Lake info", profileBlock(lake) + facilityBlock(lake) + depthBlock(lake)
           + learnRow([learnLink("winterkill", "Winterkill and aeration")].concat(window.DepthModel && DepthModel.has(lake)
               ? [learnLink("depth-model", "3D depth model guide")] : []))
           + depthChartHtml(lake)
           + '<div class="about" data-about></div>' + photoBlock(lake), isOpen("info", false))
+      + section("how", lake.river ? "How to fish this water" : "How to fish this lake", howHtml(lake), isOpen("how", false))
+      + (lake.river ? section("river", "River stretch", riverHtml(lake, f) + learnRow([learnLink("river", "Reading a river")]), isOpen("river", false)) : "")
       // Hot spots only when there are some, each with its source and date.
       + (spots.length ? section("spots", "Hot spots", hotSpotsHtml(spots), isOpen("spots", false)) : "")
-      + section("rules", "Rules" + (ban ? " · bait ban" : ""), rulesYearHtml() + iceSeasonBlock(lake) + regulationBlock(lake) + boatingHtml(lake)
-          + '<a class="btn" href="' + RULES_URL + '" target="_blank" rel="noopener">Alberta fishing rules ↗</a>'
-          + '<a class="btn" href="' + LICENCE_URL + '" target="_blank" rel="noopener">Buy a licence ↗</a>', isOpen("rules", false))
+      + (f ? section("season", "Ice, hatches and tackle", seasonHtml(lake, f), isOpen("season", false)) : "")
+      // Build 5: the stocked / open / winterkill line and the daily tip, folded.
+      + section("status", "Tip and status", verdictLine(lake) + (f ? tipHtml(lake, f, d) : ""), isOpen("status", false))
+      + section("forecast", "Forecast", forecast, isOpen("forecast", false))
+      + section("bite", "Bite by hour", '<div class="cx-embed" data-cx></div>', isOpen("bite", false))
       + section("go", "Getting there", lake.lat == null ? '<p class="dim">No recorded position.</p>'
           : '<a class="btn" href="' + directionsFrom(lake) + '" target="_blank" rel="noopener">Google Maps ↗</a>'
           + '<a class="btn" href="' + appleMapsUrl(lake) + '" target="_blank" rel="noopener">Apple Maps ↗</a>'

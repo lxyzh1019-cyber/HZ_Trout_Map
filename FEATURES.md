@@ -1,4 +1,4 @@
-# FEATURES — HZ_Trout_Map — manifest v7 — Build 5 Stage 2
+# FEATURES — HZ_Trout_Map — manifest v8 — Build 5 Stage 2 phone-check fixes
 
 Locked features of the current version (branch claude/funny-ritchie-bealq0, from main at 922ddb0). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
 
@@ -42,7 +42,10 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - "Show 3D depth model" button at the top of the lake panel (Build 4) and in the Depth chart row of Lake info, for the 43 lakes with an Alberta depth chart (40 lakebed files; the Pierre Greys and Wildhorse chains share one). The Alberta depth chart link stays next to it.
 - Opens full screen over the map: Close, Default view (glides back to the first position and zoom) and an "i" button that opens the Learn guide.
 - Lakebed from the Alberta Geological Survey: outline for the shore, contour lines for the depth (the AGS grid alone reads too shallow on small lakes), AGS grid for land height; up to 160 cells on the long side; deepest cell within 1.5 m of the deepest contour on all 40 (tested). Depth at the survey water level, said in the key.
-- Turn freely in every direction; it glides after you let go; pinch or scroll to zoom; Height slider (starts at a lake-by-lake value, 1–200×); tap the lakebed for depth.
+- One finger or the left mouse button moves the model; two fingers or the right mouse button turn it (it glides after you let go); pinch or scroll to zoom; Default view resets the place, the turn and the zoom; Height slider (starts at a lake-by-lake value, 1–200×). In the Learn guide one finger still turns, so the page can scroll (phone check after Stage 2).
+- Tap the lakebed: "Depth here: x m", with today's fish depth after it when that layer is on. A marker answers a tap only within 16 px of it on the screen and in front of the lakebed (before, the fish-depth dots caught every tap, even on the bank).
+- Colours by metres, the same for every lake: lightest at 0 m, darkest at 20 m or deeper; the legend says "20 m or deeper" and "deepest here x m".
+- A water that is not stocked takes its max and mean depth from its lakebed survey (Gull Lake 7.6 m), so its fish-depth tip no longer says "lake depth unknown".
 - Names hidden until you point at a marker (PC) or tap it (phone); one name at a time, with its reason under the model.
 - Wind: small arrows about every 300 m of water (fewer on the biggest lakes, at most about 160) and a wind sign (compass that turns with the model, wind arrow, speed, from, sun position). Time slider and Play over the saved forecast hours. Wind direction comes from the forecast (new field, Build 3).
 - Fish depth today layer (Build 4, on at the start): the tip's depth range on the lakebed, for the time slider's day.
@@ -70,6 +73,8 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - The guide's put-and-take list is read with each entry's watershed unit, and one printed line is read left to right, so two columns no longer merge (Kramer Pond, Innisfree Trout Pond, Jack Fish Lake, Michichi Reservoir now carry the put-and-take rules).
 
 ## Map and finding a lake
+- Every river stretch is drawn (phone check after Stage 2: 15 stretches drawn as one long line, both Red Deer River stretches below the Dickson Dam among them, were skipped), with an invisible 20 px tap line on top of the 3 px line.
+- The picked day on the week bar is white with dark text; home is a house in a white ring. Neither is orange any more, so neither reads as a gold "Best" pin.
 - Pins cluster when zoomed out and split as you zoom in; hover shows name, score, distance, fish in view and last stocking date.
 - One "Map ▾" button on the map (Build 5) opens a small menu: Topo, Street, Satellite, Zoom to results, Copy link. A pick, a tap outside or Escape closes it.
 - "Zoom to results" fits the lakes the filters leave; "Copy link" copies a URL that reproduces every filter, home, the picked day, the town and the list.
@@ -77,6 +82,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - Basemaps: Topo, Street, Satellite.
 
 ## Filters (Filters button; a column on a wide PC, a slide-over below 1024 px)
+- Stocking: Stocked, Not stocked (lakes) and Rivers, each its own switch (URL st, ns, rv). Rivers ignore the species and "stocked recently" filters. Below 1024 px a "Show N waters" button at the bottom closes the panel. Every control is at least 44 px; text a size up (phone check after Stage 2).
 - Stocked recently: 30, 60, 90 days, or this season.
 - Species: nine (rainbow, brook, brown, tiger, cutthroat, westslope cutthroat, walleye, northern pike, Arctic grayling).
 - Fish size: under 15 cm, 15 to 20 cm, catchable 20 cm and over.
@@ -93,7 +99,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - Ice season line: all winter / early ice only / late ice only / closed, with "Legal is not safe. Ice thickness is never forecast."
 - Aerated tag on every stated-aerated lake (24), with or without a known depth; red thin-ice warning October to April, at the top of the panel. The extra "kept aerated so trout survive the winter" row is gone (Build 5).
 - Rules-year warning (Build 5): from 1 April after the guide year, "Rules shown are from the 2026 guide; check the 2027 guide" at the top of the panel and in Rules, until the data is refreshed (README steps).
-- Sections start closed (Build 5): Tip and status, Forecast, Bite by hour (was "Bite by time of day"), Ice hatches and tackle, How to fish, Fish and stocking, Lake info, Rules (a bait-ban lake no longer opens Rules; the red badge is at the top), Getting there.
+- Sections start closed (Build 5), in the owner's order (phone check after Stage 2): Rules, Fish and stocking, Lake info, How to fish (River stretch and Hot spots after it), Ice hatches and tackle, Tip and status, Forecast, Bite by hour, Getting there. "bait ban" is red in the Rules title and in the Rules block's Bait row.
 - Stocking summary, last stocked with size, years, "Usually stocked" (Build 5: months used in at least 60% of the stocked years 2011–2026, with counts, e.g. "May (14 of 16 years)"; under 3 stocked years "Too few years to tell"; 282 of 382 lakes have a usual month), species, change versus last year, the stocking table.
 - Zone, area, reported species (Anglers Atlas, with agree / disagree counts), on-site facilities and facility chips.
 - Max depth, mean depth, summer layer, winterkill risk band with its reasons.
@@ -120,6 +126,22 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - ACA aeration roster with ACA's Winter Angling column; a test fails if it disagrees with the regulations.
 - Colour-blind-safe pin palettes; every score pin carries its number.
 - Credit lines: Open-Meteo (CC BY 4.0), town list licence, GeoNames via Open-Meteo, Esri imagery, photo credits, Alberta Geological Survey (depth charts), Open-Meteo elevation with Copernicus DEM (in the ice inputs). The 3D view footer and its Learn guide carry the Open Government Licence – Alberta line, Transport Canada TP 15587E (not the official version), MyWildAlberta, Open-Meteo and three.js (MIT).
+
+## Regression table — manifest v7 → v8 (Build 5 Stage 2 phone-check fixes)
+| Feature | v7 → v8 | Note |
+|---|---|---|
+| River lines | changed | all 86 stretches drawn (71 before); 20 px tap line |
+| Stocking filter | changed | plus Rivers; rivers no longer hidden by Not stocked, species or recency |
+| Lake panel sections | changed | owner's order, Rules first; red "bait ban" |
+| 3D tap | changed | depth under the finger; markers only within 16 px |
+| 3D colours | changed | by metres, 0–20 m, same on every lake |
+| 3D drag | changed | one finger moves, two fingers turn; Learn guide unchanged |
+| Depth of waters not stocked | added | from their lakebed survey |
+| Picked day, home marker | changed | white day, house symbol |
+| Filters | changed | Show N waters button; 44 px controls; text a size up |
+| Text sizes | changed | labels at least 12 px; panel text 15 px; rules block 14 px |
+| Bite and Day out, forecast, rules data, stocking data | kept | |
+| Offline | kept | shell cache v9 → v10 |
 
 ## Regression table — manifest v6 → v7 (Build 5 Stage 2)
 | Feature | v6 → v7 | Note |
