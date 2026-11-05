@@ -590,6 +590,12 @@
   }
 
   function stockingHtml(lake) {
+    // Build 5: a water the guide names that Alberta's stocking reports never list.
+    if (lake.unstocked) {
+      return '<dl class="kv"><dt>Stocking</dt><dd>Not stocked. Alberta\'s stocking reports 2011–2026 do not list this water.</dd>'
+        + "<dt>Typical size</dt><dd>Not published by Alberta. Growth is never guessed.</dd></dl>"
+        + (lake.coord_source && lake.coord_source !== "guide" ? '<p class="dim">' + esc(positionNote(lake)) + "</p>" : "");
+    }
     var rows = lake.stockings.filter(stockingPasses)
       .sort(function (a, b) { return stockingSortKey(b).localeCompare(stockingSortKey(a)); });
     var last = rows[0];
@@ -625,6 +631,13 @@
       + '<div class="ats">' + esc(lake.ats || lakeKey(lake)) + "</div>"
       + '<div class="gridwrap"><table class="stock"><thead><tr><th>Date</th><th>Sp.</th><th>Strain</th><th>cm</th><th>g</th><th>Number</th></tr></thead><tbody>'
       + table + "</tbody></table></div>";
+  }
+
+  function positionNote(lake) {
+    return lake.coord_source === "place names" ? "Position from Canada's official place names (CGNDB)."
+      : lake.coord_source === "outline" ? "Position from the lake outline in Canada's water data (CanVec)."
+      : lake.coord_source === "ats" ? "Position estimated from the guide's land description; expect a few hundred metres of error."
+      : "Position estimated.";
   }
 
   function directionsFrom(lake) {
@@ -790,7 +803,28 @@
   // THE WHOLE PANEL
   // ============================================================
 
+  /* Build 5: a river stretch is scored at its forecast spots; the panel shows the
+   * spot with the best day of the week, so every part of the panel reads one forecast. */
+  function viewOf(lake) {
+    if (!lake || !lake.river || !Array.isArray(lake.spots) || lake.spots.length < 2) return lake;
+    var f = Forecast.forLake(lake);
+    var p = f && f.spot != null ? lake.spots[f.spot] : null;
+    return p ? Object.assign({}, lake, { lat: p[0], lon: p[1], _spotKey: lakeKey(lake) + "#" + f.spot }) : lake;
+  }
+
+  function riverHtml(lake, f) {
+    var n = Array.isArray(lake.spots) ? lake.spots.length : 1;
+    return '<dl class="kv"><dt>Stretch</dt><dd>' + esc(lake.detail || "As the guide gives it") + "</dd>"
+      + "<dt>Forecast</dt><dd>" + (n > 1 ? "Spot " + ((f && f.spot != null ? f.spot : 0) + 1) + " of " + n
+        + ", about every 25 km along the stretch; the one with the best day this week is shown." : "One spot on the stretch.") + "</dd>"
+      + (lake.limits === "estimated" ? '<dt>Limits</dt><dd class="dim">Estimated: the guide names a limit (a road or park edge) the maps could not place, so the line is the whole river in this part of the guide.</dd>'
+        : lake.limits === "approximate" ? '<dt>Limits</dt><dd class="dim">Approximate: one end is placed from a named place near it (a dam or bridge). Read the guide\'s words above.</dd>'
+        : lake.limits === "unit" ? '<dt>Limits</dt><dd class="dim">The river in this part of the guide; its edges are estimated.</dd>' : "")
+      + "</dl>";
+  }
+
   function html(lake) {
+    lake = viewOf(lake);
     var key = lakeKey(lake);
     var f = Forecast.forLake(lake);
     var d = state.day;
@@ -798,7 +832,7 @@
     var fav = state.favourites.has(key);
     var origin = DayUI.originPoint();
     var km = Number.isFinite(lake.distanceKm) ? Math.round(lake.distanceKm) + " km from " + esc(origin.name) : "";
-    var size = lake.surface_area_ha != null ? esc(lake.surface_area_ha) + " ha" : "size unknown";
+    var size = lake.river ? "river stretch" : lake.surface_area_ha != null ? esc(lake.surface_area_ha) + " ha" : "size unknown";
     var ban = lakeBaitBan(lake);
     var open = state.sections || {};
     var isOpen = function (id, def) { return open[id] === undefined ? def : open[id]; };
@@ -826,9 +860,10 @@
       + section("forecast", "Forecast", forecast, isOpen("forecast", false))
       + section("bite", "Bite by hour", '<div class="cx-embed" data-cx></div>', isOpen("bite", false))
       + (f ? section("season", "Ice, hatches and tackle", seasonHtml(lake, f), isOpen("season", false)) : "")
-      + section("how", "How to fish this lake", howHtml(lake), isOpen("how", false))
+      + section("how", lake.river ? "How to fish this water" : "How to fish this lake", howHtml(lake), isOpen("how", false))
+      + (lake.river ? section("river", "River stretch", riverHtml(lake, f) + learnRow([learnLink("river", "Reading a river")]), isOpen("river", false)) : "")
       + section("fish", "Fish and stocking", stockingHtml(lake) + learnRow(fishLinks(lake)), isOpen("fish", false))
-      + section("info", "Lake info", profileBlock(lake) + facilityBlock(lake) + depthBlock(lake)
+      + section("info", lake.river ? "Water info" : "Lake info", profileBlock(lake) + facilityBlock(lake) + depthBlock(lake)
           + learnRow([learnLink("winterkill", "Winterkill and aeration")].concat(window.DepthModel && DepthModel.has(lake)
               ? [learnLink("depth-model", "3D depth model guide")] : []))
           + depthChartHtml(lake)
@@ -936,6 +971,7 @@
     fishDepthFor: fishDepthFor,
     winterScoreHtml: winterScoreHtml,
     usualMonths: usualMonths,
+    viewOf: viewOf,
     rulesYearWarning: rulesYearWarning,
     _internal: { bannerHtml: bannerHtml, whyHtml: whyHtml, tagsHtml: tagsHtml, dayCompareSentence: dayCompareSentence, barsHtml: barsHtml, boatingHtml: boatingHtml, tipHtml: tipHtml, estimatesFor: estimatesFor, seasonHtml: seasonHtml, howHtml: howHtml, depthChartHtml: depthChartHtml, hotSpotsHtml: hotSpotsHtml },
     BAND_WORD: BAND_WORD,

@@ -55,6 +55,8 @@ Single working record for this repository. Updated by the main session at the en
 - [agreed] (owner accepted 2026-11-04) Survey depths go beyond the mean: 18 surveyed lakes with no published max depth get the survey's max, so their summer layer, winterkill band and fish depth change; chain grids (Pierre Greys, Wildhorse) give none — search: load_survey
 - [agreed] Build 5 Plan v1 approved 2026-11-04 (Edmonton): 4 stages, one PR each; decisions 1–6 at option A (no score without a forecast anywhere; answer line + tags + thin-ice warning open, week bars in "This week"; best hour ±1 h; usual month only at 60%+; rules-year warning at panel top and in Rules; CRLF for .md only) — search: answerHtml
 - [agreed] Build 5 Rev 3 (owner 2026-11-04 evening): keep the best-day box format open at the top (Go day · score, reason, ice line, 7 bars); "8 reports" tag the same size as the others; decisions 7–9 at A ("Bite by hour", safety lines whole, one wind word) — search: Tip and status
+- [agreed] Build 5 Rev 5 (owner 2026-11-05): decision 11 at A = CanVec 1:50,000 (the 1:250,000 file has no names); decision 15 at A = static.ags.aer.ca allowed, 3D for the guide's depth-chart lakes — search: water_linear_flow
+- [differs from plan] Kananaskis and Medley Rivers are stocked waters; their stretch joins the stocked pin instead of a second "not stocked" pin; stocked lakes with no zone (Headwall, Memorial, Running Rain, Badger and others) cannot take their guide row until a zone is set; Oldman, Bearspaw and Pine Coulee Reservoirs are in neither the place names nor CanVec under that name — search: stocked_twin
 - [agreed] (owner accepted 2026-11-04) River guide has one labelled bend drawing (A–G), not one drawing per water type; the sample 3D model in the guide is a second small view, off while a lake's 3D view is open — search: data-demo-host
 
 ## Pending
@@ -62,7 +64,7 @@ Single working record for this repository. Updated by the main session at the en
 - Build 2: merged 2026-11-04 (PR #19, cd9a470). Owner still to do: device check.
 - Build 3 (3D depth model): merged 2026-11-04 (PR #20, d3e3c0d). Owner still to do: device check.
 - Build 4 (feature check fixes and connections): merged 2026-11-04 (PR #21, 922ddb0). Owner still to do: device check.
-- Build 5 Stage 1 (fewer words): built on branch claude/funny-ritchie-bealq0 2026-11-04; waiting for the owner's OK on the before and after pictures, then the PR.
+- Build 5 Stage 1 (fewer words): merged 2026-11-04 (PR #22, d70bc8a). Owner still to do: device check.
 - Leftover helper worktree .claude/worktrees/agent-a00cd60cf51c9739a: removal needs the owner's separate yes (QC2).
 
 ## Request ledger
@@ -162,7 +164,10 @@ Single working record for this repository. Updated by the main session at the en
 | M8 | 11-04 | Rules year check banner from 1 Apr 2027; README refresh steps | done | 5.1; rulesYearWarning; README "Refreshing the rules" |
 | M9 | 11-04 | "Usually stocked" months at 60%+, "Too few years to tell" under 3 years | done | 5.1; usualMonths; 282 of 382 lakes |
 | M10 | 11-04 | Every stage: tests, 5-size layout check, before/after pictures, FEATURES and record, CRLF, final report | open | 5.1 done; stages 2–4 to come |
-| M11 | 11-04 | Stage 2: score all lakes in the 2026 guide, Red Deer River below Dickson Dam, CGNDB positions, weather budget, Stocked filter | open | Build 5 Stage 2 |
+| M11 | 11-04 | Stage 2: score all lakes and rivers in the 2026 guide, Red Deer River below Dickson Dam, CGNDB and CanVec positions, weather budget, Stocked filter | done | 5.2; 286 lakes, 86 stretches, 318 spots, 3D on 114 lakes; 52 names in data/waters_review.csv; spot count M15 |
+| M14 | 11-05 | Zones for the stocked lakes that have none, from the Alberta Conservation Association's documents | done, other source | the Association's site blocks automated reading (bot check); decision 16 A: Alberta's sportfishing regulations map (geospatial.alberta.ca); 58 filled, 14 corrected where the guide agrees; owner corrected Emerald (Hart) ES1 and Dormer ES2 in lake_facts.csv |
+| M15 | 11-05 | Count the owner's 218 pins: lake, river stretch (300 m) or nothing; read the file only | done | 143 lake (128 outline holds the lake point, 13 outline with the lake's name, 2 size circle + 1 km), 10 river only, 65 nothing; file read in place, nothing saved; .claude/state/checks/spots_count.py |
+| M16 | 11-05 | River edges from Alberta's zone outlines (decision 18 A) | open | needs Open-Meteo heights (daily limit reached 11-05); follow-up pull request after Stage 2 (decision 19 A) |
 | M12 | 11-04 | Stage 3: import my spots (browser only), species mode | open | Build 5 Stage 3 |
 | M13 | 11-04 | Stage 4: Firebase sync and weekly email (ASK first) | open | Build 5 Stage 4; replaces F1, F2 |
 
@@ -181,8 +186,8 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 | Build 2 | COMPLETE | PR #19 merged 2026-11-04 (cd9a470) |
 | Build 3 | COMPLETE | PR #20 merged 2026-11-04 (d3e3c0d) |
 | Build 4 | COMPLETE | PR #21 merged 2026-11-04 (922ddb0) |
-| Build 5 Stage 1 | IN REVIEW | branch claude/funny-ritchie-bealq0; 9 new tests; layout check 5 sizes 0 faults; before/after pictures 2026-11-04 |
-| Build 5 Stage 2 | NOT STARTED | |
+| Build 5 Stage 1 | COMPLETE | PR #22 merged 2026-11-04 (d70bc8a); 274 tests pass on GitHub |
+| Build 5 Stage 2 | IN REVIEW | branch claude/funny-ritchie-bealq0; 316 tests pass; data rebuild gives the same files twice; owner OK on the pictures 11-05; zones M14 |
 | Build 5 Stage 3 | NOT STARTED | |
 | Build 5 Stage 4 | NOT STARTED | |
 
@@ -221,7 +226,13 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 - 2026-11-04 build-5 stage 1 Rev 3 (box open, answer line removed, tags one size): test_regression_checks 274 run → 274 pass; word count 390 px first screen no forecast 76, made-up weather 123; layout 5 sizes 0 faults; main (7f10c2c, to-do update) merged into the branch
 - Proof: 2026-11-04 Playwright on the working tree (headless Chromium, fresh profile, weather blocked or made-up): Beaver Lake panel first screen 59 words with no forecast, "Needs a forecast", no bars; Map menu opens, Escape and a pick close it; tag tap shows and hides the full words; ⓘ shows "From: …"; Usually stocked "May (14 of 16 years)"; layout 5 sizes 0 faults; 0 page errors
 
+- 2026-11-05 build-5 stage 2: unittest discover 308 run → 308 pass (PYTHONUTF8=1); build_history.py leaves data/ unchanged; Open-Meteo heights 983 keys (rate limit 429 hit after repeated runs; elevation.py now asks only for new or moved points); reviewer pass 16 findings → all fixed (data side by a helper on separate files, app side in this session) or recorded above
+- 2026-11-05 build-5 stage 2 sizes: first visit about 10.4 MB (app 1.7, stocking data 4.3, waters and rivers 0.7, lakebeds 4.0); was about 7.4 MB
+
 ## Open questions / blockers
 - H4 answered 2026-10-30: Open-Meteo counts per IP; one full load = 250 calls in 5 requests (measured in the browser), 3 h cache.
 - Species page facts from general knowledge (Athabasca rainbow at risk, westslope cutthroat Threatened, walleye special licence, bull trout protected): owner to check.
 - River guide facts from general knowledge (learn/river.html): water from deep in Gleniffer Reservoir stays cold all summer; brown trout and mountain whitefish the main fish, some rainbow, bull trout pass through; releases can raise the river fast; the dam keeps some water open in winter: owner to check.
+- 2026-11-05 Stage 2 zones: lake_zones.py 382 stocked lakes, 366 by the lake layer, 7 by the river layer, the rest by zone outline; build_history.py twice → same md5 for every data/*.json and *.csv; guide rules on 363 stocked lakes (316 before); 312 tests pass; layout at 360, 390, 834, 1194, 1280 for Pine Coulee, Headwall Lakes and the Red Deer River → 0 faults, 0 page errors
+- 2026-11-05 Open-Meteo answered "Daily API request limit exceeded" (HTTP 429): the river rebuild is deferred (M16); data/rivers.json is the 24d8cde build the owner saw in the pictures
+- 2026-11-05 reviewer pass on the zone change → 8 findings, all fixed: a same-named lake elsewhere no longer confirms a zone (land description within 15 km, or a name in one zone only); zone outlines saved once and read from disk; cut-short map answers stop the script; owner corrections are "settled", and "fill" rows no longer block Alberta's zone; outlines unsimplified, holes per outline, nearest zone within 2 km on a sliver; the new tests run from the file too; heights saved for a .zip input; zone rows match wb ids by id (one lake is renamed during the build). Zones and rules unchanged by the fixes; rebuild twice → same md5; 316 tests pass

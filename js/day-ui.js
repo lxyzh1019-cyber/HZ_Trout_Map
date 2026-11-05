@@ -36,6 +36,14 @@
     recomputeDistances();
     if (typeof placeOriginMarker === "function") placeOriginMarker();
     onFilterChange();
+    fetchNear();
+  }
+
+  /* Build 5: a new home or a picked town loads the forecasts within 200 km of it. */
+  var nearTimer = null;
+  function fetchNear() {
+    clearTimeout(nearTimer);
+    nearTimer = setTimeout(function () { if (navigator.onLine && !fx.loading) fetchAll(false); }, 400);
   }
 
   // ============================================================
@@ -252,12 +260,19 @@
             "Day out " + LakeSheet.bandWord(day.dayOut)];
   }
 
+  /* Build 5: one river can have several stretches; the start of the guide's
+   * words tells them apart ("river: from Dickson Dam …"). */
+  function stretchHint(l) {
+    var d = String(l.detail || "").replace(/^(Mainstem and tributaries|Mainstem|Includes tributaries;?)\s*/i, "").trim();
+    return "river" + (d ? ": " + (d.length > 38 ? d.slice(0, 36).replace(/\s+\S*$/, "") + " …" : d) : " · " + (l.zone || ""));
+  }
+
   function rowHtml(lake, d, winter) {
     var f = Forecast.forLake(lake);
     var s = f ? Forecast.rankable(f, d) : null;
     var pill = dayOutPill(lake, d, winter);
     var km = Number.isFinite(lake.distanceKm) ? Math.round(lake.distanceKm) + " km" : "";
-    var size = lake.surface_area_ha != null ? lake.surface_area_ha + " ha" : "size unknown";
+    var size = lake.river ? stretchHint(lake) : lake.surface_area_ha != null ? lake.surface_area_ha + " ha" : "size unknown";
     var cold = winter || (f && f.iced);
     var score = cold ? winterText(lake, d) : s === null ? "—" : pct(s);
     return '<button type="button" class="row" data-lake="' + esc(lakeKey(lake)) + '">'
@@ -397,7 +412,12 @@
     var title = $("sheet-title");
     if (title && !(opts && opts.noFocus)) { title.setAttribute("tabindex", "-1"); title.focus({ preventScroll: true }); }
     // A lake with no saved forecast gets one now, so its panel fills in.
-    if (lake.lat != null && Weather.peek(lake.lat, lake.lon).source === "none") {
+    if (lake.river && Array.isArray(lake.spots)) {
+      // Build 5: a river stretch is scored at all its forecast spots.
+      Weather.loadAll(lake.spots.map(function (p) { return { lat: p[0], lon: p[1] }; }), {}).then(function (s) {
+        if (s.calls) { Forecast.clear(); refresh(); }
+      });
+    } else if (lake.lat != null && Weather.peek(lake.lat, lake.lon).source === "none") {
       Weather.load(lake.lat, lake.lon).then(function () { refresh(); });
     }
   }
@@ -467,6 +487,7 @@
     return '<li role="option" id="sr-' + i + '" class="row" data-key="' + esc(lakeKey(l)) + '"' + (i === active ? ' aria-selected="true"' : "") + ">"
       + '<span><span class="nm">' + esc(l.name) + '</span><br><span class="sub">'
       + (Number.isFinite(l.distanceKm) ? Math.round(l.distanceKm) + " km from " + esc(originPoint().name) : "no position")
+      + (l.river ? " · " + esc(stretchHint(l)) : "")
       + "</span></span>"
       + '<span class="sc" title="' + (winter || (f && f.iced) ? "Winter score" : "Bite score") + '">'
       + esc(winter || (f && f.iced) ? winterText(l, state.day) : s === null ? "—" : pct(s)) + "</span>"
@@ -646,7 +667,7 @@
     if (!host) return;
     if (!fx.loading) { host.hidden = true; return; }
     host.hidden = false;
-    host.textContent = "Getting the forecast for " + mappableLakes().length + " lakes · " + fx.done + " of " + fx.of
+    host.textContent = "Getting the forecast for the lakes near you and on screen · " + fx.done + " of " + fx.of
       + ". Saved forecasts show first.";
   }
 
@@ -654,8 +675,47 @@
   // GETTING EVERY LAKE'S FORECAST
   // ============================================================
 
+  /* Build 5 Stage 2: every forecast point (a lake, or each spot on a river
+   * stretch). The ones within 200 km of you or on screen load first; the rest
+   * load when you move the map to them. A cell already saved costs nothing. */
+  var WX_NEAR_KM = 200;
+  /* On screen counts only once the map is zoomed in this far (about a 200 km
+   * wide view on a phone); at the province view everything is on screen. */
+  var WX_SCREEN_ZOOM = 8;
+  function weatherPoints() {
+    var out = [];
+    LAKES.forEach(function (l) {
+      if (l.river && Array.isArray(l.spots)) l.spots.forEach(function (p) { out.push({ lat: p[0], lon: p[1] }); });
+      else if (l.lat != null && l.lon != null) out.push({ lat: l.lat, lon: l.lon });
+    });
+    return out;
+  }
+  function onScreenOrNear(points) {
+    var o = originPoint();
+    var b = map && map.getBounds && map.getZoom && map.getZoom() >= WX_SCREEN_ZOOM ? map.getBounds() : null;
+    return points.filter(function (p) {
+      return haversineKm(o.lat, o.lon, p.lat, p.lon) <= WX_NEAR_KM || (b && b.contains([p.lat, p.lon]));
+    });
+  }
+  var panTimer = null;
+  function fetchOnScreen() {
+    clearTimeout(panTimer);
+    panTimer = setTimeout(function () {
+      if (!navigator.onLine || fx.loading || !map || !map.getBounds || map.getZoom() < WX_SCREEN_ZOOM) return;
+      var b = map.getBounds();
+      var pts = weatherPoints().filter(function (p) { return b.contains([p.lat, p.lon]); });
+      Weather.loadAll(pts, {}).then(function (summary) {
+        if (!summary.calls) return;
+        fx.panSummary = summary;
+        if (typeof updateDataQualitySummary === "function") updateDataQualitySummary();
+        Forecast.clear();
+        refresh();
+      });
+    }, 700);
+  }
+
   function fetchAll(force) {
-    var lakes = LAKES.filter(function (l) { return l.lat != null && l.lon != null; });
+    var lakes = onScreenOrNear(weatherPoints());
     fx.loading = true; fx.done = 0; fx.of = 0;
     progressHtml();
     return Weather.loadAll(lakes, {
@@ -774,7 +834,10 @@
       else setSidebarHidden(!app.classList.contains("sidebar-hidden"));
     });
     if (map) {
-      map.on("moveend", function () { if (state.onScreen || winterOn() !== lastWinter) { lastWinter = winterOn(); render(); renderPins(); } else drawWeek(); });
+      map.on("moveend", function () {
+        if (state.onScreen || winterOn() !== lastWinter) { lastWinter = winterOn(); render(); renderPins(); } else drawWeek();
+        fetchOnScreen();
+      });
     }
     var mq = matchMedia("(min-width: 1024px)");
     var onMq = function () { renderSheet(); if (map) setTimeout(function () { map.invalidateSize(); }, 60); };
@@ -808,6 +871,7 @@
 
   window.DayUI = {
     init: init,
+    _weather: { weatherPoints: function () { return weatherPoints(); }, onScreenOrNear: function (p) { return onScreenOrNear(p); }, NEAR_KM: WX_NEAR_KM, SCREEN_ZOOM: WX_SCREEN_ZOOM },
     render: render,
     refresh: refresh,
     renderSheet: renderSheet,
@@ -821,6 +885,8 @@
     emptyCheck: emptyCheck,
     showState: showState,
     lastSummary: function () { return fx.lastSummary; },
+    panSummary: function () { return fx.panSummary || null; },
+    fetchNear: function () { fetchNear(); },
     _internal: { ranked: ranked, rowHtml: rowHtml, dayOutPill: dayOutPill, pool: pool, thisWinter: thisWinter, winterKey: winterKey },
   };
 })();

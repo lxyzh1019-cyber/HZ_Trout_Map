@@ -135,13 +135,19 @@ def lake_names():
             key = lake.get("lake_id") or lake.get("ats")
             if lake.get("name"):
                 names[key] = lake["name"]
+    # Build 5 Stage 2: the guide's lakes that are not stocked.
+    extra = ROOT / "data" / "waters_unstocked.json"
+    if extra.exists():
+        for lake in json.loads(extra.read_text(encoding="utf-8")).get("lakes", []):
+            names.setdefault(lake["lake_id"], lake["name"])
     return names
 
 
 def main():
     charts = outlines()
     names = lake_names()
-    lakes = placed_lakes()
+    # River forecast spots ("<stretch>#<n>") have a height but are not lakes.
+    lakes = {k: v for k, v in placed_lakes().items() if "#" not in k}
     matched = {}
     for key, (lat, lon) in lakes.items():
         ours = names.get(key)

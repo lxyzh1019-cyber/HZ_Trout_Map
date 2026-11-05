@@ -175,13 +175,37 @@
             new Date().toDateString()].join("|");
   }
 
+  /* Build 5: a river stretch has a forecast spot about every 25 km. It is
+   * scored at each one with the same engine, and the spot with the best day of
+   * the week stands for the stretch (the panel names it). */
+  function spotsOf(lake) {
+    return lake && lake.river && Array.isArray(lake.spots) && lake.spots.length > 1 ? lake.spots : null;
+  }
+  function riverKey(lake) {
+    return lake.spots.map(function (p) { var wx = Weather.peek(p[0], p[1]); return wx.fetchedAt || 0; }).join(",")
+      + "|" + new Date().toDateString();
+  }
+  function summariseRiver(lake) {
+    var best = null;
+    lake.spots.forEach(function (p, i) {
+      // Each spot has its own height ("<stretch id>#<n>" in lake_elevation.json).
+      var v = summarise(Object.assign({}, lake, { lat: p[0], lon: p[1], _spotKey: lakeKey(lake) + "#" + i }));
+      v.spot = i;
+      var b = v.bestDay >= 0 && v.days[v.bestDay].bite != null ? v.days[v.bestDay].bite : -1;
+      var w = v.hasWeather ? 1 : 0;
+      if (!best || w > best.w || (w === best.w && b > best.b)) best = { v: v, b: b, w: w };
+    });
+    best.v.spots = lake.spots.length;
+    return best.v;
+  }
+
   /** Seven days for one lake, computed once per forecast and filter. */
   function forLake(lake) {
     if (!lake || lake.lat == null || lake.lon == null) return null;
-    var k = lakeKey(lake), ck = cacheKey(lake);
+    var k = lakeKey(lake), river = spotsOf(lake), ck = river ? riverKey(lake) : cacheKey(lake);
     var hit = cache[k];
     if (hit && hit.ck === ck) return hit.value;
-    var value = summarise(lake);
+    var value = river ? summariseRiver(lake) : summarise(lake);
     cache[k] = { ck: ck, value: value };
     return value;
   }
@@ -189,7 +213,7 @@
   /** Whether a lake's summary is already computed for the current inputs. */
   function ready(lake) {
     var hit = cache[lakeKey(lake)];
-    return !!(hit && hit.ck === cacheKey(lake));
+    return !!(hit && hit.ck === (spotsOf(lake) ? riverKey(lake) : cacheKey(lake)));
   }
 
   /** Score many lakes in small slices so the page keeps answering taps.

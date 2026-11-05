@@ -2,16 +2,621 @@
  "source": "Open-Meteo Elevation API (Copernicus DEM GLO-90, 90 m)",
  "url": "https://api.open-meteo.com/v1/elevation",
  "licence": "CC BY 4.0 (Open-Meteo); Copernicus DEM © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018, provided under COPERNICUS by the European Union and ESA",
- "retrieved": "2026-11-03",
- "calls": 4,
- "count": 380,
+ "retrieved": "2026-11-05",
+ "calls": 10,
+ "calls_this_run": 0,
+ "count": 984,
  "lakes": {
+  "gu-es1-barnaby-lake": 1898.0,
+  "gu-es1-blairmore-water-supply-unnamed-reservoir": 1395.0,
+  "gu-es1-carburn-park-pond": 1016.0,
+  "gu-es1-chester-lake": 2195.0,
+  "gu-es1-east-scarpe-lake": 1974.0,
+  "gu-es1-gap-lake": 1291.0,
+  "gu-es1-ghost-reservoir": 1191.0,
+  "gu-es1-glenmore-reservoir": 1087.0,
+  "gu-es1-lys-lake": 2340.0,
+  "gu-es1-mud-lake": 1923.0,
+  "gu-es1-picklejar-lakes": 2089.0,
+  "gu-es1-rainy-ridge-lake": 2111.0,
+  "gu-es1-rummel-lake": 2367.0,
+  "gu-es1-southfork-lake": 2297.0,
+  "gu-es1-spray-lakes-reservoir": 1695.0,
+  "gu-es1-sunken-lakes": 1480.0,
+  "gu-es1-tombstone-lakes": 2260.0,
+  "gu-es1-window-mountain-lake": 2234.0,
+  "gu-es2-abraham-lake": 1313.0,
+  "gu-es2-brazeau-reservoir": 960.0,
+  "gu-es2-coral-lake": 2568.0,
+  "gu-es2-gleniffer-lake": 947.0,
+  "gu-es2-jumping-fish-unnamed-lake": 1412.0,
+  "gu-es2-michele-upper-and-lower-lakes": 2726.0,
+  "gu-es2-pinto-lake": 1909.0,
+  "gu-es2-resolute-lake": 1381.0,
+  "gu-es2-ruby-lake": 1991.0,
+  "gu-es2-swan-lake": 1231.0,
+  "gu-es3-bear-lake": 870.0,
+  "gu-es3-blue-lake": 1149.0,
+  "gu-es3-busby-lake": 1819.0,
+  "gu-es3-cache-lake": 1148.0,
+  "gu-es3-chip-lake": 787.0,
+  "gu-es3-embarras-pit-lakes": 1441.0,
+  "gu-es3-graveyard-lake": 1150.0,
+  "gu-es3-gregg-lake": 1140.0,
+  "gu-es3-horseshoe-lake": 1243.0,
+  "gu-es3-jarvis-lake": 1151.0,
+  "gu-es3-lac-des-roches": 1672.0,
+  "gu-es3-mystery-lake": 1859.0,
+  "gu-es3-rock-lake": 1387.0,
+  "gu-es3-shiningbank-lake": 833.0,
+  "gu-es3-sphinx-unnamed-lake": 1564.0,
+  "gu-es3-sundance-lake": 1156.0,
+  "gu-es3-wolf-lake": 1049.0,
+  "gu-es4-crooked-lake": 817.0,
+  "gu-es4-goose-lake": 699.0,
+  "gu-es4-iosegun-lake": 773.0,
+  "gu-es4-long-lake": 712.0,
+  "gu-es4-meekwap-lake": 805.0,
+  "gu-es4-raspberry-lake": 786.0,
+  "gu-es4-smoke-lake": 836.0,
+  "gu-es4-snipe-lake": 742.0,
+  "gu-es4-sturgeon-lake": 688.0,
+  "gu-nb1-amisk-lake": 612.0,
+  "gu-nb1-angling-lake": 556.0,
+  "gu-nb1-bangs-lake": 535.0,
+  "gu-nb1-beartrap-lake": 574.0,
+  "gu-nb1-beaver-lake": 586.0,
+  "gu-nb1-behan-lake": 655.0,
+  "gu-nb1-bentley-lake": 618.0,
+  "gu-nb1-big-chief-lake": 648.0,
+  "gu-nb1-big-johnson-chump-lake": 610.0,
+  "gu-nb1-bourque-lake": 611.0,
+  "gu-nb1-burnt-lake": 659.0,
+  "gu-nb1-calling-lake": 592.0,
+  "gu-nb1-claude-lake": 565.0,
+  "gu-nb1-clyde-lake": 651.0,
+  "gu-nb1-cold-lake": 534.0,
+  "gu-nb1-cow-lake": 639.0,
+  "gu-nb1-elinor-lake": 582.0,
+  "gu-nb1-ethel-bear-lake": 539.0,
+  "gu-nb1-fishing-lake": 598.0,
+  "gu-nb1-floatingstone-lake": 600.0,
+  "gu-nb1-fork-lake": 591.0,
+  "gu-nb1-francis-lake": 609.0,
+  "gu-nb1-garner-lake": 602.0,
+  "gu-nb1-garnier-lakes": 592.0,
+  "gu-nb1-goodfish-lake": 577.0,
+  "gu-nb1-goodwin-lake": 655.0,
+  "gu-nb1-halfmoon-lake": 652.0,
+  "gu-nb1-hanmore-lake": 668.0,
+  "gu-nb1-heart-lake": 595.0,
+  "gu-nb1-hilda-lake": 544.0,
+  "gu-nb1-hope-lake": 619.0,
+  "gu-nb1-ironwood-lake": 584.0,
+  "gu-nb1-lac-la-biche": 542.0,
+  "gu-nb1-lac-saint-cyr": 650.0,
+  "gu-nb1-lac-sante": 604.0,
+  "gu-nb1-laurier-lake": 564.0,
+  "gu-nb1-little-bear-lake": 659.0,
+  "gu-nb1-lodge-lake": 613.0,
+  "gu-nb1-logan-lake": 595.0,
+  "gu-nb1-lone-pine-lake": 569.0,
+  "gu-nb1-manatokan-lake": 554.0,
+  "gu-nb1-marie-lake": 573.0,
+  "gu-nb1-may-lake": 604.0,
+  "gu-nb1-minnie-lake": 549.0,
+  "gu-nb1-mons-lake": 605.0,
+  "gu-nb1-moonshine-lake": 653.0,
+  "gu-nb1-moose-lake": 531.0,
+  "gu-nb1-moosehills-lake": 534.0,
+  "gu-nb1-north-buck-lake": 627.0,
+  "gu-nb1-piche-lake": 595.0,
+  "gu-nb1-reed-lake": 579.0,
+  "gu-nb1-rock-island-lake": 654.0,
+  "gu-nb1-ross-lake": 573.0,
+  "gu-nb1-seibert-lake": 619.0,
+  "gu-nb1-sinclair-lake": 629.0,
+  "gu-nb1-soars-lake": 597.0,
+  "gu-nb1-spencer-lake": 618.0,
+  "gu-nb1-stoney-siler-lake": 583.0,
+  "gu-nb1-touchwood-lake": 631.0,
+  "gu-nb1-tucker-lake": 552.0,
+  "gu-nb1-victor-lake": 569.0,
+  "gu-nb1-wayetenaw-lake": 577.0,
+  "gu-nb1-whitefish-lake": 575.0,
+  "gu-nb1-whitney-lake": 565.0,
+  "gu-nb1-wiau-lake": 651.0,
+  "gu-nb2-baptiste-lake": 578.0,
+  "gu-nb2-bolloque-lake": 684.0,
+  "gu-nb2-crooked-lake": 621.0,
+  "gu-nb2-fawcett-lake": 618.0,
+  "gu-nb2-francis-lake": 686.0,
+  "gu-nb2-freeman-lake": 1078.0,
+  "gu-nb2-ghost-lake": 628.0,
+  "gu-nb2-island-lake": 601.0,
+  "gu-nb2-jenkins-lake": 631.0,
+  "gu-nb2-lac-la-nonne": 662.0,
+  "gu-nb2-lawrence-lake": 644.0,
+  "gu-nb2-lesser-slave-lake": 575.0,
+  "gu-nb2-long-island-lake": 696.0,
+  "gu-nb2-long-lake": 707.0,
+  "gu-nb2-meyer-lake": 622.0,
+  "gu-nb2-mitsue-lake": 579.0,
+  "gu-nb2-nakamun-lake": 687.0,
+  "gu-nb2-narrow-lake": 686.0,
+  "gu-nb2-orloff-lake": 635.0,
+  "gu-nb2-paul-lake": 639.0,
+  "gu-nb2-steele-cross-lake": 656.0,
+  "gu-nb2-thunder-lake": 652.0,
+  "gu-nb3-albright-lake": 793.0,
+  "gu-nb3-beatty-lake": 623.0,
+  "gu-nb3-berry-lake": 637.0,
+  "gu-nb3-bistcho-lake": 553.0,
+  "gu-nb3-brintnell-lake": 654.0,
+  "gu-nb3-cadotte-lake": 568.0,
+  "gu-nb3-calder-lake": 644.0,
+  "gu-nb3-caribou-lake": 777.0,
+  "gu-nb3-equisetum-lake": 691.0,
+  "gu-nb3-fish-jackfish-lake": 818.0,
+  "gu-nb3-gods-lake": 618.0,
+  "gu-nb3-goodfish-lake": 692.0,
+  "gu-nb3-graham-trout-lake": 690.0,
+  "gu-nb3-haig-lake": 745.0,
+  "gu-nb3-hutch-lake": 326.0,
+  "gu-nb3-legend-lake": 789.0,
+  "gu-nb3-margaret-lake": 825.0,
+  "gu-nb3-mink-lake-1": 656.0,
+  "gu-nb3-mistehae-lake": 586.0,
+  "gu-nb3-muskwa-lake": 566.0,
+  "gu-nb3-nipisi-lake": 654.0,
+  "gu-nb3-north-wabasca-lake": 554.0,
+  "gu-nb3-pastecho-lake": 582.0,
+  "gu-nb3-peerless-lake": 690.0,
+  "gu-nb3-pitchimi-lake": 763.0,
+  "gu-nb3-rainbow-lake": 476.0,
+  "gu-nb3-round-lake": 703.0,
+  "gu-nb3-semo-lake": 888.0,
+  "gu-nb3-south-wabasca-lake": 544.0,
+  "gu-nb3-spawn-lake": 574.0,
+  "gu-nb3-talbot-lake": 696.0,
+  "gu-nb3-thurston-lake": 612.0,
+  "gu-nb3-utikuma-lake": 639.0,
+  "gu-nb3-utikumasis-lake": 640.0,
+  "gu-nb3-vandersteene-lake": 693.0,
+  "gu-nb3-wentzel-lake": 659.0,
+  "gu-nb4-alexander-lake": 284.0,
+  "gu-nb4-andrew-lake": 312.0,
+  "gu-nb4-arch-lake": 281.0,
+  "gu-nb4-ashton-lake": 311.0,
+  "gu-nb4-barrow-lake": 225.0,
+  "gu-nb4-base-lake": 649.0,
+  "gu-nb4-bayonet-lake": 324.0,
+  "gu-nb4-big-island-lake": 679.0,
+  "gu-nb4-blanche-lake": 212.0,
+  "gu-nb4-bocquene-lake": 211.0,
+  "gu-nb4-bryant-lake": 278.0,
+  "gu-nb4-burstall-lake": 285.0,
+  "gu-nb4-charles-lake": 302.0,
+  "gu-nb4-cherry-lake": 321.0,
+  "gu-nb4-christina-lake": 560.0,
+  "gu-nb4-cockscomb-lake": 248.0,
+  "gu-nb4-colin-lake": 283.0,
+  "gu-nb4-collins-lake": 312.0,
+  "gu-nb4-cornwall-lake": 287.0,
+  "gu-nb4-cowper-lake": 466.0,
+  "gu-nb4-daly-lake": 265.0,
+  "gu-nb4-darwin-lake": 246.0,
+  "gu-nb4-dawson-lake": 293.0,
+  "gu-nb4-disappointment-lake": 270.0,
+  "gu-nb4-ells-lake": 287.0,
+  "gu-nb4-fletcher-lake": 247.0,
+  "gu-nb4-florence-lake": 279.0,
+  "gu-nb4-gardiner-lakes": 673.0,
+  "gu-nb4-gipsy-lake": 471.0,
+  "gu-nb4-gregoire-willow-lake": 476.0,
+  "gu-nb4-grist-lake": 600.0,
+  "gu-nb4-hooker-lake": 281.0,
+  "gu-nb4-kimowin-hook-lake": 470.0,
+  "gu-nb4-kirby-sterner-lake": 634.0,
+  "gu-nb4-lake-athabasca": 207.0,
+  "gu-nb4-leggo-lake": 298.0,
+  "gu-nb4-leland-lakes": 274.0,
+  "gu-nb4-limon-lake": 211.0,
+  "gu-nb4-loutit-lake": 220.0,
+  "gu-nb4-mcclelland-lake": 293.0,
+  "gu-nb4-mercredi-lake": 292.0,
+  "gu-nb4-myers-lake": 221.0,
+  "gu-nb4-namur-lake": 721.0,
+  "gu-nb4-one-week-lake": 306.0,
+  "gu-nb4-pans-lake": 296.0,
+  "gu-nb4-peters-lake": 296.0,
+  "gu-nb4-potts-lake": 295.0,
+  "gu-nb4-richardson-lake": 208.0,
+  "gu-nb4-roderick-lake": 293.0,
+  "gu-nb4-royemma-lake": 650.0,
+  "gu-nb4-ryan-lake": 223.0,
+  "gu-nb4-st-agnes-lake": 303.0,
+  "gu-nb4-steepbank-lake": 653.0,
+  "gu-nb4-tulip-lake": 247.0,
+  "gu-nb4-turtle-lake": 275.0,
+  "gu-nb4-wappau-lake": 649.0,
+  "gu-nb4-weekes-lake": 343.0,
+  "gu-nb4-winefred-lake": 592.0,
+  "gu-nb4-winnifred-lake": 286.0,
+  "gu-nb4-woodman-lake": 290.0,
+  "gu-nb4-wylie-lake": 279.0,
+  "gu-pp1-chestermere-lake": 1023.0,
+  "gu-pp1-clear-lake": 966.0,
+  "gu-pp1-cowoki-lake": 760.0,
+  "gu-pp1-crawling-valley-reservoir": 794.0,
+  "gu-pp1-eagle-lake": 923.0,
+  "gu-pp1-elkwater-lake": 1224.0,
+  "gu-pp1-fincastle-lake": 795.0,
+  "gu-pp1-gun-club-cann-reservoir": 754.0,
+  "gu-pp1-henderson-lake": 911.0,
+  "gu-pp1-horsefly-lake-reservoir": 820.0,
+  "gu-pp1-jamieson-lake": 750.0,
+  "gu-pp1-jensen-reservoir": 1071.0,
+  "gu-pp1-johnson-lake": 752.0,
+  "gu-pp1-lost-lake": 784.0,
+  "gu-pp1-murray-lake": 832.0,
+  "gu-pp1-park-lake": 943.0,
+  "gu-pp1-raymond-reservoir": 986.0,
+  "gu-pp1-rock-lake": 762.0,
+  "gu-pp1-rolling-hills-lake": 766.0,
+  "gu-pp1-taber-lake": 804.0,
+  "gu-pp1-timko-lake-j-or-bantry-reservoir": 755.0,
+  "gu-pp2-arm-lake": 663.0,
+  "gu-pp2-battle-lake": 865.0,
+  "gu-pp2-berry-creek-carolside-reservoir": 736.0,
+  "gu-pp2-big-lake": 650.0,
+  "gu-pp2-buck-lake": 892.0,
+  "gu-pp2-buffalo-lake": 786.0,
+  "gu-pp2-clear-barnes-lake": 657.0,
+  "gu-pp2-coal-lake": 702.0,
+  "gu-pp2-driedmeat-lake": 685.0,
+  "gu-pp2-gull-lake": 899.0,
+  "gu-pp2-hubbles-lake": 727.0,
+  "gu-pp2-isle-lake": 728.0,
+  "gu-pp2-lac-ste-anne": 721.0,
+  "gu-pp2-lessard-lake": 736.0,
+  "gu-pp2-magee-lake": 810.0,
+  "gu-pp2-matchayaw-devil-s-lake": 678.0,
+  "gu-pp2-mayatan-lake": 729.0,
+  "gu-pp2-medicine-lake": 980.0,
+  "gu-pp2-mere-lake": 743.0,
+  "gu-pp2-mink-lake": 735.0,
+  "gu-pp2-pigeon-lake": 849.0,
+  "gu-pp2-pine-lake": 889.0,
+  "gu-pp2-raft-lake": 616.0,
+  "gu-pp2-rat-lake": 897.0,
+  "gu-pp2-spotted-lake": 785.0,
+  "gu-pp2-west-twin-lake": 986.0,
+  "gu-pp2-wizard-lake": 790.0,
   "lk0001": 1178.0,
   "lk0002": 598.0,
   "lk0003": 905.0,
   "lk0004": 739.0,
   "lk0007": 1102.0,
   "lk0008": 1237.0,
+  "rv-es1-jumpingpound-creek-1#0": 1838.0,
+  "rv-es1-jumpingpound-creek-1#1": 1238.0,
+  "rv-es1-kananaskis-river-1#0": 1378.0,
+  "rv-es1-kananaskis-river-1#1": 1597.0,
+  "rv-es1-livingstone-river-1#0": 1911.0,
+  "rv-es1-livingstone-river-1#1": 1516.0,
+  "rv-es1-mill-creek-1#0": 2172.0,
+  "rv-es1-mill-creek-1#1": 1207.0,
+  "rv-es1-oldman-river-1#0": 1115.0,
+  "rv-es1-oldman-river-1#1": 1822.0,
+  "rv-es1-oldman-river-1#2": 1461.0,
+  "rv-es1-oldman-river-1#3": 1237.0,
+  "rv-es1-pincher-creek-1#0": 1047.0,
+  "rv-es1-pincher-creek-1#1": 1727.0,
+  "rv-es1-pincher-creek-1#2": 1894.0,
+  "rv-es1-policeman-creek-1#0": 1309.0,
+  "rv-es1-quirk-creek-1#0": 1653.0,
+  "rv-es1-sheep-river-1#0": 1168.0,
+  "rv-es1-sheep-river-1#1": 1494.0,
+  "rv-es1-sheep-river-1#2": 1023.0,
+  "rv-es1-silvester-creek-1#0": 1520.0,
+  "rv-es1-smith-dorrien-creek-1#0": 1857.0,
+  "rv-es1-storm-creek-1#0": 1856.0,
+  "rv-es1-threepoint-creek-1#0": 1727.0,
+  "rv-es1-threepoint-creek-1#1": 1186.0,
+  "rv-es1-waiparous-creek-1#0": 1425.0,
+  "rv-es1-waterton-river-1#0": 1062.0,
+  "rv-es1-waterton-river-1#1": 1237.0,
+  "rv-es1-west-castle-river-1#0": 1666.0,
+  "rv-es1-willow-creek-1#0": 1494.0,
+  "rv-es1-willow-creek-1#1": 1209.0,
+  "rv-es1-willow-creek-1#2": 1019.0,
+  "rv-es2-north-saskatchewan-river-1#0": 926.0,
+  "rv-es2-north-saskatchewan-river-1#1": 1214.0,
+  "rv-es2-north-saskatchewan-river-1#2": 1380.0,
+  "rv-es2-north-saskatchewan-river-1#3": 1535.0,
+  "rv-es2-north-saskatchewan-river-1#4": 921.0,
+  "rv-es2-north-saskatchewan-river-1#5": 1133.0,
+  "rv-es2-north-saskatchewan-river-1#6": 1050.0,
+  "rv-es2-north-saskatchewan-river-1#7": 1313.0,
+  "rv-es2-north-saskatchewan-river-1#8": 788.0,
+  "rv-es2-pinto-creek-1#0": 1414.0,
+  "rv-es2-prairie-creek-1#0": 1474.0,
+  "rv-es2-prairie-creek-1#1": 1093.0,
+  "rv-es2-ram-river-1#0": 2201.0,
+  "rv-es2-ram-river-1#1": 1449.0,
+  "rv-es2-ram-river-1#2": 1105.0,
+  "rv-es2-raven-river-1#0": 1218.0,
+  "rv-es2-raven-river-1#1": 959.0,
+  "rv-es2-red-deer-river-1#0": 986.0,
+  "rv-es2-red-deer-river-1#1": 1274.0,
+  "rv-es2-red-deer-river-1#2": 1532.0,
+  "rv-es2-red-deer-river-1#3": 1102.0,
+  "rv-es2-red-deer-river-1#4": 2047.0,
+  "rv-es2-rundell-creek-1#0": 1161.0,
+  "rv-es2-siffleur-river-1#0": 1496.0,
+  "rv-es2-siffleur-river-1#1": 2307.0,
+  "rv-es2-swan-creek-1#0": 1222.0,
+  "rv-es2-tay-river-1#0": 1618.0,
+  "rv-es2-tay-river-1#1": 1230.0,
+  "rv-es3-athabasca-river-1#0": 1212.0,
+  "rv-es3-athabasca-river-1#1": 724.0,
+  "rv-es3-athabasca-river-1#2": 997.0,
+  "rv-es3-athabasca-river-1#3": 854.0,
+  "rv-es3-athabasca-river-1#4": 905.0,
+  "rv-es3-athabasca-river-1#5": 939.0,
+  "rv-es3-athabasca-river-1#6": 780.0,
+  "rv-es3-athabasca-river-1#7": 1066.0,
+  "rv-es3-athabasca-river-1#8": 660.0,
+  "rv-es3-berland-river-1#0": 995.0,
+  "rv-es3-berland-river-1#1": 1089.0,
+  "rv-es3-berland-river-1#2": 845.0,
+  "rv-es3-bigoray-river-1#0": 843.0,
+  "rv-es3-deerlick-creek-1#0": 1392.0,
+  "rv-es3-dismal-creek-1#0": 1060.0,
+  "rv-es3-dismal-creek-1#1": 1251.0,
+  "rv-es3-embarras-river-1#0": 1221.0,
+  "rv-es3-embarras-river-1#1": 1008.0,
+  "rv-es3-eunice-creek-1#0": 1389.0,
+  "rv-es3-gregg-river-1#0": 1243.0,
+  "rv-es3-lobstick-river-1#0": 798.0,
+  "rv-es3-lobstick-river-1#1": 902.0,
+  "rv-es3-lobstick-river-1#2": 777.0,
+  "rv-es3-luscar-creek-1#0": 1627.0,
+  "rv-es3-mackenzie-creek-1#0": 1508.0,
+  "rv-es3-mcleod-river-1#0": 795.0,
+  "rv-es3-mcleod-river-1#1": 982.0,
+  "rv-es3-mcleod-river-1#2": 1104.0,
+  "rv-es3-mcleod-river-1#3": 1255.0,
+  "rv-es3-mcleod-river-1#4": 1744.0,
+  "rv-es3-mcleod-river-1#5": 846.0,
+  "rv-es3-mcleod-river-1#6": 757.0,
+  "rv-es3-mcleod-river-1#7": 697.0,
+  "rv-es3-pembina-river-1#0": 1222.0,
+  "rv-es3-pembina-river-1#1": 1571.0,
+  "rv-es3-pembina-river-1#2": 1090.0,
+  "rv-es3-pembina-river-1#3": 757.0,
+  "rv-es3-pembina-river-1#4": 682.0,
+  "rv-es3-pembina-river-1#5": 835.0,
+  "rv-es3-plante-creek-1#0": 1133.0,
+  "rv-es3-rat-creek-1#0": 928.0,
+  "rv-es3-rat-creek-1#1": 1645.0,
+  "rv-es3-wampus-creek-1#0": 1373.0,
+  "rv-es3-wildhay-river-1#0": 1546.0,
+  "rv-es3-wildhay-river-1#1": 1087.0,
+  "rv-es3-wildhay-river-1#2": 999.0,
+  "rv-es3-wildhay-river-1#3": 1267.0,
+  "rv-es3-windfall-creek-1#0": 1099.0,
+  "rv-es3-windfall-creek-1#1": 818.0,
+  "rv-nb1-athabasca-river-1#0": 496.0,
+  "rv-nb1-athabasca-river-1#1": 490.0,
+  "rv-nb1-athabasca-river-1#2": 477.0,
+  "rv-nb1-athabasca-river-1#3": 465.0,
+  "rv-nb1-beaver-river-1#0": 538.0,
+  "rv-nb1-beaver-river-1#1": 492.0,
+  "rv-nb1-beaver-river-1#2": 570.0,
+  "rv-nb1-beaver-river-1#3": 530.0,
+  "rv-nb1-beaver-river-1#4": 519.0,
+  "rv-nb1-beaver-river-1#5": 512.0,
+  "rv-nb1-la-biche-river-1#0": 545.0,
+  "rv-nb1-la-biche-river-1#1": 507.0,
+  "rv-nb1-martineau-river-1#0": 557.0,
+  "rv-nb1-medley-river-1#0": 729.0,
+  "rv-nb1-medley-river-1#1": 561.0,
+  "rv-nb1-owl-river-1#0": 650.0,
+  "rv-nb1-owl-river-1#1": 571.0,
+  "rv-nb1-piche-river-1#0": 587.0,
+  "rv-nb3-chinchaga-river-1#0": 784.0,
+  "rv-nb3-chinchaga-river-1#1": 744.0,
+  "rv-nb3-chinchaga-river-1#10": 366.0,
+  "rv-nb3-chinchaga-river-1#11": 337.0,
+  "rv-nb3-chinchaga-river-1#2": 699.0,
+  "rv-nb3-chinchaga-river-1#3": 641.0,
+  "rv-nb3-chinchaga-river-1#4": 576.0,
+  "rv-nb3-chinchaga-river-1#5": 504.0,
+  "rv-nb3-chinchaga-river-1#6": 454.0,
+  "rv-nb3-chinchaga-river-1#7": 419.0,
+  "rv-nb3-chinchaga-river-1#8": 400.0,
+  "rv-nb3-chinchaga-river-1#9": 385.0,
+  "rv-nb3-hay-river-1#0": 329.0,
+  "rv-nb3-hay-river-1#1": 334.0,
+  "rv-nb3-hay-river-1#10": 293.0,
+  "rv-nb3-hay-river-1#11": 290.0,
+  "rv-nb3-hay-river-1#12": 422.0,
+  "rv-nb3-hay-river-1#13": 377.0,
+  "rv-nb3-hay-river-1#14": 365.0,
+  "rv-nb3-hay-river-1#15": 329.0,
+  "rv-nb3-hay-river-1#2": 492.0,
+  "rv-nb3-hay-river-1#3": 457.0,
+  "rv-nb3-hay-river-1#4": 290.0,
+  "rv-nb3-hay-river-1#5": 297.0,
+  "rv-nb3-hay-river-1#6": 435.0,
+  "rv-nb3-hay-river-1#7": 326.0,
+  "rv-nb3-hay-river-1#8": 316.0,
+  "rv-nb3-hay-river-1#9": 296.0,
+  "rv-nb3-loon-river-1#0": 680.0,
+  "rv-nb3-loon-river-1#1": 494.0,
+  "rv-nb3-loon-river-1#2": 475.0,
+  "rv-nb3-mikkwa-river-1#0": 290.0,
+  "rv-nb3-mikkwa-river-1#1": 249.0,
+  "rv-nb3-mikkwa-river-1#2": 595.0,
+  "rv-nb3-mikkwa-river-1#3": 488.0,
+  "rv-nb3-mikkwa-river-1#4": 392.0,
+  "rv-nb3-mikkwa-river-1#5": 356.0,
+  "rv-nb3-mikkwa-river-1#6": 332.0,
+  "rv-nb3-notikewin-river-1#0": 918.0,
+  "rv-nb3-notikewin-river-1#1": 346.0,
+  "rv-nb3-notikewin-river-1#2": 770.0,
+  "rv-nb3-notikewin-river-1#3": 686.0,
+  "rv-nb3-notikewin-river-1#4": 610.0,
+  "rv-nb3-notikewin-river-1#5": 515.0,
+  "rv-nb3-peace-river-1#0": 222.0,
+  "rv-nb3-peace-river-1#1": 326.0,
+  "rv-nb3-peace-river-1#10": 275.0,
+  "rv-nb3-peace-river-1#11": 266.0,
+  "rv-nb3-peace-river-1#12": 261.0,
+  "rv-nb3-peace-river-1#13": 257.0,
+  "rv-nb3-peace-river-1#14": 259.0,
+  "rv-nb3-peace-river-1#15": 251.0,
+  "rv-nb3-peace-river-1#16": 257.0,
+  "rv-nb3-peace-river-1#17": 397.0,
+  "rv-nb3-peace-river-1#18": 212.0,
+  "rv-nb3-peace-river-1#19": 221.0,
+  "rv-nb3-peace-river-1#2": 330.0,
+  "rv-nb3-peace-river-1#20": 220.0,
+  "rv-nb3-peace-river-1#21": 215.0,
+  "rv-nb3-peace-river-1#22": 229.0,
+  "rv-nb3-peace-river-1#23": 228.0,
+  "rv-nb3-peace-river-1#3": 355.0,
+  "rv-nb3-peace-river-1#4": 349.0,
+  "rv-nb3-peace-river-1#5": 356.0,
+  "rv-nb3-peace-river-1#6": 369.0,
+  "rv-nb3-peace-river-1#7": 376.0,
+  "rv-nb3-peace-river-1#8": 295.0,
+  "rv-nb3-peace-river-1#9": 285.0,
+  "rv-nb3-petitot-river-1#0": 625.0,
+  "rv-nb3-petitot-river-1#1": 574.0,
+  "rv-nb3-petitot-river-1#2": 556.0,
+  "rv-nb3-petitot-river-1#3": 553.0,
+  "rv-nb3-petitot-river-1#4": 522.0,
+  "rv-nb3-petitot-river-1#5": 517.0,
+  "rv-nb3-petitot-river-1#6": 461.0,
+  "rv-nb3-smoky-river-1#0": 316.0,
+  "rv-nb3-smoky-river-1#1": 370.0,
+  "rv-nb3-smoky-river-1#2": 337.0,
+  "rv-nb3-wabasca-river-1#0": 437.0,
+  "rv-nb3-wabasca-river-1#1": 465.0,
+  "rv-nb3-wabasca-river-1#2": 477.0,
+  "rv-nb3-wabasca-river-1#3": 398.0,
+  "rv-nb3-wabasca-river-1#4": 388.0,
+  "rv-nb3-wabasca-river-1#5": 351.0,
+  "rv-nb3-wabasca-river-1#6": 320.0,
+  "rv-nb3-wabasca-river-1#7": 284.0,
+  "rv-nb3-wabasca-river-1#8": 252.0,
+  "rv-nb4-athabasca-river-1#0": 215.0,
+  "rv-nb4-athabasca-river-1#1": 440.0,
+  "rv-nb4-athabasca-river-1#2": 216.0,
+  "rv-nb4-athabasca-river-1#3": 398.0,
+  "rv-nb4-athabasca-river-1#4": 364.0,
+  "rv-nb4-athabasca-river-1#5": 328.0,
+  "rv-nb4-athabasca-river-1#6": 284.0,
+  "rv-nb4-athabasca-river-1#7": 251.0,
+  "rv-nb4-clearwater-river-1#0": 304.0,
+  "rv-nb4-clearwater-river-1#1": 266.0,
+  "rv-nb4-clearwater-river-1#2": 256.0,
+  "rv-nb4-clearwater-river-1#3": 244.0,
+  "rv-nb4-ells-river-1#0": 605.0,
+  "rv-nb4-ells-river-1#1": 446.0,
+  "rv-nb4-ells-river-1#2": 347.0,
+  "rv-nb4-hangingstone-river-1#0": 712.0,
+  "rv-nb4-hangingstone-river-1#1": 435.0,
+  "rv-nb4-house-river-1#0": 505.0,
+  "rv-nb4-house-river-1#1": 661.0,
+  "rv-nb4-richardson-river-1#0": 215.0,
+  "rv-nb4-richardson-river-1#1": 423.0,
+  "rv-nb4-richardson-river-1#2": 343.0,
+  "rv-nb4-richardson-river-1#3": 256.0,
+  "rv-nb4-richardson-river-1#4": 273.0,
+  "rv-pp1-battle-creek-1#0": 1230.0,
+  "rv-pp1-bow-river-1#0": 887.0,
+  "rv-pp1-bow-river-1#1": 804.0,
+  "rv-pp1-bow-river-1#2": 726.0,
+  "rv-pp1-bow-river-1#3": 707.0,
+  "rv-pp1-graburn-creek-1#0": 1353.0,
+  "rv-pp1-lee-creek-1#0": 1165.0,
+  "rv-pp1-little-bow-river-1#0": 964.0,
+  "rv-pp1-little-bow-river-1#1": 773.0,
+  "rv-pp1-little-bow-river-1#2": 801.0,
+  "rv-pp1-little-bow-river-1#3": 873.0,
+  "rv-pp1-oldman-river-1#0": 848.0,
+  "rv-pp1-oldman-river-1#1": 915.0,
+  "rv-pp1-oldman-river-1#2": 747.0,
+  "rv-pp1-oldman-river-1#3": 794.0,
+  "rv-pp1-oldman-river-1#4": 699.0,
+  "rv-pp1-south-saskatchewan-river-1#0": 654.0,
+  "rv-pp1-south-saskatchewan-river-1#1": 621.0,
+  "rv-pp1-south-saskatchewan-river-1#2": 604.0,
+  "rv-pp1-south-saskatchewan-river-1#3": 590.0,
+  "rv-pp1-south-saskatchewan-river-1#4": 692.0,
+  "rv-pp1-south-saskatchewan-river-1#5": 678.0,
+  "rv-pp1-st-mary-river-1#0": 840.0,
+  "rv-pp1-st-mary-river-1#1": 1008.0,
+  "rv-pp1-st-mary-river-1#2": 1106.0,
+  "rv-pp1-st-mary-river-1#3": 1246.0,
+  "rv-pp2-battle-river-1#0": 685.0,
+  "rv-pp2-battle-river-1#1": 813.0,
+  "rv-pp2-battle-river-1#10": 669.0,
+  "rv-pp2-battle-river-1#11": 648.0,
+  "rv-pp2-battle-river-1#12": 685.0,
+  "rv-pp2-battle-river-1#2": 784.0,
+  "rv-pp2-battle-river-1#3": 702.0,
+  "rv-pp2-battle-river-1#4": 835.0,
+  "rv-pp2-battle-river-1#5": 592.0,
+  "rv-pp2-battle-river-1#6": 575.0,
+  "rv-pp2-battle-river-1#7": 553.0,
+  "rv-pp2-battle-river-1#8": 544.0,
+  "rv-pp2-battle-river-1#9": 618.0,
+  "rv-pp2-berry-creek-1#0": 773.0,
+  "rv-pp2-berry-creek-1#1": 763.0,
+  "rv-pp2-berry-creek-1#2": 718.0,
+  "rv-pp2-berry-creek-1#3": 639.0,
+  "rv-pp2-blindman-river-1#0": 970.0,
+  "rv-pp2-blindman-river-1#1": 894.0,
+  "rv-pp2-blindman-river-1#2": 872.0,
+  "rv-pp2-blindman-river-1#3": 851.0,
+  "rv-pp2-little-red-deer-river-1#0": 931.0,
+  "rv-pp2-little-red-deer-river-1#1": 1136.0,
+  "rv-pp2-medicine-river-1#0": 926.0,
+  "rv-pp2-medicine-river-1#1": 942.0,
+  "rv-pp2-medicine-river-1#2": 905.0,
+  "rv-pp2-north-saskatchewan-river-1#0": 677.0,
+  "rv-pp2-north-saskatchewan-river-1#1": 739.0,
+  "rv-pp2-north-saskatchewan-river-1#2": 503.0,
+  "rv-pp2-north-saskatchewan-river-1#3": 598.0,
+  "rv-pp2-north-saskatchewan-river-1#4": 642.0,
+  "rv-pp2-north-saskatchewan-river-1#5": 626.0,
+  "rv-pp2-north-saskatchewan-river-1#6": 537.0,
+  "rv-pp2-parlby-creek-1#0": 803.0,
+  "rv-pp2-red-deer-river-1#0": 947.0,
+  "rv-pp2-red-deer-river-1#1": 870.0,
+  "rv-pp2-red-deer-river-1#2": 799.0,
+  "rv-pp2-red-deer-river-1#3": 758.0,
+  "rv-pp2-red-deer-river-1#4": 727.0,
+  "rv-pp2-red-deer-river-1#5": 706.0,
+  "rv-pp2-red-deer-river-2#0": 705.0,
+  "rv-pp2-red-deer-river-2#1": 683.0,
+  "rv-pp2-red-deer-river-2#2": 672.0,
+  "rv-pp2-red-deer-river-2#3": 657.0,
+  "rv-pp2-red-deer-river-2#4": 647.0,
+  "rv-pp2-red-deer-river-2#5": 636.0,
+  "rv-pp2-red-deer-river-2#6": 620.0,
+  "rv-pp2-red-deer-river-2#7": 607.0,
+  "rv-pp2-red-deer-river-2#8": 599.0,
+  "rv-pp2-red-deer-river-2#9": 587.0,
+  "rv-pp2-sturgeon-river-1#0": 649.0,
+  "rv-pp2-sturgeon-river-1#1": 733.0,
+  "rv-pp2-sturgeon-river-1#2": 679.0,
+  "rv-pp2-sylvan-creek-1#0": 934.0,
   "wb1573": 1440.0,
   "wb1606": 1910.0,
   "wb17891": 1449.0,
@@ -386,5 +991,3943 @@
   "wb6922": 955.0,
   "wb6923": 707.0,
   "wb854": 1125.0
+ },
+ "points": {
+  "gu-es1-barnaby-lake": [
+   49.34223,
+   -114.37115
+  ],
+  "gu-es1-blairmore-water-supply-unnamed-reservoir": [
+   49.60436,
+   -114.46443
+  ],
+  "gu-es1-carburn-park-pond": [
+   50.97328,
+   -114.035
+  ],
+  "gu-es1-chester-lake": [
+   50.81309,
+   -115.28531
+  ],
+  "gu-es1-east-scarpe-lake": [
+   49.21116,
+   -114.28117
+  ],
+  "gu-es1-gap-lake": [
+   51.05702,
+   -115.23084
+  ],
+  "gu-es1-ghost-reservoir": [
+   51.2025,
+   -114.75667
+  ],
+  "gu-es1-glenmore-reservoir": [
+   50.98917,
+   -114.11361
+  ],
+  "gu-es1-lys-lake": [
+   49.24029,
+   -114.30367
+  ],
+  "gu-es1-mud-lake": [
+   50.79853,
+   -115.30847
+  ],
+  "gu-es1-picklejar-lakes": [
+   50.52183,
+   -114.79307
+  ],
+  "gu-es1-rainy-ridge-lake": [
+   49.25485,
+   -114.37115
+  ],
+  "gu-es1-rummel-lake": [
+   50.84222,
+   -115.30847
+  ],
+  "gu-es1-southfork-lake": [
+   49.32767,
+   -114.37115
+  ],
+  "gu-es1-spray-lakes-reservoir": [
+   50.92889,
+   -115.38135
+  ],
+  "gu-es1-sunken-lakes": [
+   50.81309,
+   -114.59055
+  ],
+  "gu-es1-tombstone-lakes": [
+   50.69659,
+   -114.98425
+  ],
+  "gu-es1-window-mountain-lake": [
+   49.76456,
+   -114.64567
+  ],
+  "gu-es2-abraham-lake": [
+   52.2257,
+   -116.44758
+  ],
+  "gu-es2-brazeau-reservoir": [
+   52.95385,
+   -115.61339
+  ],
+  "gu-es2-coral-lake": [
+   52.28395,
+   -116.80577
+  ],
+  "gu-es2-gleniffer-lake": [
+   52.03638,
+   -114.27461
+  ],
+  "gu-es2-jumping-fish-unnamed-lake": [
+   52.8337,
+   -116.45648
+  ],
+  "gu-es2-michele-upper-and-lower-lakes": [
+   52.08007,
+   -116.75801
+  ],
+  "gu-es2-pinto-lake": [
+   52.12376,
+   -116.8774
+  ],
+  "gu-es2-resolute-lake": [
+   52.00725,
+   -116.59086
+  ],
+  "gu-es2-ruby-lake": [
+   52.82278,
+   -117.1176
+  ],
+  "gu-es2-swan-lake": [
+   52.12376,
+   -115.182
+  ],
+  "gu-es3-bear-lake": [
+   53.74446,
+   -116.1517
+  ],
+  "gu-es3-blue-lake": [
+   53.48038,
+   -117.79797
+  ],
+  "gu-es3-busby-lake": [
+   53.37617,
+   -118.13563
+  ],
+  "gu-es3-cache-lake": [
+   53.48929,
+   -117.80093
+  ],
+  "gu-es3-chip-lake": [
+   53.66667,
+   -115.38333
+  ],
+  "gu-es3-embarras-pit-lakes": [
+   53.08491,
+   -116.94729
+  ],
+  "gu-es3-graveyard-lake": [
+   53.49568,
+   -117.80537
+  ],
+  "gu-es3-gregg-lake": [
+   53.54254,
+   -117.79143
+  ],
+  "gu-es3-horseshoe-lake": [
+   52.69813,
+   -117.86531
+  ],
+  "gu-es3-jarvis-lake": [
+   53.45816,
+   -117.79838
+  ],
+  "gu-es3-lac-des-roches": [
+   53.05579,
+   -117.38755
+  ],
+  "gu-es3-mystery-lake": [
+   53.15773,
+   -117.68105
+  ],
+  "gu-es3-rock-lake": [
+   53.45969,
+   -118.26257
+  ],
+  "gu-es3-shiningbank-lake": [
+   53.86372,
+   -116.02556
+  ],
+  "gu-es3-sphinx-unnamed-lake": [
+   53.11404,
+   -117.50984
+  ],
+  "gu-es3-sundance-lake": [
+   53.72905,
+   -116.96992
+  ],
+  "gu-es3-wolf-lake": [
+   53.21598,
+   -116.06677
+  ],
+  "gu-es4-crooked-lake": [
+   54.44259,
+   -117.24548
+  ],
+  "gu-es4-goose-lake": [
+   54.97871,
+   -117.54864
+  ],
+  "gu-es4-iosegun-lake": [
+   54.47105,
+   -116.8448
+  ],
+  "gu-es4-long-lake": [
+   54.90544,
+   -117.56148
+  ],
+  "gu-es4-meekwap-lake": [
+   54.65887,
+   -116.6265
+  ],
+  "gu-es4-raspberry-lake": [
+   54.44813,
+   -116.74339
+  ],
+  "gu-es4-smoke-lake": [
+   54.36045,
+   -116.93104
+  ],
+  "gu-es4-snipe-lake": [
+   55.12808,
+   -116.78621
+  ],
+  "gu-es4-sturgeon-lake": [
+   55.10461,
+   -117.58667
+  ],
+  "gu-nb1-amisk-lake": [
+   54.59361,
+   -112.63306
+  ],
+  "gu-nb1-angling-lake": [
+   54.20038,
+   -110.32893
+  ],
+  "gu-nb1-bangs-lake": [
+   54.15595,
+   -111.03435
+  ],
+  "gu-nb1-beartrap-lake": [
+   54.20429,
+   -110.53809
+  ],
+  "gu-nb1-beaver-lake": [
+   54.69974,
+   -111.82312
+  ],
+  "gu-nb1-behan-lake": [
+   55.29849,
+   -111.55694
+  ],
+  "gu-nb1-bentley-lake": [
+   54.04575,
+   -111.05279
+  ],
+  "gu-nb1-big-chief-lake": [
+   55.24023,
+   -111.63415
+  ],
+  "gu-nb1-big-johnson-chump-lake": [
+   54.65139,
+   -112.5825
+  ],
+  "gu-nb1-bourque-lake": [
+   54.67369,
+   -110.53964
+  ],
+  "gu-nb1-burnt-lake": [
+   54.80843,
+   -110.43354
+  ],
+  "gu-nb1-calling-lake": [
+   55.24222,
+   -113.31111
+  ],
+  "gu-nb1-claude-lake": [
+   54.792,
+   -111.90703
+  ],
+  "gu-nb1-clyde-lake": [
+   55.30667,
+   -111.485
+  ],
+  "gu-nb1-cold-lake": [
+   54.57084,
+   -110.12434
+  ],
+  "gu-nb1-cow-lake": [
+   55.22567,
+   -111.65988
+  ],
+  "gu-nb1-elinor-lake": [
+   54.66756,
+   -111.66573
+  ],
+  "gu-nb1-ethel-bear-lake": [
+   54.53194,
+   -110.35111
+  ],
+  "gu-nb1-fishing-lake": [
+   53.90358,
+   -110.2163
+  ],
+  "gu-nb1-floatingstone-lake": [
+   54.22432,
+   -111.6361
+  ],
+  "gu-nb1-fork-lake": [
+   54.46583,
+   -111.58028
+  ],
+  "gu-nb1-francis-lake": [
+   54.95967,
+   -111.56822
+  ],
+  "gu-nb1-garner-lake": [
+   54.19929,
+   -111.72666
+  ],
+  "gu-nb1-garnier-lakes": [
+   53.99083,
+   -110.56583
+  ],
+  "gu-nb1-goodfish-lake": [
+   54.28268,
+   -111.81605
+  ],
+  "gu-nb1-goodwin-lake": [
+   55.42489,
+   -111.66667
+  ],
+  "gu-nb1-halfmoon-lake": [
+   54.05853,
+   -113.34938
+  ],
+  "gu-nb1-hanmore-lake": [
+   54.29578,
+   -112.52974
+  ],
+  "gu-nb1-heart-lake": [
+   55.03333,
+   -111.48778
+  ],
+  "gu-nb1-hilda-lake": [
+   54.52207,
+   -110.43132
+  ],
+  "gu-nb1-hope-lake": [
+   54.65679,
+   -112.65983
+  ],
+  "gu-nb1-ironwood-lake": [
+   54.59972,
+   -111.51778
+  ],
+  "gu-nb1-lac-la-biche": [
+   54.85639,
+   -112.05889
+  ],
+  "gu-nb1-lac-saint-cyr": [
+   53.89766,
+   -111.19114
+  ],
+  "gu-nb1-lac-sante": [
+   53.84134,
+   -111.55472
+  ],
+  "gu-nb1-laurier-lake": [
+   53.85694,
+   -110.53556
+  ],
+  "gu-nb1-little-bear-lake": [
+   55.10917,
+   -111.44134
+  ],
+  "gu-nb1-lodge-lake": [
+   54.72293,
+   -112.44258
+  ],
+  "gu-nb1-logan-lake": [
+   55.08972,
+   -111.3625
+  ],
+  "gu-nb1-lone-pine-lake": [
+   54.42848,
+   -112.0628
+  ],
+  "gu-nb1-manatokan-lake": [
+   54.46471,
+   -110.94651
+  ],
+  "gu-nb1-marie-lake": [
+   54.62437,
+   -110.29927
+  ],
+  "gu-nb1-may-lake": [
+   54.71723,
+   -110.39025
+  ],
+  "gu-nb1-minnie-lake": [
+   54.28749,
+   -111.10439
+  ],
+  "gu-nb1-mons-lake": [
+   54.18993,
+   -112.36102
+  ],
+  "gu-nb1-moonshine-lake": [
+   54.01579,
+   -110.10417
+  ],
+  "gu-nb1-moose-lake": [
+   54.25359,
+   -110.94663
+  ],
+  "gu-nb1-moosehills-lake": [
+   53.93368,
+   -110.81261
+  ],
+  "gu-nb1-north-buck-lake": [
+   54.67687,
+   -112.56297
+  ],
+  "gu-nb1-piche-lake": [
+   55.03667,
+   -111.60222
+  ],
+  "gu-nb1-reed-lake": [
+   54.26161,
+   -111.75618
+  ],
+  "gu-nb1-rock-island-lake": [
+   53.84729,
+   -110.1339
+  ],
+  "gu-nb1-ross-lake": [
+   53.82737,
+   -110.48826
+  ],
+  "gu-nb1-seibert-lake": [
+   54.73167,
+   -111.30556
+  ],
+  "gu-nb1-sinclair-lake": [
+   54.64315,
+   -110.64492
+  ],
+  "gu-nb1-soars-lake": [
+   54.15101,
+   -110.15071
+  ],
+  "gu-nb1-spencer-lake": [
+   54.79641,
+   -111.28104
+  ],
+  "gu-nb1-stoney-siler-lake": [
+   53.86417,
+   -111.09
+  ],
+  "gu-nb1-touchwood-lake": [
+   54.81031,
+   -111.39571
+  ],
+  "gu-nb1-tucker-lake": [
+   54.53423,
+   -110.6062
+  ],
+  "gu-nb1-victor-lake": [
+   54.41786,
+   -112.04489
+  ],
+  "gu-nb1-wayetenaw-lake": [
+   54.32273,
+   -111.86165
+  ],
+  "gu-nb1-whitefish-lake": [
+   54.36806,
+   -111.89722
+  ],
+  "gu-nb1-whitney-lake": [
+   53.83721,
+   -110.55289
+  ],
+  "gu-nb1-wiau-lake": [
+   55.3713,
+   -111.2996
+  ],
+  "gu-nb2-baptiste-lake": [
+   54.77008,
+   -113.55079
+  ],
+  "gu-nb2-bolloque-lake": [
+   54.52486,
+   -113.68331
+  ],
+  "gu-nb2-crooked-lake": [
+   54.91639,
+   -113.54528
+  ],
+  "gu-nb2-fawcett-lake": [
+   55.31167,
+   -113.91667
+  ],
+  "gu-nb2-francis-lake": [
+   54.71597,
+   -113.78101
+  ],
+  "gu-nb2-freeman-lake": [
+   54.6906,
+   -115.53687
+  ],
+  "gu-nb2-ghost-lake": [
+   54.89072,
+   -113.60972
+  ],
+  "gu-nb2-island-lake": [
+   54.84639,
+   -113.53194
+  ],
+  "gu-nb2-jenkins-lake": [
+   54.9183,
+   -113.60542
+  ],
+  "gu-nb2-lac-la-nonne": [
+   53.93894,
+   -114.32144
+  ],
+  "gu-nb2-lawrence-lake": [
+   54.97662,
+   -113.69782
+  ],
+  "gu-nb2-lesser-slave-lake": [
+   55.44411,
+   -116.0459
+  ],
+  "gu-nb2-long-island-lake": [
+   54.4684,
+   -113.8063
+  ],
+  "gu-nb2-long-lake": [
+   54.5849,
+   -113.65455
+  ],
+  "gu-nb2-meyer-lake": [
+   54.97213,
+   -113.57682
+  ],
+  "gu-nb2-mitsue-lake": [
+   55.24806,
+   -114.61028
+  ],
+  "gu-nb2-nakamun-lake": [
+   53.88634,
+   -114.19867
+  ],
+  "gu-nb2-narrow-lake": [
+   54.6194,
+   -113.61535
+  ],
+  "gu-nb2-orloff-lake": [
+   55.36806,
+   -113.50194
+  ],
+  "gu-nb2-paul-lake": [
+   55.27289,
+   -113.94098
+  ],
+  "gu-nb2-steele-cross-lake": [
+   54.64861,
+   -113.77556
+  ],
+  "gu-nb2-thunder-lake": [
+   54.12702,
+   -114.75801
+  ],
+  "gu-nb3-albright-lake": [
+   55.49006,
+   -119.82179
+  ],
+  "gu-nb3-beatty-lake": [
+   59.86071,
+   -118.0512
+  ],
+  "gu-nb3-berry-lake": [
+   55.94028,
+   -114.74815
+  ],
+  "gu-nb3-bistcho-lake": [
+   59.82393,
+   -118.85297
+  ],
+  "gu-nb3-brintnell-lake": [
+   55.80492,
+   -114.71027
+  ],
+  "gu-nb3-cadotte-lake": [
+   56.4425,
+   -116.3925
+  ],
+  "gu-nb3-calder-lake": [
+   55.87973,
+   -114.70551
+  ],
+  "gu-nb3-caribou-lake": [
+   59.06402,
+   -116.0839
+  ],
+  "gu-nb3-equisetum-lake": [
+   56.71722,
+   -114.69861
+  ],
+  "gu-nb3-fish-jackfish-lake": [
+   55.57694,
+   -119.59889
+  ],
+  "gu-nb3-gods-lake": [
+   56.81894,
+   -114.29002
+  ],
+  "gu-nb3-goodfish-lake": [
+   56.69972,
+   -114.73444
+  ],
+  "gu-nb3-graham-trout-lake": [
+   56.55889,
+   -114.5425
+  ],
+  "gu-nb3-haig-lake": [
+   56.90307,
+   -116.09783
+  ],
+  "gu-nb3-hutch-lake": [
+   58.75945,
+   -117.33183
+  ],
+  "gu-nb3-legend-lake": [
+   57.41012,
+   -112.92284
+  ],
+  "gu-nb3-margaret-lake": [
+   58.95361,
+   -115.4125
+  ],
+  "gu-nb3-mink-lake-1": [
+   56.11401,
+   -115.68977
+  ],
+  "gu-nb3-mistehae-lake": [
+   55.91722,
+   -114.31938
+  ],
+  "gu-nb3-muskwa-lake": [
+   56.15111,
+   -114.64278
+  ],
+  "gu-nb3-nipisi-lake": [
+   55.77906,
+   -114.97364
+  ],
+  "gu-nb3-north-wabasca-lake": [
+   55.98659,
+   -113.97554
+  ],
+  "gu-nb3-pastecho-lake": [
+   55.93175,
+   -114.42137
+  ],
+  "gu-nb3-peerless-lake": [
+   56.61667,
+   -114.65972
+  ],
+  "gu-nb3-pitchimi-lake": [
+   59.02202,
+   -114.77709
+  ],
+  "gu-nb3-rainbow-lake": [
+   58.28581,
+   -119.27324
+  ],
+  "gu-nb3-round-lake": [
+   56.75624,
+   -114.56909
+  ],
+  "gu-nb3-semo-lake": [
+   58.84556,
+   -115.00028
+  ],
+  "gu-nb3-south-wabasca-lake": [
+   55.93926,
+   -113.78561
+  ],
+  "gu-nb3-spawn-lake": [
+   59.99306,
+   -118.45988
+  ],
+  "gu-nb3-talbot-lake": [
+   57.4614,
+   -115.73436
+  ],
+  "gu-nb3-thurston-lake": [
+   59.926,
+   -118.11179
+  ],
+  "gu-nb3-utikuma-lake": [
+   55.86023,
+   -115.33701
+  ],
+  "gu-nb3-utikumasis-lake": [
+   55.91101,
+   -115.69193
+  ],
+  "gu-nb3-vandersteene-lake": [
+   56.60288,
+   -114.43437
+  ],
+  "gu-nb3-wentzel-lake": [
+   59.047,
+   -114.45686
+  ],
+  "gu-nb4-alexander-lake": [
+   59.62432,
+   -110.47381
+  ],
+  "gu-nb4-andrew-lake": [
+   59.89602,
+   -110.102
+  ],
+  "gu-nb4-arch-lake": [
+   59.85419,
+   -110.64361
+  ],
+  "gu-nb4-ashton-lake": [
+   59.84081,
+   -110.41119
+  ],
+  "gu-nb4-barrow-lake": [
+   59.25746,
+   -111.20475
+  ],
+  "gu-nb4-base-lake": [
+   55.64934,
+   -111.84467
+  ],
+  "gu-nb4-bayonet-lake": [
+   59.93307,
+   -110.31057
+  ],
+  "gu-nb4-big-island-lake": [
+   57.61306,
+   -112.52083
+  ],
+  "gu-nb4-blanche-lake": [
+   58.38944,
+   -111.31583
+  ],
+  "gu-nb4-bocquene-lake": [
+   59.47301,
+   -111.07568
+  ],
+  "gu-nb4-bryant-lake": [
+   59.30685,
+   -110.25875
+  ],
+  "gu-nb4-burstall-lake": [
+   59.34587,
+   -110.19188
+  ],
+  "gu-nb4-charles-lake": [
+   59.875,
+   -110.56012
+  ],
+  "gu-nb4-cherry-lake": [
+   59.73544,
+   -110.09867
+  ],
+  "gu-nb4-christina-lake": [
+   55.648,
+   -110.81786
+  ],
+  "gu-nb4-cockscomb-lake": [
+   59.54022,
+   -111.10835
+  ],
+  "gu-nb4-colin-lake": [
+   59.56944,
+   -110.1425
+  ],
+  "gu-nb4-collins-lake": [
+   59.97103,
+   -110.33417
+  ],
+  "gu-nb4-cornwall-lake": [
+   59.59858,
+   -110.60572
+  ],
+  "gu-nb4-cowper-lake": [
+   55.89846,
+   -110.44294
+  ],
+  "gu-nb4-daly-lake": [
+   59.62143,
+   -110.84696
+  ],
+  "gu-nb4-darwin-lake": [
+   59.30871,
+   -111.03139
+  ],
+  "gu-nb4-dawson-lake": [
+   59.88492,
+   -110.4583
+  ],
+  "gu-nb4-disappointment-lake": [
+   59.41995,
+   -110.77941
+  ],
+  "gu-nb4-ells-lake": [
+   59.67226,
+   -110.53929
+  ],
+  "gu-nb4-fletcher-lake": [
+   59.11768,
+   -110.83553
+  ],
+  "gu-nb4-florence-lake": [
+   59.27107,
+   -110.38133
+  ],
+  "gu-nb4-gardiner-lakes": [
+   57.53689,
+   -112.52566
+  ],
+  "gu-nb4-gipsy-lake": [
+   56.42679,
+   -110.23376
+  ],
+  "gu-nb4-gregoire-willow-lake": [
+   56.45806,
+   -111.14139
+  ],
+  "gu-nb4-grist-lake": [
+   55.37964,
+   -110.47225
+  ],
+  "gu-nb4-hooker-lake": [
+   59.54668,
+   -110.86166
+  ],
+  "gu-nb4-kimowin-hook-lake": [
+   56.19972,
+   -110.1
+  ],
+  "gu-nb4-kirby-sterner-lake": [
+   55.47083,
+   -110.76944
+  ],
+  "gu-nb4-lake-athabasca": [
+   59.125,
+   -110.00311
+  ],
+  "gu-nb4-leggo-lake": [
+   59.7285,
+   -110.63968
+  ],
+  "gu-nb4-leland-lakes": [
+   59.86619,
+   -111.0527
+  ],
+  "gu-nb4-limon-lake": [
+   58.41236,
+   -111.32721
+  ],
+  "gu-nb4-loutit-lake": [
+   58.97782,
+   -110.86107
+  ],
+  "gu-nb4-mcclelland-lake": [
+   57.47588,
+   -111.33076
+  ],
+  "gu-nb4-mercredi-lake": [
+   59.94024,
+   -110.70804
+  ],
+  "gu-nb4-myers-lake": [
+   59.69149,
+   -111.24741
+  ],
+  "gu-nb4-namur-lake": [
+   57.41704,
+   -112.68306
+  ],
+  "gu-nb4-one-week-lake": [
+   59.87704,
+   -110.33446
+  ],
+  "gu-nb4-pans-lake": [
+   59.76889,
+   -110.34049
+  ],
+  "gu-nb4-peters-lake": [
+   59.48333,
+   -110.00311
+  ],
+  "gu-nb4-potts-lake": [
+   59.7217,
+   -110.43985
+  ],
+  "gu-nb4-richardson-lake": [
+   58.40278,
+   -111.07278
+  ],
+  "gu-nb4-roderick-lake": [
+   59.48746,
+   -110.15717
+  ],
+  "gu-nb4-royemma-lake": [
+   55.48201,
+   -110.12554
+  ],
+  "gu-nb4-ryan-lake": [
+   59.18333,
+   -111.09222
+  ],
+  "gu-nb4-st-agnes-lake": [
+   59.67877,
+   -110.23471
+  ],
+  "gu-nb4-steepbank-lake": [
+   55.47658,
+   -111.57326
+  ],
+  "gu-nb4-tulip-lake": [
+   59.91081,
+   -111.1345
+  ],
+  "gu-nb4-turtle-lake": [
+   59.38096,
+   -110.59575
+  ],
+  "gu-nb4-wappau-lake": [
+   55.50237,
+   -111.59677
+  ],
+  "gu-nb4-weekes-lake": [
+   59.72631,
+   -110.00313
+  ],
+  "gu-nb4-winefred-lake": [
+   55.46629,
+   -110.57457
+  ],
+  "gu-nb4-winnifred-lake": [
+   59.2322,
+   -110.40418
+  ],
+  "gu-nb4-woodman-lake": [
+   59.53462,
+   -110.46069
+  ],
+  "gu-nb4-wylie-lake": [
+   59.33095,
+   -110.36752
+  ],
+  "gu-pp1-chestermere-lake": [
+   51.03889,
+   -113.81861
+  ],
+  "gu-pp1-clear-lake": [
+   50.14723,
+   -113.4178
+  ],
+  "gu-pp1-cowoki-lake": [
+   50.58553,
+   -111.70587
+  ],
+  "gu-pp1-crawling-valley-reservoir": [
+   50.75484,
+   -112.42009
+  ],
+  "gu-pp1-eagle-lake": [
+   50.99667,
+   -113.32417
+  ],
+  "gu-pp1-elkwater-lake": [
+   49.67183,
+   -110.29767
+  ],
+  "gu-pp1-fincastle-lake": [
+   49.82792,
+   -111.98124
+  ],
+  "gu-pp1-gun-club-cann-reservoir": [
+   50.60921,
+   -111.9106
+  ],
+  "gu-pp1-henderson-lake": [
+   49.68772,
+   -112.79652
+  ],
+  "gu-pp1-horsefly-lake-reservoir": [
+   49.73127,
+   -112.07171
+  ],
+  "gu-pp1-jamieson-lake": [
+   50.60921,
+   -111.88744
+  ],
+  "gu-pp1-jensen-reservoir": [
+   49.31333,
+   -112.8975
+  ],
+  "gu-pp1-johnson-lake": [
+   50.59465,
+   -111.88744
+  ],
+  "gu-pp1-lost-lake": [
+   50.14765,
+   -112.3015
+  ],
+  "gu-pp1-murray-lake": [
+   49.54611,
+   -111.00815
+  ],
+  "gu-pp1-park-lake": [
+   49.80998,
+   -112.92501
+  ],
+  "gu-pp1-raymond-reservoir": [
+   49.40972,
+   -112.67361
+  ],
+  "gu-pp1-rock-lake": [
+   50.68056,
+   -111.98806
+  ],
+  "gu-pp1-rolling-hills-lake": [
+   50.35889,
+   -111.91442
+  ],
+  "gu-pp1-taber-lake": [
+   49.80431,
+   -112.09219
+  ],
+  "gu-pp1-timko-lake-j-or-bantry-reservoir": [
+   50.47814,
+   -111.73556
+  ],
+  "gu-pp2-arm-lake": [
+   52.74639,
+   -110.59944
+  ],
+  "gu-pp2-battle-lake": [
+   52.98297,
+   -114.20622
+  ],
+  "gu-pp2-berry-creek-carolside-reservoir": [
+   51.28972,
+   -111.61167
+  ],
+  "gu-pp2-big-lake": [
+   53.59722,
+   -113.71583
+  ],
+  "gu-pp2-buck-lake": [
+   53.02666,
+   -114.79491
+  ],
+  "gu-pp2-buffalo-lake": [
+   52.46185,
+   -112.88974
+  ],
+  "gu-pp2-clear-barnes-lake": [
+   52.76528,
+   -110.60306
+  ],
+  "gu-pp2-coal-lake": [
+   53.06925,
+   -113.29038
+  ],
+  "gu-pp2-driedmeat-lake": [
+   52.86472,
+   -112.74972
+  ],
+  "gu-pp2-gull-lake": [
+   52.56719,
+   -114.03831
+  ],
+  "gu-pp2-hubbles-lake": [
+   53.56365,
+   -114.09095
+  ],
+  "gu-pp2-isle-lake": [
+   53.62319,
+   -114.73207
+  ],
+  "gu-pp2-lac-ste-anne": [
+   53.70833,
+   -114.46028
+  ],
+  "gu-pp2-lessard-lake": [
+   53.78552,
+   -114.65278
+  ],
+  "gu-pp2-magee-lake": [
+   52.56036,
+   -113.38335
+  ],
+  "gu-pp2-matchayaw-devil-s-lake": [
+   53.71083,
+   -114.10028
+  ],
+  "gu-pp2-mayatan-lake": [
+   53.48591,
+   -114.30134
+  ],
+  "gu-pp2-medicine-lake": [
+   52.74417,
+   -114.74278
+  ],
+  "gu-pp2-mere-lake": [
+   53.62316,
+   -114.10239
+  ],
+  "gu-pp2-mink-lake": [
+   53.52155,
+   -114.22707
+  ],
+  "gu-pp2-pigeon-lake": [
+   53.03028,
+   -114.06333
+  ],
+  "gu-pp2-pine-lake": [
+   52.08954,
+   -113.44167
+  ],
+  "gu-pp2-raft-lake": [
+   53.62716,
+   -110.70461
+  ],
+  "gu-pp2-rat-lake": [
+   52.95385,
+   -114.7885
+  ],
+  "gu-pp2-spotted-lake": [
+   52.50313,
+   -113.12813
+  ],
+  "gu-pp2-west-twin-lake": [
+   52.95385,
+   -114.35179
+  ],
+  "gu-pp2-wizard-lake": [
+   53.12456,
+   -113.895
+  ],
+  "lk0001": [
+   49.34223,
+   -113.63275
+  ],
+  "lk0002": [
+   54.80334,
+   -110.01276
+  ],
+  "lk0003": [
+   51.67231,
+   -113.23414
+  ],
+  "lk0004": [
+   52.00725,
+   -110.77606
+  ],
+  "lk0007": [
+   49.32403,
+   -113.19974
+  ],
+  "lk0008": [
+   52.49875,
+   -115.58248
+  ],
+  "rv-es1-jumpingpound-creek-1#0": [
+   50.9394,
+   -114.9399
+  ],
+  "rv-es1-jumpingpound-creek-1#1": [
+   51.0751,
+   -114.5552
+  ],
+  "rv-es1-kananaskis-river-1#0": [
+   50.9973,
+   -115.0808
+  ],
+  "rv-es1-kananaskis-river-1#1": [
+   50.7428,
+   -115.1388
+  ],
+  "rv-es1-livingstone-river-1#0": [
+   50.2025,
+   -114.4796
+  ],
+  "rv-es1-livingstone-river-1#1": [
+   49.9831,
+   -114.4014
+  ],
+  "rv-es1-mill-creek-1#0": [
+   49.2351,
+   -114.1849
+  ],
+  "rv-es1-mill-creek-1#1": [
+   49.4703,
+   -114.1343
+  ],
+  "rv-es1-oldman-river-1#0": [
+   49.581,
+   -113.9631
+  ],
+  "rv-es1-oldman-river-1#1": [
+   50.1131,
+   -114.652
+  ],
+  "rv-es1-oldman-river-1#2": [
+   49.9412,
+   -114.3923
+  ],
+  "rv-es1-oldman-river-1#3": [
+   49.7944,
+   -114.128
+  ],
+  "rv-es1-pincher-creek-1#0": [
+   49.5371,
+   -113.7996
+  ],
+  "rv-es1-pincher-creek-1#1": [
+   49.2835,
+   -114.1295
+  ],
+  "rv-es1-pincher-creek-1#2": [
+   49.3858,
+   -114.5835
+  ],
+  "rv-es1-policeman-creek-1#0": [
+   51.0872,
+   -115.3548
+  ],
+  "rv-es1-quirk-creek-1#0": [
+   50.7816,
+   -114.7201
+  ],
+  "rv-es1-sheep-river-1#0": [
+   50.696,
+   -114.2355
+  ],
+  "rv-es1-sheep-river-1#1": [
+   50.6308,
+   -114.6721
+  ],
+  "rv-es1-sheep-river-1#2": [
+   50.7129,
+   -113.8814
+  ],
+  "rv-es1-silvester-creek-1#0": [
+   50.8423,
+   -114.7219
+  ],
+  "rv-es1-smith-dorrien-creek-1#0": [
+   50.7764,
+   -115.2852
+  ],
+  "rv-es1-storm-creek-1#0": [
+   50.5178,
+   -114.902
+  ],
+  "rv-es1-threepoint-creek-1#0": [
+   50.75,
+   -114.7229
+  ],
+  "rv-es1-threepoint-creek-1#1": [
+   50.75,
+   -114.3176
+  ],
+  "rv-es1-waiparous-creek-1#0": [
+   51.3682,
+   -114.9868
+  ],
+  "rv-es1-waterton-river-1#0": [
+   49.4095,
+   -113.5605
+  ],
+  "rv-es1-waterton-river-1#1": [
+   49.2316,
+   -113.7715
+  ],
+  "rv-es1-west-castle-river-1#0": [
+   49.215,
+   -114.3442
+  ],
+  "rv-es1-willow-creek-1#0": [
+   50.2522,
+   -114.3857
+  ],
+  "rv-es1-willow-creek-1#1": [
+   50.1527,
+   -114.0566
+  ],
+  "rv-es1-willow-creek-1#2": [
+   50.0898,
+   -113.7199
+  ],
+  "rv-es2-north-saskatchewan-river-1#0": [
+   52.4976,
+   -114.9758
+  ],
+  "rv-es2-north-saskatchewan-river-1#1": [
+   52.3586,
+   -116.2424
+  ],
+  "rv-es2-north-saskatchewan-river-1#2": [
+   51.9778,
+   -116.703
+  ],
+  "rv-es2-north-saskatchewan-river-1#3": [
+   52.1544,
+   -117.0099
+  ],
+  "rv-es2-north-saskatchewan-river-1#4": [
+   52.8167,
+   -115.1743
+  ],
+  "rv-es2-north-saskatchewan-river-1#5": [
+   52.4389,
+   -115.7923
+  ],
+  "rv-es2-north-saskatchewan-river-1#6": [
+   52.3821,
+   -115.4355
+  ],
+  "rv-es2-north-saskatchewan-river-1#7": [
+   52.1162,
+   -116.4141
+  ],
+  "rv-es2-north-saskatchewan-river-1#8": [
+   53.04,
+   -115.2173
+  ],
+  "rv-es2-pinto-creek-1#0": [
+   52.2416,
+   -115.7978
+  ],
+  "rv-es2-prairie-creek-1#0": [
+   52.1379,
+   -115.5
+  ],
+  "rv-es2-prairie-creek-1#1": [
+   52.25,
+   -115.124
+  ],
+  "rv-es2-ram-river-1#0": [
+   52.0138,
+   -116.0994
+  ],
+  "rv-es2-ram-river-1#1": [
+   52.1604,
+   -115.7442
+  ],
+  "rv-es2-ram-river-1#2": [
+   52.3176,
+   -115.4811
+  ],
+  "rv-es2-raven-river-1#0": [
+   51.9902,
+   -115.0109
+  ],
+  "rv-es2-raven-river-1#1": [
+   52.0526,
+   -114.4229
+  ],
+  "rv-es2-red-deer-river-1#0": [
+   51.9633,
+   -114.4386
+  ],
+  "rv-es2-red-deer-river-1#1": [
+   51.6672,
+   -114.9701
+  ],
+  "rv-es2-red-deer-river-1#2": [
+   51.7134,
+   -115.4907
+  ],
+  "rv-es2-red-deer-river-1#3": [
+   51.7781,
+   -114.6537
+  ],
+  "rv-es2-red-deer-river-1#4": [
+   51.5447,
+   -116.0113
+  ],
+  "rv-es2-rundell-creek-1#0": [
+   52.7433,
+   -116.1393
+  ],
+  "rv-es2-siffleur-river-1#0": [
+   52.0,
+   -116.3712
+  ],
+  "rv-es2-siffleur-river-1#1": [
+   51.7051,
+   -116.2719
+  ],
+  "rv-es2-swan-creek-1#0": [
+   52.1196,
+   -115.1573
+  ],
+  "rv-es2-tay-river-1#0": [
+   52.1087,
+   -115.5393
+  ],
+  "rv-es2-tay-river-1#1": [
+   52.0288,
+   -115.1971
+  ],
+  "rv-es3-athabasca-river-1#0": [
+   52.6133,
+   -117.8455
+  ],
+  "rv-es3-athabasca-river-1#1": [
+   54.1811,
+   -115.9445
+  ],
+  "rv-es3-athabasca-river-1#2": [
+   53.1576,
+   -117.9773
+  ],
+  "rv-es3-athabasca-river-1#3": [
+   53.9357,
+   -117.0723
+  ],
+  "rv-es3-athabasca-river-1#4": [
+   53.7182,
+   -117.1707
+  ],
+  "rv-es3-athabasca-river-1#5": [
+   53.5246,
+   -117.3635
+  ],
+  "rv-es3-athabasca-river-1#6": [
+   54.2202,
+   -116.3771
+  ],
+  "rv-es3-athabasca-river-1#7": [
+   52.8072,
+   -118.0336
+  ],
+  "rv-es3-athabasca-river-1#8": [
+   54.1649,
+   -115.3755
+  ],
+  "rv-es3-berland-river-1#0": [
+   54.0448,
+   -117.5
+  ],
+  "rv-es3-berland-river-1#1": [
+   53.9646,
+   -117.8576
+  ],
+  "rv-es3-berland-river-1#2": [
+   53.9999,
+   -116.8651
+  ],
+  "rv-es3-bigoray-river-1#0": [
+   53.5,
+   -115.3837
+  ],
+  "rv-es3-deerlick-creek-1#0": [
+   53.1129,
+   -117.257
+  ],
+  "rv-es3-dismal-creek-1#0": [
+   53.1175,
+   -116.0153
+  ],
+  "rv-es3-dismal-creek-1#1": [
+   53.0242,
+   -116.3558
+  ],
+  "rv-es3-embarras-river-1#0": [
+   53.1522,
+   -117.0124
+  ],
+  "rv-es3-embarras-river-1#1": [
+   53.343,
+   -116.8135
+  ],
+  "rv-es3-eunice-creek-1#0": [
+   53.1125,
+   -117.2178
+  ],
+  "rv-es3-gregg-river-1#0": [
+   53.2496,
+   -117.3845
+  ],
+  "rv-es3-lobstick-river-1#0": [
+   53.6294,
+   -115.5
+  ],
+  "rv-es3-lobstick-river-1#1": [
+   53.5027,
+   -115.8437
+  ],
+  "rv-es3-lobstick-river-1#2": [
+   53.6094,
+   -115.1223
+  ],
+  "rv-es3-luscar-creek-1#0": [
+   53.0661,
+   -117.3855
+  ],
+  "rv-es3-mackenzie-creek-1#0": [
+   53.0,
+   -117.1624
+  ],
+  "rv-es3-mcleod-river-1#0": [
+   53.7122,
+   -115.9733
+  ],
+  "rv-es3-mcleod-river-1#1": [
+   53.5241,
+   -116.9009
+  ],
+  "rv-es3-mcleod-river-1#2": [
+   53.3808,
+   -117.1921
+  ],
+  "rv-es3-mcleod-river-1#3": [
+   53.1587,
+   -117.2516
+  ],
+  "rv-es3-mcleod-river-1#4": [
+   52.934,
+   -117.2768
+  ],
+  "rv-es3-mcleod-river-1#5": [
+   53.6083,
+   -116.3098
+  ],
+  "rv-es3-mcleod-river-1#6": [
+   53.9239,
+   -115.8446
+  ],
+  "rv-es3-mcleod-river-1#7": [
+   54.1338,
+   -115.7072
+  ],
+  "rv-es3-pembina-river-1#0": [
+   53.024,
+   -116.4797
+  ],
+  "rv-es3-pembina-river-1#1": [
+   52.9539,
+   -117.004
+  ],
+  "rv-es3-pembina-river-1#2": [
+   53.1614,
+   -116.1832
+  ],
+  "rv-es3-pembina-river-1#3": [
+   53.5073,
+   -115.0049
+  ],
+  "rv-es3-pembina-river-1#4": [
+   53.7654,
+   -114.9639
+  ],
+  "rv-es3-pembina-river-1#5": [
+   53.25,
+   -115.1748
+  ],
+  "rv-es3-plante-creek-1#0": [
+   53.6699,
+   -117.3166
+  ],
+  "rv-es3-rat-creek-1#0": [
+   53.2636,
+   -115.6218
+  ],
+  "rv-es3-rat-creek-1#1": [
+   52.9317,
+   -116.9146
+  ],
+  "rv-es3-wampus-creek-1#0": [
+   53.1177,
+   -117.3032
+  ],
+  "rv-es3-wildhay-river-1#0": [
+   53.4785,
+   -118.3677
+  ],
+  "rv-es3-wildhay-river-1#1": [
+   53.7523,
+   -117.6788
+  ],
+  "rv-es3-wildhay-river-1#2": [
+   53.8977,
+   -117.388
+  ],
+  "rv-es3-wildhay-river-1#3": [
+   53.5139,
+   -117.9647
+  ],
+  "rv-es3-windfall-creek-1#0": [
+   53.9993,
+   -116.5413
+  ],
+  "rv-es3-windfall-creek-1#1": [
+   54.1565,
+   -116.2674
+  ],
+  "rv-nb1-athabasca-river-1#0": [
+   54.9408,
+   -113.0114
+  ],
+  "rv-nb1-athabasca-river-1#1": [
+   55.1442,
+   -112.8437
+  ],
+  "rv-nb1-athabasca-river-1#2": [
+   55.3547,
+   -112.7046
+  ],
+  "rv-nb1-athabasca-river-1#3": [
+   55.5778,
+   -112.7602
+  ],
+  "rv-nb1-beaver-river-1#0": [
+   54.5,
+   -111.8311
+  ],
+  "rv-nb1-beaver-river-1#1": [
+   54.2827,
+   -110.1029
+  ],
+  "rv-nb1-beaver-river-1#2": [
+   54.7269,
+   -111.9016
+  ],
+  "rv-nb1-beaver-river-1#3": [
+   54.4095,
+   -111.477
+  ],
+  "rv-nb1-beaver-river-1#4": [
+   54.3641,
+   -111.0986
+  ],
+  "rv-nb1-beaver-river-1#5": [
+   54.3778,
+   -110.7129
+  ],
+  "rv-nb1-la-biche-river-1#0": [
+   54.9964,
+   -112.307
+  ],
+  "rv-nb1-la-biche-river-1#1": [
+   55.0146,
+   -112.6977
+  ],
+  "rv-nb1-martineau-river-1#0": [
+   54.6954,
+   -110.0
+  ],
+  "rv-nb1-medley-river-1#0": [
+   54.8843,
+   -110.3329
+  ],
+  "rv-nb1-medley-river-1#1": [
+   54.6374,
+   -110.2001
+  ],
+  "rv-nb1-owl-river-1#0": [
+   55.25,
+   -111.5735
+  ],
+  "rv-nb1-owl-river-1#1": [
+   55.0609,
+   -111.7871
+  ],
+  "rv-nb1-piche-river-1#0": [
+   55.0,
+   -111.7294
+  ],
+  "rv-nb3-chinchaga-river-1#0": [
+   57.2986,
+   -120.3149
+  ],
+  "rv-nb3-chinchaga-river-1#1": [
+   57.316,
+   -119.8999
+  ],
+  "rv-nb3-chinchaga-river-1#10": [
+   58.5096,
+   -118.3666
+  ],
+  "rv-nb3-chinchaga-river-1#11": [
+   58.7324,
+   -118.4255
+  ],
+  "rv-nb3-chinchaga-river-1#2": [
+   57.3153,
+   -119.4835
+  ],
+  "rv-nb3-chinchaga-river-1#3": [
+   57.403,
+   -119.0993
+  ],
+  "rv-nb3-chinchaga-river-1#4": [
+   57.6055,
+   -118.9169
+  ],
+  "rv-nb3-chinchaga-river-1#5": [
+   57.8033,
+   -118.7165
+  ],
+  "rv-nb3-chinchaga-river-1#6": [
+   57.943,
+   -118.3851
+  ],
+  "rv-nb3-chinchaga-river-1#7": [
+   57.8628,
+   -117.9894
+  ],
+  "rv-nb3-chinchaga-river-1#8": [
+   58.0896,
+   -118.0632
+  ],
+  "rv-nb3-chinchaga-river-1#9": [
+   58.2962,
+   -118.2317
+  ],
+  "rv-nb3-hay-river-1#0": [
+   58.6879,
+   -119.1898
+  ],
+  "rv-nb3-hay-river-1#1": [
+   58.7714,
+   -119.5919
+  ],
+  "rv-nb3-hay-river-1#10": [
+   59.3088,
+   -117.3474
+  ],
+  "rv-nb3-hay-river-1#11": [
+   59.5116,
+   -117.1569
+  ],
+  "rv-nb3-hay-river-1#12": [
+   58.347,
+   -120.2711
+  ],
+  "rv-nb3-hay-river-1#13": [
+   58.5534,
+   -120.4444
+  ],
+  "rv-nb3-hay-river-1#14": [
+   58.7381,
+   -120.1979
+  ],
+  "rv-nb3-hay-river-1#15": [
+   58.7946,
+   -118.8083
+  ],
+  "rv-nb3-hay-river-1#2": [
+   58.2689,
+   -118.9065
+  ],
+  "rv-nb3-hay-river-1#3": [
+   58.288,
+   -119.4841
+  ],
+  "rv-nb3-hay-river-1#4": [
+   59.7652,
+   -117.0
+  ],
+  "rv-nb3-hay-river-1#5": [
+   59.9875,
+   -116.9331
+  ],
+  "rv-nb3-hay-river-1#6": [
+   58.4016,
+   -119.8538
+  ],
+  "rv-nb3-hay-river-1#7": [
+   58.8713,
+   -118.3162
+  ],
+  "rv-nb3-hay-river-1#8": [
+   58.9702,
+   -117.9246
+  ],
+  "rv-nb3-hay-river-1#9": [
+   59.1433,
+   -117.6454
+  ],
+  "rv-nb3-loon-river-1#0": [
+   56.6911,
+   -115.7776
+  ],
+  "rv-nb3-loon-river-1#1": [
+   56.7334,
+   -115.2921
+  ],
+  "rv-nb3-loon-river-1#2": [
+   56.9516,
+   -115.1925
+  ],
+  "rv-nb3-mikkwa-river-1#0": [
+   58.2115,
+   -115.0
+  ],
+  "rv-nb3-mikkwa-river-1#1": [
+   58.3795,
+   -114.7157
+  ],
+  "rv-nb3-mikkwa-river-1#2": [
+   57.5589,
+   -113.7973
+  ],
+  "rv-nb3-mikkwa-river-1#3": [
+   57.6212,
+   -114.2005
+  ],
+  "rv-nb3-mikkwa-river-1#4": [
+   57.7062,
+   -114.5901
+  ],
+  "rv-nb3-mikkwa-river-1#5": [
+   57.7258,
+   -115.0095
+  ],
+  "rv-nb3-mikkwa-river-1#6": [
+   57.9365,
+   -115.157
+  ],
+  "rv-nb3-notikewin-river-1#0": [
+   56.7459,
+   -119.237
+  ],
+  "rv-nb3-notikewin-river-1#1": [
+   57.1337,
+   -117.3897
+  ],
+  "rv-nb3-notikewin-river-1#2": [
+   56.9482,
+   -119.0401
+  ],
+  "rv-nb3-notikewin-river-1#3": [
+   57.0124,
+   -118.6446
+  ],
+  "rv-nb3-notikewin-river-1#4": [
+   56.8979,
+   -118.2896
+  ],
+  "rv-nb3-notikewin-river-1#5": [
+   56.884,
+   -117.807
+  ],
+  "rv-nb3-peace-river-1#0": [
+   58.6878,
+   -113.5394
+  ],
+  "rv-nb3-peace-river-1#1": [
+   56.0291,
+   -117.6953
+  ],
+  "rv-nb3-peace-river-1#10": [
+   57.136,
+   -117.1522
+  ],
+  "rv-nb3-peace-river-1#11": [
+   57.4962,
+   -117.116
+  ],
+  "rv-nb3-peace-river-1#12": [
+   57.7211,
+   -117.1196
+  ],
+  "rv-nb3-peace-river-1#13": [
+   57.9727,
+   -117.1413
+  ],
+  "rv-nb3-peace-river-1#14": [
+   58.0973,
+   -116.7876
+  ],
+  "rv-nb3-peace-river-1#15": [
+   58.2813,
+   -116.5405
+  ],
+  "rv-nb3-peace-river-1#16": [
+   58.4188,
+   -115.4949
+  ],
+  "rv-nb3-peace-river-1#17": [
+   56.1187,
+   -120.5028
+  ],
+  "rv-nb3-peace-river-1#18": [
+   59.0434,
+   -111.9844
+  ],
+  "rv-nb3-peace-river-1#19": [
+   58.8094,
+   -113.1745
+  ],
+  "rv-nb3-peace-river-1#2": [
+   55.9155,
+   -118.0424
+  ],
+  "rv-nb3-peace-river-1#20": [
+   58.9866,
+   -112.9032
+  ],
+  "rv-nb3-peace-river-1#21": [
+   59.1763,
+   -112.6675
+  ],
+  "rv-nb3-peace-river-1#22": [
+   58.509,
+   -114.5229
+  ],
+  "rv-nb3-peace-river-1#23": [
+   58.6418,
+   -114.1734
+  ],
+  "rv-nb3-peace-river-1#3": [
+   55.9055,
+   -118.4432
+  ],
+  "rv-nb3-peace-river-1#4": [
+   55.9913,
+   -118.8144
+  ],
+  "rv-nb3-peace-river-1#5": [
+   56.1997,
+   -118.9659
+  ],
+  "rv-nb3-peace-river-1#6": [
+   56.2432,
+   -119.363
+  ],
+  "rv-nb3-peace-river-1#7": [
+   56.1731,
+   -119.7473
+  ],
+  "rv-nb3-peace-river-1#8": [
+   56.693,
+   -117.2333
+  ],
+  "rv-nb3-peace-river-1#9": [
+   56.9178,
+   -117.2544
+  ],
+  "rv-nb3-petitot-river-1#0": [
+   59.8922,
+   -118.0594
+  ],
+  "rv-nb3-petitot-river-1#1": [
+   60.0,
+   -118.4664
+  ],
+  "rv-nb3-petitot-river-1#2": [
+   59.8412,
+   -118.784
+  ],
+  "rv-nb3-petitot-river-1#3": [
+   59.7382,
+   -119.1822
+  ],
+  "rv-nb3-petitot-river-1#4": [
+   59.6003,
+   -119.534
+  ],
+  "rv-nb3-petitot-river-1#5": [
+   59.5875,
+   -119.9775
+  ],
+  "rv-nb3-petitot-river-1#6": [
+   59.626,
+   -120.4157
+  ],
+  "rv-nb3-smoky-river-1#0": [
+   56.1681,
+   -117.3355
+  ],
+  "rv-nb3-smoky-river-1#1": [
+   55.7387,
+   -117.6403
+  ],
+  "rv-nb3-smoky-river-1#2": [
+   55.9543,
+   -117.5256
+  ],
+  "rv-nb3-wabasca-river-1#0": [
+   57.1011,
+   -114.6445
+  ],
+  "rv-nb3-wabasca-river-1#1": [
+   56.9282,
+   -114.3802
+  ],
+  "rv-nb3-wabasca-river-1#2": [
+   56.8634,
+   -113.9859
+  ],
+  "rv-nb3-wabasca-river-1#3": [
+   57.166,
+   -115.0953
+  ],
+  "rv-nb3-wabasca-river-1#4": [
+   57.3633,
+   -115.2952
+  ],
+  "rv-nb3-wabasca-river-1#5": [
+   57.5829,
+   -115.3858
+  ],
+  "rv-nb3-wabasca-river-1#6": [
+   57.8078,
+   -115.3754
+  ],
+  "rv-nb3-wabasca-river-1#7": [
+   58.032,
+   -115.4087
+  ],
+  "rv-nb3-wabasca-river-1#8": [
+   58.2563,
+   -115.3785
+  ],
+  "rv-nb4-athabasca-river-1#0": [
+   58.36,
+   -111.535
+  ],
+  "rv-nb4-athabasca-river-1#1": [
+   55.7854,
+   -112.626
+  ],
+  "rv-nb4-athabasca-river-1#2": [
+   58.0044,
+   -111.3541
+  ],
+  "rv-nb4-athabasca-river-1#3": [
+   56.1993,
+   -112.5123
+  ],
+  "rv-nb4-athabasca-river-1#4": [
+   56.4079,
+   -112.6645
+  ],
+  "rv-nb4-athabasca-river-1#5": [
+   56.5682,
+   -112.3784
+  ],
+  "rv-nb4-athabasca-river-1#6": [
+   56.5922,
+   -111.9712
+  ],
+  "rv-nb4-athabasca-river-1#7": [
+   56.6631,
+   -111.5809
+  ],
+  "rv-nb4-clearwater-river-1#0": [
+   56.7057,
+   -110.0
+  ],
+  "rv-nb4-clearwater-river-1#1": [
+   56.7179,
+   -110.4095
+  ],
+  "rv-nb4-clearwater-river-1#2": [
+   56.6789,
+   -110.8129
+  ],
+  "rv-nb4-clearwater-river-1#3": [
+   56.6743,
+   -111.2228
+  ],
+  "rv-nb4-ells-river-1#0": [
+   57.3245,
+   -112.5822
+  ],
+  "rv-nb4-ells-river-1#1": [
+   57.1297,
+   -112.3746
+  ],
+  "rv-nb4-ells-river-1#2": [
+   57.2239,
+   -111.998
+  ],
+  "rv-nb4-hangingstone-river-1#0": [
+   56.1784,
+   -111.4458
+  ],
+  "rv-nb4-hangingstone-river-1#1": [
+   56.4968,
+   -111.3926
+  ],
+  "rv-nb4-house-river-1#0": [
+   55.939,
+   -112.4291
+  ],
+  "rv-nb4-house-river-1#1": [
+   55.7526,
+   -111.9107
+  ],
+  "rv-nb4-richardson-river-1#0": [
+   58.4022,
+   -111.2549
+  ],
+  "rv-nb4-richardson-river-1#1": [
+   57.7352,
+   -110.0356
+  ],
+  "rv-nb4-richardson-river-1#2": [
+   57.8706,
+   -110.3726
+  ],
+  "rv-nb4-richardson-river-1#3": [
+   58.1766,
+   -111.0801
+  ],
+  "rv-nb4-richardson-river-1#4": [
+   57.9873,
+   -110.8504
+  ],
+  "rv-pp1-battle-creek-1#0": [
+   49.6609,
+   -110.0942
+  ],
+  "rv-pp1-bow-river-1#0": [
+   50.8434,
+   -113.3021
+  ],
+  "rv-pp1-bow-river-1#1": [
+   50.768,
+   -112.7863
+  ],
+  "rv-pp1-bow-river-1#2": [
+   50.219,
+   -112.0752
+  ],
+  "rv-pp1-bow-river-1#3": [
+   50.1041,
+   -111.6313
+  ],
+  "rv-pp1-graburn-creek-1#0": [
+   49.6121,
+   -110.1096
+  ],
+  "rv-pp1-lee-creek-1#0": [
+   49.1677,
+   -113.3404
+  ],
+  "rv-pp1-little-bow-river-1#0": [
+   50.3113,
+   -113.4856
+  ],
+  "rv-pp1-little-bow-river-1#1": [
+   49.8989,
+   -112.5
+  ],
+  "rv-pp1-little-bow-river-1#2": [
+   50.0843,
+   -112.6983
+  ],
+  "rv-pp1-little-bow-river-1#3": [
+   50.1817,
+   -113.0146
+  ],
+  "rv-pp1-oldman-river-1#0": [
+   49.6734,
+   -112.9858
+  ],
+  "rv-pp1-oldman-river-1#1": [
+   49.8128,
+   -113.3183
+  ],
+  "rv-pp1-oldman-river-1#2": [
+   49.8221,
+   -112.1561
+  ],
+  "rv-pp1-oldman-river-1#3": [
+   49.8449,
+   -112.7605
+  ],
+  "rv-pp1-oldman-river-1#4": [
+   49.9396,
+   -111.7018
+  ],
+  "rv-pp1-south-saskatchewan-river-1#0": [
+   50.0406,
+   -110.6887
+  ],
+  "rv-pp1-south-saskatchewan-river-1#1": [
+   50.2632,
+   -110.6395
+  ],
+  "rv-pp1-south-saskatchewan-river-1#2": [
+   50.4316,
+   -110.406
+  ],
+  "rv-pp1-south-saskatchewan-river-1#3": [
+   50.6278,
+   -110.2329
+  ],
+  "rv-pp1-south-saskatchewan-river-1#4": [
+   49.9228,
+   -111.5278
+  ],
+  "rv-pp1-south-saskatchewan-river-1#5": [
+   50.0517,
+   -111.2407
+  ],
+  "rv-pp1-st-mary-river-1#0": [
+   49.6081,
+   -112.9136
+  ],
+  "rv-pp1-st-mary-river-1#1": [
+   49.3924,
+   -113.0112
+  ],
+  "rv-pp1-st-mary-river-1#2": [
+   49.2381,
+   -113.2622
+  ],
+  "rv-pp1-st-mary-river-1#3": [
+   49.0139,
+   -113.2888
+  ],
+  "rv-pp2-battle-river-1#0": [
+   52.6427,
+   -112.3923
+  ],
+  "rv-pp2-battle-river-1#1": [
+   52.75,
+   -113.8128
+  ],
+  "rv-pp2-battle-river-1#10": [
+   52.4748,
+   -112.1458
+  ],
+  "rv-pp2-battle-river-1#11": [
+   52.4069,
+   -111.7942
+  ],
+  "rv-pp2-battle-river-1#12": [
+   52.9047,
+   -112.8042
+  ],
+  "rv-pp2-battle-river-1#2": [
+   52.7569,
+   -113.4415
+  ],
+  "rv-pp2-battle-river-1#3": [
+   52.9421,
+   -113.1725
+  ],
+  "rv-pp2-battle-river-1#4": [
+   52.9165,
+   -114.0631
+  ],
+  "rv-pp2-battle-river-1#5": [
+   52.8961,
+   -111.0021
+  ],
+  "rv-pp2-battle-river-1#6": [
+   53.0494,
+   -110.7285
+  ],
+  "rv-pp2-battle-river-1#7": [
+   52.9429,
+   -110.3992
+  ],
+  "rv-pp2-battle-river-1#8": [
+   52.8573,
+   -110.0545
+  ],
+  "rv-pp2-battle-river-1#9": [
+   52.4971,
+   -111.2455
+  ],
+  "rv-pp2-berry-creek-1#0": [
+   51.7561,
+   -111.6099
+  ],
+  "rv-pp2-berry-creek-1#1": [
+   51.4793,
+   -111.5
+  ],
+  "rv-pp2-berry-creek-1#2": [
+   51.1215,
+   -111.6966
+  ],
+  "rv-pp2-berry-creek-1#3": [
+   50.8493,
+   -111.5967
+  ],
+  "rv-pp2-blindman-river-1#0": [
+   52.8902,
+   -114.5074
+  ],
+  "rv-pp2-blindman-river-1#1": [
+   52.7279,
+   -114.2499
+  ],
+  "rv-pp2-blindman-river-1#2": [
+   52.518,
+   -114.1171
+  ],
+  "rv-pp2-blindman-river-1#3": [
+   52.3501,
+   -113.8717
+  ],
+  "rv-pp2-little-red-deer-river-1#0": [
+   52.004,
+   -114.2213
+  ],
+  "rv-pp2-little-red-deer-river-1#1": [
+   51.5539,
+   -114.5481
+  ],
+  "rv-pp2-medicine-river-1#0": [
+   52.3968,
+   -114.3746
+  ],
+  "rv-pp2-medicine-river-1#1": [
+   52.6067,
+   -114.5076
+  ],
+  "rv-pp2-medicine-river-1#2": [
+   52.1844,
+   -114.2541
+  ],
+  "rv-pp2-north-saskatchewan-river-1#0": [
+   53.3343,
+   -114.4781
+  ],
+  "rv-pp2-north-saskatchewan-river-1#1": [
+   53.1919,
+   -114.9315
+  ],
+  "rv-pp2-north-saskatchewan-river-1#2": [
+   53.66,
+   -110.337
+  ],
+  "rv-pp2-north-saskatchewan-river-1#3": [
+   53.7351,
+   -113.1982
+  ],
+  "rv-pp2-north-saskatchewan-river-1#4": [
+   53.3269,
+   -114.0047
+  ],
+  "rv-pp2-north-saskatchewan-river-1#5": [
+   53.3945,
+   -113.6453
+  ],
+  "rv-pp2-north-saskatchewan-river-1#6": [
+   53.7976,
+   -111.7286
+  ],
+  "rv-pp2-parlby-creek-1#0": [
+   52.5127,
+   -113.3261
+  ],
+  "rv-pp2-red-deer-river-1#0": [
+   52.0503,
+   -114.22
+  ],
+  "rv-pp2-red-deer-river-1#1": [
+   52.1849,
+   -113.9264
+  ],
+  "rv-pp2-red-deer-river-1#2": [
+   52.2613,
+   -113.5608
+  ],
+  "rv-pp2-red-deer-river-1#3": [
+   52.3145,
+   -113.2033
+  ],
+  "rv-pp2-red-deer-river-1#4": [
+   52.1178,
+   -113.0255
+  ],
+  "rv-pp2-red-deer-river-1#5": [
+   51.8929,
+   -113.0105
+  ],
+  "rv-pp2-red-deer-river-2#0": [
+   51.8365,
+   -113.0163
+  ],
+  "rv-pp2-red-deer-river-2#1": [
+   51.5005,
+   -112.8377
+  ],
+  "rv-pp2-red-deer-river-2#2": [
+   51.3437,
+   -112.5042
+  ],
+  "rv-pp2-red-deer-river-2#3": [
+   51.2072,
+   -112.2184
+  ],
+  "rv-pp2-red-deer-river-2#4": [
+   51.0029,
+   -111.9335
+  ],
+  "rv-pp2-red-deer-river-2#5": [
+   50.8572,
+   -111.6618
+  ],
+  "rv-pp2-red-deer-river-2#6": [
+   50.8441,
+   -111.1548
+  ],
+  "rv-pp2-red-deer-river-2#7": [
+   50.8623,
+   -110.7995
+  ],
+  "rv-pp2-red-deer-river-2#8": [
+   50.8873,
+   -110.4452
+  ],
+  "rv-pp2-red-deer-river-2#9": [
+   50.9492,
+   -110.1023
+  ],
+  "rv-pp2-sturgeon-river-1#0": [
+   53.7485,
+   -113.4578
+  ],
+  "rv-pp2-sturgeon-river-1#1": [
+   53.6566,
+   -114.6313
+  ],
+  "rv-pp2-sturgeon-river-1#2": [
+   53.7272,
+   -114.0394
+  ],
+  "rv-pp2-sylvan-creek-1#0": [
+   52.2743,
+   -113.9615
+  ],
+  "wb1573": [
+   51.039668,
+   -114.849893
+  ],
+  "wb1606": [
+   50.783333,
+   -115.3
+  ],
+  "wb17891": [
+   51.354755,
+   -114.944894
+  ],
+  "wb17894": [
+   51.419906,
+   -112.838356
+  ],
+  "wb18007": [
+   50.1757,
+   -113.737738
+  ],
+  "wb18014": [
+   55.6888,
+   -116.6027
+  ],
+  "wb18019": [
+   52.987222,
+   -113.353311
+  ],
+  "wb18020": [
+   51.351315,
+   -110.488247
+  ],
+  "wb18022": [
+   52.218207,
+   -111.91105
+  ],
+  "wb18997": [
+   50.473279,
+   -114.912787
+  ],
+  "wb19525": [
+   53.902144,
+   -117.38983
+  ],
+  "wb19760": [
+   54.775532,
+   -111.953265
+  ],
+  "wb20258": [
+   53.097592,
+   -111.79091
+  ],
+  "wb20267": [
+   58.197347,
+   -115.906655
+  ],
+  "wb2065": [
+   50.817739,
+   -113.779006
+  ],
+  "wb2081": [
+   51.033333,
+   -115.041667
+  ],
+  "wb21137": [
+   54.149158,
+   -115.685342
+  ],
+  "wb2129": [
+   54.604201,
+   -110.186494
+  ],
+  "wb21332": [
+   52.84209,
+   -115.125149
+  ],
+  "wb21353": [
+   54.339952,
+   -110.479159
+  ],
+  "wb22504": [
+   49.659849,
+   -112.863787
+  ],
+  "wb22993": [
+   52.469538,
+   -113.709921
+  ],
+  "wb22995": [
+   56.224205,
+   -117.553092
+  ],
+  "wb22996": [
+   58.532109,
+   -117.302526
+  ],
+  "wb23094": [
+   53.6401,
+   -112.9304
+  ],
+  "wb23292": [
+   53.376492,
+   -114.309875
+  ],
+  "wb23293": [
+   51.422275,
+   -114.049779
+  ],
+  "wb23327": [
+   50.247,
+   -113.4226
+  ],
+  "wb23789": [
+   53.030531,
+   -116.714447
+  ],
+  "wb23790": [
+   52.992044,
+   -116.649313
+  ],
+  "wb23791": [
+   52.992815,
+   -116.645687
+  ],
+  "wb24053": [
+   54.3089,
+   -110.61054
+  ],
+  "wb24236": [
+   52.93,
+   -115.51
+  ],
+  "wb24278": [
+   49.434987,
+   -112.384948
+  ],
+  "wb24312": [
+   53.004695,
+   -116.653503
+  ],
+  "wb24364": [
+   51.995874,
+   -114.726449
+  ],
+  "wb24702": [
+   53.995566,
+   -111.268531
+  ],
+  "wb26033": [
+   54.15613,
+   -115.364319
+  ],
+  "wb26047": [
+   54.056876,
+   -112.956077
+  ],
+  "wb26322": [
+   52.476805,
+   -113.712706
+  ],
+  "wb26431": [
+   58.517177,
+   -117.163713
+  ],
+  "wb26442": [
+   49.693633,
+   -112.900097
+  ],
+  "wb26443": [
+   49.664455,
+   -112.787844
+  ],
+  "wb26444": [
+   49.656083,
+   -112.798097
+  ],
+  "wb26447": [
+   51.041403,
+   -114.017656
+  ],
+  "wb26729": [
+   55.618695,
+   -118.529556
+  ],
+  "wb26854": [
+   53.683219,
+   -113.274136
+  ],
+  "wb317177": [
+   50.8455,
+   -114.2455
+  ],
+  "wb318138": [
+   49.794747,
+   -112.188165
+  ],
+  "wb328085": [
+   55.829544,
+   -119.167595
+  ],
+  "wb3470": [
+   50.900514,
+   -114.689747
+  ],
+  "wb3476": [
+   51.065761,
+   -115.202402
+  ],
+  "wb3479": [
+   53.566383,
+   -116.481493
+  ],
+  "wb3482": [
+   50.969566,
+   -115.107943
+  ],
+  "wb3485": [
+   52.398682,
+   -114.949741
+  ],
+  "wb3486": [
+   51.05457,
+   -114.944741
+  ],
+  "wb3488": [
+   50.872201,
+   -115.148727
+  ],
+  "wb3494": [
+   51.24853,
+   -111.210333
+  ],
+  "wb3499": [
+   50.236864,
+   -114.20802
+  ],
+  "wb3505": [
+   51.546348,
+   -113.331867
+  ],
+  "wb3510": [
+   49.207984,
+   -111.562445
+  ],
+  "wb3515": [
+   50.1944,
+   -112.6757
+  ],
+  "wb3522": [
+   50.888074,
+   -114.669068
+  ],
+  "wb3523": [
+   49.531283,
+   -110.372274
+  ],
+  "wb3524": [
+   51.582647,
+   -112.52946
+  ],
+  "wb3526": [
+   49.3751,
+   -112.5874
+  ],
+  "wb3534": [
+   49.673739,
+   -110.181613
+  ],
+  "wb3536": [
+   49.6831,
+   -112.3562
+  ],
+  "wb3537": [
+   50.2084,
+   -112.8157
+  ],
+  "wb3899": [
+   52.063523,
+   -115.092202
+  ],
+  "wb3909": [
+   52.303119,
+   -116.418572
+  ],
+  "wb3948": [
+   50.577603,
+   -115.210545
+  ],
+  "wb395186": [
+   53.119469,
+   -115.320171
+  ],
+  "wb395196": [
+   51.19005,
+   -114.49262
+  ],
+  "wb3959": [
+   50.3887,
+   -112.4591
+  ],
+  "wb4005": [
+   50.218457,
+   -114.430019
+  ],
+  "wb4011": [
+   49.411416,
+   -114.105019
+  ],
+  "wb4014": [
+   52.006721,
+   -114.788387
+  ],
+  "wb4018": [
+   49.372895,
+   -114.296284
+  ],
+  "wb4027": [
+   53.8105,
+   -111.3369
+  ],
+  "wb4061": [
+   52.011667,
+   -114.854167
+  ],
+  "wb4094": [
+   54.980556,
+   -116.459444
+  ],
+  "wb4159": [
+   50.604055,
+   -114.943209
+  ],
+  "wb4161": [
+   51.98,
+   -114.902
+  ],
+  "wb4167": [
+   50.781856,
+   -115.335866
+  ],
+  "wb4171": [
+   49.303994,
+   -114.061148
+  ],
+  "wb417476": [
+   49.896607,
+   -113.208467
+  ],
+  "wb417477": [
+   55.237091,
+   -118.812752
+  ],
+  "wb417505": [
+   53.888476,
+   -110.910587
+  ],
+  "wb417506": [
+   52.355924,
+   -113.871506
+  ],
+  "wb4208": [
+   52.29945,
+   -110.714832
+  ],
+  "wb4221": [
+   50.372611,
+   -114.814015
+  ],
+  "wb4231": [
+   49.935915,
+   -110.407082
+  ],
+  "wb4252": [
+   54.24779,
+   -110.841712
+  ],
+  "wb4261": [
+   53.618628,
+   -114.074339
+  ],
+  "wb4265": [
+   49.6364,
+   -112.2523
+  ],
+  "wb4318": [
+   50.806944,
+   -115.345556
+  ],
+  "wb4340": [
+   52.260185,
+   -115.005926
+  ],
+  "wb4351": [
+   54.5143,
+   -110.5222
+  ],
+  "wb4374": [
+   49.634111,
+   -114.637963
+  ],
+  "wb4426": [
+   53.896214,
+   -111.1509
+  ],
+  "wb4446": [
+   52.576348,
+   -110.004391
+  ],
+  "wb4458": [
+   54.15737,
+   -115.05405
+  ],
+  "wb4460": [
+   55.314926,
+   -117.204628
+  ],
+  "wb4488": [
+   53.654925,
+   -117.685762
+  ],
+  "wb4495": [
+   51.726322,
+   -115.462742
+  ],
+  "wb4505": [
+   54.801854,
+   -115.382263
+  ],
+  "wb4532": [
+   49.626771,
+   -114.641917
+  ],
+  "wb4535": [
+   53.726034,
+   -117.117962
+  ],
+  "wb4539": [
+   56.188889,
+   -110.906389
+  ],
+  "wb4562": [
+   52.971131,
+   -116.576532
+  ],
+  "wb4564": [
+   52.084305,
+   -116.628437
+  ],
+  "wb4571": [
+   53.45,
+   -116.7667
+  ],
+  "wb4614": [
+   50.834761,
+   -115.235806
+  ],
+  "wb4635": [
+   53.9258,
+   -110.34
+  ],
+  "wb4642": [
+   50.865879,
+   -115.265111
+  ],
+  "wb4647": [
+   52.330286,
+   -115.830899
+  ],
+  "wb4697": [
+   52.449584,
+   -116.192114
+  ],
+  "wb4708": [
+   54.3167,
+   -115.1333
+  ],
+  "wb4725": [
+   53.9,
+   -119.05
+  ],
+  "wb4794": [
+   53.487212,
+   -114.173756
+  ],
+  "wb4806": [
+   50.807542,
+   -115.245079
+  ],
+  "wb4837": [
+   50.793015,
+   -115.318769
+  ],
+  "wb4854": [
+   50.413889,
+   -114.855278
+  ],
+  "wb4888": [
+   51.655556,
+   -115.584444
+  ],
+  "wb4897": [
+   50.661923,
+   -115.215945
+  ],
+  "wb4909": [
+   49.627778,
+   -114.684444
+  ],
+  "wb4920": [
+   53.594311,
+   -111.296351
+  ],
+  "wb4935": [
+   54.872509,
+   -115.11153
+  ],
+  "wb4944": [
+   54.895503,
+   -114.965309
+  ],
+  "wb4947": [
+   52.366667,
+   -116.85
+  ],
+  "wb4965": [
+   55.625,
+   -118.533333
+  ],
+  "wb4977": [
+   54.0586,
+   -110.8973
+  ],
+  "wb4978": [
+   49.9346,
+   -112.9916
+  ],
+  "wb5002": [
+   53.280836,
+   -117.783145
+  ],
+  "wb5029": [
+   52.08109,
+   -116.553435
+  ],
+  "wb5050": [
+   49.541912,
+   -114.248586
+  ],
+  "wb5074": [
+   50.863852,
+   -115.249942
+  ],
+  "wb5078": [
+   55.483333,
+   -114.766667
+  ],
+  "wb5093": [
+   54.551596,
+   -110.300937
+  ],
+  "wb5099": [
+   51.3696,
+   -112.1995
+  ],
+  "wb5149": [
+   50.453153,
+   -114.90368
+  ],
+  "wb5158": [
+   51.904668,
+   -115.933169
+  ],
+  "wb5179": [
+   50.633333,
+   -115.133333
+  ],
+  "wb5223": [
+   51.401845,
+   -115.185439
+  ],
+  "wb5232": [
+   54.671776,
+   -115.628279
+  ],
+  "wb5245": [
+   53.112602,
+   -117.454064
+  ],
+  "wb5253": [
+   50.689323,
+   -115.293158
+  ],
+  "wb5275": [
+   50.4752,
+   -112.8638
+  ],
+  "wb5286": [
+   54.298603,
+   -115.652786
+  ],
+  "wb5324": [
+   53.560075,
+   -116.768896
+  ],
+  "wb5336": [
+   53.3583,
+   -116.0344
+  ],
+  "wb5348": [
+   52.216312,
+   -115.007692
+  ],
+  "wb5360": [
+   55.886111,
+   -119.227778
+  ],
+  "wb5387": [
+   53.624675,
+   -113.956437
+  ],
+  "wb5407": [
+   52.851672,
+   -116.874653
+  ],
+  "wb5434": [
+   50.4362,
+   -111.9405
+  ],
+  "wb5466": [
+   53.566667,
+   -117.133333
+  ],
+  "wb5467": [
+   52.418798,
+   -116.860193
+  ],
+  "wb5476": [
+   56.316771,
+   -119.894419
+  ],
+  "wb5504": [
+   49.011823,
+   -113.456699
+  ],
+  "wb5513": [
+   49.1117,
+   -113.655837
+  ],
+  "wb5521": [
+   55.084708,
+   -114.621162
+  ],
+  "wb5538": [
+   54.017399,
+   -114.352591
+  ],
+  "wb5555": [
+   52.038779,
+   -115.705653
+  ],
+  "wb5565": [
+   53.655681,
+   -117.702585
+  ],
+  "wb5568": [
+   49.641667,
+   -114.662222
+  ],
+  "wb5569": [
+   52.1,
+   -114.966667
+  ],
+  "wb5572": [
+   53.908548,
+   -118.585692
+  ],
+  "wb5581": [
+   54.6535,
+   -111.4282
+  ],
+  "wb5646": [
+   49.9789,
+   -111.0606
+  ],
+  "wb5649": [
+   50.5913,
+   -115.1537
+  ],
+  "wb5661": [
+   49.66537,
+   -110.106922
+  ],
+  "wb5667": [
+   50.886413,
+   -115.243069
+  ],
+  "wb5714": [
+   56.669178,
+   -119.0339
+  ],
+  "wb5715": [
+   50.505823,
+   -114.943334
+  ],
+  "wb5729": [
+   53.690156,
+   -114.191032
+  ],
+  "wb5743": [
+   55.8336,
+   -113.3848
+  ],
+  "wb5753": [
+   53.612875,
+   -114.078152
+  ],
+  "wb5758": [
+   56.9788,
+   -115.9155
+  ],
+  "wb5766": [
+   54.318086,
+   -115.077728
+  ],
+  "wb5788": [
+   50.840833,
+   -115.397778
+  ],
+  "wb5790": [
+   49.7555,
+   -111.7732
+  ],
+  "wb5804": [
+   52.451617,
+   -116.149976
+  ],
+  "wb5805": [
+   51.04974,
+   -114.86917
+  ],
+  "wb5820": [
+   54.614,
+   -112.7265
+  ],
+  "wb5858": [
+   50.673406,
+   -115.105897
+  ],
+  "wb5874": [
+   53.517861,
+   -114.138808
+  ],
+  "wb5895": [
+   53.510057,
+   -114.273086
+  ],
+  "wb5901": [
+   51.17613,
+   -115.283424
+  ],
+  "wb5919": [
+   52.203976,
+   -115.001395
+  ],
+  "wb5929": [
+   56.706382,
+   -118.318549
+  ],
+  "wb5944": [
+   55.059122,
+   -117.813668
+  ],
+  "wb5952": [
+   52.3741,
+   -114.1877
+  ],
+  "wb5960": [
+   50.722474,
+   -114.978777
+  ],
+  "wb5968": [
+   52.06155,
+   -115.11949
+  ],
+  "wb5971": [
+   54.795498,
+   -115.015327
+  ],
+  "wb5990": [
+   50.630121,
+   -115.277514
+  ],
+  "wb6039": [
+   52.41472,
+   -115.00078
+  ],
+  "wb6044": [
+   57.45,
+   -117.533333
+  ],
+  "wb6051": [
+   54.35553,
+   -119.78669
+  ],
+  "wb6061": [
+   50.617022,
+   -115.161232
+  ],
+  "wb6082": [
+   53.364531,
+   -110.884936
+  ],
+  "wb6086": [
+   53.882014,
+   -119.090207
+  ],
+  "wb6095": [
+   53.545513,
+   -114.589748
+  ],
+  "wb6097": [
+   57.7371,
+   -115.5847
+  ],
+  "wb6120": [
+   50.85314,
+   -115.43005
+  ],
+  "wb6160": [
+   53.271338,
+   -117.80152
+  ],
+  "wb6169": [
+   55.6253,
+   -116.7353
+  ],
+  "wb6173": [
+   52.595848,
+   -113.093667
+  ],
+  "wb6524": [
+   55.317308,
+   -117.209194
+  ],
+  "wb6525": [
+   50.785287,
+   -115.326112
+  ],
+  "wb6528": [
+   54.964036,
+   -113.511311
+  ],
+  "wb6530": [
+   50.802829,
+   -115.247348
+  ],
+  "wb6533": [
+   53.90135,
+   -118.588692
+  ],
+  "wb6534": [
+   53.910427,
+   -118.60656
+  ],
+  "wb6535": [
+   54.380594,
+   -119.755438
+  ],
+  "wb6537": [
+   53.269491,
+   -117.792759
+  ],
+  "wb6541": [
+   50.797209,
+   -115.322777
+  ],
+  "wb6598": [
+   59.161004,
+   -118.681101
+  ],
+  "wb6601": [
+   51.957774,
+   -114.802334
+  ],
+  "wb6605": [
+   50.796667,
+   -115.388417
+  ],
+  "wb6606": [
+   50.796149,
+   -115.39287
+  ],
+  "wb6607": [
+   50.815306,
+   -114.599941
+  ],
+  "wb6608": [
+   50.815306,
+   -114.599941
+  ],
+  "wb6609": [
+   56.360995,
+   -117.311159
+  ],
+  "wb6610": [
+   50.926586,
+   -115.242495
+  ],
+  "wb6613": [
+   54.145706,
+   -113.727525
+  ],
+  "wb6614": [
+   52.976846,
+   -113.408198
+  ],
+  "wb6617": [
+   51.454862,
+   -114.609375
+  ],
+  "wb6618": [
+   55.076591,
+   -117.284529
+  ],
+  "wb6619": [
+   53.492329,
+   -112.035539
+  ],
+  "wb6620": [
+   53.474312,
+   -112.05988
+  ],
+  "wb6622": [
+   52.8425,
+   -110.85653
+  ],
+  "wb6623": [
+   52.269458,
+   -113.853351
+  ],
+  "wb6625": [
+   53.601291,
+   -115.318904
+  ],
+  "wb6626": [
+   53.574507,
+   -116.2285
+  ],
+  "wb6635": [
+   54.702083,
+   -115.71791
+  ],
+  "wb6636": [
+   56.637029,
+   -111.191296
+  ],
+  "wb6637": [
+   56.639271,
+   -111.248523
+  ],
+  "wb6638": [
+   54.022698,
+   -116.362574
+  ],
+  "wb6642": [
+   55.021444,
+   -112.015324
+  ],
+  "wb6647": [
+   53.616078,
+   -115.725966
+  ],
+  "wb6651": [
+   53.0436,
+   -116.717434
+  ],
+  "wb6652": [
+   53.722144,
+   -116.979844
+  ],
+  "wb6654": [
+   52.0498,
+   -116.4732
+  ],
+  "wb6655": [
+   53.775627,
+   -112.749283
+  ],
+  "wb6658": [
+   53.041523,
+   -116.706
+  ],
+  "wb6659": [
+   53.565803,
+   -116.736533
+  ],
+  "wb6662": [
+   52.106097,
+   -116.564829
+  ],
+  "wb6668": [
+   56.588109,
+   -111.320447
+  ],
+  "wb6669": [
+   54.489439,
+   -113.783183
+  ],
+  "wb6670": [
+   53.703308,
+   -111.744946
+  ],
+  "wb6671": [
+   51.280125,
+   -114.010762
+  ],
+  "wb6672": [
+   51.423867,
+   -115.325722
+  ],
+  "wb6674": [
+   53.1886,
+   -113.0443
+  ],
+  "wb6677": [
+   51.046185,
+   -115.018195
+  ],
+  "wb6682": [
+   49.500793,
+   -112.5376
+  ],
+  "wb6684": [
+   56.504886,
+   -118.461339
+  ],
+  "wb6686": [
+   51.041855,
+   -113.390752
+  ],
+  "wb6688": [
+   52.740747,
+   -110.609119
+  ],
+  "wb6692": [
+   49.372404,
+   -113.108558
+  ],
+  "wb6693": [
+   55.513162,
+   -119.583801
+  ],
+  "wb6695": [
+   53.193482,
+   -114.551159
+  ],
+  "wb6697": [
+   51.208304,
+   -112.955705
+  ],
+  "wb6699": [
+   54.212986,
+   -112.423089
+  ],
+  "wb6702": [
+   52.247523,
+   -115.183801
+  ],
+  "wb6705": [
+   58.495385,
+   -119.349303
+  ],
+  "wb6706": [
+   52.979766,
+   -112.729392
+  ],
+  "wb6711": [
+   52.347721,
+   -110.278345
+  ],
+  "wb6712": [
+   51.074617,
+   -115.37285
+  ],
+  "wb6713": [
+   53.909473,
+   -117.181743
+  ],
+  "wb6714": [
+   51.6135,
+   -110.497677
+  ],
+  "wb6716": [
+   53.895509,
+   -115.050562
+  ],
+  "wb6718": [
+   52.471946,
+   -113.316718
+  ],
+  "wb6721": [
+   56.222511,
+   -117.556197
+  ],
+  "wb6724": [
+   52.791495,
+   -114.317013
+  ],
+  "wb6726": [
+   52.648629,
+   -114.729184
+  ],
+  "wb6730": [
+   55.172657,
+   -118.806587
+  ],
+  "wb6732": [
+   55.762438,
+   -118.725502
+  ],
+  "wb6734": [
+   49.671905,
+   -112.879725
+  ],
+  "wb6735": [
+   52.322935,
+   -114.292729
+  ],
+  "wb6736": [
+   53.811699,
+   -113.658398
+  ],
+  "wb6737": [
+   52.867842,
+   -113.961579
+  ],
+  "wb6741": [
+   51.565685,
+   -113.735238
+  ],
+  "wb6746": [
+   52.464155,
+   -113.138878
+  ],
+  "wb6750": [
+   58.324911,
+   -116.585882
+  ],
+  "wb6751": [
+   49.4103,
+   -112.8647
+  ],
+  "wb6753": [
+   55.709784,
+   -116.919773
+  ],
+  "wb6755": [
+   51.840076,
+   -112.45129
+  ],
+  "wb6757": [
+   49.64707,
+   -112.45932
+  ],
+  "wb6758": [
+   50.03504,
+   -112.81712
+  ],
+  "wb6760": [
+   53.279,
+   -110.1391
+  ],
+  "wb6761": [
+   52.750929,
+   -111.539761
+  ],
+  "wb6764": [
+   53.259984,
+   -113.567083
+  ],
+  "wb6765": [
+   53.947431,
+   -113.586428
+  ],
+  "wb6767": [
+   49.079532,
+   -113.655918
+  ],
+  "wb6769": [
+   49.895155,
+   -113.199605
+  ],
+  "wb6770": [
+   52.112277,
+   -112.844594
+  ],
+  "wb6773": [
+   51.859122,
+   -113.620127
+  ],
+  "wb6774": [
+   52.906846,
+   -114.745933
+  ],
+  "wb6776": [
+   53.637547,
+   -113.653734
+  ],
+  "wb6778": [
+   56.209063,
+   -117.20295
+  ],
+  "wb6780": [
+   52.221611,
+   -111.732917
+  ],
+  "wb6784": [
+   53.39796,
+   -111.629354
+  ],
+  "wb6785": [
+   52.918593,
+   -111.236446
+  ],
+  "wb6786": [
+   52.246795,
+   -114.996541
+  ],
+  "wb6788": [
+   53.508917,
+   -117.810057
+  ],
+  "wb6790": [
+   53.799728,
+   -113.66643
+  ],
+  "wb6791": [
+   53.581702,
+   -113.371337
+  ],
+  "wb6794": [
+   54.958674,
+   -118.782831
+  ],
+  "wb6795": [
+   56.372419,
+   -116.954587
+  ],
+  "wb6796": [
+   51.739122,
+   -113.978521
+  ],
+  "wb6803": [
+   51.649233,
+   -111.983108
+  ],
+  "wb6806": [
+   52.297145,
+   -114.394522
+  ],
+  "wb6808": [
+   52.494632,
+   -115.972609
+  ],
+  "wb6809": [
+   52.110661,
+   -110.771236
+  ],
+  "wb6810": [
+   49.870282,
+   -113.516665
+  ],
+  "wb6813": [
+   49.6436,
+   -111.3937
+  ],
+  "wb6815": [
+   54.45359,
+   -116.888798
+  ],
+  "wb6816": [
+   53.830514,
+   -113.332084
+  ],
+  "wb6818": [
+   49.095497,
+   -111.995479
+  ],
+  "wb6820": [
+   52.056822,
+   -115.657217
+  ],
+  "wb6821": [
+   54.333426,
+   -115.61828
+  ],
+  "wb6822": [
+   50.57721,
+   -113.85142
+  ],
+  "wb6823": [
+   50.161135,
+   -112.432267
+  ],
+  "wb6825": [
+   56.0588,
+   -118.387234
+  ],
+  "wb6827": [
+   56.30153,
+   -117.906378
+  ],
+  "wb6830": [
+   58.608147,
+   -117.156875
+  ],
+  "wb6831": [
+   49.477485,
+   -111.456691
+  ],
+  "wb6833": [
+   52.50583,
+   -112.180118
+  ],
+  "wb6836": [
+   51.590937,
+   -115.498976
+  ],
+  "wb6840": [
+   53.584969,
+   -114.473822
+  ],
+  "wb6842": [
+   50.049958,
+   -110.780527
+  ],
+  "wb6844": [
+   52.011001,
+   -114.309334
+  ],
+  "wb6845": [
+   52.105809,
+   -111.44958
+  ],
+  "wb6846": [
+   49.5588,
+   -113.8722
+  ],
+  "wb6850": [
+   56.093732,
+   -118.376801
+  ],
+  "wb6852": [
+   52.86884,
+   -112.263607
+  ],
+  "wb6853": [
+   51.262527,
+   -114.121485
+  ],
+  "wb6858": [
+   49.655563,
+   -114.559795
+  ],
+  "wb6859": [
+   49.446821,
+   -112.648546
+  ],
+  "wb6860": [
+   54.786102,
+   -115.194645
+  ],
+  "wb6861": [
+   51.7253,
+   -114.111399
+  ],
+  "wb6868": [
+   53.763266,
+   -113.584073
+  ],
+  "wb6871": [
+   52.6804,
+   -113.58502
+  ],
+  "wb6873": [
+   50.524756,
+   -111.843722
+  ],
+  "wb6876": [
+   53.259224,
+   -110.040698
+  ],
+  "wb6877": [
+   50.867923,
+   -115.353252
+  ],
+  "wb6878": [
+   49.677137,
+   -110.506929
+  ],
+  "wb6879": [
+   49.553784,
+   -114.299609
+  ],
+  "wb6880": [
+   49.492841,
+   -113.93045
+  ],
+  "wb6882": [
+   50.434749,
+   -112.259866
+  ],
+  "wb6884": [
+   54.537414,
+   -112.80524
+  ],
+  "wb6889": [
+   52.042128,
+   -112.131457
+  ],
+  "wb6890": [
+   54.265723,
+   -110.745372
+  ],
+  "wb6892": [
+   49.278825,
+   -114.024744
+  ],
+  "wb6893": [
+   53.346482,
+   -113.430512
+  ],
+  "wb6894": [
+   54.100613,
+   -112.15247
+  ],
+  "wb6896": [
+   52.008173,
+   -113.740366
+  ],
+  "wb6897": [
+   50.233539,
+   -114.430313
+  ],
+  "wb6900": [
+   51.099316,
+   -110.25524
+  ],
+  "wb6902": [
+   49.672284,
+   -114.604063
+  ],
+  "wb6903": [
+   53.147371,
+   -114.409999
+  ],
+  "wb6904": [
+   54.832388,
+   -115.326749
+  ],
+  "wb6905": [
+   52.581079,
+   -112.966507
+  ],
+  "wb6910": [
+   54.465241,
+   -116.937675
+  ],
+  "wb6914": [
+   52.480398,
+   -116.122018
+  ],
+  "wb6915": [
+   52.484878,
+   -116.128512
+  ],
+  "wb6917": [
+   53.341065,
+   -117.605197
+  ],
+  "wb6921": [
+   52.916194,
+   -115.414317
+  ],
+  "wb6922": [
+   52.934075,
+   -115.492258
+  ],
+  "wb6923": [
+   53.217685,
+   -112.532662
+  ],
+  "wb854": [
+   53.63381,
+   -117.709012
+  ]
  }
 }

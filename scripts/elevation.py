@@ -17,11 +17,17 @@ them, 100 points per request: 380 lakes is 4 requests. The service returns a
 Writes data/lake_elevation.json:
 
     {"source": ..., "licence": ..., "retrieved": "YYYY-MM-DD", "calls": 4,
-     "count": 380, "lakes": {"wb854": 1187.0, ...}}
+     "count": 380, "lakes": {"wb854": 1187.0, ...},
+     "points": {"wb854": [53.63381, -117.709012], ...}}
+
+"lakes" is what the app reads. "points" is where each height was asked for: a
+saved height is kept only while its water is still within 100 m of that point,
+so a lake or river spot that moved is asked for again.
 """
 
 import datetime
 import json
+import math
 import ssl
 import subprocess
 import sys
@@ -35,6 +41,22 @@ DATA = ROOT / "data"
 OUT = DATA / "lake_elevation.json"
 ENDPOINT = "https://api.open-meteo.com/v1/elevation"
 PER_CALL = 100
+MOVED_M = 100.0
+
+
+def metres(a, b):
+    lat1, lon1, lat2, lon2 = map(math.radians, (a[0], a[1], b[0], b[1]))
+    h = math.sin((lat2 - lat1) / 2) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin((lon2 - lon1) / 2) ** 2
+    return 2 * 6371000.0 * math.asin(math.sqrt(min(1.0, h)))
+
+
+def still_good(saved, key, point):
+    """The saved height for key, if it was asked for within MOVED_M of point."""
+    h = saved.get("lakes", {}).get(key)
+    at = saved.get("points", {}).get(key)
+    if h is None or not at or metres(at, point) > MOVED_M:
+        return None
+    return h
 
 
 def placed_lakes():
@@ -45,6 +67,18 @@ def placed_lakes():
             key = lake.get("lake_id") or lake.get("ats")
             if lake.get("lat") is not None and lake.get("lon") is not None:
                 lakes[key] = (lake["lat"], lake["lon"])
+    # Build 5 Stage 2: the guide's lakes that are not stocked, and each forecast
+    # spot of a river stretch ("<stretch id>#<n>"), from scripts/waterbodies.py.
+    extra = DATA / "waters_unstocked.json"
+    if extra.exists():
+        for lake in json.loads(extra.read_text(encoding="utf-8")).get("lakes", []):
+            if lake.get("lat") is not None:
+                lakes.setdefault(lake["lake_id"], (lake["lat"], lake["lon"]))
+    rivers = DATA / "rivers.json"
+    if rivers.exists():
+        for st in json.loads(rivers.read_text(encoding="utf-8")).get("stretches", []):
+            for i, (lat, lon) in enumerate(st.get("spots") or []):
+                lakes[f"{st['lake_id']}#{i}"] = (lat, lon)
     return dict(sorted(lakes.items()))
 
 
@@ -55,9 +89,9 @@ def get_json(url):
     try:
         with urllib.request.urlopen(req, timeout=60) as resp:
             return json.loads(resp.read().decode("utf-8"))
-    except urllib.error.URLError as err:
-        if not isinstance(err.reason, ssl.SSLError):
-            raise
+    except urllib.error.URLError:
+        # A refused certificate chain (seen on one Windows PC) or a reset
+        # connection: curl uses the system store and its own connection.
         out = subprocess.run(["curl", "-sfL", "-A", "troutmap-build/1.0", url],
                              capture_output=True, check=True, timeout=90).stdout
         return json.loads(out.decode("utf-8"))
@@ -66,7 +100,16 @@ def get_json(url):
 def fetch(points):
     lats = ",".join(f"{lat:.5f}" for lat, _ in points)
     lons = ",".join(f"{lon:.5f}" for _, lon in points)
-    body = get_json(f"{ENDPOINT}?latitude={lats}&longitude={lons}")
+    # A reset connection is retried a few times before the build gives up.
+    # A reset connection or a rate limit (HTTP 429) is retried, waiting longer each time.
+    for attempt in range(8):
+        try:
+            body = get_json(f"{ENDPOINT}?latitude={lats}&longitude={lons}")
+            break
+        except (urllib.error.URLError, ConnectionError, TimeoutError, subprocess.CalledProcessError):
+            if attempt == 7:
+                raise
+            time.sleep(15 * (attempt + 1))
     heights = body.get("elevation")
     if not isinstance(heights, list) or len(heights) != len(points):
         raise ValueError(f"expected {len(points)} heights, got {body!r:.200}")
@@ -77,8 +120,18 @@ def main():
     lakes = placed_lakes()
     keys = list(lakes)
     out, calls = {}, 0
-    for i in range(0, len(keys), PER_CALL):
-        chunk = keys[i:i + PER_CALL]
+    # A height already saved for the same id at the same place is kept: the DEM
+    # does not change, and each point is one call on Open-Meteo's free limit. A
+    # new id, or one whose water moved more than 100 m (or has no saved point),
+    # is asked for again. Ids no longer on the map are dropped.
+    saved = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {}
+    for k in keys:
+        h = still_good(saved, k, lakes[k])
+        if h is not None:
+            out[k] = h
+    need = [k for k in keys if k not in out]
+    for i in range(0, len(need), PER_CALL):
+        chunk = need[i:i + PER_CALL]
         heights = fetch([lakes[k] for k in chunk])
         calls += 1
         for k, h in zip(chunk, heights):
@@ -94,12 +147,15 @@ def main():
         "url": ENDPOINT,
         "licence": "CC BY 4.0 (Open-Meteo); Copernicus DEM © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018, provided under COPERNICUS by the European Union and ESA",
         "retrieved": datetime.date.today().isoformat(),
-        "calls": calls,
+        # Calls a build from nothing takes (100 points per call); this run made calls_this_run.
+        "calls": -(-len(out) // PER_CALL),
+        "calls_this_run": calls,
         "count": len(out),
-        "lakes": out,
+        "lakes": dict(sorted(out.items())),
+        "points": {k: [round(lakes[k][0], 6), round(lakes[k][1], 6)] for k in sorted(out)},
     }
     OUT.write_text(json.dumps(record, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\r\n")
-    print(f"{len(out)} of {len(keys)} lakes, {calls} calls -> {OUT.relative_to(ROOT)}")
+    print(f"{len(out)} of {len(keys)} lakes, {len(need)} asked for in {calls} calls -> {OUT.relative_to(ROOT)}")
     return 0
 
 

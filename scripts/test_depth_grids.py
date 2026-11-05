@@ -31,8 +31,10 @@ class DepthGridTests(unittest.TestCase):
     def test_every_depth_chart_lake_has_a_grid(self):
         charts = json.loads((ROOT / "data" / "depth_charts.json").read_text(encoding="utf-8"))["lakes"]
         index = load_index()
+        # Every lake with a depth chart has its lakebed grid (Build 5 Stage 2 adds
+        # the guide's lakes that are not stocked, "gu-..."); the 43 stocked ones stay.
         self.assertEqual(set(charts), set(index["lakes"]))
-        self.assertEqual(len(index["lakes"]), 43)
+        self.assertEqual(len([k for k in index["lakes"] if not k.startswith("gu-")]), 43)
 
     def test_every_grid_file_exists_with_one_cell_per_grid_point(self):
         index = load_index()
@@ -46,7 +48,10 @@ class DepthGridTests(unittest.TestCase):
 
     def test_all_grids_stay_inside_the_size_target(self):
         total = sum((ROOT / g["file"]).stat().st_size for g in load_index()["grids"].values())
-        self.assertLess(total, 1.5 * 1024 * 1024)
+        # Build 3: 43 lakes in 1.37 MB under a 1.5 MB cap. Build 5 Stage 2 adds the
+        # guide's depth-chart lakes that are not stocked (about 110 lakes, 3.8 MB);
+        # all are still saved on the first visit so 3D works with no signal.
+        self.assertLess(total, 4.5 * 1024 * 1024)
 
     def test_deepest_cell_matches_the_contour_map(self):
         # Depth is filled from the contour lines, so the deepest cell sits at

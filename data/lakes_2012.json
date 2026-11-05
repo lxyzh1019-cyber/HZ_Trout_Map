@@ -6,7 +6,7 @@
     "lat": 53.545513,
     "lon": -114.589748,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "PP2",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -1245,7 +1245,7 @@
     "lat": 53.9,
     "lon": -119.05,
     "coord_source": "profile",
-    "zone": "ES2",
+    "zone": "ES4",
     "surface_area_ha": 163.6,
     "amenities": "Day use picnic area, fire pits, picnic tables, boat launch, natural beach, playground, beach, dock for small motors.",
     "stockings": [
@@ -1467,7 +1467,7 @@
     "lat": 50.524756,
     "lon": -111.843722,
     "coord_source": "profile",
-    "zone": "ES2",
+    "zone": "PP1",
     "surface_area_ha": 13.9,
     "amenities": "This waterbody has no amenities.",
     "stockings": [
@@ -1971,7 +1971,7 @@
     "lat": 49.677137,
     "lon": -110.506929,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -2121,7 +2121,7 @@
     "lat": 53.882014,
     "lon": -119.090207,
     "coord_source": "profile",
-    "zone": "NB1",
+    "zone": "ES4",
     "surface_area_ha": 72.4,
     "amenities": "Kayaking, canoeing, fishing.",
     "stockings": [
@@ -2572,7 +2572,7 @@
     "lat": 50.872201,
     "lon": -115.148727,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -2757,7 +2757,7 @@
     "lat": 54.980556,
     "lon": -116.459444,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "NB2",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -2857,7 +2857,7 @@
     "lat": 50.633333,
     "lon": -115.133333,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -3164,7 +3164,7 @@
     "lat": 49.207984,
     "lon": -111.562445,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -3382,7 +3382,7 @@
     "lat": 51.546348,
     "lon": -113.331867,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "PP2",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -3963,7 +3963,7 @@
     "lat": 50.900514,
     "lon": -114.689747,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -4715,7 +4715,7 @@
     "lat": 49.626771,
     "lon": -114.641917,
     "coord_source": "alberta",
-    "zone": "ES3",
+    "zone": "ES1",
     "surface_area_ha": 3.5,
     "amenities": null,
     "stockings": [
@@ -4987,7 +4987,7 @@
     "lat": 52.042128,
     "lon": -112.131457,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "PP2",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -5283,7 +5283,7 @@
     "lat": 51.039668,
     "lon": -114.849893,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -5758,7 +5758,7 @@
     "lat": 49.434987,
     "lon": -112.384948,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -5786,7 +5786,7 @@
     "lat": 49.895155,
     "lon": -113.199605,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -6915,7 +6915,7 @@
     "lat": 51.074617,
     "lon": -115.37285,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -7094,7 +7094,7 @@
     "lat": 50.434749,
     "lon": -112.259866,
     "coord_source": "profile",
-    "zone": "PP2",
+    "zone": "PP1",
     "surface_area_ha": 4.0,
     "amenities": "This waterbody has no amenities.",
     "stockings": [
@@ -7289,7 +7289,7 @@
     "lat": 53.895509,
     "lon": -115.050562,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "NB2",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -7423,7 +7423,7 @@
     "lat": 53.775627,
     "lon": -112.749283,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "PP2",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -7490,7 +7490,7 @@
     "lat": 54.537414,
     "lon": -112.80524,
     "coord_source": "profile",
-    "zone": "NB2",
+    "zone": "NB1",
     "surface_area_ha": 2.8,
     "amenities": "Day use, fires in designated pits only.",
     "stockings": [
@@ -7518,7 +7518,7 @@
     "lat": 53.947431,
     "lon": -113.586428,
     "coord_source": "profile",
-    "zone": "PP2",
+    "zone": "NB1",
     "surface_area_ha": 1.5,
     "amenities": "Day use only, no open fires, foot access only.",
     "stockings": [
@@ -7804,7 +7804,7 @@
     "lat": 50.867923,
     "lon": -115.353252,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -8061,7 +8061,7 @@
     "lat": 52.347721,
     "lon": -110.278345,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "PP2",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -8454,7 +8454,7 @@
     "lat": 51.033333,
     "lon": -115.041667,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -8549,7 +8549,7 @@
     "lat": 52.366667,
     "lon": -116.85,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES2",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -8644,7 +8644,7 @@
     "lat": 50.372611,
     "lon": -114.814015,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -9126,7 +9126,7 @@
     "lat": 53.041523,
     "lon": -116.706,
     "coord_source": "profile",
-    "zone": "ES2",
+    "zone": "ES3",
     "surface_area_ha": 2.6,
     "amenities": "This waterbody has no amenities.",
     "stockings": [
@@ -9417,7 +9417,7 @@
     "lat": 50.817739,
     "lon": -113.779006,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -9445,7 +9445,7 @@
     "lat": 51.354755,
     "lon": -114.944894,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -9540,7 +9540,7 @@
     "lat": 50.802829,
     "lon": -115.247348,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -9624,7 +9624,7 @@
     "lat": 52.418798,
     "lon": -116.860193,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES2",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -10166,7 +10166,7 @@
     "lat": 54.45359,
     "lon": -116.888798,
     "coord_source": "profile",
-    "zone": "ES3",
+    "zone": "ES4",
     "surface_area_ha": 2.5,
     "amenities": "Fishing dock",
     "stockings": [
@@ -10278,7 +10278,7 @@
     "lat": 55.076591,
     "lon": -117.284529,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES4",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -10558,7 +10558,7 @@
     "lat": 51.423867,
     "lon": -115.325722,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES2",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -10586,7 +10586,7 @@
     "lat": 50.807542,
     "lon": -115.245079,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -10670,7 +10670,7 @@
     "lat": 49.870282,
     "lon": -113.516665,
     "coord_source": "profile",
-    "zone": "PP1",
+    "zone": "ES1",
     "surface_area_ha": 1.4,
     "amenities": "Day use, no open fires, foot access only.",
     "stockings": [
@@ -10726,7 +10726,7 @@
     "lat": 49.664455,
     "lon": -112.787844,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -10754,7 +10754,7 @@
     "lat": 49.693633,
     "lon": -112.900097,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -10782,7 +10782,7 @@
     "lat": 49.656083,
     "lon": -112.798097,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "PP1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -10894,7 +10894,7 @@
     "lat": 50.926586,
     "lon": -115.242495,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -11090,7 +11090,7 @@
     "lat": 50.661923,
     "lon": -115.215945,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -11118,7 +11118,7 @@
     "lat": 50.505823,
     "lon": -114.943334,
     "coord_source": "alberta",
-    "zone": null,
+    "zone": "ES1",
     "surface_area_ha": null,
     "amenities": null,
     "stockings": [
@@ -11146,7 +11146,7 @@
     "lat": 51.041403,
     "lon": -114.017656,
     "coord_source": "profile",
-    "zone": "PP2",
+    "zone": "ES1",
     "surface_area_ha": 1.0,
     "amenities": "Bow habitat station has amenities.",
     "stockings": [

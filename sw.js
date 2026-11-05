@@ -36,7 +36,9 @@
    chips, the sample 3D model in the Learn guide and the river guide. */
 /* v8: Build 5 Stage 1. One answer line, short tags, the Map menu, ⓘ for what an
    estimate used, "Usually stocked" and the rules-year warning. */
-const SHELL_CACHE = "troutmap-shell-v8";
+/* v9: Build 5 Stage 2. Waters that are not stocked, river stretches, the
+   Stocked filter, and weather loaded near you and on screen first. */
+const SHELL_CACHE = "troutmap-shell-v9";
 const DATA_CACHE = "troutmap-data-v1";
 const TILE_CACHE = "troutmap-tiles-v1";
 /* v2: the single-spot forecast URL gained wind_direction_10m, so the old
@@ -132,6 +134,8 @@ async function precacheData() {
                  // Build 3: the 3D depth model's index and boating rules; the
                  // lakebed files named in the index follow below.
                  "data/depth_grids/index.json", "data/boating_rules.json",
+                 // Build 5 Stage 2: the guide's waters that are not stocked, and its rivers.
+                 "data/waters_unstocked.json", "data/rivers.json",
                  "live/advisories.json"];
   await Promise.all(fixed.map(u => cache.add(u).catch(() => {})));
 
