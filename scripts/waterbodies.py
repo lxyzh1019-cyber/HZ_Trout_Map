@@ -58,7 +58,6 @@ import zipfile
 from collections import Counter, defaultdict
 from pathlib import Path
 
-import shapefile  # pyshp
 
 import ats
 import regulations
@@ -299,6 +298,9 @@ def cgn_rows(rows):
 
 
 def canvec(path, layer):
+    # pyshp is needed only to read the CanVec download; the tests and the
+    # GitHub checks import this file without it.
+    import shapefile  # pyshp
     path = Path(path)
     if path.suffix.lower() == ".zip":
         z = zipfile.ZipFile(path)
