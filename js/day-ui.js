@@ -36,6 +36,14 @@
     recomputeDistances();
     if (typeof placeOriginMarker === "function") placeOriginMarker();
     onFilterChange();
+    fetchNear();
+  }
+
+  /* Build 5: a new home or a picked town loads the forecasts within 200 km of it. */
+  var nearTimer = null;
+  function fetchNear() {
+    clearTimeout(nearTimer);
+    nearTimer = setTimeout(function () { if (navigator.onLine && !fx.loading) fetchAll(false); }, 400);
   }
 
   // ============================================================
@@ -252,12 +260,19 @@
             "Day out " + LakeSheet.bandWord(day.dayOut)];
   }
 
+  /* Build 5: one river can have several stretches; the start of the guide's
+   * words tells them apart ("river: from Dickson Dam …"). */
+  function stretchHint(l) {
+    var d = String(l.detail || "").replace(/^(Mainstem and tributaries|Mainstem|Includes tributaries;?)\s*/i, "").trim();
+    return "river" + (d ? ": " + (d.length > 38 ? d.slice(0, 36).replace(/\s+\S*$/, "") + " …" : d) : " · " + (l.zone || ""));
+  }
+
   function rowHtml(lake, d, winter) {
     var f = Forecast.forLake(lake);
     var s = f ? Forecast.rankable(f, d) : null;
     var pill = dayOutPill(lake, d, winter);
     var km = Number.isFinite(lake.distanceKm) ? Math.round(lake.distanceKm) + " km" : "";
-    var size = lake.surface_area_ha != null ? lake.surface_area_ha + " ha" : "size unknown";
+    var size = lake.river ? stretchHint(lake) : lake.surface_area_ha != null ? lake.surface_area_ha + " ha" : "size unknown";
     var cold = winter || (f && f.iced);
     var score = cold ? winterText(lake, d) : s === null ? "—" : pct(s);
     return '<button type="button" class="row" data-lake="' + esc(lakeKey(lake)) + '">'
@@ -472,6 +487,7 @@
     return '<li role="option" id="sr-' + i + '" class="row" data-key="' + esc(lakeKey(l)) + '"' + (i === active ? ' aria-selected="true"' : "") + ">"
       + '<span><span class="nm">' + esc(l.name) + '</span><br><span class="sub">'
       + (Number.isFinite(l.distanceKm) ? Math.round(l.distanceKm) + " km from " + esc(originPoint().name) : "no position")
+      + (l.river ? " · " + esc(stretchHint(l)) : "")
       + "</span></span>"
       + '<span class="sc" title="' + (winter || (f && f.iced) ? "Winter score" : "Bite score") + '">'
       + esc(winter || (f && f.iced) ? winterText(l, state.day) : s === null ? "—" : pct(s)) + "</span>"
@@ -869,6 +885,8 @@
     emptyCheck: emptyCheck,
     showState: showState,
     lastSummary: function () { return fx.lastSummary; },
+    panSummary: function () { return fx.panSummary || null; },
+    fetchNear: function () { fetchNear(); },
     _internal: { ranked: ranked, rowHtml: rowHtml, dayOutPill: dayOutPill, pool: pool, thisWinter: thisWinter, winterKey: winterKey },
   };
 })();

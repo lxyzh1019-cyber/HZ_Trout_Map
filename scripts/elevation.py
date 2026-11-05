@@ -17,11 +17,17 @@ them, 100 points per request: 380 lakes is 4 requests. The service returns a
 Writes data/lake_elevation.json:
 
     {"source": ..., "licence": ..., "retrieved": "YYYY-MM-DD", "calls": 4,
-     "count": 380, "lakes": {"wb854": 1187.0, ...}}
+     "count": 380, "lakes": {"wb854": 1187.0, ...},
+     "points": {"wb854": [53.63381, -117.709012], ...}}
+
+"lakes" is what the app reads. "points" is where each height was asked for: a
+saved height is kept only while its water is still within 100 m of that point,
+so a lake or river spot that moved is asked for again.
 """
 
 import datetime
 import json
+import math
 import ssl
 import subprocess
 import sys
@@ -35,6 +41,22 @@ DATA = ROOT / "data"
 OUT = DATA / "lake_elevation.json"
 ENDPOINT = "https://api.open-meteo.com/v1/elevation"
 PER_CALL = 100
+MOVED_M = 100.0
+
+
+def metres(a, b):
+    lat1, lon1, lat2, lon2 = map(math.radians, (a[0], a[1], b[0], b[1]))
+    h = math.sin((lat2 - lat1) / 2) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin((lon2 - lon1) / 2) ** 2
+    return 2 * 6371000.0 * math.asin(math.sqrt(min(1.0, h)))
+
+
+def still_good(saved, key, point):
+    """The saved height for key, if it was asked for within MOVED_M of point."""
+    h = saved.get("lakes", {}).get(key)
+    at = saved.get("points", {}).get(key)
+    if h is None or not at or metres(at, point) > MOVED_M:
+        return None
+    return h
 
 
 def placed_lakes():
@@ -98,12 +120,15 @@ def main():
     lakes = placed_lakes()
     keys = list(lakes)
     out, calls = {}, 0
-    # A height already saved for the same id is kept: the DEM does not change, and
-    # each point is one call on Open-Meteo's free limit. Only new points are asked for.
-    if OUT.exists():
-        saved = json.loads(OUT.read_text(encoding="utf-8")).get("lakes", {})
-        out = {k: v for k, v in saved.items() if k in lakes}
-    out = dict(out)
+    # A height already saved for the same id at the same place is kept: the DEM
+    # does not change, and each point is one call on Open-Meteo's free limit. A
+    # new id, or one whose water moved more than 100 m (or has no saved point),
+    # is asked for again. Ids no longer on the map are dropped.
+    saved = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {}
+    for k in keys:
+        h = still_good(saved, k, lakes[k])
+        if h is not None:
+            out[k] = h
     need = [k for k in keys if k not in out]
     for i in range(0, len(need), PER_CALL):
         chunk = need[i:i + PER_CALL]
@@ -127,9 +152,10 @@ def main():
         "calls_this_run": calls,
         "count": len(out),
         "lakes": dict(sorted(out.items())),
+        "points": {k: [round(lakes[k][0], 6), round(lakes[k][1], 6)] for k in sorted(out)},
     }
     OUT.write_text(json.dumps(record, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\r\n")
-    print(f"{len(out)} of {len(keys)} lakes, {calls} calls -> {OUT.relative_to(ROOT)}")
+    print(f"{len(out)} of {len(keys)} lakes, {len(need)} asked for in {calls} calls -> {OUT.relative_to(ROOT)}")
     return 0
 
 

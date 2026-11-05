@@ -55,6 +55,8 @@ Single working record for this repository. Updated by the main session at the en
 - [agreed] (owner accepted 2026-11-04) Survey depths go beyond the mean: 18 surveyed lakes with no published max depth get the survey's max, so their summer layer, winterkill band and fish depth change; chain grids (Pierre Greys, Wildhorse) give none — search: load_survey
 - [agreed] Build 5 Plan v1 approved 2026-11-04 (Edmonton): 4 stages, one PR each; decisions 1–6 at option A (no score without a forecast anywhere; answer line + tags + thin-ice warning open, week bars in "This week"; best hour ±1 h; usual month only at 60%+; rules-year warning at panel top and in Rules; CRLF for .md only) — search: answerHtml
 - [agreed] Build 5 Rev 3 (owner 2026-11-04 evening): keep the best-day box format open at the top (Go day · score, reason, ice line, 7 bars); "8 reports" tag the same size as the others; decisions 7–9 at A ("Bite by hour", safety lines whole, one wind word) — search: Tip and status
+- [agreed] Build 5 Rev 5 (owner 2026-11-05): decision 11 at A = CanVec 1:50,000 (the 1:250,000 file has no names); decision 15 at A = static.ags.aer.ca allowed, 3D for the guide's depth-chart lakes — search: water_linear_flow
+- [differs from plan] Kananaskis and Medley Rivers are stocked waters; their stretch joins the stocked pin instead of a second "not stocked" pin; stocked lakes with no zone (Headwall, Memorial, Running Rain, Badger and others) cannot take their guide row until a zone is set; Oldman, Bearspaw and Pine Coulee Reservoirs are in neither the place names nor CanVec under that name — search: stocked_twin
 - [agreed] (owner accepted 2026-11-04) River guide has one labelled bend drawing (A–G), not one drawing per water type; the sample 3D model in the guide is a second small view, off while a lake's 3D view is open — search: data-demo-host
 
 ## Pending
@@ -162,7 +164,7 @@ Single working record for this repository. Updated by the main session at the en
 | M8 | 11-04 | Rules year check banner from 1 Apr 2027; README refresh steps | done | 5.1; rulesYearWarning; README "Refreshing the rules" |
 | M9 | 11-04 | "Usually stocked" months at 60%+, "Too few years to tell" under 3 years | done | 5.1; usualMonths; 282 of 382 lakes |
 | M10 | 11-04 | Every stage: tests, 5-size layout check, before/after pictures, FEATURES and record, CRLF, final report | open | 5.1 done; stages 2–4 to come |
-| M11 | 11-04 | Stage 2: score all lakes in the 2026 guide, Red Deer River below Dickson Dam, CGNDB positions, weather budget, Stocked filter | open | Build 5 Stage 2 |
+| M11 | 11-04 | Stage 2: score all lakes and rivers in the 2026 guide, Red Deer River below Dickson Dam, CGNDB and CanVec positions, weather budget, Stocked filter | done | 5.2; 285 lakes, 86 stretches, 318 spots, 3D on 114 lakes; 53 names in data/waters_review.csv; spot matching for the owner's 218 pins waits for the file |
 | M12 | 11-04 | Stage 3: import my spots (browser only), species mode | open | Build 5 Stage 3 |
 | M13 | 11-04 | Stage 4: Firebase sync and weekly email (ASK first) | open | Build 5 Stage 4; replaces F1, F2 |
 
@@ -182,7 +184,7 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 | Build 3 | COMPLETE | PR #20 merged 2026-11-04 (d3e3c0d) |
 | Build 4 | COMPLETE | PR #21 merged 2026-11-04 (922ddb0) |
 | Build 5 Stage 1 | COMPLETE | PR #22 merged 2026-11-04 (d70bc8a); 274 tests pass on GitHub |
-| Build 5 Stage 2 | IN PROGRESS | planning: guide tables 464 lake names (84 on the map, about 380 new), 69 river and creek names, 127 stretches |
+| Build 5 Stage 2 | IN REVIEW | branch claude/funny-ritchie-bealq0; 308 tests pass; data rebuild unchanged; reviewer 16 findings all fixed or recorded; waiting for the owner's picture OK |
 | Build 5 Stage 3 | NOT STARTED | |
 | Build 5 Stage 4 | NOT STARTED | |
 
@@ -220,6 +222,9 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 - 2026-11-04 build-5 stage 1 reviewer pass → 11 findings, all fixed or put to the owner: ice safety line on the first screen; "sun and moon only" words removed; no winter score without a forecast; one wind word (Day out) in panel and list; open tag and ⓘ kept on a redraw, focus kept; menu aria, ⓘ labels, aria-live; water box kept without a forecast; README step 4 uses regs_aliases.csv; tests for taps and exact counts; "Bite by hour" rename and the 87 words with a forecast asked as decisions; this Proof line. Full suite then 275 run → 275 pass
 - 2026-11-04 build-5 stage 1 Rev 3 (box open, answer line removed, tags one size): test_regression_checks 274 run → 274 pass; word count 390 px first screen no forecast 76, made-up weather 123; layout 5 sizes 0 faults; main (7f10c2c, to-do update) merged into the branch
 - Proof: 2026-11-04 Playwright on the working tree (headless Chromium, fresh profile, weather blocked or made-up): Beaver Lake panel first screen 59 words with no forecast, "Needs a forecast", no bars; Map menu opens, Escape and a pick close it; tag tap shows and hides the full words; ⓘ shows "From: …"; Usually stocked "May (14 of 16 years)"; layout 5 sizes 0 faults; 0 page errors
+
+- 2026-11-05 build-5 stage 2: unittest discover 308 run → 308 pass (PYTHONUTF8=1); build_history.py leaves data/ unchanged; Open-Meteo heights 983 keys (rate limit 429 hit after repeated runs; elevation.py now asks only for new or moved points); reviewer pass 16 findings → all fixed (data side by a helper on separate files, app side in this session) or recorded above
+- 2026-11-05 build-5 stage 2 sizes: first visit about 10.4 MB (app 1.7, stocking data 4.3, waters and rivers 0.7, lakebeds 4.0); was about 7.4 MB
 
 ## Open questions / blockers
 - H4 answered 2026-10-30: Open-Meteo counts per IP; one full load = 250 calls in 5 requests (measured in the browser), 3 h cache.

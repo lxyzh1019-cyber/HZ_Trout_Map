@@ -4,8 +4,8 @@
  "layer": "https://services2.arcgis.com/jQV6VMr2Loovu7GU/arcgis/rest/services/Lake_Boundary/FeatureServer/0",
  "retrieved": "2026-11-05",
  "surveyed": 166,
- "placed_lakes": 661,
- "matched": 109,
+ "placed_lakes": 665,
+ "matched": 114,
  "rule": "same name without 'lake', chain parts (Upper, #3), brackets and punctuation, with the lake's point inside the outline or within 2 km; or one letter different with the point inside",
  "lakes": {
   "gu-es1-gap-lake": {
@@ -66,7 +66,7 @@
    "name": "Sturgeon Lake",
    "dig": "DIG 2008-0682",
    "url": "https://ags.aer.ca/publication/dig-2008-0682",
-   "km_from_outline": 0.0
+   "km_from_outline": 0.24
   },
   "gu-nb1-amisk-lake": {
    "name": "Amisk Lake",
@@ -84,6 +84,12 @@
    "name": "Beaver Lake",
    "dig": "DIG 2008-0546",
    "url": "https://ags.aer.ca/publication/dig-2008-0546",
+   "km_from_outline": 0.11
+  },
+  "gu-nb1-burnt-lake": {
+   "name": "Burnt Lake",
+   "dig": "DIG 2008-0557",
+   "url": "https://ags.aer.ca/publication/dig-2008-0557",
    "km_from_outline": 0.0
   },
   "gu-nb1-claude-lake": {
@@ -158,6 +164,12 @@
    "url": "https://ags.aer.ca/publication/dig-2008-0629",
    "km_from_outline": 0.11
   },
+  "gu-nb1-lac-sante": {
+   "name": "Lac Sante",
+   "dig": "DIG 2008-0668",
+   "url": "https://ags.aer.ca/publication/dig-2008-0668",
+   "km_from_outline": 0.0
+  },
   "gu-nb1-laurier-lake": {
    "name": "Laurier Lake",
    "dig": "DIG 2008-0621",
@@ -198,7 +210,7 @@
    "name": "North Buck Lake",
    "dig": "DIG 2008-0652",
    "url": "https://ags.aer.ca/publication/dig-2008-0652",
-   "km_from_outline": 0.0
+   "km_from_outline": 0.25
   },
   "gu-nb1-seibert-lake": {
    "name": "Seibert Lake",
@@ -254,6 +266,12 @@
    "url": "https://ags.aer.ca/publication/dig-2008-0592",
    "km_from_outline": 0.0
   },
+  "gu-nb2-island-lake": {
+   "name": "Island Lake",
+   "dig": "DIG 2008-0611",
+   "url": "https://ags.aer.ca/publication/dig-2008-0611",
+   "km_from_outline": 0.0
+  },
   "gu-nb2-lac-la-nonne": {
    "name": "Lac la Nonne",
    "dig": "DIG 2008-0651",
@@ -288,7 +306,7 @@
    "name": "Nakamun Lake",
    "dig": "DIG 2008-0649",
    "url": "https://ags.aer.ca/publication/dig-2008-0649",
-   "km_from_outline": 0.0
+   "km_from_outline": 0.17
   },
   "gu-nb2-steele-cross-lake": {
    "name": "Steele Lake",
@@ -300,6 +318,12 @@
    "name": "Nipisi Lake",
    "dig": "DIG 2008-0650",
    "url": "https://ags.aer.ca/publication/dig-2008-0650",
+   "km_from_outline": 0.0
+  },
+  "gu-nb3-utikuma-lake": {
+   "name": "Utikuma Lake",
+   "dig": "DIG 2008-0691",
+   "url": "https://ags.aer.ca/publication/dig-2008-0691",
    "km_from_outline": 0.0
   },
   "gu-nb4-winefred-lake": {
@@ -337,6 +361,12 @@
    "dig": "DIG 2008-0555",
    "url": "https://ags.aer.ca/publication/dig-2008-0555",
    "km_from_outline": 0.65
+  },
+  "gu-pp2-buffalo-lake": {
+   "name": "Buffalo Lake",
+   "dig": "DIG 2008-0556",
+   "url": "https://ags.aer.ca/publication/dig-2008-0556",
+   "km_from_outline": 0.41
   },
   "gu-pp2-coal-lake": {
    "name": "Coal Lake",

@@ -4068,3 +4068,46 @@ class Build5Stage2Tests(unittest.TestCase):
         got = run_js(["forecast.js"], """(() => { const F = window.Forecast;
           return typeof F.forLake; })()""", prelude="window = globalThis;")
         self.assertEqual(got, "function")
+
+    def test_a_river_is_shown_at_its_best_spot_with_that_spots_height(self):
+        got = run_js(["lake-sheet.js"], """(() => {
+          window.Forecast = { forLake: () => ({ spot: 2, days: [] }) };
+          const lake = { lake_id: 'rv-x-1', river: true, lat: 1, lon: 1, spots: [[50, -114], [51, -114], [52, -114]] };
+          const v = window.LakeSheet.viewOf(lake);
+          const still = window.LakeSheet.viewOf({ lake_id: 'wb1', lat: 3, lon: 4 });
+          return [v.lat, v.lon, v._spotKey, still.lat]; })()""",
+                     prelude="window = globalThis; function lakeKey(l) { return l.lake_id; } var state = {};")
+        self.assertEqual(got, [52, -114, "rv-x-1#2", 3])
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn("lake && lake._spotKey ? lake._spotKey : lakeKey(lake)", page)
+        self.assertIn("Math.min(...lake.spots.map(p => haversineKm(originLat(), originLon(), p[0], p[1])))", page)
+        fc = (ROOT / "js" / "forecast.js").read_text(encoding="utf-8")
+        self.assertIn('_spotKey: lakeKey(lake) + "#" + i', fc)
+
+    def test_weather_calls_per_load(self):
+        """The cells the app asks for: every lake and river spot, one call per
+        0.25 degree cell (js/weather.js cellKey). A fresh load from Red Deer asks
+        only for the cells within 200 km; the whole province stays under
+        Open-Meteo's 600 calls a minute."""
+        import math
+        pts = [(l["lat"], l["lon"]) for l in placed_waters().values() if l.get("lat") is not None]
+        pts += [tuple(p) for s in self.rivers["stretches"] for p in s["spots"]]
+        cell = lambda p: (round(p[0] * 4) / 4, round(p[1] * 4) / 4)
+        home = (52.268, -113.811)
+        km = lambda a, b: 6371 * 2 * math.asin(math.sqrt(math.sin(math.radians(b[0] - a[0]) / 2) ** 2
+              + math.cos(math.radians(a[0])) * math.cos(math.radians(b[0])) * math.sin(math.radians(b[1] - a[1]) / 2) ** 2))
+        full = {cell(p) for p in pts}
+        near = {cell(p) for p in pts if km(home, p) <= 200}
+        self.assertLess(len(near), 250, len(near))     # before Stage 2 a full load was 250
+        self.assertLess(len(full), 600, len(full))
+        day = (ROOT / "js" / "day-ui.js").read_text(encoding="utf-8")
+        self.assertIn("fetchNear();", day[day.index("function setOrigin("):day.index("function setOrigin(") + 400])
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn("DayUI.fetchNear()", page[page.index("function setHome("):page.index("function updateHomeUI(")])
+
+    def test_zone_view_counts_stocked_lakes_and_hides_rivers(self):
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        z = page[page.index("function zoneSummaries("):page.index("function zoneSummaries(") + 400]
+        self.assertIn("if (lake.unstocked) continue;", z)
+        v = page[page.index("function setView("):page.index("function setView(") + 900]
+        self.assertIn("map.removeLayer(riverLayer)", v)

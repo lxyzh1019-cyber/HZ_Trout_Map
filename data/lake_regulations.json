@@ -1087,6 +1087,39 @@
    },
    "zone": "PP1"
   },
+  "wb3536": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "confirmed_by": "Build 5 match",
+   "detail": "",
+   "matched_name": "Stafford Reservoir",
+   "page": 23,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 8 TO MAR. 15"
+   },
+   "species": {
+    "BURB": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "LKWH": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "NRPK": {
+     "count": 1,
+     "text": "1 fish 63-70 cm"
+    },
+    "WALL": {
+     "count": 1,
+     "text": "1 fish 50-55 cm"
+    }
+   },
+   "trout_total": null,
+   "zone": "PP1"
+  },
   "wb3899": {
    "bait": "Bait is allowed",
    "basis": "put-and-take",
@@ -1643,6 +1676,40 @@
     "text": "OPEN all year"
    },
    "zone": "PP2"
+  },
+  "wb4265": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "confirmed_by": "Build 5 match",
+   "detail": "",
+   "matched_name": "Chin Lakes",
+   "page": 22,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 8 TO MAR. 15"
+   },
+   "species": {
+    "BURB": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "LKWH": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "NRPK": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "WALL": {
+     "count": 1,
+     "text": "1 fish 50-55 cm"
+    }
+   },
+   "trout_total": null,
+   "zone": "PP1"
   },
   "wb4318": {
    "bait": "Bait allowed, except bait fish",
@@ -2501,6 +2568,45 @@
    },
    "zone": "NB2"
   },
+  "wb4977": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "confirmed_by": "Build 5 match",
+   "detail": "",
+   "matched_name": "Kehiwin Lake",
+   "page": 31,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN MAY 15 TO MAR. 31"
+   },
+   "species": {
+    "BURB": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "LKWH": {
+     "count": 10,
+     "text": "10 fish"
+    },
+    "NRPK": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "WALL": {
+     "count": 0,
+     "text": "0 fish",
+     "zero": true
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": null,
+   "zone": "NB1"
+  },
   "wb4978": {
    "bait": "Bait allowed, except bait fish",
    "basis": "site-specific",
@@ -3285,6 +3391,25 @@
     "text": "OPEN all year"
    },
    "zone": "ES3"
+  },
+  "wb5568": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "confirmed_by": "Build 5 match",
+   "detail": "18-8-5-W5",
+   "matched_name": "Phillips Lake",
+   "page": 8,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {},
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES1"
   },
   "wb5569": {
    "bait": "Bait is allowed",
@@ -4142,6 +4267,40 @@
    },
    "zone": "ES2"
   },
+  "wb6044": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "confirmed_by": "Build 5 match",
+   "detail": "29-97-22-W5",
+   "matched_name": "Twin Lakes",
+   "page": 42,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 5,
+    "size_cm": 35,
+    "size_op": "over",
+    "text": "5 trout; only 2 TGTR over 35 cm"
+   },
+   "zone": "NB3"
+  },
   "wb6051": {
    "bait": "Bait is allowed",
    "basis": "put-and-take",
@@ -4720,44 +4879,70 @@
    "zone": "ES2"
   },
   "wb6605": {
-   "bait": "Bait allowed",
-   "basis": "watershed-default",
-   "limits": {
-    "Arctic Grayling": "0",
-    "Bull Trout": "0",
-    "Burbot": "10",
-    "Lake Whitefish": "10",
-    "Mountain Whitefish": "5 over 30 cm",
-    "Perch": "15",
-    "Pike": "3",
-    "Trout": "5",
-    "Walleye": "3 over 50 cm"
-   },
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "confirmed_by": "Build 5 match",
+   "detail": "Upper and lower; 24-21-11-W5; Includes tributaries and outlet",
+   "matched_name": "Smuts Lakes",
+   "page": 8,
    "season": {
     "closed": false,
     "implied": false,
-    "text": "OPEN all year"
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 40,
+    "size_op": "over",
+    "text": "1 trout over 40 cm"
    },
    "zone": "ES1"
   },
   "wb6606": {
-   "bait": "Bait allowed",
-   "basis": "watershed-default",
-   "limits": {
-    "Arctic Grayling": "0",
-    "Bull Trout": "0",
-    "Burbot": "10",
-    "Lake Whitefish": "10",
-    "Mountain Whitefish": "5 over 30 cm",
-    "Perch": "15",
-    "Pike": "3",
-    "Trout": "5",
-    "Walleye": "3 over 50 cm"
-   },
+   "bait": "Bait ban",
+   "basis": "site-specific",
+   "confirmed_by": "Build 5 match",
+   "detail": "Upper and lower; 24-21-11-W5; Includes tributaries and outlet",
+   "matched_name": "Smuts Lakes",
+   "page": 8,
    "season": {
     "closed": false,
     "implied": false,
-    "text": "OPEN all year"
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 1,
+    "size_cm": 40,
+    "size_op": "over",
+    "text": "1 trout over 40 cm"
    },
    "zone": "ES1"
   },

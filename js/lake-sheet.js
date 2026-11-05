@@ -809,7 +809,7 @@
     if (!lake || !lake.river || !Array.isArray(lake.spots) || lake.spots.length < 2) return lake;
     var f = Forecast.forLake(lake);
     var p = f && f.spot != null ? lake.spots[f.spot] : null;
-    return p ? Object.assign({}, lake, { lat: p[0], lon: p[1] }) : lake;
+    return p ? Object.assign({}, lake, { lat: p[0], lon: p[1], _spotKey: lakeKey(lake) + "#" + f.spot }) : lake;
   }
 
   function riverHtml(lake, f) {
@@ -817,7 +817,9 @@
     return '<dl class="kv"><dt>Stretch</dt><dd>' + esc(lake.detail || "As the guide gives it") + "</dd>"
       + "<dt>Forecast</dt><dd>" + (n > 1 ? "Spot " + ((f && f.spot != null ? f.spot : 0) + 1) + " of " + n
         + ", about every 25 km along the stretch; the one with the best day this week is shown." : "One spot on the stretch.") + "</dd>"
-      + (lake.limits === "estimated" ? '<dt>Limits</dt><dd class="dim">Estimated: the guide names a limit the maps could not place exactly.</dd>' : "")
+      + (lake.limits === "estimated" ? '<dt>Limits</dt><dd class="dim">Estimated: the guide names a limit (a road or park edge) the maps could not place, so the line is the whole river in this part of the guide.</dd>'
+        : lake.limits === "approximate" ? '<dt>Limits</dt><dd class="dim">Approximate: one end is placed from a named place near it (a dam or bridge). Read the guide\'s words above.</dd>'
+        : lake.limits === "unit" ? '<dt>Limits</dt><dd class="dim">The river in this part of the guide; its edges are estimated.</dd>' : "")
       + "</dl>";
   }
 
@@ -858,10 +860,10 @@
       + section("forecast", "Forecast", forecast, isOpen("forecast", false))
       + section("bite", "Bite by hour", '<div class="cx-embed" data-cx></div>', isOpen("bite", false))
       + (f ? section("season", "Ice, hatches and tackle", seasonHtml(lake, f), isOpen("season", false)) : "")
-      + section("how", "How to fish this lake", howHtml(lake), isOpen("how", false))
+      + section("how", lake.river ? "How to fish this water" : "How to fish this lake", howHtml(lake), isOpen("how", false))
       + (lake.river ? section("river", "River stretch", riverHtml(lake, f) + learnRow([learnLink("river", "Reading a river")]), isOpen("river", false)) : "")
       + section("fish", "Fish and stocking", stockingHtml(lake) + learnRow(fishLinks(lake)), isOpen("fish", false))
-      + section("info", "Lake info", profileBlock(lake) + facilityBlock(lake) + depthBlock(lake)
+      + section("info", lake.river ? "Water info" : "Lake info", profileBlock(lake) + facilityBlock(lake) + depthBlock(lake)
           + learnRow([learnLink("winterkill", "Winterkill and aeration")].concat(window.DepthModel && DepthModel.has(lake)
               ? [learnLink("depth-model", "3D depth model guide")] : []))
           + depthChartHtml(lake)

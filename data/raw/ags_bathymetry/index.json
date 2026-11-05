@@ -77,6 +77,12 @@
   "grid_dig": "DIG_2008_0377",
   "zip": "DIG_2008_0377.zip"
  },
+ "gu-nb1-burnt-lake": {
+  "name": "Burnt Lake",
+  "contour_dig": "DIG 2008-0557",
+  "grid_dig": "DIG_2008_0388",
+  "zip": "DIG_2008_0388.zip"
+ },
  "gu-nb1-claude-lake": {
   "name": "Claude Lake",
   "contour_dig": "DIG 2008-0570",
@@ -148,6 +154,12 @@
   "contour_dig": "DIG 2008-0629",
   "grid_dig": "DIG_2008_0460",
   "zip": "DIG_2008_0460.zip"
+ },
+ "gu-nb1-lac-sante": {
+  "name": "Lac Sante",
+  "contour_dig": "DIG 2008-0668",
+  "grid_dig": "DIG_2008_0499",
+  "zip": "DIG_2008_0499.zip"
  },
  "gu-nb1-laurier-lake": {
   "name": "Laurier Lake",
@@ -245,6 +257,12 @@
   "grid_dig": "DIG_2008_0423",
   "zip": "DIG_2008_0423.zip"
  },
+ "gu-nb2-island-lake": {
+  "name": "Island Lake",
+  "contour_dig": "DIG 2008-0611",
+  "grid_dig": "DIG_2008_0442",
+  "zip": "DIG_2008_0442.zip"
+ },
  "gu-nb2-lac-la-nonne": {
   "name": "Lac la Nonne",
   "contour_dig": "DIG 2008-0651",
@@ -293,6 +311,12 @@
   "grid_dig": "DIG_2008_0481",
   "zip": "DIG_2008_0481.zip"
  },
+ "gu-nb3-utikuma-lake": {
+  "name": "Utikuma Lake",
+  "contour_dig": "DIG 2008-0691",
+  "grid_dig": "DIG_2008_0522",
+  "zip": "DIG_2008_0522.zip"
+ },
  "gu-nb4-winefred-lake": {
   "name": "Winefred Lake",
   "contour_dig": "DIG 2008-0701",
@@ -328,6 +352,12 @@
   "contour_dig": "DIG 2008-0555",
   "grid_dig": "DIG_2008_0386",
   "zip": "DIG_2008_0386.zip"
+ },
+ "gu-pp2-buffalo-lake": {
+  "name": "Buffalo Lake",
+  "contour_dig": "DIG 2008-0556",
+  "grid_dig": "DIG_2008_0387",
+  "zip": "DIG_2008_0387.zip"
  },
  "gu-pp2-coal-lake": {
   "name": "Coal Lake",

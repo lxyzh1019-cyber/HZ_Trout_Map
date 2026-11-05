@@ -188,7 +188,8 @@
   function summariseRiver(lake) {
     var best = null;
     lake.spots.forEach(function (p, i) {
-      var v = summarise(Object.assign({}, lake, { lat: p[0], lon: p[1] }));
+      // Each spot has its own height ("<stretch id>#<n>" in lake_elevation.json).
+      var v = summarise(Object.assign({}, lake, { lat: p[0], lon: p[1], _spotKey: lakeKey(lake) + "#" + i }));
       v.spot = i;
       var b = v.bestDay >= 0 && v.days[v.bestDay].bite != null ? v.days[v.bestDay].bite : -1;
       var w = v.hasWeather ? 1 : 0;

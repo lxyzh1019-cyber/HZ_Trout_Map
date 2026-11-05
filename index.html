@@ -1840,7 +1840,7 @@ async function loadAllData() {
   // Build 5 Stage 2: the waters the 2026 guide names that are not stocked, and
   // the guide's river stretches. Each carries its own rule row; a missing file
   // costs the map those waters, never the stocked lakes.
-  lakes.push(...await loadWaters(new Set(lakes.map(l => l.lake_id || l.ats))));
+  lakes.push(...await loadWaters(lakes));
   for (const lk of lakes) {
     lk.total_fish = lk.stockings.reduce((acc, s) => acc + (Number(s.number) || 0), 0);
     lk.species_set = [...new Set(lk.stockings.map(s => s.species).filter(Boolean))].sort();
@@ -1851,8 +1851,10 @@ async function loadAllData() {
 /** Lakes not stocked (data/waters_unstocked.json) and river stretches
  *  (data/rivers.json), shaped like a stocked lake with no stockings. */
 let WATERS_INFO = null;
-async function loadWaters(known) {
+async function loadWaters(stocked) {
   const out = [];
+  const known = new Set(stocked.map(l => l.lake_id || l.ats));
+  const byId = new Map(stocked.map(l => [l.lake_id || l.ats, l]));
   WATERS_INFO = { lakes: 0, stretches: 0, lakeSource: null, riverSource: null };
   try {
     const r = await fetch("data/waters_unstocked.json");
@@ -1873,6 +1875,15 @@ async function loadWaters(known) {
       WATERS_INFO.riverSource = d.source || null;
       for (const w of d.stretches || []) {
         if (!w.lake_id || !Array.isArray(w.spots) || !w.spots.length) continue;
+        // A river the stocking reports list (Kananaskis, Medley) keeps its one
+        // stocked pin; the stretch gives it the line, the spots and, where the
+        // stocked entry has none, the guide's row.
+        const twin = w.stocked_twin && byId.get(w.stocked_twin);
+        if (twin) {
+          Object.assign(twin, { river: true, line: w.line, spots: w.spots, detail: w.detail, limits: w.limits });
+          if (!twin.rules) twin.rules = w.rules;
+          continue;
+        }
         const [lat, lon] = w.spots[Math.floor((w.spots.length - 1) / 2)];
         out.push({ ...w, lat, lon, stockings: [], unstocked: true, river: true });
         WATERS_INFO.stretches++;
@@ -1957,7 +1968,9 @@ async function loadOptionalJson(path) {
 
 /** The lake's own height in metres, or null. */
 function elevationFor(lake) {
-  const v = ELEVATIONS && ELEVATIONS.lakes ? ELEVATIONS.lakes[lakeKey(lake)] : null;
+  // Build 5: a river stretch is scored at its spots, each with its own height ("<id>#<n>").
+  const key = lake && lake._spotKey ? lake._spotKey : lakeKey(lake);
+  const v = ELEVATIONS && ELEVATIONS.lakes ? ELEVATIONS.lakes[key] : null;
   return Number.isFinite(v) ? v : null;
 }
 
@@ -2013,7 +2026,10 @@ function recomputeDistances() {
   for (const lake of LAKES) {
     lake.distanceKm = (lake.lat == null || lake.lon == null)
       ? Infinity
-      : haversineKm(originLat(), originLon(), lake.lat, lake.lon);
+      // Build 5: a river stretch is as near as its nearest forecast spot.
+      : lake.river && Array.isArray(lake.spots)
+        ? Math.min(...lake.spots.map(p => haversineKm(originLat(), originLon(), p[0], p[1])))
+        : haversineKm(originLat(), originLon(), lake.lat, lake.lon);
   }
 }
 
@@ -2183,6 +2199,8 @@ function zoneSummaries() {
   const byZone = new Map();
   let unzonedLakes = 0, unzonedFish = 0;
   for (const lake of visibleLakes()) {
+    // Build 5: "Zones by fish stocked" counts stocked lakes only.
+    if (lake.unstocked) continue;
     const fish = filteredFishTotal(lake);
     if (!lake.zone) { unzonedLakes++; unzonedFish += fish; continue; }
     let z = byZone.get(lake.zone);
@@ -2705,7 +2723,7 @@ function regulationBlock(lake) {
   }
 
   const because = {
-    "site-specific": `listed for this lake in the ${esc(zone)} table`,
+    "site-specific": `listed for this ${lake.river ? "river stretch" : "water"} in the ${esc(zone)} table`,
     "put-and-take": "provincial put-and-take stocked lake regulations",
     "watershed-default": `not listed individually — the ${esc(zone)} default applies`,
   }[reg.basis] || "";
@@ -3166,6 +3184,8 @@ function setHome(next, opts = {}) {
   }
   updateHomeUI();
   onFilterChange();
+  // Build 5: the forecasts near the new home load now (they load near you first).
+  if (window.DayUI && DayUI.fetchNear) DayUI.fetchNear();
 }
 
 function updateHomeUI() {
@@ -3592,8 +3612,9 @@ function activeFilters() {
   if (state.aeratedOnly) out.push({ id: "aer", label: "Aerated", counted: true, clear: click("#aerated-chip") });
   if (state.baitBanOnly) out.push({ id: "bait", label: "Bait ban", counted: true, clear: click("#bait-chip") });
   if (state.gridOnly) out.push({ id: "3d", label: "Has a 3D depth model", counted: true, clear: click("#grid-chip") });
-  if (!state.showStocked) out.push({ id: "nostocked", label: "Not stocked only", counted: true, clear: click("#stocked-chip") });
-  if (!state.showUnstocked) out.push({ id: "nounstocked", label: "Stocked only", counted: true, clear: click("#unstocked-chip") });
+  if (!state.showStocked && !state.showUnstocked) out.push({ id: "nostocking", label: "Stocked and Not stocked both off", counted: true, clear: click("#stocked-chip") });
+  else if (!state.showStocked) out.push({ id: "nostocked", label: "Not stocked only", counted: true, clear: click("#stocked-chip") });
+  else if (!state.showUnstocked) out.push({ id: "nounstocked", label: "Stocked only", counted: true, clear: click("#unstocked-chip") });
   if (state.facilities.size) out.push({ id: "fac", label: `${state.facilities.size} facilit${state.facilities.size === 1 ? "y" : "ies"}`, counted: true, clear: click('[data-all="facility"]') });
   return out;
 }
@@ -3682,9 +3703,12 @@ function updateDataQualitySummary() {
   }
   const calls = Weather.callsToday();
   const last = window.DayUI ? DayUI.lastSummary() : null;
+  const pan = window.DayUI && DayUI.panSummary ? DayUI.panSummary() : null;
   if (last) {
     parts.push(`weather: <strong>${last.calls}</strong> call(s) in ${last.requests} request(s) for ${last.cells} forecast spots`
-      + ` near you and on screen on the last load (${last.fromCache} already saved), <strong>${calls.calls}</strong> today on this device`
+      + ` near you on the last load (${last.fromCache} already saved)`
+      + (pan ? `, ${pan.calls} more when the map moved` : "")
+      + `, <strong>${calls.calls}</strong> today on this device`
       + ` — Open-Meteo's free limit is 600 a minute and 10,000 a day`);
   }
   el.innerHTML = parts.join(" · ");
@@ -3944,11 +3968,13 @@ function setView(view) {
 
   if (view === "zones") {
     if (map.hasLayer(pinLayer)) map.removeLayer(pinLayer);
+    if (riverLayer && map.hasLayer(riverLayer)) map.removeLayer(riverLayer);
     if (!map.hasLayer(zoneLayer)) zoneLayer.addTo(map);
     renderZones();
   } else {
     if (map.hasLayer(zoneLayer)) map.removeLayer(zoneLayer);
     if (!map.hasLayer(pinLayer)) pinLayer.addTo(map);
+    if (riverLayer && !map.hasLayer(riverLayer)) riverLayer.addTo(map);
   }
 
   if (view === "list") renderList();
