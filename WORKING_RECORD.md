@@ -54,6 +54,7 @@ Single working record for this repository. Updated by the main session at the en
 - [agreed] (owner accepted 2026-11-04) Ice forming removes the score only on an ice-on date worked out from this forecast; near or past the usual (calendar) date the score stays and the banner warns "Ice usually forms here about …" — search: iceUsual
 - [agreed] (owner accepted 2026-11-04) Survey depths go beyond the mean: 18 surveyed lakes with no published max depth get the survey's max, so their summer layer, winterkill band and fish depth change; chain grids (Pierre Greys, Wildhorse) give none — search: load_survey
 - [agreed] Build 5 Plan v1 approved 2026-11-04 (Edmonton): 4 stages, one PR each; decisions 1–6 at option A (no score without a forecast anywhere; answer line + tags + thin-ice warning open, week bars in "This week"; best hour ±1 h; usual month only at 60%+; rules-year warning at panel top and in Rules; CRLF for .md only) — search: answerHtml
+- [agreed] Build 5 Rev 3 (owner 2026-11-04 evening): keep the best-day box format open at the top (Go day · score, reason, ice line, 7 bars); "8 reports" tag the same size as the others; decisions 7–9 at A ("Bite by hour", safety lines whole, one wind word) — search: Tip and status
 - [agreed] (owner accepted 2026-11-04) River guide has one labelled bend drawing (A–G), not one drawing per water type; the sample 3D model in the guide is a second small view, off while a lake's 3D view is open — search: data-demo-host
 
 ## Pending
@@ -154,10 +155,10 @@ Single working record for this repository. Updated by the main session at the en
 | M1 | 11-04 | W1 No forecast: no scores, no 7-day bars, "Needs a forecast" | done | 5.1; bannerHtml, whyHtml, conditions-ui; test_no_forecast_shows_no_score_and_no_bars |
 | M2 | 11-04 | W2 Remove the extra "AERATED kept aerated…" row; keep tag and thin-ice warning | done | 5.1; aerationBlock |
 | M3 | 11-04 | W3 One "Map" button with a small menu of the 5 map buttons | done | 5.1; #map-menu, Escape and outside tap close it |
-| M4 | 11-04 | W4 One answer line at the top; everything else folded | done | 5.1; answerHtml, "This week" fold |
+| M4 | 11-04 | W4 One answer line at the top; everything else folded | superseded | owner 11-04 (Rev 3): keep the best-day box open as before; tip and status folded |
 | M5 | 11-04 | W5 Short tags, full wording on tap | done | 5.1; tagList, .tag-full |
 | M6 | 11-04 | W6 Each estimate's "From: …" behind a small ⓘ | done | 5.1; estHead(title, inputs) |
-| M7 | 11-04 | At most 60 words on the panel's first phone screen; before and after counts | done | 5.1; Beaver Lake 390 px no forecast: 107 → 59 first screen, 246 → 65 whole panel; with a forecast 174 → 87 (decision asked) |
+| M7 | 11-04 | At most 60 words on the panel's first phone screen; before and after counts | done, target not met by owner's choice | 5.1 Rev 3 with the box open: Beaver Lake 390 px no forecast 107 → 76 first screen, 246 → 84 whole panel; made-up weather 174 → 123 |
 | M8 | 11-04 | Rules year check banner from 1 Apr 2027; README refresh steps | done | 5.1; rulesYearWarning; README "Refreshing the rules" |
 | M9 | 11-04 | "Usually stocked" months at 60%+, "Too few years to tell" under 3 years | done | 5.1; usualMonths; 282 of 382 lakes |
 | M10 | 11-04 | Every stage: tests, 5-size layout check, before/after pictures, FEATURES and record, CRLF, final report | open | 5.1 done; stages 2–4 to come |
@@ -217,6 +218,7 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 - 2026-11-04 build-5 stage 1 layout check (Playwright, made-up weather) at 360×740, 390×844, 834×1194, 1194×834, 1280×800: map, Map menu open, Escape, lake open, tag tapped, all sections open, ⓘ open → 0 faults (before: day bars 40–43 px wide and "Next 6 h / 7 days" 25 px tall at 3 sizes; fixed); 0 page errors
 - 2026-11-04 build-5 stage 1 Usually stocked: 382 lakes, 282 with a usual month, 54 with fewer than 3 stocked years, 46 with no month at 60% (the plan's 53 came from a first count keyed by name; 54 keyed by lake id is right)
 - 2026-11-04 build-5 stage 1 reviewer pass → 11 findings, all fixed or put to the owner: ice safety line on the first screen; "sun and moon only" words removed; no winter score without a forecast; one wind word (Day out) in panel and list; open tag and ⓘ kept on a redraw, focus kept; menu aria, ⓘ labels, aria-live; water box kept without a forecast; README step 4 uses regs_aliases.csv; tests for taps and exact counts; "Bite by hour" rename and the 87 words with a forecast asked as decisions; this Proof line. Full suite then 275 run → 275 pass
+- 2026-11-04 build-5 stage 1 Rev 3 (box open, answer line removed, tags one size): test_regression_checks 274 run → 274 pass; word count 390 px first screen no forecast 76, made-up weather 123; layout 5 sizes 0 faults; main (7f10c2c, to-do update) merged into the branch
 - Proof: 2026-11-04 Playwright on the working tree (headless Chromium, fresh profile, weather blocked or made-up): Beaver Lake panel first screen 59 words with no forecast, "Needs a forecast", no bars; Map menu opens, Escape and a pick close it; tag tap shows and hides the full words; ⓘ shows "From: …"; Usually stocked "May (14 of 16 years)"; layout 5 sizes 0 faults; 0 page errors
 
 ## Open questions / blockers

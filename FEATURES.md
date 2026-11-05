@@ -9,8 +9,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - Near me lists by distance from your location (or home). Saved lists saved lakes ranked by best day. Area lists the lakes of one of Alberta's fish management zones. Clear resets the list, the town and the open lake.
 - Two scores per lake and day: Bite (unchanged weights: light 40, water temperature 35, pressure trend 15, wind 6, rain 4; moon a capped multiplier; gusts not scored, warning at 40 km/h) and Day out (wind plus half the gust spread, times 0.7 under 10 ha, 1.0 medium, 1.3 over 200 ha; rain amount and chance; air temperature). A lake with no area uses medium and says "size unknown".
 - Lake panel: slides up on a phone, fills the right column on a PC; replaces the pin popup, the Conditions panel and the photos panel.
-- Answer line (Build 5) at the top of the lake panel: "Go <day> <score> · <calm / breezy / gusty> · <best hour ±1 h> · <first fly or lure>, <fish depth>" (the wind word is the list rows' Day out word, gusty also at gusts of 40 km/h); or "Needs a forecast", "Season shut", "Ice likely · winter score n", "No good day this week". Ice likely, ice forming or usual ice-on near: one red line under it ending "Legal is not safe. Ice thickness is never forecast." Everything else is folded.
-- "This week" fold (Build 5, closed at the start): the stocked / open / winterkill line, the best-day banner, Why and the tip.
+- Best-day box open at the top of the lake panel (owner, Build 5 Rev 3: kept as before, not a one-line answer), with "Why …?" closed under it. "Tip and status" (Build 5, closed): the stocked / open / winterkill line and the daily tip.
 - Best-day banner: "Go <day> · <score>", the reason, 7 bars with Best/Good/Fair/Poor, gusty days named "not a boat day"; shut days show no score. No forecast (Build 5): "Needs a forecast", no score and no bars; the Why, "Bite by hour" (it keeps the water temperature box) and the winter list rows show no score either. Each bar is a button: tap it to pick that day for the whole app, as the week bar does; the picked bar is outlined (Build 4).
 - Ice forming (Build 4): days on or after an ice-on date the ice estimate works out from this forecast show "Ice forming — no score" and leave Best, gold pins and "Best near you". Near or past the usual ice-on date with no ice in the forecast, the scores stay and the banner says "Ice usually forms here about <date> … Check the lake before you go."
 - "Why this score": first the picked day against today ("Mon is 6 higher than today (70): light +8, pressure trend -5."; "This is today."), then the 5 parts that add up to the shown Bite score (moon inside each part), the Day out size factor, and one sentence comparing with the nearest lake that has a different forecast spot or size.
@@ -82,7 +81,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - Ice season line: all winter / early ice only / late ice only / closed, with "Legal is not safe. Ice thickness is never forecast."
 - Aerated tag on every stated-aerated lake (24), with or without a known depth; red thin-ice warning October to April, at the top of the panel. The extra "kept aerated so trout survive the winter" row is gone (Build 5).
 - Rules-year warning (Build 5): from 1 April after the guide year, "Rules shown are from the 2026 guide; check the 2027 guide" at the top of the panel and in Rules, until the data is refreshed (README steps).
-- Sections start closed (Build 5): This week, Forecast, Bite by hour (was "Bite by time of day"), Ice hatches and tackle, How to fish, Fish and stocking, Lake info, Rules (a bait-ban lake no longer opens Rules; the red badge is at the top), Getting there.
+- Sections start closed (Build 5): Tip and status, Forecast, Bite by hour (was "Bite by time of day"), Ice hatches and tackle, How to fish, Fish and stocking, Lake info, Rules (a bait-ban lake no longer opens Rules; the red badge is at the top), Getting there.
 - Stocking summary, last stocked with size, years, "Usually stocked" (Build 5: months used in at least 60% of the stocked years 2011–2026, with counts, e.g. "May (14 of 16 years)"; under 3 stocked years "Too few years to tell"; 282 of 382 lakes have a usual month), species, change versus last year, the stocking table.
 - Zone, area, reported species (Anglers Atlas, with agree / disagree counts), on-site facilities and facility chips.
 - Max depth, mean depth, summer layer, winterkill risk band with its reasons.
@@ -115,9 +114,9 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 |---|---|---|
 | Week bar, Best near you, PC column, nav | kept | |
 | Bite and Day out scores, weights | kept | unchanged; no score without a forecast (list, pins and hover already had none) |
-| Best-day banner, 7 bars, Why, tip | kept | in the "This week" fold; no forecast shows "Needs a forecast" and no bars |
-| Answer line | added | top of the lake panel |
-| Tags | changed | short words; full words on tap |
+| Best-day banner, 7 bars, Why | kept | open at the top as before (owner's choice); no forecast shows "Needs a forecast" and no bars |
+| Daily tip and stocked / open / winterkill line | kept | in the "Tip and status" fold |
+| Tags | changed | short words, all one size; full words on tap |
 | Aerated badge row | intentionally removed | W2: the Aerated tag and the thin-ice warning stay |
 | Thin-ice warning | kept | |
 | Estimates "From: …" | kept | behind ⓘ |
