@@ -2177,7 +2177,7 @@ class IceSeasonTests(unittest.TestCase):
 
     def test_winter_guard_hides_the_score(self):
         self.assertIn("Conditions.iceLikely(pastWeek)", self.ui)
-        self.assertRegex(self.ui, r"closed\s*\|\|\s*iced\s*\?\s*\"\"\s*:\s*verdictHtml\(now\)")
+        self.assertRegex(self.ui, r"closed\s*\|\|\s*iced(\s*\|\|[^?]*)?\s*\?\s*\"\"\s*:\s*verdictHtml\(now\)")
         self.assertIn("<strong>Ice likely</strong>", self.ui)
 
 
@@ -3018,7 +3018,8 @@ class Build2EstimateTests(unittest.TestCase):
     def test_the_panel_shows_estimated_and_the_inputs(self):
         sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
         self.assertIn('<span class="est-chip">estimated</span>', sheet)
-        self.assertIn('class="inputs">From: ', sheet)
+        # Build 5 (W6): the inputs sit behind a small ⓘ button.
+        self.assertIn('<p class="inputs" id="\' + id + \'" hidden>From: ', sheet)
         for title in ("Ice cover", "Insect hatches", "Turnover", "Flies and lures", "How to fish this lake"):
             self.assertIn(title, sheet)
 
@@ -3360,7 +3361,7 @@ class Build2DataTests(unittest.TestCase):
     def test_build2_files_are_loaded_and_precached(self):
         worker = (ROOT / "sw.js").read_text(encoding="utf-8")
         # v7 since Build 4; Build 2 files stay listed.
-        self.assertIn('const SHELL_CACHE = "troutmap-shell-v7";', worker)
+        self.assertIn('const SHELL_CACHE = "troutmap-shell-v8";', worker)
         start = worker.index("const SHELL_FILES = [")
         shell = set(re.findall(r'"([^"]+)"', worker[start:worker.index("]", start)]))
         self.assertIn("js/estimates.js", shell)
@@ -3756,3 +3757,158 @@ class Build4Tests(unittest.TestCase):
         # Directions only for shore spots (review 8).
         self.assertIn("ud.shore && typeof ud.i", d3)
         self.assertEqual(d3.count("shore: true"), 1)
+
+
+class Build5Stage1Tests(unittest.TestCase):
+    """Build 5, Stage 1: fewer words on the lake panel, and no score without a forecast."""
+
+    PRELUDE = (
+        "window = globalThis;"
+        "function esc(s) { return String(s == null ? '' : s).replace(/[&<>\"']/g, c => '&#' + c.charCodeAt(0) + ';'); }"
+        "var state = {day: 0, sections: {}};"
+        "var REGULATIONS = {guide_year: 2026, lakes: {}};"
+        "function regulationFor(l) { return null; }"
+        "function profileFor(l) { return l.prof || null; }"
+        "function lakeKey(l) { return l.lake_id; }"
+        "function lakeOpenNow(l) { return l.shut ? false : true; }"
+        "function lakeAerated(l) { return !!l.aer; }"
+        "function lakeIceKind(l) { return null; }"
+        "function fishName(c) { return c; }"
+        "var ADVISORIES = null;"
+    )
+
+    def test_no_forecast_shows_no_score_and_no_bars(self):
+        got = run_js(["conditions.js", "estimates.js", "lake-sheet.js"], """(() => {
+          const S = window.LakeSheet, I = S._internal;
+          const day = i => ({start: new Date(Date.UTC(2026, 10, 5 + i, 7)), bite: 0.97, best: {score: 0.97},
+                             confidence: 'Astronomy only'});
+          const f = {offset: null, bestDay: -1, hasWeather: false, iced: false, days: [0,1,2,3,4,5,6].map(day)};
+          const lake = {lake_id: 'wb1', name: 'Test'};
+          return [I.bannerHtml(lake, f, 0), I.whyHtml(lake, f, 0), S.answerParts(lake, f).text]; })()""",
+                     prelude=self.PRELUDE)
+        banner, why, answer = got
+        self.assertIn("Needs a forecast", banner)
+        self.assertNotIn("data-pickday", banner)
+        self.assertNotIn("97", banner)
+        self.assertEqual(why, "")
+        self.assertEqual(answer, "Needs a forecast")
+        self.assertNotIn("No forecast yet", (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8"))
+        ui = (ROOT / "js" / "conditions-ui.js").read_text(encoding="utf-8")
+        self.assertIn('wx.source === "none"', ui)
+        self.assertIn("<strong>Needs a forecast</strong>", ui)
+
+    def test_answer_line_names_day_score_wind_time_tackle_depth(self):
+        prelude = self.PRELUDE + (
+            "var Weather = {peek: () => ({data: {dailyT: [], dailyMeanC: [], elevM: null}})};"
+            "var ConditionsUI = {_internal: {waterFor: () => ({tempC: 8, source: 'air'})}};"
+            "function depthFor() { return {max_depth_m: 9}; }"
+            "function filteredDominantOrder() { return ['RNTR']; }"
+            "function lakeBaitRule() { return 'ban'; }"
+        )
+        got = run_js(["conditions.js", "estimates.js", "lake-sheet.js"], """(() => {
+          const S = window.LakeSheet, I = S._internal;
+          const day = (i, x) => Object.assign({start: new Date(Date.UTC(2026, 10, 5 + i, 7)), bite: 0.5, windMean: 20, gustMax: 25,
+                             bestWhen: new Date(Date.UTC(2026, 10, 5 + i, 15)), pressureTrend3h: 0}, x || {});
+          const days = [0,1,2,3,4,5,6].map(i => day(i));
+          days[1] = day(1, {bite: 0.82, windMean: 5});
+          const f = {offset: -25200, bestDay: 1, hasWeather: true, iced: false, days: days};
+          const lake = {lake_id: 'wb1', name: 'Test', lat: 53, lon: -114};
+          return [S.answerParts(lake, f).text, S.answerParts(Object.assign({shut: true}, lake), Object.assign({}, f, {days: days.map(d => Object.assign({}, d, {closed: true}))})).text,
+                  S.answerParts(lake, Object.assign({}, f, {bestDay: -1})).text, S.answerParts(lake, null).text,
+                  I.windWord({windMean: 5}), I.windWord({windMean: 12}), I.windWord({windMean: 20}), I.windWord({windMean: 30}), I.windWord({windMean: 5, gustMax: 45}),
+                  I.shortTackle('leech, slow strip'), I.shortTackle('chironomid pupa under a small float, just off the bottom'),
+                  I.shortTackle('leech or dragonfly nymph on a sinking line, down in the cooler water'), I.shortTackle('small spoon')]; })()""",
+                     prelude=prelude)
+        # Nov 6 is a Friday; the best hour is 08:00 at the lake (UTC-7).
+        self.assertRegex(got[0], r"^Go Fri 82 · calm · 07:00–09:00 · leech, [\d.]+–[\d.]+ m$")   # November: fall flies
+        self.assertEqual(got[1], "Season shut")
+        self.assertEqual(got[2], "No good day this week")
+        self.assertEqual(got[3], "No position, so no forecast")
+        self.assertEqual(got[4:9], ["calm", "light wind", "breezy", "windy", "gusty"])
+        self.assertEqual(got[9:], ["leech", "chironomid pupa", "leech or dragonfly nymph", "small spoon"])
+
+    def test_short_tags_keep_the_full_words_on_tap(self):
+        got = run_js(["conditions.js", "lake-sheet.js"], """(() => {
+          const I = window.LakeSheet._internal;
+          return I.tagsHtml({lake_id: 'wb1', aer: true, prof: {confirmed: {species: [{agree: 8}]}}}, false); })()""",
+                     prelude=self.PRELUDE)
+        self.assertIn(">8 reports</span></button>", got)
+        self.assertIn(">Aerated</span></button>", got)
+        self.assertIn("Popularity estimate: 8 angler reports", got)   # the full words, shown on tap
+        self.assertIn('class="tag-full" id="tag-full" hidden', got)
+        sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        self.assertIn('"Limit " + lim + " trout"', sheet)
+        self.assertIn('"Size rule"', sheet)
+        self.assertIn('"Advisory"', sheet)
+        self.assertIn('q("[data-tag]")', sheet)
+
+    def test_aeration_row_is_only_the_thin_ice_warning(self):
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        block = page[page.index("function aerationBlock("):page.index("function regulationBlock(")]
+        self.assertNotIn("kept aerated", block)
+        self.assertIn("Thin ice and open water near the aerators", block)
+
+    def test_one_map_button_opens_the_five_map_buttons(self):
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        menu = page[page.index('id="map-menu"'):page.index('id="fx-progress"')]
+        for needle in ('data-base="topo"', 'data-base="osm"', 'data-base="sat"', 'id="zoom-results"', 'id="share-btn"'):
+            self.assertIn(needle, menu)
+        self.assertIn('id="map-menu-btn"', page)
+        self.assertIn('aria-expanded="false" aria-controls="map-menu">Map ▾</button>', page)
+
+    def test_estimate_inputs_sit_behind_an_info_button(self):
+        sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        self.assertNotIn("inputsLine(", sheet)
+        self.assertIn('aria-label="What this estimate used">ⓘ</button>', sheet)
+        self.assertIn('q("[data-info]")', sheet)
+        for title in ("Ice cover", "Insect hatches", "Turnover", "Flies and lures"):
+            self.assertRegex(sheet, r'estHead\("%s", [^)]+\)' % title)
+
+    def test_rules_year_warning_from_the_first_of_april(self):
+        got = run_js(["lake-sheet.js"], """(() => { const S = window.LakeSheet;
+          return [S.rulesYearWarning(new Date(2027, 2, 31, 23, 59)), S.rulesYearWarning(new Date(2027, 3, 1, 0, 1)),
+                  S.rulesYearWarning(new Date(2026, 10, 5))]; })()""", prelude=self.PRELUDE)
+        self.assertIsNone(got[0])
+        self.assertEqual(got[1], "Rules shown are from the 2026 guide; check the 2027 guide")
+        self.assertIsNone(got[2])
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn("## Refreshing the rules for a new guide year", readme)
+
+    def test_usually_stocked_months(self):
+        lakes = {}
+        for path in sorted(DATA_DIR.glob("lakes_20*.json")):
+            for lake in json.loads(path.read_text(encoding="utf-8")):
+                key = lake.get("lake_id") or lake.get("ats")
+                lakes.setdefault(key, []).extend(
+                    {"year": s.get("year"), "date": s.get("date"), "date_precision": s.get("date_precision")}
+                    for s in lake.get("stockings", []))
+        got = run_js(["lake-sheet.js"], """(() => { const S = window.LakeSheet, all = %s;
+          const st = (y, m, p) => ({year: y, date: y + '-' + m + '-10', date_precision: p || 'day'});
+          const sample = [st(2020, '05'), st(2020, '09'), st(2021, '05'), st(2022, '05'), st(2023, '05'), st(2023, '09'), {year: 2024, date: '2024', date_precision: 'year'}];
+          const keys = Object.keys(all);
+          return [S.usualMonths(sample).text, S.usualMonths([st(2020, '05'), st(2021, '05')]).text,
+                  S.usualMonths([st(2020, '05'), st(2021, '06'), st(2022, '07')]).text,
+                  keys.length, keys.filter(k => S.usualMonths(all[k]).months.length).length,
+                  keys.filter(k => S.usualMonths(all[k]).years < 3).length]; })()""" % json.dumps(lakes),
+                     prelude=self.PRELUDE)
+        # 5 stocked years (2024 known only to the year): May in 4, Sep in 2 (40%, under 60%).
+        self.assertEqual(got[0], "May (4 of 5 years)")
+        self.assertEqual(got[1], "Too few years to tell")
+        self.assertEqual(got[2], "No usual month: stocked in different months over 3 years")
+        self.assertEqual(got[3], len(lakes))
+        self.assertTrue(270 <= got[4] <= 295, got[4])   # the to-do expects about 282
+        self.assertGreater(got[5], 0)
+        sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        self.assertIn("<dt>Usually stocked</dt>", sheet)
+
+    def test_lake_panel_folds_everything_below_the_answer(self):
+        sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        html = sheet[sheet.index("function html(lake)"):sheet.index("function wire(")]
+        self.assertIn('section("week", "This week"', html)
+        self.assertIn('isOpen("week", false)', html)
+        self.assertIn('isOpen("forecast", false)', html)
+        self.assertIn('isOpen("rules", false)', html)
+        self.assertLess(html.index("answerHtml(lake, f)"), html.index('section("week"'))
+        self.assertLess(html.index("aerationBlock(lake)"), html.index('section("week"'))
+        self.assertEqual(html.count("rulesYearHtml()"), 2)
+        self.assertEqual((ROOT / ".gitattributes").read_text(encoding="utf-8").count("*.md text eol=crlf"), 1)

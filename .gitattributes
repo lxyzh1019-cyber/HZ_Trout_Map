@@ -1,0 +1,3 @@
+# Build 5: documents the owner may edit open with Windows line endings on the owner's PC.
+# Data files keep their bytes: a check compares them byte by byte.
+*.md text eol=crlf

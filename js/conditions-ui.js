@@ -1,6 +1,6 @@
 /* The conditions panel: the next six hours, and the next seven days.
  *
- * Since Build 1b it is drawn inside the lake panel ("Bite by time of day")
+ * Since Build 1b it is drawn inside the lake panel ("Bite by hour")
  * by renderInto; the floating panel and its Conditions button are gone.
  *
  * Two horizons because there are two questions. "Should I go now, and when in
@@ -571,7 +571,7 @@
       + "</div></div>";
   }
 
-  /* Drawn inside the lake panel's "Bite by time of day" section. The panel
+  /* Drawn inside the lake panel's "Bite by hour" section. The panel
    * already names the lake, closes itself and shows the solunar table, so the
    * embedded copy leaves out its own heading, close button and calendar. */
   var embedHost = null;
@@ -621,6 +621,10 @@
         + '<div>Every day of the past 7 days had a mean air temperature below freezing.</div>'
         + '<div>Legal is not safe. Ice thickness is never forecast.</div>'
         + '<div class="cx-why">No open-water score is shown while the lake is likely iced over.</div></div>';
+    } else if (wx.source === "none") {
+      // Build 5 (W1): no forecast, no score; sun and moon alone are not a Bite score.
+      body = '<div class="cx-closed"><strong>Needs a forecast</strong>'
+        + '<div class="cx-why">The Bite score needs the weather for this lake. It shows when the forecast arrives.</div></div>';
     } else {
       body = (state.conditions.horizon === "week"
         ? gridHtml(place, wx, water)
@@ -643,7 +647,7 @@
       + '</div>')
       + weatherNowHtml(wx, new Date())
       // A shut lake gets no verdict: the closed block below says why.
-      + (closed || iced ? "" : verdictHtml(now))
+      + (closed || iced || wx.source === "none" ? "" : verdictHtml(now))
       + '<div class="cx-row">'
       + '<div class="chips cx-horizon">'
       + '<button class="chip' + (state.conditions.horizon === "now" ? " active" : "") + '" data-horizon="now">Next 6 h</button>'
@@ -655,7 +659,7 @@
           ? "times on this device's clock"
           : "times at the lake" + (wx.data.timezone ? " (" + esc(wx.data.timezone) + ")" : ""))
       + '</span></div>'
-      + (closed || iced ? "" : '<div class="cx-secheading">Fish activity forecast</div>')
+      + (closed || iced || wx.source === "none" ? "" : '<div class="cx-secheading">Fish activity forecast</div>')
       + body
       + (advisories.length
           ? '<div class="cx-advisory">' + advisories.map(esc).join("<br>") + "</div>" : "")

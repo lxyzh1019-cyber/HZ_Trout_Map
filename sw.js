@@ -34,7 +34,9 @@
    the boating rules. js/weather.js now asks for wind direction too. */
 /* v7: Build 4. The lake panel picks a day, the fish depth range, the Filters
    chips, the sample 3D model in the Learn guide and the river guide. */
-const SHELL_CACHE = "troutmap-shell-v7";
+/* v8: Build 5 Stage 1. One answer line, short tags, the Map menu, ⓘ for what an
+   estimate used, "Usually stocked" and the rules-year warning. */
+const SHELL_CACHE = "troutmap-shell-v8";
 const DATA_CACHE = "troutmap-data-v1";
 const TILE_CACHE = "troutmap-tiles-v1";
 /* v2: the single-spot forecast URL gained wind_direction_10m, so the old

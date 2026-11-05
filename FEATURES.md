@@ -1,6 +1,6 @@
-# FEATURES — HZ_Trout_Map — manifest v5 — Build 4
+# FEATURES — HZ_Trout_Map — manifest v6 — Build 5 Stage 1
 
-Locked features of the current version (branch build-4, from main at d3e3c0d). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
+Locked features of the current version (branch claude/funny-ritchie-bealq0, from main at 922ddb0). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
 
 ## Which lake, which day (Build 1b)
 - Week bar over the map: 7 days, each with the top Bite score of the lakes on screen; tap a day and the pins recolour for it. "gusty" marks a day when most lakes on screen gust to 40 km/h or more.
@@ -9,14 +9,16 @@ Locked features of the current version (branch build-4, from main at d3e3c0d). E
 - Near me lists by distance from your location (or home). Saved lists saved lakes ranked by best day. Area lists the lakes of one of Alberta's fish management zones. Clear resets the list, the town and the open lake.
 - Two scores per lake and day: Bite (unchanged weights: light 40, water temperature 35, pressure trend 15, wind 6, rain 4; moon a capped multiplier; gusts not scored, warning at 40 km/h) and Day out (wind plus half the gust spread, times 0.7 under 10 ha, 1.0 medium, 1.3 over 200 ha; rain amount and chance; air temperature). A lake with no area uses medium and says "size unknown".
 - Lake panel: slides up on a phone, fills the right column on a PC; replaces the pin popup, the Conditions panel and the photos panel.
-- Best-day banner: "Go <day> · <score>", the reason, 7 bars with Best/Good/Fair/Poor, gusty days named "not a boat day"; shut days show no score. Each bar is a button: tap it to pick that day for the whole app, as the week bar does; the picked bar is outlined (Build 4).
+- Answer line (Build 5) at the top of the lake panel: "Go <day> <score> · <wind> · <best hour ±1 h> · <first fly or lure>, <fish depth>" (wind: calm under 8 km/h, light wind 8–15, breezy 15–25, windy 25+); or "Needs a forecast", "Season shut", "Ice likely · winter score n", "No good day this week". Ice forming or usual ice-on near: one red line "… Check the lake before you go." Everything else is folded.
+- "This week" fold (Build 5, closed at the start): the stocked / open / winterkill line, the best-day banner, Why and the tip.
+- Best-day banner: "Go <day> · <score>", the reason, 7 bars with Best/Good/Fair/Poor, gusty days named "not a boat day"; shut days show no score. No forecast (Build 5): "Needs a forecast", no score and no bars; the Why and "Bite by hour" show no score either. Each bar is a button: tap it to pick that day for the whole app, as the week bar does; the picked bar is outlined (Build 4).
 - Ice forming (Build 4): days on or after an ice-on date the ice estimate works out from this forecast show "Ice forming — no score" and leave Best, gold pins and "Best near you". Near or past the usual ice-on date with no ice in the forecast, the scores stay and the banner says "Ice usually forms here about <date> … Check the lake before you go."
 - "Why this score": first the picked day against today ("Mon is 6 higher than today (70): light +8, pressure trend -5."; "This is today."), then the 5 parts that add up to the shown Bite score (moon inside each part), the Day out size factor, and one sentence comparing with the nearest lake that has a different forecast spot or size.
 - Pin colour modes: Bite on the day (default), Best this week (gold pins), Species, Change. Score pins carry the number; groups show the best score inside them. Colour-blind-safe score scale: grey, blue, light blue, gold.
-- Forecast section: Wind / Weather / Barometer / Solunar tabs, 3 or 7 days, Lines or Grid, today's major and minor feeding times and the moon phase. "Bite by time of day" keeps the 6-hour strip, the 7 x 5 grid, the factor rows and the measured water temperature input.
+- Forecast section: Wind / Weather / Barometer / Solunar tabs, 3 or 7 days, Lines or Grid, today's major and minor feeding times and the moon phase. "Bite by hour" (Build 5; was "Bite by time of day") keeps the 6-hour strip, the 7 x 5 grid, the factor rows and the measured water temperature input.
 - A plain daily tip, and a "sun breaking through" reminder labelled as anglers' reports and never scored. The tip gives a depth range for the lake on the picked day, labelled estimated (Build 4, Estimates.fishDepth): under ice 1.5–4 m; water under 10 °C 1–4 m; 10–18 °C 2–6 m; over 18 °C the summer layer, or half the depth to the bottom on a lake that does not layer; rising pressure the deeper half, falling the shallower half; never deeper than the lake.
 - Winter: when more than half the lakes on screen have the winter guard on, the week bar shows wind chill, pins show the legal ice season, and the panel says "Ice likely". Frozen lakes are left out of gold pins, "Best near you" and the Saved ranking. The list becomes "This winter" (Build 2).
-- Tags: Low harvest limit (trout limit 0–2), Trophy size rule (the guide's words), Popularity estimate (largest Angler's Atlas report count, labelled estimate), Aerated, Ice season (winter), Advisory (when an Alberta notice names the lake).
+- Tags, short (Build 5): "Limit n trout" (trout limit 0–2), "Size rule" (the guide's words), "n reports" (Popularity estimate: largest Angler's Atlas report count, labelled estimate), "Aerated", "Ice: <kind>" (winter), "Advisory" (when an Alberta notice names the lake). A tap shows the full words under the tags (an Advisory adds the Alberta notice link); a second tap hides them.
 - Stocked size and date shown; "Typical size: not published by Alberta"; growth never guessed.
 - Search for towns and lakes: the saved Alberta town list first (works with no signal), then Open-Meteo place search in Canada (Alberta first). Each lake row has distance, Bite and Day out. Picking a town measures from it (lists, distances and the distance filter) and does not change home.
 - Messages: forecast progress, "No signal" once per visit (says town search uses the saved Alberta town list), "No lakes in range" with a widen button, and a first-visit walkthrough with install steps.
@@ -25,7 +27,7 @@ Locked features of the current version (branch build-4, from main at d3e3c0d). E
 
 ## Estimates and winter (Build 2)
 - Lake height for every placed lake (380, Open-Meteo elevation, Copernicus DEM). It corrects the forecast air to the lake's own height (6.5 °C per km) for the water temperature estimate and the ice estimate only.
-- "Ice, hatches and tackle" section in the lake panel. Each block says "estimated" and lists what it used ("From: …").
+- "Ice, hatches and tackle" section in the lake panel. Each block says "estimated"; what it used ("From: …") opens with the ⓘ button next to it (Build 5).
   - Ice cover: ice-on and ice-off dates from freezing and thawing degree-days over 14 days of air (7 past, 7 forecast), by latitude, height and depth; beyond the forecast the trend, then the usual dates. Dates only, with "Legal is not safe. Ice thickness is never forecast." next to them.
   - Insect hatches on the water estimate: chironomids 10 °C, mayflies 14 °C, damselflies 16 °C, sedges 17 °C (likely / soon / not yet / done for the year / under ice).
   - Turnover from the summer layer: spring after ice-off; fall when the surface is 4–10 °C on a lake that layers; "too shallow to layer" and "no depth survey" said plainly.
@@ -58,6 +60,7 @@ Locked features of the current version (branch build-4, from main at d3e3c0d). E
 
 ## Map and finding a lake
 - Pins cluster when zoomed out and split as you zoom in; hover shows name, score, distance, fish in view and last stocking date.
+- One "Map ▾" button on the map (Build 5) opens a small menu: Topo, Street, Satellite, Zoom to results, Copy link. A pick, a tap outside or Escape closes it.
 - "Zoom to results" fits the lakes the filters leave; "Copy link" copies a URL that reproduces every filter, home, the picked day, the town and the list.
 - Zone view ranks Alberta's ten fish management zones by fish stocked.
 - Basemaps: Topo, Street, Satellite.
@@ -77,8 +80,10 @@ Locked features of the current version (branch build-4, from main at d3e3c0d). E
 ## Lake panel (was the lake popup)
 - Bait ban: filled red badge at the top when the guide lists a bait ban.
 - Ice season line: all winter / early ice only / late ice only / closed, with "Legal is not safe. Ice thickness is never forecast."
-- Aerated badge on every stated-aerated lake (24), with or without a known depth; red thin-ice warning October to April.
-- Stocking summary, last stocked with size, years, species, change versus last year, the stocking table.
+- Aerated tag on every stated-aerated lake (24), with or without a known depth; red thin-ice warning October to April, at the top of the panel. The extra "kept aerated so trout survive the winter" row is gone (Build 5).
+- Rules-year warning (Build 5): from 1 April after the guide year, "Rules shown are from the 2026 guide; check the 2027 guide" at the top of the panel and in Rules, until the data is refreshed (README steps).
+- Sections start closed (Build 5): This week, Forecast, Bite by hour (was "Bite by time of day"), Ice hatches and tackle, How to fish, Fish and stocking, Lake info, Rules (a bait-ban lake no longer opens Rules; the red badge is at the top), Getting there.
+- Stocking summary, last stocked with size, years, "Usually stocked" (Build 5: months used in at least 60% of the stocked years 2011–2026, with counts, e.g. "May (14 of 16 years)"; under 3 stocked years "Too few years to tell"; 282 of 382 lakes have a usual month), species, change versus last year, the stocking table.
 - Zone, area, reported species (Anglers Atlas, with agree / disagree counts), on-site facilities and facility chips.
 - Max depth, mean depth, summer layer, winterkill risk band with its reasons.
 - Regulations: season, open today, bait, catch limits, where the rule comes from, link to the official zone tables.
@@ -96,7 +101,7 @@ Locked features of the current version (branch build-4, from main at d3e3c0d). E
 ## Taking it with you
 - List view sortable on any column, including Bite and Day out for the picked day, with CSV download.
 - Saved lakes in the browser and a one-click multi-stop driving route through them.
-- Works offline after the first visit (service worker, shell cache v7, saved town list, saved forecasts, lake heights, depth chart links, hot spots, the 3D depth model with its lakebed files and boating rules).
+- Works offline after the first visit (service worker, shell cache v8, saved town list, saved forecasts, lake heights, depth chart links, hot spots, the 3D depth model with its lakebed files and boating rules).
 
 ## Data and honesty
 - Estimated positions are labelled; data quality panel; evidence page (evidence.html).
@@ -104,6 +109,26 @@ Locked features of the current version (branch build-4, from main at d3e3c0d). E
 - ACA aeration roster with ACA's Winter Angling column; a test fails if it disagrees with the regulations.
 - Colour-blind-safe pin palettes; every score pin carries its number.
 - Credit lines: Open-Meteo (CC BY 4.0), town list licence, GeoNames via Open-Meteo, Esri imagery, photo credits, Alberta Geological Survey (depth charts), Open-Meteo elevation with Copernicus DEM (in the ice inputs). The 3D view footer and its Learn guide carry the Open Government Licence – Alberta line, Transport Canada TP 15587E (not the official version), MyWildAlberta, Open-Meteo and three.js (MIT).
+
+## Regression table — manifest v5 → v6 (Build 5 Stage 1)
+| Feature | v5 → v6 | Note |
+|---|---|---|
+| Week bar, Best near you, PC column, nav | kept | |
+| Bite and Day out scores, weights | kept | unchanged; no score without a forecast (list, pins and hover already had none) |
+| Best-day banner, 7 bars, Why, tip | kept | in the "This week" fold; no forecast shows "Needs a forecast" and no bars |
+| Answer line | added | top of the lake panel |
+| Tags | changed | short words; full words on tap |
+| Aerated badge row | intentionally removed | W2: the Aerated tag and the thin-ice warning stay |
+| Thin-ice warning | kept | |
+| Estimates "From: …" | kept | behind ⓘ |
+| Bite by time of day | kept | renamed "Bite by hour"; no score without a forecast |
+| Forecast and Rules sections open at the start | changed | closed; the bait ban badge stays at the top |
+| Map buttons Topo, Street, Satellite, Zoom to results, Copy link | kept | in the Map menu |
+| Usually stocked | added | Fish and stocking |
+| Rules-year warning | added | from 1 April 2027 |
+| Day bars and "Next 6 h / 7 days" tap size | changed | 44 px (were 40–43 px and 25 px) |
+| Offline | kept | shell cache v7 → v8 |
+| Charts, list view and CSV, favourites, search, towns, 3D, Learn | kept | |
 
 ## Regression table — manifest v4 → v5 (Build 4)
 | Feature | v4 → v5 | Note |

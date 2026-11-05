@@ -113,6 +113,29 @@ fifteen seconds and is idempotent: running it twice produces identical files.
 3. Run `python3 build_history.py`.
 4. Answer anything that lands in `data/link_review.csv` (see below).
 
+## Refreshing the rules for a new guide year
+
+Alberta publishes a new sportfishing guide each spring; a guide is in force
+from 1 April to 31 March of the next year. From 1 April after the guide year
+the lake panel shows "Rules shown are from the <year> guide; check the
+<next year> guide" until the data is refreshed.
+
+You do not need a terminal. Start a Claude Code session on this repository and
+say: "Refresh the rules to the <year> sportfishing guide", and attach or link
+the new guide PDF from Alberta's site. The session does these steps:
+
+1. Cut the guide down to its rule pages:
+   `python3 scripts/strip_regulations.py <guide.pdf> data/raw/alberta-sportfishing-regulations-<year>-tables.pdf`
+   (this also writes the `.provenance.json` next to it).
+2. Change `REGULATIONS_PDF` in `scripts/build_history.py` to the new file name.
+3. Rebuild: `cd scripts` then `python3 build_history.py`. `data/lake_regulations.json`
+   now says the new `guide_year`, and the warning goes away.
+4. Answer anything new in `data/regs_review.csv`.
+5. Run the tests and open a pull request. You merge it.
+
+When it worked, a lake panel shows no rules-year warning and its Rules section
+names the new guide year. If you see anything else, stop and ask.
+
 ## The four report formats
 
 Alberta has changed this report's layout repeatedly, and for some years the

@@ -115,29 +115,44 @@
     return out;
   }
 
-  function tagsHtml(lake, winter) {
+  /* Build 5 (W5): short tags; a tap shows the full words under them. Each tag
+   * is [class, short words, full words, link or null]. */
+  function tagList(lake, winter) {
     var t = [];
-    if (lakeAerated(lake)) t.push('<span class="tag aer">Aerated</span>');
+    if (lakeAerated(lake)) {
+      t.push(["aer", "Aerated", "Aerated: stated by ACA's Lake Aeration Program or on Alberta's own lake page. Aerators keep some water open so trout survive the winter.", null]);
+    }
     var lim = troutLimit(lake);
     if (lim !== null && lim <= 2) {
-      t.push('<span class="tag low" title="Fewer fish taken, so more can grow big.">Low harvest limit: '
-        + lim + " trout</span>");
+      t.push(["low", "Limit " + lim + " trout", "Low harvest limit: " + lim + " trout. Fewer fish taken, so more can grow big.", null]);
     }
     var trophy = trophyRule(lake);
-    if (trophy) t.push('<span class="tag trophy" title="From the ' + esc(REGULATIONS.guide_year || "")
-      + ' regulations, in the guide\'s words.">Trophy size rule: ' + esc(trophy) + "</span>");
+    if (trophy) {
+      t.push(["trophy", "Size rule", "Trophy size rule: " + trophy + ". From the " + (REGULATIONS.guide_year || "")
+        + " regulations, in the guide's words.", null]);
+    }
     var pop = popularity(lake);
-    if (pop) t.push('<span class="tag est" title="Estimate: the largest number of anglers who reported one fish here on Angler\'s Atlas. Not a count of visits.">Popularity estimate: '
-      + pop + " angler report" + (pop === 1 ? "" : "s") + "</span>");
+    if (pop) {
+      t.push(["est", pop + " report" + (pop === 1 ? "" : "s"), "Popularity estimate: " + pop + " angler report" + (pop === 1 ? "" : "s")
+        + ". Estimate: the largest number of anglers who reported one fish here on Angler's Atlas. Not a count of visits.", null]);
+    }
     if (winter) {
       var kind = lakeIceKind(lake);
-      if (kind) t.push('<span class="tag ice">Ice season: ' + esc(ICE_KIND_TEXT[kind]) + "</span>");
+      if (kind) t.push(["ice", "Ice: " + ICE_KIND_TEXT[kind], "Ice season: " + ICE_KIND_TEXT[kind] + ".", null]);
     }
-    advisoriesFor(lake).forEach(function (a) {
-      t.push('<a class="tag warn-tag" href="' + esc(a.url) + '" target="_blank" rel="noopener">Advisory: '
-        + esc(a.text) + "</a>");
-    });
-    return t.length ? '<div class="tags">' + t.join("") + "</div>" : "";
+    advisoriesFor(lake).forEach(function (a) { t.push(["warn-tag", "Advisory", "Advisory: " + a.text, a.url]); });
+    return t;
+  }
+
+  function tagsHtml(lake, winter) {
+    var t = tagList(lake, winter);
+    if (!t.length) return "";
+    return '<div class="tags">' + t.map(function (x, i) {
+      // A 44 px tap area around a small pill.
+      return '<button type="button" class="tag-btn" data-tag="' + i + '" data-full="' + esc(x[2]) + '"'
+        + (x[3] ? ' data-url="' + esc(x[3]) + '"' : "") + ' aria-expanded="false" aria-controls="tag-full">'
+        + '<span class="tag ' + x[0] + '">' + esc(x[1]) + "</span></button>";
+    }).join("") + '</div><p class="tag-full" id="tag-full" hidden></p>';
   }
 
   // ============================================================
@@ -189,9 +204,14 @@
       // Near or past the usual ice-on date, with no ice in this forecast: the scores stay, with a warning.
       : f.iceUsual ? '<div class="why ice-forming"><b>Ice usually forms here about ' + esc(Estimates.fmtDate(f.iceUsual))
         + ".</b> This forecast shows no ice yet. Check the lake before you go. " + esc(Estimates.ICE_WARNING) + "</div>" : "";
+    // Build 5 (W1): with no forecast there is no score and no bar, only the reason.
+    if (!f.hasWeather) {
+      return '<div class="banner none"><div class="go">Needs a forecast</div><div class="why">'
+        + "The Bite and Day out scores need the weather for this lake. They show when the forecast arrives.</div></div>";
+    }
     if (f.bestDay < 0) {
-      return '<div class="banner none"><div class="go">' + (f.hasWeather ? "No good day this week" : "No forecast yet") + '</div><div class="why">'
-        + (f.hasWeather ? "Every day is gusty, rough on the water, shut or icing over." : "No forecast yet for this lake, so only the sun and moon are known.")
+      return '<div class="banner none"><div class="go">No good day this week</div><div class="why">'
+        + "Every day is gusty, rough on the water, shut or icing over."
         + gustText + "</div>" + iceText + barsHtml(f) + "</div>";
     }
     var b = f.days[f.bestDay];
@@ -199,6 +219,77 @@
       + '<div class="why">Best bite on a day you can be out: Bite ' + bandWord(b.bite)
       + ", Day out " + bandWord(b.dayOut) + (b.bestWhen ? ", best around " + clock(b.bestWhen, f.offset) : "") + "."
       + gustText + "</div>" + iceText + barsHtml(f) + "</div>";
+  }
+
+  /* Build 5 (W4): one answer line at the top of the panel: which day, the score,
+   * the wind, the best two hours, what to use and how deep. Everything behind it
+   * is in the folds below. */
+  function windWord(day) {
+    if (num(day.gustMax) !== null && day.gustMax >= Conditions.GUST_WARN_KPH) return "gusty";
+    var w = num(day.windMean);
+    if (w === null) return null;
+    return w < 8 ? "calm" : w < 15 ? "light wind" : w < 25 ? "breezy" : "windy";
+  }
+
+  /* The first fly or lure of the tackle estimate, without its how-to words:
+   * "leech, slow strip" → "leech"; "chironomid pupa under a small float" → "chironomid pupa". */
+  function shortTackle(text) {
+    return String(text || "").split(",")[0].split(/ (?:under|on|in|near|at|trolled|just|down|for) /)[0].trim();
+  }
+
+  function answerParts(lake, f) {
+    if (!f) return { text: "No position, so no forecast", cls: "none" };
+    var d0 = f.days[0];
+    if (lakeOpenNow(lake) === false && d0 && d0.closed) return { text: "Season shut", cls: "shut" };
+    if (!f.hasWeather) return { text: "Needs a forecast", cls: "none" };
+    if (f.iced) {
+      var ws = pct(d0 && d0.winter);
+      return { text: "Ice likely" + (ws === null ? "" : " · winter score " + ws), cls: "ice" };
+    }
+    if (f.bestDay < 0) return { text: "No good day this week", cls: "none" };
+    var i = f.bestDay, day = f.days[i];
+    var bits = ["Go " + dayName(f, i) + " " + pct(day.bite)];
+    var ww = windWord(day);
+    if (ww) bits.push(ww);
+    if (day.bestWhen) {
+      var t = day.bestWhen.getTime();
+      bits.push(clock(new Date(t - 3600000), f.offset) + "–" + clock(new Date(t + 3600000), f.offset));
+    }
+    var use = null, depth = null;
+    try {
+      var e = estimatesFor(lake, f);
+      use = shortTackle((e.tackle.flies || [])[0] || (e.tackle.lures || [])[0]);
+      var fd = fishDepthFor(lake, f, i);
+      if (fd) depth = fd.lo + "–" + fd.hi + " m";
+    } catch (err) { /* an estimate that cannot be made leaves its part out */ }
+    if (use || depth) bits.push([use, depth].filter(Boolean).join(", "));
+    return { text: bits.join(" · "), cls: "go" };
+  }
+
+  function answerHtml(lake, f) {
+    var a = answerParts(lake, f);
+    var ice = "";
+    if (f && f.hasWeather && !f.iced) {
+      var first = -1;
+      f.days.forEach(function (x, i) { if (first < 0 && x.iceForming) first = i; });
+      if (first >= 0) ice = "Ice forming" + (first > 0 ? " from " + dayName(f, first) : "") + ". Check the lake before you go.";
+      else if (f.iceUsual) ice = "Ice usually forms here about " + Estimates.fmtDate(f.iceUsual) + ". Check the lake before you go.";
+    }
+    return '<div class="answer ' + a.cls + '" data-answer>' + esc(a.text) + "</div>"
+      + (ice ? '<div class="answer-ice">' + esc(ice) + "</div>" : "");
+  }
+
+  /* Build 5: guide year Y holds to 31 March of Y+1. From 1 April the panel says
+   * the rules may be old, until the data is refreshed. */
+  function rulesYearWarning(now) {
+    var y = typeof REGULATIONS !== "undefined" && REGULATIONS ? Number(REGULATIONS.guide_year) : NaN;
+    if (!isFinite(y)) return null;
+    var until = new Date(y + 1, 3, 1);
+    return (now || new Date()) >= until ? "Rules shown are from the " + y + " guide; check the " + (y + 1) + " guide" : null;
+  }
+  function rulesYearHtml(now) {
+    var w = rulesYearWarning(now);
+    return w ? '<div class="rules-old" role="note">' + esc(w) + ".</div>" : "";
   }
 
   /* Build 2 (C17): the winter score for frozen lakes, and how cold it will feel. */
@@ -291,7 +382,7 @@
   function whyHtml(lake, f, d) {
     var day = f.days[d];
     // A shut day, or a day the ice is forming, has no score, so it has no parts either.
-    if (!day || !day.best || f.iced || day.closed || day.iceForming) return "";
+    if (!day || !day.best || f.iced || day.closed || day.iceForming || !f.hasWeather) return "";
     var w = Conditions.whyParts(day.best);
     var rows = w.parts.map(function (p) {
       if (!p.present) {
@@ -373,7 +464,7 @@
 
   function lineSvg(f, rows, series, opts) {
     var W = 320, H = 130, L = 30, R = 8, T = 10, B = 20;
-    if (!rows.length) return '<p class="dim">No forecast yet for this lake.</p>';
+    if (!rows.length) return '<p class="dim">Needs a forecast: none saved for this lake yet.</p>';
     var t0 = rows[0].t, t1 = rows[rows.length - 1].t || t0 + 1;
     var vals = [];
     series.forEach(function (s) { rows.forEach(function (r) { if (r[s.k] !== null) vals.push(r[s.k]); }); });
@@ -522,6 +613,33 @@
   // THE REST OF WHAT THE POPUP SAID
   // ============================================================
 
+  /* Build 5: the months a lake is usually stocked, from every report 2011–2026
+   * (not only the years picked in Filters): a month counts when it was used in at
+   * least 60% of the years the lake was stocked. Dates known only to the year do
+   * not count toward a month, but the year still counts as a stocked year. */
+  var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var USUAL_SHARE = 0.6, USUAL_MIN_YEARS = 3;
+  function usualMonths(stockings) {
+    var years = {}, byMonth = {};
+    (stockings || []).forEach(function (s) {
+      if (s.year == null) return;
+      years[s.year] = true;
+      var m = /^\d{4}-(\d{2})/.exec(String(s.date || ""));
+      if (!m || (s.date_precision !== "day" && s.date_precision !== "month")) return;
+      var k = Number(m[1]);
+      (byMonth[k] = byMonth[k] || {})[s.year] = true;
+    });
+    var n = Object.keys(years).length;
+    if (n < USUAL_MIN_YEARS) return { years: n, months: [], text: "Too few years to tell" };
+    var months = Object.keys(byMonth).map(function (k) { return { month: Number(k), count: Object.keys(byMonth[k]).length }; })
+      .filter(function (x) { return x.count / n >= USUAL_SHARE; })
+      .sort(function (a, b) { return b.count - a.count || a.month - b.month; });
+    if (!months.length) return { years: n, months: [], text: "No usual month: stocked in different months over " + n + " years" };
+    return { years: n, months: months, text: months.map(function (x, i) {
+      return MONTHS[x.month - 1] + " (" + x.count + (i === 0 ? " of " + n + " years" : "") + ")";
+    }).join(" · ") };
+  }
+
   function stockingHtml(lake) {
     var rows = lake.stockings.filter(stockingPasses)
       .sort(function (a, b) { return stockingSortKey(b).localeCompare(stockingSortKey(a)); });
@@ -548,6 +666,7 @@
     return '<dl class="kv"><dt>Species</dt><dd>' + esc(species) + "</dd>"
       + "<dt>Last stocked</dt><dd>" + esc(lastText) + "</dd>"
       + "<dt>Years</dt><dd>" + esc(years || "—") + "</dd>"
+      + "<dt>Usually stocked</dt><dd>" + esc(usualMonths(lake.stockings).text) + "</dd>"
       + "<dt>Fish shown</dt><dd>" + fmtNum(filteredFishTotal(lake)) + "</dd>"
       + "<dt>Typical size</dt><dd>Not published by Alberta. Shown: stocked size and date. Growth is never guessed.</dd>"
       + (change ? "<dt>Versus " + pair.previous + '</dt><dd><span class="change-tag" style="background:' + cls.color
@@ -581,8 +700,16 @@
   }
   function learnRow(links) { return links.length ? '<p class="learn-row">Learn: ' + links.join(" ") + "</p>" : ""; }
 
-  function estHead(title) { return "<h3>" + esc(title) + ' <span class="est-chip">estimated</span></h3>'; }
-  function inputsLine(inputs) { return '<p class="inputs">From: ' + esc(inputs.join("; ")) + ".</p>"; }
+  /* Build 5 (W6): what each estimate used sits behind a small ⓘ button. */
+  var infoSeq = 0;
+  function estHead(title, inputs) {
+    if (!inputs || !inputs.length) return "<h3>" + esc(title) + ' <span class="est-chip">estimated</span></h3>';
+    var id = "est-in-" + (++infoSeq);
+    return "<h3>" + esc(title) + ' <span class="est-chip">estimated</span>'
+      + ' <button type="button" class="info-btn" data-info="' + id + '" aria-expanded="false" aria-controls="' + id
+      + '" aria-label="What this estimate used">ⓘ</button></h3>'
+      + '<p class="inputs" id="' + id + '" hidden>From: ' + esc(inputs.join("; ")) + ".</p>";
+  }
 
   /** Every estimate for this lake now, from the same water and depth the scores use. */
   function estimatesFor(lake, f) {
@@ -619,15 +746,14 @@
         + esc(h.status) + "</b>";
     }).join("");
     var t = e.tackle;
-    return '<div class="est">' + estHead("Ice cover") + "<p>" + esc(e.ice.text) + "</p>"
-      + '<p class="warn">' + esc(e.ice.warning) + learnLink("ice-safety", "Ice safety") + "</p>" + inputsLine(e.ice.inputs) + "</div>"
-      + '<div class="est">' + estHead("Insect hatches") + '<div class="hatch">' + hatchRows + "</div>"
-      + inputsLine(e.hatch.inputs) + "</div>"
-      + '<div class="est">' + estHead("Turnover") + "<p>" + esc(e.turnover.text) + "</p>" + inputsLine(e.turnover.inputs) + "</div>"
-      + '<div class="est">' + estHead("Flies and lures") + "<p><b>Flies:</b> " + esc(t.flies.join("; ")) + "</p>"
+    return '<div class="est">' + estHead("Ice cover", e.ice.inputs) + "<p>" + esc(e.ice.text) + "</p>"
+      + '<p class="warn">' + esc(e.ice.warning) + learnLink("ice-safety", "Ice safety") + "</p></div>"
+      + '<div class="est">' + estHead("Insect hatches", e.hatch.inputs) + '<div class="hatch">' + hatchRows + "</div></div>"
+      + '<div class="est">' + estHead("Turnover", e.turnover.inputs) + "<p>" + esc(e.turnover.text) + "</p></div>"
+      + '<div class="est">' + estHead("Flies and lures", t.inputs) + "<p><b>Flies:</b> " + esc(t.flies.join("; ")) + "</p>"
       + "<p><b>Lures:</b> " + esc(t.lures.join("; ")) + "</p>"
       + (t.bait ? "<p><b>Bait:</b> " + esc(t.bait.join("; ")) + "</p>" : '<p class="warn">' + esc(t.baitNote) + "</p>")
-      + "<p>" + esc(t.legal) + "</p>" + inputsLine(t.inputs) + "</div>";
+      + "<p>" + esc(t.legal) + "</p></div>";
   }
 
   /* Build 4: the lakebed shapes load once per lake, then the panel redraws. */
@@ -654,11 +780,11 @@
       areaHa: lake.surface_area_ha, aerated: lakeAerated(lake), amenities: (profileFor(lake) || {}).amenities || [],
       baitRule: lakeBaitRule(lake), iceKind: lakeIceKind(lake), troutLimit: troutLimit(lake),
     });
-    return '<div class="est">' + estHead("From its depth, size, facilities and rules") + "<ul>"
+    return '<div class="est">' + estHead("From its depth, size, facilities and rules", h.inputs) + "<ul>"
       + h.lines.map(function (l) { return "<li>" + esc(l) + "</li>"; }).join("") + "</ul>"
       // Build 4: the shapes named above, one tap away.
       + (window.DepthModel && DepthModel.has(lake) ? '<button type="button" class="btn" data-depth3d>See it in 3D</button>' : "")
-      + inputsLine(h.inputs) + "</div>";
+      + "</div>";
   }
 
   function depthChartHtml(lake) {
@@ -737,17 +863,19 @@
       + '<button type="button" class="icon-btn" data-close-lake aria-label="Close lake">✕</button></div></div>'
       // The bait ban first, before anything else is read.
       + '<div class="lake-top">' + baitBanLine(lake)
+      + rulesYearHtml()
       + tagsHtml(lake, winter)
-      + verdictLine(lake)
+      // Build 5 (W4): one answer line; the week, why and tip are in "This week".
+      + answerHtml(lake, f)
+      + aerationBlock(lake)
       // Build 4: the 3D model one tap from the top, for the 43 surveyed lakes.
       + (window.DepthModel && DepthModel.has(lake)
           ? '<button type="button" class="btn btn3d" data-depth3d><b class="mark3d">3D</b> Show 3D depth model</button>' : "")
       + "</div>"
-      + (f ? bannerHtml(lake, f, d) + whyHtml(lake, f, d) : "")
-      + aerationBlock(lake)
-      + (f ? tipHtml(lake, f, d) : "")
-      + section("forecast", "Forecast", forecast, isOpen("forecast", true))
-      + section("bite", "Bite by time of day", '<div class="cx-embed" data-cx></div>', isOpen("bite", false))
+      + section("week", "This week", verdictLine(lake) + (f ? bannerHtml(lake, f, d) + whyHtml(lake, f, d) + tipHtml(lake, f, d)
+          : '<p class="dim">This lake has no position, so it has no forecast.</p>'), isOpen("week", false))
+      + section("forecast", "Forecast", forecast, isOpen("forecast", false))
+      + section("bite", "Bite by hour", '<div class="cx-embed" data-cx></div>', isOpen("bite", false))
       + (f ? section("season", "Ice, hatches and tackle", seasonHtml(lake, f), isOpen("season", false)) : "")
       + section("how", "How to fish this lake", howHtml(lake), isOpen("how", false))
       + section("fish", "Fish and stocking", stockingHtml(lake) + learnRow(fishLinks(lake)), isOpen("fish", false))
@@ -758,9 +886,9 @@
           + '<div class="about" data-about></div>' + photoBlock(lake), isOpen("info", false))
       // Hot spots only when there are some, each with its source and date.
       + (spots.length ? section("spots", "Hot spots", hotSpotsHtml(spots), isOpen("spots", false)) : "")
-      + section("rules", "Rules" + (ban ? " · bait ban" : ""), iceSeasonBlock(lake) + regulationBlock(lake) + boatingHtml(lake)
+      + section("rules", "Rules" + (ban ? " · bait ban" : ""), rulesYearHtml() + iceSeasonBlock(lake) + regulationBlock(lake) + boatingHtml(lake)
           + '<a class="btn" href="' + RULES_URL + '" target="_blank" rel="noopener">Alberta fishing rules ↗</a>'
-          + '<a class="btn" href="' + LICENCE_URL + '" target="_blank" rel="noopener">Buy a licence ↗</a>', isOpen("rules", ban))
+          + '<a class="btn" href="' + LICENCE_URL + '" target="_blank" rel="noopener">Buy a licence ↗</a>', isOpen("rules", false))
       + section("go", "Getting there", lake.lat == null ? '<p class="dim">No recorded position.</p>'
           : '<a class="btn" href="' + directionsFrom(lake) + '" target="_blank" rel="noopener">Google Maps ↗</a>'
           + '<a class="btn" href="' + appleMapsUrl(lake) + '" target="_blank" rel="noopener">Apple Maps ↗</a>'
@@ -772,6 +900,33 @@
     var rerender = function () { DayUI.renderSheet(); };
     var q = function (sel) { return Array.prototype.slice.call(host.querySelectorAll(sel)); };
     q("[data-close-lake]").forEach(function (b) { b.addEventListener("click", function () { DayUI.closeLake(); }); });
+    // Build 5 (W5): a tag shows its full words; a second tap, or another tag, changes them.
+    var full = host.querySelector(".tag-full");
+    q("[data-tag]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var was = b.getAttribute("aria-expanded") === "true";
+        q("[data-tag]").forEach(function (o) { o.setAttribute("aria-expanded", "false"); });
+        if (!full) return;
+        if (was) { full.hidden = true; full.textContent = ""; return; }
+        b.setAttribute("aria-expanded", "true");
+        full.textContent = b.dataset.full || "";
+        if (b.dataset.url) {
+          var a = document.createElement("a");
+          a.href = b.dataset.url; a.target = "_blank"; a.rel = "noopener"; a.textContent = " Alberta notice ↗";
+          full.appendChild(a);
+        }
+        full.hidden = false;
+      });
+    });
+    // Build 5 (W6): ⓘ shows what an estimate used.
+    q("[data-info]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var p = host.querySelector("#" + b.dataset.info);
+        if (!p) return;
+        p.hidden = !p.hidden;
+        b.setAttribute("aria-expanded", String(!p.hidden));
+      });
+    });
     // Build 4: Learn links open the guide for the term next to them.
     q("[data-learn]").forEach(function (b) {
       b.addEventListener("click", function (ev) { ev.preventDefault(); if (window.ReadingRoom) ReadingRoom.open(b.dataset.learn); });
@@ -832,7 +987,10 @@
     estimatesFor: estimatesFor,
     fishDepthFor: fishDepthFor,
     winterScoreHtml: winterScoreHtml,
-    _internal: { dayCompareSentence: dayCompareSentence, barsHtml: barsHtml, boatingHtml: boatingHtml, tipHtml: tipHtml, estimatesFor: estimatesFor, seasonHtml: seasonHtml, howHtml: howHtml, depthChartHtml: depthChartHtml, hotSpotsHtml: hotSpotsHtml },
+    usualMonths: usualMonths,
+    rulesYearWarning: rulesYearWarning,
+    answerParts: answerParts,
+    _internal: { bannerHtml: bannerHtml, whyHtml: whyHtml, tagsHtml: tagsHtml, shortTackle: shortTackle, windWord: windWord, dayCompareSentence: dayCompareSentence, barsHtml: barsHtml, boatingHtml: boatingHtml, tipHtml: tipHtml, estimatesFor: estimatesFor, seasonHtml: seasonHtml, howHtml: howHtml, depthChartHtml: depthChartHtml, hotSpotsHtml: hotSpotsHtml },
     BAND_WORD: BAND_WORD,
     RULES_URL: RULES_URL,
     LICENCE_URL: LICENCE_URL,
