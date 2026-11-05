@@ -132,7 +132,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 |---|---|---|
 | River lines | changed | all 86 stretches drawn (71 before); 20 px tap line |
 | Stocking filter | changed | plus Rivers; rivers no longer hidden by Not stocked, species or recency |
-| Lake panel sections | changed | owner's order, Rules first; red "bait ban" |
+| Lake panel sections | changed | owner's order, Rules first; red "Bait Ban" wherever the app shows it |
 | 3D tap | changed | depth under the finger; markers only within 16 px |
 | 3D colours | changed | by metres, 0–20 m, same on every lake |
 | 3D drag | changed | one finger moves, two fingers turn; Learn guide unchanged |
@@ -142,6 +142,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 | Text sizes | changed | owner asked twice for bigger: labels at least 14 px; panel text 17 px; section titles 18 px; rules block 16 px |
 | Bite and Day out, forecast, rules data, stocking data | kept | |
 | Offline | kept | shell cache v9 → v10 |
+| River edges (decision 18 A) | follow-up | not in this change: Open-Meteo refused heights all day 11-05 (daily limit); rivers are as pictured in Stage 2 |
 
 ## Regression table — manifest v6 → v7 (Build 5 Stage 2)
 | Feature | v6 → v7 | Note |
