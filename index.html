@@ -1105,17 +1105,14 @@
   .tag-btn:focus-visible { outline: 2px solid #8fb8de; outline-offset: 1px; }
   .tag-full { margin: 0 0 6px; font-size: 13px; color: var(--ink); }
   .tag-full a { color: var(--accent); }
-  /* Build 5 (W4): the one answer line at the top of the lake panel. */
-  .answer { margin: 4px 0 6px; font-size: 18px; font-weight: 800; color: #e0a526; }
-  .answer.none, .answer.shut { color: var(--ink); }
-  .answer.ice { color: #7fb8d8; }
-  .answer-ice { margin: 0 0 6px; font-size: 13px; font-weight: 700; color: #f0b3ae; }
-  .lake-top .aer-row { margin: 0 0 6px; font-size: 13px; }
-  .lake-top .ice-warn { font-weight: 700; color: var(--WSCT); }
+  /* Build 5: the tag named "est" must not take the estimate blocks' margin (.est below). */
+  .tags .tag { margin: 0; }
+  .sheet > .aer-row { font-size: 13px; }
+  .lake-nopos { margin: 6px 14px 8px; }
   .rules-old { margin: 4px 0 6px; padding: 6px 10px; border-radius: 6px; background: #4a2a26; border: 1px solid #c62828; color: #f6cdc9; font-size: 13px; font-weight: 600; }
   details .rules-old { margin: 0 0 8px; }
-  .sheet details[data-sec="week"] > .body { padding: 0 0 12px; }
-  .sheet details[data-sec="week"] > .body > .verdict { margin: 0 14px 8px; }
+  .sheet details[data-sec="status"] > .body { padding: 0 0 12px; }
+  .sheet details[data-sec="status"] > .body > .verdict { margin: 0 14px 8px; }
   /* Build 5 (W6): ⓘ opens what an estimate used. */
   .info-btn { font: inherit; font-size: 16px; min-width: 44px; min-height: 44px; padding: 0; border: 0; background: none; color: var(--ink-dim); cursor: pointer; }
   .info-btn[aria-expanded="true"] { color: var(--accent); }

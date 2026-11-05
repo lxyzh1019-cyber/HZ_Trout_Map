@@ -248,8 +248,7 @@
     if (num(day.gustMax) !== null && day.gustMax >= Conditions.GUST_WARN_KPH) return ["gusty", "gusts " + Math.round(day.gustMax) + " km/h"];
     if ((num(day.precipChancePct) || 0) > 60 || (num(day.precipMm) || 0) > 2) return ["rainy", "rain likely"];
     if (num(day.dayOut) === null) return ["", "no forecast"];
-    // Build 5: the same word the panel's answer line uses (LakeSheet.dayOutWord).
-    return [LakeSheet.dayOutWord(day.dayOut),
+    return [day.dayOut >= 0.6 ? "calm" : day.dayOut >= 0.42 ? "breezy" : "gusty",
             "Day out " + LakeSheet.bandWord(day.dayOut)];
   }
 

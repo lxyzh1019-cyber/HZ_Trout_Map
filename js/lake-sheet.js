@@ -228,69 +228,6 @@
       + gustText + "</div>" + iceText + barsHtml(f) + "</div>";
   }
 
-  /* Build 5 (W4): one answer line at the top of the panel: which day, the score,
-   * the wind, the best two hours, what to use and how deep. Everything behind it
-   * is in the folds below. */
-  /* The same word the list rows use for a day (Day out: calm, breezy, gusty), so the
-   * panel and the list never say different things about one day. */
-  function dayOutWord(dayOut) {
-    if (num(dayOut) === null) return null;
-    return dayOut >= 0.6 ? "calm" : dayOut >= 0.42 ? "breezy" : "gusty";
-  }
-  function windWord(day) {
-    if (num(day.gustMax) !== null && day.gustMax >= Conditions.GUST_WARN_KPH) return "gusty";
-    return dayOutWord(day.dayOut);
-  }
-
-  /* The first fly or lure of the tackle estimate, without its how-to words:
-   * "leech, slow strip" → "leech"; "chironomid pupa under a small float" → "chironomid pupa". */
-  function shortTackle(text) {
-    return String(text || "").split(",")[0].split(/ (?:under|on|in|near|at|trolled|just|down|for) /)[0].trim();
-  }
-
-  function answerParts(lake, f) {
-    if (!f) return { text: "No position, so no forecast", cls: "none" };
-    var d0 = f.days[0];
-    if (lakeOpenNow(lake) === false && d0 && d0.closed) return { text: "Season shut", cls: "shut" };
-    if (!f.hasWeather) return { text: "Needs a forecast", cls: "none" };
-    if (f.iced) {
-      var ws = pct(d0 && d0.winter);
-      return { text: "Ice likely" + (ws === null ? "" : " · winter score " + ws), cls: "ice" };
-    }
-    if (f.bestDay < 0) return { text: "No good day this week", cls: "none" };
-    var i = f.bestDay, day = f.days[i];
-    var bits = ["Go " + dayName(f, i) + " " + pct(day.bite)];
-    var ww = windWord(day);
-    if (ww) bits.push(ww);
-    if (day.bestWhen) {
-      var t = day.bestWhen.getTime();
-      bits.push(clock(new Date(t - 3600000), f.offset) + "–" + clock(new Date(t + 3600000), f.offset));
-    }
-    var use = null, depth = null;
-    try {
-      var e = estimatesFor(lake, f);
-      use = shortTackle((e.tackle.flies || [])[0] || (e.tackle.lures || [])[0]);
-      var fd = fishDepthFor(lake, f, i);
-      if (fd) depth = fd.lo + "–" + fd.hi + " m";
-    } catch (err) { /* an estimate that cannot be made leaves its part out */ }
-    if (use || depth) bits.push([use, depth].filter(Boolean).join(", "));
-    return { text: bits.join(" · "), cls: "go" };
-  }
-
-  function answerHtml(lake, f) {
-    var a = answerParts(lake, f);
-    var ice = "";
-    if (f && f.hasWeather && f.iced) ice = Estimates.ICE_WARNING;
-    else if (f && f.hasWeather) {
-      var first = -1;
-      f.days.forEach(function (x, i) { if (first < 0 && x.iceForming) first = i; });
-      if (first >= 0) ice = "Ice forming" + (first > 0 ? " from " + dayName(f, first) : "") + ". Check the lake before you go. " + Estimates.ICE_WARNING;
-      else if (f.iceUsual) ice = "Ice usually forms here about " + Estimates.fmtDate(f.iceUsual) + ". Check the lake before you go. " + Estimates.ICE_WARNING;
-    }
-    return '<div class="answer ' + a.cls + '" data-answer>' + esc(a.text) + "</div>"
-      + (ice ? '<div class="answer-ice">' + esc(ice) + "</div>" : "");
-  }
-
   /* Build 5: guide year Y holds to 31 March of Y+1. From 1 April the panel says
    * the rules may be old, until the data is refreshed. */
   function rulesYearWarning(now) {
@@ -877,15 +814,15 @@
       + '<div class="lake-top">' + baitBanLine(lake)
       + rulesYearHtml()
       + tagsHtml(lake, winter)
-      // Build 5 (W4): one answer line; the week, why and tip are in "This week".
-      + answerHtml(lake, f)
-      + aerationBlock(lake)
       // Build 4: the 3D model one tap from the top, for the 43 surveyed lakes.
       + (window.DepthModel && DepthModel.has(lake)
           ? '<button type="button" class="btn btn3d" data-depth3d><b class="mark3d">3D</b> Show 3D depth model</button>' : "")
       + "</div>"
-      + section("week", "This week", verdictLine(lake) + (f ? bannerHtml(lake, f, d) + whyHtml(lake, f, d) + tipHtml(lake, f, d)
-          : '<p class="dim">This lake has no position, so it has no forecast.</p>'), isOpen("week", false))
+      // The best-day box stays open (owner, Build 5 Rev 3); Why under it, closed.
+      + (f ? bannerHtml(lake, f, d) + whyHtml(lake, f, d) : '<p class="dim lake-nopos">This lake has no position, so it has no forecast.</p>')
+      + aerationBlock(lake)
+      // Build 5: the stocked / open / winterkill line and the daily tip, folded.
+      + section("status", "Tip and status", verdictLine(lake) + (f ? tipHtml(lake, f, d) : ""), isOpen("status", false))
       + section("forecast", "Forecast", forecast, isOpen("forecast", false))
       + section("bite", "Bite by hour", '<div class="cx-embed" data-cx></div>', isOpen("bite", false))
       + (f ? section("season", "Ice, hatches and tackle", seasonHtml(lake, f), isOpen("season", false)) : "")
@@ -999,11 +936,8 @@
     fishDepthFor: fishDepthFor,
     winterScoreHtml: winterScoreHtml,
     usualMonths: usualMonths,
-    dayOutWord: dayOutWord,
     rulesYearWarning: rulesYearWarning,
-    answerParts: answerParts,
-    _answerHtml: answerHtml,
-    _internal: { bannerHtml: bannerHtml, whyHtml: whyHtml, tagsHtml: tagsHtml, shortTackle: shortTackle, windWord: windWord, dayCompareSentence: dayCompareSentence, barsHtml: barsHtml, boatingHtml: boatingHtml, tipHtml: tipHtml, estimatesFor: estimatesFor, seasonHtml: seasonHtml, howHtml: howHtml, depthChartHtml: depthChartHtml, hotSpotsHtml: hotSpotsHtml },
+    _internal: { bannerHtml: bannerHtml, whyHtml: whyHtml, tagsHtml: tagsHtml, dayCompareSentence: dayCompareSentence, barsHtml: barsHtml, boatingHtml: boatingHtml, tipHtml: tipHtml, estimatesFor: estimatesFor, seasonHtml: seasonHtml, howHtml: howHtml, depthChartHtml: depthChartHtml, hotSpotsHtml: hotSpotsHtml },
     BAND_WORD: BAND_WORD,
     RULES_URL: RULES_URL,
     LICENCE_URL: LICENCE_URL,

@@ -3784,51 +3784,17 @@ class Build5Stage1Tests(unittest.TestCase):
                              confidence: 'Astronomy only'});
           const f = {offset: null, bestDay: -1, hasWeather: false, iced: false, days: [0,1,2,3,4,5,6].map(day)};
           const lake = {lake_id: 'wb1', name: 'Test'};
-          return [I.bannerHtml(lake, f, 0), I.whyHtml(lake, f, 0), S.answerParts(lake, f).text]; })()""",
+          return [I.bannerHtml(lake, f, 0), I.whyHtml(lake, f, 0)]; })()""",
                      prelude=self.PRELUDE)
-        banner, why, answer = got
+        banner, why = got
         self.assertIn("Needs a forecast", banner)
         self.assertNotIn("data-pickday", banner)
         self.assertNotIn("97", banner)
         self.assertEqual(why, "")
-        self.assertEqual(answer, "Needs a forecast")
         self.assertNotIn("No forecast yet", (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8"))
         ui = (ROOT / "js" / "conditions-ui.js").read_text(encoding="utf-8")
         self.assertIn('wx.source === "none"', ui)
         self.assertIn("<strong>Needs a forecast</strong>", ui)
-
-    def test_answer_line_names_day_score_wind_time_tackle_depth(self):
-        prelude = self.PRELUDE + (
-            "var Weather = {peek: () => ({data: {dailyT: [], dailyMeanC: [], elevM: null}})};"
-            "var ConditionsUI = {_internal: {waterFor: () => ({tempC: 8, source: 'air'})}};"
-            "function depthFor() { return {max_depth_m: 9}; }"
-            "function filteredDominantOrder() { return ['RNTR']; }"
-            "function lakeBaitRule() { return 'ban'; }"
-        )
-        got = run_js(["conditions.js", "estimates.js", "lake-sheet.js"], """(() => {
-          const S = window.LakeSheet, I = S._internal;
-          const day = (i, x) => Object.assign({start: new Date(Date.UTC(2026, 10, 5 + i, 7)), bite: 0.5, windMean: 20, gustMax: 25,
-                             bestWhen: new Date(Date.UTC(2026, 10, 5 + i, 15)), pressureTrend3h: 0}, x || {});
-          const days = [0,1,2,3,4,5,6].map(i => day(i));
-          days[1] = day(1, {bite: 0.82, windMean: 5, dayOut: 0.7});
-          const f = {offset: -25200, bestDay: 1, hasWeather: true, iced: false, days: days};
-          const lake = {lake_id: 'wb1', name: 'Test', lat: 53, lon: -114};
-          return [S.answerParts(lake, f).text, S.answerParts(Object.assign({shut: true}, lake), Object.assign({}, f, {days: days.map(d => Object.assign({}, d, {closed: true}))})).text,
-                  S.answerParts(lake, Object.assign({}, f, {bestDay: -1})).text, S.answerParts(lake, null).text,
-                  I.windWord({dayOut: 0.7}), I.windWord({dayOut: 0.5}), I.windWord({dayOut: 0.3}), I.windWord({}), I.windWord({dayOut: 0.9, gustMax: 45}),
-                  I.shortTackle('leech, slow strip'), I.shortTackle('chironomid pupa under a small float, just off the bottom'),
-                  I.shortTackle('leech or dragonfly nymph on a sinking line, down in the cooler water'), I.shortTackle('small spoon')]; })()""",
-                     prelude=prelude)
-        # Nov 6 is a Friday; the best hour is 08:00 at the lake (UTC-7).
-        self.assertRegex(got[0], r"^Go Fri 82 · calm · 07:00–09:00 · leech, [\d.]+–[\d.]+ m$")   # November: fall flies
-        self.assertEqual(got[1], "Season shut")
-        self.assertEqual(got[2], "No good day this week")
-        self.assertEqual(got[3], "No position, so no forecast")
-        # The same words as the list rows' Day out pill, so panel and list agree.
-        self.assertEqual(got[4:9], ["calm", "breezy", "gusty", None, "gusty"])
-        dayui = (ROOT / "js" / "day-ui.js").read_text(encoding="utf-8")
-        self.assertIn("LakeSheet.dayOutWord(day.dayOut)", dayui)
-        self.assertEqual(got[9:], ["leech", "chironomid pupa", "leech or dragonfly nymph", "small spoon"])
 
     def test_short_tags_keep_the_full_words_on_tap(self):
         got = run_js(["conditions.js", "lake-sheet.js"], """(() => {
@@ -3905,15 +3871,21 @@ class Build5Stage1Tests(unittest.TestCase):
         sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
         self.assertIn("<dt>Usually stocked</dt>", sheet)
 
-    def test_lake_panel_folds_everything_below_the_answer(self):
+    def test_best_day_box_stays_open_and_the_rest_folds(self):
+        # Owner, Build 5 Rev 3: the best-day box (Go day · score, reason, ice line, 7 bars) stays open.
         sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
         html = sheet[sheet.index("function html(lake)"):sheet.index("function wire(")]
-        self.assertIn('section("week", "This week"', html)
-        self.assertIn('isOpen("week", false)', html)
+        self.assertNotIn("answerHtml", sheet)
+        self.assertIn('section("status", "Tip and status", verdictLine(lake) + (f ? tipHtml(lake, f, d)', html)
+        self.assertIn('isOpen("status", false)', html)
         self.assertIn('isOpen("forecast", false)', html)
         self.assertIn('isOpen("rules", false)', html)
-        self.assertLess(html.index("answerHtml(lake, f)"), html.index('section("week"'))
-        self.assertLess(html.index("aerationBlock(lake)"), html.index('section("week"'))
+        top = html[:html.index('section("status"')]
+        self.assertIn("bannerHtml(lake, f, d) + whyHtml(lake, f, d)", top)
+        self.assertIn("aerationBlock(lake)", top)
+        self.assertNotIn("section(", top)
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn(".tags .tag { margin: 0; }", page)   # "8 reports" the same size as the other tags
         self.assertEqual(html.count("rulesYearHtml()"), 2)
         self.assertEqual((ROOT / ".gitattributes").read_text(encoding="utf-8").count("*.md text eol=crlf"), 1)
 
@@ -3927,23 +3899,22 @@ class Build5Stage1Tests(unittest.TestCase):
         branch = ui[ui.index('} else if (wx.source === "none") {'):ui.index("/* Weather, then whether to go")]
         self.assertIn("waterInputHtml(place, water)", branch)
 
-    def test_ice_safety_line_stays_on_the_first_screen(self):
-        prelude = self.PRELUDE + "var Weather = {peek: () => ({data: null})};"
+    def test_ice_safety_line_stays_in_the_open_box(self):
         got = run_js(["conditions.js", "estimates.js", "lake-sheet.js"], """(() => {
-          const S = window.LakeSheet, E = window.Estimates;
-          const day = i => ({start: new Date(Date.UTC(2026, 10, 5 + i, 7)), bite: 0.5, winter: 0.4, iceForming: i >= 2});
+          const I = window.LakeSheet._internal, E = window.Estimates;
+          const day = i => ({start: new Date(Date.UTC(2026, 10, 5 + i, 7)), bite: 0.6, dayOut: 0.7, winter: 0.4, iceForming: i >= 2});
           const days = [0,1,2,3,4,5,6].map(day);
           const lake = {lake_id: 'wb1', name: 'Test', lat: 53, lon: -114};
           return [E.ICE_WARNING,
-                  S._answerHtml(lake, {offset: -25200, bestDay: -1, hasWeather: true, iced: true, days: days}),
-                  S._answerHtml(lake, {offset: -25200, bestDay: 0, hasWeather: true, iced: false, days: days}),
-                  S._answerHtml(lake, {offset: -25200, bestDay: -1, hasWeather: false, iced: false, days: days})]; })()""",
-                     prelude=prelude)
-        warning, iced, forming, none = got
-        self.assertIn(warning, iced)
-        self.assertIn("Ice likely · winter score 40", iced)
-        self.assertIn("Ice forming from Sat. Check the lake before you go. " + warning, forming)
-        self.assertNotIn("answer-ice", none)
+                  I.bannerHtml(lake, {offset: -25200, bestDay: -1, hasWeather: true, iced: true, days: days}, 0),
+                  I.bannerHtml(lake, {offset: -25200, bestDay: 0, hasWeather: true, iced: false, days: days}, 0)]; })()""",
+                     prelude=self.PRELUDE)
+        warning, iced, forming = got
+        self.assertIn("Ice likely", iced)
+        self.assertIn("Legal is not safe. Ice thickness is never forecast.", iced)
+        self.assertIn("Ice forming — no score from Sat.", forming)
+        self.assertIn(warning, forming)
+        self.assertIn('data-pickday="6"', forming)
 
     def test_tags_and_info_buttons_open_close_and_survive_a_redraw(self):
         """wire() against a small stand-in for the page: a tap shows and hides
