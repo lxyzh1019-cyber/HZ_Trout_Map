@@ -139,7 +139,13 @@ def seed_from_stocking_map(reg):
     return added
 
 
-def apply_zones(reg):
+def key_of(lake):
+    """How a row of data/lake_zones.csv finds its lake (see apply_zones)."""
+    lid = lake["lake_id"]
+    return (lid, None) if lid.startswith("wb") else (lid, lake["name"])
+
+
+def apply_zones(reg, final=False):
     """The fishing zone from Alberta's regulations map (data/lake_zones.csv).
 
     The profile gives most lakes their zone. scripts/lake_zones.py looked up
@@ -154,19 +160,26 @@ def apply_zones(reg):
     if not path.exists():
         return 0
     with path.open(newline="", encoding="utf-8") as handle:
-        # Keyed by id and name: a minted lk00NN id follows the order lakes are
-        # minted in, so the name guards against a zone landing on another lake.
-        rows = {(r["lake_id"], r["name"]): r for r in csv.DictReader(handle)}
-    # A zone you answered in data/lake_facts.csv is never replaced here.
+        # An Alberta "wb" id is stable. A minted lk00NN id follows the order
+        # lakes are minted in, so for those the name guards against a zone
+        # landing on another lake.
+        rows = {key_of(r): r for r in csv.DictReader(handle)}
+    # A zone a person settled or kept in data/lake_facts.csv is never replaced
+    # here. A "fill" row (written by reconcile.py) is not an answer: it applies
+    # only to a lake that still has no zone, and Alberta's map comes first.
     answered = set()
     if FACTS_PATH.exists():
         with FACTS_PATH.open(newline="", encoding="utf-8") as handle:
-            answered = {r["lake_id"] for r in csv.DictReader(handle) if r.get("field") == "zone"}
+            answered = {r["lake_id"] for r in csv.DictReader(handle)
+                        if r.get("field") == "zone" and (r.get("decision") or "").strip() in ("settled", "keep")}
     changed = 0
+    seen = set()
     for lake in reg.lakes:
+        row = rows.get(key_of(lake))
+        if row:
+            seen.add(key_of(lake))
         if lake["lake_id"] in answered:
             continue
-        row = rows.get((lake["lake_id"], lake["name"]))
         if not row or not row["alberta_zone"]:
             continue
         zone, now = row["alberta_zone"], lake.get("zone")
@@ -175,6 +188,11 @@ def apply_zones(reg):
         if not now or zone in row["guide_zones"].split():
             lake["zone"] = zone
             changed += 1
+    stale = len(rows) - len(seen)
+    if stale and final:
+        # Only meaningful on the second call, once the minted lakes exist.
+        print(f"  {stale} row(s) of data/lake_zones.csv match no lake by id and name: "
+              f"re-run scripts/lake_zones.py")
     return changed
 
 
@@ -845,7 +863,7 @@ def main():
     # Again, now that the lakes minted from a land description exist: those are
     # precisely the ones with no waterbody id, so they are the ones a published
     # id is recorded for, and they are not in the registry during the first pass.
-    zoned = apply_zones(reg)
+    zoned = apply_zones(reg, final=True)
     confirmed += apply_facts(reg)
     if confirmed:
         print(f"\n  {confirmed} field(s) from data/lake_facts.csv, your past answers")

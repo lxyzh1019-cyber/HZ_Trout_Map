@@ -141,18 +141,13 @@ class Build5WatersTests(unittest.TestCase):
         self.assertIn(("Medley River", "on the map as a stocked water"), why)
 
     def test_rivers_with_no_line_are_in_the_review_file(self):
-        # No CanVec line of the name at all, or none inside the zone's outline on
-        # Alberta's regulations map.
+        # No CanVec line of the name at all, or none in the zone (the line there is
+        # in a neighbouring unit by the nearest stocked lakes).
         missing = {r["lake"] for r in self.review if r["why"] in (
             "no river line of that name in the water data", "no river line of that name in the zone")}
-        for name in ("South Castle River", "Monday Creek"):
+        for name in ("South Castle River", "Redwater River", "Muskwa River",
+                     "Nipisi River", "Birch Creek", "Monday Creek", "Sunday Creek"):
             self.assertIn(name, missing)
-        # With Alberta's zone outlines (not the nearest stocked lakes) these
-        # found their line inside their zone.
-        have = {s["name"] for s in self.rivers["stretches"]}
-        for name in ("Redwater River", "Muskwa River", "Nipisi River", "Birch Creek", "Sunday Creek"):
-            self.assertIn(name, have)
-            self.assertNotIn(name, missing)
         # Piche River is "Piché River" in CanVec: found once accents are dropped.
         self.assertIn("rv-nb1-piche-river-1", self.by_id)
         placed = {s["name"] for s in self.rivers["stretches"]}
@@ -204,9 +199,6 @@ class Build5WatersTests(unittest.TestCase):
         self.assertNotIn("250,000", src)
         self.assertNotIn("250K", src)
 
-
-if __name__ == "__main__":
-    unittest.main()
 
 
 class Build5ZoneTests(unittest.TestCase):
@@ -273,3 +265,62 @@ class Build5ZoneTests(unittest.TestCase):
         for name in ("Kramer Pond", "Innisfree Trout Pond", "Ashland Reservoir", "Boulder Lake"):
             self.assertIn(name, st)
         self.assertEqual(self.regs[self.by_name("Kramer Pond")]["basis"], "put-and-take")
+
+
+class Build5ZoneHelperTests(unittest.TestCase):
+    """scripts/lake_zones.py and the --lakes-only and height rules, offline."""
+
+    def test_zone_code_and_point_zone_with_a_hole(self):
+        import lake_zones as lz
+        self.assertEqual(lz.zone_code("NB3", "00009"), "NB3")
+        self.assertEqual(lz.zone_code("ES1 - Eastern Slopes", None), "ES1")
+        with self.assertRaises(ValueError):
+            lz.zone_code("Zone", "1")
+        outer = [[0, 0], [10, 0], [10, 10], [0, 10]]
+        hole = [[4, 4], [6, 4], [6, 6], [4, 6]]
+        island = [[4, 4], [6, 4], [6, 6], [4, 6]]
+        outlines = [("ES1", [outer, hole], (0, 0, 10, 10)), ("PP1", [island], (4, 4, 6, 6))]
+        self.assertEqual(lz.point_zone(outlines, 2, 2), "ES1")
+        self.assertEqual(lz.point_zone(outlines, 5, 5), "PP1")      # in ES1's hole, in PP1
+        self.assertIsNone(lz.point_zone(outlines, 50, 50))          # far outside every outline
+        self.assertEqual(lz.point_zone(outlines, 5, 10.01, near_km=5), "ES1")  # a sliver past the edge
+
+    def test_a_same_named_lake_elsewhere_confirms_nothing(self):
+        import lake_zones as lz
+        lake = {"name": "Swan Lake", "lat": 56.98, "lon": -115.92}
+        far = {"swanlake": [("ES2", (52.0, -115.0)), ("ES4", (54.0, -118.0))]}
+        self.assertEqual(lz.confirming_zones(lake, far), set())
+        near = {"swanlake": [("NB3", (56.95, -115.90))]}
+        self.assertEqual(lz.confirming_zones(lake, near), {"NB3"})
+        # No land description: only the lake's own name, and only if it is in one zone.
+        self.assertEqual(lz.confirming_zones(lake, {"swanlake": [("NB3", None)]}), {"NB3"})
+        self.assertEqual(lz.confirming_zones(lake, {"swanlake": [("NB3", None), ("ES2", None)]}), set())
+        bracket = {"name": "Little Bear Lake (Hasse Lake)", "lat": 53.5, "lon": -114.2}
+        self.assertEqual(lz.confirming_zones(bracket, {"hasselake": [("PP2", None)]}), set())
+
+    def test_lakes_only_keeps_the_river_rows(self):
+        import waterbodies as wb
+        regs = {"zones": {"ES1": {"rivers": {"Bow River": {}}, "lakes": {"Elbow River": {}, "Bow Lake": {}}}}}
+        names = wb.river_names(regs)
+        self.assertIn(wb.norm("Bow River"), names)
+        self.assertIn(wb.norm("Elbow River"), names)
+        self.assertNotIn(wb.norm("Bow Lake"), names)
+
+    def test_a_refused_height_stops_the_build(self):
+        import elevation
+        import waterbodies as wb
+        real, cache = elevation.fetch, dict(wb.HEIGHT_CACHE)
+        try:
+            def refuse(points):
+                raise RuntimeError("Daily API request limit exceeded")
+            elevation.fetch = refuse
+            wb.HEIGHT_CACHE["path"] = None
+            with self.assertRaises(SystemExit):
+                wb.heights_of([(52.0, -114.0), (52.1, -114.1)])
+        finally:
+            elevation.fetch = real
+            wb.HEIGHT_CACHE.update(cache)
+
+
+if __name__ == "__main__":
+    unittest.main()

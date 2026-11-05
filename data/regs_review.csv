@@ -2,7 +2,6 @@ lake,lake_id,zone,why,closest,score
 Morinville Lake,lk0006,,no fish management zone recorded,,
 Niton Pond,lk0005,,no fish management zone recorded,,
 Buller Pond,wb6877,ES1,a similar name exists but is not close enough to trust,Bear Pond,0.8
-Dormer Lake,wb6836,ES1,a similar name exists but is not close enough to trust,Corner Lake,0.818
 Goodwin Reservoir,wb317177,ES1,a similar name exists but is not close enough to trust,Oldman Reservoir,0.788
 Avalanche Lake,wb6672,ES2,a similar name exists but is not close enough to trust,Cavan Lake,0.75
 Kakut Lake,wb4965,ES4,a similar name exists but is not close enough to trust,Rat Lake,0.778

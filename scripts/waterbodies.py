@@ -9,6 +9,11 @@ app can score it and show its rules like any stocked lake.
 Usage (network inputs are downloaded first, then read from disk):
 
     python -I scripts/waterbodies.py <CanVec 1:50,000 Hydro folder or .zip> <cgn_ab_csv_eng.zip>
+    python -I scripts/waterbodies.py --lakes-only <CanVec ...> <cgn_ab_csv_eng.zip>
+
+--lakes-only places the guide's lakes again and leaves data/rivers.json and the
+river rows of data/waters_review.csv as they are. It asks for no heights, so it
+runs when Open-Meteo refuses (its daily limit); the rivers need the heights.
 
 Inputs
     the guide          data/raw/alberta-sportfishing-regulations-2026-tables.pdf (read by regulations.py)
@@ -1102,12 +1107,15 @@ def unsettled_twins(twin_rows):
     return out
 
 
-def run(canvec_path, cgn_path, regs=None, cgn=None, outl=None, river_lines=None):
+def run(canvec_path, cgn_path, regs=None, cgn=None, outl=None, river_lines=None, lakes_only=False):
     """Everything main() writes, as (lakes, review, rivers, twins). The inputs can
     be handed in (the tests and a re-run read them once)."""
     regs = regs or regulations.load(PDF)
-    if HEIGHT_CACHE["path"] is None and Path(canvec_path).is_dir():
-        HEIGHT_CACHE["path"] = str(Path(canvec_path) / "waterbodies_heights.json")
+    # Saved inputs live next to the CanVec download (its folder, or the folder
+    # its .zip is in), outside the repository.
+    keep = Path(canvec_path) if Path(canvec_path).is_dir() else Path(canvec_path).parent
+    if HEIGHT_CACHE["path"] is None:
+        HEIGHT_CACHE["path"] = str(keep / "waterbodies_heights.json")
     cgn = cgn if cgn is not None else read_cgn(cgn_path)
     PLACES.clear()
     for r in cgn:
@@ -1117,11 +1125,13 @@ def run(canvec_path, cgn_path, regs=None, cgn=None, outl=None, river_lines=None)
             pass
     stocked = stocked_lakes()
     import lake_zones
-    zones = Zones(stocked, lake_zones.zone_outlines())
+    zones = Zones(stocked, lake_zones.zone_outlines(keep / "zone_outlines.json"))
     outl = outl if outl is not None else outlines(canvec_path)
     WATER["path"] = canvec_path
     LAKE_POINTS[:] = cgn_rows(cgn)
     lakes, review, twins = placed_lakes(regs, zones, LAKE_POINTS, outl, stocked)
+    if lakes_only:
+        return regs, lakes, review, None, twins
     wanted = {norm(n) for u in regs["zones"].values() for n in list(u["rivers"]) + [x for x in u["lakes"] if flowing(x)]}
     for u in regs["zones"].values():
         for r in u["rivers"].values():
@@ -1133,10 +1143,24 @@ def run(canvec_path, cgn_path, regs=None, cgn=None, outl=None, river_lines=None)
     return regs, lakes, review + river_review, rivers, twins
 
 
+def river_names(regs):
+    """Normalised names of the guide's flowing waters (its river tables, and the
+    creeks and rivers in its lake tables)."""
+    return {norm(n) for u in regs["zones"].values()
+            for n in list(u["rivers"]) + [x for x in u["lakes"] if flowing(x)]}
+
+
 def main(argv):
+    lakes_only = "--lakes-only" in argv
+    argv = [a for a in argv if a != "--lakes-only"]
     if len(argv) != 3:
         raise SystemExit(__doc__)
-    regs, lakes, review, rivers, twins = run(argv[1], argv[2])
+    regs, lakes, review, rivers, twins = run(argv[1], argv[2], lakes_only=lakes_only)
+    if lakes_only:
+        flowing_names = river_names(regs)
+        rivers = json.loads((DATA / "rivers.json").read_text(encoding="utf-8"))["stretches"]
+        with (DATA / "waters_review.csv").open(newline="", encoding="utf-8") as f:
+            review += [r for r in csv.DictReader(f) if norm(r["lake"]) in flowing_names]
     write(regs, lakes, review, rivers)
     report(lakes, review, rivers, twins)
 

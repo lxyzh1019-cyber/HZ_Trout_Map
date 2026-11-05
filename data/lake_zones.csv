@@ -16,7 +16,7 @@ wb6892,Bathing Lake,ES1,lake layer by waterbody id,ES1
 wb4005,Bear Pond,ES1,lake layer by waterbody id,ES1
 wb6893,Beaumont Pond,PP2,lake layer by waterbody id,PP2
 wb4011,Beauvais Lake,ES1,lake layer by waterbody id,ES1
-wb4014,Beaver Lake,ES2,lake layer by waterbody id,ES2 NB1
+wb4014,Beaver Lake,ES2,lake layer by waterbody id,ES2
 wb4018,Beaver Mines Lake,ES1,lake layer by waterbody id,ES1
 wb6894,Bellis Beach Lake,NB1,lake layer by waterbody id,NB1
 wb6896,Bennett'S Pond,PP2,lake layer by waterbody id,
@@ -24,7 +24,7 @@ wb6897,Big Iron Lake,ES1,lake layer by waterbody id,ES1
 wb4061,Birch Lake,ES2,lake layer by waterbody id,ES2
 wb6923,Black Nugget Mine Pit,PP2,lake layer by waterbody id,PP2
 wb3494,Blood Indian Creek Reservoir,PP2,lake layer by waterbody id,PP2
-wb4094,Blue Lake,NB2,lake layer by waterbody id,ES3 NB2
+wb4094,Blue Lake,NB2,lake layer by waterbody id,NB2
 wb6889,Boehlke'S Pond,PP2,lake layer by waterbody id,
 wb6890,Bonnyville Town Pond (Slawuta Lake),NB1,lake layer by waterbody id,NB1
 wb417506,Boulder Lake,PP2,lake layer by waterbody id,PP2
@@ -71,7 +71,7 @@ wb6859,Corner Lake,PP1,lake layer by waterbody id,PP1
 wb6845,Coronation Reservoir,PP2,lake layer by waterbody id,PP2
 wb6846,Cottonwood Lake,ES1,lake layer by waterbody id,ES1
 wb417477,County Sportsplex Pond,ES4,lake layer by waterbody id,
-wb4340,Cow Lake,ES2,lake layer by waterbody id,ES2 NB1
+wb4340,Cow Lake,ES2,lake layer by waterbody id,ES2
 wb23293,Crossfield Trout Pond,ES1,lake layer by waterbody id,ES1
 wb4374,Crowsnest Lake,ES1,lake layer by waterbody id,ES1
 wb6850,Cummings Lake,NB3,lake layer by waterbody id,
@@ -84,7 +84,7 @@ wb6833,Diplomat Mine Pond,PP2,lake layer by waterbody id,PP2
 wb4458,Dolberg Lake,NB2,lake layer by waterbody id,NB2
 wb6836,Dormer Lake,ES2,lake layer by waterbody id,ES2
 wb4488,Dunn Lake,ES3,lake layer by waterbody id,ES3
-wb4495,Eagle Lake,ES2,lake layer by waterbody id,ES2 PP1
+wb4495,Eagle Lake,ES2,lake layer by waterbody id,ES2
 wb4460,East Dollar Lake,ES4,lake layer by waterbody id,ES4
 wb6840,East Pit Lake,PP2,lake layer by waterbody id,PP2
 wb22993,East Stormwater Pond,PP2,lake layer by waterbody id,PP2
@@ -93,10 +93,10 @@ wb6842,Echo Dale Regional Park Pond,PP1,lake layer by waterbody id,PP1
 wb4505,Edith Lake,NB2,lake layer by waterbody id,NB2
 wb6820,Elk Creek Pond,ES2,lake layer by waterbody id,ES2
 wb417505,Elk Point Pond,NB1,lake layer by waterbody id,NB1
-wb6821,Emerald Lake,ES3,lake layer by waterbody id,ES1 ES3
-wb4532,Emerald Lake (Hart Lake),ES1,lake layer by waterbody id,ES1 ES3
+wb6821,Emerald Lake,ES3,lake layer by waterbody id,ES3
+wb4532,Emerald Lake (Hart Lake),ES1,lake layer by waterbody id,ES1
 wb4535,Emerson Lakes,ES3,lake layer by waterbody id,ES3
-wb6822,Emerson Lakes,PP1,lake layer by waterbody id,ES3
+wb6822,Emerson Lakes,PP1,lake layer by waterbody id,
 wb6823,Enchant Park Pond,PP1,lake layer by waterbody id,
 wb4539,Engstrom Lake,NB4,lake layer by waterbody id,NB4
 wb6662,Entry Lake,ES2,lake layer by waterbody id,ES2
@@ -116,13 +116,13 @@ wb6815,Fox Creek Trout Pond,ES4,lake layer by waterbody id,ES4
 wb4635,Frog Lake,NB1,lake layer by waterbody id,NB1
 wb3505,Fyten Reservoir,PP2,lake layer by waterbody id,
 wb4642,Galatea Lakes (Lower Galatea Lake),ES1,lake layer by waterbody id,ES1
-wb4647,Gap Lake,ES2,lake layer by waterbody id,ES1 ES2
+wb4647,Gap Lake,ES2,lake layer by waterbody id,ES2
 wb23292,Genesee Trout Pond,PP2,lake layer by waterbody id,PP2
 wb6816,Gibbons Park Pond,PP2,lake layer by waterbody id,
 wb4697,Goldeye Lake,ES2,lake layer by waterbody id,ES2
 wb6818,Goldspring Park Pond,PP1,lake layer by waterbody id,PP1
 wb317177,Goodwin Reservoir,ES1,lake layer by waterbody id,
-wb4708,Goose Lake,NB2,lake layer by waterbody id,ES4 NB2
+wb4708,Goose Lake,NB2,lake layer by waterbody id,
 wb6809,Gooseberry Park Pond,PP2,lake layer by waterbody id,PP2
 wb4725,Grande Cache Lake,ES4,lake layer by waterbody id,ES4
 wb6810,Granum Pond,ES1,lake layer by waterbody id,ES1
@@ -146,16 +146,16 @@ wb6796,Hiller's (Dam) Reservoir,PP2,lake layer by waterbody id,PP2
 wb6917,Hinton Fish and Game Pond (Cold Creek Trout Pond),ES3,lake layer by waterbody id,
 wb6541,Hogarth Lakes (Lower),ES1,lake layer by waterbody id,ES1
 wb4837,Hogarth Lakes (Upper Hogarth Lake),ES1,lake layer by waterbody id,ES1
-wb6669,Horseshoe Lake,NB2,lake layer by waterbody id,ES3 NB2
+wb6669,Horseshoe Lake,NB2,lake layer by waterbody id,NB2
 wb6780,Huber Reservoir,PP2,lake layer by waterbody id,PP2
 wb4888,Ice Lake,ES2,lake layer by waterbody id,ES2
 wb6784,Innisfree Trout Pond,PP2,lake layer by waterbody id,PP2
 wb4897,Invincible Lake,ES1,lake layer by waterbody id,ES1
 wb6785,Irma Fish and Game Pond,PP2,lake layer by waterbody id,PP2
 wb6786,Ironside Pond,ES2,lake layer by waterbody id,ES2
-wb4909,Island Lake,ES1,lake layer by waterbody id,ES1 NB1 NB2
-wb4920,Jack Fish Lake,PP2,lake layer by waterbody id,ES2 PP2
-lk0008,Jackfish Lake,ES2,zone outline at the lake's position,ES2 PP2
+wb4909,Island Lake,ES1,lake layer by waterbody id,ES1
+wb4920,Jack Fish Lake,PP2,lake layer by waterbody id,PP2
+lk0008,Jackfish Lake,ES2,zone outline at the lake's position,ES2
 wb4935,Jane Lake,NB2,lake layer by waterbody id,NB2
 wb854,Jarvis Creek,ES3,river layer by waterbody id,
 wb6788,Jarvis Creek Pond,ES3,lake layer by waterbody id,ES3
@@ -192,7 +192,7 @@ wb6765,Legal Reservoir,NB1,lake layer by waterbody id,NB1
 wb26322,Len Thompson Pond,PP2,lake layer by waterbody id,PP2
 wb5074,Lillian Lake,ES1,lake layer by waterbody id,ES1
 wb5078,Lilly Lake,NB2,lake layer by waterbody id,
-wb5093,Little Bear Lake (Hasse Lake),NB1,lake layer by waterbody id,NB1 PP2
+wb5093,Little Bear Lake (Hasse Lake),NB1,lake layer by waterbody id,NB1
 wb6767,Little Beaverdam Lake,ES1,lake layer by waterbody id,ES1
 wb3515,Little Bow Lake Reservoir,PP1,lake layer by waterbody id,PP1
 wb5099,Little Fish Lake,PP2,lake layer by waterbody id,PP2
@@ -208,7 +208,7 @@ wb6537,Lower Wildhorse Lakes,ES3,lake layer by waterbody id,
 wb6721,MD Peace Pond #1,NB3,lake layer by waterbody id,NB3
 wb6750,Machesis Lake,NB3,lake layer by waterbody id,NB3
 wb6751,Magrath Children's Pond,PP1,lake layer by waterbody id,PP1
-wb5223,Margaret Lake,ES1,lake layer by waterbody id,ES1 NB3
+wb5223,Margaret Lake,ES1,lake layer by waterbody id,ES1
 wb5232,Marigold Lake,NB2,lake layer by waterbody id,NB2
 wb5245,Mary Gregg Lake,ES3,lake layer by waterbody id,ES3
 wb5253,Maude Lake,ES1,lake layer by waterbody id,ES1
@@ -221,7 +221,7 @@ wb6757,McQuillan Reservoir,PP1,lake layer by waterbody id,PP1
 wb6758,McVinnie Reservoir,PP1,lake layer by waterbody id,PP1
 wb5275,Mcgregor Reservoir,PP1,lake layer by waterbody id,PP1
 wb22995,Md Peace Pond #2,NB3,lake layer by waterbody id,NB3
-wb2129,Medley River,NB1,river layer by waterbody id,NB1
+wb2129,Medley River,NB1,river layer by waterbody id,
 wb6610,Memorial Lakes (West Memorial Lake),ES1,lake layer by waterbody id,ES1
 wb3523,Michel Reservoir,PP1,lake layer by waterbody id,
 wb3524,Michichi Reservoir,PP2,lake layer by waterbody id,PP2
@@ -292,7 +292,7 @@ wb26047,Radway Fish Pond,NB1,lake layer by waterbody id,NB1
 wb6713,Rainbow Lake,ES3,lake layer by waterbody id,NB3
 wb6705,Rainbow Lake Pond,NB3,lake layer by waterbody id,NB3
 wb6613,Rainbow Park Pond (Westlock Recreation Pond),NB1,lake layer by waterbody id,
-wb6702,Rat Lake,ES2,lake layer by waterbody id,ES2 PP2
+wb6702,Rat Lake,ES2,lake layer by waterbody id,ES2
 wb5649,Rawson Lake,ES1,lake layer by waterbody id,ES1
 wb5661,Reesor Lake,PP1,lake layer by waterbody id,PP1
 wb5667,Ribbon Lake,ES1,lake layer by waterbody id,ES1
@@ -311,7 +311,7 @@ wb5788,Shark Lake,ES1,lake layer by waterbody id,ES1
 wb328085,Shell True North Pond,NB3,lake layer by waterbody id,NB3
 wb6699,Shemeluk Lake,NB1,lake layer by waterbody id,NB1
 wb5790,Sherburne Reservoir,PP1,lake layer by waterbody id,
-wb5804,Shunda Lake (Fish Lake),ES2,lake layer by waterbody id,ES2 NB3
+wb5804,Shunda Lake (Fish Lake),ES2,lake layer by waterbody id,ES2
 wb6688,Shuster Lake,PP2,lake layer by waterbody id,PP2
 wb1573,Sibbald Creek,ES1,river layer by waterbody id,
 wb5805,Sibbald Lake,ES1,lake layer by waterbody id,ES1
@@ -323,9 +323,9 @@ wb18014,South Heart Reservoir,NB2,lake layer by waterbody id,NB2
 wb6652,South Sundance Lake,ES3,lake layer by waterbody id,ES3
 wb6051,South Two Lake,ES4,lake layer by waterbody id,
 wb5858,Sparrows Egg Lake,ES1,lake layer by waterbody id,ES1
-wb5874,Spring (Cottage) Lake,PP2,lake layer by waterbody id,ES4 PP2
+wb5874,Spring (Cottage) Lake,PP2,lake layer by waterbody id,PP2
 wb6692,Spring Coulee Park Pond,PP1,lake layer by waterbody id,PP1
-wb6693,Spring Lake (Spirit River),ES4,lake layer by waterbody id,ES4 PP2
+wb6693,Spring Lake (Spirit River),ES4,lake layer by waterbody id,ES4
 wb3534,Spruce Coulee Reservoir,PP1,lake layer by waterbody id,PP1
 lk0007,St. Mary reservoir,PP1,zone outline at the lake's position,PP1
 wb24702,St. Paul Fish Pond,NB1,lake layer by waterbody id,NB1
@@ -336,8 +336,8 @@ wb6682,Stirling Children's Pond,PP1,lake layer by waterbody id,PP1
 wb6686,Strathmore Children's Pond,PP1,lake layer by waterbody id,PP1
 wb5919,Strubel Lake,ES2,lake layer by waterbody id,ES2
 wb5929,Sulphur Lake,NB3,lake layer by waterbody id,NB3
-wb5758,Swan Lake,NB3,lake layer by waterbody id,ES2 ES4
-wb5944,Swan Lake,ES4,lake layer by waterbody id,ES2 ES4
+wb5758,Swan Lake,NB3,lake layer by waterbody id,
+wb5944,Swan Lake,ES4,lake layer by waterbody id,ES4
 wb5952,Sylvan Lake,PP2,lake layer by waterbody id,PP2
 wb318138,Taber Trout Pond,PP1,lake layer by waterbody id,PP1
 wb5960,Talus Lake,ES1,zone outline at the lake's position,ES1
@@ -351,15 +351,15 @@ wb5990,Three Isle Lake,ES1,lake layer by waterbody id,ES1
 wb6677,Tim Horton Children's Pond,ES1,lake layer by waterbody id,ES1
 wb6638,Trapper Lake,ES3,lake layer by waterbody id,ES3
 wb3537,Travers Reservoir,PP1,lake layer by waterbody id,
-wb6039,Twin Lakes,ES2,lake layer by waterbody id,ES2 NB3
+wb6039,Twin Lakes,ES2,lake layer by waterbody id,ES2
 wb23327,Twin Valley Reservoir,PP1,lake layer by waterbody id,
 wb6670,Two Hills Pond,PP2,lake layer by waterbody id,PP2
 wb6061,Upper Kananaskis Lake,ES1,lake layer by waterbody id,ES1
 wb6606,Upper Smuts Lake,ES1,lake layer by waterbody id,
-wb6618,Valleyview Children's Pond,ES4,lake layer by waterbody id,ES4
+wb6618,Valleyview Children's Pond,ES4,lake layer by waterbody id,
 wb6619,Vegreville Children's Pond,PP2,lake layer by waterbody id,PP2
 wb6620,Vegreville Trout Pond,PP2,lake layer by waterbody id,PP2
-wb6086,Victor Lake,ES4,lake layer by waterbody id,ES4 NB1
+wb6086,Victor Lake,ES4,lake layer by waterbody id,ES4
 wb6095,Wabamun Lake,PP2,lake layer by waterbody id,PP2
 wb6097,Wadlin Lake,NB3,lake layer by waterbody id,NB3
 wb6622,Wallace Park Pond,PP2,lake layer by waterbody id,PP2

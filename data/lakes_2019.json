@@ -4669,7 +4669,7 @@
     "lat": 49.626771,
     "lon": -114.641917,
     "coord_source": "alberta",
-    "zone": "ES3",
+    "zone": "ES1",
     "surface_area_ha": 3.5,
     "amenities": null,
     "stockings": [
@@ -5067,7 +5067,7 @@
     "lat": 51.590937,
     "lon": -115.498976,
     "coord_source": "alberta",
-    "zone": "ES1",
+    "zone": "ES2",
     "surface_area_ha": 6.5,
     "amenities": null,
     "stockings": [

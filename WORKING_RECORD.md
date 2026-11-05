@@ -164,7 +164,10 @@ Single working record for this repository. Updated by the main session at the en
 | M8 | 11-04 | Rules year check banner from 1 Apr 2027; README refresh steps | done | 5.1; rulesYearWarning; README "Refreshing the rules" |
 | M9 | 11-04 | "Usually stocked" months at 60%+, "Too few years to tell" under 3 years | done | 5.1; usualMonths; 282 of 382 lakes |
 | M10 | 11-04 | Every stage: tests, 5-size layout check, before/after pictures, FEATURES and record, CRLF, final report | open | 5.1 done; stages 2–4 to come |
-| M11 | 11-04 | Stage 2: score all lakes and rivers in the 2026 guide, Red Deer River below Dickson Dam, CGNDB and CanVec positions, weather budget, Stocked filter | done | 5.2; 285 lakes, 86 stretches, 318 spots, 3D on 114 lakes; 53 names in data/waters_review.csv; spot matching for the owner's 218 pins waits for the file |
+| M11 | 11-04 | Stage 2: score all lakes and rivers in the 2026 guide, Red Deer River below Dickson Dam, CGNDB and CanVec positions, weather budget, Stocked filter | done | 5.2; 286 lakes, 86 stretches, 318 spots, 3D on 114 lakes; 52 names in data/waters_review.csv; spot count M15 |
+| M14 | 11-05 | Zones for the stocked lakes that have none, from the Alberta Conservation Association's documents | done, other source | the Association's site blocks automated reading (bot check); decision 16 A: Alberta's sportfishing regulations map (geospatial.alberta.ca); 58 filled, 14 corrected where the guide agrees; owner corrected Emerald (Hart) ES1 and Dormer ES2 in lake_facts.csv |
+| M15 | 11-05 | Count the owner's 218 pins: lake, river stretch (300 m) or nothing; read the file only | done | 143 lake (128 outline holds the lake point, 13 outline with the lake's name, 2 size circle + 1 km), 10 river only, 65 nothing; file read in place, nothing saved; .claude/state/checks/spots_count.py |
+| M16 | 11-05 | River edges from Alberta's zone outlines (decision 18 A) | open | needs Open-Meteo heights (daily limit reached 11-05); follow-up pull request after Stage 2 (decision 19 A) |
 | M12 | 11-04 | Stage 3: import my spots (browser only), species mode | open | Build 5 Stage 3 |
 | M13 | 11-04 | Stage 4: Firebase sync and weekly email (ASK first) | open | Build 5 Stage 4; replaces F1, F2 |
 
@@ -184,7 +187,7 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 | Build 3 | COMPLETE | PR #20 merged 2026-11-04 (d3e3c0d) |
 | Build 4 | COMPLETE | PR #21 merged 2026-11-04 (922ddb0) |
 | Build 5 Stage 1 | COMPLETE | PR #22 merged 2026-11-04 (d70bc8a); 274 tests pass on GitHub |
-| Build 5 Stage 2 | IN REVIEW | branch claude/funny-ritchie-bealq0; 308 tests pass; data rebuild unchanged; reviewer 16 findings all fixed or recorded; waiting for the owner's picture OK |
+| Build 5 Stage 2 | IN REVIEW | branch claude/funny-ritchie-bealq0; 316 tests pass; data rebuild gives the same files twice; owner OK on the pictures 11-05; zones M14 |
 | Build 5 Stage 3 | NOT STARTED | |
 | Build 5 Stage 4 | NOT STARTED | |
 
@@ -230,3 +233,6 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 - H4 answered 2026-10-30: Open-Meteo counts per IP; one full load = 250 calls in 5 requests (measured in the browser), 3 h cache.
 - Species page facts from general knowledge (Athabasca rainbow at risk, westslope cutthroat Threatened, walleye special licence, bull trout protected): owner to check.
 - River guide facts from general knowledge (learn/river.html): water from deep in Gleniffer Reservoir stays cold all summer; brown trout and mountain whitefish the main fish, some rainbow, bull trout pass through; releases can raise the river fast; the dam keeps some water open in winter: owner to check.
+- 2026-11-05 Stage 2 zones: lake_zones.py 382 stocked lakes, 366 by the lake layer, 7 by the river layer, the rest by zone outline; build_history.py twice → same md5 for every data/*.json and *.csv; guide rules on 363 stocked lakes (316 before); 312 tests pass; layout at 360, 390, 834, 1194, 1280 for Pine Coulee, Headwall Lakes and the Red Deer River → 0 faults, 0 page errors
+- 2026-11-05 Open-Meteo answered "Daily API request limit exceeded" (HTTP 429): the river rebuild is deferred (M16); data/rivers.json is the 24d8cde build the owner saw in the pictures
+- 2026-11-05 reviewer pass on the zone change → 8 findings, all fixed: a same-named lake elsewhere no longer confirms a zone (land description within 15 km, or a name in one zone only); zone outlines saved once and read from disk; cut-short map answers stop the script; owner corrections are "settled", and "fill" rows no longer block Alberta's zone; outlines unsimplified, holes per outline, nearest zone within 2 km on a sliver; the new tests run from the file too; heights saved for a .zip input; zone rows match wb ids by id (one lake is renamed during the build). Zones and rules unchanged by the fixes; rebuild twice → same md5; 316 tests pass

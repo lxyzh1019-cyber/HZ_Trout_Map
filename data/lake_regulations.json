@@ -2467,22 +2467,34 @@
    "zone": "NB2"
   },
   "wb4532": {
-   "bait": "Bait is allowed",
-   "basis": "put-and-take",
-   "limits": {
-    "Northern Pike": "3 Northern Pike of any size",
-    "Trout": "5 trout of any size",
-    "Yellow Perch": "15 Yellow Perch of any size"
-   },
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "SE-8-8-5-W5",
    "match_score": 0.95,
-   "matched_name": "Emerald Lake",
-   "note": "For other species, see Maximum Possession limits.",
+   "matched_name": "Emerald (Hart) Lake",
+   "page": 7,
    "season": {
     "closed": false,
     "implied": false,
-    "text": "OPEN all year"
+    "text": "OPEN ALL YEAR"
    },
-   "zone": "ES3"
+   "species": {
+    "LKTR": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "MNWH": {
+     "count": 3,
+     "size_cm": 30,
+     "size_op": "over",
+     "text": "3 over 30 cm"
+    }
+   },
+   "trout_total": {
+    "count": 5,
+    "text": "5 trout"
+   },
+   "zone": "ES1"
   },
   "wb4535": {
    "bait": "Bait is allowed",
@@ -7868,6 +7880,37 @@
     "text": "OPEN all year"
    },
    "zone": "PP2"
+  },
+  "wb6836": {
+   "bait": "Bait allowed, except bait fish",
+   "basis": "site-specific",
+   "detail": "21-30-11-W5",
+   "matched_name": "Dormer Lake",
+   "page": 13,
+   "season": {
+    "closed": false,
+    "implied": false,
+    "text": "OPEN ALL YEAR"
+   },
+   "species": {
+    "NRPK": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "WALL": {
+     "count": 3,
+     "text": "3 fish"
+    },
+    "YLPR": {
+     "count": 15,
+     "text": "15 fish"
+    }
+   },
+   "trout_total": {
+    "count": 2,
+    "text": "2 trout"
+   },
+   "zone": "ES2"
   },
   "wb6840": {
    "bait": "Bait is allowed",

@@ -1142,7 +1142,7 @@
       "EMERALD LAKE (HART LAKE)",
       "Emerald Lake (Hart Lake)"
     ],
-    "zone": "ES3",
+    "zone": "ES1",
     "surface_area_ha": 3.5,
     "amenities": null,
     "base_name": "Emerald Lake (Hart Lake)"
@@ -6149,7 +6149,7 @@
       "DORMER LAKE",
       "Dormer Lake"
     ],
-    "zone": "ES1",
+    "zone": "ES2",
     "surface_area_ha": 6.5,
     "amenities": null,
     "base_name": "Dormer Lake"

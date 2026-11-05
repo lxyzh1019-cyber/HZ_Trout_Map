@@ -4087,9 +4087,8 @@ class Build5Stage2Tests(unittest.TestCase):
     def test_weather_calls_per_load(self):
         """The cells the app asks for: every lake and river spot, one call per
         0.25 degree cell (js/weather.js cellKey). A fresh load from Red Deer asks
-        only for the cells within 200 km, under Open-Meteo's 600 calls a minute.
-        The whole province is never asked for at once (on-screen cells load only
-        zoomed in); it stays far under the 10,000 calls a day."""
+        only for the cells within 200 km; the whole province stays under
+        Open-Meteo's 600 calls a minute."""
         import math
         pts = [(l["lat"], l["lon"]) for l in placed_waters().values() if l.get("lat") is not None]
         pts += [tuple(p) for s in self.rivers["stretches"] for p in s["spots"]]
@@ -4100,7 +4099,7 @@ class Build5Stage2Tests(unittest.TestCase):
         full = {cell(p) for p in pts}
         near = {cell(p) for p in pts if km(home, p) <= 200}
         self.assertLess(len(near), 250, len(near))     # before Stage 2 a full load was 250
-        self.assertLess(len(full), 1000, len(full))
+        self.assertLess(len(full), 600, len(full))
         day = (ROOT / "js" / "day-ui.js").read_text(encoding="utf-8")
         self.assertIn("fetchNear();", day[day.index("function setOrigin("):day.index("function setOrigin(") + 400])
         page = (ROOT / "index.html").read_text(encoding="utf-8")

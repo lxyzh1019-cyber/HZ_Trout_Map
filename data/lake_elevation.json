@@ -3,9 +3,9 @@
  "url": "https://api.open-meteo.com/v1/elevation",
  "licence": "CC BY 4.0 (Open-Meteo); Copernicus DEM © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018, provided under COPERNICUS by the European Union and ESA",
  "retrieved": "2026-11-05",
- "calls": 11,
- "calls_this_run": 1,
- "count": 1018,
+ "calls": 10,
+ "calls_this_run": 0,
+ "count": 984,
  "lakes": {
   "gu-es1-barnaby-lake": 1898.0,
   "gu-es1-blairmore-water-supply-unnamed-reservoir": 1395.0,
@@ -308,10 +308,9 @@
   "rv-es1-mill-creek-1#0": 2172.0,
   "rv-es1-mill-creek-1#1": 1207.0,
   "rv-es1-oldman-river-1#0": 1115.0,
-  "rv-es1-oldman-river-1#1": 915.0,
-  "rv-es1-oldman-river-1#2": 1822.0,
-  "rv-es1-oldman-river-1#3": 1461.0,
-  "rv-es1-oldman-river-1#4": 1237.0,
+  "rv-es1-oldman-river-1#1": 1822.0,
+  "rv-es1-oldman-river-1#2": 1461.0,
+  "rv-es1-oldman-river-1#3": 1237.0,
   "rv-es1-pincher-creek-1#0": 1047.0,
   "rv-es1-pincher-creek-1#1": 1727.0,
   "rv-es1-pincher-creek-1#2": 1894.0,
@@ -331,20 +330,17 @@
   "rv-es1-west-castle-river-1#0": 1666.0,
   "rv-es1-willow-creek-1#0": 1494.0,
   "rv-es1-willow-creek-1#1": 1209.0,
-  "rv-es1-willow-creek-1#2": 1002.0,
-  "rv-es1-willow-creek-1#3": 971.0,
+  "rv-es1-willow-creek-1#2": 1019.0,
   "rv-es2-north-saskatchewan-river-1#0": 926.0,
   "rv-es2-north-saskatchewan-river-1#1": 1214.0,
   "rv-es2-north-saskatchewan-river-1#2": 1380.0,
   "rv-es2-north-saskatchewan-river-1#3": 1535.0,
-  "rv-es2-north-saskatchewan-river-1#4": 739.0,
-  "rv-es2-north-saskatchewan-river-1#5": 787.0,
-  "rv-es2-north-saskatchewan-river-1#6": 921.0,
-  "rv-es2-north-saskatchewan-river-1#7": 1133.0,
-  "rv-es2-north-saskatchewan-river-1#8": 1050.0,
-  "rv-es2-north-saskatchewan-river-1#9": 1313.0,
+  "rv-es2-north-saskatchewan-river-1#4": 921.0,
+  "rv-es2-north-saskatchewan-river-1#5": 1133.0,
+  "rv-es2-north-saskatchewan-river-1#6": 1050.0,
+  "rv-es2-north-saskatchewan-river-1#7": 1313.0,
+  "rv-es2-north-saskatchewan-river-1#8": 788.0,
   "rv-es2-pinto-creek-1#0": 1414.0,
-  "rv-es2-pinto-creek-1#1": 1844.0,
   "rv-es2-prairie-creek-1#0": 1474.0,
   "rv-es2-prairie-creek-1#1": 1093.0,
   "rv-es2-ram-river-1#0": 2201.0,
@@ -363,24 +359,22 @@
   "rv-es2-swan-creek-1#0": 1222.0,
   "rv-es2-tay-river-1#0": 1618.0,
   "rv-es2-tay-river-1#1": 1230.0,
-  "rv-es3-athabasca-river-1#0": 1180.0,
+  "rv-es3-athabasca-river-1#0": 1212.0,
   "rv-es3-athabasca-river-1#1": 724.0,
   "rv-es3-athabasca-river-1#2": 997.0,
   "rv-es3-athabasca-river-1#3": 854.0,
   "rv-es3-athabasca-river-1#4": 905.0,
   "rv-es3-athabasca-river-1#5": 939.0,
   "rv-es3-athabasca-river-1#6": 780.0,
-  "rv-es3-athabasca-river-1#7": 1037.0,
-  "rv-es3-berland-river-1#0": 1272.0,
-  "rv-es3-berland-river-1#1": 995.0,
-  "rv-es3-berland-river-1#2": 1584.0,
-  "rv-es3-berland-river-1#3": 1089.0,
-  "rv-es3-berland-river-1#4": 845.0,
+  "rv-es3-athabasca-river-1#7": 1066.0,
+  "rv-es3-athabasca-river-1#8": 660.0,
+  "rv-es3-berland-river-1#0": 995.0,
+  "rv-es3-berland-river-1#1": 1089.0,
+  "rv-es3-berland-river-1#2": 845.0,
   "rv-es3-bigoray-river-1#0": 843.0,
   "rv-es3-deerlick-creek-1#0": 1392.0,
   "rv-es3-dismal-creek-1#0": 1060.0,
   "rv-es3-dismal-creek-1#1": 1251.0,
-  "rv-es3-dismal-creek-1#2": 922.0,
   "rv-es3-embarras-river-1#0": 1221.0,
   "rv-es3-embarras-river-1#1": 1008.0,
   "rv-es3-eunice-creek-1#0": 1389.0,
@@ -400,15 +394,13 @@
   "rv-es3-mcleod-river-1#7": 697.0,
   "rv-es3-pembina-river-1#0": 1222.0,
   "rv-es3-pembina-river-1#1": 1571.0,
-  "rv-es3-pembina-river-1#2": 972.0,
-  "rv-es3-pembina-river-1#3": 878.0,
-  "rv-es3-pembina-river-1#4": 845.0,
-  "rv-es3-pembina-river-1#5": 770.0,
-  "rv-es3-pembina-river-1#6": 697.0,
+  "rv-es3-pembina-river-1#2": 1090.0,
+  "rv-es3-pembina-river-1#3": 757.0,
+  "rv-es3-pembina-river-1#4": 682.0,
+  "rv-es3-pembina-river-1#5": 835.0,
   "rv-es3-plante-creek-1#0": 1133.0,
-  "rv-es3-rat-creek-1#0": 871.0,
-  "rv-es3-rat-creek-1#1": 941.0,
-  "rv-es3-rat-creek-1#2": 1645.0,
+  "rv-es3-rat-creek-1#0": 928.0,
+  "rv-es3-rat-creek-1#1": 1645.0,
   "rv-es3-wampus-creek-1#0": 1373.0,
   "rv-es3-wildhay-river-1#0": 1546.0,
   "rv-es3-wildhay-river-1#1": 1087.0,
@@ -416,12 +408,10 @@
   "rv-es3-wildhay-river-1#3": 1267.0,
   "rv-es3-windfall-creek-1#0": 1099.0,
   "rv-es3-windfall-creek-1#1": 818.0,
-  "rv-nb1-athabasca-river-1#0": 507.0,
-  "rv-nb1-athabasca-river-1#1": 498.0,
-  "rv-nb1-athabasca-river-1#2": 491.0,
-  "rv-nb1-athabasca-river-1#3": 479.0,
-  "rv-nb1-athabasca-river-1#4": 467.0,
-  "rv-nb1-athabasca-river-1#5": 447.0,
+  "rv-nb1-athabasca-river-1#0": 496.0,
+  "rv-nb1-athabasca-river-1#1": 490.0,
+  "rv-nb1-athabasca-river-1#2": 477.0,
+  "rv-nb1-athabasca-river-1#3": 465.0,
   "rv-nb1-beaver-river-1#0": 538.0,
   "rv-nb1-beaver-river-1#1": 492.0,
   "rv-nb1-beaver-river-1#2": 570.0,
@@ -436,9 +426,6 @@
   "rv-nb1-owl-river-1#0": 650.0,
   "rv-nb1-owl-river-1#1": 571.0,
   "rv-nb1-piche-river-1#0": 587.0,
-  "rv-nb1-redwater-river-1#0": 601.0,
-  "rv-nb1-redwater-river-1#1": 682.0,
-  "rv-nb1-redwater-river-1#2": 616.0,
   "rv-nb3-chinchaga-river-1#0": 784.0,
   "rv-nb3-chinchaga-river-1#1": 744.0,
   "rv-nb3-chinchaga-river-1#10": 366.0,
@@ -470,18 +457,13 @@
   "rv-nb3-loon-river-1#0": 680.0,
   "rv-nb3-loon-river-1#1": 494.0,
   "rv-nb3-loon-river-1#2": 475.0,
-  "rv-nb3-mikkwa-river-1#0": 651.0,
-  "rv-nb3-mikkwa-river-1#1": 290.0,
-  "rv-nb3-mikkwa-river-1#2": 775.0,
-  "rv-nb3-mikkwa-river-1#3": 612.0,
-  "rv-nb3-mikkwa-river-1#4": 486.0,
-  "rv-nb3-mikkwa-river-1#5": 400.0,
-  "rv-nb3-mikkwa-river-1#6": 370.0,
-  "rv-nb3-mikkwa-river-1#7": 328.0,
-  "rv-nb3-mikkwa-river-1#8": 249.0,
-  "rv-nb3-muskwa-river-1#0": 549.0,
-  "rv-nb3-muskwa-river-1#1": 543.0,
-  "rv-nb3-nipisi-river-1#0": 623.0,
+  "rv-nb3-mikkwa-river-1#0": 290.0,
+  "rv-nb3-mikkwa-river-1#1": 249.0,
+  "rv-nb3-mikkwa-river-1#2": 595.0,
+  "rv-nb3-mikkwa-river-1#3": 488.0,
+  "rv-nb3-mikkwa-river-1#4": 392.0,
+  "rv-nb3-mikkwa-river-1#5": 356.0,
+  "rv-nb3-mikkwa-river-1#6": 332.0,
   "rv-nb3-notikewin-river-1#0": 918.0,
   "rv-nb3-notikewin-river-1#1": 346.0,
   "rv-nb3-notikewin-river-1#2": 770.0,
@@ -519,21 +501,18 @@
   "rv-nb3-petitot-river-1#4": 522.0,
   "rv-nb3-petitot-river-1#5": 517.0,
   "rv-nb3-petitot-river-1#6": 461.0,
-  "rv-nb3-smoky-river-1#0": 332.0,
+  "rv-nb3-smoky-river-1#0": 316.0,
+  "rv-nb3-smoky-river-1#1": 370.0,
+  "rv-nb3-smoky-river-1#2": 337.0,
   "rv-nb3-wabasca-river-1#0": 437.0,
   "rv-nb3-wabasca-river-1#1": 465.0,
-  "rv-nb3-wabasca-river-1#10": 351.0,
-  "rv-nb3-wabasca-river-1#11": 320.0,
-  "rv-nb3-wabasca-river-1#12": 284.0,
-  "rv-nb3-wabasca-river-1#13": 252.0,
   "rv-nb3-wabasca-river-1#2": 477.0,
-  "rv-nb3-wabasca-river-1#3": 483.0,
-  "rv-nb3-wabasca-river-1#4": 555.0,
-  "rv-nb3-wabasca-river-1#5": 522.0,
-  "rv-nb3-wabasca-river-1#6": 544.0,
-  "rv-nb3-wabasca-river-1#7": 544.0,
-  "rv-nb3-wabasca-river-1#8": 398.0,
-  "rv-nb3-wabasca-river-1#9": 388.0,
+  "rv-nb3-wabasca-river-1#3": 398.0,
+  "rv-nb3-wabasca-river-1#4": 388.0,
+  "rv-nb3-wabasca-river-1#5": 351.0,
+  "rv-nb3-wabasca-river-1#6": 320.0,
+  "rv-nb3-wabasca-river-1#7": 284.0,
+  "rv-nb3-wabasca-river-1#8": 252.0,
   "rv-nb4-athabasca-river-1#0": 215.0,
   "rv-nb4-athabasca-river-1#1": 440.0,
   "rv-nb4-athabasca-river-1#2": 216.0,
@@ -542,8 +521,6 @@
   "rv-nb4-athabasca-river-1#5": 328.0,
   "rv-nb4-athabasca-river-1#6": 284.0,
   "rv-nb4-athabasca-river-1#7": 251.0,
-  "rv-nb4-birch-creek-1#0": 648.0,
-  "rv-nb4-birch-creek-1#1": 559.0,
   "rv-nb4-clearwater-river-1#0": 304.0,
   "rv-nb4-clearwater-river-1#1": 266.0,
   "rv-nb4-clearwater-river-1#2": 256.0,
@@ -554,39 +531,34 @@
   "rv-nb4-hangingstone-river-1#0": 712.0,
   "rv-nb4-hangingstone-river-1#1": 435.0,
   "rv-nb4-house-river-1#0": 505.0,
-  "rv-nb4-house-river-1#1": 660.0,
-  "rv-nb4-house-river-1#2": 684.0,
+  "rv-nb4-house-river-1#1": 661.0,
   "rv-nb4-richardson-river-1#0": 215.0,
   "rv-nb4-richardson-river-1#1": 423.0,
   "rv-nb4-richardson-river-1#2": 343.0,
   "rv-nb4-richardson-river-1#3": 256.0,
   "rv-nb4-richardson-river-1#4": 273.0,
-  "rv-nb4-sunday-creek-1#0": 574.0,
   "rv-pp1-battle-creek-1#0": 1230.0,
   "rv-pp1-bow-river-1#0": 887.0,
   "rv-pp1-bow-river-1#1": 804.0,
-  "rv-pp1-bow-river-1#2": 732.0,
-  "rv-pp1-bow-river-1#3": 766.0,
-  "rv-pp1-bow-river-1#4": 718.0,
-  "rv-pp1-bow-river-1#5": 704.0,
+  "rv-pp1-bow-river-1#2": 726.0,
+  "rv-pp1-bow-river-1#3": 707.0,
   "rv-pp1-graburn-creek-1#0": 1353.0,
   "rv-pp1-lee-creek-1#0": 1165.0,
   "rv-pp1-little-bow-river-1#0": 964.0,
   "rv-pp1-little-bow-river-1#1": 773.0,
   "rv-pp1-little-bow-river-1#2": 801.0,
   "rv-pp1-little-bow-river-1#3": 873.0,
-  "rv-pp1-little-bow-river-1#4": 997.0,
   "rv-pp1-oldman-river-1#0": 848.0,
-  "rv-pp1-oldman-river-1#1": 747.0,
-  "rv-pp1-oldman-river-1#2": 794.0,
-  "rv-pp1-oldman-river-1#3": 699.0,
-  "rv-pp1-south-saskatchewan-river-1#0": 581.0,
-  "rv-pp1-south-saskatchewan-river-1#1": 654.0,
-  "rv-pp1-south-saskatchewan-river-1#2": 621.0,
-  "rv-pp1-south-saskatchewan-river-1#3": 604.0,
-  "rv-pp1-south-saskatchewan-river-1#4": 590.0,
-  "rv-pp1-south-saskatchewan-river-1#5": 692.0,
-  "rv-pp1-south-saskatchewan-river-1#6": 678.0,
+  "rv-pp1-oldman-river-1#1": 915.0,
+  "rv-pp1-oldman-river-1#2": 747.0,
+  "rv-pp1-oldman-river-1#3": 794.0,
+  "rv-pp1-oldman-river-1#4": 699.0,
+  "rv-pp1-south-saskatchewan-river-1#0": 654.0,
+  "rv-pp1-south-saskatchewan-river-1#1": 621.0,
+  "rv-pp1-south-saskatchewan-river-1#2": 604.0,
+  "rv-pp1-south-saskatchewan-river-1#3": 590.0,
+  "rv-pp1-south-saskatchewan-river-1#4": 692.0,
+  "rv-pp1-south-saskatchewan-river-1#5": 678.0,
   "rv-pp1-st-mary-river-1#0": 840.0,
   "rv-pp1-st-mary-river-1#1": 1008.0,
   "rv-pp1-st-mary-river-1#2": 1106.0,
@@ -613,30 +585,24 @@
   "rv-pp2-blindman-river-1#2": 872.0,
   "rv-pp2-blindman-river-1#3": 851.0,
   "rv-pp2-little-red-deer-river-1#0": 931.0,
+  "rv-pp2-little-red-deer-river-1#1": 1136.0,
   "rv-pp2-medicine-river-1#0": 926.0,
   "rv-pp2-medicine-river-1#1": 942.0,
   "rv-pp2-medicine-river-1#2": 905.0,
   "rv-pp2-north-saskatchewan-river-1#0": 677.0,
-  "rv-pp2-north-saskatchewan-river-1#1": 717.0,
-  "rv-pp2-north-saskatchewan-river-1#10": 532.0,
-  "rv-pp2-north-saskatchewan-river-1#11": 526.0,
-  "rv-pp2-north-saskatchewan-river-1#12": 513.0,
-  "rv-pp2-north-saskatchewan-river-1#2": 500.0,
+  "rv-pp2-north-saskatchewan-river-1#1": 739.0,
+  "rv-pp2-north-saskatchewan-river-1#2": 503.0,
   "rv-pp2-north-saskatchewan-river-1#3": 598.0,
-  "rv-pp2-north-saskatchewan-river-1#4": 582.0,
-  "rv-pp2-north-saskatchewan-river-1#5": 570.0,
-  "rv-pp2-north-saskatchewan-river-1#6": 549.0,
-  "rv-pp2-north-saskatchewan-river-1#7": 642.0,
-  "rv-pp2-north-saskatchewan-river-1#8": 626.0,
-  "rv-pp2-north-saskatchewan-river-1#9": 540.0,
+  "rv-pp2-north-saskatchewan-river-1#4": 642.0,
+  "rv-pp2-north-saskatchewan-river-1#5": 626.0,
+  "rv-pp2-north-saskatchewan-river-1#6": 537.0,
   "rv-pp2-parlby-creek-1#0": 803.0,
-  "rv-pp2-red-deer-river-1#0": 968.0,
-  "rv-pp2-red-deer-river-1#1": 883.0,
-  "rv-pp2-red-deer-river-1#2": 862.0,
-  "rv-pp2-red-deer-river-1#3": 793.0,
-  "rv-pp2-red-deer-river-1#4": 760.0,
-  "rv-pp2-red-deer-river-1#5": 725.0,
-  "rv-pp2-red-deer-river-1#6": 704.0,
+  "rv-pp2-red-deer-river-1#0": 947.0,
+  "rv-pp2-red-deer-river-1#1": 870.0,
+  "rv-pp2-red-deer-river-1#2": 799.0,
+  "rv-pp2-red-deer-river-1#3": 758.0,
+  "rv-pp2-red-deer-river-1#4": 727.0,
+  "rv-pp2-red-deer-river-1#5": 706.0,
   "rv-pp2-red-deer-river-2#0": 705.0,
   "rv-pp2-red-deer-river-2#1": 683.0,
   "rv-pp2-red-deer-river-2#2": 672.0,
@@ -2232,18 +2198,14 @@
    -113.9631
   ],
   "rv-es1-oldman-river-1#1": [
-   49.8128,
-   -113.3183
-  ],
-  "rv-es1-oldman-river-1#2": [
    50.1131,
    -114.652
   ],
-  "rv-es1-oldman-river-1#3": [
+  "rv-es1-oldman-river-1#2": [
    49.9412,
    -114.3923
   ],
-  "rv-es1-oldman-river-1#4": [
+  "rv-es1-oldman-river-1#3": [
    49.7944,
    -114.128
   ],
@@ -2324,12 +2286,8 @@
    -114.0566
   ],
   "rv-es1-willow-creek-1#2": [
-   50.0274,
-   -113.7048
-  ],
-  "rv-es1-willow-creek-1#3": [
-   49.8282,
-   -113.5427
+   50.0898,
+   -113.7199
   ],
   "rv-es2-north-saskatchewan-river-1#0": [
    52.4976,
@@ -2348,36 +2306,28 @@
    -117.0099
   ],
   "rv-es2-north-saskatchewan-river-1#4": [
-   53.1919,
-   -114.9315
-  ],
-  "rv-es2-north-saskatchewan-river-1#5": [
-   53.0439,
-   -115.2135
-  ],
-  "rv-es2-north-saskatchewan-river-1#6": [
    52.8167,
    -115.1743
   ],
-  "rv-es2-north-saskatchewan-river-1#7": [
+  "rv-es2-north-saskatchewan-river-1#5": [
    52.4389,
    -115.7923
   ],
-  "rv-es2-north-saskatchewan-river-1#8": [
+  "rv-es2-north-saskatchewan-river-1#6": [
    52.3821,
    -115.4355
   ],
-  "rv-es2-north-saskatchewan-river-1#9": [
+  "rv-es2-north-saskatchewan-river-1#7": [
    52.1162,
    -116.4141
+  ],
+  "rv-es2-north-saskatchewan-river-1#8": [
+   53.04,
+   -115.2173
   ],
   "rv-es2-pinto-creek-1#0": [
    52.2416,
    -115.7978
-  ],
-  "rv-es2-pinto-creek-1#1": [
-   51.4634,
-   -115.3734
   ],
   "rv-es2-prairie-creek-1#0": [
    52.1379,
@@ -2452,8 +2402,8 @@
    -115.1971
   ],
   "rv-es3-athabasca-river-1#0": [
-   52.6646,
-   -117.8835
+   52.6133,
+   -117.8455
   ],
   "rv-es3-athabasca-river-1#1": [
    54.1811,
@@ -2480,26 +2430,22 @@
    -116.3771
   ],
   "rv-es3-athabasca-river-1#7": [
-   52.8567,
-   -118.0766
+   52.8072,
+   -118.0336
+  ],
+  "rv-es3-athabasca-river-1#8": [
+   54.1649,
+   -115.3755
   ],
   "rv-es3-berland-river-1#0": [
-   53.7632,
-   -118.1605
-  ],
-  "rv-es3-berland-river-1#1": [
    54.0448,
    -117.5
   ],
-  "rv-es3-berland-river-1#2": [
-   53.6787,
-   -118.5784
-  ],
-  "rv-es3-berland-river-1#3": [
+  "rv-es3-berland-river-1#1": [
    53.9646,
    -117.8576
   ],
-  "rv-es3-berland-river-1#4": [
+  "rv-es3-berland-river-1#2": [
    53.9999,
    -116.8651
   ],
@@ -2518,10 +2464,6 @@
   "rv-es3-dismal-creek-1#1": [
    53.0242,
    -116.3558
-  ],
-  "rv-es3-dismal-creek-1#2": [
-   53.096,
-   -115.5997
   ],
   "rv-es3-embarras-river-1#0": [
    53.1522,
@@ -2600,38 +2542,30 @@
    -117.004
   ],
   "rv-es3-pembina-river-1#2": [
-   53.1582,
-   -115.8494
+   53.1614,
+   -116.1832
   ],
   "rv-es3-pembina-river-1#3": [
-   53.102,
-   -115.4865
+   53.5073,
+   -115.0049
   ],
   "rv-es3-pembina-river-1#4": [
-   53.2329,
-   -115.1816
+   53.7654,
+   -114.9639
   ],
   "rv-es3-pembina-river-1#5": [
-   53.4632,
-   -115.013
-  ],
-  "rv-es3-pembina-river-1#6": [
-   53.6783,
-   -114.9023
+   53.25,
+   -115.1748
   ],
   "rv-es3-plante-creek-1#0": [
    53.6699,
    -117.3166
   ],
   "rv-es3-rat-creek-1#0": [
-   53.1306,
-   -115.4688
+   53.2636,
+   -115.6218
   ],
   "rv-es3-rat-creek-1#1": [
-   53.2953,
-   -115.7273
-  ],
-  "rv-es3-rat-creek-1#2": [
    52.9317,
    -116.9146
   ],
@@ -2664,28 +2598,20 @@
    -116.2674
   ],
   "rv-nb1-athabasca-river-1#0": [
-   54.7255,
-   -113.2762
+   54.9408,
+   -113.0114
   ],
   "rv-nb1-athabasca-river-1#1": [
-   54.9129,
-   -113.0594
+   55.1442,
+   -112.8437
   ],
   "rv-nb1-athabasca-river-1#2": [
-   55.1108,
-   -112.8724
+   55.3547,
+   -112.7046
   ],
   "rv-nb1-athabasca-river-1#3": [
-   55.3082,
-   -112.6837
-  ],
-  "rv-nb1-athabasca-river-1#4": [
-   55.5245,
-   -112.7928
-  ],
-  "rv-nb1-athabasca-river-1#5": [
-   55.7234,
-   -112.6066
+   55.5778,
+   -112.7602
   ],
   "rv-nb1-beaver-river-1#0": [
    54.5,
@@ -2742,18 +2668,6 @@
   "rv-nb1-piche-river-1#0": [
    55.0,
    -111.7294
-  ],
-  "rv-nb1-redwater-river-1#0": [
-   53.8991,
-   -113.0
-  ],
-  "rv-nb1-redwater-river-1#1": [
-   54.0,
-   -113.8162
-  ],
-  "rv-nb1-redwater-river-1#2": [
-   54.0914,
-   -113.4662
   ],
   "rv-nb3-chinchaga-river-1#0": [
    57.2986,
@@ -2880,52 +2794,32 @@
    -115.1925
   ],
   "rv-nb3-mikkwa-river-1#0": [
-   57.5,
-   -113.3855
-  ],
-  "rv-nb3-mikkwa-river-1#1": [
    58.2115,
    -115.0
   ],
-  "rv-nb3-mikkwa-river-1#2": [
-   57.4143,
-   -112.9989
-  ],
-  "rv-nb3-mikkwa-river-1#3": [
-   57.5627,
-   -113.7878
-  ],
-  "rv-nb3-mikkwa-river-1#4": [
-   57.6165,
-   -114.1952
-  ],
-  "rv-nb3-mikkwa-river-1#5": [
-   57.7115,
-   -114.5763
-  ],
-  "rv-nb3-mikkwa-river-1#6": [
-   57.7311,
-   -114.9958
-  ],
-  "rv-nb3-mikkwa-river-1#7": [
-   57.943,
-   -115.1371
-  ],
-  "rv-nb3-mikkwa-river-1#8": [
+  "rv-nb3-mikkwa-river-1#1": [
    58.3795,
    -114.7157
   ],
-  "rv-nb3-muskwa-river-1#0": [
-   56.1206,
-   -114.2409
+  "rv-nb3-mikkwa-river-1#2": [
+   57.5589,
+   -113.7973
   ],
-  "rv-nb3-muskwa-river-1#1": [
-   56.2285,
-   -113.8863
+  "rv-nb3-mikkwa-river-1#3": [
+   57.6212,
+   -114.2005
   ],
-  "rv-nb3-nipisi-river-1#0": [
-   55.9937,
-   -114.8239
+  "rv-nb3-mikkwa-river-1#4": [
+   57.7062,
+   -114.5901
+  ],
+  "rv-nb3-mikkwa-river-1#5": [
+   57.7258,
+   -115.0095
+  ],
+  "rv-nb3-mikkwa-river-1#6": [
+   57.9365,
+   -115.157
   ],
   "rv-nb3-notikewin-river-1#0": [
    56.7459,
@@ -3076,8 +2970,16 @@
    -120.4157
   ],
   "rv-nb3-smoky-river-1#0": [
-   55.9851,
-   -117.5291
+   56.1681,
+   -117.3355
+  ],
+  "rv-nb3-smoky-river-1#1": [
+   55.7387,
+   -117.6403
+  ],
+  "rv-nb3-smoky-river-1#2": [
+   55.9543,
+   -117.5256
   ],
   "rv-nb3-wabasca-river-1#0": [
    57.1011,
@@ -3087,53 +2989,33 @@
    56.9282,
    -114.3802
   ],
-  "rv-nb3-wabasca-river-1#10": [
-   57.5829,
-   -115.3858
-  ],
-  "rv-nb3-wabasca-river-1#11": [
-   57.8078,
-   -115.3754
-  ],
-  "rv-nb3-wabasca-river-1#12": [
-   58.032,
-   -115.4087
-  ],
-  "rv-nb3-wabasca-river-1#13": [
-   58.2563,
-   -115.3785
-  ],
   "rv-nb3-wabasca-river-1#2": [
    56.8634,
    -113.9859
   ],
   "rv-nb3-wabasca-river-1#3": [
-   56.7757,
-   -113.6073
-  ],
-  "rv-nb3-wabasca-river-1#4": [
-   55.9091,
-   -113.492
-  ],
-  "rv-nb3-wabasca-river-1#5": [
-   56.4679,
-   -113.6873
-  ],
-  "rv-nb3-wabasca-river-1#6": [
-   55.9619,
-   -113.8822
-  ],
-  "rv-nb3-wabasca-river-1#7": [
-   56.1839,
-   -113.8171
-  ],
-  "rv-nb3-wabasca-river-1#8": [
    57.166,
    -115.0953
   ],
-  "rv-nb3-wabasca-river-1#9": [
+  "rv-nb3-wabasca-river-1#4": [
    57.3633,
    -115.2952
+  ],
+  "rv-nb3-wabasca-river-1#5": [
+   57.5829,
+   -115.3858
+  ],
+  "rv-nb3-wabasca-river-1#6": [
+   57.8078,
+   -115.3754
+  ],
+  "rv-nb3-wabasca-river-1#7": [
+   58.032,
+   -115.4087
+  ],
+  "rv-nb3-wabasca-river-1#8": [
+   58.2563,
+   -115.3785
   ],
   "rv-nb4-athabasca-river-1#0": [
    58.36,
@@ -3166,14 +3048,6 @@
   "rv-nb4-athabasca-river-1#7": [
    56.6631,
    -111.5809
-  ],
-  "rv-nb4-birch-creek-1#0": [
-   55.4839,
-   -111.3711
-  ],
-  "rv-nb4-birch-creek-1#1": [
-   55.6277,
-   -111.0652
   ],
   "rv-nb4-clearwater-river-1#0": [
    56.7057,
@@ -3216,12 +3090,8 @@
    -112.4291
   ],
   "rv-nb4-house-river-1#1": [
-   55.7006,
-   -112.0
-  ],
-  "rv-nb4-house-river-1#2": [
-   55.9229,
-   -111.9389
+   55.7526,
+   -111.9107
   ],
   "rv-nb4-richardson-river-1#0": [
    58.4022,
@@ -3243,10 +3113,6 @@
    57.9873,
    -110.8504
   ],
-  "rv-nb4-sunday-creek-1#0": [
-   55.5629,
-   -110.8945
-  ],
   "rv-pp1-battle-creek-1#0": [
    49.6609,
    -110.0942
@@ -3260,20 +3126,12 @@
    -112.7863
   ],
   "rv-pp1-bow-river-1#2": [
-   50.3195,
-   -112.1637
+   50.219,
+   -112.0752
   ],
   "rv-pp1-bow-river-1#3": [
-   50.6432,
-   -112.4902
-  ],
-  "rv-pp1-bow-river-1#4": [
-   50.1927,
-   -111.8732
-  ],
-  "rv-pp1-bow-river-1#5": [
-   50.0504,
-   -111.6014
+   50.1041,
+   -111.6313
   ],
   "rv-pp1-graburn-creek-1#0": [
    49.6121,
@@ -3299,51 +3157,47 @@
    50.1817,
    -113.0146
   ],
-  "rv-pp1-little-bow-river-1#4": [
-   50.4802,
-   -113.719
-  ],
   "rv-pp1-oldman-river-1#0": [
    49.6734,
    -112.9858
   ],
   "rv-pp1-oldman-river-1#1": [
+   49.8128,
+   -113.3183
+  ],
+  "rv-pp1-oldman-river-1#2": [
    49.8221,
    -112.1561
   ],
-  "rv-pp1-oldman-river-1#2": [
+  "rv-pp1-oldman-river-1#3": [
    49.8449,
    -112.7605
   ],
-  "rv-pp1-oldman-river-1#3": [
+  "rv-pp1-oldman-river-1#4": [
    49.9396,
    -111.7018
   ],
   "rv-pp1-south-saskatchewan-river-1#0": [
-   50.8697,
-   -110.0033
-  ],
-  "rv-pp1-south-saskatchewan-river-1#1": [
    50.0406,
    -110.6887
   ],
-  "rv-pp1-south-saskatchewan-river-1#2": [
+  "rv-pp1-south-saskatchewan-river-1#1": [
    50.2632,
    -110.6395
   ],
-  "rv-pp1-south-saskatchewan-river-1#3": [
+  "rv-pp1-south-saskatchewan-river-1#2": [
    50.4316,
    -110.406
   ],
-  "rv-pp1-south-saskatchewan-river-1#4": [
+  "rv-pp1-south-saskatchewan-river-1#3": [
    50.6278,
    -110.2329
   ],
-  "rv-pp1-south-saskatchewan-river-1#5": [
+  "rv-pp1-south-saskatchewan-river-1#4": [
    49.9228,
    -111.5278
   ],
-  "rv-pp1-south-saskatchewan-river-1#6": [
+  "rv-pp1-south-saskatchewan-river-1#5": [
    50.0517,
    -111.2407
   ],
@@ -3451,6 +3305,10 @@
    52.004,
    -114.2213
   ],
+  "rv-pp2-little-red-deer-river-1#1": [
+   51.5539,
+   -114.5481
+  ],
   "rv-pp2-medicine-river-1#0": [
    52.3968,
    -114.3746
@@ -3468,84 +3326,56 @@
    -114.4781
   ],
   "rv-pp2-north-saskatchewan-river-1#1": [
-   53.2907,
-   -114.8538
-  ],
-  "rv-pp2-north-saskatchewan-river-1#10": [
-   53.7626,
-   -111.4091
-  ],
-  "rv-pp2-north-saskatchewan-river-1#11": [
-   53.8087,
-   -111.0365
-  ],
-  "rv-pp2-north-saskatchewan-river-1#12": [
-   53.8518,
-   -110.6617
+   53.1919,
+   -114.9315
   ],
   "rv-pp2-north-saskatchewan-river-1#2": [
-   53.6063,
-   -110.0174
+   53.66,
+   -110.337
   ],
   "rv-pp2-north-saskatchewan-river-1#3": [
    53.7351,
    -113.1982
   ],
   "rv-pp2-north-saskatchewan-river-1#4": [
-   53.995,
-   -112.8486
-  ],
-  "rv-pp2-north-saskatchewan-river-1#5": [
-   53.9909,
-   -112.4661
-  ],
-  "rv-pp2-north-saskatchewan-river-1#6": [
-   53.9599,
-   -112.0864
-  ],
-  "rv-pp2-north-saskatchewan-river-1#7": [
    53.3269,
    -114.0047
   ],
-  "rv-pp2-north-saskatchewan-river-1#8": [
+  "rv-pp2-north-saskatchewan-river-1#5": [
    53.3945,
    -113.6453
   ],
-  "rv-pp2-north-saskatchewan-river-1#9": [
-   53.8908,
-   -111.7223
+  "rv-pp2-north-saskatchewan-river-1#6": [
+   53.7976,
+   -111.7286
   ],
   "rv-pp2-parlby-creek-1#0": [
    52.5127,
    -113.3261
   ],
   "rv-pp2-red-deer-river-1#0": [
-   52.0022,
-   -114.3872
+   52.0503,
+   -114.22
   ],
   "rv-pp2-red-deer-river-1#1": [
-   52.0605,
-   -114.0024
+   52.1849,
+   -113.9264
   ],
   "rv-pp2-red-deer-river-1#2": [
-   52.2685,
-   -113.8627
+   52.2613,
+   -113.5608
   ],
   "rv-pp2-red-deer-river-1#3": [
-   52.2394,
-   -113.4981
+   52.3145,
+   -113.2033
   ],
   "rv-pp2-red-deer-river-1#4": [
-   52.3177,
-   -113.1535
+   52.1178,
+   -113.0255
   ],
   "rv-pp2-red-deer-river-1#5": [
-   52.1073,
-   -113.0237
-  ],
-  "rv-pp2-red-deer-river-1#6": [
-   51.8824,
-   -113.0205
+   51.8929,
+   -113.0105
   ],
   "rv-pp2-red-deer-river-2#0": [
    51.8365,

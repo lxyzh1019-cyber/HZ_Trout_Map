@@ -66,6 +66,8 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - Distance to a river stretch is to its nearest forecast spot.
 - Weather: spots within 200 km of you load first (fewer than 250 calls from Red Deer; the whole province is under 600); a new home or a picked town loads the spots near it; spots on screen load when the map is zoomed in to about 200 km across; a lake panel loads its own forecast; the data quality line counts the calls.
 - Credits: Natural Resources Canada place names (CGNDB) and CanVec 1:50,000 Hydro, Open Government Licence – Canada, in the data quality panel and in both data files.
+- Fishing zones of stocked lakes (owner's request, 2026-11-05): from Alberta's sportfishing regulations map (scripts/lake_zones.py → data/lake_zones.csv: the lake by its Alberta waterbody number, else the zone outline at its position). A lake takes that zone where it had none (58 lakes, e.g. Headwall, Memorial, Running Rain, Wabamun, Lower Kananaskis) or where the guide names it in that zone against its profile (14, e.g. Pine Coulee Reservoir PP2 → ES1, Lake Newell and Brooks Aquaduct Pond → PP1). A zone answered in data/lake_facts.csv is never replaced (Emerald (Hart) Lake ES1 and Dormer Lake ES2 corrected there by the owner). Stocked lakes with guide rules: 316 → 363; without: 69 → 19 (Morinville Lake and Niton Pond have no position or number).
+- The guide's put-and-take list is read with each entry's watershed unit, and one printed line is read left to right, so two columns no longer merge (Kramer Pond, Innisfree Trout Pond, Jack Fish Lake, Michichi Reservoir now carry the put-and-take rules).
 
 ## Map and finding a lake
 - Pins cluster when zoomed out and split as you zoom in; hover shows name, score, distance, fish in view and last stocking date.
@@ -126,7 +128,8 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 | Bite and Day out, banner, Why, tip | kept | same engine for every water; rivers use their best spot |
 | Best near you | kept | 100 / 200 km / all steps unchanged (checked after a name clash was fixed) |
 | Filters | kept | plus Stocking: Stocked / Not stocked |
-| Rules | kept | waters not stocked carry the guide's row |
+| Rules | kept | waters not stocked carry the guide's row; 47 more stocked lakes carry theirs (zones from Alberta's regulations map) |
+| Fishing zone of a stocked lake | changed | 58 filled, 14 corrected where the guide agrees; owner's saved answers win |
 | 3D depth model | kept | 43 → 114 lakes; offline lakebeds 1.37 → 4.0 MB |
 | Weather calls per load | changed | near you first, on screen when zoomed in; a new home loads near it |
 | Zone view | kept | counts stocked lakes only; river lines hidden there |
