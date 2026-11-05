@@ -1848,14 +1848,14 @@ async function loadAllData() {
   return { lakes, years };
 }
 
-/** Lakes not stocked (data/lakes_unstocked.json) and river stretches
+/** Lakes not stocked (data/waters_unstocked.json) and river stretches
  *  (data/rivers.json), shaped like a stocked lake with no stockings. */
 let WATERS_INFO = null;
 async function loadWaters(known) {
   const out = [];
   WATERS_INFO = { lakes: 0, stretches: 0, lakeSource: null, riverSource: null };
   try {
-    const r = await fetch("data/lakes_unstocked.json");
+    const r = await fetch("data/waters_unstocked.json");
     if (r.ok) {
       const d = await r.json();
       WATERS_INFO.lakeSource = d.source || null;
@@ -3674,11 +3674,17 @@ function updateDataQualitySummary() {
       parts.push(`<strong>${QUALITY_SUMMARY.rows_awaiting_review}</strong> row(s) awaiting a linking decision`);
     }
   }
+  // Build 5 Stage 2: the guide's waters that are not stocked, with their sources.
+  if (WATERS_INFO && (WATERS_INFO.lakes || WATERS_INFO.stretches)) {
+    parts.push(`<strong>${WATERS_INFO.lakes}</strong> lakes and <strong>${WATERS_INFO.stretches}</strong> river stretches not stocked, from the sportfishing guide;`
+      + ` positions from the guide's land locations and Natural Resources Canada's place names and water data`
+      + ` (contains information licensed under the Open Government Licence – Canada)`);
+  }
   const calls = Weather.callsToday();
   const last = window.DayUI ? DayUI.lastSummary() : null;
   if (last) {
     parts.push(`weather: <strong>${last.calls}</strong> call(s) in ${last.requests} request(s) for ${last.cells} forecast spots`
-      + ` on the last load (${last.fromCache} already saved), <strong>${calls.calls}</strong> today on this device`
+      + ` near you and on screen on the last load (${last.fromCache} already saved), <strong>${calls.calls}</strong> today on this device`
       + ` — Open-Meteo's free limit is 600 a minute and 10,000 a day`);
   }
   el.innerHTML = parts.join(" · ");

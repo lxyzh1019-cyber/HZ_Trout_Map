@@ -2,12 +2,420 @@
  "source": "Alberta Geological Survey, Lake Bathymetry Data (Lake_Boundary layer)",
  "page": "https://ags.aer.ca/interactive-data-and-tools/lake-bathymetry-data",
  "layer": "https://services2.arcgis.com/jQV6VMr2Loovu7GU/arcgis/rest/services/Lake_Boundary/FeatureServer/0",
- "retrieved": "2026-11-03",
+ "retrieved": "2026-11-05",
  "surveyed": 166,
- "placed_lakes": 380,
- "matched": 43,
+ "placed_lakes": 672,
+ "matched": 111,
  "rule": "same name without 'lake', chain parts (Upper, #3), brackets and punctuation, with the lake's point inside the outline or within 2 km; or one letter different with the point inside",
  "lakes": {
+  "gu-es1-gap-lake": {
+   "name": "Gap Lake",
+   "dig": "DIG 2008-0590",
+   "url": "https://ags.aer.ca/publication/dig-2008-0590",
+   "km_from_outline": 0.0
+  },
+  "gu-es1-glenmore-reservoir": {
+   "name": "Glenmore Reservoir",
+   "dig": "DIG 2008-0593",
+   "url": "https://ags.aer.ca/publication/dig-2008-0593",
+   "km_from_outline": 0.0
+  },
+  "gu-es2-swan-lake": {
+   "name": "Swan Lake",
+   "dig": "DIG 2008-0683",
+   "url": "https://ags.aer.ca/publication/dig-2008-0683",
+   "km_from_outline": 0.17
+  },
+  "gu-es3-jarvis-lake": {
+   "name": "Jarvis Lake",
+   "dig": "DIG 2008-0614",
+   "url": "https://ags.aer.ca/publication/dig-2008-0614",
+   "km_from_outline": 0.0
+  },
+  "gu-es3-rock-lake": {
+   "name": "Rock Lake",
+   "dig": "DIG 2008-0664",
+   "url": "https://ags.aer.ca/publication/dig-2008-0664",
+   "km_from_outline": 0.0
+  },
+  "gu-es3-shiningbank-lake": {
+   "name": "Shiningbank Lake",
+   "dig": "DIG 2008-0670",
+   "url": "https://ags.aer.ca/publication/dig-2008-0670",
+   "km_from_outline": 0.0
+  },
+  "gu-es4-iosegun-lake": {
+   "name": "Iosegun Lake",
+   "dig": "DIG 2008-0609",
+   "url": "https://ags.aer.ca/publication/dig-2008-0609",
+   "km_from_outline": 0.0
+  },
+  "gu-es4-smoke-lake": {
+   "name": "Smoke Lake",
+   "dig": "DIG 2008-0672",
+   "url": "https://ags.aer.ca/publication/dig-2008-0672",
+   "km_from_outline": 0.0
+  },
+  "gu-es4-snipe-lake": {
+   "name": "Snipe Lake",
+   "dig": "DIG 2008-0674",
+   "url": "https://ags.aer.ca/publication/dig-2008-0674",
+   "km_from_outline": 0.0
+  },
+  "gu-es4-sturgeon-lake": {
+   "name": "Sturgeon Lake",
+   "dig": "DIG 2008-0682",
+   "url": "https://ags.aer.ca/publication/dig-2008-0682",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-amisk-lake": {
+   "name": "Amisk Lake",
+   "dig": "DIG 2008-0535",
+   "url": "https://ags.aer.ca/publication/dig-2008-0535",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-angling-lake": {
+   "name": "Angling Lake",
+   "dig": "DIG 2008-0536",
+   "url": "https://ags.aer.ca/publication/dig-2008-0536",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-beaver-lake": {
+   "name": "Beaver Lake",
+   "dig": "DIG 2008-0546",
+   "url": "https://ags.aer.ca/publication/dig-2008-0546",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-claude-lake": {
+   "name": "Claude Lake",
+   "dig": "DIG 2008-0570",
+   "url": "https://ags.aer.ca/publication/dig-2008-0570",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-cold-lake": {
+   "name": "Cold Lake",
+   "dig": "DIG 2008-0572",
+   "url": "https://ags.aer.ca/publication/dig-2008-0572",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-ethel-bear-lake": {
+   "name": "Ethel Lake",
+   "dig": "DIG 2008-0583",
+   "url": "https://ags.aer.ca/publication/dig-2008-0583",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-floatingstone-lake": {
+   "name": "Floatingstone Lake",
+   "dig": "DIG 2008-0586",
+   "url": "https://ags.aer.ca/publication/dig-2008-0586",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-fork-lake": {
+   "name": "Fork Lake",
+   "dig": "DIG 2008-0587",
+   "url": "https://ags.aer.ca/publication/dig-2008-0587",
+   "km_from_outline": 0.03
+  },
+  "gu-nb1-garner-lake": {
+   "name": "Garner Lake",
+   "dig": "DIG 2008-0591",
+   "url": "https://ags.aer.ca/publication/dig-2008-0591",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-goodfish-lake": {
+   "name": "Goodfish Lake",
+   "dig": "DIG 2008-0596",
+   "url": "https://ags.aer.ca/publication/dig-2008-0596",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-hanmore-lake": {
+   "name": "Hanmore Lake",
+   "dig": "DIG 2008-0604",
+   "url": "https://ags.aer.ca/publication/dig-2008-0604",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-hilda-lake": {
+   "name": "Hilda Lake",
+   "dig": "DIG 2008-0607",
+   "url": "https://ags.aer.ca/publication/dig-2008-0607",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-ironwood-lake": {
+   "name": "Ironwood Lake",
+   "dig": "DIG 2008-0610",
+   "url": "https://ags.aer.ca/publication/dig-2008-0610",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-kehiwin-lake": {
+   "name": "Kehiwin Lake",
+   "dig": "DIG 2008-0618",
+   "url": "https://ags.aer.ca/publication/dig-2008-0618",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-lac-la-biche": {
+   "name": "Lac la Biche",
+   "dig": "DIG 2008-0548",
+   "url": "https://ags.aer.ca/publication/dig-2008-0548",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-lac-saint-cyr": {
+   "name": "Lac Saint Cyr",
+   "dig": "DIG 2008-0629",
+   "url": "https://ags.aer.ca/publication/dig-2008-0629",
+   "km_from_outline": 0.02
+  },
+  "gu-nb1-laurier-lake": {
+   "name": "Laurier Lake",
+   "dig": "DIG 2008-0621",
+   "url": "https://ags.aer.ca/publication/dig-2008-0621",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-manatokan-lake": {
+   "name": "Manatokan Lake",
+   "dig": "DIG 2008-0631",
+   "url": "https://ags.aer.ca/publication/dig-2008-0631",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-marie-lake": {
+   "name": "Marie Lake",
+   "dig": "DIG 2008-0632",
+   "url": "https://ags.aer.ca/publication/dig-2008-0632",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-may-lake": {
+   "name": "May Lake",
+   "dig": "DIG 2008-0634",
+   "url": "https://ags.aer.ca/publication/dig-2008-0634",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-minnie-lake": {
+   "name": "Minnie Lake",
+   "dig": "DIG 2008-0641",
+   "url": "https://ags.aer.ca/publication/dig-2008-0641",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-moose-lake": {
+   "name": "Moose Lake",
+   "dig": "DIG 2008-0645",
+   "url": "https://ags.aer.ca/publication/dig-2008-0645",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-north-buck-lake": {
+   "name": "North Buck Lake",
+   "dig": "DIG 2008-0652",
+   "url": "https://ags.aer.ca/publication/dig-2008-0652",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-seibert-lake": {
+   "name": "Seibert Lake",
+   "dig": "DIG 2008-0669",
+   "url": "https://ags.aer.ca/publication/dig-2008-0669",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-touchwood-lake": {
+   "name": "Touchwood Lake",
+   "dig": "DIG 2008-0686",
+   "url": "https://ags.aer.ca/publication/dig-2008-0686",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-tucker-lake": {
+   "name": "Tucker Lake",
+   "dig": "DIG 2008-0687",
+   "url": "https://ags.aer.ca/publication/dig-2008-0687",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-whitefish-lake": {
+   "name": "Whitefish Lake",
+   "dig": "DIG 2008-0697",
+   "url": "https://ags.aer.ca/publication/dig-2008-0697",
+   "km_from_outline": 0.0
+  },
+  "gu-nb1-whitney-lake": {
+   "name": "Whitney Lake",
+   "dig": "DIG 2008-0698",
+   "url": "https://ags.aer.ca/publication/dig-2008-0698",
+   "km_from_outline": 0.0
+  },
+  "gu-nb2-baptiste-lake": {
+   "name": "Baptiste Lake",
+   "dig": "DIG 2008-0541",
+   "url": "https://ags.aer.ca/publication/dig-2008-0541",
+   "km_from_outline": 0.0
+  },
+  "gu-nb2-fawcett-lake": {
+   "name": "Fawcett Lake",
+   "dig": "DIG 2008-0584",
+   "url": "https://ags.aer.ca/publication/dig-2008-0584",
+   "km_from_outline": 0.0
+  },
+  "gu-nb2-freeman-lake": {
+   "name": "Freeman Lake",
+   "dig": "DIG 2008-0588",
+   "url": "https://ags.aer.ca/publication/dig-2008-0588",
+   "km_from_outline": 0.0
+  },
+  "gu-nb2-ghost-lake": {
+   "name": "Ghost Lake",
+   "dig": "DIG 2008-0592",
+   "url": "https://ags.aer.ca/publication/dig-2008-0592",
+   "km_from_outline": 0.0
+  },
+  "gu-nb2-lac-la-nonne": {
+   "name": "Lac la Nonne",
+   "dig": "DIG 2008-0651",
+   "url": "https://ags.aer.ca/publication/dig-2008-0651",
+   "km_from_outline": 0.0
+  },
+  "gu-nb2-lawrence-lake": {
+   "name": "Lawrence Lake",
+   "dig": "DIG 2008-0622",
+   "url": "https://ags.aer.ca/publication/dig-2008-0622",
+   "km_from_outline": 0.0
+  },
+  "gu-nb2-lesser-slave-lake": {
+   "name": "Lesser Slave Lake",
+   "dig": "DIG 2008-0624",
+   "url": "https://ags.aer.ca/publication/dig-2008-0624",
+   "km_from_outline": 0.0
+  },
+  "gu-nb2-long-island-lake": {
+   "name": "Long Island Lake",
+   "dig": "DIG 2008-0626",
+   "url": "https://ags.aer.ca/publication/dig-2008-0626",
+   "km_from_outline": 0.0
+  },
+  "gu-nb2-mitsue-lake": {
+   "name": "Mitsue Lake",
+   "dig": "DIG 2008-0644",
+   "url": "https://ags.aer.ca/publication/dig-2008-0644",
+   "km_from_outline": 0.0
+  },
+  "gu-nb2-nakamun-lake": {
+   "name": "Nakamun Lake",
+   "dig": "DIG 2008-0649",
+   "url": "https://ags.aer.ca/publication/dig-2008-0649",
+   "km_from_outline": 0.0
+  },
+  "gu-nb2-steele-cross-lake": {
+   "name": "Steele Lake",
+   "dig": "DIG 2008-0680",
+   "url": "https://ags.aer.ca/publication/dig-2008-0680",
+   "km_from_outline": 0.0
+  },
+  "gu-nb3-nipisi-lake": {
+   "name": "Nipisi Lake",
+   "dig": "DIG 2008-0650",
+   "url": "https://ags.aer.ca/publication/dig-2008-0650",
+   "km_from_outline": 0.0
+  },
+  "gu-nb4-winefred-lake": {
+   "name": "Winefred Lake",
+   "dig": "DIG 2008-0701",
+   "url": "https://ags.aer.ca/publication/dig-2008-0701",
+   "km_from_outline": 0.0
+  },
+  "gu-pp1-chestermere-lake": {
+   "name": "Chestermere Lake",
+   "dig": "DIG 2008-0565",
+   "url": "https://ags.aer.ca/publication/dig-2008-0565",
+   "km_from_outline": 0.01
+  },
+  "gu-pp1-chin-lakes": {
+   "name": "Chin Lakes",
+   "dig": "DIG 2008-0568",
+   "url": "https://ags.aer.ca/publication/dig-2008-0568",
+   "km_from_outline": 0.0
+  },
+  "gu-pp1-elkwater-lake": {
+   "name": "Elkwater Lake",
+   "dig": "DIG 2008-0582",
+   "url": "https://ags.aer.ca/publication/dig-2008-0582",
+   "km_from_outline": 0.0
+  },
+  "gu-pp2-arm-lake": {
+   "name": "Arm Lake",
+   "dig": "DIG 2008-0539",
+   "url": "https://ags.aer.ca/publication/dig-2008-0539",
+   "km_from_outline": 0.0
+  },
+  "gu-pp2-battle-lake": {
+   "name": "Battle Lake",
+   "dig": "DIG 2008-0543",
+   "url": "https://ags.aer.ca/publication/dig-2008-0543",
+   "km_from_outline": 0.47
+  },
+  "gu-pp2-buck-lake": {
+   "name": "Buck Lake",
+   "dig": "DIG 2008-0555",
+   "url": "https://ags.aer.ca/publication/dig-2008-0555",
+   "km_from_outline": 0.65
+  },
+  "gu-pp2-coal-lake": {
+   "name": "Coal Lake",
+   "dig": "DIG 2008-0571",
+   "url": "https://ags.aer.ca/publication/dig-2008-0571",
+   "km_from_outline": 0.0
+  },
+  "gu-pp2-gull-lake": {
+   "name": "Gull Lake",
+   "dig": "DIG 2008-0603",
+   "url": "https://ags.aer.ca/publication/dig-2008-0603",
+   "km_from_outline": 0.0
+  },
+  "gu-pp2-hubbles-lake": {
+   "name": "Hubbles Lake",
+   "dig": "DIG 2008-0608",
+   "url": "https://ags.aer.ca/publication/dig-2008-0608",
+   "km_from_outline": 0.0
+  },
+  "gu-pp2-isle-lake": {
+   "name": "Isle Lake",
+   "dig": "DIG 2008-0612",
+   "url": "https://ags.aer.ca/publication/dig-2008-0612",
+   "km_from_outline": 0.0
+  },
+  "gu-pp2-magee-lake": {
+   "name": "Magee Lake",
+   "dig": "DIG 2008-0630",
+   "url": "https://ags.aer.ca/publication/dig-2008-0630",
+   "km_from_outline": 0.0
+  },
+  "gu-pp2-medicine-lake": {
+   "name": "Medicine Lake",
+   "dig": "DIG 2008-0636",
+   "url": "https://ags.aer.ca/publication/dig-2008-0636",
+   "km_from_outline": 0.0
+  },
+  "gu-pp2-mere-lake": {
+   "name": "Mere Lake",
+   "dig": "DIG 2008-0637",
+   "url": "https://ags.aer.ca/publication/dig-2008-0637",
+   "km_from_outline": 0.04
+  },
+  "gu-pp2-mink-lake": {
+   "name": "Mink Lake",
+   "dig": "DIG 2008-0640",
+   "url": "https://ags.aer.ca/publication/dig-2008-0640",
+   "km_from_outline": 0.0
+  },
+  "gu-pp2-pigeon-lake": {
+   "name": "Pigeon Lake",
+   "dig": "DIG 2008-0659",
+   "url": "https://ags.aer.ca/publication/dig-2008-0659",
+   "km_from_outline": 0.0
+  },
+  "gu-pp2-pine-lake": {
+   "name": "Pine Lake",
+   "dig": "DIG 2008-0660",
+   "url": "https://ags.aer.ca/publication/dig-2008-0660",
+   "km_from_outline": 0.0
+  },
+  "gu-pp2-wizard-lake": {
+   "name": "Wizard Lake",
+   "dig": "DIG 2008-0702",
+   "url": "https://ags.aer.ca/publication/dig-2008-0702",
+   "km_from_outline": 0.0
+  },
   "wb18014": {
    "name": "South Heart Reservoir",
    "dig": "DIG 2008-0676",

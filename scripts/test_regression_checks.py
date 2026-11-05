@@ -2689,6 +2689,25 @@ def run_js(files, expr, prelude=""):
     return json.loads(out)
 
 
+def placed_waters():
+    """Build 5 Stage 2: every placed lake, stocked or not (data/waters_unstocked.json)."""
+    out = dict(mapped_lakes())
+    path = DATA_DIR / "waters_unstocked.json"
+    if path.exists():
+        for lake in json.loads(path.read_text(encoding="utf-8"))["lakes"]:
+            if lake.get("lat") is not None:
+                out.setdefault(lake["lake_id"], lake)
+    return out
+
+
+def river_spot_keys():
+    path = DATA_DIR / "rivers.json"
+    if not path.exists():
+        return set()
+    return {f"{st['lake_id']}#{i}" for st in json.loads(path.read_text(encoding="utf-8"))["stretches"]
+            for i in range(len(st["spots"]))}
+
+
 def mapped_lakes():
     """Every lake with a position, merged across the years as the page does."""
     lakes = {}
@@ -3283,8 +3302,9 @@ class Build2DataTests(unittest.TestCase):
 
     def test_every_placed_lake_has_a_height(self):
         rec = json.loads((DATA_DIR / "lake_elevation.json").read_text(encoding="utf-8"))
-        placed = mapped_lakes()
-        self.assertEqual(set(rec["lakes"]), set(placed))
+        # Build 5 Stage 2: the lakes that are not stocked and each river forecast spot too.
+        placed = set(placed_waters()) | river_spot_keys()
+        self.assertEqual(set(rec["lakes"]), placed)
         self.assertEqual(rec["count"], len(placed))
         self.assertEqual(rec["calls"], -(-len(placed) // 100), "100 lakes per call")
         for key, h in rec["lakes"].items():
@@ -3314,7 +3334,7 @@ class Build2DataTests(unittest.TestCase):
 
     def test_depth_chart_links_are_matched_lakes(self):
         rec = json.loads((DATA_DIR / "depth_charts.json").read_text(encoding="utf-8"))
-        placed = mapped_lakes()
+        placed = placed_waters()
         self.assertEqual(rec["matched"], len(rec["lakes"]))
         self.assertGreaterEqual(rec["surveyed"], 160)
         self.assertGreater(rec["matched"], 20)
@@ -3361,7 +3381,7 @@ class Build2DataTests(unittest.TestCase):
     def test_build2_files_are_loaded_and_precached(self):
         worker = (ROOT / "sw.js").read_text(encoding="utf-8")
         # v7 since Build 4; Build 2 files stay listed.
-        self.assertIn('const SHELL_CACHE = "troutmap-shell-v8";', worker)
+        self.assertIn('const SHELL_CACHE = "troutmap-shell-v9";', worker)
         start = worker.index("const SHELL_FILES = [")
         shell = set(re.findall(r'"([^"]+)"', worker[start:worker.index("]", start)]))
         self.assertIn("js/estimates.js", shell)

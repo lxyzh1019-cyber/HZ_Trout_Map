@@ -646,7 +646,7 @@
     if (!host) return;
     if (!fx.loading) { host.hidden = true; return; }
     host.hidden = false;
-    host.textContent = "Getting the forecast for " + mappableLakes().length + " lakes · " + fx.done + " of " + fx.of
+    host.textContent = "Getting the forecast for the lakes near you and on screen · " + fx.done + " of " + fx.of
       + ". Saved forecasts show first.";
   }
 

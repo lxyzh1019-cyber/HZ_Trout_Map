@@ -45,6 +45,18 @@ def placed_lakes():
             key = lake.get("lake_id") or lake.get("ats")
             if lake.get("lat") is not None and lake.get("lon") is not None:
                 lakes[key] = (lake["lat"], lake["lon"])
+    # Build 5 Stage 2: the guide's lakes that are not stocked, and each forecast
+    # spot of a river stretch ("<stretch id>#<n>"), from scripts/waterbodies.py.
+    extra = DATA / "waters_unstocked.json"
+    if extra.exists():
+        for lake in json.loads(extra.read_text(encoding="utf-8")).get("lakes", []):
+            if lake.get("lat") is not None:
+                lakes.setdefault(lake["lake_id"], (lake["lat"], lake["lon"]))
+    rivers = DATA / "rivers.json"
+    if rivers.exists():
+        for st in json.loads(rivers.read_text(encoding="utf-8")).get("stretches", []):
+            for i, (lat, lon) in enumerate(st.get("spots") or []):
+                lakes[f"{st['lake_id']}#{i}"] = (lat, lon)
     return dict(sorted(lakes.items()))
 
 
@@ -66,7 +78,15 @@ def get_json(url):
 def fetch(points):
     lats = ",".join(f"{lat:.5f}" for lat, _ in points)
     lons = ",".join(f"{lon:.5f}" for _, lon in points)
-    body = get_json(f"{ENDPOINT}?latitude={lats}&longitude={lons}")
+    # A reset connection is retried a few times before the build gives up.
+    for attempt in range(6):
+        try:
+            body = get_json(f"{ENDPOINT}?latitude={lats}&longitude={lons}")
+            break
+        except (urllib.error.URLError, ConnectionError, TimeoutError):
+            if attempt == 5:
+                raise
+            time.sleep(2 * (attempt + 1))
     heights = body.get("elevation")
     if not isinstance(heights, list) or len(heights) != len(points):
         raise ValueError(f"expected {len(points)} heights, got {body!r:.200}")
