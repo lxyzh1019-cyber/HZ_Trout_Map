@@ -138,7 +138,8 @@
   function winterScore(l, d) {
     var f = Forecast.forLake(l);
     var day = f && f.days[d];
-    return day && !day.closed && num(day.winter) !== null ? day.winter : null;
+    // Build 5 (W1): no forecast, no winter score either; sun and moon alone are not a score.
+    return day && f.hasWeather && !day.closed && num(day.winter) !== null ? day.winter : null;
   }
   function thisWinter(a, b) {
     var ka = winterKey(a), kb = winterKey(b);
@@ -362,7 +363,7 @@
 
   /* A selector for the focused control in the panel, so a redraw can give the
    * focus back to the same control instead of dropping it to the page. */
-  var FOCUS_ATTRS = ["data-pickday", "data-fxtab", "data-fxspan", "data-fxview", "data-fav", "data-close-lake", "data-photos", "data-lakelink"];
+  var FOCUS_ATTRS = ["data-pickday", "data-fxtab", "data-fxspan", "data-fxview", "data-fav", "data-close-lake", "data-photos", "data-lakelink", "data-tag", "data-info"];
   function focusKey(host) {
     var a = document.activeElement;
     if (!a || !host.contains(a)) return null;
@@ -614,7 +615,7 @@
     if (f && f.fetchedAt) age = new Date(f.fetchedAt);
     showState("No signal",
       "<p>" + (age ? "Showing the forecast saved at " + LakeSheet.clock(age, f.offset) + " (" + esc(Weather.ageText(f.fetchedAt)) + ")."
-        : "No forecast is saved on this device yet, so scores use the sun and moon only.")
+        : "No forecast is saved on this device yet, so no scores show.")
       + " Scores update when you are back online.</p><p>Town search uses the saved Alberta town list.</p>", "OK");
   }
 

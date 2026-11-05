@@ -53,13 +53,16 @@ Single working record for this repository. Updated by the main session at the en
 - [agreed] (owner accepted 2026-11-04) "3D" in list rows and the hover card is a label, not a button (a button inside the row button is invalid); the lake panel gets a "Show 3D depth model" button at its top instead — search: btn3d
 - [agreed] (owner accepted 2026-11-04) Ice forming removes the score only on an ice-on date worked out from this forecast; near or past the usual (calendar) date the score stays and the banner warns "Ice usually forms here about …" — search: iceUsual
 - [agreed] (owner accepted 2026-11-04) Survey depths go beyond the mean: 18 surveyed lakes with no published max depth get the survey's max, so their summer layer, winterkill band and fish depth change; chain grids (Pierre Greys, Wildhorse) give none — search: load_survey
+- [agreed] Build 5 Plan v1 approved 2026-11-04 (Edmonton): 4 stages, one PR each; decisions 1–6 at option A (no score without a forecast anywhere; answer line + tags + thin-ice warning open, week bars in "This week"; best hour ±1 h; usual month only at 60%+; rules-year warning at panel top and in Rules; CRLF for .md only) — search: answerHtml
+- [agreed] Build 5 Rev 3 (owner 2026-11-04 evening): keep the best-day box format open at the top (Go day · score, reason, ice line, 7 bars); "8 reports" tag the same size as the others; decisions 7–9 at A ("Bite by hour", safety lines whole, one wind word) — search: Tip and status
 - [agreed] (owner accepted 2026-11-04) River guide has one labelled bend drawing (A–G), not one drawing per water type; the sample 3D model in the guide is a second small view, off while a lake's 3D view is open — search: data-demo-host
 
 ## Pending
 - Build 1b: merged 2026-10-30 (PR #18). Owner still to do: device check, and the 4 species facts on the Learn pages.
 - Build 2: merged 2026-11-04 (PR #19, cd9a470). Owner still to do: device check.
 - Build 3 (3D depth model): merged 2026-11-04 (PR #20, d3e3c0d). Owner still to do: device check.
-- Build 4 (feature check fixes and connections): built on branch build-4 2026-11-04; PR #21; owner accepted the 4 differences 2026-11-04; waiting for the owner's merge and device check.
+- Build 4 (feature check fixes and connections): merged 2026-11-04 (PR #21, 922ddb0). Owner still to do: device check.
+- Build 5 Stage 1 (fewer words): built on branch claude/funny-ritchie-bealq0 2026-11-04; waiting for the owner's OK on the before and after pictures, then the PR.
 - Leftover helper worktree .claude/worktrees/agent-a00cd60cf51c9739a: removal needs the owner's separate yes (QC2).
 
 ## Request ledger
@@ -149,6 +152,19 @@ Single working record for this repository. Updated by the main session at the en
 | L6 | 11-04 | 3D map in the Learn guide with the rule texts (points 7–20) | done | 4; sample model + Show on the model, test_learn_guides_match_the_3d_view |
 | L7 | 11-04 | Pick a different day and see why its score differs from today | done | 4; day bars + dayCompareSentence |
 | L8 | 11-04 | How to read a river and find the fish, Red Deer River example | done | 4; learn/river.html; facts for the owner to check |
+| M1 | 11-04 | W1 No forecast: no scores, no 7-day bars, "Needs a forecast" | done | 5.1; bannerHtml, whyHtml, conditions-ui; test_no_forecast_shows_no_score_and_no_bars |
+| M2 | 11-04 | W2 Remove the extra "AERATED kept aerated…" row; keep tag and thin-ice warning | done | 5.1; aerationBlock |
+| M3 | 11-04 | W3 One "Map" button with a small menu of the 5 map buttons | done | 5.1; #map-menu, Escape and outside tap close it |
+| M4 | 11-04 | W4 One answer line at the top; everything else folded | superseded | owner 11-04 (Rev 3): keep the best-day box open as before; tip and status folded |
+| M5 | 11-04 | W5 Short tags, full wording on tap | done | 5.1; tagList, .tag-full |
+| M6 | 11-04 | W6 Each estimate's "From: …" behind a small ⓘ | done | 5.1; estHead(title, inputs) |
+| M7 | 11-04 | At most 60 words on the panel's first phone screen; before and after counts | done, target not met by owner's choice | 5.1 Rev 3 with the box open: Beaver Lake 390 px no forecast 107 → 76 first screen, 246 → 84 whole panel; made-up weather 174 → 123 |
+| M8 | 11-04 | Rules year check banner from 1 Apr 2027; README refresh steps | done | 5.1; rulesYearWarning; README "Refreshing the rules" |
+| M9 | 11-04 | "Usually stocked" months at 60%+, "Too few years to tell" under 3 years | done | 5.1; usualMonths; 282 of 382 lakes |
+| M10 | 11-04 | Every stage: tests, 5-size layout check, before/after pictures, FEATURES and record, CRLF, final report | open | 5.1 done; stages 2–4 to come |
+| M11 | 11-04 | Stage 2: score all lakes in the 2026 guide, Red Deer River below Dickson Dam, CGNDB positions, weather budget, Stocked filter | open | Build 5 Stage 2 |
+| M12 | 11-04 | Stage 3: import my spots (browser only), species mode | open | Build 5 Stage 3 |
+| M13 | 11-04 | Stage 4: Firebase sync and weekly email (ASK first) | open | Build 5 Stage 4; replaces F1, F2 |
 
 ## Hotspot counter
 | Area / feature | Fix rounds | Recurrences | Regressions caused | Workarounds/exceptions | Last symptom | Rewrite-vs-repair reviewed? |
@@ -164,7 +180,11 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 | Build 1b | COMPLETE | PR #18 merged 2026-10-30 (64852ae) |
 | Build 2 | COMPLETE | PR #19 merged 2026-11-04 (cd9a470) |
 | Build 3 | COMPLETE | PR #20 merged 2026-11-04 (d3e3c0d) |
-| Build 4 | IN REVIEW | branch build-4; 13 new tests, full suite 277 pass, browser and offline proof 2026-11-04 |
+| Build 4 | COMPLETE | PR #21 merged 2026-11-04 (922ddb0) |
+| Build 5 Stage 1 | IN REVIEW | branch claude/funny-ritchie-bealq0; 9 new tests; layout check 5 sizes 0 faults; before/after pictures 2026-11-04 |
+| Build 5 Stage 2 | NOT STARTED | |
+| Build 5 Stage 3 | NOT STARTED | |
+| Build 5 Stage 4 | NOT STARTED | |
 
 ## Checks and evidence
 - 2026-10-29 unittest discover on main → 183 passed; live site has bait-chip, ice-chip, aerated-chip; live stamp troutmap-shell-v3
@@ -192,6 +212,14 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 - 2026-11-04 build-4 tests: unittest discover 277 run → 277 pass locally (PYTHONUTF8=1, openpyxl installed)
 - 2026-11-04 build-4 reviewer pass → 16 findings, all fixed or recorded as differences (shared grids, usual-date ice warning, "?" lands after the sample mounts, one 3D drawing at a time, search Escape, shore-only directions, 44 px targets, page scroll over the sample, river winter wording and life jacket, day water said "today", sample model message, See it in 3D button, tests)
 - Proof: 2026-11-04 browser at 390×844 and 1440×900: day bar picks the day (URL day=, week bar follows), Why "Mon is 6 higher than today (70)…", tip "Here on Sat: about 2.5–4 m … lake 5.5 m deep", Beaver Mines banner "Ice usually forms here about Nov 5 … Check the lake before you go", Filters chips and count (0 at start, 2 after 90 days + 3D, ✕ removes), 3D fish depth layer, shore spot Directions 49.36759,-114.30766, Escape one layer at a time (guide, 3D, search), guide "?" lands on its section, sample model on/off note, smallest tap 44 px. Offline (headless Chrome, network off, shell v7): app loads 382 lakes, lake panel 7 day bars, river guide and the sample model build from the cache, 0 page errors
+
+- 2026-11-04 build-5 stage 1 (Edmonton evening): unittest test_regression_checks 272 run → all pass locally (first run) (PYTHONUTF8=1, openpyxl installed) after updating 3 checks to the new wording (shell v8, ⓘ inputs, verdict guard); Build5Stage1Tests 9 pass
+- 2026-11-04 build-5 stage 1 word count (Playwright, Beaver Lake wb4014, weather blocked, words of the panel's visible innerText): 390×844 first screen 107 → 59, whole panel with sections closed 246 → 65, height 1519 → 698 px; with made-up weather first screen 174 → 79
+- 2026-11-04 build-5 stage 1 layout check (Playwright, made-up weather) at 360×740, 390×844, 834×1194, 1194×834, 1280×800: map, Map menu open, Escape, lake open, tag tapped, all sections open, ⓘ open → 0 faults (before: day bars 40–43 px wide and "Next 6 h / 7 days" 25 px tall at 3 sizes; fixed); 0 page errors
+- 2026-11-04 build-5 stage 1 Usually stocked: 382 lakes, 282 with a usual month, 54 with fewer than 3 stocked years, 46 with no month at 60% (the plan's 53 came from a first count keyed by name; 54 keyed by lake id is right)
+- 2026-11-04 build-5 stage 1 reviewer pass → 11 findings, all fixed or put to the owner: ice safety line on the first screen; "sun and moon only" words removed; no winter score without a forecast; one wind word (Day out) in panel and list; open tag and ⓘ kept on a redraw, focus kept; menu aria, ⓘ labels, aria-live; water box kept without a forecast; README step 4 uses regs_aliases.csv; tests for taps and exact counts; "Bite by hour" rename and the 87 words with a forecast asked as decisions; this Proof line. Full suite then 275 run → 275 pass
+- 2026-11-04 build-5 stage 1 Rev 3 (box open, answer line removed, tags one size): test_regression_checks 274 run → 274 pass; word count 390 px first screen no forecast 76, made-up weather 123; layout 5 sizes 0 faults; main (7f10c2c, to-do update) merged into the branch
+- Proof: 2026-11-04 Playwright on the working tree (headless Chromium, fresh profile, weather blocked or made-up): Beaver Lake panel first screen 59 words with no forecast, "Needs a forecast", no bars; Map menu opens, Escape and a pick close it; tag tap shows and hides the full words; ⓘ shows "From: …"; Usually stocked "May (14 of 16 years)"; layout 5 sizes 0 faults; 0 page errors
 
 ## Open questions / blockers
 - H4 answered 2026-10-30: Open-Meteo counts per IP; one full load = 250 calls in 5 requests (measured in the browser), 3 h cache.

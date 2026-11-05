@@ -353,6 +353,14 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.35);
   }
   .map-btn:hover { border-color: var(--accent); }
+  /* Build 5 (W3): the map buttons sit in a small menu under one Map button. */
+  .map-menu { display: flex; flex-direction: column; gap: 4px; padding: 6px; background: rgba(43,46,42,.96);
+    border: 1px solid var(--panel-edge); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,.45); }
+  .map-menu[hidden] { display: none; }
+  /* Open, the menu sits over the "Best near you" card (z-index 650), as a menu should. */
+  .map-btns:has(#map-menu:not([hidden])) { z-index: 660; }
+  .map-menu .map-btn { box-shadow: none; text-align: left; }
+  #map-menu-btn[aria-expanded="true"] { border-color: var(--accent); color: var(--accent); }
 
   #chart-toggle {
     position: absolute; bottom: calc(16px + var(--panel-h)); left: 16px; z-index: 500;
@@ -678,6 +686,8 @@
   .cx-row { display: flex; align-items: center; justify-content: space-between;
     gap: 8px; margin: 8px 0 4px; }
   .cx-horizon { margin: 0; }
+  /* Build 5: the layout check found these two at 25 px; every tap target is 44 px. */
+  .cx-horizon .chip { min-height: 44px; }
   .cx-conf { font-size: 10px; text-transform: uppercase; letter-spacing: .04em;
     color: var(--ink-dim); }
   .cx-src-row { font-size: 10.5px; color: var(--ink-dim); margin-bottom: 8px;
@@ -1087,6 +1097,25 @@
   .tag.est { border-style: dashed; color: var(--ink-dim); }
   .tag.ice { border-color: #7fb8d8; color: #bfe0f3; }
   .tag.warn-tag { border-color: #c62828; color: #f6cdc9; }
+  /* Build 5 (W5): tags are short buttons; a tap shows the full words below them. */
+  .tags { gap: 0 4px; padding: 0; align-items: center; }
+  .tag-btn { font: inherit; display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px; border: 0; background: none; cursor: pointer; }
+  .tag-btn .tag { display: inline-block; }
+  .tag-btn[aria-expanded="true"] .tag { outline: 2px solid var(--ink); outline-offset: 1px; }
+  .tag-btn:focus-visible { outline: 2px solid #8fb8de; outline-offset: 1px; }
+  .tag-full { margin: 0 0 6px; font-size: 13px; color: var(--ink); }
+  .tag-full a { color: var(--accent); }
+  /* Build 5: the tag named "est" must not take the estimate blocks' margin (.est below). */
+  .tags .tag { margin: 0; }
+  .sheet > .aer-row { font-size: 13px; }
+  .lake-nopos { margin: 6px 14px 8px; }
+  .rules-old { margin: 4px 0 6px; padding: 6px 10px; border-radius: 6px; background: #4a2a26; border: 1px solid #c62828; color: #f6cdc9; font-size: 13px; font-weight: 600; }
+  details .rules-old { margin: 0 0 8px; }
+  .sheet details[data-sec="status"] > .body { padding: 0 0 12px; }
+  .sheet details[data-sec="status"] > .body > .verdict { margin: 0 14px 8px; }
+  /* Build 5 (W6): ⓘ opens what an estimate used. */
+  .info-btn { font: inherit; font-size: 16px; min-width: 44px; min-height: 44px; padding: 0; border: 0; background: none; color: var(--ink-dim); cursor: pointer; }
+  .info-btn[aria-expanded="true"] { color: var(--accent); }
   .banner { margin: 6px 14px 8px; border-radius: 12px; background: #4a3a20; border: 1px solid #e0a526; padding: 12px; }
   .banner .go { font-size: 22px; font-weight: 800; color: #e0a526; }
   .banner .why { font-size: 13px; margin-top: 2px; }
@@ -1094,7 +1123,9 @@
   .banner.ice .go { color: #7fb8d8; }
   .banner.shut, .banner.none { background: var(--panel-2); border-color: #555; }
   .banner.shut .go, .banner.none .go { color: var(--ink); font-size: 18px; }
-  .bars { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; align-items: end; height: 96px; margin-top: 10px; }
+  /* Build 5: the bars reach into the banner's padding and sit 2 px apart, so each is
+     at least 44 px wide on a 360 px phone and in the PC column (they were 40–43 px). */
+  .bars { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; align-items: end; height: 96px; margin: 10px -8px 0; }
   .bars div, .bars button { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; font-size: 11px; color: var(--ink-dim); }
   /* Build 4: each day bar is a button that picks the day; the picked one is outlined. */
   .bars button { font: inherit; font-size: 11px; background: none; border: 1px solid transparent; border-radius: 6px; padding: 2px 0; min-height: 44px; cursor: pointer; }
@@ -1377,14 +1408,18 @@
     <div id="map"></div>
     <div class="week" id="week" role="group" aria-label="Pick a day"></div>
     <div class="score-legend" id="score-legend" hidden></div>
+    <!-- Build 5 (W3): one Map button; the 5 map buttons are in its menu. -->
     <div class="map-btns">
-      <div class="layers" role="group" aria-label="Map layer">
-        <button class="map-btn active" data-base="topo" type="button" aria-pressed="true">Topo</button>
-        <button class="map-btn" data-base="osm" type="button" aria-pressed="false">Street</button>
-        <button class="map-btn" data-base="sat" type="button" aria-pressed="false">Satellite</button>
+      <button class="map-btn" id="map-menu-btn" type="button" aria-expanded="false" aria-controls="map-menu">Map ▾</button>
+      <div class="map-menu" id="map-menu" hidden>
+        <div class="layers" role="group" aria-label="Map layer">
+          <button class="map-btn active" data-base="topo" type="button" aria-pressed="true">Topo</button>
+          <button class="map-btn" data-base="osm" type="button" aria-pressed="false">Street</button>
+          <button class="map-btn" data-base="sat" type="button" aria-pressed="false">Satellite</button>
+        </div>
+        <button class="map-btn" id="zoom-results" type="button">Zoom to results</button>
+        <button class="map-btn" id="share-btn" type="button">Copy link</button>
       </div>
-      <button class="map-btn" id="zoom-results" type="button">Zoom to results</button>
-      <button class="map-btn" id="share-btn" type="button">Copy link</button>
     </div>
     <div id="fx-progress" class="fx-progress" hidden aria-live="polite"></div>
     <div class="best" id="best"></div>
@@ -2503,11 +2538,11 @@ function aerationBlock(lake) {
   const month = new Date().getMonth();
   const iceMonths = month >= 9 || month <= 3;
   const why = "Stated by ACA's Lake Aeration Program or on Alberta's own lake page.";
-  return `<div class="aer-row"><span class="aer-badge" title="${esc(why)}">Aerated</span>`
-    + `<span class="dim">kept aerated so trout survive the winter</span>`
-    + (iceMonths
-      ? `<span class="ice-warn">Thin ice and open water near the aerators. Stay behind the fence and the danger signs.</span>`
-      : "")
+  /* Build 5 (W2): the Aerated tag at the top of the panel says it; this row
+   * keeps only the thin-ice warning, October to April. */
+  if (!iceMonths) return "";
+  return `<div class="aer-row" title="${esc(why)}">`
+    + `<span class="ice-warn">Thin ice and open water near the aerators. Stay behind the fence and the danger signs.</span>`
     + `</div>`;
 }
 
@@ -4316,7 +4351,22 @@ async function init() {
     updateHomeUI();
     renderFavourites();
 
-    document.getElementById("zoom-results").addEventListener("click", zoomToResults);
+    // Build 5 (W3): the Map button opens and closes the small map menu.
+    const mapMenu = document.getElementById("map-menu");
+    const mapMenuBtn = document.getElementById("map-menu-btn");
+    const setMapMenu = open => {
+      mapMenu.hidden = !open;
+      mapMenuBtn.setAttribute("aria-expanded", String(open));
+    };
+    mapMenuBtn.addEventListener("click", () => setMapMenu(mapMenu.hidden));
+    document.addEventListener("click", ev => {
+      if (!mapMenu.hidden && !ev.target.closest(".map-btns")) setMapMenu(false);
+    });
+    document.addEventListener("keydown", ev => {
+      if (ev.key === "Escape" && !mapMenu.hidden) { setMapMenu(false); mapMenuBtn.focus(); ev.stopImmediatePropagation(); }
+    }, true);
+    mapMenu.querySelectorAll("[data-base]").forEach(b => b.addEventListener("click", () => setMapMenu(false)));
+    document.getElementById("zoom-results").addEventListener("click", () => { setMapMenu(false); zoomToResults(); });
     document.getElementById("share-btn").addEventListener("click", async () => {
       writeUrl();
       const btn = document.getElementById("share-btn");
