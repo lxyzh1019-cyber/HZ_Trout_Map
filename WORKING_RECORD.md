@@ -62,7 +62,7 @@ Single working record for this repository. Updated by the main session at the en
 - Build 2: merged 2026-11-04 (PR #19, cd9a470). Owner still to do: device check.
 - Build 3 (3D depth model): merged 2026-11-04 (PR #20, d3e3c0d). Owner still to do: device check.
 - Build 4 (feature check fixes and connections): merged 2026-11-04 (PR #21, 922ddb0). Owner still to do: device check.
-- Build 5 Stage 1 (fewer words): built on branch claude/funny-ritchie-bealq0 2026-11-04; waiting for the owner's OK on the before and after pictures, then the PR.
+- Build 5 Stage 1 (fewer words): merged 2026-11-04 (PR #22, d70bc8a). Owner still to do: device check.
 - Leftover helper worktree .claude/worktrees/agent-a00cd60cf51c9739a: removal needs the owner's separate yes (QC2).
 
 ## Request ledger
@@ -181,8 +181,8 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 | Build 2 | COMPLETE | PR #19 merged 2026-11-04 (cd9a470) |
 | Build 3 | COMPLETE | PR #20 merged 2026-11-04 (d3e3c0d) |
 | Build 4 | COMPLETE | PR #21 merged 2026-11-04 (922ddb0) |
-| Build 5 Stage 1 | IN REVIEW | branch claude/funny-ritchie-bealq0; 9 new tests; layout check 5 sizes 0 faults; before/after pictures 2026-11-04 |
-| Build 5 Stage 2 | NOT STARTED | |
+| Build 5 Stage 1 | COMPLETE | PR #22 merged 2026-11-04 (d70bc8a); 274 tests pass on GitHub |
+| Build 5 Stage 2 | IN PROGRESS | planning: guide tables 464 lake names (84 on the map, about 380 new), 69 river and creek names, 127 stretches |
 | Build 5 Stage 3 | NOT STARTED | |
 | Build 5 Stage 4 | NOT STARTED | |
 
