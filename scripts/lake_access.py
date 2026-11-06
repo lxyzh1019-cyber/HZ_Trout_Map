@@ -44,7 +44,9 @@ import depth_grids
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 OUT = DATA / "lake_access.json"
-OVERPASS = "https://overpass-api.de/api/interpreter"
+# The main Overpass server first, then a public mirror of the same OpenStreetMap data
+# (decision 26 A: the main one dropped every connection from the build session on 2026-11-06).
+SERVERS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]
 USER_AGENT = "HZ-Trout-Map data build (github.com/lxyzh1019-cyber/HZ_Trout_Map)"
 ROAD_KINDS = ["motorway", "trunk", "primary", "secondary", "tertiary", "unclassified",
               "residential", "service", "track"]
@@ -53,7 +55,7 @@ LAUNCH_NEAR_M = 150.0
 SERVICE_NEAR_M = 400.0
 SIMPLIFY_M = 12.0
 MIN_ROAD_M = 60.0
-BATCH = 12
+BATCH = 4                 # grids per request: 12 made the mirror time out (504)
 
 
 def grids():
@@ -85,30 +87,37 @@ def query(boxes):
     return "[out:json][timeout:180];(" + "".join(parts) + ");out tags geom;"
 
 
-def ask(q, tries=5):
+def ask(q, tries=4):
+    """The answer and the server that gave it. Each server gets a few tries, with a
+    longer wait each time (429 or 504 when busy)."""
     body = urllib.parse.urlencode({"data": q}).encode()
-    for t in range(tries):
-        req = urllib.request.Request(OVERPASS, data=body, headers={"User-Agent": USER_AGENT})
-        try:
-            with urllib.request.urlopen(req, timeout=240) as r:
-                return json.loads(r.read().decode("utf-8"))
-        except Exception as e:      # 429 or 504 when busy: wait and ask again
-            if t == tries - 1:
-                raise SystemExit("Overpass did not answer: %s" % e)
-            time.sleep(15 * (t + 1))
+    last = None
+    for url in SERVERS:
+        for t in range(tries):
+            req = urllib.request.Request(url, data=body, headers={"User-Agent": USER_AGENT})
+            try:
+                with urllib.request.urlopen(req, timeout=300) as r:
+                    return json.loads(r.read().decode("utf-8")), url
+            except Exception as e:
+                last = e
+                time.sleep(15 * (t + 1))
+    raise SystemExit("no Overpass server answered: %s" % last)
 
 
 def fetch(cache):
     cache = Path(cache)
     cache.mkdir(parents=True, exist_ok=True)
-    gs = grids()
+    # Grids already answered are skipped, so a run cut short by a busy server goes on
+    # where it stopped; each saved answer names its own grids.
+    done = set()
+    for f in cache.glob("batch_*.json"):
+        done.update(json.loads(f.read_text(encoding="utf-8"))["stems"])
+    gs = [g for g in grids() if g[0] not in done]
     for k in range(0, len(gs), BATCH):
         part = gs[k:k + BATCH]
-        f = cache / ("batch_%03d.json" % (k // BATCH))
-        if f.exists():
-            continue
-        ans = ask(query([bbox(m) for _, m in part]))
-        f.write_text(json.dumps({"stems": [s for s, _ in part], "answer": ans}), encoding="utf-8")
+        f = cache / ("batch_%s.json" % part[0][0])
+        ans, url = ask(query([bbox(m) for _, m in part]))
+        f.write_text(json.dumps({"stems": [s for s, _ in part], "server": url, "answer": ans}), encoding="utf-8")
         time.sleep(5)               # one request at a time, with a pause: Overpass's fair use
     (cache / "retrieved.txt").write_text(time.strftime("%Y-%m-%d", time.gmtime()), encoding="utf-8")
 
@@ -287,9 +296,10 @@ def keep_for(g, elements):
 def build(cache):
     cache = Path(cache)
     metas = dict(grids())
-    out = {}
+    out, servers = {}, set()
     for f in sorted(cache.glob("batch_*.json")):
         saved = json.loads(f.read_text(encoding="utf-8"))
+        servers.add(urllib.parse.urlparse(saved.get("server") or SERVERS[0]).netloc)
         elements = saved["answer"].get("elements", [])
         for stem in saved["stems"]:
             out[stem] = keep_for(Grid(metas[stem]), elements)
@@ -297,7 +307,7 @@ def build(cache):
     if missing:
         raise SystemExit("no saved answer for %d grids, e.g. %s: run --fetch" % (len(missing), missing[0]))
     doc = {
-        "source": "OpenStreetMap, via the Overpass API (overpass-api.de)",
+        "source": "OpenStreetMap, via the Overpass API (%s)" % ", ".join(sorted(servers)),
         "licence": "Open Database License (ODbL 1.0)",
         "credit": "© OpenStreetMap contributors",
         "url": "https://www.openstreetmap.org/copyright",
