@@ -1,0 +1,50 @@
+water,key,zone,closest_2021,score
+Clyde Lake,gu-nb1-clyde-lake,NB1,Claude Lake,0.86
+Laurier Lake,gu-nb1-laurier-lake,NB1,Garnier Lakes,0.80
+Lodge Lake,gu-nb1-lodge-lake,NB1,Claude Lake,0.76
+Logan Lake,gu-nb1-logan-lake,NB1,Garner Lake,0.76
+Marie Lake,gu-nb1-marie-lake,NB1,Garnier Lakes,0.78
+Minnie Lake,gu-nb1-minnie-lake,NB1,Bonnie Lake,0.82
+Mons Lake,gu-nb1-mons-lake,NB1,Ross Lake,0.78
+Moose Lake,gu-nb1-moose-lake,NB1,Primrose Lake,0.78
+Piche Lake,gu-nb1-piche-lake,NB1,Cache Lake,0.80
+Grist Lake,gu-nb4-grist-lake,NB4,Gipsy Lake,0.80
+Leland Lakes,gu-nb4-leland-lakes,NB4,Alexander Lake,0.77
+Limon Lake,gu-nb4-limon-lake,NB4,Colin Lake,0.80
+Pans Lake,gu-nb4-pans-lake,NB4,Base Lake,0.78
+Peters Lake,gu-nb4-peters-lake,NB4,Fletcher Lake,0.75
+Ryan Lake,gu-nb4-ryan-lake,NB4,Bryant Lake,0.90
+Turtle Lake,gu-nb4-turtle-lake,NB4,Burstall Lake,0.75
+Taber Lake,gu-pp1-taber-lake,PP1,Badger Lake,0.76
+Willow Creek,rv-es1-willow-creek-1,ES1,Mill Creek,0.82
+Twin Valley Reservoir,wb23327,PP1,Crawling Valley Reservoir,0.87
+Goodwin Reservoir,wb317177,ES1,Oldman Reservoir,0.79
+Chain Lakes Reservoir,wb3499,ES1,Spray Lakes Reservoir,0.81
+Michel Reservoir,wb3523,PP1,Cpr Reservoir,0.76
+Spruce Coulee Reservoir,wb3534,PP1,Cross Coulee Reservoir,0.80
+Butcher's Lake,wb4171,ES1,Burns Lake,0.75
+Chatwin Lake,wb4252,NB1,Calling Lake,0.75
+Island Lake,wb4909,ES1,Lillian Lake,0.78
+Lees Lake,wb5050,ES1,Lys Lake,0.82
+Mcgregor Reservoir,wb5275,PP1,Cpr Reservoir,0.77
+Mitchell Lake,wb5348,ES2,Ice Lake,0.76
+Obed Lake,wb5466,ES3,Bear Lake,0.78
+Ole Lake,wb5476,NB3,Joker Lake,0.78
+Peanut Lake,wb5538,NB2,Paul Lake,0.80
+Sauer Lake,wb5753,PP2,Arm Lake,0.78
+Star Lake,wb5895,PP2,Arm Lake,0.82
+Strubel Lake,wb5919,ES2,Ruby Lake,0.76
+Tay Lake,wb5968,ES2,Entry Lake,0.78
+Burstall Lake (Lower),wb6525,ES1,Burstall Lakes [Upper],0.82
+Winchell Lake,wb6617,ES2,Ice Lake,0.76
+Niton Lake,wb6647,ES3,Silkstone Lake,0.75
+Sardine Lake,wb6695,PP2,Pine Lake,0.76
+Rat Lake,wb6702,ES2,Coral Lake,0.78
+Rainbow Lake,wb6713,ES3,Minnow Lake,0.78
+Open Creek Reservoir,wb6726,PP2,Blood Indian Creek Reservoir,0.75
+Keenex Coulee Reservoir,wb6769,PP1,Cross Coulee Reservoir,0.76
+Hermitage Lake,wb6791,PP2,Magee Lake,0.75
+East Pit Lake,wb6840,PP2,East Twin Lake,0.81
+Buller Pond,wb6877,ES1,Bear Pond,0.80
+Burmis Lake,wb6879,ES1,Burns Lake,0.86
+Burn's Reservoir,wb6880,ES1,Bearspaw Reservoir,0.76
