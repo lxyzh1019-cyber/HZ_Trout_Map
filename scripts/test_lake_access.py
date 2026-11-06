@@ -72,12 +72,12 @@ class AccessScriptTests(unittest.TestCase):
         self.assertEqual(len(out["roads"]), 1)
         r = out["roads"][0]
         self.assertEqual((r["kind"], r["name"]), ("tertiary", "Range Road 1"))
-        # Cut exactly at the edge (one cell outside), give or take the 5-decimal rounding (about 1 m).
+        # Cut exactly at the board's edge, give or take the 5-decimal rounding (about 1 m).
         ends = [g.cell(*r["pts"][0]), g.cell(*r["pts"][-1])]
-        self.assertAlmostEqual(min(e[0] for e in ends), -1, delta=0.05)
-        self.assertAlmostEqual(max(e[0] for e in ends), g.w, delta=0.05)
+        self.assertAlmostEqual(min(e[0] for e in ends), 0, delta=0.05)
+        self.assertAlmostEqual(max(e[0] for e in ends), g.w - 1, delta=0.05)
         for lat, lon in r["pts"]:
-            self.assertTrue(g.inside(*g.cell(lat, lon), margin=1.05), (lat, lon))
+            self.assertTrue(g.inside(*g.cell(lat, lon), margin=0.05), (lat, lon))
 
     def test_short_pieces_are_dropped(self):
         a = self.ll(*self.edge)
@@ -128,6 +128,13 @@ class AccessViewTests(unittest.TestCase):
         self.assertEqual(self.d3.count('if (id === "access") L.roads.visible = c.checked;'), 2)
         self.assertIn('if (c.dataset.layer === "access") L.roads.visible = c.checked;', self.d3)
         self.assertIn("L.access, L.spots", self.d3)        # launches answer a tap first
+
+    def test_roads_lie_on_the_land_at_any_height(self):
+        # The lift is undone by the Height scale, so it stays 0.006 at 1x and at 200x.
+        self.assertIn("L.roads.position.z = 0.006 / ex;", self.d3)
+        self.assertEqual(self.d3.count("liftRoads();"), 2)
+        self.assertNotIn("landZ[k] * U) + 0.006", self.d3)
+        self.assertIn("Math.max(0, Math.min(w - 1, c.i))", self.d3)
 
     def test_the_view_opens_without_the_file(self):
         self.assertIn("loadAccess()]).then(function (got) {", self.d3)

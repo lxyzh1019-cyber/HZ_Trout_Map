@@ -678,13 +678,18 @@
     var landAt = function (i, j) {
       var ii = Math.max(0, Math.min(w - 1, Math.round(i))), jj = Math.max(0, Math.min(h - 1, Math.round(j)));
       var k = jj * w + ii;
-      return (grid.depth[k] > 0 ? 0 : landZ[k] * U) + 0.006;      // a causeway or bridge sits on the water
+      return grid.depth[k] > 0 ? 0 : landZ[k] * U;      // a causeway or bridge sits on the water
     };
+    // The roads ride the Height slider with the land; their small lift above it does not.
+    var liftRoads = function () { L.roads.position.z = 0.006 / ex; };
+    liftRoads();
     ((acc && acc.roads) || []).forEach(function (r) {
       var pts = [];
       (r.pts || []).forEach(function (p) {
         var c = toCell(p[0], p[1]);
-        if (inGrid(c, 1)) pts.push(new T.Vector3(px(c.i), py(c.j), landAt(c.i, c.j)));
+        if (!inGrid(c, 1)) return;
+        var ci = Math.max(0, Math.min(w - 1, c.i)), cj = Math.max(0, Math.min(h - 1, c.j));   // never past the board
+        pts.push(new T.Vector3(px(ci), py(cj), landAt(ci, cj)));
       });
       if (pts.length < 2) return;
       var main = ROAD_MAIN[r.kind], dash = ROAD_DASH[r.kind];
@@ -1157,6 +1162,7 @@
       ex = Number(heightIn.value) || 1;
       heightTxt.textContent = ex + "× taller";
       bed.scale.z = ex;
+      liftRoads();
       pins.forEach(placePin);
       if (tapMark.visible) tapMark.position.z = -tapMark.userData.z * U * ex + 0.02;
       showTip(null);

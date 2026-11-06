@@ -215,9 +215,9 @@ def clip_segment(a, b, lo_i, hi_i, lo_j, hi_j):
 
 
 def clip_line(g, latlons):
-    """A road cut to the grid (one cell outside allowed), exactly at the edge: a list of
-    pieces, each [(lat, lon, i, j), ...]."""
-    lo_i, hi_i, lo_j, hi_j = -1.0, g.w, -1.0, g.h
+    """A road cut exactly at the edge of the board (the first and last cell centres, as
+    the 3D view draws it): a list of pieces, each [(lat, lon, i, j), ...]."""
+    lo_i, hi_i, lo_j, hi_j = 0.0, g.w - 1.0, 0.0, g.h - 1.0
     cells = [(lat, lon) + g.cell(lat, lon) for lat, lon in latlons]
     pieces, piece = [], []
 
