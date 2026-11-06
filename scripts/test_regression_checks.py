@@ -3380,8 +3380,8 @@ class Build2DataTests(unittest.TestCase):
 
     def test_build2_files_are_loaded_and_precached(self):
         worker = (ROOT / "sw.js").read_text(encoding="utf-8")
-        # v10 since the phone-check fixes after Build 5 Stage 2; Build 2 files stay listed.
-        self.assertIn('const SHELL_CACHE = "troutmap-shell-v10";', worker)
+        # v11 since the boat launches and roads (decision 23 A); Build 2 files stay listed.
+        self.assertIn('const SHELL_CACHE = "troutmap-shell-v11";', worker)
         start = worker.index("const SHELL_FILES = [")
         shell = set(re.findall(r'"([^"]+)"', worker[start:worker.index("]", start)]))
         self.assertIn("js/estimates.js", shell)
@@ -3778,7 +3778,9 @@ class Build4Tests(unittest.TestCase):
         self.assertIn("v.stop()", unmount)
         # Directions only for shore spots (review 8).
         self.assertIn("ud.shore && typeof ud.i", d3)
-        self.assertEqual(d3.count("shore: true"), 1)
+        # Shore spots, and (decision 23 A) boat launches, which are on the shore too.
+        self.assertEqual(d3.count("shore: true"), 2)
+        self.assertIn('pin(0xF4F1E8, 0.05, i, j, 0.34, L.access, { name: "Boat launch"', d3)
 
 
 class Build5Stage1Tests(unittest.TestCase):

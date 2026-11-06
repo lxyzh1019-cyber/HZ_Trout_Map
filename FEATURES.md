@@ -1,6 +1,6 @@
-# FEATURES — HZ_Trout_Map — manifest v9 — Build 5 Stage 2 river edges
+# FEATURES — HZ_Trout_Map — manifest v10 — Build 5 boat launches and roads in 3D
 
-Locked features of the current version (branch claude/funny-ritchie-bealq0, from main at 922ddb0). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
+Locked features of the current version (branch claude/funny-ritchie-bealq0, from main at 28956ce). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
 
 ## Which lake, which day (Build 1b)
 - Week bar over the map: 7 days, each with the top Bite score of the lakes on screen; tap a day and the pins recolour for it. "gusty" marks a day when most lakes on screen gust to 40 km/h or more.
@@ -50,6 +50,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - Wind: small arrows about every 300 m of water (fewer on the biggest lakes, at most about 160) and a wind sign (compass that turns with the model, wind arrow, speed, from, sun position). Time slider and Play over the saved forecast hours. Wind direction comes from the forecast (new field, Build 3).
 - Fish depth today layer (Build 4, on at the start): the tip's depth range on the lakebed, for the time slider's day.
 - Tapping a shore spot adds "Directions to the shore near this spot" (Google Maps) (Build 4).
+- Boat launches and roads layer (decision 23 A, on at the start): white pins for boat launches (OpenStreetMap leisure=slipway within 150 m of the lake's water, name and "private" kept) and thin lines for roads on the land (main and local roads; service roads and tracks dashed, only within 400 m of water), cut at the board's edge and lying on the land at any height. Tapping a launch gives its name, a check-the-signs line and "Directions to the shore near this spot". Footer: "© OpenStreetMap contributors (ODbL); a launch may be private or closed, and the map can miss one", plus "OpenStreetMap shows no boat launch on this lake" when there is none, or "Boat launches and roads for this lake aren't downloaded yet" for a lake whose grid the server has not sent (decision 27 A). Learn section "Boat launches and roads" with a Show on the model button. The view still opens if data/lake_access.json is missing.
 - Possible spots (estimates) by access: up to 3 shore spots (3 m water within a 30 m cast, facing the wind's push, more open water behind it scores higher), one trolling route (5 m line, or less on a shallow lake, on the downwind half; faded without a boat launch; with the boating rules), and under ice up to 3 ice spots (1.5–4 m within about 60 m of a drop-off). Under 8 km/h the spots use the drop-offs only. On big lakes (cells over 30 m) the reasons give the real distance instead of "30 m".
 - Structure markers: island, point, hump, basin, drop-off, flat. Drop-off dots.
 - Layers you turn on: weed line (4 m, estimate), summer layer (the lake's layer band, June to September, not under ice), deep within a cast, calm shore, sun and shade shore, reported spots, under-ice band (any time of year). 5 are on at the start (fish depth, wind, spots, structure, drop-offs). Aerated lakes show the aerator warning October to April.
@@ -118,14 +119,25 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 ## Taking it with you
 - List view sortable on any column, including Bite and Day out for the picked day, with CSV download.
 - Saved lakes in the browser and a one-click multi-stop driving route through them.
-- Works offline after the first visit (service worker, shell cache v9, the guide's waters and rivers, saved town list, saved forecasts, lake heights, depth chart links, hot spots, the 3D depth model with its lakebed files and boating rules).
+- Works offline after the first visit (service worker, shell cache v11, the guide's waters and rivers, saved town list, saved forecasts, lake heights, depth chart links, hot spots, the 3D depth model with its lakebed files, boating rules, and boat launches and roads).
 
 ## Data and honesty
 - Estimated positions are labelled; data quality panel; evidence page (evidence.html).
 - Alberta advisories (closures, consumption) collected daily and shown in Filters.
 - ACA aeration roster with ACA's Winter Angling column; a test fails if it disagrees with the regulations.
 - Colour-blind-safe pin palettes; every score pin carries its number.
-- Credit lines: Open-Meteo (CC BY 4.0), town list licence, GeoNames via Open-Meteo, Esri imagery, photo credits, Alberta Geological Survey (depth charts), Open-Meteo elevation with Copernicus DEM (in the ice inputs). The 3D view footer and its Learn guide carry the Open Government Licence – Alberta line, Transport Canada TP 15587E (not the official version), MyWildAlberta, Open-Meteo and three.js (MIT).
+- Credit lines: Open-Meteo (CC BY 4.0), town list licence, GeoNames via Open-Meteo, Esri imagery, photo credits, Alberta Geological Survey (depth charts), Open-Meteo elevation with Copernicus DEM (in the ice inputs). The 3D view footer and its Learn guide carry the Open Government Licence – Alberta line, Transport Canada TP 15587E (not the official version), MyWildAlberta, Open-Meteo, three.js (MIT) and © OpenStreetMap contributors (ODbL, linked to openstreetmap.org/copyright) for boat launches and roads.
+
+## Regression table — manifest v9 → v10 (Build 5 boat launches and roads in 3D)
+| Feature | v9 → v10 | Note |
+|---|---|---|
+| 3D view | changed | new Boat launches and roads layer, on at the start; other layers, spots, tap and Height slider unchanged |
+| 3D footer | changed | OpenStreetMap credit (ODbL) and one of two notes: no launch on this lake, or not downloaded yet |
+| 3D tap | kept | a launch answers first (then spots); roads answer as before for lines |
+| Learn room | changed | 3D guide gains "Boat launches and roads" with Show on the model |
+| Data | added | data/lake_access.json from OpenStreetMap via Overpass (mirror overpass.kumi.systems, decision 26 A; data dated 2026-06-01): 90 of 111 lakebed grids, 56 boat launches on 28 of them, 6,598 road pieces, 754 kB; 21 grids (22 lakes) say "not downloaded yet" (decision 27 A, filled in the leftovers patch) |
+| Lakes, rules, stocking, panel, rivers, weather, filters | kept | |
+| Offline | kept | shell cache v10 → v11, one new data file |
 
 ## Regression table — manifest v8 → v9 (Build 5 Stage 2 river edges)
 | Feature | v8 → v9 | Note |
