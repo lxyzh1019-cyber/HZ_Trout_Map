@@ -273,7 +273,7 @@
     return feats.map(function (f) {
       var p = f.properties || {}, loc = p.location || p.Location || {};
       var g = f.geometry || {}, c = g.type === "Point" && Array.isArray(g.coordinates) ? g.coordinates : null;
-      var tags = tagList(p.tags || p.Tags).concat(tagList(p.list || p.List || p.folder || p.layer || p.category));
+      var tags = tagList(p.tags || p.Tags).concat(tagList(p.lists || p.list || p.List || p.folder || p.layer || p.category));
       if (!tags.length && fileTag) tags = [fileTag];
       return place({
         name: p.name || p.Name || p.title || p.Title || loc.name || loc.Name || "",

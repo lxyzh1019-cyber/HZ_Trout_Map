@@ -65,7 +65,7 @@ Single working record for this repository. Updated by the main session at the en
 - [agreed] (owner 2026-11-06) Finish the whole build (Stage 3, Stage 4) before the leftovers; the leftovers go into one small patch at the end — search: Leftovers patch
 - [agreed] (owner 2026-11-06, decision 30) My spots are matched to lakes by real shorelines from CanVec (data/lake_outlines.json), not only by an area circle: the listed areas are unreliable (Sylvan 5.3 ha listed, 4,226 ha surveyed); CanVec cuts lakes at map sheet edges, so the pieces are joined along those edges — search: on_sheet_line
 - [agreed] (owner 2026-11-06, decision 31) Stage 3 is two pull requests: 3a My spots, then 3b Species mode — search: Stage 3a
-- [proposed] 2026-11-06 the import takes several files at once and replaces the last import: Takeout gives one CSV per saved list, so importing one list at a time would keep only the last — search: for (const file of files)
+- [agreed] (owner 2026-11-06) the import takes several files at once and replaces the last import: Takeout gives one CSV per saved list, so importing one list at a time would keep only the last — search: for (const file of files)
 ## Pending
 - Build 1b: merged 2026-10-30 (PR #18). Owner still to do: device check, and the 4 species facts on the Learn pages.
 - Build 2: merged 2026-11-04 (PR #19, cd9a470). Owner still to do: device check.
@@ -176,7 +176,7 @@ Single working record for this repository. Updated by the main session at the en
 | M15 | 11-05 | Count the owner's 218 pins: lake, river stretch (300 m) or nothing; read the file only | done | 143 lake (128 outline holds the lake point, 13 outline with the lake's name, 2 size circle + 1 km), 10 river only, 65 nothing; file read in place, nothing saved; .claude/state/checks/spots_count.py |
 | M16 | 11-05 | River edges from Alberta's zone outlines (decision 18 A) | done | Open-Meteo answered 00:10 UTC 11-06; 91 stretches (5 new), 24 changed, 351 spots; Red Deer keeps "found"; own pull request after #24 was merged |
 | M17 | 11-05 | Phone check after Stage 2: rules first and red bait ban; rivers off with Not stocked; Red Deer River line does not open; 3D always 2.5–4 m, colours, no move, roads and launches; colours clash; filters auto-hide?; small text | done | plan Rev 9 decisions 20–24 at A; owner OK on the pictures 11-05 (text two sizes larger again, "Bait Ban"); roads and launches are decision 23 A, own pull request |
-| M18 | 11-06 | Boat launches and roads in 3D from OpenStreetMap (decision 23 A) | done, PR open | owner OK on the before and after pictures 2026-11-06; decisions 26 A (mirror) and 27 A (ship partial if needed); own pull request |
+| M18 | 11-06 | Boat launches and roads in 3D from OpenStreetMap (decision 23 A) | done, PR #26 merged | owner OK on the before and after pictures 2026-11-06; decisions 26 A (mirror) and 27 A (ship partial if needed); own pull request |
 | M19 | 11-06 | 3D for big lakes and on the ice: zoom to a useful level, GPS to search an area, study at home and take a spot to Google Maps; plus the 3D slider and title fixes | open | owner: one pull request, built in the leftovers patch after Stage 4 (owner 2026-11-06: finish the whole build first); saved marks belong to Stage 3 My spots |
 | M12 | 11-04 | Stage 3: import my spots (browser only), species mode | 3a done, PR pending; 3b open | decision 31: 3a My spots, 3b Species mode |
 | M13 | 11-04 | Stage 4: Firebase sync and weekly email (ASK first) | open | Build 5 Stage 4; replaces F1, F2 |
@@ -200,9 +200,9 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 | Build 5 Stage 2 | COMPLETE | PR #23 merged 2026-11-05 (2f53fba); GitHub checks passed |
 | Stage 2 phone-check fixes | COMPLETE | PR #24 merged 2026-11-06 (f374b77); GitHub checks passed |
 | Stage 2 river edges | COMPLETE | PR #25 merged 2026-11-06 (28956ce); owner OK on the 4 pictures and decision 25 A, 2026-11-06 |
-| Boat launches and roads in 3D | READY FOR REVIEW | M18; branch claude/funny-ritchie-bealq0 from 28956ce; owner OK on the pictures 2026-11-06; 90 of 111 grids (decision 27 A) |
+| Boat launches and roads in 3D | COMPLETE | PR #26 merged 2026-11-06 (4f4e941); owner OK on the pictures 2026-11-06; 90 of 111 grids (decision 27 A) |
 | Leftovers patch | NOT STARTED | after Stage 4 (owner 2026-11-06): the 21 missing boat-launch grids; "3D on the ice" (sliders 44 px and title at 360 px, zoom to about 300 m across, Find me with live GPS, Open in Google Maps and Copy location for any tapped point) |
-| Build 5 Stage 3a My spots | IN PROGRESS | M12; built locally while #26 waits; pushed to claude/funny-ritchie-bealq0 after #26 merges |
+| Build 5 Stage 3a My spots | IN PROGRESS | M12; branch claude/funny-ritchie-bealq0 from 4f4e941; pull request after the owner's OK on the pictures |
 | Build 5 Stage 3b Species mode | NOT STARTED | decision 31 |
 | Build 5 Stage 4 | NOT STARTED | |
 
@@ -264,3 +264,4 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 - 2026-11-06 the saved Overpass answers live in the session scratchpad: if the container is reclaimed before the leftovers patch, those 90 grids are downloaded again (the build repeats from the answers)
 - 2026-11-06 lake outlines (lake_outlines.py on the CanVec 1:50 000 water layer, 501,070 outlines, 11 s): 528 of 666 lakes have an outline (475 hold the lake's point, 53 by name within 1 km), 138 a circle (4 from the survey area, 79 listed, 55 no area: 1 km); 707 kB; rebuilt twice → same md5. First try kept only the map-sheet piece holding the point (Lesser Slave 5,201 ha); joining pieces by name failed (the big pieces have no name); joined along map sheet edges instead: Lesser Slave 117,671 ha, Lac La Biche 24,471 ha (survey 23,642), Sylvan 4,216 ha (survey 4,226), Gull 8,125 ha
 - 2026-11-06 My spots with made-up samples (Takeout JSON, two list CSVs, KML, KMZ): the Sylvan test spot (52.3321, -114.1462) matches Sylvan, 3 m from the shore; 12 places → 5 on a lake, 1 on a river, 2 saved lakes, 1 not on a lake, 1 not placed, 1 skipped (town), 1 in two lists; 20 new tests pass; layout after an import: 0 faults at 360, 390, 834, 1194 and 1280 (Filters, Sylvan's panel), 0 page errors; a 3D tap on a teal pin gives "My spot: Sunbreaker point" with directions
+- 2026-11-06 owner's private file (read in place from the upload, counts only, nothing printed or saved; owner OK on the Stage 3a pictures and the many-files import the same day): 558 places, 218 pins → 144 on a lake (M15: 143), 18 on a river (M15: 10; the river edges added 5 stretches since), 56 not on a lake (M15: 65); 340 names → 98 saved lakes, 242 not placed (232 no Alberta lake with the name, 10 several lakes with it); 0 skipped (the file has no addresses); 59 Unconfirmed (= the need-to-validate list); 40 lakes with spots, 28 on Sylvan. The parser now also reads a "lists" property (the file keeps list names there)

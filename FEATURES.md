@@ -1,6 +1,6 @@
 # FEATURES — HZ_Trout_Map — manifest v11 — Build 5 Stage 3a My spots
 
-Locked features of the current version (branch claude/funny-ritchie-bealq0, from main at 28956ce). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
+Locked features of the current version (branch claude/funny-ritchie-bealq0, from main at 4f4e941). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
 
 ## Which lake, which day (Build 1b)
 - Week bar over the map: 7 days, each with the top Bite score of the lakes on screen; tap a day and the pins recolour for it. "gusty" marks a day when most lakes on screen gust to 40 km/h or more.

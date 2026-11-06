@@ -197,6 +197,12 @@ class MySpotsParserTests(unittest.TestCase):
         self.assertEqual(run('window.MySpots._internal.nameForms("Graham (Trout) Lake")', {}),
                          ["graham trout lake", "graham lake"])
 
+    def test_list_names_in_a_lists_property_are_tags(self):
+        doc = {"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": None,
+               "properties": {"name": "Some Lake", "tags": ["Pike"], "lists": ["Fishing spot (need to validate)"]}}]}
+        out = run("window.MySpots._internal.parseGeoJson(A.d, '')", {"d": doc})
+        self.assertEqual(out[0]["tags"], ["Pike", "Unconfirmed"])
+
     def test_an_unknown_file_type_says_what_it_reads(self):
         out = run('window.MySpots.parseFile("spots.txt", "x")', {})
         self.assertEqual(out, {"error": "The app reads .json, .geojson, .csv, .kml and .kmz files."})
