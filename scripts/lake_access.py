@@ -9,6 +9,7 @@ Usage:
 
     python -I scripts/lake_access.py --fetch <cache folder>   # ask Overpass, save the answers
     python -I scripts/lake_access.py <cache folder>           # build data/lake_access.json
+    python -I scripts/lake_access.py --partial <cache folder> # build with some grids not saved yet
 
 The build reads only the saved answers, so it repeats without a network. The
 cache folder lives outside the repository.
@@ -20,18 +21,20 @@ licence; the 3D view carries the credit line OpenStreetMap asks for.
 What is kept, per lakebed grid
     launches   leisure=slipway (node, or the middle of a way) on the grid, within
                LAUNCH_NEAR_M of the grid's water; name and access=private kept
-    roads      highway ways of ROAD_KINDS, cut to the grid (one cell outside
-               allowed), simplified to SIMPLIFY_M; pieces under MIN_ROAD_M dropped.
+    roads      highway ways of ROAD_KINDS, cut at the board's edge (the first and
+               last cell centres), simplified to SIMPLIFY_M; pieces under MIN_ROAD_M dropped.
                Service roads and tracks only within SERVICE_NEAR_M of the water.
 
 Writes data/lake_access.json:
     {"source", "licence", "credit", "url", "retrieved", "kinds",
+     "missing": [grid stems with no saved answer; [] unless built with --partial],
      "grids": {"DIG_2008_0366": {"launches": [{"lat", "lon", "name"?, "private"?}],
                                  "roads": [{"kind", "name"?, "pts": [[lat, lon], ...]}]}}}
 """
 
 import json
 import math
+import os
 import struct
 import sys
 import time
@@ -293,7 +296,10 @@ def keep_for(g, elements):
     return {"launches": launches, "roads": roads}
 
 
-def build(cache):
+def build(cache, partial=False):
+    """With partial (decision 27 A, when the server will not answer for every grid)
+    the grids with no saved answer are listed in "missing", so the 3D view can say
+    their launches are not downloaded yet rather than that there are none."""
     cache = Path(cache)
     metas = dict(grids())
     out, servers = {}, set()
@@ -304,7 +310,7 @@ def build(cache):
         for stem in saved["stems"]:
             out[stem] = keep_for(Grid(metas[stem]), elements)
     missing = sorted(set(metas) - set(out))
-    if missing:
+    if missing and not partial:
         raise SystemExit("no saved answer for %d grids, e.g. %s: run --fetch" % (len(missing), missing[0]))
     doc = {
         "source": "OpenStreetMap, via the Overpass API (%s)" % ", ".join(sorted(servers)),
@@ -313,20 +319,24 @@ def build(cache):
         "url": "https://www.openstreetmap.org/copyright",
         "retrieved": (cache / "retrieved.txt").read_text(encoding="utf-8").strip(),
         "kinds": {"launch": "leisure=slipway", "roads": ROAD_KINDS},
+        "missing": missing,
         "grids": out,
     }
     OUT.write_text(json.dumps(doc, ensure_ascii=False, separators=(",", ":"), sort_keys=True) + "\n", encoding="utf-8")
     nl = sum(len(v["launches"]) for v in out.values())
     nr = sum(len(v["roads"]) for v in out.values())
     with_l = sum(1 for v in out.values() if v["launches"])
-    print("%d grids: %d boat launches on %d of them, %d road pieces -> %s (%d kB)"
-          % (len(out), nl, with_l, nr, OUT.relative_to(ROOT), OUT.stat().st_size // 1024))
+    print("%d grids: %d boat launches on %d of them, %d road pieces -> %s (%d kB)%s"
+          % (len(out), nl, with_l, nr, os.path.relpath(OUT, ROOT), OUT.stat().st_size // 1024,
+             "; %d grids not downloaded yet" % len(missing) if missing else ""))
 
 
 def main(argv):
     if len(argv) == 3 and argv[1] == "--fetch":
         fetch(argv[2])
         build(argv[2])
+    elif len(argv) == 3 and argv[1] == "--partial":
+        build(argv[2], partial=True)
     elif len(argv) == 2:
         build(argv[1])
     else:

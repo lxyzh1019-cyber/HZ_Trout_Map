@@ -7,8 +7,10 @@ run without a network. The data checks run once data/lake_access.json exists.
 """
 
 import json
+import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 import depth_grids
 import lake_access as la
@@ -84,6 +86,23 @@ class AccessScriptTests(unittest.TestCase):
         b = self.ll(self.edge[0] + 0.5, self.edge[1])     # about half a cell: under 60 m
         self.assertEqual(la.keep_for(self.g, [way(20, [a, b], highway="residential")])["roads"], [])
 
+    def test_a_partial_build_lists_what_is_missing_and_a_full_build_refuses(self):
+        # Decision 27 A: ship with the grids the server answered for, and say which are not in.
+        (s1, m1), (s2, m2) = la.grids()[:2]
+        shore = self.ll(*self.edge)
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(la, "grids", lambda: [(s1, m1), (s2, m2)]), \
+                mock.patch.object(la, "OUT", Path(d) / "out.json"):
+            (Path(d) / "retrieved.txt").write_text("2026-11-06", encoding="utf-8")
+            (Path(d) / ("batch_%s.json" % s1)).write_text(json.dumps({"stems": [s1], "server": la.SERVERS[-1],
+                "answer": {"elements": [node(1, *shore, leisure="slipway")]}}), encoding="utf-8")
+            with self.assertRaises(SystemExit):
+                la.build(d)
+            la.build(d, partial=True)
+            doc = json.loads((Path(d) / "out.json").read_text(encoding="utf-8"))
+        self.assertEqual(doc["missing"], [s2])
+        self.assertEqual(set(doc["grids"]), {s1})
+        self.assertEqual(len(doc["grids"][s1]["launches"]), 1)
+
 
 @unittest.skipUnless((DATA / "lake_access.json").exists(), "data/lake_access.json not built yet")
 class AccessDataTests(unittest.TestCase):
@@ -98,9 +117,11 @@ class AccessDataTests(unittest.TestCase):
         self.assertEqual(self.doc["url"], "https://www.openstreetmap.org/copyright")
         self.assertRegex(self.doc["retrieved"], r"^\d{4}-\d{2}-\d{2}$")
 
-    def test_every_lakebed_grid_has_an_entry_and_launches_lie_on_it(self):
+    def test_every_lakebed_grid_has_an_entry_or_is_listed_missing_and_launches_lie_on_it(self):
         stems = {Path(m["file"]).stem: m for m in self.index["grids"].values()}
-        self.assertEqual(set(self.doc["grids"]), set(stems))
+        missing = set(self.doc["missing"])
+        self.assertFalse(missing & set(self.doc["grids"]))
+        self.assertEqual(set(self.doc["grids"]) | missing, set(stems))
         for stem, v in self.doc["grids"].items():
             g = la.Grid(stems[stem])
             for s in v["launches"]:
@@ -120,6 +141,11 @@ class AccessViewTests(unittest.TestCase):
         self.assertIn('href="https://www.openstreetmap.org/copyright"', self.d3)
         self.assertIn("© OpenStreetMap contributors</a> (ODbL)", self.d3)
         self.assertIn("OpenStreetMap shows no boat launch on this lake.", self.d3)
+        # Decision 27 A: a lake whose grid is not downloaded yet says so, not "no launch".
+        self.assertIn("Boat launches and roads for this lake aren't downloaded yet.", self.d3)
+        self.assertIn('if ((access.missing || []).indexOf(stem) >= 0) return { missing: true };', self.d3)
+        self.assertIn("noAcc.hidden = !acc || acc.missing || launches.length > 0;", self.d3)
+        self.assertIn('accMissing.hidden = !(acc && acc.missing);', self.d3)
 
     def test_a_launch_gives_directions_and_roads_follow_the_layer_switch(self):
         draw = self.d3[self.d3.index("// ---- decision 23 A"):self.d3.index('var noAcc = el.querySelector("[data-noaccess]")')]

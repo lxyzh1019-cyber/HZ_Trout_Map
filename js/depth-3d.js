@@ -117,6 +117,7 @@
   function accessFor(meta, access) {
     if (!access || !access.grids || !meta || !meta.file) return null;
     var stem = meta.file.replace(/^.*\//, "").replace(/\.bin$/, "");
+    if ((access.missing || []).indexOf(stem) >= 0) return { missing: true };   // decision 27 A
     return access.grids[stem] || null;
   }
 
@@ -275,7 +276,8 @@
       + "Spots and layers are estimates. Lakebed: " + escHtml(meta.source) + ", Open Government Licence – Alberta. "
       + "Boating rules: Transport Canada TP 15587E (2026), not the official version, and MyWildAlberta. Wind: Open-Meteo.com (CC BY 4.0). 3D: three.js (MIT). "
       + 'Boat launches and roads: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a> (ODbL); a launch may be private or closed, and the map can miss one.'
-      + '<span data-noaccess hidden> OpenStreetMap shows no boat launch on this lake.</span></div>'
+      + '<span data-noaccess hidden> OpenStreetMap shows no boat launch on this lake.</span>'
+      + "<span data-accmissing hidden> Boat launches and roads for this lake aren't downloaded yet.</span></div>"
       + "</div>";
     (host || document.body).appendChild(el);
     return el;
@@ -712,7 +714,9 @@
           + " Check the signs at the lake; a launch can be closed or low in a dry year." });
     });
     var noAcc = el.querySelector("[data-noaccess]");
-    if (noAcc) noAcc.hidden = !acc || launches.length > 0;
+    if (noAcc) noAcc.hidden = !acc || acc.missing || launches.length > 0;
+    var accMissing = el.querySelector("[data-accmissing]");
+    if (accMissing) accMissing.hidden = !(acc && acc.missing);
 
     // ---- wind arrows: small, about every 300 m of water
     var shp = new T.Shape();
