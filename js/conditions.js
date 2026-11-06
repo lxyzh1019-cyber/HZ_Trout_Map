@@ -95,8 +95,54 @@
     WALL: { lo: 2, optLo: 20, optHi: 24, hi: 29 },
     NRPK: { lo: 1, optLo: 19, optHi: 21, hi: 29 },
     ARGR: { lo: 1, optLo: 10, optHi: 17, hi: 22 },
+
+    /* Build 5 Stage 3b, Species mode: the three the owner fishes for that are
+     * not stocked anywhere, so trout mode never meets them. Alberta sources
+     * first, then elsewhere with the place named (decision 32), all on
+     * evidence.html. Burbot: the China (Ussuri River) study on wild adults in
+     * winter; its optLo is an inference from Alberta's mid-winter spawning and
+     * feeding. Lake whitefish: Alberta's 1992 criteria (Taylor & Barton). Mountain
+     * whitefish: Utah preferenda inside Alberta's 8-18 chronic band, Alberta's
+     * 22 acute limit. Under ice the season decides, not this band. */
+    BURB: { lo: 0, optLo: 2, optHi: 12, hi: 22 },
+    LKWH: { lo: 0, optLo: 10, optHi: 14, hi: 23 },
+    MNWH: { lo: 2, optLo: 10, optHi: 16, hi: 22 },
   };
   var FALLBACK_BAND = BANDS.RNTR;
+
+  /* Build 5 Stage 3b: Species mode. Trout mode is the code path above, as it
+   * was: no profile, the trout light floors, no season. A species picked in
+   * Filters brings its own light floors (by sun altitude: above 30, 10-30, 0-10,
+   * civil twilight, nautical, astronomical, full dark), how much of the dawn and
+   * dusk peak it takes, how much cloud lifts a bright sky, and a month-by-month
+   * season. The five weights stay the same for every species (decision 33): no
+   * source gives species weights. Season values are this app's estimates from
+   * the sources and the owner's Alberta experience, which comes first. */
+  var TROUT_LIGHT = [0.20, 0.35, 0.70, 0.90, 0.55, 0.40, 0.30];
+  var SEASON_CAP = 0.15;
+  var SPECIES_MODE = {
+    // Dusk and dawn, low light (Alberta EIA; Escanaba Lake, Wisconsin creel data).
+    WALL: { name: "Walleye", light: [0.15, 0.30, 0.70, 1.00, 0.80, 0.65, 0.55], peak: 1.0, cloudLift: 0.35, season: null },
+    // Feeds at night; spawns under the ice February and March in Alberta (Alberta EIA).
+    BURB: { name: "Burbot", light: [0.25, 0.30, 0.45, 0.70, 0.85, 0.95, 1.00], peak: 0.7, cloudLift: 0.25,
+            season: [0.9, 1.0, 1.0, 0.8, 0.4, 0.3, 0.3, 0.3, 0.4, 0.5, 0.6, 0.7],
+            seasonNote: ["under ice, before spawning", "spawning under ice (Alberta, Feb–Mar)", "spawning under ice (Alberta, Feb–Mar)", "late ice"] },
+    // Shallow water over mud in winter (owner: Sylvan, Gull, Lake Newell); spawning shallows Oct-Dec (Alberta).
+    LKWH: { name: "Lake whitefish", light: [0.55, 0.60, 0.75, 0.85, 0.70, 0.65, 0.60], peak: 0.85, cloudLift: 0.25,
+            season: [0.9, 0.9, 0.85, 0.6, 0.5, 0.5, 0.4, 0.4, 0.5, 0.8, 0.9, 0.9],
+            seasonNote: ["ice season: shallow flats over mud (Alberta anglers)", "ice season: shallow flats over mud (Alberta anglers)", "ice season: shallow flats over mud (Alberta anglers)"] },
+    // Spawning October to early November in Alberta; schools in pools in winter.
+    MNWH: { name: "Mountain whitefish", light: [0.35, 0.45, 0.75, 0.90, 0.65, 0.55, 0.50], peak: 0.9, cloudLift: 0.25,
+            season: [0.85, 0.85, 0.8, 0.6, 0.5, 0.5, 0.5, 0.5, 0.6, 0.8, 0.8, 0.85] },
+  };
+
+  function seasonFor(mode, when) {
+    var prof = SPECIES_MODE[mode];
+    if (!prof || !prof.season || !when) return { mult: 1, note: null };
+    var m = when.getMonth(), s = prof.season[m];
+    var note = prof.seasonNote && prof.seasonNote[m] ? prof.seasonNote[m] : null;
+    return { mult: 1 + SEASON_CAP * (2 * s - 1), s: s, note: note };
+  }
 
   // ============================================================
   // SUB-SCORES
@@ -111,23 +157,27 @@
    * effect that a sun-and-moon calendar cannot express at all. */
   var PEAK_SIGMA_MIN = 45;
 
-  function lightScore(sunAltDeg, minsToEdge, cloudFrac) {
+  function lightScore(sunAltDeg, minsToEdge, cloudFrac, profile) {
     var alt = num(sunAltDeg);
     if (alt === null) return null;
+    // Trout: high sun 0.20, civil twilight 0.90 (the best of it), full dark 0.30
+    // because trout are visual feeders. A Species mode profile brings its own.
+    var F = profile ? profile.light : TROUT_LIGHT;
     var floor =
-      alt >  30 ? 0.20 :
-      alt >  10 ? 0.35 :
-      alt >   0 ? 0.70 :
-      alt >  -6 ? 0.90 :        // civil twilight, the best of it
-      alt > -12 ? 0.55 :
-      alt > -18 ? 0.40 : 0.30;  // full dark: trout are visual feeders
+      alt >  30 ? F[0] :
+      alt >  10 ? F[1] :
+      alt >   0 ? F[2] :
+      alt >  -6 ? F[3] :
+      alt > -12 ? F[4] :
+      alt > -18 ? F[5] : F[6];
 
     var m = num(minsToEdge);
     var peak = m === null ? 0 : Math.exp(-(m * m) / (2 * PEAK_SIGMA_MIN * PEAK_SIGMA_MIN));
+    if (profile) peak *= profile.peak;
     var s = Math.max(floor, peak);
 
     var cloud = num(cloudFrac);
-    if (cloud !== null && alt > 10) s += 0.25 * clamp01(cloud) * (1 - s);
+    if (cloud !== null && alt > 10) s += (profile ? profile.cloudLift : 0.25) * clamp01(cloud) * (1 - s);
     return clamp01(s);
   }
 
@@ -429,6 +479,10 @@
     var weather = o.weather || null;
     var water = o.water || null;
     var species = o.species || null;
+    // Build 5 Stage 3b: a species picked in Filters (null is trout, as before).
+    var mode = o.mode && SPECIES_MODE[o.mode] ? o.mode : null;
+    var profile = mode ? SPECIES_MODE[mode] : null;
+    if (mode) species = [mode];
 
     var factors = {};
     var advisories = [];
@@ -442,7 +496,7 @@
     var cloudFrac = weather && num(weather.cloudCoverPct) !== null
       ? clamp01(weather.cloudCoverPct / 100) : null;
     factors.light = {
-      s: lightScore(sunAlt, minsEdge, cloudFrac),
+      s: lightScore(sunAlt, minsEdge, cloudFrac, profile),
       tier: TIERS.light,
       value: sunAlt === null ? null : Math.round(sunAlt * 10) / 10,
       note: sunAlt === null ? null : "sun " + Math.round(sunAlt) + "°"
@@ -544,7 +598,8 @@
      * and "best moment" becomes whichever one happened to be tested first. So
      * ranking uses the unclamped value. Nothing outside this file should display
      * scoreRaw — it is for comparing slots, not for showing. */
-    var raw = base * moon.mult;
+    var season = seasonFor(mode, o.when);
+    var raw = base * moon.mult * season.mult;
     var score = clamp01(raw);
 
     return {
@@ -552,6 +607,9 @@
       scoreRaw: raw,
       band: bandName(score),
       factors: factors,
+      mode: mode,
+      seasonMult: season.mult,
+      seasonNote: season.note,
       moonMult: moon.mult,
       moonNote: moon.note,
       moonTier: TIERS.moon,
@@ -678,7 +736,7 @@
     var total = Math.round(clamp01(num(r.score) || 0) * 100);
     var raw = num(r.scoreRaw), score = num(r.score);
     var squash = raw && raw > 0 && score !== null ? score / raw : 1;
-    var mult = (num(r.moonMult) || 1) * squash;
+    var mult = (num(r.moonMult) || 1) * (num(r.seasonMult) || 1) * squash;
     var denom = 0;
     Object.keys(WEIGHTS).forEach(function (k) {
       var f = factors[k];
@@ -857,7 +915,8 @@
     });
     Object.keys(parts).forEach(function (k) { parts[k].share = denom ? parts[k].weight / denom : 0; });
     if (!denom) return { score: null, scoreRaw: null, band: null, parts: parts, moonMult: 1 };
-    var mult = num(r.moonMult) || 1;
+    // Build 5 Stage 3b: under ice the species' season counts too (burbot spawning).
+    var mult = (num(r.moonMult) || 1) * (num(r.seasonMult) || 1);
     var raw = numer / denom * mult;
     var score = clamp01(raw);
     return { score: score, scoreRaw: raw, band: bandName(score), parts: parts, moonMult: mult };
@@ -942,13 +1001,14 @@
     stratification: stratification,
     bandName: bandName,
     BANDS: BANDS,
+    SPECIES_MODE: SPECIES_MODE,
     WEIGHTS: WEIGHTS,
     TIERS: TIERS,
     MOON_CAP: MOON_CAP,
     _internal: {
       lightScore: lightScore, waterScore: waterScore, pressureScore: pressureScore,
       windScore: windScore, precipScore: precipScore, leadDecay: leadDecay,
-      moonMultiplier: moonMultiplier,
+      moonMultiplier: moonMultiplier, seasonFor: seasonFor,
     },
   };
 })();

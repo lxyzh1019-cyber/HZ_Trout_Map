@@ -343,6 +343,9 @@
   .tag.hollow { background: transparent; border: 2px solid #14B8A6; color: #7fe0d4; }
   .my-spot.unconfirmed h3::after { content: " (to check)"; font-weight: 400; color: var(--ink-dim); }
   .saved-lake { color: #7fe0d4; }
+  /* Build 5 Stage 3b: which species the scores are for, and whether it is recorded here. */
+  .mode-line { margin: 8px 0; padding: 8px 10px; border-left: 4px solid var(--accent); background: var(--panel-2); font-size: 16px; }
+  .mode-line.not-here { border-left-color: #c9a227; }
 
   /* ---------- Search ---------- */
   .search-wrap { position: relative; }
@@ -1318,6 +1321,12 @@
     <div class="active-filters" id="active-filters" aria-label="Filters that narrow the map"></div>
     <div class="empty-state" id="empty-state">No lakes match these filters. Try more years, more species, a longer distance, or switch Stocked, Not stocked or Rivers back on.</div>
 
+    <div class="group" id="mode-group">
+      <div class="group-label"><span>Fishing for</span></div>
+      <div class="chips" id="mode-chips" role="radiogroup" aria-label="Fishing for"></div>
+      <div class="hint" id="mode-hint">Scores are for trout. Pick a species to score every water for it.</div>
+    </div>
+
     <div class="group" id="advisory-group" hidden>
       <div class="group-label"><span>Alberta advisories</span></div>
       <div class="hint" id="advisory-note"></div>
@@ -1742,6 +1751,8 @@ const state = {
   /** "bite" (the picked day), "best" (best day this week), "species" or
    *  "change" — what pin colour means. */
   colorMode: "bite",
+  /** Build 5 Stage 3b: WALL, BURB, LKWH or MNWH; null scores for trout (today). */
+  speciesMode: null,
   /** Day picked on the week bar: 0 is today at the lake. */
   day: 0,
   /** A town picked in search, or "you" from Near me. Distances measure from
@@ -1806,6 +1817,7 @@ let ADVISORIES = null;
 let ELEVATIONS = null;     // Build 2: lake heights, for the water model and ice only
 let DEPTH_CHARTS = null;   // Build 2: Alberta Geological Survey depth charts, matched lakes
 let HOT_SPOTS = null;      // Build 2: hot spots, each with a source link and date
+let SPECIES_PRESENCE = null; // Build 5 Stage 3b: species recorded in each water (presence only)
 let DEPTH_GRIDS = null;    // Build 3: lakebed grids for the 3D depth model (AGS)
 let BOATING_RULES = null;  // Build 3: boating rules (Transport Canada TP 15587E, MyWildAlberta)
 let PROVISIONAL_YEARS = new Set();
@@ -1815,6 +1827,9 @@ const STORE_HOME = "troutmap.home";
 const STORE_FAVS = "troutmap.favourites";
 const STORE_WATER = "troutmap.watertemp";
 const STORE_SIDEBAR = "troutmap.sidebar";
+/* Build 5 Stage 3b: the species the scores are for (null = trout, as before). */
+const STORE_SPECIES = "troutmap.species";
+const SPECIES_MODES = { WALL: "Walleye", BURB: "Burbot", LKWH: "Lake whitefish", MNWH: "Mountain whitefish" };
 
 // ============================================================
 // UTILITIES
@@ -2030,6 +2045,14 @@ function depthChartFor(lake) {
   return DEPTH_CHARTS && DEPTH_CHARTS.lakes ? DEPTH_CHARTS.lakes[lakeKey(lake)] || null : null;
 }
 
+/** Build 5 Stage 3b: where a species is recorded in this water, as source names
+ *  ("guide2021", "stocked", "reports"); [] when it is not recorded. Presence only:
+ *  no rule comes from the 2021 guide. */
+function speciesSourcesFor(lake, code) {
+  const rec = SPECIES_PRESENCE && SPECIES_PRESENCE.presence ? SPECIES_PRESENCE.presence[lakeKey(lake)] : null;
+  return (rec && rec[code]) || [];
+}
+
 /** Hot spots on this lake, each with its source link and date. */
 function hotSpotsFor(lake) {
   if (!HOT_SPOTS || !Array.isArray(HOT_SPOTS.spots)) return [];
@@ -2175,6 +2198,10 @@ function filteredFishTotal(lake) {
   for (const s of lake.stockings) if (stockingPasses(s)) total += Number(s.number);
   return total;
 }
+/** The species Species mode scores for, or null for trout (today's model). */
+function speciesMode() { return state.speciesMode && SPECIES_MODES[state.speciesMode] ? state.speciesMode : null; }
+/** What a lake is scored for: the picked species, or its stocked fish in trout mode. */
+function scoringSpecies(lake) { const m = speciesMode(); return m ? [m] : filteredDominantOrder(lake); }
 function filteredDominantOrder(lake) {
   const counts = {};
   for (const s of lake.stockings) {
@@ -3912,6 +3939,28 @@ function buildSelectAll() {
 // ============================================================
 // Search for towns and lakes lives in js/day-ui.js.
 
+/* ---------- Build 5 Stage 3b: Species mode ---------- */
+function buildModeChips() {
+  const host = document.getElementById("mode-chips");
+  if (!host) return;
+  const cur = speciesMode();
+  const opts = [[null, "Trout"]].concat(Object.entries(SPECIES_MODES));
+  host.innerHTML = opts.map(([code, label]) => `<button type="button" class="chip${(code || null) === cur ? " active" : ""}"`
+    + ` role="radio" aria-checked="${(code || null) === cur}" data-mode="${code || ""}">${esc(label)}</button>`).join("");
+  document.getElementById("mode-hint").textContent = cur
+    ? `Scores are for ${SPECIES_MODES[cur].toLowerCase()} (estimated). Each lake says whether ${SPECIES_MODES[cur].toLowerCase()} are recorded there.`
+    : "Scores are for trout. Pick a species to score every water for it.";
+  host.onclick = e => {
+    const b = e.target.closest("[data-mode]");
+    if (!b) return;
+    state.speciesMode = b.dataset.mode || null;
+    writeStore(STORE_SPECIES, state.speciesMode);
+    buildModeChips();
+    DayUI.refresh();
+    DayUI.renderSheet();
+  };
+}
+
 /* ---------- Build 5 Stage 3a: My spots (js/my-spots.js), this browser only ---------- */
 let LAKE_OUTLINES = null;
 function spotsContext() {
@@ -4593,6 +4642,7 @@ async function init() {
     const stored = readStore(STORE_HOME, null);
     if (stored && Number.isFinite(stored.lat)) state.home = stored;
     state.favourites = new Set(readStore(STORE_FAVS, []));
+    { const m = readStore(STORE_SPECIES, null); state.speciesMode = SPECIES_MODES[m] ? m : null; }
     state.conditions.waterOverrides = readStore(STORE_WATER, {}) || {};
 
     const params = readUrl();
@@ -4602,12 +4652,13 @@ async function init() {
     DEPTHS = await loadDepths();
     PROFILES = await loadProfiles();
     ADVISORIES = await loadAdvisories();
-    [ELEVATIONS, DEPTH_CHARTS, HOT_SPOTS, DEPTH_GRIDS, BOATING_RULES] = await Promise.all([
+    [ELEVATIONS, DEPTH_CHARTS, HOT_SPOTS, DEPTH_GRIDS, BOATING_RULES, SPECIES_PRESENCE] = await Promise.all([
       loadOptionalJson("data/lake_elevation.json"),
       loadOptionalJson("data/depth_charts.json"),
       loadOptionalJson("data/hot_spots.json"),
       loadOptionalJson("data/depth_grids/index.json"),
       loadOptionalJson("data/boating_rules.json"),
+      loadOptionalJson("data/species_presence.json"),
     ]);
     LAKES = lakes;
     ALL_YEARS = years;
@@ -4670,6 +4721,7 @@ async function init() {
       setTimeout(() => { btn.textContent = "Copy link"; }, 2200);
     });
     DayUI.init();
+    buildModeChips();
     // Build 5 Stage 3a: My spots, from this browser only.
     if (window.MySpots) {
       document.getElementById("spots-import").addEventListener("click", () => document.getElementById("spots-file").click());

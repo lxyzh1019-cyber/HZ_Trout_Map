@@ -1,6 +1,6 @@
-# FEATURES — HZ_Trout_Map — manifest v11 — Build 5 Stage 3a My spots
+# FEATURES — HZ_Trout_Map — manifest v12 — Build 5 Stage 3b Species mode
 
-Locked features of the current version (branch claude/funny-ritchie-bealq0, from main at 4f4e941). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
+Locked features of the current version (branch claude/funny-ritchie-bealq0, from main at f5905b5). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
 
 ## Which lake, which day (Build 1b)
 - Week bar over the map: 7 days, each with the top Bite score of the lakes on screen; tap a day and the pins recolour for it. "gusty" marks a day when most lakes on screen gust to 40 km/h or more.
@@ -116,6 +116,13 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - Charts by species, by season, per-species trend and a stocking calendar (Charts button in the header); opening a lake scopes them to that lake.
 - Planning summary with year-over-year totals and direction.
 
+## Species mode (Build 5 Stage 3b)
+- "Fishing for" at the top of Filters: Trout (today's model, unchanged), Walleye, Burbot, Lake whitefish, Mountain whitefish; remembered on this device (troutmap.species). Every water is scored for the picked species.
+- The five weights stay the same for every species (decision 33). Each species has its own water band (burbot 0/2–12/22, lake whitefish 0/10–14/23, mountain whitefish 2/10–16/22; walleye as before), light reading (walleye dusk and dawn and low light, burbot night) and month-by-month season that moves the score by at most 15% (burbot February and March under the ice; lake whitefish and mountain whitefish October to March). The winter score under ice counts the season too.
+- Each lake panel says "<species> recorded here (Alberta guide 2021, stocking, anglers' reports)" or "not recorded here: check before you go" (data/species_presence.json: walleye in 158 waters, burbot 126, lake whitefish 120, mountain whitefish 44). The 2021 guide is used for species presence only; every rule shown is the 2026 guide's.
+- How to fish by species, estimated, each line naming its source and place: Alberta anglers' experience first (lake whitefish on shallow flats over mud in winter: Sylvan, Gull, Lake Newell; a wire worm beats goby-style lures), then Alberta sources, then studies from elsewhere with the place (decision 32). A bait ban from the 2026 guide still applies.
+- Evidence page: the species bands, light and season with sources and places; Learn: "Species mode" in the scores guide.
+
 ## My spots (Build 5 Stage 3a)
 - "Import my spots" in Filters: pick all your files at once (Google Takeout Saved Places.json, a saved list's CSV, My Maps KMZ or KML, GeoJSON); a new import replaces the last. Kept only in this browser (IndexedDB troutmap-spots), never sent anywhere, never in the repository; "Remove my spots" clears them.
 - Each spot is matched to a lake by its shoreline (data/lake_outlines.json, decision 30): inside the outline or within 500 m of it; a lake with no outline uses a circle of its area plus 1 km. Two lakes in one outline: the nearer lake point. Then a river stretch within 300 m. A place with a street address more than 1 km from any lake is skipped (towns). A place with only a name is matched by name to one lake ("Saved lake"); no match, or several lakes of that name, is "not placed".
@@ -126,7 +133,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 ## Taking it with you
 - List view sortable on any column, including Bite and Day out for the picked day, with CSV download.
 - Saved lakes in the browser and a one-click multi-stop driving route through them.
-- Works offline after the first visit (service worker, shell cache v12, the guide's waters and rivers, saved town list, saved forecasts, lake heights, depth chart links, hot spots, the 3D depth model with its lakebed files, boating rules, and boat launches and roads).
+- Works offline after the first visit (service worker, shell cache v13, the guide's waters and rivers, saved town list, saved forecasts, lake heights, depth chart links, hot spots, the 3D depth model with its lakebed files, boating rules, and boat launches and roads).
 
 ## Data and honesty
 - Estimated positions are labelled; data quality panel; evidence page (evidence.html).
@@ -134,6 +141,17 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - ACA aeration roster with ACA's Winter Angling column; a test fails if it disagrees with the regulations.
 - Colour-blind-safe pin palettes; every score pin carries its number.
 - Credit lines: Open-Meteo (CC BY 4.0), town list licence, GeoNames via Open-Meteo, Esri imagery, photo credits, Alberta Geological Survey (depth charts), Open-Meteo elevation with Copernicus DEM (in the ice inputs). The 3D view footer and its Learn guide carry the Open Government Licence – Alberta line, Transport Canada TP 15587E (not the official version), MyWildAlberta, Open-Meteo, three.js (MIT) and © OpenStreetMap contributors (ODbL, linked to openstreetmap.org/copyright) for boat launches and roads. The lake outlines used for matching spots: CanVec (Natural Resources Canada), Open Government Licence – Canada.
+
+## Regression table — manifest v11 → v12 (Build 5 Stage 3b Species mode)
+| Feature | v11 → v12 | Note |
+|---|---|---|
+| Bite score | kept for trout | identical on 50 test hours before and after; weights unchanged |
+| Species mode | added | Fishing for switch; walleye, burbot, lake whitefish, mountain whitefish bands, light and season |
+| Lake panel | changed | a species line in Species mode; How to fish by species in Species mode; trout mode unchanged |
+| Data | added | data/species_presence.json (presence only), data/species_review.csv (49 names too close to call) |
+| Evidence page, Learn | changed | species bands and a Species mode section; scores guide gains Species mode |
+| Rules, stocking, rivers, weather, boat launches, my spots, 3D | kept | |
+| Offline | kept | shell cache v12 → v13; species file precached |
 
 ## Regression table — manifest v10 → v11 (Build 5 Stage 3a My spots)
 | Feature | v10 → v11 | Note |

@@ -2473,6 +2473,8 @@ class SpeciesBeyondTroutTests(unittest.TestCase):
         "RNTR": (4, 12, 18, 24), "BKTR": (3, 11, 16, 21), "BNTR": (4, 12, 19, 25),
         "TGTR": (3, 11, 17, 22), "CTTR": (3, 9, 16, 22), "WSCT": (2, 8, 15, 20),
         "WALL": (2, 20, 24, 29), "NRPK": (1, 19, 21, 29), "ARGR": (1, 10, 17, 22),
+        # Build 5 Stage 3b, Species mode (decision 32: Alberta sources first, place named).
+        "BURB": (0, 2, 12, 22), "LKWH": (0, 10, 14, 23), "MNWH": (2, 10, 16, 22),
     }
 
     def bands(self):
@@ -3383,8 +3385,8 @@ class Build2DataTests(unittest.TestCase):
 
     def test_build2_files_are_loaded_and_precached(self):
         worker = (ROOT / "sw.js").read_text(encoding="utf-8")
-        # v12 since My spots (Build 5 Stage 3a); Build 2 files stay listed.
-        self.assertIn('const SHELL_CACHE = "troutmap-shell-v12";', worker)
+        # v13 since Species mode (Build 5 Stage 3b); Build 2 files stay listed.
+        self.assertIn('const SHELL_CACHE = "troutmap-shell-v13";', worker)
         start = worker.index("const SHELL_FILES = [")
         shell = set(re.findall(r'"([^"]+)"', worker[start:worker.index("]", start)]))
         self.assertIn("js/estimates.js", shell)
