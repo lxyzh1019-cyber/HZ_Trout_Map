@@ -712,7 +712,14 @@ def write_depths(reg):
     is built to say nothing rather than guess when depth is absent.
     """
     import depth
-    stats = depth.write(reg.lakes, DATA_DIR)
+    # Build 5: the guide's waters that are not stocked (data/waters_unstocked.json,
+    # from scripts/waterbodies.py) get the same depth entry where Alberta's
+    # lakebed survey covers them, with the summer layer and winterkill worked out
+    # here. Without it the app knew Cold Lake's 99 m only from the 3D grid and
+    # called it "shallow".
+    waters = DATA_DIR / "waters_unstocked.json"
+    extra = json.loads(waters.read_text(encoding="utf-8")).get("lakes", []) if waters.exists() else []
+    stats = depth.write(list(reg.lakes) + extra, DATA_DIR)
     if not stats:
         print("\nNo data/raw/mywildalberta_lakes.csv; skipping depth and winterkill.")
         print("  Build it once with: cd scripts && python3 import_stocking_map.py")

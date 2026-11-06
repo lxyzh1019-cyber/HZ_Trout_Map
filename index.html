@@ -211,6 +211,7 @@
     --CTTR: #9085e9;
     --WSCT: #e66767;
     --good: #5cb27f;
+    --danger-ink: #ff8a80;
     --sidebar-w: 320px;
   }
   * { box-sizing: border-box; }
@@ -228,32 +229,32 @@
     border-right: 2px solid var(--panel-edge); overflow-y: auto; padding: 14px 16px 28px;
   }
   #sidebar h1 { font-size: 17px; font-weight: 600; margin: 0 0 2px; letter-spacing: 0.3px; }
-  #sidebar .subtitle { font-size: 12px; color: var(--ink-dim); margin-bottom: 14px; }
+  #sidebar .subtitle { font-size: 15px; color: var(--ink-dim); margin-bottom: 14px; }
   .count {
     font-size: 13px; color: var(--accent); margin-bottom: 6px;
     padding: 8px 10px; background: rgba(201,138,62,0.08); border-left: 3px solid var(--accent);
   }
-  .filter-summary { font-size: 11px; color: var(--ink-dim); margin-bottom: 12px; line-height: 1.45; }
+  .filter-summary { font-size: 15px; color: var(--ink-dim); margin-bottom: 12px; line-height: 1.45; }
   .empty-state {
-    display: none; font-size: 11px; color: var(--ink-dim); margin-bottom: 12px;
+    display: none; font-size: 15px; color: var(--ink-dim); margin-bottom: 12px;
     padding: 8px 10px; border: 1px dashed var(--panel-edge); border-radius: 3px;
   }
   .empty-state.show { display: block; }
   .group { margin-bottom: 18px; }
   .group-label {
-    font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
+    font-size: 15px; text-transform: uppercase; letter-spacing: 1.2px;
     color: var(--ink-dim); margin-bottom: 7px; display: flex;
     justify-content: space-between; align-items: baseline; gap: 8px;
   }
-  .group-label .aside { text-transform: none; letter-spacing: 0; font-size: 11px; }
+  .group-label .aside { text-transform: none; letter-spacing: 0; font-size: 15px; }
   .linkish {
     background: none; border: 0; color: var(--accent); cursor: pointer;
-    font-size: 11px; padding: 0; text-decoration: underline;
+    font-size: 15px; padding: 0; text-decoration: underline;
   }
   .linkish:hover { color: var(--ink); }
   /* Build 4: Learn links in the lake panel, big enough to tap. */
-  .learn-link { display: inline-flex; align-items: center; font-size: 12px; min-height: 44px; padding: 0 4px; }
-  .learn-row { font-size: 12px; color: var(--ink-dim); margin: 8px 0 0; }
+  .learn-link { display: inline-flex; align-items: center; font-size: 15px; min-height: 44px; padding: 0 4px; }
+  .learn-row { font-size: 15px; color: var(--ink-dim); margin: 8px 0 0; }
   .btn3d { margin-top: 8px; }
 
   .species-row { display: flex; align-items: center; padding: 3px 0; cursor: pointer; user-select: none; }
@@ -264,7 +265,7 @@
     border: 1.5px solid rgba(255,255,255,0.45); font-size: 9px; font-weight: 700; color: #12140f;
   }
   .species-label { font-size: 13px; flex: 1; }
-  .species-count { font-size: 11px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+  .species-count { font-size: 15px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
 
   input[type=range] { width: 100%; accent-color: var(--accent); }
   .slider-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-dim); margin-top: 2px; }
@@ -279,7 +280,7 @@
   .chip:hover { color: var(--ink); }
   .chip.active { background: var(--accent); color: #1f211e; border-color: var(--accent); font-weight: 600; }
   .chip .rc-n { opacity: 0.65; font-variant-numeric: tabular-nums; margin-left: 3px; }
-  .shortcuts { display: flex; flex-wrap: wrap; gap: 4px; font-size: 11px; }
+  .shortcuts { display: flex; flex-wrap: wrap; gap: 4px; font-size: 15px; }
   .shortcut {
     padding: 3px 7px; background: transparent; border: 1px solid var(--panel-edge);
     color: var(--ink-dim); cursor: pointer; border-radius: 3px;
@@ -293,20 +294,31 @@
   }
   .btn:hover { color: var(--ink); border-color: var(--ink-dim); }
   .btn.active { background: var(--accent); color: #1f211e; border-color: var(--accent); font-weight: 600; }
+  /* Phone check after Stage 2: every control in Filters is at least 44 px, a
+     finger's width, and its words are a size up. */
+  #sidebar .chip, #sidebar .shortcut, #sidebar .btn { min-height: 44px; min-width: 44px; font-size: 15px; }
+  #sidebar .linkish { min-height: 44px; min-width: 44px; padding: 0 6px; }
+  #sidebar .species-row { min-height: 44px; padding: 0; }
+  #sidebar #sidebar-close { min-width: 44px; min-height: 44px; padding: 0; text-align: center; }
+  #sidebar details.quality > summary { min-height: 44px; display: flex; align-items: center; }
+  /* The slide-over opens above the top bar, so its × and title are not hidden
+     under it (the top bar sits at z-index 1100). */
+  html #app.menu-open #sidebar { z-index: 1200; }
+  html #app.menu-open #scrim { z-index: 1150; }
 
-  .home-name { font-size: 12px; color: var(--ink); margin-bottom: 6px; }
-  .home-name .coord { color: var(--ink-dim); font-size: 11px; }
-  .hint { font-size: 11px; color: var(--ink-dim); margin-top: 6px; line-height: 1.45; }
+  .home-name { font-size: 15px; color: var(--ink); margin-bottom: 6px; }
+  .home-name .coord { color: var(--ink-dim); font-size: 15px; }
+  .hint { font-size: 15px; color: var(--ink-dim); margin-top: 6px; line-height: 1.45; }
   .hint.armed { color: var(--accent); }
 
   details.quality { border-top: 1px solid var(--panel-edge); padding-top: 10px; }
   details.quality > summary {
-    font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
+    font-size: 15px; text-transform: uppercase; letter-spacing: 1.2px;
     color: var(--ink-dim); cursor: pointer; list-style: revert;
   }
-  .data-quality { font-size: 11px; color: var(--ink-dim); margin-top: 8px; line-height: 1.55; }
+  .data-quality { font-size: 15px; color: var(--ink-dim); margin-top: 8px; line-height: 1.55; }
   .data-quality strong { color: var(--ink); }
-  .legend { font-size: 11px; color: var(--ink-dim); line-height: 1.5; margin-top: 10px; }
+  .legend { font-size: 15px; color: var(--ink-dim); line-height: 1.5; margin-top: 10px; }
   .legend strong { color: var(--ink); }
   .legend-keys { display: flex; flex-direction: column; gap: 3px; margin-top: 8px; }
   .legend-key { display: flex; align-items: center; gap: 6px; }
@@ -316,7 +328,7 @@
     border: 1px solid rgba(0,0,0,0.35);
   }
 
-  #fav-list { list-style: none; margin: 0; padding: 0; font-size: 12px; }
+  #fav-list { list-style: none; margin: 0; padding: 0; font-size: 15px; }
   #fav-list li { display: flex; align-items: center; gap: 6px; padding: 2px 0; }
   #fav-list button { background: none; border: 0; color: var(--ink-dim); cursor: pointer; padding: 0 2px; }
   #fav-list button:hover { color: var(--accent); }
@@ -400,7 +412,7 @@
   }
   .leaflet-tooltip.lake-label::before { display: none; }
   .lake-tip b { color: var(--ink); }
-  .lake-tip .tip-sub { color: var(--ink-dim); font-size: 11px; }
+  .lake-tip .tip-sub { color: var(--ink-dim); font-size: 15px; }
 
   /* ---------- Chart panel ---------- */
   #chart-panel {
@@ -413,9 +425,9 @@
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
     padding: 9px 14px; border-bottom: 1px solid var(--panel-edge); flex-shrink: 0; flex-wrap: wrap;
   }
-  .chart-summary { display: flex; gap: 18px; font-size: 12px; color: var(--ink-dim); }
+  .chart-summary { display: flex; gap: 18px; font-size: 15px; color: var(--ink-dim); }
   .chart-summary .stat-value {
-    color: var(--ink); font-weight: 600; font-size: 14px; margin-right: 4px;
+    color: var(--ink); font-weight: 600; font-size: 16px; margin-right: 4px;
     font-variant-numeric: tabular-nums;
   }
   .chart-summary .stat-value.accent { color: var(--accent); }
@@ -425,22 +437,22 @@
     border: 1px solid var(--panel-edge); color: var(--ink-dim); cursor: pointer;
   }
   .chart-type-btn.active { background: var(--accent); color: #1f211e; border-color: var(--accent); font-weight: 600; }
-  .chart-helper { padding: 6px 14px; font-size: 11px; color: var(--ink-dim); border-bottom: 1px solid var(--panel-edge); }
+  .chart-helper { padding: 6px 14px; font-size: 15px; color: var(--ink-dim); border-bottom: 1px solid var(--panel-edge); }
   .planning-summary {
-    display: flex; flex-wrap: wrap; gap: 12px; padding: 6px 14px; font-size: 11px;
+    display: flex; flex-wrap: wrap; gap: 12px; padding: 6px 14px; font-size: 15px;
     color: var(--ink-dim); border-bottom: 1px solid var(--panel-edge);
   }
   .planning-summary strong { color: var(--ink); }
   .chart-scope-row {
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
-    padding: 6px 14px; font-size: 11px; color: var(--ink-dim);
+    padding: 6px 14px; font-size: 15px; color: var(--ink-dim);
     border-bottom: 1px solid var(--panel-edge); flex-shrink: 0;
   }
   /* A class-level display:flex outranks the UA rule for [hidden]. */
   .chart-scope-row[hidden] { display: none; }
   .chart-scope-row strong { color: var(--ink); font-weight: 600; }
   .chart-scope-clear {
-    flex-shrink: 0; padding: 3px 8px; font-size: 11px; cursor: pointer; background: var(--bg);
+    flex-shrink: 0; padding: 3px 8px; font-size: 15px; cursor: pointer; background: var(--bg);
     border: 1px solid var(--panel-edge); color: var(--accent); border-radius: 3px;
   }
   .chart-scope-clear:hover { border-color: var(--accent); color: var(--ink); }
@@ -465,10 +477,10 @@
   #list-view tr:hover td { background: var(--panel-2); }
   .list-bar {
     display: flex; gap: 10px; align-items: center; padding: 8px 12px;
-    border-bottom: 1px solid var(--panel-edge); background: var(--panel); font-size: 12px;
+    border-bottom: 1px solid var(--panel-edge); background: var(--panel); font-size: 15px;
     position: sticky; top: 0; z-index: 3; flex-wrap: wrap;
   }
-  .sp-tag { display: inline-block; padding: 1px 5px; border-radius: 2px; font-size: 10px; font-weight: 700; color: #12140f; }
+  .sp-tag { display: inline-block; padding: 1px 5px; border-radius: 2px; font-size: 12px; font-weight: 700; color: #12140f; }
   .star { background: none; border: 0; cursor: pointer; color: var(--ink-dim); font-size: 14px; padding: 0 2px; }
   .star.on { color: var(--accent); }
 
@@ -482,39 +494,39 @@
     max-height: 60vh; overflow-y: auto; scrollbar-gutter: stable; padding-right: 4px; }
   .lake-popup h3 { margin: 0 0 2px; font-size: 14px; display: flex; align-items: center; gap: 6px; }
   #advisory-list { list-style: none; padding: 0; margin: 4px 0 0; }
-  #advisory-list li { font-size: 11px; line-height: 1.45; margin-bottom: 5px;
+  #advisory-list li { font-size: 15px; line-height: 1.45; margin-bottom: 5px;
     padding-left: 9px; border-left: 2px solid var(--TGTR); }
   #advisory-list a { color: var(--ink-dim); text-decoration: none; }
   #advisory-list a:hover { color: var(--ink); }
-  .lake-popup .depth-row { font-size: 11px; color: var(--ink-dim); margin-bottom: 5px; }
+  .lake-popup .depth-row { font-size: 15px; color: var(--ink-dim); margin-bottom: 5px; }
   /* A derived figure never shares a line with a measured one. Its own row,
      italic, and the word "estimated" adjacent to the number itself. */
-  .lake-popup .est-row { font-size: 11px; color: var(--ink-dim); margin-bottom: 5px;
+  .lake-popup .est-row { font-size: 15px; color: var(--ink-dim); margin-bottom: 5px;
     font-style: italic; opacity: .85; }
   .lake-popup .dim { color: var(--ink-dim); }
-  .lake-popup .wk-row { font-size: 11px; margin-bottom: 7px; display: flex;
+  .lake-popup .wk-row { font-size: 15px; margin-bottom: 7px; display: flex;
     align-items: baseline; gap: 6px; flex-wrap: wrap; }
-  .wk-badge { font-size: 9px; font-weight: 700; text-transform: uppercase;
+  .wk-badge { font-size: 14px; font-weight: 700; text-transform: uppercase;
     letter-spacing: .04em; padding: 1px 6px; border-radius: 999px; color: #1f211e;
     white-space: nowrap; }
   .wk-badge.low { background: var(--good); }
   .wk-badge.moderate { background: var(--TGTR); }
   .wk-badge.high { background: var(--WSCT); }
-  .lake-popup .aer-row { font-size: 11px; margin-bottom: 7px; display: flex;
+  .lake-popup .aer-row { font-size: 15px; margin-bottom: 7px; display: flex;
     align-items: baseline; gap: 6px; flex-wrap: wrap; }
-  .aer-badge { font-size: 9px; font-weight: 700; text-transform: uppercase;
+  .aer-badge { font-size: 14px; font-weight: 700; text-transform: uppercase;
     letter-spacing: .04em; padding: 1px 6px; border-radius: 999px; color: #1f211e;
     background: #7fb8d8; white-space: nowrap; }
   .lake-popup .ice-warn { flex-basis: 100%; font-weight: 700; color: var(--WSCT); }
   /* A filled red badge, not only red text, so a bait ban is picked up at a glance (owner, 16 Oct: the filled
      look from an earlier build). White on #c62828 is 5.6:1 contrast. */
-  .lake-popup .bait-ban { font-size: 12px; font-weight: 700; color: #fff; background: #c62828;
+  .lake-popup .bait-ban { font-size: 15px; font-weight: 700; color: #fff; background: #c62828;
     border-radius: 3px; padding: 2px 8px; margin: -2px 0 6px; display: inline-block; }
   .reg-block { margin: 8px 0 4px; padding: 8px 10px; background: var(--panel-2);
-    border-left: 3px solid var(--accent); border-radius: 3px; font-size: 12px; }
+    border-left: 3px solid var(--accent); border-radius: 3px; font-size: 16px; }
   .reg-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 5px; }
-  .reg-year { font-size: 10px; color: var(--ink-dim); text-transform: uppercase; letter-spacing: .04em; }
-  .reg-open { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 6px;
+  .reg-year { font-size: 14px; color: var(--ink-dim); text-transform: uppercase; letter-spacing: .04em; }
+  .reg-open { display: inline-block; font-size: 14px; font-weight: 700; padding: 1px 6px;
     border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; color: #1f211e; }
   .reg-open.yes { background: var(--good); }
   .reg-open.no { background: var(--WSCT); }
@@ -527,22 +539,22 @@
   .reg-block[data-basis="watershed-default"] { border-left-color: var(--ink-dim); }
   .reg-block[data-basis="cross-reference"] { border-left-color: var(--TGTR); }
   .reg-basis {
-    display: inline-block; font-size: 9.5px; font-weight: 700; padding: 1px 6px;
+    display: inline-block; font-size: 14px; font-weight: 700; padding: 1px 6px;
     border-radius: 999px; text-transform: uppercase; letter-spacing: .04em;
     background: var(--ink-dim); color: #1f211e;
   }
   .reg-block[data-basis="site-specific"] .reg-basis { background: var(--good); }
-  .reg-default { color: var(--ink-dim); font-size: 10px; font-style: italic; }
+  .reg-default { color: var(--ink-dim); font-size: 14px; font-style: italic; }
   .reg-row { display: flex; gap: 8px; margin: 2px 0; line-height: 1.4; }
   .reg-k { flex: 0 0 52px; color: var(--ink-dim); }
   .reg-v { flex: 1; }
-  .reg-why { margin-top: 5px; font-size: 11px; color: var(--ink-dim); font-style: italic; }
-  .reg-warn { margin-top: 4px; font-size: 11px; color: var(--ink-dim); }
-  .reg-none { font-size: 11.5px; color: var(--ink-dim); line-height: 1.45; }
-  .lake-popup .ats { font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; font-family: "SF Mono", Menlo, monospace; }
-  .lake-popup .meta { font-size: 12px; margin-bottom: 8px; }
+  .reg-why { margin-top: 5px; font-size: 15px; color: var(--ink-dim); font-style: italic; }
+  .reg-warn { margin-top: 4px; font-size: 15px; color: var(--ink-dim); }
+  .reg-none { font-size: 15.5px; color: var(--ink-dim); line-height: 1.45; }
+  .lake-popup .ats { font-size: 15px; color: var(--ink-dim); margin-bottom: 8px; font-family: "SF Mono", Menlo, monospace; }
+  .lake-popup .meta { font-size: 15px; margin-bottom: 8px; }
   .lake-popup .meta strong { color: var(--accent); }
-  .lake-popup table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .lake-popup table { width: 100%; border-collapse: collapse; font-size: 15px; }
   .lake-popup th { text-align: left; padding: 3px 5px 3px 0; border-bottom: 1px solid var(--panel-edge); color: var(--ink-dim); font-weight: 500; }
   .lake-popup td { padding: 3px 5px 3px 0; border-bottom: 1px dotted var(--panel-edge); }
   .lake-popup td:last-child, .lake-popup th:last-child { text-align: right; padding-right: 4px; }
@@ -553,8 +565,8 @@
   .lake-popup .d { display: inline-block; width: 1.25em; text-align: right; }
   .lake-popup .d.unknown { color: var(--ink-dim); }
   .lake-popup td.date-cell { font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .lake-popup .profile-row { font-size: 11px; color: var(--ink-dim); margin-bottom: 6px; }
-  .lake-popup .profile-amenities { font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; line-height: 1.45; }
+  .lake-popup .profile-row { font-size: 15px; color: var(--ink-dim); margin-bottom: 6px; }
+  .lake-popup .profile-amenities { font-size: 15px; color: var(--ink-dim); margin-bottom: 8px; line-height: 1.45; }
   /* Reported present, which is not the same claim as stocked, and is not a
      catch limit. Styled as a quieter row than the stocking table for that
      reason — it is somebody's report, not Alberta's record. */
@@ -563,18 +575,18 @@
     display: inline-block; margin-right: 4px; padding: 1px 6px;
     background: var(--panel-2); border: 1px solid var(--panel-edge);
     border-left: 3px solid var(--ink-dim); border-radius: 2px;
-    font-size: 10px; color: var(--ink-dim);
+    font-size: 14px; color: var(--ink-dim);
   }
   .seen-chip.stocked { color: var(--ink); }
   /* The community's own confidence, shown rather than averaged away. */
   .seen-chip.shaky { opacity: .62; }
-  .seen-chip i { font-style: normal; font-size: 8.5px; color: var(--ink-dim);
+  .seen-chip i { font-style: normal; font-size: 14px; color: var(--ink-dim);
     margin-left: 4px; font-variant-numeric: tabular-nums; }
-  .seen-chip b { color: var(--accent); font-size: 11px; margin-left: 2px; }
+  .seen-chip b { color: var(--accent); font-size: 15px; margin-left: 2px; }
   .seen-chip.kind-invasive { border-left-color: var(--WSCT) !important; color: var(--WSCT); }
-  .seen-rough .seen-chip { font-size: 9.5px; opacity: .8; }
-  .seen-cite { font-size: 9.5px; color: var(--ink-dim); font-style: italic; }
-  .seen-foot { font-size: 9px; color: var(--ink-dim); font-style: italic;
+  .seen-rough .seen-chip { font-size: 14px; opacity: .8; }
+  .seen-cite { font-size: 14px; color: var(--ink-dim); font-style: italic; }
+  .seen-foot { font-size: 14px; color: var(--ink-dim); font-style: italic;
     line-height: 1.5; margin: 1px 0 3px; }
   .seen-foot b { font-style: normal; color: var(--accent); }
 
@@ -590,15 +602,15 @@
   .reg-lim-absent { color: var(--ink-dim); opacity: .6; }
   .reg-lim-unknown { color: var(--ink-dim); }
   .reg-legend { display: flex; flex-wrap: wrap; gap: 7px; margin: 5px 0 0;
-    font-size: 9px; text-transform: uppercase; letter-spacing: .04em; }
+    font-size: 14px; text-transform: uppercase; letter-spacing: .04em; }
   .reg-legend .reg-lim { padding: 0; cursor: default; }
 
-  .lake-popup .profile-label { color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; font-size: 10px; margin-right: 3px; }
+  .lake-popup .profile-label { color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; font-size: 14px; margin-right: 3px; }
   .lake-popup a.zone-link { color: var(--ink); border-bottom: 1px dotted var(--accent); text-decoration: none; }
   .lake-popup a.zone-link:hover { color: var(--accent); }
   .lake-popup a.gmaps {
     display: inline-block; margin-top: 10px; color: var(--accent); text-decoration: none;
-    border-bottom: 1px solid var(--accent); font-size: 11px;
+    border-bottom: 1px solid var(--accent); font-size: 15px;
   }
   .lake-popup a.gmaps:hover { color: var(--ink); border-color: var(--ink); }
   /* Above the stocking table, not below it: some lakes carry forty rows, and
@@ -610,7 +622,7 @@
   .lake-popup .popup-actions a.gmaps, .lake-popup .popup-actions .gmaps { margin-top: 0; }
   .lake-popup .gmaps.as-btn {
     background: none; padding: 0; cursor: pointer; font-family: inherit;
-    border: 0; border-bottom: 1px solid var(--accent); color: var(--accent); font-size: 11px;
+    border: 0; border-bottom: 1px solid var(--accent); color: var(--accent); font-size: 15px;
   }
   .lake-popup .gmaps.as-btn:hover { color: var(--ink); border-color: var(--ink); }
   .change-tag {
@@ -636,7 +648,7 @@
     position: absolute; top: 10px; right: 56px; z-index: 501;
     width: 360px; max-height: 78%; overflow: auto; padding: 10px 12px 12px;
     background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 3px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.45); font-size: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.45); font-size: 15px;
   }
   .lp-desc { color: var(--ink-dim); line-height: 1.5; margin: 8px 0 10px; }
   .lp-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -656,15 +668,15 @@
 
   /* ---- the verdict line ------------------------------------------------- */
   /* One line, at the top, answering whether the drive is worth it. */
-  .lake-popup .verdict { font-size: 11px; font-weight: 600; color: var(--ink);
+  .lake-popup .verdict { font-size: 15px; font-weight: 600; color: var(--ink);
     border-left: 3px solid var(--ink-dim); padding: 2px 0 2px 7px; margin: 6px 0 8px; }
   .lake-popup .verdict.fresh { border-left-color: var(--good); }
   .lake-popup .verdict.shut { border-left-color: var(--BKTR); color: var(--ink-dim); }
 
   /* ---- facility chips --------------------------------------------------- */
-  .lake-popup .fac-row { font-size: 11px; margin-bottom: 8px; line-height: 1.9; }
+  .lake-popup .fac-row { font-size: 15px; margin-bottom: 8px; line-height: 1.9; }
   .fac-chip { display: inline-block; background: var(--bg); border: 1px solid var(--panel-edge);
-    border-radius: 999px; padding: 1px 7px; margin-right: 4px; font-size: 10px;
+    border-radius: 999px; padding: 1px 7px; margin-right: 4px; font-size: 14px;
     color: var(--ink-dim); white-space: nowrap; }
   .lake-popup .photo-row { margin-bottom: 8px; }
 
@@ -673,12 +685,12 @@
     position: absolute; top: 10px; right: 56px; z-index: 500;
     width: 360px; max-height: 78%; overflow: auto; padding: 10px 12px 12px;
     background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 3px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.45); font-size: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.45); font-size: 15px;
   }
   .cx-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
-  .cx-title { font-size: 13px; color: var(--accent); font-weight: 600;
+  .cx-title { font-size: 16px; color: var(--accent); font-weight: 600;
     text-transform: uppercase; letter-spacing: 0.6px; }
-  .cx-place { display: block; font-size: 12px; color: var(--ink); font-weight: 400;
+  .cx-place { display: block; font-size: 15px; color: var(--ink); font-weight: 400;
     text-transform: none; letter-spacing: 0; margin-top: 1px; }
   .cx-close { background: none; border: 0; color: var(--ink-dim); font-size: 18px;
     line-height: 1; cursor: pointer; padding: 0 2px; }
@@ -688,9 +700,9 @@
   .cx-horizon { margin: 0; }
   /* Build 5: the layout check found these two at 25 px; every tap target is 44 px. */
   .cx-horizon .chip { min-height: 44px; }
-  .cx-conf { font-size: 10px; text-transform: uppercase; letter-spacing: .04em;
+  .cx-conf { font-size: 14px; text-transform: uppercase; letter-spacing: .04em;
     color: var(--ink-dim); }
-  .cx-src-row { font-size: 10.5px; color: var(--ink-dim); margin-bottom: 8px;
+  .cx-src-row { font-size: 14.5px; color: var(--ink-dim); margin-bottom: 8px;
     display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
   .cx-tz { font-style: italic; }
   .cx-warn { color: var(--TGTR); }
@@ -699,9 +711,9 @@
   /* The first thing in the panel, because a verdict you cannot see the inputs
      to is a verdict you have to take on faith. */
   .cx-weather { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px;
-    margin: 8px 0 6px; font-size: 11px; color: var(--ink-dim);
+    margin: 8px 0 6px; font-size: 15px; color: var(--ink-dim);
     font-variant-numeric: tabular-nums; }
-  .cx-wx-air { color: var(--ink); font-size: 15px; font-weight: 600; margin-right: 4px; }
+  .cx-wx-air { color: var(--ink); font-size: 17px; font-weight: 600; margin-right: 4px; }
   .cx-wx-sky { color: var(--ink); text-transform: capitalize; }
   .cx-wx-sep { color: var(--panel-edge); margin: 0 1px; }
   .cx-weather-none { font-style: italic; }
@@ -710,11 +722,11 @@
   .cx-verdict { display: flex; align-items: baseline; gap: 6px; margin: 0 0 8px;
     padding: 6px 9px; background: var(--panel-2); border-left: 3px solid var(--ink-dim);
     border-radius: 3px; }
-  .cx-verdict-band { font-size: 13px; font-weight: 700; color: var(--ink);
+  .cx-verdict-band { font-size: 16px; font-weight: 700; color: var(--ink);
     text-transform: uppercase; letter-spacing: .03em; }
   .cx-verdict-n { font-size: 16px; font-weight: 700; color: var(--ink);
     font-variant-numeric: tabular-nums; }
-  .cx-verdict-of { font-size: 10.5px; color: var(--ink-dim); margin-right: auto; }
+  .cx-verdict-of { font-size: 14.5px; color: var(--ink-dim); margin-right: auto; }
   /* The four bands the score reports, in the ramp's own top and bottom. */
   .cx-verdict.cx-band-prime { border-left-color: #f2d183; }
   .cx-verdict.cx-band-good  { border-left-color: var(--good); }
@@ -723,17 +735,17 @@
 
   /* A heading over the strip or grid, so the score above it and the detail
      below it are visibly two different claims. */
-  .cx-secheading { font-size: 9.5px; text-transform: uppercase; letter-spacing: .06em;
+  .cx-secheading { font-size: 14px; text-transform: uppercase; letter-spacing: .06em;
     color: var(--ink-dim); margin: 2px 0 5px; }
 
   /* ---- the fishing calendar, at the foot and out of the way ------------- */
   .cx-cal { margin-top: 9px; padding-top: 8px; border-top: 1px solid var(--panel-edge); }
   .cx-cal-head { display: flex; align-items: baseline; gap: 6px; margin-bottom: 4px; }
-  .cx-cal-title { font-size: 9.5px; text-transform: uppercase; letter-spacing: .06em;
+  .cx-cal-title { font-size: 14px; text-transform: uppercase; letter-spacing: .06em;
     color: var(--ink-dim); border-bottom: 1px dotted var(--panel-edge); cursor: help; }
-  .cx-cal-note { font-size: 9.5px; color: var(--ink-dim); font-style: italic; }
+  .cx-cal-note { font-size: 14px; color: var(--ink-dim); font-style: italic; }
   .cx-cal-row { display: flex; align-items: baseline; gap: 6px; margin: 2px 0;
-    font-size: 10px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+    font-size: 14px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
   .cx-cal-day { flex: 0 0 46px; color: var(--ink); }
   .cx-cal-moon { flex: 0 0 12px; text-align: center; }
   .cx-cal-pers { flex: 1; display: flex; flex-wrap: wrap; gap: 4px; }
@@ -765,7 +777,7 @@
   .cx-tick.night { background: #35382f; }
   .cx-tick.major { background: #b69551; }
   .cx-tick.minor { background: #736440; }
-  .cx-best { margin-top: 7px; font-size: 11.5px; color: var(--ink-dim); }
+  .cx-best { margin-top: 7px; font-size: 15.5px; color: var(--ink-dim); }
   .cx-best strong { color: var(--ink); }
 
   /* The seven-day grid. */
@@ -777,9 +789,9 @@
   .cx-ghead span { color: var(--ink); font-size: 11px; font-variant-numeric: tabular-nums; }
   /* Both of these explain rather than report, so they read quieter than the
      numbers they sit under. */
-  .cx-tierkey { margin-top: 6px; font-size: 9.5px; line-height: 1.45; color: var(--ink-dim); }
+  .cx-tierkey { margin-top: 6px; font-size: 12px; line-height: 1.45; color: var(--ink-dim); }
   .cx-tierkey a { color: var(--accent); }
-  .cx-measure-hint { margin-top: 4px; font-size: 9.5px; line-height: 1.45;
+  .cx-measure-hint { margin-top: 4px; font-size: 14px; line-height: 1.45;
     color: var(--ink-dim); font-style: italic; }
   .cx-glabel { justify-content: flex-start; align-items: flex-start; flex-direction: column;
     gap: 1px; color: var(--ink-dim); font-size: 10px; }
@@ -799,7 +811,7 @@
   .cx-score.lead-far { opacity: .62;
     background-image: repeating-linear-gradient(45deg, rgba(31,33,30,.34) 0 3px, transparent 3px 6px); }
   .cx-legend { display: flex; align-items: center; gap: 3px; margin-top: 8px;
-    font-size: 9.5px; color: var(--ink-dim); flex-wrap: wrap; }
+    font-size: 14px; color: var(--ink-dim); flex-wrap: wrap; }
   .cx-legend i { width: 16px; height: 8px; border-radius: 2px; display: inline-block; }
   .cx-key { margin: 0 3px; }
   .cx-faded { flex-basis: 100%; margin-top: 2px; }
@@ -807,10 +819,10 @@
   /* Why the number is what it is. */
   .cx-factors { margin-top: 10px; border-top: 1px solid var(--panel-edge); padding-top: 7px; }
   .cx-factor { display: grid; grid-template-columns: 62px 56px 1fr 46px;
-    align-items: center; gap: 5px; margin: 3px 0; font-size: 10.5px; }
+    align-items: center; gap: 5px; margin: 3px 0; font-size: 14.5px; }
   .cx-factor.absent { opacity: .5; }
   .cx-fname { color: var(--ink); }
-  .cx-tier { font-size: 8.5px; font-weight: 700; text-transform: uppercase;
+  .cx-tier { font-size: 12px; font-weight: 700; text-transform: uppercase;
     letter-spacing: .03em; padding: 1px 4px; border-radius: 999px; text-align: center;
     color: #1f211e; background: #5a5c4e; }
   .cx-tier.strong { background: var(--good); }
@@ -821,22 +833,22 @@
   .cx-fbar { height: 5px; background: #33362f; border-radius: 3px; overflow: hidden; }
   .cx-fbar i { display: block; height: 100%; }
   .cx-measure { display: flex; align-items: center; gap: 7px; margin-top: 9px;
-    padding-top: 8px; border-top: 1px solid var(--panel-edge); font-size: 10.5px; }
+    padding-top: 8px; border-top: 1px solid var(--panel-edge); font-size: 14.5px; }
   .cx-measure label { color: var(--ink-dim); }
   .cx-measure input { width: 64px; background: var(--panel-2); color: var(--ink);
     border: 1px solid var(--panel-edge); border-radius: 3px; padding: 2px 5px;
-    font-size: 11px; font-variant-numeric: tabular-nums; }
+    font-size: 15px; font-variant-numeric: tabular-nums; }
   .cx-measure-note { color: var(--ink-dim); font-style: italic; }
   .cx-clear { background: none; border: 0; color: var(--accent); cursor: pointer;
-    font-size: 10.5px; padding: 0; }
+    font-size: 14.5px; padding: 0; }
   .cx-advisory { margin-top: 8px; padding: 7px 9px; background: var(--panel-2);
-    border-left: 3px solid var(--TGTR); font-size: 10.5px; line-height: 1.45;
+    border-left: 3px solid var(--TGTR); font-size: 14.5px; line-height: 1.45;
     color: var(--ink-dim); }
   .cx-closed { padding: 14px 10px; text-align: center; }
-  .cx-closed strong { color: var(--WSCT); font-size: 14px; letter-spacing: .04em; }
-  .cx-closed div { font-size: 11px; color: var(--ink-dim); margin-top: 4px; }
+  .cx-closed strong { color: var(--WSCT); font-size: 16px; letter-spacing: .04em; }
+  .cx-closed div { font-size: 15px; color: var(--ink-dim); margin-top: 4px; }
   .cx-why { font-style: italic; }
-  .cx-foot { margin-top: 9px; font-size: 10.5px; }
+  .cx-foot { margin-top: 9px; font-size: 14.5px; }
   .cx-foot a { color: var(--accent); text-decoration: none;
     border-bottom: 1px dotted var(--accent); }
   .map-btn.active { background: var(--accent); color: #1f211e; border-color: var(--accent); }
@@ -849,19 +861,19 @@
   }
   #map-wrap.zone-mode #zone-panel { display: block; }
   .zone-panel-title {
-    font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
+    font-size: 15px; text-transform: uppercase; letter-spacing: 1.2px;
     color: var(--ink-dim); margin-bottom: 8px;
   }
-  .zone-table { border-collapse: collapse; width: 100%; font-size: 12px; }
+  .zone-table { border-collapse: collapse; width: 100%; font-size: 15px; }
   /* A wrapped region name pushes the swatch onto its own line and the row stops
      reading as a row, so every cell stays on one line. */
   .zone-table th, .zone-table td {
     padding: 3px 4px; border-bottom: 1px solid var(--panel-edge); text-align: left;
     white-space: nowrap; vertical-align: middle;
   }
-  .zone-table th { color: var(--ink-dim); font-weight: 500; font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px; }
+  .zone-table th { color: var(--ink-dim); font-weight: 500; font-size: 14px; text-transform: uppercase; letter-spacing: 0.6px; }
   .zone-table td.num, .zone-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
-  .zone-table .zone-region { color: var(--ink-dim); font-size: 11px; }
+  .zone-table .zone-region { color: var(--ink-dim); font-size: 15px; }
   .zone-swatch {
     display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 5px;
     border: 1px solid rgba(0,0,0,0.4);
@@ -908,7 +920,7 @@
     #map-wrap { --panel-open-h: 54vh; }
     #chart-toggle { left: 10px; bottom: calc(10px + var(--panel-h)); padding: 7px 11px; font-size: 12px; }
     .map-btns { top: 10px; right: 10px; }
-    .chart-summary { gap: 12px; font-size: 11px; }
+    .chart-summary { gap: 12px; font-size: 15px; }
     /* Leaflet sizes a popup up to its 380px maxWidth, which is wider than a
        phone once the popup's own margins are added, and the × landed off
        screen. Content plus Leaflet's 46px of margin and border stays 10px in. */
@@ -997,8 +1009,8 @@
   .row:hover, .row:focus-visible { background: var(--panel-2); }
   .row .nm { font-weight: 600; font-size: 14px; }
   .row .sub { font-size: 12px; color: var(--ink-dim); }
-  .mark3d { display: inline-block; padding: 0 5px; border-radius: 4px; background: #534AB7; color: #fff; font-size: 10px; font-weight: 700; line-height: 16px; }
-  .row .sc { font-variant-numeric: tabular-nums; font-weight: 700; min-width: 30px; text-align: right; font-size: 15px; }
+  .mark3d { display: inline-block; padding: 0 5px; border-radius: 4px; background: #534AB7; color: #fff; font-size: 12px; font-weight: 700; line-height: 16px; }
+  .row .sc { font-variant-numeric: tabular-nums; font-weight: 700; min-width: 30px; text-align: right; font-size: 17px; }
   .dayout { font-size: 12px; padding: 2px 8px; border-radius: 999px; white-space: nowrap; background: var(--panel-2); color: var(--ink-dim); }
   .dayout.calm { background: #2f4a39; color: #a6dcb9; }
   .dayout.breezy { background: #4a4530; color: #e8dca6; }
@@ -1009,7 +1021,7 @@
   .chipbtn { min-height: 44px; padding: 0 10px; border-radius: 8px; border: 1px solid #555; background: transparent;
     color: var(--ink-dim); font-size: 12px; cursor: pointer; }
   .chipbtn[aria-pressed="true"], .chipbtn[data-clear-origin] { border-color: var(--accent); color: var(--accent); }
-  .note { font-size: 12px; color: var(--ink-dim); padding: 6px 12px 10px; margin: 0; }
+  .note { font-size: 15px; color: var(--ink-dim); padding: 6px 12px 10px; margin: 0; }
   .zones { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 12px; }
   .zones button { min-height: 44px; padding: 0 10px; border-radius: 8px; border: 1px solid #555; background: transparent;
     color: var(--ink); font-size: 13px; cursor: pointer; }
@@ -1030,7 +1042,12 @@
   .week .d { font-size: 12px; color: var(--ink-dim); }
   .week .b { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
   .week .flag { font-size: 10px; color: #f0b3ae; }
-  .week button[aria-pressed="true"] { background: var(--accent); color: #1f211e; }
+  /* Owner, phone check after Stage 2: the picked day is white, not the orange
+     that read like the gold "Best" pins. */
+  .week button[aria-pressed="true"] { background: #f4f1e8; color: #1f211e; box-shadow: inset 0 0 0 2px #1f211e; }
+  .home-pin { width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 2px solid #1f211e;
+    box-shadow: 0 0 0 2px #fff, 0 1px 4px rgba(0,0,0,.6); display: grid; place-items: center; }
+  .ban-word { color: var(--danger-ink); font-weight: 700; }
   .week button[aria-pressed="true"] .d, .week button[aria-pressed="true"] .flag { color: #1f211e; }
   #map-wrap .map-btns { top: 80px; right: 8px; }
   #map-wrap .map-btn { min-height: 44px; min-width: 44px; padding: 0 10px; font-size: 12px; border-radius: 8px; }
@@ -1090,7 +1107,7 @@
   .lake-top .bait-ban { margin: 4px 0; }
   .lake-top .verdict { margin: 4px 0 6px; }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 0; }
-  .tag { font-size: 12px; padding: 3px 8px; border-radius: 999px; background: var(--panel-2); border: 1px solid #555; color: var(--ink); text-decoration: none; }
+  .tag { font-size: 15px; padding: 3px 8px; border-radius: 999px; background: var(--panel-2); border: 1px solid #555; color: var(--ink); text-decoration: none; }
   .tag.aer { background: #7fb8d8; color: #14232c; border-color: #7fb8d8; font-weight: 700; }
   .tag.low { border-color: var(--good); color: #a6dcb9; }
   .tag.trophy { border-color: var(--TGTR); color: #f1cf86; }
@@ -1103,13 +1120,13 @@
   .tag-btn .tag { display: inline-block; }
   .tag-btn[aria-expanded="true"] .tag { outline: 2px solid var(--ink); outline-offset: 1px; }
   .tag-btn:focus-visible { outline: 2px solid #8fb8de; outline-offset: 1px; }
-  .tag-full { margin: 0 0 6px; font-size: 13px; color: var(--ink); }
+  .tag-full { margin: 0 0 6px; font-size: 16px; color: var(--ink); }
   .tag-full a { color: var(--accent); }
   /* Build 5: the tag named "est" must not take the estimate blocks' margin (.est below). */
   .tags .tag { margin: 0; }
-  .sheet > .aer-row { font-size: 13px; }
+  .sheet > .aer-row { font-size: 16px; }
   .lake-nopos { margin: 6px 14px 8px; }
-  .rules-old { margin: 4px 0 6px; padding: 6px 10px; border-radius: 6px; background: #4a2a26; border: 1px solid #c62828; color: #f6cdc9; font-size: 13px; font-weight: 600; }
+  .rules-old { margin: 4px 0 6px; padding: 6px 10px; border-radius: 6px; background: #4a2a26; border: 1px solid #c62828; color: #f6cdc9; font-size: 16px; font-weight: 600; }
   details .rules-old { margin: 0 0 8px; }
   .sheet details[data-sec="status"] > .body { padding: 0 0 12px; }
   .sheet details[data-sec="status"] > .body > .verdict { margin: 0 14px 8px; }
@@ -1118,7 +1135,7 @@
   .info-btn[aria-expanded="true"] { color: var(--accent); }
   .banner { margin: 6px 14px 8px; border-radius: 12px; background: #4a3a20; border: 1px solid #e0a526; padding: 12px; }
   .banner .go { font-size: 22px; font-weight: 800; color: #e0a526; }
-  .banner .why { font-size: 13px; margin-top: 2px; }
+  .banner .why { font-size: 16px; margin-top: 2px; }
   .banner.ice { background: #24343d; border-color: #7fb8d8; }
   .banner.ice .go { color: #7fb8d8; }
   .banner.shut, .banner.none { background: var(--panel-2); border-color: #555; }
@@ -1139,38 +1156,38 @@
   .bars .top { color: #e0a526; font-weight: 700; }
   .bars .gust span, .bars .shut span { background: #77736a; }
   details.why { margin: 0 14px 8px; background: var(--panel-2); border-radius: 8px; padding: 0 10px; border: 0; }
-  details.why summary { padding: 0; color: #e0a526; font-size: 14px; }
+  details.why summary { padding: 0; color: #e0a526; font-size: 16px; }
   details.why .body { padding: 0 0 10px; }
-  .why .lead { margin: 0 0 8px; font-size: 12px; color: var(--ink-dim); }
-  .why .compare { margin: 8px 0 0; font-size: 13px; }
-  .fac { display: grid; grid-template-columns: 130px 1fr 52px; gap: 8px; align-items: center; font-size: 13px; margin: 4px 0; }
+  .why .lead { margin: 0 0 8px; font-size: 15px; color: var(--ink-dim); }
+  .why .compare { margin: 8px 0 0; font-size: 16px; }
+  .fac { display: grid; grid-template-columns: 130px 1fr 52px; gap: 8px; align-items: center; font-size: 16px; margin: 4px 0; }
   .fac .track { height: 8px; background: #55584f; border-radius: 4px; overflow: hidden; }
   .fac .track span { display: block; height: 100%; background: #e0a526; }
   .fac b { text-align: right; font-variant-numeric: tabular-nums; }
   .fac.absent { color: var(--ink-dim); }
-  .tip { margin: 0 14px 8px; font-size: 13px; padding: 8px 10px; border-left: 3px solid var(--accent); background: var(--panel-2); }
+  .tip { margin: 0 14px 8px; font-size: 16px; padding: 8px 10px; border-left: 3px solid var(--accent); background: var(--panel-2); }
   .tip.clear { border-left-color: #7fb8d8; }
   /* Build 2: estimates, each with the word "estimated" and what it used. */
   .est { margin: 0 0 12px; }
   .est h3 { font-size: 14px; margin: 0 0 4px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
-  .est p { margin: 0 0 4px; font-size: 13px; }
-  .est ul { margin: 0 0 4px; padding-left: 18px; font-size: 13px; }
-  .est-chip { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; border: 1px dashed var(--ink-dim); color: var(--ink-dim); }
-  .est .inputs { font-size: 12px; color: var(--ink-dim); }
+  .est p { margin: 0 0 4px; font-size: 16px; }
+  .est ul { margin: 0 0 4px; padding-left: 18px; font-size: 16px; }
+  .est-chip { font-size: 15px; font-weight: 600; padding: 1px 7px; border-radius: 999px; border: 1px dashed var(--ink-dim); color: var(--ink-dim); }
+  .est .inputs { font-size: 15px; color: var(--ink-dim); }
   .est .warn { color: #f0b3ae; }
-  .hatch { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; font-size: 13px; margin: 0 0 4px; }
+  .hatch { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; font-size: 16px; margin: 0 0 4px; }
   .hatch .likely { color: #a6dcb9; } .hatch .soon { color: #e0a526; }
-  .winter-score { margin-top: 6px; font-size: 13px; }
+  .winter-score { margin-top: 6px; font-size: 16px; }
   .sheet > .aer-row { margin: 0 14px 8px; }
   .sheet details { border-top: 1px solid var(--panel-edge); }
   .sheet summary { list-style: none; min-height: 52px; display: flex; align-items: center; justify-content: space-between;
-    padding: 0 14px; font-weight: 600; cursor: pointer; }
+    padding: 0 14px; font-weight: 600; cursor: pointer; font-size: 18px; }
   .sheet summary::-webkit-details-marker { display: none; }
   .sheet summary::after { content: "+"; color: var(--ink-dim); font-size: 20px; }
   .sheet details[open] > summary::after { content: "−"; }
-  .sheet details > .body { padding: 0 14px 12px; font-size: 14px; }
+  .sheet details > .body { padding: 0 14px 12px; font-size: 17px; }
   .sheet details.why > summary { padding: 0; }
-  .kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0 0 8px; font-size: 13px; }
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0 0 8px; font-size: 16px; }
   .kv dt { color: var(--ink-dim); }
   .kv dd { margin: 0; }
   .tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
@@ -1180,18 +1197,18 @@
   .seg { display: inline-flex; gap: 4px; margin: 0 6px 8px 0; }
   .chart { background: var(--panel-2); border-radius: 8px; padding: 6px; }
   .chart svg { width: 100%; height: auto; display: block; }
-  .key, .src { font-size: 12px; color: var(--ink-dim); margin-top: 4px; }
-  .explain { font-size: 13px; margin: 8px 0 0; }
+  .key, .src { font-size: 15px; color: var(--ink-dim); margin-top: 4px; }
+  .explain { font-size: 16px; margin: 8px 0 0; }
   .gridwrap { overflow-x: auto; }
-  .fxgrid { border-collapse: collapse; font-size: 12px; width: 100%; }
+  .fxgrid { border-collapse: collapse; font-size: 15px; width: 100%; }
   .fxgrid th, .fxgrid td { padding: 4px; text-align: center; border-bottom: 1px solid var(--panel-edge); font-variant-numeric: tabular-nums; }
   .fxgrid th { color: var(--ink-dim); font-weight: 500; }
   .fxgrid td.hot { background: #55332f; color: #f6cdc9; }
   .fxgrid small { color: var(--ink-dim); }
-  .solunar .srow { display: grid; grid-template-columns: 44px 1fr; gap: 2px 8px; padding: 4px 0; border-bottom: 1px solid var(--panel-edge); font-size: 13px; }
+  .solunar .srow { display: grid; grid-template-columns: 44px 1fr; gap: 2px 8px; padding: 4px 0; border-bottom: 1px solid var(--panel-edge); font-size: 16px; }
   .solunar .pers { grid-column: 2; display: flex; flex-wrap: wrap; gap: 4px 10px; }
   .solunar .per b { color: #e0a526; }
-  .feed { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; margin-top: 8px; font-size: 13px; }
+  .feed { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; margin-top: 8px; font-size: 16px; }
   .feed b { color: #e0a526; }
   .sheet a.btn, .sheet button.btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px;
     border-radius: 8px; border: 1px solid #555; color: var(--ink); text-decoration: none; margin: 4px 6px 0 0;
@@ -1199,13 +1216,13 @@
   .sheet .stock { width: 100%; }
   .sheet .about:empty { display: none; }
   .sheet .gmaps.as-btn { min-height: 44px; }
-  .cx-embed { font-size: 13px; }
+  .cx-embed { font-size: 16px; }
 
   /* Messages over the map. */
   .state { position: absolute; inset: 0; z-index: 1300; display: flex; align-items: center; justify-content: center;
     background: rgba(31,33,30,.85); padding: 20px; }
   .state[hidden] { display: none; }
-  .state .card { background: var(--panel); border-radius: 12px; padding: 16px; max-width: 360px; font-size: 14px; }
+  .state .card { background: var(--panel); border-radius: 12px; padding: 16px; max-width: 360px; font-size: 16px; }
   .state .card h3 { margin: 0 0 6px; font-size: 16px; }
   .state .card p, .state .card ol { margin: 0 0 10px; color: var(--ink-dim); }
   .state .card button { min-height: 44px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--accent);
@@ -1231,7 +1248,13 @@
     background: var(--panel-2); border-top: 1px solid var(--panel-edge); }
   .bar button { min-height: 48px; border-color: transparent; }
 
+  .side-done { display: none; }
   @media (max-width: 1023px) {
+    .side-done { display: block; position: sticky; bottom: -28px; margin: 12px -16px -28px; padding: 10px 16px;
+      padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+      background: var(--panel); border-top: 1px solid var(--panel-edge); }
+    .side-done .btn { width: 100%; min-height: 48px; font-size: 15px; font-weight: 700;
+      background: #f4f1e8; color: #1f211e; border-color: #f4f1e8; }
     .leaflet-control-zoom { display: none; }
     /* Below a PC width the filters slide over the map, as on a phone. */
     #sidebar {
@@ -1283,7 +1306,7 @@
     <div class="count" id="result-count">Showing … lakes</div>
     <div class="filter-summary" id="filter-summary"></div>
     <div class="active-filters" id="active-filters" aria-label="Filters that narrow the map"></div>
-    <div class="empty-state" id="empty-state">No lakes match these filters. Try more years, more species, or a longer distance.</div>
+    <div class="empty-state" id="empty-state">No lakes match these filters. Try more years, more species, a longer distance, or switch Stocked, Not stocked or Rivers back on.</div>
 
     <div class="group" id="advisory-group" hidden>
       <div class="group-label"><span>Alberta advisories</span></div>
@@ -1298,7 +1321,7 @@
         <button class="chip" id="open-now-chip" type="button" aria-pressed="false">Open today</button>
         <button class="chip" id="ice-chip" type="button" aria-pressed="false">Open for ice fishing</button>
         <button class="chip" id="aerated-chip" type="button" aria-pressed="false">Aerated</button>
-        <button class="chip" id="bait-chip" type="button" aria-pressed="false">Bait ban</button>
+        <button class="chip" id="bait-chip" type="button" aria-pressed="false">Bait Ban</button>
       </div>
       <div class="hint" id="open-now-note"></div>
     </div>
@@ -1307,6 +1330,7 @@
       <div class="chips">
         <button class="chip active" id="stocked-chip" type="button" aria-pressed="true">Stocked</button>
         <button class="chip active" id="unstocked-chip" type="button" aria-pressed="true">Not stocked</button>
+        <button class="chip active" id="rivers-chip" type="button" aria-pressed="true">Rivers</button>
       </div>
       <div class="hint" id="stocking-note"></div>
     </div>
@@ -1396,6 +1420,9 @@
       <div class="data-quality" id="data-quality">checking…</div>
       <div class="legend" id="legend"></div>
     </details>
+    <!-- Owner, phone check after Stage 2: on a phone or iPad the filters cover
+         the map; one tap here closes them and shows what they leave. -->
+    <div class="side-done"><button class="btn" id="filters-done" type="button">Show the waters</button></div>
   </aside>
 
   <div id="main">
@@ -1724,6 +1751,7 @@ const state = {
   /** Build 5: show stocked waters, waters that are not stocked, or both (default). */
   showStocked: true,
   showUnstocked: true,
+  showRivers: true,
   /** Facilities a lake must be KNOWN to have. Empty means no facility filter.
    *  Never inverted into "known not to have": 95 mapped lakes state no
    *  amenities at all, and that is Alberta not saying, not a lake with no
@@ -2069,8 +2097,14 @@ function lakePassesFilters(lake) {
   // Build 5: the stocking filters (species, years, size, recently stocked) are
   // about stocked fish. A water that is not stocked passes years and size, and
   // is left out only when you ask for particular stocked species or a recent
-  // stocking, or switch "Not stocked" off.
-  if (lake.unstocked) {
+  // stocking, or switch "Not stocked" off. Every river stretch has its own
+  // switch, "Rivers", and is not hidden by the stocked-fish filters: that
+  // includes the two the stocking reports list (Kananaskis, Medley), whose
+  // last stocking is older than the default years.
+  const asRiver = !!lake.river;
+  if (asRiver) {
+    if (!state.showRivers) return false;
+  } else if (lake.unstocked) {
     if (!state.showUnstocked) return false;
     if (state.species.size !== SPECIES_ORDER.length || recencyIsActive()) return false;
   } else {
@@ -2088,7 +2122,7 @@ function lakePassesFilters(lake) {
   if (state.baitBanOnly && REGULATIONS && !lakeBaitBan(lake)) return false;
   if (state.gridOnly && DEPTH_GRIDS && !(window.DepthModel && DepthModel.has(lake))) return false;
   if (!facilitiesPass(lake)) return false;
-  return lake.unstocked ? true : recencyPasses(lake, recencyOption());
+  return lake.unstocked || asRiver ? true : recencyPasses(lake, recencyOption());
 }
 
 /* Every facility asked for has to be one this lake is KNOWN to have.
@@ -2574,6 +2608,8 @@ function lakeBaitRule(lake) {
   return reg.bait === "Bait ban" ? "ban" : "allowed";
 }
 
+/** The guide's bait rule as the panel shows it: "Bait Ban" (owner), the rest as printed. */
+function baitWords(text) { return /^bait ban$/i.test(text || "") ? "Bait Ban" : text; }
 /** The regulations put this lake under a bait ban. */
 function lakeBaitBan(lake) {
   const reg = regulationFor(lake);
@@ -2598,7 +2634,7 @@ function iceSeasonBlock(lake) {
 
 /** The red line at the top of the popup for a lake under a bait ban. */
 function baitBanLine(lake) {
-  return lakeBaitBan(lake) ? `<div class="bait-ban">Bait ban</div>` : "";
+  return lakeBaitBan(lake) ? `<div class="bait-ban">Bait Ban</div>` : "";
 }
 
 /** Stated aerated: on ACA's roster or on Alberta's own lake page. A windmill
@@ -2688,7 +2724,7 @@ function regulationBlock(lake) {
     }
     if (reg.bait) {
       rows.push(`<div class="reg-row"><span class="reg-k">Bait</span>
-        <span class="reg-v">${esc(reg.bait)}</span></div>`);
+        <span class="reg-v${/ban/i.test(reg.bait) ? " ban-word" : ""}">${esc(baitWords(reg.bait))}</span></div>`);
     }
     const others = Object.entries(reg.species || {})
       .map(([code, v]) => limitPart(fishName(code), `${fishName(code)} ${v.text}`, lake))
@@ -2714,7 +2750,7 @@ function regulationBlock(lake) {
       ? `the ${esc(zone || "zone")} default` : "the provincial stocked-lake default";
     if (reg.bait) {
       rows.push(`<div class="reg-row"><span class="reg-k">Bait</span>
-        <span class="reg-v">${esc(reg.bait)}</span></div>`);
+        <span class="reg-v${/ban/i.test(reg.bait) ? " ban-word" : ""}">${esc(baitWords(reg.bait))}</span></div>`);
     }
     if (listed) {
       rows.push(`<div class="reg-row"><span class="reg-k" title="These are ${esc(defaultNote)}, not limits written for this lake. A species listed here is not a species this lake is known to hold.">Limits</span>
@@ -2969,8 +3005,9 @@ function placeOriginMarker() {
 function placeHomeMarker() {
   const icon = L.divIcon({
     className: "pin-wrap",
-    html: `<div style="width:15px;height:15px;background:#c98a3e;border:2px solid #1f211e;border-radius:50%;box-shadow:0 0 0 3px rgba(201,138,62,0.4)"></div>`,
-    iconSize: [15, 15], iconAnchor: [7.5, 7.5],
+    // A house in a white ring: a shape, not a colour, so it never reads as a score pin.
+    html: `<div class="home-pin" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 3 2.5 11h2.8v9h5.2v-6h3v6h5.2v-9h2.8z" fill="#1f211e"/></svg></div>`,
+    iconSize: [28, 28], iconAnchor: [14, 14],
   });
   if (homeMarker) map.removeLayer(homeMarker);
   homeMarker = L.marker([state.home.lat, state.home.lon], { icon, draggable: true, zIndexOffset: 1000 })
@@ -3047,6 +3084,8 @@ function renderPins() {
 
   document.getElementById("result-count").textContent =
     `Showing ${shown} of ${LAKES.length} lakes`;
+  const done = document.getElementById("filters-done");
+  if (done) done.textContent = `Show ${shown} water${shown === 1 ? "" : "s"}`;
   document.getElementById("empty-state").classList.toggle("show", shown === 0 && unplaced === 0);
   updateFilterSummary();
   updateLegend();
@@ -3056,19 +3095,28 @@ function renderPins() {
 /* Build 5: each river stretch the guide names is a thin blue line; the open one
  * is wider. A tap on the line opens the stretch, as its pin does. */
 let riverLayer = null;
+function riverDrawable(line) {
+  return Array.isArray(line) && line.some(pl => Array.isArray(pl) && pl.length >= 2 && Array.isArray(pl[0]));
+}
 function renderRivers() {
   if (!map) return;
   if (!riverLayer) riverLayer = L.layerGroup().addTo(map);
   riverLayer.clearLayers();
   const open = state.selectedKey || null;
   for (const lake of LAKES) {
-    if (!lake.river || !Array.isArray(lake.line) || lake.line.length < 2 || !lakePassesFilters(lake)) continue;
+    // "line" is a list of polylines (CanVec pieces). A stretch drawn as one
+    // long polyline is a list of length 1 and must still be drawn: counting
+    // the list once hid 15 stretches, both Red Deer River ones among them.
+    if (!lake.river || !riverDrawable(lake.line) || !lakePassesFilters(lake)) continue;
     const on = lakeKey(lake) === open;
     const line = L.polyline(lake.line, { color: on ? "#bfe0f3" : "#5aa9e6", weight: on ? 6 : 3, opacity: on ? 0.95 : 0.8,
-      className: "river-line" });
-    line.bindTooltip(() => tooltipHtml(lake), { className: "lake-tip", sticky: true });
-    line.on("click", () => { lastPinClickAt = Date.now(); DayUI.openLake(lakeKey(lake), { noPan: true }); });
+      className: "river-line", interactive: false });
+    // A 3 px line is too thin for a finger: an invisible 20 px line on top takes the tap.
+    const hit = L.polyline(lake.line, { color: "#000", opacity: 0, weight: 20, className: "river-hit" });
+    hit.bindTooltip(() => tooltipHtml(lake), { className: "lake-tip", sticky: true });
+    hit.on("click", () => { lastPinClickAt = Date.now(); DayUI.openLake(lakeKey(lake), { noPan: true }); });
     riverLayer.addLayer(line);
+    riverLayer.addLayer(hit);
   }
 }
 
@@ -3610,11 +3658,12 @@ function activeFilters() {
   if (state.openNow) out.push({ id: "open", label: "Open today", counted: true, clear: click("#open-now-chip") });
   if (state.iceFishing) out.push({ id: "ice", label: "Open for ice fishing", counted: true, clear: click("#ice-chip") });
   if (state.aeratedOnly) out.push({ id: "aer", label: "Aerated", counted: true, clear: click("#aerated-chip") });
-  if (state.baitBanOnly) out.push({ id: "bait", label: "Bait ban", counted: true, clear: click("#bait-chip") });
+  if (state.baitBanOnly) out.push({ id: "bait", label: "Bait Ban", counted: true, clear: click("#bait-chip") });
   if (state.gridOnly) out.push({ id: "3d", label: "Has a 3D depth model", counted: true, clear: click("#grid-chip") });
-  if (!state.showStocked && !state.showUnstocked) out.push({ id: "nostocking", label: "Stocked and Not stocked both off", counted: true, clear: click("#stocked-chip") });
-  else if (!state.showStocked) out.push({ id: "nostocked", label: "Not stocked only", counted: true, clear: click("#stocked-chip") });
-  else if (!state.showUnstocked) out.push({ id: "nounstocked", label: "Stocked only", counted: true, clear: click("#unstocked-chip") });
+  const stockOff = [["Stocked", "showStocked"], ["Not stocked", "showUnstocked"], ["Rivers", "showRivers"]].filter(([, k]) => !state[k]);
+  const offWords = stockOff.map(([w]) => w);
+  if (stockOff.length) out.push({ id: "stocking", label: `${offWords.length > 2 ? offWords.slice(0, -1).join(", ") + " and " + offWords[offWords.length - 1] : offWords.join(" and ")} off`, counted: true,
+    clear: () => { state.showStocked = state.showUnstocked = state.showRivers = true; STOCKING_SYNC.forEach(f => f()); onFilterChange(); } });
   if (state.facilities.size) out.push({ id: "fac", label: `${state.facilities.size} facilit${state.facilities.size === 1 ? "y" : "ies"}`, counted: true, clear: click('[data-all="facility"]') });
   return out;
 }
@@ -3647,18 +3696,23 @@ function updateFiltersLabel(n) {
   btn.setAttribute("aria-label", parts.length ? `Filters, ${parts.join(", ")}` : "Filters");
 }
 
-/* Build 5: stocked waters, waters the guide names that are not stocked, or both. */
+/* Build 5: stocked waters, lakes the guide names that are not stocked, and
+ * the guide's river stretches, each with its own switch. */
+const STOCKING_SYNC = [];
 function buildStockingFilter() {
-  const pairs = [["stocked-chip", "showStocked"], ["unstocked-chip", "showUnstocked"]];
+  const pairs = [["stocked-chip", "showStocked"], ["unstocked-chip", "showUnstocked"], ["rivers-chip", "showRivers"]];
   const note = document.getElementById("stocking-note");
-  const stocked = LAKES.filter(l => !l.unstocked).length;
+  const stocked = LAKES.filter(l => !l.unstocked && !l.river).length;
   const lakes = LAKES.filter(l => l.unstocked && !l.river).length;
   const rivers = LAKES.filter(l => l.river).length;
-  note.textContent = `${stocked} stocked lakes · ${lakes} lakes and ${rivers} river stretches not stocked, from the ${REGULATIONS ? REGULATIONS.guide_year + " " : ""}guide`;
+  const stockedRivers = LAKES.filter(l => l.river && !l.unstocked).length;
+  note.textContent = `${stocked} stocked lakes · ${lakes} lakes not stocked · ${rivers} river stretches`
+    + (stockedRivers ? ` (${stockedRivers} stocked)` : "") + `, from the ${REGULATIONS ? REGULATIONS.guide_year + " " : ""}guide`;
   pairs.forEach(([id, key]) => {
     const el = document.getElementById(id);
     const sync = () => { el.classList.toggle("active", state[key]); el.setAttribute("aria-pressed", state[key] ? "true" : "false"); };
     el.addEventListener("click", () => { state[key] = !state[key]; sync(); onFilterChange(); });
+    STOCKING_SYNC.push(sync);
     sync();
   });
 }
@@ -3846,6 +3900,14 @@ function gotoLake(key) {
   }
   // The lake may be filtered out; make sure it is on the map before flying to it.
   if (!lakePassesFilters(lake)) {
+    // Its own stocking switch back on, and for a water that is not stocked
+    // every species, so a search never opens a water the map does not show.
+    if (lake.river) state.showRivers = true;
+    else if (lake.unstocked) {
+      state.showUnstocked = true;
+      if (state.species.size !== SPECIES_ORDER.length) { const all = document.querySelector('[data-all="species"]'); if (all) all.click(); }
+    } else state.showStocked = true;
+    STOCKING_SYNC.forEach(f => f());
     state.recency = "any";
     state.maxDistanceKm = 1000;
     document.getElementById("dist-slider").value = 1000;
@@ -4241,6 +4303,7 @@ function writeUrl() {
   if (state.gridOnly) p.set("3d", "1");
   if (!state.showStocked) p.set("st", "0");
   if (!state.showUnstocked) p.set("ns", "0");
+  if (!state.showRivers) p.set("rv", "0");
   if (state.facilities.size) p.set("fac", [...state.facilities].join("|"));
   if (state.day) p.set("day", state.day);
   if (state.origin && state.origin.kind !== "me") {
@@ -4274,6 +4337,7 @@ function readUrl() {
   if (p.get("3d") === "1") state.gridOnly = true;
   if (p.get("st") === "0") state.showStocked = false;
   if (p.get("ns") === "0") state.showUnstocked = false;
+  if (p.get("rv") === "0") state.showRivers = false;
   // Validated against what was actually collected, so a stale or hand-typed
   // link cannot leave a filter switched on that nothing can satisfy.
   if (p.has("fac")) pendingFacilities = p.get("fac").split("|").filter(Boolean);
@@ -4370,6 +4434,11 @@ function buildMenu() {
     else setSidebarHidden(true);
   });
   document.getElementById("scrim").addEventListener("click", closeMenu);
+  document.getElementById("filters-done").addEventListener("click", () => {
+    closeMenu();
+    const b = document.getElementById("filters-btn");
+    if (b) b.focus();
+  });
   /* With the lake list on the right, the filters column starts closed on a PC
    * narrower than 1400 px; once someone opens or closes it, that is kept. */
   const stored = readStore(STORE_SIDEBAR, null);

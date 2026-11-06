@@ -278,7 +278,7 @@
     return '<button type="button" class="row" data-lake="' + esc(lakeKey(lake)) + '">'
       + '<span><span class="nm">' + esc(lake.name) + "</span><br>"
       + '<span class="sub">' + esc([km, size].concat(cold ? winterBits(lake) : []).filter(Boolean).join(" · "))
-      + (lakeBaitBan(lake) ? " · bait ban" : "")
+      + (lakeBaitBan(lake) ? " · Bait Ban" : "")
       // Build 4: a lake with a lakebed survey; its panel has the 3D button at the top.
       + (window.DepthModel && DepthModel.has(lake) ? ' · <b class="mark3d" title="Has a 3D depth model">3D</b>' : "") + "</span></span>"
       + '<span class="sc" title="' + (cold ? "Winter score: light, pressure trend and moon" : "Bite score") + '">' + esc(score) + "</span>"

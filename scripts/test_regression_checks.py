@@ -3192,7 +3192,7 @@ class Build2EstimateTests(unittest.TestCase):
                      " band_m: [3, 6]}, areaHa: 300, aerated: true, amenities: ['Boat Launch', 'Dock/Pier'], baitBan: true,"
                      " iceKind: 'all-winter', troutLimit: 0})")
         text = " ".join(got["lines"])
-        for part in ("Big water (300 ha)", "3–6 m", "boat launch", "Aerated", "Bait ban", "open all winter",
+        for part in ("Big water (300 ha)", "3–6 m", "boat launch", "Aerated", "Bait Ban", "open all winter",
                      "Legal is not safe. Ice thickness is never forecast.", "Catch and release", "only legal source"):
             self.assertIn(part, text)
 
@@ -3380,8 +3380,8 @@ class Build2DataTests(unittest.TestCase):
 
     def test_build2_files_are_loaded_and_precached(self):
         worker = (ROOT / "sw.js").read_text(encoding="utf-8")
-        # v7 since Build 4; Build 2 files stay listed.
-        self.assertIn('const SHELL_CACHE = "troutmap-shell-v9";', worker)
+        # v10 since the phone-check fixes after Build 5 Stage 2; Build 2 files stay listed.
+        self.assertIn('const SHELL_CACHE = "troutmap-shell-v10";', worker)
         start = worker.index("const SHELL_FILES = [")
         shell = set(re.findall(r'"([^"]+)"', worker[start:worker.index("]", start)]))
         self.assertIn("js/estimates.js", shell)
@@ -3681,7 +3681,9 @@ class Build4Tests(unittest.TestCase):
         self.assertIn("measured by the Alberta lakebed survey", page)
         depth = json.loads((DATA_DIR / "lake_depth.json").read_text(encoding="utf-8"))["lakes"]
         # The survey fills only what MyWildAlberta leaves empty (Build 4).
-        self.assertEqual(sum(1 for k in index["lakes"] if depth.get(k, {}).get("max_depth_source")), 18)
+        self.assertEqual(sum(1 for k in index["lakes"] if depth.get(k, {}).get("max_depth_source") and not k.startswith("gu-")), 18)
+        # Build 5: the 71 surveyed waters that are not stocked take their depth from the survey too.
+        self.assertEqual(sum(1 for k in index["lakes"] if depth.get(k, {}).get("max_depth_source") and k.startswith("gu-")), 71)
         # A grid that covers a chain of lakes gives none of them its depth (review 1).
         users = collections.Counter(v["grid"] for v in index["lakes"].values())
         for k, v in index["lakes"].items():
@@ -3900,10 +3902,14 @@ class Build5Stage1Tests(unittest.TestCase):
         self.assertIn('isOpen("status", false)', html)
         self.assertIn('isOpen("forecast", false)', html)
         self.assertIn('isOpen("rules", false)', html)
-        top = html[:html.index('section("status"')]
+        top = html[:html.index('section("rules"')]
         self.assertIn("bannerHtml(lake, f, d) + whyHtml(lake, f, d)", top)
         self.assertIn("aerationBlock(lake)", top)
         self.assertNotIn("section(", top)
+        # Owner, phone check after Stage 2: Rules first, the day's detail last.
+        order = [html.index('section("%s"' % sec) for sec in
+                 ("rules", "fish", "info", "how", "river", "spots", "season", "status", "forecast", "bite", "go")]
+        self.assertEqual(order, sorted(order))
         page = (ROOT / "index.html").read_text(encoding="utf-8")
         self.assertIn(".tags .tag { margin: 0; }", page)   # "8 reports" the same size as the other tags
         self.assertEqual(html.count("rulesYearHtml()"), 2)
@@ -4111,3 +4117,81 @@ class Build5Stage2Tests(unittest.TestCase):
         self.assertIn("if (lake.unstocked) continue;", z)
         v = page[page.index("function setView("):page.index("function setView(") + 900]
         self.assertIn("map.removeLayer(riverLayer)", v)
+
+
+class Build5PhoneCheckTests(unittest.TestCase):
+    """The owner's phone check after Build 5 Stage 2 (items 1, 3-9)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.page = (ROOT / "index.html").read_text(encoding="utf-8")
+        cls.sheet = (ROOT / "js" / "lake-sheet.js").read_text(encoding="utf-8")
+        cls.d3 = (ROOT / "js" / "depth-3d.js").read_text(encoding="utf-8")
+        cls.rivers = json.loads((DATA_DIR / "rivers.json").read_text(encoding="utf-8"))
+
+    def test_every_river_stretch_is_drawn_with_a_wide_tap_line(self):
+        r = self.page[self.page.index("function renderRivers("):self.page.index("function zoomToResults(")]
+        self.assertNotIn("lake.line.length < 2", r)      # counted polylines, not points: hid 15 stretches
+        self.assertIn("riverDrawable(lake.line)", r)
+        self.assertIn("weight: 20", r)
+        self.assertIn('hit.on("click"', r)
+        for s in self.rivers["stretches"]:
+            self.assertTrue(any(isinstance(pl, list) and len(pl) >= 2 for pl in s["line"]), s["lake_id"])
+        red = [s for s in self.rivers["stretches"] if s["name"] == "Red Deer River" and s["zone"] == "PP2"]
+        self.assertEqual(len(red), 2)
+        self.assertTrue(all(len(s["line"]) == 1 for s in red))    # the shape that used to be skipped
+
+    def test_rivers_have_their_own_filter(self):
+        self.assertIn('id="rivers-chip"', self.page)
+        self.assertIn("showRivers: true,", self.page)
+        passes = self.page[self.page.index("function lakePassesFilters("):self.page.index("function facilitiesPass(")]
+        i = passes.index("if (asRiver) {")
+        self.assertIn("if (!state.showRivers) return false;", passes[i:i + 120])
+        self.assertLess(i, passes.index("} else if (lake.unstocked) {"))
+        self.assertIn("const asRiver = !!lake.river;", passes)           # the stocked twins too
+        self.assertIn("return lake.unstocked || asRiver ? true : recencyPasses(", passes)
+        go = self.page[self.page.index("function gotoLake("):self.page.index("function buildRecencyChipsState(")]
+        self.assertIn("if (lake.river) state.showRivers = true;", go)
+        self.assertIn('if (p.get("rv") === "0") state.showRivers = false;', self.page)
+        self.assertIn('if (!state.showRivers) p.set("rv", "0");', self.page)
+
+    def test_bait_ban_is_red(self):
+        self.assertIn('<span class="ban-word">Bait Ban</span>', self.sheet)
+        self.assertIn('function baitWords(text) { return /^bait ban$/i.test(text || "") ? "Bait Ban" : text; }', self.page)
+        self.assertIn('/ban/i.test(reg.bait) ? " ban-word" : ""', self.page)
+        self.assertIn(".ban-word { color: var(--danger-ink); font-weight: 700; }", self.page)
+
+    def test_3d_tap_reads_the_depth_colours_by_metres_and_one_finger_moves(self):
+        h = self.d3[self.d3.index("function hit(ev)"):self.d3.index("function pick(ev)")]
+        self.assertNotIn("L.fishdepth]", h)                 # the dots no longer catch every tap
+        self.assertIn("x.distance <= far && onScreen(x, ev, b)", h)
+        self.assertIn("z / COLOUR_DEEP_M", self.d3)
+        self.assertIn("var COLOUR_DEEP_M = 20;", self.d3)
+        self.assertIn("var panOne = !v.demo", self.d3)
+        self.assertIn("root.position.x += dx * k", self.d3)
+        self.assertIn("root.position.set(0, 0, 0);", self.d3)
+        h2 = self.d3[self.d3.index("if (ptrs.size === 2) {\n        var pp"):][:900]
+        self.assertIn("mid0", h2)                        # a pinch zooms only; the midpoint turns
+        self.assertIn(".add(root.position).project(cam)", self.d3)   # compass with the model moved
+        # Waters not stocked get the build's depth entry, summer layer included (Cold Lake is 99 m, not "shallow").
+        depth = json.loads((DATA_DIR / "lake_depth.json").read_text(encoding="utf-8"))["lakes"]
+        self.assertEqual(depth["gu-pp2-gull-lake"]["max_depth_m"], 7.6)
+        self.assertTrue(depth["gu-nb1-cold-lake"]["stratification"]["stratifies"])
+
+    def test_picked_day_and_home_are_not_orange(self):
+        self.assertNotIn('.week button[aria-pressed="true"] { background: var(--accent)', self.page)
+        home = self.page[self.page.index("function placeHomeMarker("):self.page.index("function placeHomeMarker(") + 700]
+        self.assertIn('class="home-pin"', home)
+        self.assertNotIn("#c98a3e", home)
+
+    def test_filters_have_a_show_button_and_labels_are_12px_or_more(self):
+        self.assertIn('id="filters-done"', self.page)
+        done = self.page[self.page.index('getElementById("filters-done").addEventListener("click"'):][:200]
+        self.assertIn("closeMenu();", done)
+        self.assertIn('getElementById("filters-btn")', done)          # focus back on the button
+        css = self.page[:self.page.index("</style>")]
+        for sel in (".reg-legend", ".reg-basis", ".reg-year", ".lake-popup .profile-label", ".seen-foot", ".seen-chip i"):
+            i = css.index(sel + " {") if sel + " {" in css else css.index(sel)
+            size = float(re.search(r"font-size:\s*([\d.]+)px", css[i:i + 300]).group(1))
+            self.assertGreaterEqual(size, 14, sel)
+        self.assertRegex(css, r"\.sheet details > \.body \{[^}]*font-size: 17px")   # owner: even bigger
