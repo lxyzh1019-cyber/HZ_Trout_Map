@@ -145,9 +145,13 @@ class Build5WatersTests(unittest.TestCase):
         # in a neighbouring unit by the nearest stocked lakes).
         missing = {r["lake"] for r in self.review if r["why"] in (
             "no river line of that name in the water data", "no river line of that name in the zone")}
-        for name in ("South Castle River", "Redwater River", "Muskwa River",
-                     "Nipisi River", "Birch Creek", "Monday Creek", "Sunday Creek"):
+        for name in ("South Castle River", "Monday Creek"):
             self.assertIn(name, missing)
+        # Alberta's zone outlines (decision 18 A) find these in their own zone; the
+        # nearest-stocked-lakes guess had put their lines in a neighbouring zone.
+        for lake_id in ("rv-nb1-redwater-river-1", "rv-nb3-muskwa-river-1", "rv-nb3-nipisi-river-1",
+                        "rv-nb4-birch-creek-1", "rv-nb4-sunday-creek-1"):
+            self.assertIn(lake_id, self.by_id)
         # Piche River is "Piché River" in CanVec: found once accents are dropped.
         self.assertIn("rv-nb1-piche-river-1", self.by_id)
         placed = {s["name"] for s in self.rivers["stretches"]}
