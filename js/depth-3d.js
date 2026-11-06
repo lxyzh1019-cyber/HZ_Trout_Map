@@ -8,7 +8,9 @@
  *
  * Data: data/depth_grids/index.json and one .bin per grid (Alberta Geological
  * Survey, see scripts/depth_grids.py), data/boating_rules.json (Transport
- * Canada TP 15587E and MyWildAlberta, see scripts/boating_rules.py). The
+ * Canada TP 15587E and MyWildAlberta, see scripts/boating_rules.py),
+ * data/lake_access.json (boat launches and roads from OpenStreetMap, ODbL, see
+ * scripts/lake_access.py). The
  * shapes and spots come from js/lake-structure.js and js/fishing-spots.js;
  * this file only draws them.
  *
@@ -34,7 +36,7 @@
   var D0 = 6.4;                      // camera distance at the default view
   var LAND_CAP_M = 6;                // land is drawn at most this high
   var COLOUR_DEEP_M = 20;            // the darkest blue: 20 m or deeper, the same on every lake
-  var LAYERS_ON = ["fishdepth", "wind", "spots", "struct", "drop"];
+  var LAYERS_ON = ["fishdepth", "wind", "spots", "struct", "drop", "access"];
   var LAYERS_OFF = ["weed", "summer", "cast", "calm", "sun", "rep", "ice"];
   var LAYER_INFO = {
     fishdepth: ["Fish depth today", "c", "#4FC3F7"],
@@ -44,13 +46,18 @@
     cast: ["Deep within a cast", "c", "#993556"], calm: ["Calm shore", "c", "#1D9E75"],
     sun: ["Sun and shade shore", "c", "#FAC775"], rep: ["Reported spots", "c", "#7F77DD"],
     ice: ["Under-ice band", "c", "#FFFFFF"],
+    access: ["Boat launches and roads", "c", "#F4F1E8"],
   };
+  // Roads from OpenStreetMap: main roads light, local roads grey, tracks and service roads dashed.
+  var ROAD_MAIN = { motorway: 1, trunk: 1, primary: 1, secondary: 1, tertiary: 1 };
+  var ROAD_DASH = { service: 1, track: 1 };
   var KIND_COLOUR = { island: 0x5F5E5A, point: 0xBA7517, basin: 0x534AB7, hump: 0xD4537E, drop: 0xD85A30, flat: 0x639922 };
   var DIRS = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
 
   var webgl = null;          // checked once
   var threeLoading = null;
   var gridCache = {};
+  var accessLoading = null;  // data/lake_access.json, asked for once
   var view = null;           // the open view, or null
 
   function index() { return typeof DEPTH_GRIDS !== "undefined" && DEPTH_GRIDS && DEPTH_GRIDS.lakes ? DEPTH_GRIDS : null; }
@@ -96,6 +103,21 @@
         gridCache[meta.file] = LakeStructure.fromInt16(meta, cells);
         return gridCache[meta.file];
       });
+  }
+
+  /* Decision 23 A: boat launches and roads from OpenStreetMap, one file for all
+   * lakebed grids. A view opens without them if the file cannot load. */
+  function loadAccess() {
+    if (!accessLoading) {
+      accessLoading = fetch("data/lake_access.json").then(function (r) { if (!r.ok) throw new Error("http " + r.status); return r.json(); })
+        .catch(function () { accessLoading = null; return null; });
+    }
+    return accessLoading;
+  }
+  function accessFor(meta, access) {
+    if (!access || !access.grids || !meta || !meta.file) return null;
+    var stem = meta.file.replace(/^.*\//, "").replace(/\.bin$/, "");
+    return access.grids[stem] || null;
   }
 
   /* Build 4: the lakebed shapes for the lake panel ("How to fish this lake"),
@@ -251,7 +273,9 @@
       + "</div>"
       + '<div class="d3-foot">Depth at the survey water level; the real level changes. Height is made taller so the shape is easy to see. '
       + "Spots and layers are estimates. Lakebed: " + escHtml(meta.source) + ", Open Government Licence – Alberta. "
-      + "Boating rules: Transport Canada TP 15587E (2026), not the official version, and MyWildAlberta. Wind: Open-Meteo.com (CC BY 4.0). 3D: three.js (MIT).</div>"
+      + "Boating rules: Transport Canada TP 15587E (2026), not the official version, and MyWildAlberta. Wind: Open-Meteo.com (CC BY 4.0). 3D: three.js (MIT). "
+      + 'Boat launches and roads: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a> (ODbL); a launch may be private or closed, and the map can miss one.'
+      + '<span data-noaccess hidden> OpenStreetMap shows no boat launch on this lake.</span></div>'
       + "</div>";
     (host || document.body).appendChild(el);
     return el;
@@ -290,11 +314,12 @@
     });
     if (!canWebGL()) { wait.textContent = "This phone cannot show 3D. The Alberta depth chart link in Lake info still works."; return; }
     var mine = view;
-    Promise.all([loadThree(), loadGrid(e.grid).catch(function () { return null; })]).then(function (got) {
+    Promise.all([loadThree(), loadGrid(e.grid).catch(function () { return null; }), loadAccess()]).then(function (got) {
       if (view !== mine || !mine.alive) return;
       if (!got[0]) { wait.textContent = "3D add-on not saved yet — open the app once with signal."; return; }
       if (!got[1]) { wait.textContent = "This lakebed is not saved yet — open the app once with signal."; return; }
       wait.hidden = true;
+      mine.access = accessFor(e.grid, got[2]);
       try { build(mine, got[1]); } catch (err) {
         wait.hidden = false;
         wait.textContent = "The 3D model could not start on this device.";
@@ -363,6 +388,7 @@
     calm: { layers: ["calm", "wind"], wind: WEST, iced: false },
     sun: { layers: ["sun"], wind: WEST, iced: false, when: at(15, 7), read: "The example is set to 3 pm on a July day: the sun is in the south-west." },
     rep: { layers: ["rep"], wind: WEST, iced: false, read: "Reported spots show here when the Hot spots list has some for this lake." },
+    access: { layers: ["access"], wind: WEST, iced: false, read: "White pins are boat launches and grey lines are roads, from OpenStreetMap. Tap a launch for directions." },
     boating: { layers: ["spots"], wind: WEST, iced: false, read: "Tap the orange trolling line: its text gives this lake's boating rule." },
     credit: { layers: LAYERS_ON, wind: WEST, iced: false, read: "The credit line is at the bottom of the model's panel: scroll down inside it." },
   };
@@ -395,11 +421,12 @@
     });
     if (!canWebGL()) { wait.textContent = "This phone cannot show 3D, so the sample model is off. The text below still explains every layer."; return; }
     var mine = demo;
-    Promise.all([loadThree(), loadGrid(e.grid).catch(function () { return null; })]).then(function (got) {
+    Promise.all([loadThree(), loadGrid(e.grid).catch(function () { return null; }), loadAccess()]).then(function (got) {
       if (demo !== mine || !mine.alive) return;
       if (!got[0]) { wait.textContent = "3D add-on not saved yet — open the app once with signal."; return; }
       if (!got[1]) { wait.textContent = "This lakebed is not saved yet — open the app once with signal."; return; }
       wait.hidden = true;
+      mine.access = accessFor(e.grid, got[2]);
       try { build(mine, got[1]); if (mine.apply) mine.apply(mine.preset); } catch (err) {
         wait.hidden = false;
         wait.textContent = "The 3D model could not start on this device.";
@@ -566,7 +593,9 @@
     // ---- layers
     var L = {};
     ["fishdepth", "weed", "drop", "summer", "ice"].forEach(function (id) { L[id] = new T.Group(); bed.add(L[id]); });
-    ["wind", "spots", "struct", "cast", "calm", "sun", "rep"].forEach(function (id) { L[id] = new T.Group(); top.add(L[id]); });
+    ["wind", "spots", "struct", "cast", "calm", "sun", "rep", "access"].forEach(function (id) { L[id] = new T.Group(); top.add(L[id]); });
+    // Roads lie on the land, so they sit with the lakebed and follow the Height slider.
+    L.roads = new T.Group(); bed.add(L.roads);
 
     if (maxD > 4) L.weed.add(lines(LakeStructure.contour(grid, 4), 4, 0x3B6D11, 1, { name: "Weed line ~4 m (estimate)", color: "#3B6D11",
       why: "Weed line (estimate): weeds usually stop near 4 m. Trout cruise this edge for bugs and minnows." }));
@@ -643,6 +672,42 @@
       pin(0x7F77DD, 0.045, Math.round(c.i), Math.round(c.j), 0.3, L.rep, { name: "Reported: " + s.name, color: "#7F77DD",
         why: "Reported spot: " + s.name + (s.note ? ". " + s.note : "") + " (source " + s.source_date + ")." });
     });
+
+    // ---- decision 23 A: boat launches (white pins) and roads (lines on the land), OpenStreetMap
+    var acc = v.access;
+    var landAt = function (i, j) {
+      var ii = Math.max(0, Math.min(w - 1, Math.round(i))), jj = Math.max(0, Math.min(h - 1, Math.round(j)));
+      var k = jj * w + ii;
+      return (grid.depth[k] > 0 ? 0 : landZ[k] * U) + 0.006;      // a causeway or bridge sits on the water
+    };
+    ((acc && acc.roads) || []).forEach(function (r) {
+      var pts = [];
+      (r.pts || []).forEach(function (p) {
+        var c = toCell(p[0], p[1]);
+        if (inGrid(c, 1)) pts.push(new T.Vector3(px(c.i), py(c.j), landAt(c.i, c.j)));
+      });
+      if (pts.length < 2) return;
+      var main = ROAD_MAIN[r.kind], dash = ROAD_DASH[r.kind];
+      var mat = dash ? new T.LineDashedMaterial({ color: 0xA8A396, dashSize: 0.03, gapSize: 0.02 })
+        : new T.LineBasicMaterial({ color: main ? 0xF4F1E8 : 0xBDB8AA });
+      var line = new T.Line(new T.BufferGeometry().setFromPoints(pts), mat);
+      if (dash) line.computeLineDistances();
+      line.userData = { name: (r.name ? r.name + " · " : "") + (main ? "main road" : dash ? (r.kind === "track" ? "track" : "service road") : "local road"),
+        color: main ? "#F4F1E8" : "#A8A396",
+        why: "Road (OpenStreetMap): " + (r.name ? r.name + ", " : "") + (main ? "a main road" : dash ? (r.kind === "track" ? "a track, maybe rough or seasonal" : "a service road, maybe private") : "a local road") + "." };
+      L.roads.add(line);
+    });
+    var launches = (acc && acc.launches) || [];
+    launches.forEach(function (s) {
+      var c = toCell(s.lat, s.lon);
+      if (!inGrid(c, 0)) return;
+      var i = Math.max(0, Math.min(w - 1, Math.round(c.i))), j = Math.max(0, Math.min(h - 1, Math.round(c.j)));
+      pin(0xF4F1E8, 0.05, i, j, 0.34, L.access, { name: "Boat launch" + (s.name ? ": " + s.name : ""), color: "#F4F1E8", shore: true,
+        why: "Boat launch (OpenStreetMap)" + (s.name ? ": " + s.name : "") + "." + (s.private ? " Marked private: ask before you use it." : "")
+          + " Check the signs at the lake; a launch can be closed or low in a dry year." });
+    });
+    var noAcc = el.querySelector("[data-noaccess]");
+    if (noAcc) noAcc.hidden = !acc || launches.length > 0;
 
     // ---- wind arrows: small, about every 300 m of water
     var shp = new T.Shape();
@@ -890,8 +955,9 @@
     function layerOn(id) { var c = el.querySelector('[data-layer="' + id + '"]'); return !!(c && c.checked); }
     Array.prototype.forEach.call(el.querySelectorAll("[data-layer]"), function (c) {
       var id = c.dataset.layer;
-      var sync = function () { L[id].visible = c.checked; showTip(null); if (id === "wind" || id === "ice" || id === "summer" || id === "fishdepth") hourUpdate(); req(); };
+      var sync = function () { L[id].visible = c.checked; if (id === "access") L.roads.visible = c.checked; showTip(null); if (id === "wind" || id === "ice" || id === "summer" || id === "fishdepth") hourUpdate(); req(); };
       L[id].visible = c.checked;
+      if (id === "access") L.roads.visible = c.checked;
       c.addEventListener("change", sync);
     });
 
@@ -973,7 +1039,7 @@
       var far = bedHit ? bedHit.distance + 0.05 : Infinity;
       // Not the summer planes: they cover the lake and would catch every tap.
       // Not the fish-depth dots either: a tap there reads the depth, with the fish depth after it.
-      var groups = [L.spots, L.struct, L.rep, L.cast, L.calm, L.sun, L.ice, L.drop, L.weed];
+      var groups = [L.access, L.spots, L.struct, L.rep, L.cast, L.calm, L.sun, L.ice, L.drop, L.weed, L.roads];
       for (var g = 0; g < groups.length; g++) {
         if (!groups[g].visible || !groups[g].parent.visible) continue;
         var hs = ray.intersectObjects(groups[g].children, true).filter(function (x) { return x.distance <= far && onScreen(x, ev, b); })[0];
@@ -1127,6 +1193,7 @@
       Array.prototype.forEach.call(el.querySelectorAll("[data-layer]"), function (c) {
         c.checked = (p.layers || []).indexOf(c.dataset.layer) >= 0;
         L[c.dataset.layer].visible = c.checked;
+        if (c.dataset.layer === "access") L.roads.visible = c.checked;
       });
       if (playT) { clearInterval(playT); playT = null; playBtn.textContent = "▶"; }
       hourIdx = 0; hourIn.value = 0;
