@@ -4093,8 +4093,11 @@ class Build5Stage2Tests(unittest.TestCase):
     def test_weather_calls_per_load(self):
         """The cells the app asks for: every lake and river spot, one call per
         0.25 degree cell (js/weather.js cellKey). A fresh load from Red Deer asks
-        only for the cells within 200 km; the whole province stays under
-        Open-Meteo's 600 calls a minute."""
+        only for the cells within 200 km. The whole province (615 cells with the
+        river edges, decision 18 A) is never asked for at once: only near home or
+        on screen, paced at 550 calls a minute (Open-Meteo allows 600), so even
+        panning over all of it takes two minutes, and eight full loads a day (one per
+        3-hour refresh) stay under the 10,000 a day."""
         import math
         pts = [(l["lat"], l["lon"]) for l in placed_waters().values() if l.get("lat") is not None]
         pts += [tuple(p) for s in self.rivers["stretches"] for p in s["spots"]]
@@ -4105,7 +4108,10 @@ class Build5Stage2Tests(unittest.TestCase):
         full = {cell(p) for p in pts}
         near = {cell(p) for p in pts if km(home, p) <= 200}
         self.assertLess(len(near), 250, len(near))     # before Stage 2 a full load was 250
-        self.assertLess(len(full), 600, len(full))
+        wx = (ROOT / "js" / "weather.js").read_text(encoding="utf-8")
+        self.assertIn("var MINUTE_BUDGET = 550;", wx)
+        self.assertLess(len(full), 2 * 550, len(full))
+        self.assertLess(len(full) * 8, 10000, len(full))
         day = (ROOT / "js" / "day-ui.js").read_text(encoding="utf-8")
         self.assertIn("fetchNear();", day[day.index("function setOrigin("):day.index("function setOrigin(") + 400])
         page = (ROOT / "index.html").read_text(encoding="utf-8")

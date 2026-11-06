@@ -1,4 +1,4 @@
-# FEATURES — HZ_Trout_Map — manifest v8 — Build 5 Stage 2 phone-check fixes
+# FEATURES — HZ_Trout_Map — manifest v9 — Build 5 Stage 2 river edges
 
 Locked features of the current version (branch claude/funny-ritchie-bealq0, from main at 922ddb0). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
 
@@ -63,7 +63,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 ## All the guide's waters (Build 5 Stage 2)
 - 286 lakes, reservoirs and ponds the 2026 guide's tables name that the stocking reports never list (data/waters_unstocked.json, built by scripts/waterbodies.py), each with its own rule row from the guide, its height, Bite and Day out, forecast, winter guard and ice estimates. Positions: the guide's land location (61), a lake outline in Canada's CanVec 1:50,000 water data (169, which also gives the size), or Canada's place names (56). Names that could not be placed with confidence (42 lakes, 10 rivers) are listed in data/waters_review.csv, not on the map. A guide lake that is already on the map as a stocked lake (same water, same or close name) is left as it is; its guide row is attached through data/regs_aliases.csv where the stocked lake has a zone.
 - Fish and stocking says "Not stocked. Alberta's stocking reports 2011–2026 do not list this water."
-- 86 river and creek stretches on 80 named waters (data/rivers.json), drawn as thin blue lines (wider when open), with every guide row for the stretch ("See each part below" when the parts have different seasons). A forecast spot about every 25 km (318 spots), each with its own height; the spot with the best day of the week stands for the stretch and the panel names it. Limits: "found" (Red Deer River from the Dickson Dam to the Tolman Bridge), "approximate" (by a named place), "unit" (the river in that part of the guide, edges estimated), "estimated" (a road or park limit the maps could not place). No 3D on rivers. "River stretch" section with the guide's words and a "Reading a river" link; list and search rows say "river: <start of the guide's words>". Kananaskis and Medley Rivers keep their stocked pin, with the line added.
+- 91 river and creek stretches on 85 named waters (data/rivers.json), drawn as thin blue lines (wider when open), with every guide row for the stretch ("See each part below" when the parts have different seasons). Each stretch is cut at its zone's edge from Alberta's zone outlines (decision 18 A). A forecast spot about every 25 km (351 spots), each with its own height; the spot with the best day of the week stands for the stretch and the panel names it. Limits: "found" (Red Deer River from the Dickson Dam to the Tolman Bridge), "approximate" (by a named place), "unit" (the river in that part of the guide, edges estimated), "estimated" (a road or park limit the maps could not place). No 3D on rivers. "River stretch" section with the guide's words and a "Reading a river" link; list and search rows say "river: <start of the guide's words>". Kananaskis and Medley Rivers keep their stocked pin, with the line added.
 - 3D depth model on 114 lakes (71 of them new), all lakebed files saved on the first visit (4.0 MB, was 1.37 MB).
 - Filters: "Stocking" with Stocked and Not stocked (both on at the start). A water that is not stocked passes years and size, and is left out only for a species choice or a recent-stocking filter. A water without rules is never hidden by a season or bait filter. Zone view counts stocked lakes only and hides river lines.
 - Distance to a river stretch is to its nearest forecast spot.
@@ -127,10 +127,20 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - Colour-blind-safe pin palettes; every score pin carries its number.
 - Credit lines: Open-Meteo (CC BY 4.0), town list licence, GeoNames via Open-Meteo, Esri imagery, photo credits, Alberta Geological Survey (depth charts), Open-Meteo elevation with Copernicus DEM (in the ice inputs). The 3D view footer and its Learn guide carry the Open Government Licence – Alberta line, Transport Canada TP 15587E (not the official version), MyWildAlberta, Open-Meteo and three.js (MIT).
 
+## Regression table — manifest v8 → v9 (Build 5 Stage 2 river edges)
+| Feature | v8 → v9 | Note |
+|---|---|---|
+| River stretches | changed | cut at Alberta's zone outlines, not the nearest stocked lakes: 86 → 91 stretches (Redwater, Muskwa, Nipisi Rivers, Birch and Sunday Creeks added), 24 change length; Red Deer River below the Dickson Dam keeps "found" |
+| River forecast spots | changed | 318 → 351, each with its own height; near Red Deer 161 → 164 weather cells |
+| Weather calls | kept | still near home or on screen, paced at 550 a minute; the whole province is 615 cells (two minutes if panned over all of it) |
+| Review file | changed | 5 rivers leave it (now placed) |
+| Lakes, rules, stocking, panel, 3D, filters | kept | |
+| Offline | kept | shell cache v10 (data files only) |
+
 ## Regression table — manifest v7 → v8 (Build 5 Stage 2 phone-check fixes)
 | Feature | v7 → v8 | Note |
 |---|---|---|
-| River lines | changed | all 86 stretches drawn (71 before); 20 px tap line |
+| River lines | changed | all 86 stretches drawn (71 before); 20 px tap line (91 after the river edges, v9) |
 | Stocking filter | changed | plus Rivers; rivers no longer hidden by Not stocked, species or recency |
 | Lake panel sections | changed | owner's order, Rules first; red "Bait Ban" wherever the app shows it |
 | 3D tap | changed | depth under the finger; markers only within 16 px |
@@ -142,7 +152,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 | Text sizes | changed | owner asked twice for bigger: labels at least 14 px; panel text 17 px; section titles 18 px; rules block 16 px |
 | Bite and Day out, forecast, rules data, stocking data | kept | |
 | Offline | kept | shell cache v9 → v10 |
-| River edges (decision 18 A) | follow-up | not in this change: Open-Meteo refused heights all day 11-05 (daily limit); rivers are as pictured in Stage 2 |
+| River edges (decision 18 A) | follow-up | not in this change: Open-Meteo refused heights all day 11-05 (daily limit); done in v9 |
 
 ## Regression table — manifest v6 → v7 (Build 5 Stage 2)
 | Feature | v6 → v7 | Note |

@@ -59,6 +59,7 @@ Single working record for this repository. Updated by the main session at the en
 - [differs from plan] Kananaskis and Medley Rivers are stocked waters; their stretch joins the stocked pin instead of a second "not stocked" pin; stocked lakes with no zone (Headwall, Memorial, Running Rain, Badger and others) cannot take their guide row until a zone is set; Oldman, Bearspaw and Pine Coulee Reservoirs are in neither the place names nor CanVec under that name — search: stocked_twin
 - [agreed] (owner accepted 2026-11-04) River guide has one labelled bend drawing (A–G), not one drawing per water type; the sample 3D model in the guide is a second small view, off while a lake's 3D view is open — search: data-demo-host
 
+- [agreed] (owner 2026-11-06, decision 25 A) With the river edges the whole province is 615 weather cells: the guard checks the app's 550-a-minute pacing and 8 loads a day under 10,000, not "under 600 cells"; river spots stay about every 25 km — search: MINUTE_BUDGET
 ## Pending
 - Build 1b: merged 2026-10-30 (PR #18). Owner still to do: device check, and the 4 species facts on the Learn pages.
 - Build 2: merged 2026-11-04 (PR #19, cd9a470). Owner still to do: device check.
@@ -167,7 +168,7 @@ Single working record for this repository. Updated by the main session at the en
 | M11 | 11-04 | Stage 2: score all lakes and rivers in the 2026 guide, Red Deer River below Dickson Dam, CGNDB and CanVec positions, weather budget, Stocked filter | done | 5.2; 286 lakes, 86 stretches, 318 spots, 3D on 114 lakes; 52 names in data/waters_review.csv; spot count M15 |
 | M14 | 11-05 | Zones for the stocked lakes that have none, from the Alberta Conservation Association's documents | done, other source | the Association's site blocks automated reading (bot check); decision 16 A: Alberta's sportfishing regulations map (geospatial.alberta.ca); 58 filled, 14 corrected where the guide agrees; owner corrected Emerald (Hart) ES1 and Dormer ES2 in lake_facts.csv |
 | M15 | 11-05 | Count the owner's 218 pins: lake, river stretch (300 m) or nothing; read the file only | done | 143 lake (128 outline holds the lake point, 13 outline with the lake's name, 2 size circle + 1 km), 10 river only, 65 nothing; file read in place, nothing saved; .claude/state/checks/spots_count.py |
-| M16 | 11-05 | River edges from Alberta's zone outlines (decision 18 A) | open | needs Open-Meteo heights (daily limit reached 11-05; still refused 22:39 UTC); owner 11-05: open the phone-check pull request without them; added after the limit resets (reminder 00:20 UTC 11-06) |
+| M16 | 11-05 | River edges from Alberta's zone outlines (decision 18 A) | done | Open-Meteo answered 00:10 UTC 11-06; 91 stretches (5 new), 24 changed, 351 spots; Red Deer keeps "found"; own pull request after #24 was merged |
 | M17 | 11-05 | Phone check after Stage 2: rules first and red bait ban; rivers off with Not stocked; Red Deer River line does not open; 3D always 2.5–4 m, colours, no move, roads and launches; colours clash; filters auto-hide?; small text | done | plan Rev 9 decisions 20–24 at A; owner OK on the pictures 11-05 (text two sizes larger again, "Bait Ban"); roads and launches are decision 23 A, own pull request |
 | M12 | 11-04 | Stage 3: import my spots (browser only), species mode | open | Build 5 Stage 3 |
 | M13 | 11-04 | Stage 4: Firebase sync and weekly email (ASK first) | open | Build 5 Stage 4; replaces F1, F2 |
@@ -189,7 +190,8 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 | Build 4 | COMPLETE | PR #21 merged 2026-11-04 (922ddb0) |
 | Build 5 Stage 1 | COMPLETE | PR #22 merged 2026-11-04 (d70bc8a); 274 tests pass on GitHub |
 | Build 5 Stage 2 | COMPLETE | PR #23 merged 2026-11-05 (2f53fba); GitHub checks passed |
-| Stage 2 phone-check fixes | READY FOR REVIEW | M17; branch claude/funny-ritchie-bealq0 from 2f53fba; river edges (M16) follow |
+| Stage 2 phone-check fixes | COMPLETE | PR #24 merged 2026-11-06 (f374b77); GitHub checks passed |
+| Stage 2 river edges | READY FOR REVIEW | M16; branch claude/funny-ritchie-bealq0 from f374b77; owner OK on the 4 pictures and decision 25 A, 2026-11-06 |
 | Build 5 Stage 3 | NOT STARTED | |
 | Build 5 Stage 4 | NOT STARTED | |
 
@@ -242,3 +244,4 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 - 2026-11-05 reviewer pass on the phone-check fixes → 9 findings, all fixed: waters not stocked get the build's depth entry with summer layer and winterkill (71 lakes; Cold Lake 99 m was called "shallow" by the first fallback); a pinch only zooms; search turns the water's stocking switch back on; the Rivers switch covers the stocked rivers too (Kananaskis, Medley) and the note counts 84 + 2; the compass follows a moved model; the fish-depth line names the slider's day; empty-state and chip words; 4 labels missed by the text sweep; focus back on Filters after "Show N waters". Also fixed: the slide-over now opens above the top bar (its × was hidden at 360 px). 322 tests pass; rebuild twice → same md5; layout 0 faults at 5 sizes for 5 lakes and the Filters panel
 - 2026-11-05 owner on the pictures: "font even bigger, the rest is OK, and Bait Ban instead of Bait ban" → text two more sizes up (labels 14, panel 17, titles 18, rules block 16; Filters 15), "Bait Ban" wherever the app shows it (the guide's stored text stays "Bait ban"); 322 tests pass; layout 0 faults at 5 sizes for 5 lakes and Filters
 - 2026-11-05 22:39 UTC Open-Meteo still "Daily API request limit exceeded"; owner: continue without it → pull request opened with the rivers as in Stage 2; before it: 322 tests pass; rebuild twice → same md5, no data change; layout 0 faults, 0 page errors at 5 sizes for 5 waters and Filters
+- 2026-11-06 00:10 UTC Open-Meteo answered → river edges: waterbodies.py full run (3 min), elevation.py (88 new heights, 1 call), build_history twice → same md5; 2 tests changed as expected (5 rivers leave the review list; the province-wide cell guard 600 → paced 550 a minute, since 615 cells now); 322 tests pass; layout 0 faults at 5 sizes for Red Deer, Muskwa, North Saskatchewan (PP2) and Beaver Lake; taps on Red Deer (both), Blindman, Sylvan Creek and Muskwa open their panels. depth_charts.py not re-run: it reads lakes only
