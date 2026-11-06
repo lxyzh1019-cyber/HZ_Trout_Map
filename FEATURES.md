@@ -135,7 +135,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 | 3D footer | changed | OpenStreetMap credit (ODbL) and one of two notes: no launch on this lake, or not downloaded yet |
 | 3D tap | kept | a launch answers first (then spots); roads answer as before for lines |
 | Learn room | changed | 3D guide gains "Boat launches and roads" with Show on the model |
-| Data | added | data/lake_access.json from OpenStreetMap via Overpass (mirror overpass.kumi.systems, decision 26 A; data dated 2026-06-01) |
+| Data | added | data/lake_access.json from OpenStreetMap via Overpass (mirror overpass.kumi.systems, decision 26 A; data dated 2026-06-01): 90 of 111 lakebed grids, 56 boat launches on 28 of them, 6,598 road pieces, 754 kB; 21 grids (22 lakes) say "not downloaded yet" (decision 27 A, filled in the leftovers patch) |
 | Lakes, rules, stocking, panel, rivers, weather, filters | kept | |
 | Offline | kept | shell cache v10 → v11, one new data file |
 

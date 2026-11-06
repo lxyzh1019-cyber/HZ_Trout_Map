@@ -62,6 +62,7 @@ Single working record for this repository. Updated by the main session at the en
 - [agreed] (owner 2026-11-06, decision 25 A) With the river edges the whole province is 615 weather cells: the guard checks the app's 550-a-minute pacing and 8 loads a day under 10,000, not "under 600 cells"; river spots stay about every 25 km — search: MINUTE_BUDGET
 - [agreed] (owner 2026-11-06, decision 26 A) Boat launches and roads come from OpenStreetMap through the Overpass mirror overpass.kumi.systems (its data dated 2026-06-01): overpass-api.de dropped every connection from the build machine; the script tries both, one grid per request with a pause, and records the server — search: SERVERS
 - [agreed] (owner 2026-11-06, decision 27 A) If the mirror will not send every grid, ship with the grids it sent: data/lake_access.json lists the rest in "missing" and the 3D view says "aren't downloaded yet" for them, never "no boat launch"; a later run fills them — search: data-accmissing
+- [agreed] (owner 2026-11-06) Finish the whole build (Stage 3, Stage 4) before the leftovers; the leftovers go into one small patch at the end — search: Leftovers patch
 ## Pending
 - Build 1b: merged 2026-10-30 (PR #18). Owner still to do: device check, and the 4 species facts on the Learn pages.
 - Build 2: merged 2026-11-04 (PR #19, cd9a470). Owner still to do: device check.
@@ -172,7 +173,8 @@ Single working record for this repository. Updated by the main session at the en
 | M15 | 11-05 | Count the owner's 218 pins: lake, river stretch (300 m) or nothing; read the file only | done | 143 lake (128 outline holds the lake point, 13 outline with the lake's name, 2 size circle + 1 km), 10 river only, 65 nothing; file read in place, nothing saved; .claude/state/checks/spots_count.py |
 | M16 | 11-05 | River edges from Alberta's zone outlines (decision 18 A) | done | Open-Meteo answered 00:10 UTC 11-06; 91 stretches (5 new), 24 changed, 351 spots; Red Deer keeps "found"; own pull request after #24 was merged |
 | M17 | 11-05 | Phone check after Stage 2: rules first and red bait ban; rivers off with Not stocked; Red Deer River line does not open; 3D always 2.5–4 m, colours, no move, roads and launches; colours clash; filters auto-hide?; small text | done | plan Rev 9 decisions 20–24 at A; owner OK on the pictures 11-05 (text two sizes larger again, "Bait Ban"); roads and launches are decision 23 A, own pull request |
-| M18 | 11-06 | Boat launches and roads in 3D from OpenStreetMap (decision 23 A) | done, PR pending | owner OK on the before and after pictures 2026-11-06; decisions 26 A (mirror) and 27 A (ship partial if needed); own pull request |
+| M18 | 11-06 | Boat launches and roads in 3D from OpenStreetMap (decision 23 A) | done, PR open | owner OK on the before and after pictures 2026-11-06; decisions 26 A (mirror) and 27 A (ship partial if needed); own pull request |
+| M19 | 11-06 | 3D for big lakes and on the ice: zoom to a useful level, GPS to search an area, study at home and take a spot to Google Maps; plus the 3D slider and title fixes | open | owner: one pull request, built in the leftovers patch after Stage 4 (owner 2026-11-06: finish the whole build first); saved marks belong to Stage 3 My spots |
 | M12 | 11-04 | Stage 3: import my spots (browser only), species mode | open | Build 5 Stage 3 |
 | M13 | 11-04 | Stage 4: Firebase sync and weekly email (ASK first) | open | Build 5 Stage 4; replaces F1, F2 |
 
@@ -195,7 +197,8 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 | Build 5 Stage 2 | COMPLETE | PR #23 merged 2026-11-05 (2f53fba); GitHub checks passed |
 | Stage 2 phone-check fixes | COMPLETE | PR #24 merged 2026-11-06 (f374b77); GitHub checks passed |
 | Stage 2 river edges | COMPLETE | PR #25 merged 2026-11-06 (28956ce); owner OK on the 4 pictures and decision 25 A, 2026-11-06 |
-| Boat launches and roads in 3D | IN PROGRESS | M18; branch claude/funny-ritchie-bealq0 from 28956ce; owner OK on the pictures 2026-11-06 |
+| Boat launches and roads in 3D | READY FOR REVIEW | M18; branch claude/funny-ritchie-bealq0 from 28956ce; owner OK on the pictures 2026-11-06; 90 of 111 grids (decision 27 A) |
+| Leftovers patch | NOT STARTED | after Stage 4 (owner 2026-11-06): the 21 missing boat-launch grids; "3D on the ice" (sliders 44 px and title at 360 px, zoom to about 300 m across, Find me with live GPS, Open in Google Maps and Copy location for any tapped point) |
 | Build 5 Stage 3 | NOT STARTED | |
 | Build 5 Stage 4 | NOT STARTED | |
 
@@ -253,3 +256,5 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 - 2026-11-06 trial pictures (90 grids): roads floated about 0.24 above the land at 40x and hung past the board — the lift was inside the Height scale; fixed (8126c9f), roads now cut at the board's edge; after pictures for Sylvan, Pine and Gull at 390 and 1280 px, a tap finds a launch with a directions link at all 3 lakes and both sizes, 0 page errors
 - 2026-11-06 partial build (decision 27 A): 90 grids, 56 launches on 28 of them, 6,598 road pieces, 754 kB, 21 grids (22 lakes) listed missing; 334 tests pass, 0 skipped; build_history twice → same md5, no committed data changed
 - 2026-11-06 sanity check: the lake facts name a boat launch for 9 lakes with a 3D model (lake_profile.json); OpenStreetMap has one at 3, 1 is on a missing grid, 5 have none in OpenStreetMap (wb4265, wb4340, wb4794, wb5050, wb5324) — the footer says the map can miss one
+- 2026-11-06 3D layout check (new d3layout.js, 5 sizes, Sylvan, Pine, Gull, Wizard): the boat-launch parts add no fault; 2 older faults found in every 3D view — the Time and Height sliders are 16 px tall to touch, and the title is cut at 360 px — both in the leftovers patch; app layout.js 0 faults for Beaver Lake and Pine Coulee
+- 2026-11-06 the saved Overpass answers live in the session scratchpad: if the container is reclaimed before the leftovers patch, those 90 grids are downloaded again (the build repeats from the answers)
