@@ -59,6 +59,7 @@ Single working record for this repository. Updated by the main session at the en
 - [differs from plan] Kananaskis and Medley Rivers are stocked waters; their stretch joins the stocked pin instead of a second "not stocked" pin; stocked lakes with no zone (Headwall, Memorial, Running Rain, Badger and others) cannot take their guide row until a zone is set; Oldman, Bearspaw and Pine Coulee Reservoirs are in neither the place names nor CanVec under that name — search: stocked_twin
 - [agreed] (owner accepted 2026-11-04) River guide has one labelled bend drawing (A–G), not one drawing per water type; the sample 3D model in the guide is a second small view, off while a lake's 3D view is open — search: data-demo-host
 
+- [agreed] (owner 2026-11-06, decision 25 A) With the river edges the whole province is 615 weather cells: the guard checks the app's 550-a-minute pacing and 8 loads a day under 10,000, not "under 600 cells"; river spots stay about every 25 km — search: MINUTE_BUDGET
 ## Pending
 - Build 1b: merged 2026-10-30 (PR #18). Owner still to do: device check, and the 4 species facts on the Learn pages.
 - Build 2: merged 2026-11-04 (PR #19, cd9a470). Owner still to do: device check.
@@ -190,7 +191,7 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 | Build 5 Stage 1 | COMPLETE | PR #22 merged 2026-11-04 (d70bc8a); 274 tests pass on GitHub |
 | Build 5 Stage 2 | COMPLETE | PR #23 merged 2026-11-05 (2f53fba); GitHub checks passed |
 | Stage 2 phone-check fixes | COMPLETE | PR #24 merged 2026-11-06 (f374b77); GitHub checks passed |
-| Stage 2 river edges | READY FOR REVIEW | M16; branch claude/funny-ritchie-bealq0 from f374b77 |
+| Stage 2 river edges | READY FOR REVIEW | M16; branch claude/funny-ritchie-bealq0 from f374b77; owner OK on the 4 pictures and decision 25 A, 2026-11-06 |
 | Build 5 Stage 3 | NOT STARTED | |
 | Build 5 Stage 4 | NOT STARTED | |
 
