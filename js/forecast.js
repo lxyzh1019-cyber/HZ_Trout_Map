@@ -86,7 +86,7 @@
   function summarise(lake) {
     var CUI = ConditionsUI._internal;
     var place = { lat: lake.lat, lon: lake.lon, name: lake.name, lake: lake,
-                  species: filteredDominantOrder(lake) };
+                  species: scoringSpecies(lake), mode: speciesMode() };
     var wx = Weather.peek(lake.lat, lake.lon);
     var water = CUI.waterFor(place, wx);
     var iced = !!(wx.data && Conditions.iceLikely(pastWeek(wx.data)));
@@ -171,7 +171,8 @@
   function cacheKey(lake) {
     var wx = Weather.peek(lake.lat, lake.lon);
     var o = state.conditions.waterOverrides[lakeKey(lake)];
-    return [wx.fetchedAt || 0, filteredDominantOrder(lake).join(""), o ? o.tempC : "",
+    // The species mode is in the key, so switching it re-scores every lake.
+    return [wx.fetchedAt || 0, (speciesMode() || "trout") + ":" + filteredDominantOrder(lake).join(""), o ? o.tempC : "",
             new Date().toDateString()].join("|");
   }
 

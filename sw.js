@@ -40,7 +40,9 @@
    Stocked filter, and weather loaded near you and on screen first. */
 /* v12: Build 5 Stage 3a. js/my-spots.js (My spots, kept in this browser only);
    data/lake_outlines.json is cached when an import first uses it. */
-const SHELL_CACHE = "troutmap-shell-v12";
+/* v13: Build 5 Stage 3b. Species mode (js/conditions.js profiles, the Fishing
+   for switch) and data/species_presence.json. */
+const SHELL_CACHE = "troutmap-shell-v13";
 const DATA_CACHE = "troutmap-data-v1";
 const TILE_CACHE = "troutmap-tiles-v1";
 /* v2: the single-spot forecast URL gained wind_direction_10m, so the old
@@ -141,6 +143,8 @@ async function precacheData() {
                  "data/waters_unstocked.json", "data/rivers.json",
                  // Decision 23 A: boat launches and roads for the 3D view (OpenStreetMap, ODbL).
                  "data/lake_access.json",
+                 // Build 5 Stage 3b: species recorded in each water (presence only).
+                 "data/species_presence.json",
                  "live/advisories.json"];
   await Promise.all(fixed.map(u => cache.add(u).catch(() => {})));
 

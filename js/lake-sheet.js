@@ -364,7 +364,7 @@
   function fishDepthFor(lake, f, d, underIce) {
     var day = f && f.days[d];
     var wx = Weather.peek(lake.lat, lake.lon);
-    var water = ConditionsUI._internal.waterFor({ lat: lake.lat, lon: lake.lon, lake: lake, species: filteredDominantOrder(lake) }, wx);
+    var water = ConditionsUI._internal.waterFor({ lat: lake.lat, lon: lake.lon, lake: lake, species: scoringSpecies(lake) }, wx);
     var depth = depthFor(lake) || {};
     return Estimates.fishDepth({
       waterC: water ? water.tempC : null, waterSource: water ? water.source : null,
@@ -734,7 +734,57 @@
     return null;
   }
 
+  /* Build 5 Stage 3b: what Species mode says about this water. Alberta
+   * experience first, then Alberta sources, then elsewhere with the place named
+   * (decision 32). The bait rule is always the 2026 guide's. */
+  var SOURCE_WORD = { guide2021: "Alberta guide 2021", stocked: "stocking", reports: "anglers' reports" };
+  function isRiverOrReservoir(lake) { return !!lake.river || /reservoir/i.test(lake.name || ""); }
+
+  function modeLineHtml(lake) {
+    var m = typeof speciesMode === "function" ? speciesMode() : null;
+    if (!m) return "";
+    var name = SPECIES_MODES[m], srcs = typeof speciesSourcesFor === "function" ? speciesSourcesFor(lake, m) : [];
+    var where = srcs.length
+      ? "<b>" + esc(name) + " recorded here</b> (" + esc(srcs.map(function (x) { return SOURCE_WORD[x] || x; }).join(", ")) + ")."
+      : "<b>" + esc(name) + " not recorded here</b>: check before you go.";
+    var hint = m === "MNWH" && !isRiverOrReservoir(lake) ? " Mountain whitefish are a river and reservoir fish; on a lake, lake whitefish are the likelier whitefish."
+      : m === "LKWH" && lake.river ? " Lake whitefish are a lake fish; on a river, mountain whitefish are the likelier whitefish." : "";
+    return '<div class="mode-line' + (srcs.length ? "" : " not-here") + '">' + where + esc(hint)
+      + ' <span class="dim">Scores are for ' + esc(name.toLowerCase()) + " (estimated).</span></div>";
+  }
+
+  function speciesHowLines(lake, m) {
+    var ban = lakeBaitBan(lake);
+    var L = {
+      WALL: ["Best at dusk and dawn and in low light; cloud helps (Alberta EIA; Escanaba Lake, Wisconsin creel study).",
+             "Under the ice, dusk into dark is the time (Alberta EIA: walleye in clear water feed at twilight or dark)."],
+      BURB: ["Feeds at night: after dark is the time (Alberta EIA).",
+             "Spawns under the ice in February and March in Alberta, in shallow water (Alberta EIA): late-winter nights are the peak.",
+             "Best in water below about 12 °C (wild adults in winter, Ussuri River, China)."],
+      LKWH: ["Winter: shallow flats over mud are very productive in Alberta (owner's experience: Sylvan, Gull, Lake Newell); deep basins are the second choice.",
+             "Spawns in shallows under 5 m from October to December (Alberta EIA).",
+             "Lure: a wire worm (Alberta anglers' choice); goby-style lures, popular in Ontario, do less well here (owner's experience)."
+               + (ban ? " Bait ban here (2026 guide): fish it without bait." : "")],
+      MNWH: ["Rivers and reservoirs. Spawns October to early November in Alberta (Alberta report, Taylor & Barton 1992).",
+             "Best in water about 10–16 °C (lab study, Utah, USA; inside Alberta's 8–18 °C range)."],
+    };
+    return L[m] || [];
+  }
+
   function howHtml(lake) {
+    var m = typeof speciesMode === "function" ? speciesMode() : null;
+    if (m) {
+      return '<div class="est">' + estHead("For " + SPECIES_MODES[m].toLowerCase() + ", from Alberta experience and the sources on the evidence page",
+        ["species mode: " + SPECIES_MODES[m], "bait rule: " + (lakeBaitRule(lake) || "see the rules")], "how") + "<ul>"
+        + speciesHowLines(lake, m).map(function (l) { return "<li>" + esc(l) + "</li>"; }).join("") + "</ul>"
+        + '<p class="dim">Estimated. Alberta anglers\' experience comes first; studies from elsewhere name their place.</p>'
+        + (window.DepthModel && DepthModel.has(lake) ? '<button type="button" class="btn" data-depth3d>See it in 3D</button>' : "")
+        + "</div>";
+    }
+    return troutHowHtml(lake);
+  }
+
+  function troutHowHtml(lake) {
     var depth = depthFor(lake) || {};
     var h = Estimates.howToFish({
       shapes: shapesFor(lake),
@@ -870,6 +920,7 @@
       + '<div class="lake-top">' + baitBanLine(lake)
       + rulesYearHtml()
       + tagsHtml(lake, winter)
+      + modeLineHtml(lake)
       // Build 4: the 3D model one tap from the top, for the 43 surveyed lakes.
       + (window.DepthModel && DepthModel.has(lake)
           ? '<button type="button" class="btn btn3d" data-depth3d><b class="mark3d">3D</b> Show 3D depth model</button>' : "")
@@ -998,7 +1049,7 @@
     usualMonths: usualMonths,
     viewOf: viewOf,
     rulesYearWarning: rulesYearWarning,
-    _internal: { bannerHtml: bannerHtml, whyHtml: whyHtml, tagsHtml: tagsHtml, dayCompareSentence: dayCompareSentence, barsHtml: barsHtml, boatingHtml: boatingHtml, tipHtml: tipHtml, estimatesFor: estimatesFor, seasonHtml: seasonHtml, howHtml: howHtml, depthChartHtml: depthChartHtml, hotSpotsHtml: hotSpotsHtml, mySpotsHtml: mySpotsHtml },
+    _internal: { bannerHtml: bannerHtml, whyHtml: whyHtml, tagsHtml: tagsHtml, dayCompareSentence: dayCompareSentence, barsHtml: barsHtml, boatingHtml: boatingHtml, tipHtml: tipHtml, estimatesFor: estimatesFor, seasonHtml: seasonHtml, howHtml: howHtml, depthChartHtml: depthChartHtml, hotSpotsHtml: hotSpotsHtml, mySpotsHtml: mySpotsHtml, modeLineHtml: modeLineHtml, speciesHowLines: speciesHowLines },
     BAND_WORD: BAND_WORD,
     RULES_URL: RULES_URL,
     LICENCE_URL: LICENCE_URL,

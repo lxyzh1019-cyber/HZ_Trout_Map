@@ -90,7 +90,7 @@
 
   function placeFor(lake) {
     return { lat: lake.lat, lon: lake.lon, name: lake.name, lake: lake,
-             species: filteredDominantOrder(lake) };
+             species: scoringSpecies(lake), mode: speciesMode() };
   }
 
   /** The nearest lake to home, by the distance prepareLakes already measured.
@@ -150,7 +150,7 @@
 
   function scoreAt(place, when, wx, water) {
     return Conditions.scoreSlot({
-      when: when, lat: place.lat, lon: place.lon, species: place.species,
+      when: when, lat: place.lat, lon: place.lon, species: place.species, mode: place.mode,
       weather: wx.data ? Weather.at(wx.data, when) : null,
       water: water,
       astro: astroFor(place, startOfDay(when)),
