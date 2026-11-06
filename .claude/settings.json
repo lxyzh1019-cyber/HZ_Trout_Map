@@ -2,10 +2,6 @@
   "permissions": {
     "defaultMode": "plan",
     "ask": [
-      "Bash(git commit:*)",
-      "Bash(git push:*)",
-      "Bash(git merge:*)",
-      "Bash(gh pr merge:*)",
       "Bash(firebase deploy:*)",
       "Bash(npm run deploy:*)"
     ],
@@ -85,5 +81,6 @@
       }
     ]
   },
-  "plansDirectory": "./plans"
+  "plansDirectory": "./plans",
+  "showClearContextOnPlanAccept": true
 }
