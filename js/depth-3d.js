@@ -36,7 +36,7 @@
   var D0 = 6.4;                      // camera distance at the default view
   var LAND_CAP_M = 6;                // land is drawn at most this high
   var COLOUR_DEEP_M = 20;            // the darkest blue: 20 m or deeper, the same on every lake
-  var LAYERS_ON = ["fishdepth", "wind", "spots", "struct", "drop", "access"];
+  var LAYERS_ON = ["fishdepth", "wind", "spots", "struct", "drop", "access", "mine"];
   var LAYERS_OFF = ["weed", "summer", "cast", "calm", "sun", "rep", "ice"];
   var LAYER_INFO = {
     fishdepth: ["Fish depth today", "c", "#4FC3F7"],
@@ -47,6 +47,7 @@
     sun: ["Sun and shade shore", "c", "#FAC775"], rep: ["Reported spots", "c", "#7F77DD"],
     ice: ["Under-ice band", "c", "#FFFFFF"],
     access: ["Boat launches and roads", "c", "#F4F1E8"],
+    mine: ["My spots", "c", "#14B8A6"],
   };
   // Roads from OpenStreetMap: main roads light, local roads grey, tracks and service roads dashed.
   var ROAD_MAIN = { motorway: 1, trunk: 1, primary: 1, secondary: 1, tertiary: 1 };
@@ -391,6 +392,7 @@
     sun: { layers: ["sun"], wind: WEST, iced: false, when: at(15, 7), read: "The example is set to 3 pm on a July day: the sun is in the south-west." },
     rep: { layers: ["rep"], wind: WEST, iced: false, read: "Reported spots show here when the Hot spots list has some for this lake." },
     access: { layers: ["access"], wind: WEST, iced: false, read: "White pins are boat launches and grey lines are roads, from OpenStreetMap. Tap a launch for directions." },
+    mine: { layers: ["mine"], wind: WEST, iced: false, read: "Your own spots show here as teal pins once you import them (Filters, My spots); a hollow ring is one you marked to check." },
     boating: { layers: ["spots"], wind: WEST, iced: false, read: "Tap the orange trolling line: its text gives this lake's boating rule." },
     credit: { layers: LAYERS_ON, wind: WEST, iced: false, read: "The credit line is at the bottom of the model's panel: scroll down inside it." },
   };
@@ -595,7 +597,7 @@
     // ---- layers
     var L = {};
     ["fishdepth", "weed", "drop", "summer", "ice"].forEach(function (id) { L[id] = new T.Group(); bed.add(L[id]); });
-    ["wind", "spots", "struct", "cast", "calm", "sun", "rep", "access"].forEach(function (id) { L[id] = new T.Group(); top.add(L[id]); });
+    ["wind", "spots", "struct", "cast", "calm", "sun", "rep", "access", "mine"].forEach(function (id) { L[id] = new T.Group(); top.add(L[id]); });
     // Roads lie on the land, so they sit with the lakebed and follow the Height slider.
     L.roads = new T.Group(); bed.add(L.roads);
 
@@ -674,6 +676,29 @@
       pin(0x7F77DD, 0.045, Math.round(c.i), Math.round(c.j), 0.3, L.rep, { name: "Reported: " + s.name, color: "#7F77DD",
         why: "Reported spot: " + s.name + (s.note ? ". " + s.note : "") + " (source " + s.source_date + ")." });
     });
+
+    // ---- Build 5 Stage 3a: the owner's own spots, from this browser only (js/my-spots.js)
+    var mine = !v.demo && window.MySpots && typeof lakeKey === "function" ? MySpots.forLake(lakeKey(lake)) : [];
+    mine.forEach(function (s) {
+      var c = toCell(s.lat, s.lon);
+      if (!inGrid(c, 0)) return;
+      var i = Math.max(0, Math.min(w - 1, Math.round(c.i))), j = Math.max(0, Math.min(h - 1, Math.round(c.j)));
+      var why = "My spot" + (s.name ? ": " + s.name : "") + "." + (s.unconfirmed ? " Marked to check (Unconfirmed)." : "")
+        + (s.tags && s.tags.length ? " Tags: " + s.tags.filter(function (t) { return t !== MySpots.UNCONFIRMED; }).join(", ") + "." : "")
+        + (s.note ? " " + s.note : "");
+      var g = pin(0x14B8A6, 0.05, i, j, 0.38, L.mine, { name: (s.name || "My spot"), color: "#14B8A6", shore: true, why: why });
+      if (s.unconfirmed) {
+        // A hollow ring: the spot is one to check, not one to trust yet.
+        var ball = g.children[0];
+        ball.material = new T.MeshBasicMaterial({ color: 0x14B8A6, wireframe: true });
+        var ring = new T.Mesh(new T.TorusGeometry(0.06, 0.008, 6, 24), new T.MeshBasicMaterial({ color: 0x14B8A6 }));
+        ring.position.z = ball.position.z;
+        ring.rotation.x = Math.PI / 2;
+        g.add(ring);
+      }
+    });
+    var mineRow = el.querySelector('[data-layer="mine"]');
+    if (mineRow) mineRow.closest("label").hidden = !mine.length;
 
     // ---- decision 23 A: boat launches (white pins) and roads (lines on the land), OpenStreetMap
     var acc = v.access;
@@ -1048,7 +1073,7 @@
       var far = bedHit ? bedHit.distance + 0.05 : Infinity;
       // Not the summer planes: they cover the lake and would catch every tap.
       // Not the fish-depth dots either: a tap there reads the depth, with the fish depth after it.
-      var groups = [L.access, L.spots, L.struct, L.rep, L.cast, L.calm, L.sun, L.ice, L.drop, L.weed, L.roads];
+      var groups = [L.mine, L.access, L.spots, L.struct, L.rep, L.cast, L.calm, L.sun, L.ice, L.drop, L.weed, L.roads];
       for (var g = 0; g < groups.length; g++) {
         if (!groups[g].visible || !groups[g].parent.visible) continue;
         var hs = ray.intersectObjects(groups[g].children, true).filter(function (x) { return x.distance <= far && onScreen(x, ev, b); })[0];

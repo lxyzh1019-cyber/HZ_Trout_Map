@@ -1,4 +1,4 @@
-# FEATURES — HZ_Trout_Map — manifest v10 — Build 5 boat launches and roads in 3D
+# FEATURES — HZ_Trout_Map — manifest v11 — Build 5 Stage 3a My spots
 
 Locked features of the current version (branch claude/funny-ritchie-bealq0, from main at 28956ce). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
 
@@ -116,17 +116,36 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - Charts by species, by season, per-species trend and a stocking calendar (Charts button in the header); opening a lake scopes them to that lake.
 - Planning summary with year-over-year totals and direction.
 
+## My spots (Build 5 Stage 3a)
+- "Import my spots" in Filters: pick all your files at once (Google Takeout Saved Places.json, a saved list's CSV, My Maps KMZ or KML, GeoJSON); a new import replaces the last. Kept only in this browser (IndexedDB troutmap-spots), never sent anywhere, never in the repository; "Remove my spots" clears them.
+- Each spot is matched to a lake by its shoreline (data/lake_outlines.json, decision 30): inside the outline or within 500 m of it; a lake with no outline uses a circle of its area plus 1 km. Two lakes in one outline: the nearer lake point. Then a river stretch within 300 m. A place with a street address more than 1 km from any lake is skipped (towns). A place with only a name is matched by name to one lake ("Saved lake"); no match, or several lakes of that name, is "not placed".
+- List, folder and file names become tags; "Fishing spot (need to validate)" becomes "Unconfirmed" (a hollow ring in 3D). Notes are kept. The same place in two lists is one spot with both tags.
+- The summary after an import counts every place in the files (on a lake, on a river, saved lakes, not on a lake, not placed, skipped, in two lists), with "Spots not on a lake" and "Not placed" lists.
+- Lake panel: a "My spots" section with each spot's name, tags, note and On the map link, and a "Saved lake in your list" line. 3D view: a "My spots" layer (teal pins; tap for name, tags, note and directions), shown only on a lake with spots; Learn section "My spots".
+
 ## Taking it with you
 - List view sortable on any column, including Bite and Day out for the picked day, with CSV download.
 - Saved lakes in the browser and a one-click multi-stop driving route through them.
-- Works offline after the first visit (service worker, shell cache v11, the guide's waters and rivers, saved town list, saved forecasts, lake heights, depth chart links, hot spots, the 3D depth model with its lakebed files, boating rules, and boat launches and roads).
+- Works offline after the first visit (service worker, shell cache v12, the guide's waters and rivers, saved town list, saved forecasts, lake heights, depth chart links, hot spots, the 3D depth model with its lakebed files, boating rules, and boat launches and roads).
 
 ## Data and honesty
 - Estimated positions are labelled; data quality panel; evidence page (evidence.html).
 - Alberta advisories (closures, consumption) collected daily and shown in Filters.
 - ACA aeration roster with ACA's Winter Angling column; a test fails if it disagrees with the regulations.
 - Colour-blind-safe pin palettes; every score pin carries its number.
-- Credit lines: Open-Meteo (CC BY 4.0), town list licence, GeoNames via Open-Meteo, Esri imagery, photo credits, Alberta Geological Survey (depth charts), Open-Meteo elevation with Copernicus DEM (in the ice inputs). The 3D view footer and its Learn guide carry the Open Government Licence – Alberta line, Transport Canada TP 15587E (not the official version), MyWildAlberta, Open-Meteo, three.js (MIT) and © OpenStreetMap contributors (ODbL, linked to openstreetmap.org/copyright) for boat launches and roads.
+- Credit lines: Open-Meteo (CC BY 4.0), town list licence, GeoNames via Open-Meteo, Esri imagery, photo credits, Alberta Geological Survey (depth charts), Open-Meteo elevation with Copernicus DEM (in the ice inputs). The 3D view footer and its Learn guide carry the Open Government Licence – Alberta line, Transport Canada TP 15587E (not the official version), MyWildAlberta, Open-Meteo, three.js (MIT) and © OpenStreetMap contributors (ODbL, linked to openstreetmap.org/copyright) for boat launches and roads. The lake outlines used for matching spots: CanVec (Natural Resources Canada), Open Government Licence – Canada.
+
+## Regression table — manifest v10 → v11 (Build 5 Stage 3a My spots)
+| Feature | v10 → v11 | Note |
+|---|---|---|
+| My spots | added | import in Filters, kept in this browser only; matched by shoreline; lake panel section and 3D layer |
+| Data | added | data/lake_outlines.json (CanVec outlines for 528 of 666 lakes, circles for 138; 707 kB), loaded only while importing |
+| Lake panel | changed | "My spots" section when the lake has some; other sections unchanged |
+| 3D view | changed | "My spots" layer, shown only on a lake with spots; other layers unchanged |
+| Filters | changed | "My spots" group under Favourites |
+| Learn room | changed | 3D guide gains "My spots" |
+| Lakes, rules, stocking, scores, rivers, weather, boat launches | kept | |
+| Offline | kept | shell cache v11 → v12 (js/my-spots.js); the outlines are cached once an import uses them |
 
 ## Regression table — manifest v9 → v10 (Build 5 boat launches and roads in 3D)
 | Feature | v9 → v10 | Note |

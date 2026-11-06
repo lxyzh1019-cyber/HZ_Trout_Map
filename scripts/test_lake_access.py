@@ -136,7 +136,7 @@ class AccessViewTests(unittest.TestCase):
         cls.d3 = (ROOT / "js" / "depth-3d.js").read_text(encoding="utf-8")
 
     def test_the_layer_is_on_at_the_start_with_its_credit(self):
-        self.assertIn('"drop", "access"];', self.d3)
+        self.assertIn('"drop", "access", "mine"];', self.d3)
         self.assertIn('access: ["Boat launches and roads", "c", "#F4F1E8"]', self.d3)
         self.assertIn('href="https://www.openstreetmap.org/copyright"', self.d3)
         self.assertIn("© OpenStreetMap contributors</a> (ODbL)", self.d3)

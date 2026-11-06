@@ -38,7 +38,9 @@
    estimate used, "Usually stocked" and the rules-year warning. */
 /* v9: Build 5 Stage 2. Waters that are not stocked, river stretches, the
    Stocked filter, and weather loaded near you and on screen first. */
-const SHELL_CACHE = "troutmap-shell-v11";
+/* v12: Build 5 Stage 3a. js/my-spots.js (My spots, kept in this browser only);
+   data/lake_outlines.json is cached when an import first uses it. */
+const SHELL_CACHE = "troutmap-shell-v12";
 const DATA_CACHE = "troutmap-data-v1";
 const TILE_CACHE = "troutmap-tiles-v1";
 /* v2: the single-spot forecast URL gained wind_direction_10m, so the old
@@ -78,6 +80,7 @@ const SHELL_FILES = [
   "js/lake-structure.js",
   "js/fishing-spots.js",
   "js/depth-3d.js",
+  "js/my-spots.js",
   "vendor/three.min.js",
   "learn/depth-model.html",
   "learn/river.html",

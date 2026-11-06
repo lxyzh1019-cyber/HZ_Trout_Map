@@ -333,6 +333,16 @@
   #fav-list button { background: none; border: 0; color: var(--ink-dim); cursor: pointer; padding: 0 2px; }
   #fav-list button:hover { color: var(--accent); }
   #fav-list .fav-name { flex: 1; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Build 5 Stage 3a: My spots, kept in this browser only. */
+  #spots-status { margin-top: 6px; }
+  #spots-status .sum { color: var(--ink); }
+  .spots-list summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-size: 15px; }
+  .spots-list ul { list-style: none; margin: 0; padding: 0; font-size: 15px; }
+  .spots-list li { padding: 4px 0; border-top: 1px solid #3a3a37; }
+  .spots-list li a { color: var(--accent); }
+  .tag.hollow { background: transparent; border: 2px solid #14B8A6; color: #7fe0d4; }
+  .my-spot.unconfirmed h3::after { content: " (to check)"; font-weight: 400; color: var(--ink-dim); }
+  .saved-lake { color: #7fe0d4; }
 
   /* ---------- Search ---------- */
   .search-wrap { position: relative; }
@@ -1395,6 +1405,18 @@
       <div class="hint" id="fav-empty">Tap ☆ on a lake to save it here.</div>
     </div>
 
+    <div class="group" id="spots-group">
+      <div class="group-label"><span>My spots</span></div>
+      <div class="btn-row">
+        <button type="button" class="btn" id="spots-import">Import my spots</button>
+        <button type="button" class="btn" id="spots-remove" hidden>Remove my spots</button>
+      </div>
+      <input type="file" id="spots-file" accept=".json,.geojson,.csv,.kml,.kmz" multiple hidden>
+      <div class="hint" id="spots-status">Your saved places from Google Maps: Takeout (Saved Places.json or a list's CSV), or a My Maps KMZ or KML. Pick all your files at once: a new import replaces the last one. They stay in this browser only and are never sent anywhere.</div>
+      <details class="spots-list" id="spots-off" hidden><summary></summary><ul></ul></details>
+      <details class="spots-list" id="spots-unplaced" hidden><summary></summary><ul></ul></details>
+    </div>
+
     <div class="group">
       <div class="group-label"><span>View</span></div>
       <div class="btn-row">
@@ -1552,6 +1574,7 @@
 <script src="js/lake-structure.js"></script>
 <script src="js/fishing-spots.js"></script>
 <script src="js/depth-3d.js"></script>
+<script src="js/my-spots.js"></script>
 <script>
 // ============================================================
 // CONFIG
@@ -3889,6 +3912,72 @@ function buildSelectAll() {
 // ============================================================
 // Search for towns and lakes lives in js/day-ui.js.
 
+/* ---------- Build 5 Stage 3a: My spots (js/my-spots.js), this browser only ---------- */
+let LAKE_OUTLINES = null;
+function spotsContext() {
+  const lakes = [], rivers = [];
+  LAKES.forEach(l => {
+    if (l.lat == null) return;
+    if (l.river) rivers.push({ key: lakeKey(l), line: l.line || [] });
+    else lakes.push({ key: lakeKey(l), name: l.name, lat: l.lat, lon: l.lon });
+  });
+  return { lakes, rivers, outlines: LAKE_OUTLINES };
+}
+
+async function importSpots(files) {
+  const status = document.getElementById("spots-status");
+  const label = files.length === 1 ? files[0].name : files.length + " files";
+  status.textContent = "Reading " + label + "…";
+  try {
+    if (!LAKE_OUTLINES) {
+      // The lake outlines are loaded only here: the spots keep the lake they matched.
+      const r = await fetch("data/lake_outlines.json");
+      if (!r.ok) throw new Error("the lake outlines could not be loaded; try again with signal");
+      LAKE_OUTLINES = MySpots.prepOutlines(await r.json());
+    }
+    let places = [];
+    for (const file of files) {
+      const data = /\.kmz$/i.test(file.name) ? await file.arrayBuffer() : await file.text();
+      places = places.concat(await MySpots.parseFile(file.name, data));
+    }
+    if (!places.length) throw new Error("no places were found in " + (files.length === 1 ? "this file" : "these files"));
+    const result = MySpots.classify(places, spotsContext());
+    await MySpots.save(result, label);
+    renderMySpots();
+    DayUI.renderSheet();
+  } catch (e) {
+    status.textContent = "Not imported: " + (e && e.message ? e.message : e) + ".";
+  }
+}
+
+function renderMySpots() {
+  const cur = MySpots.current();
+  const status = document.getElementById("spots-status");
+  const off = document.getElementById("spots-off"), unplaced = document.getElementById("spots-unplaced");
+  document.getElementById("spots-remove").hidden = !cur;
+  if (!cur) {
+    off.hidden = unplaced.hidden = true;
+    return;
+  }
+  const c = cur.result.counts, n = cur.result.total;
+  const part = (k, word) => c[k] ? `${c[k]} ${word}` : "";
+  status.innerHTML = `<span class="sum">${esc(cur.file)}: ${n} place${n === 1 ? "" : "s"}.</span> `
+    + [part("lake", "on a lake"), part("river", "on a river"), part("saved", "saved lakes (name only)"),
+       part("offLake", "not on a lake"), part("notPlaced", "not placed"), part("skipped", "skipped (in a town)"),
+       part("duplicates", "in two lists")].filter(Boolean).join(", ")
+    + ". In this browser only.";
+  const map = s => `https://www.google.com/maps/search/?api=1&query=${Number(s.lat).toFixed(5)},${Number(s.lon).toFixed(5)}`;
+  const offs = MySpots.offLake();
+  off.hidden = !offs.length;
+  off.querySelector("summary").textContent = `Spots not on a lake (${offs.length})`;
+  off.querySelector("ul").innerHTML = offs.map(s => `<li>${esc(s.name || "Spot")}${s.unconfirmed ? " (Unconfirmed)" : ""}`
+    + ` · <a href="${esc(map(s))}" target="_blank" rel="noopener">On the map ↗</a></li>`).join("");
+  const np = cur.result.notPlaced;
+  unplaced.hidden = !np.length;
+  unplaced.querySelector("summary").textContent = `Not placed (${np.length})`;
+  unplaced.querySelector("ul").innerHTML = np.map(s => `<li>${esc(s.name || "No name")} <span class="dim">· ${esc(s.why || "")}</span></li>`).join("");
+}
+
 function gotoLake(key) {
   const lake = LAKES.find(l => lakeKey(l) === key);
   if (!lake) return;
@@ -4497,6 +4586,7 @@ async function init() {
       typeof LakeStructure === "undefined" ? "js/lake-structure.js" : null,
       typeof FishingSpots === "undefined" ? "js/fishing-spots.js" : null,
       typeof DepthModel === "undefined" ? "js/depth-3d.js" : null,
+      typeof MySpots === "undefined" ? "js/my-spots.js" : null,
     ].filter(Boolean);
     if (missing.length) throw new Error(`${missing.join(" and ")} did not load. Check the vendor/ and js/ folders are present.`);
 
@@ -4580,6 +4670,23 @@ async function init() {
       setTimeout(() => { btn.textContent = "Copy link"; }, 2200);
     });
     DayUI.init();
+    // Build 5 Stage 3a: My spots, from this browser only.
+    if (window.MySpots) {
+      document.getElementById("spots-import").addEventListener("click", () => document.getElementById("spots-file").click());
+      document.getElementById("spots-file").addEventListener("change", e => {
+        const fs = e.target.files ? [...e.target.files] : [];
+        if (fs.length) importSpots(fs);
+        e.target.value = "";
+      });
+      document.getElementById("spots-remove").addEventListener("click", async () => {
+        if (!confirm("Remove your imported spots from this browser?")) return;
+        await MySpots.clear();
+        document.getElementById("spots-status").textContent = "Your spots were removed from this browser.";
+        renderMySpots();
+        DayUI.renderSheet();
+      });
+      MySpots.load().then(() => { renderMySpots(); if (MySpots.current()) DayUI.renderSheet(); });
+    }
     document.getElementById("fav-route").addEventListener("click", () => {
       const url = favouriteRouteUrl();
       if (url) window.open(url, "_blank", "noopener");

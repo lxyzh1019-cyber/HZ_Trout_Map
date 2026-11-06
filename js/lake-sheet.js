@@ -785,6 +785,27 @@
     }).join("");
   }
 
+  /* Build 5 Stage 3a: the owner's own spots on this lake, from this browser only. */
+  function mySpotsHtml(lake) {
+    if (!window.MySpots) return "";
+    var key = lakeKey(lake), spots = MySpots.forLake(key), saved = MySpots.savedFor(key), cur = MySpots.current();
+    if (!spots.length && !saved.length) return "";
+    var tagLine = function (s) {
+      var tags = (s.tags || []).filter(function (t) { return t !== MySpots.UNCONFIRMED; });
+      return (s.unconfirmed ? '<span class="tag hollow">Unconfirmed</span> ' : "") + (tags.length ? esc(tags.join(", ")) : "");
+    };
+    var cards = spots.map(function (s) {
+      var map = "https://www.google.com/maps/search/?api=1&query=" + Number(s.lat).toFixed(5) + "," + Number(s.lon).toFixed(5);
+      var tl = tagLine(s);
+      return '<div class="est my-spot' + (s.unconfirmed ? " unconfirmed" : "") + '"><h3>' + esc(s.name || "My spot") + "</h3>"
+        + (tl ? '<p class="inputs">' + tl + "</p>" : "") + (s.note ? "<p>" + esc(s.note) + "</p>" : "")
+        + '<a class="btn" href="' + esc(map) + '" target="_blank" rel="noopener">On the map ↗</a></div>';
+    }).join("");
+    var savedLine = saved.length ? '<p class="saved-lake">Saved lake in your list' + (saved.some(function (x) { return x.unconfirmed; }) ? " (Unconfirmed)" : "")
+      + (saved[0].note ? ": " + esc(saved[0].note) : "") + ".</p>" : "";
+    return savedLine + cards + '<p class="dim">Only in this browser' + (cur && cur.file ? ", from " + esc(cur.file) : "") + ".</p>";
+  }
+
   /* The species guides for the fish stocked here, and what stocked sizes mean. */
   function fishLinks(lake) {
     var topics = window.ReadingRoom && ReadingRoom.topics ? ReadingRoom.topics : [];
@@ -838,6 +859,7 @@
     var isOpen = function (id, def) { return open[id] === undefined ? def : open[id]; };
     var forecast = f ? forecastHtml(lake, f) : '<p class="dim">This lake has no position, so it has no forecast.</p>';
     var spots = typeof hotSpotsFor === "function" ? hotSpotsFor(lake) : [];
+    var mine = mySpotsHtml(lake), mineN = window.MySpots ? MySpots.forLake(key).length : 0;
 
     return '<div class="grab" aria-hidden="true"></div>'
       + '<div class="lh"><div><h2 id="sheet-title">' + esc(lake.name) + '</h2><div class="sub">' + km + (km ? " · " : "") + size + "</div></div>"
@@ -870,6 +892,7 @@
       + (lake.river ? section("river", "River stretch", riverHtml(lake, f) + learnRow([learnLink("river", "Reading a river")]), isOpen("river", false)) : "")
       // Hot spots only when there are some, each with its source and date.
       + (spots.length ? section("spots", "Hot spots", hotSpotsHtml(spots), isOpen("spots", false)) : "")
+      + (mine ? section("mine", "My spots" + (mineN ? " (" + mineN + ")" : ""), mine, isOpen("mine", true)) : "")
       + (f ? section("season", "Ice, hatches and tackle", seasonHtml(lake, f), isOpen("season", false)) : "")
       // Build 5: the stocked / open / winterkill line and the daily tip, folded.
       + section("status", "Tip and status", verdictLine(lake) + (f ? tipHtml(lake, f, d) : ""), isOpen("status", false))
@@ -975,7 +998,7 @@
     usualMonths: usualMonths,
     viewOf: viewOf,
     rulesYearWarning: rulesYearWarning,
-    _internal: { bannerHtml: bannerHtml, whyHtml: whyHtml, tagsHtml: tagsHtml, dayCompareSentence: dayCompareSentence, barsHtml: barsHtml, boatingHtml: boatingHtml, tipHtml: tipHtml, estimatesFor: estimatesFor, seasonHtml: seasonHtml, howHtml: howHtml, depthChartHtml: depthChartHtml, hotSpotsHtml: hotSpotsHtml },
+    _internal: { bannerHtml: bannerHtml, whyHtml: whyHtml, tagsHtml: tagsHtml, dayCompareSentence: dayCompareSentence, barsHtml: barsHtml, boatingHtml: boatingHtml, tipHtml: tipHtml, estimatesFor: estimatesFor, seasonHtml: seasonHtml, howHtml: howHtml, depthChartHtml: depthChartHtml, hotSpotsHtml: hotSpotsHtml, mySpotsHtml: mySpotsHtml },
     BAND_WORD: BAND_WORD,
     RULES_URL: RULES_URL,
     LICENCE_URL: LICENCE_URL,

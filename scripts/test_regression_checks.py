@@ -448,15 +448,18 @@ class OfflineAssetTests(unittest.TestCase):
         files and nothing checked it, so a new one could ship uncached and the
         app would work perfectly until it was needed.
 
-        One file is exempt and named here rather than skipped silently: the
+        Two files are exempt and named here rather than skipped silently. The
         photo index points at images on Alberta's server, this worker does not
         handle other origins, and an index of pictures that cannot load is not
         worth the bytes. The photo COUNT lives in the profile file, which is
-        cached, so a lake still says how many there are.
+        cached, so a lake still says how many there are. The lake outlines
+        (Build 5 Stage 3a) are read only while importing my spots, and each spot
+        keeps the lake it matched, so no visit pays for them; the data cache
+        keeps them once an import has used them.
         """
         page = (ROOT / "index.html").read_text(encoding="utf-8")
         worker = (ROOT / "sw.js").read_text(encoding="utf-8")
-        lazy_on_purpose = {"data/lake_photos.json"}
+        lazy_on_purpose = {"data/lake_photos.json", "data/lake_outlines.json"}
 
         fetched = set(re.findall(r'fetch\("((?:data|live)/[^"]+)"\)', page))
         self.assertTrue(fetched, "no data fetches found; has the loader moved?")
@@ -3380,8 +3383,8 @@ class Build2DataTests(unittest.TestCase):
 
     def test_build2_files_are_loaded_and_precached(self):
         worker = (ROOT / "sw.js").read_text(encoding="utf-8")
-        # v11 since the boat launches and roads (decision 23 A); Build 2 files stay listed.
-        self.assertIn('const SHELL_CACHE = "troutmap-shell-v11";', worker)
+        # v12 since My spots (Build 5 Stage 3a); Build 2 files stay listed.
+        self.assertIn('const SHELL_CACHE = "troutmap-shell-v12";', worker)
         start = worker.index("const SHELL_FILES = [")
         shell = set(re.findall(r'"([^"]+)"', worker[start:worker.index("]", start)]))
         self.assertIn("js/estimates.js", shell)
@@ -3778,8 +3781,9 @@ class Build4Tests(unittest.TestCase):
         self.assertIn("v.stop()", unmount)
         # Directions only for shore spots (review 8).
         self.assertIn("ud.shore && typeof ud.i", d3)
-        # Shore spots, and (decision 23 A) boat launches, which are on the shore too.
-        self.assertEqual(d3.count("shore: true"), 2)
+        # Shore spots, (decision 23 A) boat launches, which are on the shore too,
+        # and (Stage 3a) my spots, which get directions to the shore near them.
+        self.assertEqual(d3.count("shore: true"), 3)
         self.assertIn('pin(0xF4F1E8, 0.05, i, j, 0.34, L.access, { name: "Boat launch"', d3)
 
 
