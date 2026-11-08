@@ -40,7 +40,9 @@ const win = { matchMedia: () => ({ matches: false }) };
 process.stdout.write(JSON.stringify({
   name: D.backupName(new Date('2026-11-07T12:00:00Z')), back,
   bad: [D.readBackup('not json'), D.readBackup('{"app":"other"}'), D.readBackup(JSON.stringify(Object.assign({}, b, { version: 9 }))),
-        D.readBackup(JSON.stringify(Object.assign({}, b, { favourites: [1, 2] })))].map(r => r.ok),
+        D.readBackup(JSON.stringify(Object.assign({}, b, { favourites: [1, 2] }))),
+        D.readBackup(JSON.stringify(Object.assign({}, b, { spots: { file: 'x', result: { spots: [], total: 0 } } }))),
+        D.readBackup(JSON.stringify(Object.assign({}, b, { spots: { file: 'x', result: { spots: [7], saved: [], notPlaced: [], counts: {}, total: 1 } } })))].map(r => r.ok),
   summary: D.summaryText(back.summary),
   tip: [D.tipWanted(iphone, win, false), D.tipWanted(ipad, win, false), D.tipWanted(mac, win, false),
         D.tipWanted(homeScreen, win, false), D.tipWanted(iphone, win, true)],
@@ -63,7 +65,8 @@ class DeviceTests(unittest.TestCase):
         self.assertEqual(self.r["summary"], "Backup from 2026-11-07: 2 saved lakes and 3 imported places.")
 
     def test_a_damaged_or_foreign_file_is_refused(self):
-        self.assertEqual(self.r["bad"], [False, False, False, False])
+        # Not JSON, another app, another version, ids not text, spots missing their lists, a spot not an object.
+        self.assertEqual(self.r["bad"], [False] * 6)
 
     def test_the_tip_shows_once_on_iphone_and_ipad_safari_only(self):
         # iPhone, iPad (says Macintosh, has touch), a Mac, already on the Home Screen, already seen.
@@ -116,6 +119,12 @@ async function go() {
     out[c.name] = { sent: r.sent, email: r.email, logs, resend: calls.filter(x => x.u.startsWith(E.RESEND_URL)).map(x => ({ h: x.o.headers, b: JSON.parse(x.o.body) })),
       week: c.name === 'stocked' ? E.scoreWeek(W, lake, forecast(now), now).map(d => d.score) : null };
   }
+  out.days = ['2026-03-08', '2026-11-01', '2026-11-02', '2026-07-15'].map(d => {
+    const m = E.localMidnight(d, 'America/Edmonton').getTime();
+    return [E.localDay(m, 'America/Edmonton'), E.localDay(m - 1, 'America/Edmonton')];
+  });
+  const failAll = await E.run(A.cases[0].env, async () => ({ ok: false, status: 503 }), new Date(A.cases[0].now), () => {});
+  out.failAll = failAll.error || null;
   out.prime = E.primeDays([{ score: 0.80 }, { score: 0.74 }, { score: 0.75 }]).length;
   out.none = E.buildEmail([{ lake: { key: 'a', name: 'A' }, prime: [], stocked: [] }], 'https://x/');
   process.stdout.write(JSON.stringify(out));
@@ -147,6 +156,9 @@ class WeeklyEmailTests(unittest.TestCase):
         self.assertIn("Mount Lorette Ponds", call["b"]["html"])
         self.assertIn("Stocked 2026-07-22", call["b"]["text"])
         self.assertIn("https://app.example/?lake=wb3482", call["b"]["html"])
+        # The made-up forecast scores a Prime day at Sylvan: the scoring path finds it.
+        self.assertIn("Sylvan Lake", call["b"]["text"])
+        self.assertIn(": Prime ", call["b"]["text"])
         self.assertIn(len(s["week"]), (7, 8))                     # the next 7 days touch 7 or 8 calendar days
         self.assertTrue(all(0 <= x <= 1 for x in s["week"]))
 
@@ -158,6 +170,13 @@ class WeeklyEmailTests(unittest.TestCase):
         self.assertEqual(self.r["quiet"]["resend"], [])
         self.assertIsNone(self.r["none"])
         self.assertEqual(self.r["prime"], 2)                      # 75 and up is Prime
+        self.assertEqual(self.r["failAll"], "forecasts failed")   # a dead forecast is not a quiet week
+
+    def test_days_follow_the_local_clock_whatever_the_time_zone_rules(self):
+        # Local midnight starts that local day, and one millisecond earlier is the day before,
+        # on clock-change days too (the runner's own time-zone data decides the offsets).
+        self.assertEqual(self.r["days"], [["2026-03-08", "2026-03-07"], ["2026-11-01", "2026-10-31"],
+                                          ["2026-11-02", "2026-11-01"], ["2026-07-15", "2026-07-14"]])
 
     def test_the_public_log_shows_counts_only(self):
         for case in ("stocked", "dry", "quiet"):
@@ -168,7 +187,7 @@ class WeeklyEmailTests(unittest.TestCase):
 
     def test_the_workflow_reads_the_variable_and_secrets(self):
         wf = (WF / "weekly-email.yml").read_text(encoding="utf-8")
-        for snippet in ("SAVED_LAKES: ${{ vars.SAVED_LAKES }}", "RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}",
+        for snippet in ("SAVED_LAKES: ${{ secrets.SAVED_LAKES || vars.SAVED_LAKES }}", "RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}",
                         "EMAIL_TO: ${{ secrets.EMAIL_TO }}", 'cron: "37 14 * * 4"', "default: true", "contents: read"):
             self.assertIn(snippet, wf)
         js = (ROOT / "scripts" / "weekly_email.js").read_text(encoding="utf-8")
@@ -179,7 +198,7 @@ class WeeklyEmailTests(unittest.TestCase):
 class ScheduledJobsStayOnTests(unittest.TestCase):
     def test_the_advisories_job_commits_once_a_month(self):
         wf = (WF / "advisories.yml").read_text(encoding="utf-8")
-        self.assertIn('if [ "$(date -u +%d)" = "01" ]; then', wf)
+        self.assertIn('if [ "$(cut -c1-7 live/last_checked.txt 2>/dev/null)" != "$month" ]; then', wf)
         self.assertIn("date -u +%F > live/last_checked.txt", wf)
         # The commit step after it still commits only when live/ changed.
         self.assertLess(wf.index("live/last_checked.txt"), wf.index('git status --porcelain live/'))

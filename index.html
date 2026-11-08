@@ -3988,7 +3988,7 @@ function setupSettings() {
     const backup = Device.makeBackup([...state.favourites], MySpots.current());
     Device.download(Device.backupName(), JSON.stringify(backup));
     setBackupStatus(Device.summaryText({ lakes: backup.favourites.length, places: backup.spots ? backup.spots.result.total : 0, made: backup.made })
-      + " Saved to this device.");
+      + " Backup file made: check your downloads.");
   });
   document.getElementById("restore-btn").addEventListener("click", () => document.getElementById("restore-file").click());
   document.getElementById("restore-file").addEventListener("change", async e => {
@@ -4003,12 +4003,13 @@ function setupSettings() {
       return;
     }
     state.favourites = new Set(read.backup.favourites);
-    writeStore(STORE_FAVS, read.backup.favourites);
+    writeStore(STORE_FAVS, [...state.favourites]);
     if (read.backup.spots) await MySpots.save(read.backup.spots.result, read.backup.spots.file || "backup");
     else await MySpots.clear();
     renderFavourites();
     renderMySpots();
     renderPins();
+    if (state.view === "list") renderList();
     DayUI.render();
     DayUI.renderSheet();
     setBackupStatus("Restored. " + Device.summaryText(read.summary));

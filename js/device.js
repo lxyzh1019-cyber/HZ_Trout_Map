@@ -75,8 +75,14 @@
     if (doc.version !== VERSION) return { ok: false, why: "This backup is from another version of the app." };
     if (!Array.isArray(doc.favourites) || !doc.favourites.every(function (k) { return typeof k === "string"; }))
       return { ok: false, why: "This backup is damaged (its saved lakes cannot be read)." };
-    var sp = doc.spots;
-    if (sp !== null && (typeof sp !== "object" || !sp.result || !Array.isArray(sp.result.spots)))
+    var sp = doc.spots, r = sp && sp.result;
+    var spotOk = function (x) {
+      return x && typeof x === "object" && (x.lat == null || (isFinite(x.lat) && isFinite(x.lon)))
+        && (x.lat != null || x.lake || x.river || x.name != null);
+    };
+    if (sp !== null && (typeof sp !== "object" || !r || typeof r !== "object" || !Array.isArray(r.spots)
+        || !Array.isArray(r.saved) || !Array.isArray(r.notPlaced) || !r.counts || typeof r.counts !== "object"
+        || !isFinite(r.total) || !r.spots.every(spotOk) || !r.saved.every(spotOk) || !r.notPlaced.every(spotOk)))
       return { ok: false, why: "This backup is damaged (its spots cannot be read)." };
     var places = sp ? sp.result.total : 0;
     return { ok: true, backup: doc, summary: { lakes: doc.favourites.length, places: places, made: doc.made } };
@@ -95,7 +101,8 @@
     a.download = name;
     document.body.appendChild(a);
     a.click();
-    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 0);
+    // Not at once: some browsers cancel a download whose address is withdrawn too early.
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 30000);
   }
 
   window.Device = {

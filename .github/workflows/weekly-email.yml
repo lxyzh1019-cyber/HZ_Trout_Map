@@ -2,11 +2,11 @@ name: Weekly email
 
 # Build 5 Stage 4: once a week, an email to the owner when a saved lake has a
 # Prime day in the next 7 days or was stocked in the last 7. The saved lakes come
-# from the repository variable SAVED_LAKES, never from a file in this public
-# repository. The log shows counts only.
+# from SAVED_LAKES (a repository secret, so the public log masks it), never from
+# a file in this public repository. The script logs counts only.
 on:
   schedule:
-    - cron: "37 14 * * 4"      # Thursdays, 7:37 AM MST (8:37 AM MDT)
+    - cron: "37 14 * * 4"      # Thursdays at 14:37 UTC, morning in Alberta
   workflow_dispatch:
     inputs:
       dry_run:
@@ -20,16 +20,19 @@ permissions:
 jobs:
   email:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
 
       - name: Score the saved lakes and send the email
         env:
-          SAVED_LAKES: ${{ vars.SAVED_LAKES }}
+          # GitHub prints a step's environment in the public log, and masks only
+          # secrets: keep the list as a secret; a variable also works but shows.
+          SAVED_LAKES: ${{ secrets.SAVED_LAKES || vars.SAVED_LAKES }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
           # A scheduled run sends; a run by hand sends only with dry run off.

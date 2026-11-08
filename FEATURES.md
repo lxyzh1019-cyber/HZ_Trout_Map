@@ -120,7 +120,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - Settings (end of Filters): the browser is asked to keep this site's data (storage persist), and Settings says "kept", "not guaranteed — use Back up" or that the browser does not say.
 - iPhone and iPad in Safari, not opened from the Home Screen: a one-time tip to add the app to the Home Screen ("Safari clears site data after 7 days without use. Home Screen apps are exempt."); "Show the Home Screen tip" in Settings.
 - Back up: one file with the saved lakes and imported spots, saved to the device, never sent anywhere or written to the repository. Restore: reads that file, shows what it holds, and replaces the saved lakes and spots after you confirm (decision 2 A); a damaged or foreign file is refused. Copy saved lake ids: the text for the weekly email.
-- Weekly email (GitHub Action, Thursdays 7:37 AM MST): the saved lakes from the repository variable SAVED_LAKES, scored for trout (decision 1 A); sent through Resend from onboarding@resend.dev to the secret EMAIL_TO only when a saved lake has a Prime day (75 or more) in the next 7 days or a stocking in the last 7; a run by hand is a dry run unless switched off; the public log shows counts only.
+- Weekly email (GitHub Action, Thursday mornings): the saved lakes from SAVED_LAKES (a repository secret, so the public log masks it; a variable also works), scored for trout (decision 1 A); sent through Resend from onboarding@resend.dev to the secret EMAIL_TO only when a saved lake has a Prime day (75 or more) in the next 7 days or a stocking in the last 7; a run by hand is a dry run unless switched off; the public log shows counts only.
 - The advisories job commits a dated line on the 1st of each month, so GitHub does not turn off the scheduled jobs after 60 days without activity (decision 3 A).
 - Favourites list: the ★ and × buttons are at least 44 px to tap.
 
@@ -176,7 +176,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 | Settings | added | storage status, Home Screen tip, Back up, Restore, Copy saved lake ids |
 | Favourites | changed | ★ and × at least 44 px to tap; Restore can replace the list after a confirm |
 | My spots | kept | Back up and Restore carry them; import unchanged |
-| Weekly email | added | GitHub Action and Resend; saved lakes from a repository variable |
+| Weekly email | added | GitHub Action and Resend; saved lakes from the SAVED_LAKES secret (or variable) |
 | Advisories job | changed | one dated commit a month; still commits advisories only when they change |
 | Test run | changed | the feature check on pull requests; full history fetched |
 | Scores, species mode, lakes, rules, rivers, 3D, boat launches | kept | |

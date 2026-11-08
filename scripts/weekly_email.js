@@ -10,7 +10,9 @@
  * The repository is public and so are its Action logs: this prints counts only,
  * never a lake id, a lake name or the address.
  *
- * Environment: SAVED_LAKES (comma-separated ids), RESEND_API_KEY, EMAIL_TO,
+ * Environment: SAVED_LAKES (comma-separated ids; the workflow reads the repository
+ * secret first, which GitHub masks in the log, then the repository variable),
+ * RESEND_API_KEY, EMAIL_TO,
  * DRY_RUN ("true" builds the email and sends nothing), APP_URL (optional).
  */
 "use strict";
@@ -91,8 +93,23 @@ function recentStockings(lake, now, days = DAYS) {
   });
 }
 
-function localDay(t, offsetSec) {
-  return new Date(t + offsetSec * 1000).toISOString().slice(0, 10);
+/* Days by the lake's own time zone, not one fixed offset: a week can cross a
+ * daylight-saving change (js/weather.js says the same about its unix times). */
+function localDay(t, tz) {
+  return new Date(t).toLocaleDateString("en-CA", { timeZone: tz });
+}
+
+function offsetSec(t, tz) {
+  const part = new Intl.DateTimeFormat("en-US", { timeZone: tz, timeZoneName: "longOffset" })
+    .formatToParts(new Date(t)).find(p => p.type === "timeZoneName");
+  const m = /GMT([+-])(\d\d):(\d\d)/.exec(part ? part.value : "");
+  return m ? (m[1] === "-" ? -1 : 1) * (Number(m[2]) * 3600 + Number(m[3]) * 60) : 0;
+}
+
+/** Local midnight of a YYYY-MM-DD day: Astro.dayFor expects the start of the local day. */
+function localMidnight(day, tz) {
+  const t = Date.parse(day + "T00:00:00Z");
+  return new Date(t - offsetSec(t, tz) * 1000);
 }
 
 /** Best Bite score per local day for the next 7 days, from an Open-Meteo answer. */
@@ -106,13 +123,14 @@ function scoreWeek(W, lake, json, now) {
   });
   const iced = !!(water && water.likelyIce);
   const species = speciesOf(lake);
+  const tz = data.timezone || "America/Edmonton";
   const days = new Map();
   const astroCache = {};
   for (const ts of data.t) {
     const when = new Date(ts * 1000);
     if (when < now || when.getTime() > now.getTime() + DAYS * 86400000) continue;
-    const day = localDay(when.getTime(), data.offset);
-    if (!astroCache[day]) astroCache[day] = W.Astro.dayFor(lake.lat, lake.lon, new Date(day + "T12:00:00Z"));
+    const day = localDay(when.getTime(), tz);
+    if (!astroCache[day]) astroCache[day] = W.Astro.dayFor(lake.lat, lake.lon, localMidnight(day, tz));
     const r = C.scoreSlot({ when, lat: lake.lat, lon: lake.lon, species: species.length ? species : ["RNTR"],
       weather: W.Weather.at(data, when), water, astro: astroCache[day],
       leadDays: Math.max(0, (when.getTime() - now.getTime()) / 86400000) });
@@ -182,24 +200,32 @@ async function run(env, fetchFn, now = new Date(), log = console.log) {
     }
     report.push({ lake, prime, stocked });
   }
+  if (lakes.length && failed === lakes.length) {
+    // A dead forecast service must not look like a quiet week.
+    log("every forecast failed: no email; the run fails so it shows in GitHub");
+    return { sent: false, email: null, report, error: "forecasts failed" };
+  }
   const email = buildEmail(report, env.APP_URL || DEFAULT_APP_URL);
   const nPrime = report.filter(r => r.prime.length).length, nStock = report.filter(r => r.stocked.length).length;
   log(`lakes with a Prime day: ${nPrime}; newly stocked: ${nStock}; forecasts that failed: ${failed}`);
   if (!email) { log("nothing to report: no email this week"); return { sent: false, email: null, report }; }
   if (String(env.DRY_RUN).toLowerCase() === "true") { log("dry run: email built, not sent"); return { sent: false, email, report }; }
-  if (!env.RESEND_API_KEY || !env.EMAIL_TO) { log("missing RESEND_API_KEY or EMAIL_TO: not sent"); return { sent: false, email, report, error: "missing secret" }; }
+  const key = String(env.RESEND_API_KEY || "").trim(), to = String(env.EMAIL_TO || "").trim();
+  if (!key || !to) { log("missing RESEND_API_KEY or EMAIL_TO: not sent"); return { sent: false, email, report, error: "missing secret" }; }
   const res = await fetchFn(RESEND_URL, {
     method: "POST",
-    headers: { "Authorization": "Bearer " + env.RESEND_API_KEY, "Content-Type": "application/json" },
-    body: JSON.stringify({ from: FROM, to: [env.EMAIL_TO], subject: email.subject, html: email.html, text: email.text }),
+    headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
+    body: JSON.stringify({ from: FROM, to: [to], subject: email.subject, html: email.html, text: email.text }),
   });
   log(res.ok ? "email sent" : `email not sent: Resend answered HTTP ${res.status}`);
   return { sent: res.ok, email, report, status: res.status };
 }
 
-module.exports = { run, buildEmail, scoreWeek, primeDays, recentStockings, loadWaters, speciesOf, engine, PRIME, FROM, RESEND_URL };
+module.exports = { run, buildEmail, scoreWeek, primeDays, recentStockings, loadWaters, speciesOf, engine, localDay, localMidnight, PRIME, FROM, RESEND_URL };
 
 if (require.main === module) {
-  run(process.env, (u, o) => fetch(u, o)).then(r => { process.exitCode = r.error || (r.status && !r.sent) ? 1 : 0; })
-    .catch(e => { console.log("weekly email failed: " + (e && e.message ? e.message : e)); process.exitCode = 1; });
+  run(process.env, (u, o) => fetch(u, Object.assign({ signal: AbortSignal.timeout(20000) }, o || {})))
+    .then(r => { process.exitCode = r.error || (r.status && !r.sent) ? 1 : 0; })
+    // A fixed text only: an error message could quote a header, which holds the key.
+    .catch(e => { console.log("weekly email failed (" + (e && e.name ? e.name : "error") + ")"); process.exitCode = 1; });
 }

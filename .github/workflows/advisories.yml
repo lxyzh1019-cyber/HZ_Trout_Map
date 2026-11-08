@@ -27,11 +27,13 @@ jobs:
 
       # Build 5 Stage 4 (decision 3 A): GitHub turns off scheduled workflows in a
       # public repository after 60 days with no activity, and the advisories
-      # rarely change. On the 1st of each month this dated line changes, so the
-      # step below makes one commit a month and the scheduled jobs stay on.
+      # rarely change. The first run of each month writes a dated line, so the
+      # step below makes one commit a month and the scheduled jobs stay on. A
+      # missed run on the 1st is made up by the next run that month.
       - name: Note the monthly check date
         run: |
-          if [ "$(date -u +%d)" = "01" ]; then
+          month="$(date -u +%Y-%m)"
+          if [ "$(cut -c1-7 live/last_checked.txt 2>/dev/null)" != "$month" ]; then
             date -u +%F > live/last_checked.txt
           fi
 
