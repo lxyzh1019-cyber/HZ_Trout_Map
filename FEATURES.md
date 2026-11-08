@@ -1,6 +1,6 @@
-# FEATURES — HZ_Trout_Map — manifest v12 — Build 5 Stage 3b Species mode
+# FEATURES — HZ_Trout_Map — manifest v13 — Build 5 Stage 4 Settings and weekly email
 
-Locked features of the current version (branch claude/funny-ritchie-bealq0, from main at f5905b5). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
+Locked features of the current version (branch claude/funny-ritchie-bealq0, from main at a2592c3). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
 
 ## Which lake, which day (Build 1b)
 - Week bar over the map: 7 days, each with the top Bite score of the lakes on screen; tap a day and the pins recolour for it. "gusty" marks a day when most lakes on screen gust to 40 km/h or more.
@@ -116,6 +116,14 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - Charts by species, by season, per-species trend and a stocking calendar (Charts button in the header); opening a lake scopes them to that lake.
 - Planning summary with year-over-year totals and direction.
 
+## Settings, backup and the weekly email (Build 5 Stage 4, no sign-in)
+- Settings (end of Filters): the browser is asked to keep this site's data (storage persist), and Settings says "kept", "not guaranteed — use Back up" or that the browser does not say.
+- iPhone and iPad in Safari, not opened from the Home Screen: a one-time tip to add the app to the Home Screen ("Safari clears site data after 7 days without use. Home Screen apps are exempt."); "Show the Home Screen tip" in Settings.
+- Back up: one file with the saved lakes and imported spots, saved to the device, never sent anywhere or written to the repository. Restore: reads that file, shows what it holds, and replaces the saved lakes and spots after you confirm (decision 2 A); a damaged or foreign file is refused. Copy saved lake ids: the text for the weekly email.
+- Weekly email (GitHub Action, Thursdays 7:37 AM MST): the saved lakes from the repository variable SAVED_LAKES, scored for trout (decision 1 A); sent through Resend from onboarding@resend.dev to the secret EMAIL_TO only when a saved lake has a Prime day (75 or more) in the next 7 days or a stocking in the last 7; a run by hand is a dry run unless switched off; the public log shows counts only.
+- The advisories job commits a dated line on the 1st of each month, so GitHub does not turn off the scheduled jobs after 60 days without activity (decision 3 A).
+- Favourites list: the ★ and × buttons are at least 44 px to tap.
+
 ## Species mode (Build 5 Stage 3b)
 - "Fishing for" at the top of Filters: Trout (today's model, unchanged), Walleye, Burbot, Lake whitefish, Mountain whitefish; remembered on this device (troutmap.species). Every water is scored for the picked species.
 - The five weights stay the same for every species (decision 33). Each species has its own water band (burbot 0/2–12/22, lake whitefish 0/10–14/23, mountain whitefish 2/10–16/22; walleye as before), light reading (walleye dusk and dawn and low light, burbot night) and month-by-month season that moves the score by at most 15% (burbot February and March under the ice; lake whitefish and mountain whitefish October to March). The winter score under ice counts the season too.
@@ -133,7 +141,7 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 ## Taking it with you
 - List view sortable on any column, including Bite and Day out for the picked day, with CSV download.
 - Saved lakes in the browser and a one-click multi-stop driving route through them.
-- Works offline after the first visit (service worker, shell cache v13, the guide's waters and rivers, saved town list, saved forecasts, lake heights, depth chart links, hot spots, the 3D depth model with its lakebed files, boating rules, and boat launches and roads).
+- Works offline after the first visit (service worker, shell cache v14, the guide's waters and rivers, saved town list, saved forecasts, lake heights, depth chart links, hot spots, the 3D depth model with its lakebed files, boating rules, and boat launches and roads).
 
 ## Data and honesty
 - Estimated positions are labelled; data quality panel; evidence page (evidence.html).
@@ -141,6 +149,38 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 - ACA aeration roster with ACA's Winter Angling column; a test fails if it disagrees with the regulations.
 - Colour-blind-safe pin palettes; every score pin carries its number.
 - Credit lines: Open-Meteo (CC BY 4.0), town list licence, GeoNames via Open-Meteo, Esri imagery, photo credits, Alberta Geological Survey (depth charts), Open-Meteo elevation with Copernicus DEM (in the ice inputs). The 3D view footer and its Learn guide carry the Open Government Licence – Alberta line, Transport Canada TP 15587E (not the official version), MyWildAlberta, Open-Meteo, three.js (MIT) and © OpenStreetMap contributors (ODbL, linked to openstreetmap.org/copyright) for boat launches and roads. The lake outlines used for matching spots: CanVec (Natural Resources Canada), Open Government Licence – Canada.
+
+## Feature map
+- Settings: storage, Home Screen tip, Back up and Restore — files: js/device.js, index.html — test: DeviceTests
+- Weekly email — files: scripts/weekly_email.js, .github/workflows/weekly-email.yml — test: WeeklyEmailTests
+- Advisories job and the monthly commit — files: .github/workflows/advisories.yml, scripts/advisories.py — test: ScheduledJobsStayOnTests
+- Test run and feature check — files: .github/workflows/checks.yml — test: test_the_feature_check_runs_on_pull_requests
+- Offline — files: sw.js — test: OfflineAssetTests
+- Species mode — files: js/conditions.js, scripts/species_presence.py, data/species_presence.json — test: SpeciesScoreTests
+- My spots — files: js/my-spots.js, scripts/lake_outlines.py, data/lake_outlines.json — test: MySpotsImportTests
+- Boat launches and roads — files: scripts/lake_access.py, data/lake_access.json — test: AccessDataTests
+- 3D depth model — files: js/depth-3d.js, js/lake-structure.js, js/fishing-spots.js, data/depth_grids/index.json — test: Build4Tests
+- Lake panel — files: js/lake-sheet.js, js/estimates.js — test: Build2PanelTests
+- Bite score, forecast and weather — files: js/forecast.js, js/weather.js, js/conditions-ui.js, js/astro.js — test: Build1bScoreTests
+- Lists, week bar and the day — files: js/day-ui.js — test: Build1bPageTests
+- Rivers and waters not stocked — files: scripts/waterbodies.py, data/rivers.json, data/waters_unstocked.json — test: Build5WatersTests
+- Rules and regulations — files: scripts/regulations.py, data/lake_regulations.json — test: RegulationTests
+- Stocking history — files: scripts/build_history.py — test: PublishedDataTests
+
+## References
+- Test speed: full run 2.5 min in 1 part (GitHub, 2026-11-06: setup 8 s, tests 1 min 40 s, data rebuild check 39 s).
+
+## Regression table — manifest v12 → v13 (Build 5 Stage 4 Settings and weekly email)
+| Feature | v12 → v13 | Note |
+|---|---|---|
+| Settings | added | storage status, Home Screen tip, Back up, Restore, Copy saved lake ids |
+| Favourites | changed | ★ and × at least 44 px to tap; Restore can replace the list after a confirm |
+| My spots | kept | Back up and Restore carry them; import unchanged |
+| Weekly email | added | GitHub Action and Resend; saved lakes from a repository variable |
+| Advisories job | changed | one dated commit a month; still commits advisories only when they change |
+| Test run | changed | the feature check on pull requests; full history fetched |
+| Scores, species mode, lakes, rules, rivers, 3D, boat launches | kept | |
+| Offline | kept | shell cache v13 → v14 (js/device.js) |
 
 ## Regression table — manifest v11 → v12 (Build 5 Stage 3b Species mode)
 | Feature | v11 → v12 | Note |

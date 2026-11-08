@@ -3385,8 +3385,8 @@ class Build2DataTests(unittest.TestCase):
 
     def test_build2_files_are_loaded_and_precached(self):
         worker = (ROOT / "sw.js").read_text(encoding="utf-8")
-        # v13 since Species mode (Build 5 Stage 3b); Build 2 files stay listed.
-        self.assertIn('const SHELL_CACHE = "troutmap-shell-v13";', worker)
+        # v14 since Settings (Build 5 Stage 4); Build 2 files stay listed.
+        self.assertIn('const SHELL_CACHE = "troutmap-shell-v14";', worker)
         start = worker.index("const SHELL_FILES = [")
         shell = set(re.findall(r'"([^"]+)"', worker[start:worker.index("]", start)]))
         self.assertIn("js/estimates.js", shell)

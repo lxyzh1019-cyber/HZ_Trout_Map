@@ -25,6 +25,16 @@ jobs:
         working-directory: scripts
         run: python3 advisories.py
 
+      # Build 5 Stage 4 (decision 3 A): GitHub turns off scheduled workflows in a
+      # public repository after 60 days with no activity, and the advisories
+      # rarely change. On the 1st of each month this dated line changes, so the
+      # step below makes one commit a month and the scheduled jobs stay on.
+      - name: Note the monthly check date
+        run: |
+          if [ "$(date -u +%d)" = "01" ]; then
+            date -u +%F > live/last_checked.txt
+          fi
+
       # Writes to live/, never data/. The build's byte-exact check on data/ is
       # what stops anyone hand-editing published data, and a daily commit into
       # data/ would trip it every morning until somebody weakened the check.
