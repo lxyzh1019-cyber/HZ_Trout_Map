@@ -42,7 +42,8 @@
    data/lake_outlines.json is cached when an import first uses it. */
 /* v13: Build 5 Stage 3b. Species mode (js/conditions.js profiles, the Fishing
    for switch) and data/species_presence.json. */
-const SHELL_CACHE = "troutmap-shell-v13";
+/* v14: Build 5 Stage 4. js/device.js (storage, the Home Screen tip, Back up and Restore). */
+const SHELL_CACHE = "troutmap-shell-v14";
 const DATA_CACHE = "troutmap-data-v1";
 const TILE_CACHE = "troutmap-tiles-v1";
 /* v2: the single-spot forecast URL gained wind_direction_10m, so the old
@@ -83,6 +84,7 @@ const SHELL_FILES = [
   "js/fishing-spots.js",
   "js/depth-3d.js",
   "js/my-spots.js",
+  "js/device.js",
   "vendor/three.min.js",
   "learn/depth-model.html",
   "learn/river.html",

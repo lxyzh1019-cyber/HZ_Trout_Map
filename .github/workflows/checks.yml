@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0       # the feature check compares with the base branch
 
       - uses: actions/setup-python@v5
         with:
@@ -39,3 +41,11 @@ jobs:
           fi
           echo "data/ is current."
           tail -20 /tmp/build.log
+
+      # The feature map in FEATURES.md: a changed file's feature needs a test and a
+      # row in the pull request's impact table (hz-claude-config, v3.3.7).
+      - name: Feature check
+        if: github.event_name == 'pull_request'
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/lxyzh1019-cyber/hz-claude-config/main/central/checks/feature_check.py -o "$RUNNER_TEMP/feature_check.py"
+          python3 "$RUNNER_TEMP/feature_check.py" --base "origin/${{ github.base_ref }}"

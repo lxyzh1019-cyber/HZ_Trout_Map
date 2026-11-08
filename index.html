@@ -330,7 +330,7 @@
 
   #fav-list { list-style: none; margin: 0; padding: 0; font-size: 15px; }
   #fav-list li { display: flex; align-items: center; gap: 6px; padding: 2px 0; }
-  #fav-list button { background: none; border: 0; color: var(--ink-dim); cursor: pointer; padding: 0 2px; }
+  #fav-list button { background: none; border: 0; color: var(--ink-dim); cursor: pointer; padding: 0 2px; min-width: 44px; min-height: 44px; }
   #fav-list button:hover { color: var(--accent); }
   #fav-list .fav-name { flex: 1; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   /* Build 5 Stage 3a: My spots, kept in this browser only. */
@@ -343,6 +343,12 @@
   .tag.hollow { background: transparent; border: 2px solid #14B8A6; color: #7fe0d4; }
   .my-spot.unconfirmed h3::after { content: " (to check)"; font-weight: 400; color: var(--ink-dim); }
   .saved-lake { color: #7fe0d4; }
+  /* Build 5 Stage 4: Settings (storage, Back up, Restore) and the Home Screen tip. */
+  #settings-group .hint { margin-top: 6px; }
+  #a2hs-tip { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 3000; max-width: 520px; margin: 0 auto;
+    background: var(--panel); color: var(--ink); border: 1px solid var(--accent); border-radius: 10px; padding: 12px 14px;
+    box-shadow: 0 6px 24px rgba(0,0,0,.45); font-size: 16px; }
+  #a2hs-tip .btn { margin-top: 8px; min-height: 44px; }
   /* Build 5 Stage 3b: which species the scores are for, and whether it is recorded here. */
   .mode-line { margin: 8px 0; padding: 8px 10px; border-left: 4px solid var(--accent); background: var(--panel-2); font-size: 16px; }
   .mode-line.not-here { border-left-color: #c9a227; }
@@ -1446,6 +1452,19 @@
       <div class="hint" id="color-hint"></div>
     </div>
 
+    <div class="group" id="settings-group">
+      <div class="group-label"><span>Settings</span></div>
+      <div class="hint" id="storage-status">Storage: checking…</div>
+      <div class="btn-row">
+        <button type="button" class="btn" id="backup-btn">Back up</button>
+        <button type="button" class="btn" id="restore-btn">Restore</button>
+        <button type="button" class="btn" id="copy-ids-btn">Copy saved lake ids</button>
+      </div>
+      <input type="file" id="restore-file" accept=".json,application/json" hidden>
+      <div class="hint" id="backup-status">Back up saves your saved lakes and imported spots in one file on this device. It is never sent anywhere.</div>
+      <button type="button" class="btn" id="a2hs-show" hidden>Show the Home Screen tip</button>
+    </div>
+
     <details class="quality">
       <summary>Data quality</summary>
       <div class="data-quality" id="data-quality">checking…</div>
@@ -1584,6 +1603,7 @@
 <script src="js/fishing-spots.js"></script>
 <script src="js/depth-3d.js"></script>
 <script src="js/my-spots.js"></script>
+<script src="js/device.js"></script>
 <script>
 // ============================================================
 // CONFIG
@@ -3939,6 +3959,69 @@ function buildSelectAll() {
 // ============================================================
 // Search for towns and lakes lives in js/day-ui.js.
 
+/* ---------- Build 5 Stage 4: Settings (no sign-in; this device only) ---------- */
+function setBackupStatus(text) { document.getElementById("backup-status").textContent = text; }
+
+function showHomeScreenTip() {
+  if (document.getElementById("a2hs-tip")) return;
+  const tip = document.createElement("div");
+  tip.id = "a2hs-tip";
+  tip.setAttribute("role", "dialog");
+  tip.setAttribute("aria-label", "Add to Home Screen");
+  tip.innerHTML = `<div>${esc(Device.TIP_TEXT)}</div><button type="button" class="btn" id="a2hs-ok">OK</button>`;
+  document.body.appendChild(tip);
+  document.getElementById("a2hs-ok").addEventListener("click", () => tip.remove());
+  try { localStorage.setItem(Device.TIP_KEY, "1"); } catch { /* private mode: the tip may show again */ }
+}
+
+function setupSettings() {
+  const status = document.getElementById("storage-status");
+  Device.storageState().then(st => { status.textContent = Device.STORAGE_TEXT[st] || Device.STORAGE_TEXT.unknown; });
+
+  let seen = false;
+  try { seen = !!localStorage.getItem(Device.TIP_KEY); } catch { seen = false; }
+  document.getElementById("a2hs-show").hidden = !Device._internal.isAppleTouch();
+  document.getElementById("a2hs-show").addEventListener("click", showHomeScreenTip);
+  if (Device.tipWanted(navigator, window, seen)) setTimeout(showHomeScreenTip, 1500);
+
+  document.getElementById("backup-btn").addEventListener("click", () => {
+    const backup = Device.makeBackup([...state.favourites], MySpots.current());
+    Device.download(Device.backupName(), JSON.stringify(backup));
+    setBackupStatus(Device.summaryText({ lakes: backup.favourites.length, places: backup.spots ? backup.spots.result.total : 0, made: backup.made })
+      + " Backup file made: check your downloads.");
+  });
+  document.getElementById("restore-btn").addEventListener("click", () => document.getElementById("restore-file").click());
+  document.getElementById("restore-file").addEventListener("change", async e => {
+    const f = e.target.files && e.target.files[0];
+    e.target.value = "";
+    if (!f) return;
+    const read = Device.readBackup(await f.text());
+    if (!read.ok) { setBackupStatus("Not restored: " + read.why); return; }
+    // Decision 2 A: Restore replaces what this browser has, after you confirm.
+    if (!confirm(Device.summaryText(read.summary) + " Replace the saved lakes and spots in this browser with it?")) {
+      setBackupStatus("Not restored: nothing changed.");
+      return;
+    }
+    state.favourites = new Set(read.backup.favourites);
+    writeStore(STORE_FAVS, [...state.favourites]);
+    if (read.backup.spots) await MySpots.save(read.backup.spots.result, read.backup.spots.file || "backup");
+    else await MySpots.clear();
+    renderFavourites();
+    renderMySpots();
+    renderPins();
+    if (state.view === "list") renderList();
+    DayUI.render();
+    DayUI.renderSheet();
+    setBackupStatus("Restored. " + Device.summaryText(read.summary));
+  });
+  document.getElementById("copy-ids-btn").addEventListener("click", async () => {
+    const ids = [...state.favourites].join(",");
+    if (!ids) { setBackupStatus("No saved lakes yet: tap ☆ on a lake first."); return; }
+    try { await navigator.clipboard.writeText(ids); setBackupStatus("Copied " + state.favourites.size + " saved lake ids for the weekly email."); }
+    catch { setBackupStatus("Copy these saved lake ids by hand: " + ids); }
+  });
+}
+
 /* ---------- Build 5 Stage 3b: Species mode ---------- */
 function buildModeChips() {
   const host = document.getElementById("mode-chips");
@@ -4636,6 +4719,7 @@ async function init() {
       typeof FishingSpots === "undefined" ? "js/fishing-spots.js" : null,
       typeof DepthModel === "undefined" ? "js/depth-3d.js" : null,
       typeof MySpots === "undefined" ? "js/my-spots.js" : null,
+      typeof Device === "undefined" ? "js/device.js" : null,
     ].filter(Boolean);
     if (missing.length) throw new Error(`${missing.join(" and ")} did not load. Check the vendor/ and js/ folders are present.`);
 
@@ -4722,6 +4806,7 @@ async function init() {
     });
     DayUI.init();
     buildModeChips();
+    if (window.Device) setupSettings();
     // Build 5 Stage 3a: My spots, from this browser only.
     if (window.MySpots) {
       document.getElementById("spots-import").addEventListener("click", () => document.getElementById("spots-file").click());

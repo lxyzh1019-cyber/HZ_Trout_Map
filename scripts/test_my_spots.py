@@ -288,7 +288,7 @@ class MySpotsViewTests(unittest.TestCase):
     def test_offline(self):
         sw = (ROOT / "sw.js").read_text(encoding="utf-8")
         self.assertIn('"js/my-spots.js"', sw)
-        self.assertIn('const SHELL_CACHE = "troutmap-shell-v13";', sw)
+        self.assertIn('const SHELL_CACHE = "troutmap-shell-v14";', sw)
 
 
 if __name__ == "__main__":
