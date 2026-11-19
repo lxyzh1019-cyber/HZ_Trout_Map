@@ -43,7 +43,9 @@
 /* v13: Build 5 Stage 3b. Species mode (js/conditions.js profiles, the Fishing
    for switch) and data/species_presence.json. */
 /* v14: Build 5 Stage 4. js/device.js (storage, the Home Screen tip, Back up and Restore). */
-const SHELL_CACHE = "troutmap-shell-v14";
+/* v15: the 7-day grid and fishing calendar headings read each day at noon, so
+   a forecast still saying UTC-7 no longer names yesterday (js/conditions-ui.js). */
+const SHELL_CACHE = "troutmap-shell-v15";
 const DATA_CACHE = "troutmap-data-v1";
 const TILE_CACHE = "troutmap-tiles-v1";
 /* v2: the single-spot forecast URL gained wind_direction_10m, so the old
