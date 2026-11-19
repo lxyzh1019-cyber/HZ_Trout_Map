@@ -71,17 +71,27 @@
     return pad(shifted.getUTCHours()) + ":" + pad(shifted.getUTCMinutes());
   }
 
+  /* The grid's days start at the device's midnight. Read at midnight, any lake
+   * offset an hour behind the device's (the forecast still saying UTC-7 after
+   * Alberta stayed on UTC-6 from 1 Nov 2026, or a phone in another province)
+   * lands on 23:00 the day before, and every heading — "Today" included — named
+   * yesterday. Read at noon, as the lake panel's day names already are, the
+   * date holds for any offset gap under 12 hours. */
+  function dayNoon(d) { return new Date(d.getTime() + 12 * 3600000); }
+
   /** The calendar day at the lake, for the grid's column headings. */
   function lakeDayName(d, index) {
     if (index === 0) return "Today";
-    var shifted = tzOffsetSec === null ? d : new Date(d.getTime() + tzOffsetSec * 1000);
+    var noon = dayNoon(d);
     var names = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    return names[tzOffsetSec === null ? shifted.getDay() : shifted.getUTCDay()];
+    return tzOffsetSec === null ? names[noon.getDay()]
+      : names[new Date(noon.getTime() + tzOffsetSec * 1000).getUTCDay()];
   }
 
   function lakeDayNumber(d) {
-    if (tzOffsetSec === null) return d.getDate();
-    return new Date(d.getTime() + tzOffsetSec * 1000).getUTCDate();
+    var noon = dayNoon(d);
+    if (tzOffsetSec === null) return noon.getDate();
+    return new Date(noon.getTime() + tzOffsetSec * 1000).getUTCDate();
   }
 
   // ============================================================
@@ -736,6 +746,7 @@
       partWindow: partWindow, colourFor: colourFor, anchor: anchor,
       astroFor: astroFor, scoreAt: scoreAt, waterFor: waterFor,
       hhmm: hhmm, startOfDay: startOfDay,
+      lakeDayName: lakeDayName, lakeDayNumber: lakeDayNumber,
       setTz: function (wx) {
         tzOffsetSec = wx && wx.data && typeof wx.data.offset === "number"
           ? wx.data.offset : null;

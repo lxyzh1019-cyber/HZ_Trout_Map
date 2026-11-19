@@ -1,4 +1,4 @@
-# FEATURES — HZ_Trout_Map — manifest v13 — Build 5 Stage 4 Settings and weekly email
+# FEATURES — HZ_Trout_Map — manifest v14 — grid date fix (2026-11-18)
 
 Locked features of the current version (branch claude/funny-ritchie-bealq0, from main at a2592c3). Every edit is checked against this list and ends with a regression table. Update this file in the same change that adds, changes or removes a feature.
 
@@ -169,6 +169,13 @@ Locked features of the current version (branch claude/funny-ritchie-bealq0, from
 
 ## References
 - Test speed: full run 2.5 min in 1 part (GitHub, 2026-11-06: setup 8 s, tests 1 min 40 s, data rebuild check 39 s).
+
+## Regression table — manifest v13 → v14 (grid date fix, 2026-11-18)
+| Feature | v13 → v14 | Note |
+|---|---|---|
+| Bite score, forecast and weather | changed | 7-day grid and fishing calendar headings read each day at noon: no longer one day early when the forecast says UTC-7 |
+| Scores, week bar, lake panel, species mode, rivers, 3D, settings | kept | scoring and times unchanged |
+| Offline | changed | shell cache v14 → v15 (js/conditions-ui.js) |
 
 ## Regression table — manifest v12 → v13 (Build 5 Stage 4 Settings and weekly email)
 | Feature | v12 → v13 | Note |

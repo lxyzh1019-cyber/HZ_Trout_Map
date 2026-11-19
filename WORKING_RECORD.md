@@ -186,6 +186,7 @@ Single working record for this repository. Updated by the main session at the en
 | M19 | 11-06 | 3D for big lakes and on the ice: zoom to a useful level, GPS to search an area, study at home and take a spot to Google Maps; plus the 3D slider and title fixes | open | owner: one pull request, built in the leftovers patch after Stage 4 (owner 2026-11-06: finish the whole build first); saved marks belong to Stage 3 My spots |
 | M12 | 11-04 | Stage 3: import my spots (browser only), species mode | 3a done (PR #27 merged); 3b done, PR pending | decision 31: 3a My spots, 3b Species mode |
 | M13 | 11-04 | Stage 4: Firebase sync and weekly email (ASK first) | open | Build 5 Stage 4; replaces F1, F2 |
+| M20 | 11-18 | Fix the date bug in the forecast page and make it live | fixed, pull request open | 7-day grid and fishing calendar headings named yesterday when the forecast's offset is behind the phone's (UTC-7 vs Alberta's UTC-6 since 2026-11-01); now read at noon like the lake panel; live after the owner's merge |
 
 ## Hotspot counter
 | Area / feature | Fix rounds | Recurrences | Regressions caused | Workarounds/exceptions | Last symptom | Rewrite-vs-repair reviewed? |
@@ -249,6 +250,7 @@ Thresholds: 3 fix rounds, 2 recurrences, 1 regression caused by a fix, or 3 work
 
 - 2026-11-05 build-5 stage 2: unittest discover 308 run → 308 pass (PYTHONUTF8=1); build_history.py leaves data/ unchanged; Open-Meteo heights 983 keys (rate limit 429 hit after repeated runs; elevation.py now asks only for new or moved points); reviewer pass 16 findings → all fixed (data side by a helper on separate files, app side in this session) or recorded above
 - 2026-11-05 build-5 stage 2 sizes: first visit about 10.4 MB (app 1.7, stocking data 4.3, waters and rivers 0.7, lakebeds 4.0); was about 7.4 MB
+- 2026-11-18 grid date fix: Edmonton phone on 2026-11-18, forecast offset UTC-7 → before "Today 17 | Wed 18 … Mon 23", after "Today 18 | Thu 19 … Tue 24"; UTC-6 and no forecast unchanged (already right); Toronto and Vancouver phones right after. New test fails on the old code, passes on the new; full suite before the change 379 run → 379 pass. Not run: a browser check (no headless browser here; Open-Meteo blocked) and Open-Meteo's real offset for Alberta (not checked)
 
 ## Open questions / blockers
 - H4 answered 2026-10-30: Open-Meteo counts per IP; one full load = 250 calls in 5 requests (measured in the browser), 3 h cache.

@@ -1,6 +1,7 @@
 import collections
 import csv
 import json
+import os
 import re
 import statistics
 import unittest
@@ -2670,9 +2671,10 @@ class ReportedSpeciesTests(unittest.TestCase):
                 self.assertTrue(named, f"{code} (in {key}) has no name in the app")
 
 
-def run_js(files, expr, prelude=""):
+def run_js(files, expr, prelude="", tz=None):
     """Evaluate an expression (it may return a promise) against real js files
-    in node, with an empty window and whatever globals the prelude defines."""
+    in node, with an empty window and whatever globals the prelude defines.
+    tz sets the device's time zone (for example "America/Edmonton")."""
     import shutil
     import subprocess
     node = shutil.which("node")
@@ -2689,8 +2691,9 @@ def run_js(files, expr, prelude=""):
     )
     arg = json.dumps({"files": [str(ROOT / "js" / f) for f in files], "expr": expr, "prelude": prelude})
     # The arguments go in on stdin: a long prelude passes the Windows command-line limit.
+    env = dict(os.environ, TZ=tz) if tz else None
     out = subprocess.run([node, "-e", script], input=arg, capture_output=True, text=True,
-                         encoding="utf-8", check=True).stdout
+                         encoding="utf-8", check=True, env=env).stdout
     return json.loads(out)
 
 
@@ -2727,6 +2730,22 @@ def mapped_lakes():
 class Build1bScoreTests(unittest.TestCase):
     """Build 1b: the Bite score is unchanged, Day out is new, and the best day
     is a day you can be out."""
+
+    def test_grid_headings_keep_the_date_when_the_forecast_offset_lags(self):
+        """The 7-day grid and the fishing calendar start each day at the
+        device's midnight. Alberta stayed on UTC-6 from 1 Nov 2026; a forecast
+        that still says UTC-7 read those midnights as 23:00 the day before, so
+        every heading named yesterday ("Today 17" on the 18th). Read at noon,
+        the date holds for any offset gap under 12 hours."""
+        expr = ("(() => { const I = window.ConditionsUI._internal;"
+                " const now = new Date('2026-11-18T20:51:00-06:00');"
+                " return [-25200, -21600, null].map(o => { I.setTz(o === null ? null : {data: {offset: o}});"
+                " const t = I.startOfDay(now); return [0, 1, 6].map(d => { const day = new Date(t.getTime() + d * 86400000);"
+                " return I.lakeDayName(day, d) + ' ' + I.lakeDayNumber(day); }).join(','); }); })()")
+        want = "Today 18,Thu 19,Tue 24"
+        for tz in ("America/Edmonton", "America/Toronto", "America/Vancouver"):
+            got = run_js(["conditions-ui.js"], expr, tz=tz)
+            self.assertEqual(got, [want, want, want], tz)
 
     def test_bite_weights_are_unchanged(self):
         got = run_js(["conditions.js"], "[window.Conditions.WEIGHTS, window.Conditions.MOON_CAP,"
@@ -3385,8 +3404,8 @@ class Build2DataTests(unittest.TestCase):
 
     def test_build2_files_are_loaded_and_precached(self):
         worker = (ROOT / "sw.js").read_text(encoding="utf-8")
-        # v14 since Settings (Build 5 Stage 4); Build 2 files stay listed.
-        self.assertIn('const SHELL_CACHE = "troutmap-shell-v14";', worker)
+        # v15 since the grid date fix (2026-11-18); Build 2 files stay listed.
+        self.assertIn('const SHELL_CACHE = "troutmap-shell-v15";', worker)
         start = worker.index("const SHELL_FILES = [")
         shell = set(re.findall(r'"([^"]+)"', worker[start:worker.index("]", start)]))
         self.assertIn("js/estimates.js", shell)
